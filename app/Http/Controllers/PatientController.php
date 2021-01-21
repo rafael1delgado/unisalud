@@ -34,11 +34,22 @@ class PatientController extends Controller
      */
     public function create()
     {
+        /* Nivel de Instrucción */
         $url = $this->getUrlBase().'ValueSet/3113';
-        $response = Http::withToken("")->get($url);
+        $response = Http::withToken($this->getToken())->get($url);
         $instructionLevel = $response->json()['compose']['include'][0]['concept'];
 
-        return view('patients.create', compact('instructionLevel'));
+        /* Identidad de genero */
+        $url = $this->getUrlBase().'ValueSet/gender-identity';
+        $response = Http::withToken($this->getToken())->get($url);
+        $genderIdentities = $response->json()['compose']['include'][0]['concept'];
+
+        /* Identidad de genero */
+        $url = $this->getUrlBase().'ValueSet/vs-deis-prevision';
+        $response = Http::withToken($this->getToken())->get($url);
+        $previciones = $response->json()['compose']['include'][0]['concept'];
+
+        return view('patients.create', compact('instructionLevel','genderIdentities','previciones'));
     }
 
     /**

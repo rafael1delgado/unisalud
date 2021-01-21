@@ -76,10 +76,9 @@
         <fieldset class="form-group col-2">
             <label for="for_gender_identity">Identidad de Genero</label>
             <select name="gender" id="for_gender_identity" class="form-control">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="unknown">Unknown</option>
-                <option value="other">Other</option>
+                @foreach ($genderIdentities as $identity)
+                    <option value="{{ $identity['code'] }}">{{ $identity['display'] }}</option>
+                @endforeach
             </select>
         </fieldset>
 
@@ -105,8 +104,9 @@
             </select>
         </fieldset>
 
-
     </div>
+
+    <div class="border-bottom mt-3 mb-3"></div>
 
     <div class="form-row">
         <fieldset class="form-group col-2">
@@ -126,6 +126,136 @@
                 @endforeach
             </select>
         </fieldset>
+
+        <fieldset class="form-group col-2">
+            <label for="for_prevision">Previsión</label>
+            <select name="prevision" id="for_prevision" class="form-control">
+                @foreach($previciones as $previcion)
+                    <option value="{{ $previcion['code'] }}">{{ $previcion['display'] }}</option>
+                @endforeach
+            </select>
+        </fieldset>
+    </div>
+
+    <div class="border-bottom mt-3 mb-3"></div>
+
+    <div class="form-row">
+        <fieldset class="form-group col-1">
+            <label for="for_addressType">Tipo de dirección</label>
+            <select name="addressType" id="for_addressType" class="form-control">
+                <option value="particular">Particular</option>
+                <option value="work">Trabajo</option>
+            </select>
+        </fieldset>
+
+
+        <fieldset class="form-group col-1">
+            <label for="for_streeNameType">Via de acceso</label>
+            <select name="streeNameType" id="for_streeNameType" class="form-control">
+                <option value="01">Calle</option>
+                <option value="02">Avenida</option>
+            </select>
+        </fieldset>
+
+        <fieldset class="form-group col-2">
+            <label for="for_streetName">Calle</label>
+            <input type="text" class="form-control" name="streetName"
+                id="for_streetName" required placeholder="">
+        </fieldset>
+
+        <fieldset class="form-group col-1">
+            <label for="for_addressNumber">Número</label>
+            <input type="text" class="form-control" name="addressNumber"
+                id="for_addressNumber" required placeholder="">
+        </fieldset>
+
+        <fieldset class="form-group col-1">
+            <label for="for_addressApartament">Depto</label>
+            <input type="text" class="form-control" name="addressApartament"
+                id="for_addressApartament" required placeholder="">
+        </fieldset>
+
+        <fieldset class="form-group col-2">
+            <label for="for_poblacion">Población/Villa/Condominio</label>
+            <input type="text" class="form-control" name="poblacion"
+                id="for_poblacion" required placeholder="">
+        </fieldset>
+
+        <fieldset class="form-group col-2">
+            <label for="for_district">Comuna</label>
+            <select name="district" id="for_district" class="form-control">
+                <option value="01">Iquique</option>
+            </select>
+        </fieldset>
+
+        <fieldset class="form-group col-2">
+            <label for="for_state">Región</label>
+            <select name="state" id="for_state" class="form-control">
+                <option value="1">Tarapacá</option>
+            </select>
+        </fieldset>
+
+    </div>
+
+
+    <div class="form-row">
+        <fieldset class="form-group col-1">
+            <label for="for_latitud">Latitud</label>
+            <input type="text" class="form-control" name="latitud"
+                id="for_latitud" required placeholder="">
+        </fieldset>
+        <fieldset class="form-group col-1">
+            <label for="for_longitud">Longitud</label>
+            <input type="text" class="form-control" name="longitud"
+                id="for_longitud" required placeholder="">
+        </fieldset>
+        <fieldset class="form-group col-2">
+            <label for="for_conutry">País</label>
+            <select name="conutry" id="for_conutry" class="form-control">
+                <option value="01">Chile</option>
+            </select>
+        </fieldset>
+
+    </div>
+
+    <div class="border-bottom mt-3 mb-3"></div>
+
+    <div class="form-row">
+
+        <fieldset class="form-group col-1">
+            <label for="for_phone1Use">Uso</label>
+            <select name="phone1Use" id="for_phone1Use" class="form-control">
+                <option value="Personal">Personal</option>
+                <option value="work">Trabajo</option>
+            </select>
+        </fieldset>
+
+        <fieldset class="form-group col-1">
+            <label for="for_telphone">Teléfono 1</label>
+            <input type="text" class="form-control" name="telphone"
+                id="for_telphone" required placeholder="">
+        </fieldset>
+
+        <fieldset class="form-group col-1">
+            <label for="for_phone2Use">Uso</label>
+            <select name="phone2Use" id="for_phone2Use" class="form-control">
+                <option value="Personal">Personal</option>
+                <option value="work">Trabajo</option>
+            </select>
+        </fieldset>
+
+        <fieldset class="form-group col-1">
+            <label for="for_telphone2">Telefono 2</label>
+            <input type="text" class="form-control" name="telphone2"
+                id="for_telphone2" required placeholder="">
+        </fieldset>
+
+        <fieldset class="form-group col-2">
+            <label for="for_email">Correo Electrónico</label>
+            <input type="text" class="form-control" name="email"
+                id="for_email" required placeholder="">
+        </fieldset>
+
 
     </div>
 </form>
