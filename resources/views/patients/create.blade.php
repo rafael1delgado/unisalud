@@ -18,17 +18,16 @@
         <fieldset class="form-group col-2">
             <label for="for_id_type">Tipo de identificación</label>
             <select name="id_type" id="for_id_type" class="form-control">
-                <option value="RUN">RUN</option>
-                <option value="Passport">Passport</option>
-                <option value="Passport">N° ficha</option>
-                <option value="Passport">Acta nacimiento</option>
+                <option value="PN">RUN</option>
+                <option value="PPN">Pasaporte</option>
+                <option value="MR">N° ficha</option>
             </select>
         </fieldset>
 
         <fieldset class="form-group col-2">
             <label for="for_indentifier">Identificador</label>
             <input type="text" class="form-control" name="indentifier"
-                id="for_indentifier" required placeholder="">
+                id="for_indentifier" required>
         </fieldset>
 
     </div>
@@ -38,20 +37,20 @@
         <fieldset class="form-group col-2">
             <label for="for_name">Nombre</label>
             <input type="text" class="form-control" name="name"
-                id="for_name" required placeholder="">
+                id="for_name" required value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}">
         </fieldset>
 
 
         <fieldset class="form-group col-2">
             <label for="for_fathers_family">Apellido Paterno</label>
             <input type="text" class="form-control" name="fathers_family"
-                id="for_fathers_family" required placeholder="">
+                id="for_fathers_family" required value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}">
         </fieldset>
 
         <fieldset class="form-group col-2">
             <label for="for_mothers_family">Apellido Materno</label>
             <input type="text" class="form-control" name="mothers_family"
-                id="for_mothers_family" required placeholder="">
+                id="for_mothers_family" required value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}">
         </fieldset>
 
     </div>
@@ -60,7 +59,7 @@
         <fieldset class="form-group col-2">
             <label for="for_birthdate">Fecha de nacimiento</label>
             <input type="date" class="form-control" name="birthdate"
-                id="for_birthdate" required placeholder="">
+                id="for_birthdate" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}">
         </fieldset>
 
         <fieldset class="form-group col-2">
@@ -164,25 +163,25 @@
         <fieldset class="form-group col-2">
             <label for="for_streetName">Calle</label>
             <input type="text" class="form-control" name="streetName"
-                id="for_streetName" required placeholder="">
+                id="for_streetName" required value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}">
         </fieldset>
 
         <fieldset class="form-group col-1">
             <label for="for_addressNumber">Número</label>
             <input type="text" class="form-control" name="addressNumber"
-                id="for_addressNumber" required placeholder="">
+                id="for_addressNumber" required value="{{ substr(str_shuffle('0123456789'), 0, 4) }}">
         </fieldset>
 
         <fieldset class="form-group col-1">
             <label for="for_addressApartament">Depto</label>
             <input type="text" class="form-control" name="addressApartament"
-                id="for_addressApartament" required placeholder="">
+                id="for_addressApartament" required value="{{ substr(str_shuffle('0123456789'), 0, 2) }}">
         </fieldset>
 
         <fieldset class="form-group col-2">
             <label for="for_poblacion">Población/Villa/Condominio</label>
             <input type="text" class="form-control" name="poblacion"
-                id="for_poblacion" required placeholder="">
+                id="for_poblacion" required value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}">
         </fieldset>
 
         <fieldset class="form-group col-2">
@@ -210,12 +209,12 @@
         <fieldset class="form-group col-1">
             <label for="for_latitud">Latitud</label>
             <input type="text" class="form-control" name="latitud"
-                id="for_latitud" required placeholder="">
+                id="for_latitud" required value="{{ substr(str_shuffle('0123456789'), 0, 8) }}">
         </fieldset>
         <fieldset class="form-group col-1">
             <label for="for_longitud">Longitud</label>
             <input type="text" class="form-control" name="longitud"
-                id="for_longitud" required placeholder="">
+                id="for_longitud" required value="{{ substr(str_shuffle('0123456789'), 0, 8) }}">
         </fieldset>
         <fieldset class="form-group col-2">
             <label for="for_conutry">País</label>
@@ -242,7 +241,7 @@
         <fieldset class="form-group col-1">
             <label for="for_phone1">Teléfono 1</label>
             <input type="text" class="form-control" name="phone1"
-                id="for_phone1" required placeholder="">
+                id="for_phone1" required value="9{{ substr(str_shuffle('0123456789'), 0, 8) }}">
         </fieldset>
 
         <fieldset class="form-group col-1">
@@ -263,10 +262,13 @@
         <fieldset class="form-group col-2">
             <label for="for_email">Correo Electrónico</label>
             <input type="text" class="form-control" name="email"
-                id="for_email" required placeholder="">
+                id="for_email" required value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 5) }}@gmail.com">
         </fieldset>
 
 
     </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+
 </form>
 @endsection
