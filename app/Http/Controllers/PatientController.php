@@ -77,7 +77,6 @@ class PatientController extends Controller
 
         /*
         https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/health-insurance
-        https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/marital-status
         https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/religious-affiliation
         */
         return view('patients.create', compact('instructionLevel',
