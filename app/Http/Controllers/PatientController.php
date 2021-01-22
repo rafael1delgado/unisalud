@@ -111,6 +111,11 @@ class PatientController extends Controller
         //     'resourceType' => 'Patient',
         // ];
         $data = [
+            'meta' => [
+                'profile' => [
+                  0 => 'http://ssiq.cens.cl/fhir/StructureDefinition/SSIQPatient',
+                ],
+              ],
             'identifier' => [
                     0 => [
                           'use' => 'usual',
@@ -197,6 +202,16 @@ class PatientController extends Controller
                           'state' => $request->input('state'),
                     ],
               ],
+            //   'maritalStatus' => [
+            //     'coding' => [
+            //       0 => [
+            //         'system' => 'http://terminology.hl7.org/CodeSystem/v3-MaritalStatus',
+            //         'code' => 'S',
+            //         'display' => 'Never Married',
+            //       ],
+            //     ],
+            //     'text' => 'Single',
+            //   ],
               'extension' => [
                 0 => [
                   'url' => 'http://hl7.org/fhir/StructureDefinition/patient-genderIdentity',
@@ -247,6 +262,7 @@ class PatientController extends Controller
                 // ],
               ],
             ];
+        dd(json_encode($data));
         $response = Http::withToken($this->getToken())->post($url, $data);
 
         return redirect()->route('patient.index');

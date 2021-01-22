@@ -145,7 +145,7 @@
         <fieldset class="form-group col-1">
             <label for="for_addressType">Tipo de dirección</label>
             <select name="addressType" id="for_addressType" class="form-control">
-                <option value="particular">Particular</option>
+                <option value="home">Particular</option>
                 <option value="work">Trabajo</option>
             </select>
         </fieldset>
