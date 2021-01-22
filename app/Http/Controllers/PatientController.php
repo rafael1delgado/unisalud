@@ -267,7 +267,7 @@ class PatientController extends Controller
                 // ],
               ],
             ];
-        dd(json_encode($data));
+        // dd(json_encode($data));
         $response = Http::withToken($this->getToken())->post($url, $data);
 
         return redirect()->route('patient.index');
