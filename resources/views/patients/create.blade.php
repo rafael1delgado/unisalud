@@ -92,7 +92,7 @@
         <fieldset class="form-group col-2">
             <label for="for_nacionality">Nacionalidad</label>
             <select name="nacionality" id="for_nacionality" class="form-control">
-                <option value="Chile">Chile</option>
+                <option value="CL-Chile">Chile</option>
             </select>
         </fieldset>
 
