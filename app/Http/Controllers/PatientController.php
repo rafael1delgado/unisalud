@@ -19,6 +19,7 @@ class PatientController extends Controller
     {
         /* Obtener pacientes desde Fhir */
         $url = $this->getUrlBase().'Patient';
+        //http://fhir-ssiq.cens.cl/ssiq/fhir/patient
         $response = Http::withToken($this->getToken())->get($url)->json();
         $patients = $response['entry'];
 
@@ -44,12 +45,44 @@ class PatientController extends Controller
         $response = Http::withToken($this->getToken())->get($url);
         $genderIdentities = $response->json()['compose']['include'][0]['concept'];
 
-        /* Identidad de genero */
-        $url = $this->getUrlBase().'ValueSet/vs-deis-prevision';
+        /* Previsión */
+        $url = $this->getUrlBase().'ValueSet/health-insurance';
         $response = Http::withToken($this->getToken())->get($url);
         $previciones = $response->json()['compose']['include'][0]['concept'];
 
-        return view('patients.create', compact('instructionLevel','genderIdentities','previciones'));
+        /* Comunas */
+        $url = $this->getUrlBase().'ValueSet/commune';
+        $response = Http::withToken($this->getToken())->get($url);
+        $communes = $response->json()['compose']['include'][0]['concept'];
+
+        /* Regiones */
+        $url = $this->getUrlBase().'ValueSet/region';
+        $response = Http::withToken($this->getToken())->get($url);
+        $regions = $response->json()['compose']['include'][0]['concept'];
+
+        /* Pueblos originarios */
+        $url = $this->getUrlBase().'ValueSet/aboriginal-community';
+        $response = Http::withToken($this->getToken())->get($url);
+        $aboriginals = $response->json()['compose']['include'][0]['concept'];
+
+        /* Vias de acceso */
+        $url = $this->getUrlBase().'ValueSet/street-type';
+        $response = Http::withToken($this->getToken())->get($url);
+        $streetTypes = $response->json()['compose']['include'][0]['concept'];
+
+        /* Estado civil */
+        $url = $this->getUrlBase().'ValueSet/marital-status';
+        $response = Http::withToken($this->getToken())->get($url);
+        $maritalStatus = $response->json()['compose']['include'][0]['concept'];
+
+        /*
+        https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/health-insurance
+        https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/marital-status
+        https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/religious-affiliation
+        */
+        return view('patients.create', compact('instructionLevel',
+            'genderIdentities','previciones','communes','regions','aboriginals',
+            'streetTypes','maritalStatus'));
     }
 
     /**
@@ -60,7 +93,26 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* Obtener pacientes desde Fhir */
+        $url = $this->getUrlBase().'Patient';
+
+        $array_name = explode(' ', $request->input('name'));
+
+        $data = [
+            'name' => [
+                0 => [
+                    'use' => 'official',
+                    'family' => $array_name[1],
+                    'given' => [0 => $array_name[0] ],
+                ],
+            ],
+            'gender' => $request->input('gender'),
+            'birthDate' => $request->input('birthDate'),
+            'resourceType' => 'Patient',
+        ];
+        $response = Http::withToken($this->getToken())->post($url, $data);
+
+        return redirect()->route('patient.index');
     }
 
     /**
@@ -71,7 +123,7 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

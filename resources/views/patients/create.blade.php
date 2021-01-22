@@ -82,12 +82,12 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-2">
+        {{-- <fieldset class="form-group col-2">
             <label for="for_birth_place">País de nacimeinto</label>
             <select name="birth_place" id="for_birth_place" class="form-control">
                 <option value=""></option>
             </select>
-        </fieldset>
+        </fieldset> --}}
 
         <fieldset class="form-group col-2">
             <label for="for_nacionality">Nacionalidad</label>
@@ -100,7 +100,9 @@
             <label for="for_ethnicity">Pueblo originario</label>
             <select name="ethnicity" id="for_ethnicity" class="form-control">
                 <option value=""></option>
-                <option value="Aymara">Aymara</option>
+                @foreach($aboriginals as $aboriginal)
+                    <option value="{{ $aboriginal['code'] }}">{{ $aboriginal['display'] }}</option>
+                @endforeach
             </select>
         </fieldset>
 
@@ -111,10 +113,11 @@
     <div class="form-row">
         <fieldset class="form-group col-2">
             <label for="for_marital_status">Estado Civil</label>
-            <select name="marital_status" id="for_marital_status" class="form-control">
-                <option value="">Soltero/a</option>
-                <option value="">Casad/a</option>
-                <option value="">Viudo/a</option>
+            <select name="marital_status" id="for_marital_status" class="form-control" required>
+                <option value=""></option>
+                @foreach($maritalStatus as $status)
+                    <option value="{{ $status['code'] }}">{{ $status['display'] }}</option>
+                @endforeach
             </select>
         </fieldset>
 
@@ -152,8 +155,9 @@
         <fieldset class="form-group col-1">
             <label for="for_streeNameType">Via de acceso</label>
             <select name="streeNameType" id="for_streeNameType" class="form-control">
-                <option value="01">Calle</option>
-                <option value="02">Avenida</option>
+                @foreach($streetTypes as $type)
+                    <option value="{{ $type['code'] }}">{{ $type['display'] }}</option>
+                @endforeach
             </select>
         </fieldset>
 
@@ -184,14 +188,18 @@
         <fieldset class="form-group col-2">
             <label for="for_district">Comuna</label>
             <select name="district" id="for_district" class="form-control">
-                <option value="01">Iquique</option>
+                @foreach($communes as $commune)
+                    <option value="{{ $commune['code'] }}">{{ $commune['display'] }}</option>
+                @endforeach
             </select>
         </fieldset>
 
         <fieldset class="form-group col-2">
             <label for="for_state">Región</label>
             <select name="state" id="for_state" class="form-control">
-                <option value="1">Tarapacá</option>
+                @foreach($regions as $region)
+                    <option value="{{ $region['code'] }}">{{ $region['display'] }}</option>
+                @endforeach
             </select>
         </fieldset>
 
@@ -223,31 +231,33 @@
     <div class="form-row">
 
         <fieldset class="form-group col-1">
-            <label for="for_phone1Use">Uso</label>
-            <select name="phone1Use" id="for_phone1Use" class="form-control">
-                <option value="Personal">Personal</option>
-                <option value="work">Trabajo</option>
+            <label for="for_phone1System">System</label>
+            <select name="phone1System" id="for_phone1System" class="form-control">
+                <option value="phone">Telefono</option>
+                <option value="mobile">Móvil</option>
+                <option value="email">Email</option>
             </select>
         </fieldset>
 
         <fieldset class="form-group col-1">
-            <label for="for_telphone">Teléfono 1</label>
-            <input type="text" class="form-control" name="telphone"
-                id="for_telphone" required placeholder="">
+            <label for="for_phone1">Teléfono 1</label>
+            <input type="text" class="form-control" name="phone1"
+                id="for_phone1" required placeholder="">
         </fieldset>
 
         <fieldset class="form-group col-1">
-            <label for="for_phone2Use">Uso</label>
-            <select name="phone2Use" id="for_phone2Use" class="form-control">
-                <option value="Personal">Personal</option>
-                <option value="work">Trabajo</option>
+            <label for="for_phone2System">System</label>
+            <select name="phone2System" id="for_phone2System" class="form-control">
+                <option value="phone">Telefono</option>
+                <option value="mobile">Móvil</option>
+                <option value="email">Email</option>
             </select>
         </fieldset>
 
         <fieldset class="form-group col-1">
-            <label for="for_telphone2">Telefono 2</label>
-            <input type="text" class="form-control" name="telphone2"
-                id="for_telphone2" required placeholder="">
+            <label for="for_phone2">Teléfono 2</label>
+            <input type="text" class="form-control" name="phone2"
+                id="for_phone2" required placeholder="">
         </fieldset>
 
         <fieldset class="form-group col-2">
