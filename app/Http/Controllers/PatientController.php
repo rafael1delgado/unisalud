@@ -36,7 +36,7 @@ class PatientController extends Controller
     public function create()
     {
         /* Nivel de Instrucción */
-        $url = $this->getUrlBase().'ValueSet/3113';
+        $url = $this->getUrlBase().'ValueSet/instruction-level';
         $response = Http::withToken($this->getToken())->get($url);
         $instructionLevel = $response->json()['compose']['include'][0]['concept'];
 
@@ -267,7 +267,7 @@ class PatientController extends Controller
                 // ],
               ],
             ];
-        // dd(json_encode($data));
+        dd(json_encode($data));
         $response = Http::withToken($this->getToken())->post($url, $data);
 
         return redirect()->route('patient.index');
