@@ -12,7 +12,7 @@
 
 <form method="POST" class="form-horizontal" action="{{ route('patient.store') }}">
     @csrf
-    @method('PUT')
+    @method('POST')
 
     <div class="form-row">
         <fieldset class="form-group col-2">
@@ -74,7 +74,7 @@
 
         <fieldset class="form-group col-2">
             <label for="for_gender_identity">Identidad de Genero</label>
-            <select name="gender" id="for_gender_identity" class="form-control">
+            <select name="gender_identity" id="for_gender_identity" class="form-control">
                 @foreach ($genderIdentities as $identity)
                     <option value="{{ $identity['code'] }}">{{ $identity['display'] }}</option>
                 @endforeach
@@ -91,7 +91,7 @@
         <fieldset class="form-group col-2">
             <label for="for_nacionality">Nacionalidad</label>
             <select name="nacionality" id="for_nacionality" class="form-control">
-                <option value="Chile">Chile</option>
+                <option value="CL-Chile">Chile</option>
             </select>
         </fieldset>
 
@@ -215,6 +215,11 @@
             <label for="for_longitud">Longitud</label>
             <input type="text" class="form-control" name="longitud"
                 id="for_longitud" required value="{{ substr(str_shuffle('0123456789'), 0, 8) }}">
+        </fieldset>
+        <fieldset class="form-group col-2">
+            <label for="for_city">Ciudad</label>
+            <input type="text" class="form-control" name="city"
+                id="for_city" required value="Iquique">
         </fieldset>
         <fieldset class="form-group col-2">
             <label for="for_conutry">País</label>
