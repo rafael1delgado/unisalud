@@ -75,6 +75,8 @@
         <fieldset class="form-group col-2">
             <label for="for_gender_identity">Identidad de Genero</label>
             <select name="gender_identity" id="for_gender_identity" class="form-control">
+                <option value="male">male</option>
+                <option value="female">female</option>
                 @foreach ($genderIdentities as $identity)
                     <option value="{{ $identity['code'] }}">{{ $identity['display'] }}</option>
                 @endforeach
@@ -145,7 +147,7 @@
         <fieldset class="form-group col-1">
             <label for="for_addressType">Tipo de dirección</label>
             <select name="addressType" id="for_addressType" class="form-control">
-                <option value="home">Particular</option>
+                <option value="particular">Particular</option>
                 <option value="work">Trabajo</option>
             </select>
         </fieldset>
@@ -251,7 +253,7 @@
 
         <fieldset class="form-group col-1">
             <label for="for_phone2System">System</label>
-            <select name="phone2System" id="for_phone2System" class="form-control">
+            <select name="phone2System" id="for_phone2System" class="form-control" readonly>
                 <option value="phone">Telefono</option>
                 <option value="mobile">Móvil</option>
                 <option value="email">Email</option>
@@ -261,7 +263,7 @@
         <fieldset class="form-group col-1">
             <label for="for_phone2">Teléfono 2</label>
             <input type="text" class="form-control" name="phone2"
-                id="for_phone2" required placeholder="">
+                id="for_phone2" readonly>
         </fieldset>
 
         <fieldset class="form-group col-2">

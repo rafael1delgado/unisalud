@@ -45,6 +45,11 @@ class PatientController extends Controller
         $response = Http::withToken($this->getToken())->get($url);
         $genderIdentities = $response->json()['compose']['include'][0]['concept'];
 
+        /* Genero */
+        $url = $this->getUrlBase().'ValueSet/administrative-gender';
+        $response = Http::withToken($this->getToken())->get($url);
+        $administrativeGenders = $response->json()['compose']['include'][0]['concept'];
+
         /* Previsión */
         $url = $this->getUrlBase().'ValueSet/health-insurance';
         $response = Http::withToken($this->getToken())->get($url);
@@ -165,7 +170,7 @@ class PatientController extends Controller
               ],
                  'gender' => $request->input('gender'),
                  'birthDate' => $request->input('birthdate'),
-                 'resourceType' => 'Patient',	    
+                 'resourceType' => 'Patient',
             'address' => [
                     0 => [
                           'use' => $request->input('addressType'),
