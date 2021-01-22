@@ -16,7 +16,12 @@ class PatientSearch extends Component
         $url = $this->getUrlBase().'Patient?name:contains=';
         $response = Http::withToken($this->getToken())->get($url.$this->searchf);
 
-        $patients = $response->json()['entry'];
+        $query = $response->json();
+        if($query['total']>0) {
+            $patients = $query['entry'];
+        }
+        else $patients = array();
+
         return view('livewire.patient-search',['patients' => $patients]);
     }
 }
