@@ -96,19 +96,157 @@ class PatientController extends Controller
         $url = $this->getUrlBase().'Patient';
 
         $array_name = explode(' ', $request->input('name'));
+        $array_nationality = explode('-', $request->input('nacionality'));
 
+        // $data = [
+        //     'name' => [
+        //         0 => [
+        //             'use' => 'official',
+        //             'family' => $array_name[1],
+        //             'given' => [0 => $array_name[0] ],
+        //         ],
+        //     ],
+        //     'gender' => $request->input('gender'),
+        //     'birthDate' => $request->input('birthDate'),
+        //     'resourceType' => 'Patient',
+        // ];
         $data = [
-            'name' => [
+            'identifier' => [
+                    0 => [
+                          'use' => 'usual',
+                          'type' => [
+                                'coding' => [
+                                      0 => [
+                                            'system' => 'http://terminology.hl7.org/CodeSystem/v2-0203',
+                                            'code' => $request->input('id_type'),
+                                      ],
+                                ],
+                          ],
+                          'value' => $request->input('identifier'),
+                    ],
+                 ],
+                 'name' => [
+                    0 => [
+                      'use' => 'official',
+                      'text' => $request->input('name').' '.$request->input('fathers_family').' '.$request->input('mothers_family'),
+                      '_family' => [
+                        'extension' => [
+                          0 => [
+                            'url' => 'http://hl7.org/fhir/StructureDefinition/humanname-fathers-family',
+                            'valueString' => $request->input('fathers_family'),
+                          ],
+                          1 => [
+                            'url' => 'http://hl7.org/fhir/StructureDefinition/humanname-mothers-family',
+                            'valueString' => $request->input('mothers_family'),
+                          ],
+                        ],
+                      ],
+                      'given' => [
+                        0 => $request->input('name'),
+                      ],
+                    ],
+                  ],
+            'telecom' => [
+                    0 => [
+                          'system' => $request->input('phone1System'),
+                          'value' => $request->input('phone1'),
+                          'use' => 'home',
+                    ],
+                    1 => [
+                          'system' => 'email',
+                          'value' => $request->input('email'),
+                          'use' => 'work',
+                    ],
+              ],
+                 'gender' => $request->input('gender'),
+                 'birthDate' => $request->input('birthdate'),
+                 'resourceType' => 'Patient',	    
+            'address' => [
+                    0 => [
+                          'use' => $request->input('addressType'),
+                        //   'text' => 'South Beach 69 Depto. 1305 Miami',
+                          'text' => $request->input('streetName').' '.$request->input('addressNumber').($request->input('addressApartament') ? ' Depto. '.$request->input('addressApartament') : ' ').$request->input('poblacion'),
+                          'line' => [
+                                0 => [
+                                  'extension' => [
+                                        0 => [
+                                              'url' => 'http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName',
+                                              'valueString' => $request->input('streetName'),
+                                        ],
+                                        1 => [
+                                              'url' => 'http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber',
+                                              'valueString' => $request->input('addressNumber'),
+                                        ],
+                                        2 => [
+                                              'url' => 'http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator',
+                                              'valueString' => $request->input('addressApartament'),
+                                        ],
+                                        3 => [
+                                              'url' => 'http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetAddressLine',
+                                              'valueString' => $request->input('poblacion'),
+                                        ],
+                                        4 => [
+                                              'url' => 'http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetNameType',
+                                              'valueString' => $request->input('streeNameType'),
+                                        ],
+                                  ],
+                                ],
+                    ],
+                          'city' => $request->input('city'),
+                          'district' => $request->input('district'),
+                          'state' => $request->input('state'),
+                    ],
+              ],
+              'extension' => [
                 0 => [
-                    'use' => 'official',
-                    'family' => $array_name[1],
-                    'given' => [0 => $array_name[0] ],
+                  'url' => 'http://hl7.org/fhir/StructureDefinition/patient-genderIdentity',
+                  'valueCodeableConcept' => [
+                    'coding' => [
+                      0 => [
+                        'system' => 'http://hl7.org/fhir/gender-identity',
+                        'code' => $request->input('gender_identity'),
+                        'display' => $request->input('gender_identity'),
+                      ],
+                    ],
+                  ],
                 ],
-            ],
-            'gender' => $request->input('gender'),
-            'birthDate' => $request->input('birthDate'),
-            'resourceType' => 'Patient',
-        ];
+                1 => [
+                  'url' => 'http://hl7.org/fhir/StructureDefinition/patient-nationality',
+                  'extension' => [
+                    0 => [
+                      'url' => 'code',
+                      'valueCodeableConcept' => [
+                        'coding' => [
+                          0 => [
+                            'code' => $array_nationality[0],
+                            'display' => $array_nationality[1],
+                          ],
+                        ],
+                      ],
+                    ],
+                  ],
+                ],
+                2 => [
+                  'url' => 'https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/health-insurance',
+                  'valueCoding' => [
+                    'system' => 'https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/health-insurance',
+                    'code' => $request->input('prevision'),
+                  ],
+                ],
+                // 3 => [
+                //   'url' => 'https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/religious-affiliation',
+                //   'valueCodeableConcept' => [
+                //     'coding' => [
+                //       0 => [
+                //         'system' => '#',
+                //         'code' => '1',
+                //         'display' => 'católico',
+                //       ],
+                //     ],
+                //   ],
+                // ],
+              ],
+            ];
         $response = Http::withToken($this->getToken())->post($url, $data);
 
         return redirect()->route('patient.index');

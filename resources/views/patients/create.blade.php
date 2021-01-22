@@ -26,9 +26,9 @@
         </fieldset>
 
         <fieldset class="form-group col-2">
-            <label for="for_indentifier">Identificador</label>
-            <input type="text" class="form-control" name="indentifier"
-                id="for_indentifier" required placeholder="">
+            <label for="for_identifier">Identificador</label>
+            <input type="text" class="form-control" name="identifier"
+                id="for_identifier" required placeholder="">
         </fieldset>
 
     </div>
@@ -68,14 +68,14 @@
             <select name="gender" id="for_gender" class="form-control">
                 <option value="male">Male</option>
                 <option value="female">Female</option>
-                <option value="unknown">Unknown</option>
+                <option value="unknown">Unknown<bir/option>
                 <option value="other">Other</option>
             </select>
         </fieldset>
 
         <fieldset class="form-group col-2">
             <label for="for_gender_identity">Identidad de Genero</label>
-            <select name="gender" id="for_gender_identity" class="form-control">
+            <select name="gender_identity" id="for_gender_identity" class="form-control">
                 @foreach ($genderIdentities as $identity)
                     <option value="{{ $identity['code'] }}">{{ $identity['display'] }}</option>
                 @endforeach
@@ -83,7 +83,7 @@
         </fieldset>
 
         {{-- <fieldset class="form-group col-2">
-            <label for="for_birth_place">País de nacimeinto</label>
+            <label for="for_birth_place">País de nacimiento</label>
             <select name="birth_place" id="for_birth_place" class="form-control">
                 <option value=""></option>
             </select>
@@ -146,7 +146,7 @@
         <fieldset class="form-group col-1">
             <label for="for_addressType">Tipo de dirección</label>
             <select name="addressType" id="for_addressType" class="form-control">
-                <option value="particular">Particular</option>
+                <option value="home">Particular</option>
                 <option value="work">Trabajo</option>
             </select>
         </fieldset>
@@ -180,7 +180,7 @@
         </fieldset>
 
         <fieldset class="form-group col-2">
-            <label for="for_poblacion">Población/Villa/Condominio</label>
+            <label for="for_pobla|on">Población/Villa/Condominio</label>
             <input type="text" class="form-control" name="poblacion"
                 id="for_poblacion" required placeholder="">
         </fieldset>
@@ -218,6 +218,11 @@
                 id="for_longitud" required placeholder="">
         </fieldset>
         <fieldset class="form-group col-2">
+            <label for="for_longitud">Ciudad</label>
+            <input type="text" class="form-control" name="city"
+                id="for_city" required placeholder="">
+        </fieldset>
+        <fieldset class="form-group col-2">
             <label for="for_conutry">País</label>
             <select name="conutry" id="for_conutry" class="form-control">
                 <option value="01">Chile</option>
@@ -247,7 +252,7 @@
 
         <fieldset class="form-group col-1">
             <label for="for_phone2System">System</label>
-            <select name="phone2System" id="for_phone2System" class="form-control">
+            <select name="phone2System" id="for_phone2System" class="form-control" readonly>
                 <option value="phone">Telefono</option>
                 <option value="mobile">Móvil</option>
                 <option value="email">Email</option>
@@ -257,7 +262,7 @@
         <fieldset class="form-group col-1">
             <label for="for_phone2">Teléfono 2</label>
             <input type="text" class="form-control" name="phone2"
-                id="for_phone2" required placeholder="">
+                id="for_phone2" readonly placeholder="">
         </fieldset>
 
         <fieldset class="form-group col-2">
