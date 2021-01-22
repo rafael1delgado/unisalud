@@ -17,15 +17,12 @@ class PatientController extends Controller
      */
     public function index()
     {
-        /* Obtener pacientes desde Fhir */
-        $url = $this->getUrlBase().'Patient';
-        //http://fhir-ssiq.cens.cl/ssiq/fhir/patient
-        $response = Http::withToken($this->getToken())->get($url)->json();
-        $patients = $response['entry'];
+        /* Obtener pacientes desde Fhir (cambiado por livewire) */
+        // $url = $this->getUrlBase().'Patient';
+        // $response = Http::withToken($this->getToken())->get($url)->json();
+        // $patients = $response['entry'];
 
-        //dd($patients);
-
-        return view('patients.index')->withPatients($patients);
+        return view('patients.index');
     }
 
     /**
@@ -97,24 +94,14 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        /* Obtener pacientes desde Fhir */
+        /* Url para el post de pacientes */
         $url = $this->getUrlBase().'Patient';
 
+        /* Descomponer el nombre y nacionalidad en un array */
         $array_name = explode(' ', $request->input('name'));
         $array_nationality = explode('-', $request->input('nacionality'));
 
-        // $data = [
-        //     'name' => [
-        //         0 => [
-        //             'use' => 'official',
-        //             'family' => $array_name[1],
-        //             'given' => [0 => $array_name[0] ],
-        //         ],
-        //     ],
-        //     'gender' => $request->input('gender'),
-        //     'birthDate' => $request->input('birthDate'),
-        //     'resourceType' => 'Patient',
-        // ];
+        /* Crear el array $data con el formato del json para insertar el paciente */
         $data = [
             'meta' => [
                 'profile' => [
@@ -267,7 +254,8 @@ class PatientController extends Controller
                 // ],
               ],
             ];
-        dd(json_encode($data));
+
+        //dd(json_encode($data));
         $response = Http::withToken($this->getToken())->post($url, $data);
 
         return redirect()->route('patient.index');
