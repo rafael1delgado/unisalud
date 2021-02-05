@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Http;
 class PatientSearch extends Component
 {
     use GoogleToken;
-    public $searchf;
+    public $searchf = null;
 
     public function render()
     {
-        $url = $this->getUrlBase().'Patient?name:contains=';
-        $response = Http::withToken($this->getToken())->get($url.$this->searchf);
-
+        $url = $this->getUrlBase().'Patient'. ($this->searchf ? '?name:contains='.$this->searchf : '/');
+        $response = Http::withToken($this->getToken())->get($url);
+        // dd($this->getToken());
         $query = $response->json();
         if($query['total']>0) {
             $patients = $query['entry'];

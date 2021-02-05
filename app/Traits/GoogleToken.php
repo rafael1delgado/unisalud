@@ -19,9 +19,7 @@ trait GoogleToken
             "exp" => $now_seconds+(60*60),  // Maximum expiration time is one hour
             "uid" => $private_key_id
         );
-
         return JWT::encode($payload, $private_key, "RS256");
-        return "token";
     }
 
     public function getUrlBase() {
