@@ -2,6 +2,7 @@
 namespace App\Traits;
 
 use \Firebase\JWT\JWT;
+use Illuminate\Support\Facades\File;
 
 trait GoogleToken
 {
@@ -9,7 +10,7 @@ trait GoogleToken
     {
         $client_email = env('GOOGLE_CLIENT_EMAIL');
         $private_key_id = env('GOOGLE_PRIVATE_KEY_ID');
-        $private_key  = env('GOOGLE_PRIVATE_KEY');
+        $private_key  = File::get(app_path().'/Keys/google_private.key');
         $now_seconds = time();
         $payload = array(
             "iss" => $client_email,

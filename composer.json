@@ -19,7 +19,6 @@
         "livewire/livewire": "^2.3"
     },
     "require-dev": {
-        "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
@@ -60,6 +59,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-install-cmd": [
+            "chmod -R 755 bootstrap\/cache"
         ]
     }
 }
