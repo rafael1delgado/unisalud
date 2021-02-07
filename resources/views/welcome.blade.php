@@ -79,9 +79,9 @@
                     <h4 class="my-0 font-weight-normal">Sistemas</h4>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a class="btn btn-outline-primary" href="{{ route('login') }}">iOnline</a></li>
-                    <li class="list-group-item"><a class="btn btn-outline-primary" href="http://intranet.saludiquique.cl">Intranet</a></li>
-                    <li class="list-group-item"><a class="btn btn-outline-primary" href="">Siremx</a></li>
+                    <li class="list-group-item p-1"><a class="btn btn-outline-primary d-block" href="{{ route('login') }}">iOnline</a></li>
+                    <li class="list-group-item p-1"><a class="btn btn-outline-primary d-block" href="http://intranet.saludiquique.cl">Intranet</a></li>
+                    <li class="list-group-item p-1"><a class="btn btn-outline-primary d-block" href="">Siremx</a></li>
                 </ul>
             </div>
 

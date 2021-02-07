@@ -333,7 +333,10 @@ class PatientController extends Controller
      */
     public function show($id)
     {
+        $url = $this->getUrlBase().'Patient/'.$id;
+        $patient = Http::withToken($this->getToken())->get($url)->json();
 
+        return view('patients.show', compact('patient'));
     }
 
     /**
