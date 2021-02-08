@@ -13,4 +13,6 @@
 {!! $user['text']['div'] !!}
 
 
+<pre class="small">{{ print_r($user) }}</pre>
+
 @endsection

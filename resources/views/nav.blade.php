@@ -27,13 +27,13 @@
 </h6>
 <ul class="nav flex-column">
     <li class="nav-item">
-        <a class="nav-link {{ active('profile.show') }}" href="{{ route('profile.show') }}">
+        <a class="nav-link {{ active('profile.*') }}" href="{{ route('profile.show') }}">
         <span data-feather="user"></span>
         Mi perfíl<span class="sr-only"></span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('patient.create') }}">
+        <a class="nav-link" href="{{ route('logout') }}">
         <span data-feather="log-out"></span>
         Cerrar sesión
         </a>

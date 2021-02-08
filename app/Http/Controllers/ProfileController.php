@@ -12,9 +12,21 @@ class ProfileController extends Controller
     use GoogleToken;
 
     public function login($run) {
-        $user = User::find($run);
-        auth()->login($user, true);
-        return redirect()->route('home');
+        if(env('APP_ENV') == 'local') {
+            $user = User::find($run);
+            auth()->login($user, true);
+            return redirect()->route('home');
+        }
+    }
+
+    public function logout() {
+        auth()->logout();
+
+        request()->session()->invalidate();
+    
+        request()->session()->regenerateToken();
+    
+        return redirect('/');
     }
 
     /**

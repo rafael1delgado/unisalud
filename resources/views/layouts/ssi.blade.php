@@ -38,7 +38,7 @@
             </button>
             <ul class="navbar-nav px-3 d-none d-md-block">
                 <li class="nav-item"> 
-                    <a class="nav-link" href="href="/">Volver al inicio</a>
+                    <span class="nav-link">{{ optional(auth()->user())->firstName }}</span>
                 </li>
             </ul>
         </nav>

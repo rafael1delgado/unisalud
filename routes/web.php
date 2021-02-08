@@ -42,6 +42,7 @@ Route::prefix('patient')->name('patient.')->group(function(){
 });
 
 Route::get('/local-login/{run}', [ProfileController::class, 'login']);
+Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
 
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
