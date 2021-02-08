@@ -16,15 +16,27 @@
 
         <!-- Custom styles for this template -->
         <link href="{{ asset('css/ssi.css') }}" rel="stylesheet">
+
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        @production
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+        @else
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon-local.ico">
+        @endproduction
+
         @livewireStyles
     </head>
     <body>
         <nav class="navbar navbar-dark sticky-top bg-ssi flex-md-nowrap p-0 shadow ssi-azul">
-            <a class="navbar-ssi col-md-3 col-lg-2 mr-0 px-3" href="#">Intranet Servicio de Salud</a>
+            <a class="navbar-ssi @production ssi-rojo @else ssi-morado @endproduction col-md-3 col-lg-2 mr-0 px-3" href="/">Servicio de Salud</a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
-            <ul class="navbar-nav px-3">
+            <ul class="navbar-nav px-3 d-none d-md-block">
                 <li class="nav-item text-nowrap">
                     <a class="nav-link" href="#">Cerrar Sesión</a>
                 </li>

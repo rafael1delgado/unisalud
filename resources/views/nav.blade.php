@@ -19,6 +19,27 @@
     </li>
 
 </ul>
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>Preferencias</span>
+    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+    <span data-feather="plus-circle"></span>
+    </a>
+</h6>
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('patient.index') }}">
+        <span data-feather="user"></span>
+        Mi perfíl<span class="sr-only"></span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('patient.create') }}">
+        <span data-feather="log-out"></span>
+        Cerrar sesión
+        </a>
+    </li>
+
+</ul>
 <!--
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
     <span>Documentos</span>

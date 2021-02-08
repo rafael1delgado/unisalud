@@ -5,7 +5,7 @@
 @section('content')
 <h3 class="mt-3">Ver paciente</h3>
 
-{!! $patient['text']['div'] !!}
+{!! optional($patient)['text']['div'] !!}
 
 @endsection
 

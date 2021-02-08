@@ -7,26 +7,26 @@
         </fieldset>
     </div>
 
-    <table class="table">
-        <thead class="border">
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <th class="px-4 py-2 font-bold">Index</th>
-                <th class="px-4 py-2 font-bold">Nombre</th>
-                <th class="px-4 py-2 font-bold">F.Nacimiento</th>
-                <th class="px-4 py-2 font-bold">Genero</th>
+                <th>Index</th>
+                <th>Nombre</th>
+                <th>F.Nacimiento</th>
+                <th>Genero</th>
             </tr>
         </thead>
-        <tbody class="border">
+        <tbody>
             @foreach($patients as $key => $patient)
                 <tr>
-                    <td class="px-4 py-2">{{ ++$key }}</td>
-                    <td class="px-4 py-2">
+                    <td>{{ ++$key }}</td>
+                    <td>
                         <a href="{{ route('patient.show',$patient['resource']['id'])}}">
                             {{ $patient['resource']['name'][0]['text'] }}
                         </a>
                     </td>
-                    <td class="px-4 py-2">{{ $patient['resource']['birthDate'] ?? ''}}</td>
-                    <td class="px-4 py-2">{{ $patient['resource']['gender'] ?? ''}}</td>
+                    <td>{{ $patient['resource']['birthDate'] ?? ''}}</td>
+                    <td>{{ $patient['resource']['gender'] ?? ''}}</td>
                 </tr>
             @endforeach
         </tbody>

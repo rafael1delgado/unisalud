@@ -24,7 +24,7 @@ body {
 
 @media (max-width: 767.98px) {
   .sidebar {
-    top: 5rem;
+    top: 0rem;
   }
 }
 
@@ -121,12 +121,16 @@ body {
 .ssi-rojo {
     background-color: rgb(239,65,68);
 }
+.ssi-morado {
+    background-color: rgb(73,17,82);
+}
+
 .navbar-ssi {
     color: #fff;
     padding-top: .75rem;
     padding-bottom: .75rem;
     font-size: 1rem;
-    background-color: rgb(239,65,68);
+    /*background-color: rgb(239,65,68);*/
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
 }
 .navbar a:hover { color: #fff !important; text-decoration: none;}

@@ -2,7 +2,7 @@
     "resourceType": "Patient",
     "text": {
         "status": "generated",
-        "div": "<div><p><b>Nombre:</b> Alvaro Raymundo Edgardo Torres Fuchslocher </p><ul><li><b>RUN:</b> 15287582-7 </li></ul> <p><b>Sexo:</b> Masculino </p><p><b>Fecha de nacimiento:</b> 25-02-1982 </p><b>Contacto:</b><ul><li><b>Teléfono móvil:</b> +56982598059</li><li><b>Teléfono trabajo:</b> Minsal: 576969 </li><li><b>Email personal:</b> alvarotorres@gmail.com</li><li><b>Email trabajo:</b> alvaro.torres@redsalud.gob.cl </li></ul><b>Direcciones:</b><ul><li><b>Dirección Personal:</b> Pasaje Ruben Donoso #2942 Depto. 1, Iquique, Tarapacá, Chile</li></ul></div>"
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Nombre:</b> Alvaro Raymundo Edgardo Torres Fuchslocher </p><ul><li><b>RUN:</b> 15287582-7 </li></ul> <p><b>Sexo:</b> Masculino </p><p><b>Fecha de nacimiento:</b> 25-02-1982 </p><b>Contacto:</b><ul><li><b>Teléfono móvil:</b> +56982598059</li><li><b>Teléfono trabajo:</b> Minsal: 576969 </li><li><b>Email personal:</b> alvarotorres@gmail.com</li><li><b>Email trabajo:</b> alvaro.torres@redsalud.gob.cl </li></ul><b>Direcciones:</b><ul><li><b>Dirección Personal:</b> Pasaje Ruben Donoso #2942 Depto. 1, Iquique, Tarapacá, Chile</li></ul></div>"
     },
     "identifier": [{
         "use": "official",
