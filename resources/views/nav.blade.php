@@ -6,13 +6,13 @@
 </h6>
 <ul class="nav flex-column">
     <li class="nav-item">
-        <a class="nav-link active" href="{{ route('patient.index') }}">
+        <a class="nav-link {{ active('patient.index') }}" href="{{ route('patient.index') }}">
         <span data-feather="users"></span>
         Ver todos<span class="sr-only">(current)</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('patient.create') }}">
+        <a class="nav-link {{ active('patient.create') }}" href="{{ route('patient.create') }}">
         <span data-feather="plus-circle"></span>
         Ingresar nuevo
         </a>
@@ -27,7 +27,7 @@
 </h6>
 <ul class="nav flex-column">
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('patient.index') }}">
+        <a class="nav-link {{ active('profile.show') }}" href="{{ route('profile.show') }}">
         <span data-feather="user"></span>
         Mi perfíl<span class="sr-only"></span>
         </a>
@@ -36,6 +36,12 @@
         <a class="nav-link" href="{{ route('patient.create') }}">
         <span data-feather="log-out"></span>
         Cerrar sesión
+        </a>
+    </li>
+    <li class="nav-item d-block d-md-none">
+        <a class="nav-link" href="/">
+        <span data-feather="home"></span>
+        Volver al inicio<span class="sr-only"></span>
         </a>
     </li>
 

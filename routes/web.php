@@ -2,7 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ClaveUnicaController;
+use App\Http\Controllers\HomeController;
+
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PatientController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +24,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/claveunica', [ClaveUnicaController::class,'autenticar'])->name('claveunica.login');
+Route::get('/claveunica/callback', [ClaveUnicaController::class,'callback'])->name('claveunica.callback');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('patient')->name('patient.')->group(function(){
     Route::get('/', [PatientController::class, 'index'])->name('index');
@@ -32,3 +40,9 @@ Route::prefix('patient')->name('patient.')->group(function(){
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
     Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
+
+Route::get('/local-login/{run}', [ProfileController::class, 'login']);
+
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');

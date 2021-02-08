@@ -32,13 +32,13 @@
     </head>
     <body>
         <nav class="navbar navbar-dark sticky-top bg-ssi flex-md-nowrap p-0 shadow ssi-azul">
-            <a class="navbar-ssi @production ssi-rojo @else ssi-morado @endproduction col-md-3 col-lg-2 mr-0 px-3" href="/">Servicio de Salud</a>
+            <a class="navbar-ssi @production ssi-rojo @else ssi-morado @endproduction col-md-3 col-lg-2 mr-0 px-3" href="{{ route('home') }}">Servicio de Salud</a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <ul class="navbar-nav px-3 d-none d-md-block">
-                <li class="nav-item text-nowrap">
-                    <a class="nav-link" href="#">Cerrar Sesión</a>
+                <li class="nav-item"> 
+                    <a class="nav-link" href="href="/">Volver al inicio</a>
                 </li>
             </ul>
         </nav>

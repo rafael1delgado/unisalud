@@ -82,13 +82,21 @@
 
             <div class="card mb-4 shadow-sm">
                 <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">Sistemas</h4>
+                    <h4 class="my-0 font-weight-normal">Salud Iquique</h4>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item p-1"><a class="btn btn-outline-primary d-block" href="{{ route('login') }}">iOnline</a></li>
-                    <li class="list-group-item p-1"><a class="btn btn-outline-primary d-block" href="http://intranet.saludiquique.cl">Intranet</a></li>
-                    <li class="list-group-item p-1"><a class="btn btn-outline-primary d-block" href="">Siremx</a></li>
-                </ul>
+                <div class="card-body">
+
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <h2>Portal de Salud</h2>
+                        <p>Bienvenido al portal de Salud de la Región de Tarapacá. Acá encontrarás la información 
+                        que esté disponible para ti, la podrás consultar en línea utilizando tu clave única del estado, 
+                        haciendo click en el botón de abajo.</p>
+
+                    </ul>
+                    <a href="" class="btn btn-lg btn-block btn-outline-primary">
+                        Portal de Salud <img src="{{ asset('images/btn_claveunica_119px.png') }}" alt="Logo Clave única">
+                    </a>
+                </div>
             </div>
 
             <div class="card mb-4 shadow-sm">
@@ -141,8 +149,8 @@
         <footer class="pt-4 my-md-5 pt-md-5 border-top">
             <div class="row">
                 <div class="col-12 col-md">
-                    <img class="mb-2" src="{{ asset('images/logo_pluma_100.jpg') }}" alt="Logo Servicio de Salud Iquique" width="100">
-                    <small class="d-block mb-3 text-muted">&copy; 2021</small>
+                    <img class="mb-2" src="{{ asset('images/logo_ssi_100px.png') }}" alt="Logo Servicio de Salud Iquique">
+                    <!--small class="d-block mb-3 text-muted">&copy; 2021</small-->
                 </div>
                 <div class="col-6 col-md">
                     <h5>Portales del estado</h5>
@@ -150,15 +158,14 @@
                         <li><a class="text-muted" href="http://www.gob.cl">Gobierno de Chile</a></li>
                         <li><a class="text-muted" href="http://www.minsal.cl">Ministerio de Salud</a></li>
                         <li><a class="text-muted" href="http://www.saludiquique.cl">Servicio de Salud Iquique</a> </li>
-                        <li><a class="text-muted" href="http://oirs.minsal.cl/">Oficina de Informaciones</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-md">
-                    <h5>Relacionados</h5>
+                    <h5>Servicio de Salud</h5>
                     <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="https://www.gob.cl/coronavirus/">Coronavirus</a></li>
-                        <li><a class="text-muted" href="https://www.gob.cl/coronavirus/cifrasoficiales/">Cifras oficiales coronavirus</a> </li>
-                        <li><a class="text-muted" href="https://www.gob.cl/plannacionaldecancer/">Plan nacional de cancer</a></li>
+                        <li><a class="text-muted" href="https://i.saludiquique.cl/login">iOnline</a></li>
+                        <li><a class="text-muted" href="http://intranet.saludiquique.cl">Intranet</a> </li>
+                        <li><a class="text-muted" href="https://www.gob.cl/plannacionaldecancer/">Siremx</a></li>
 
                     </ul>
                 </div>

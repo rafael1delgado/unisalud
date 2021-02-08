@@ -12,13 +12,25 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * El id no es incremental ya que es el run sin digito verificador
+     */
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
+        'id',
+        'dv',
         'name',
+        'fathers_family',
+        'mothers_family',
         'email',
+        'claveunica',
+        'fhir_id',
         'password',
     ];
 
