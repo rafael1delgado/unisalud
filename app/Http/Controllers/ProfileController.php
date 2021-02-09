@@ -14,16 +14,14 @@ class ProfileController extends Controller
     public function login($run) {
         //if(env('APP_ENV') == 'local') {
             $user = User::find($run);
-            auth()->login($user, true);
-            return redirect()->route('home');
+            if($user) {
+                auth()->login($user, true);
+                return redirect()->route('home');
+            }
+            else {
+                die('No encuentro el rut en la BD');
+            }
         //}
-    }
-
-    public function logout() {
-        auth()->logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
-        return redirect('/');
     }
 
     /**
@@ -34,10 +32,14 @@ class ProfileController extends Controller
      */
     public function show()
     {
-        $url = $this->getUrlBase().'Patient/'.auth()->user()->fhir_id;
-        $response = Http::withToken($this->getToken())->get($url);   
-        $user = $response->json();
-        session(['user' => $user]);
+        if(auth()->user()->fhir_id){
+            $url = $this->getUrlBase().'Patient/'.auth()->user()->fhir_id;
+            $response = Http::withToken($this->getToken())->get($url);   
+            $user = $response->json();
+        }
+        else {
+            $user = false;
+        }
         return view('users.profile.show', compact('user'));
     }
 
@@ -49,7 +51,10 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        $user = session('user');
+        //$user = session('user');
+        $url = $this->getUrlBase().'Patient/'.auth()->user()->fhir_id;
+        $response = Http::withToken($this->getToken())->get($url);   
+        $user = $response->json();
         return view('users.profile.edit', compact('user'));
     }
 
@@ -76,4 +81,7 @@ class ProfileController extends Controller
         return redirect()->back();
     }
 
+    public function observationIndex(){
+        return view('users.profile.observation.index');
+    }
 }

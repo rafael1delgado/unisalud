@@ -26,17 +26,20 @@ use App\Http\Controllers\PatientController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 //Auth::routes();
 
-Route::get('/claveunica', [ClaveUnicaController::class,'autenticar'])->name('claveunica.login');
-Route::get('/callback', [ClaveUnicaController::class,'callback']);
-Route::get('/callback-testing', [ClaveUnicaController::class,'callback']);
+Route::get('/claveunica', [ClaveUnicaController::class,'autenticar'])->name('claveunica');
+Route::get('/claveunica/callback', [ClaveUnicaController::class,'callback']);
+Route::get('/claveunica/callback-testing', [ClaveUnicaController::class,'callback']);
+Route::get('/claveunica/logout', [ClaveUnicaController::class,'logoutClaveUnica'])->name('claveunica.logout');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/logout', [ClaveUnicaController::class,'logout']);
 
-Route::prefix('patient')->name('patient.')->group(function(){
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+
+Route::prefix('patient')->name('patient.')->middleware('auth')->group(function(){
     Route::get('/', [PatientController::class, 'index'])->name('index');
     Route::post('/', [PatientController::class, 'store'])->name('store');
     Route::get('/create', [PatientController::class, 'create'])->name('create');
@@ -47,8 +50,10 @@ Route::prefix('patient')->name('patient.')->group(function(){
 });
 
 Route::get('/local-login/{run}', [ProfileController::class, 'login']);
-Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
 
-Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::prefix('profile')->name('profile.')->middleware('auth')->group(function(){
+    Route::get('/', [ProfileController::class, 'show'])->name('show');
+    Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+    Route::put('/', [ProfileController::class, 'update'])->name('update');
+    Route::get('/observation', [ProfileController::class, 'observationIndex'])->name('observation.index');
+});

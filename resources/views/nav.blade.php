@@ -1,4 +1,34 @@
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>Mi información</span>
+    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+    <span data-feather="plus-circle"></span>
+    </a>
+</h6>
+<ul class="nav flex-column">
+    @auth
+    <li class="nav-item">
+        <a class="nav-link {{ active('profile.observation.index') }}" href="{{ route('profile.observation.index') }}">
+        <span data-feather="user"></span>
+        Mis exámenes<span class="sr-only"></span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('profile.show') }}" href="{{ route('profile.show') }}">
+        <span data-feather="user"></span>
+        Mi perfíl<span class="sr-only"></span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('claveunica.logout') }}">
+        <span data-feather="log-out"></span>
+        Cerrar sesión
+        </a>
+    </li>
+    @endauth
+
+</ul>
+@can('Patient: manager')
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Pacientes</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
     <span data-feather="plus-circle"></span>
@@ -17,37 +47,9 @@
         Ingresar nuevo
         </a>
     </li>
-
 </ul>
-<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
-    <span>Preferencias</span>
-    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-    <span data-feather="plus-circle"></span>
-    </a>
-</h6>
-<ul class="nav flex-column">
-    @auth
-    <li class="nav-item">
-        <a class="nav-link {{ active('profile.*') }}" href="{{ route('profile.show') }}">
-        <span data-feather="user"></span>
-        Mi perfíl<span class="sr-only"></span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('logout') }}">
-        <span data-feather="log-out"></span>
-        Cerrar sesión
-        </a>
-    </li>
-    @endauth
-    <li class="nav-item d-block d-md-none">
-        <a class="nav-link" href="/">
-        <span data-feather="home"></span>
-        Volver al inicio<span class="sr-only"></span>
-        </a>
-    </li>
+@endcan
 
-</ul>
 <!--
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
     <span>Documentos</span>

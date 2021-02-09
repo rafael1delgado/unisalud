@@ -11,6 +11,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/cu.min.css') }}" rel="stylesheet">
 
     <!-- Favicons -->
     <!-- Favicons -->
@@ -93,9 +94,15 @@
                         haciendo click en el botón de abajo.</p>
 
                     </ul>
-                    <a href="{{ route('claveunica.login') }}" class="btn btn-lg btn-block btn-outline-primary">
-                        Portal de Salud <img src="{{ asset('images/btn_claveunica_119px.png') }}" alt="Logo Clave única">
-                    </a>
+                    <div class="row justify-content-center">
+                        <!-- Código para visualizar botón oficial iniciar sesión con ClaveÚnica-->
+                        <a class="btn-cu btn-m btn-color-estandar text-center" href="{{ route('claveunica') }}"
+                            title="Este es el botón Iniciar sesión de ClaveÚnica">
+                            <span class="cl-claveunica"></span>
+                            <span class="texto">Iniciar sesión</span>
+                        </a>
+                        <!--./ fin botón-->
+                    </div>
                 </div>
             </div>
 
@@ -164,7 +171,7 @@
                 <div class="col-6 col-md">
                     <h5>Acerca</h5>
                     <ul class="list-unstyled text-small">
-                        <li>Desarrollado por la Unidad TIC.</li>
+                        <li>Desarrollado por del Departamento TIC.</li>
                         <li><a class="text-muted" href="mailto:sistemas.ssi@redsalud.gobc.">sistemas.ssi@redsalud.gob.cl</a></li>
                     </ul>
                 </div>
