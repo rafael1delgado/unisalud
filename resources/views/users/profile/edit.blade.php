@@ -50,6 +50,13 @@
                 "{{ $user['name'][0]['_family']['extension'][1]['valueString'] }}">
         </fieldset>
 
+        <fieldset class="form-group col-12 col-md-2">
+            <label for="for_birthDate">F. Nacimiento</label>
+            <input type="date" class="form-control" name="birthDate"
+                id="for_birthDate" required value=
+                "{{ $user['birthDate'] }}">
+        </fieldset>
+
     </div>
 
 

@@ -38,7 +38,7 @@
             </button>
             <ul class="navbar-nav px-3 d-none d-md-block">
                 <li class="nav-item"> 
-                    <span class="nav-link">{{ optional(auth()->user())->firstName }}</span>
+                    <span class="nav-link">@auth {{ auth()->user()->firstName }} @endauth</span>
                 </li>
             </ul>
         </nav>

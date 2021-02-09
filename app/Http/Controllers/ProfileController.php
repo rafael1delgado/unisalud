@@ -12,20 +12,17 @@ class ProfileController extends Controller
     use GoogleToken;
 
     public function login($run) {
-        if(env('APP_ENV') == 'local') {
+        //if(env('APP_ENV') == 'local') {
             $user = User::find($run);
             auth()->login($user, true);
             return redirect()->route('home');
-        }
+        //}
     }
 
     public function logout() {
         auth()->logout();
-
         request()->session()->invalidate();
-    
         request()->session()->regenerateToken();
-    
         return redirect('/');
     }
 
@@ -63,9 +60,19 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $data = '[{
+            "op": "replace",
+            "path": "/birthDate",
+            "value": "'.$request->input('birthDate').'"
+        }]';
+        $data = json_decode($data, true);
+        $url = $this->getUrlBase().'Patient/'.auth()->user()->fhir_id;
+        $response = Http::withHeaders(['Content-Type' => 'application/json-patch+json' ])
+        ->withToken($this->getToken())
+            ->patch($url,$data);
+        return redirect()->back();
     }
 
 }

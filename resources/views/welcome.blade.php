@@ -93,7 +93,7 @@
                         haciendo click en el botón de abajo.</p>
 
                     </ul>
-                    <a href="" class="btn btn-lg btn-block btn-outline-primary">
+                    <a href="{{ route('claveunica.login') }}" class="btn btn-lg btn-block btn-outline-primary">
                         Portal de Salud <img src="{{ asset('images/btn_claveunica_119px.png') }}" alt="Logo Clave única">
                     </a>
                 </div>
@@ -105,15 +105,7 @@
                 </div>
                 <div class="card-body">
 
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <h2>Región de Tarapacá</h2>
-                        <p>Si perteneces a la región de Tarapacá, puedes revisar el resultado de tu exámen de COVID-19
-                        utilizando tu clave única del estado, haciendo click en el botón de abajo.</p>
 
-                    </ul>
-                    <a href="" class="btn btn-lg btn-block btn-outline-primary">
-                        Resultado exámenes <img src="{{ asset('images/btn_claveunica_119px.png') }}" alt="Logo Clave única">
-                    </a>
                 </div>
             </div>
 

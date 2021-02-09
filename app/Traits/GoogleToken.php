@@ -8,8 +8,9 @@ trait GoogleToken
 {
     public function getToken()
     {
+        //dd();
         // Ruta al archivo service account en App/Keys/service_account.json
-        $service_account_path = app_path().'/Keys/'.env('SERVICE_ACCOUNT');
+        $service_account_path = base_path().'/'.env('GOOGLE_CLOUD_SERVICE_ACCOUNT');
         $service_account = json_decode(File::get($service_account_path), true);
         $now_seconds = time();
         $payload = array(

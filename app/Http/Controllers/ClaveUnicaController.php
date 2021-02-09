@@ -18,7 +18,6 @@ class ClaveUnicaController extends Controller
         $scope = 'openid+run+name+email';
 
         $url=$url_base.urlencode('?client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&state='.$state);
-
         return redirect()->to($url)->send();
     }
 
@@ -26,6 +25,7 @@ class ClaveUnicaController extends Controller
         /* Segundo Paso: enviar credenciales de clave única */
         $code   = $request->input('code');
         $state  = $request->input('state');
+        //die('Regresó a callback');
         //$state = csrf_token(); /* TODO:  Validar que el state sea el mismo que viene de clave única */
 
         $url_base       = "https://accounts.claveunica.gob.cl/openid/token/";
@@ -43,7 +43,7 @@ class ClaveUnicaController extends Controller
             'state' => $state,
         ]);
 
-
+        dd(json_decode($response));
         /* Tercer Paso, obtener los datos de usuario  */
         $access_token = json_decode($response)->access_token;
         $url_base = "https://www.claveunica.gob.cl/openid/userinfo";

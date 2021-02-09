@@ -20,6 +20,10 @@ use App\Http\Controllers\PatientController;
 |
 */
 
+/* Grabar en Google storage  */
+// $disk = \Storage::disk('gcs');
+// $url = $disk->put('FILE.txt',"hola");
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,7 +31,8 @@ Route::get('/', function () {
 //Auth::routes();
 
 Route::get('/claveunica', [ClaveUnicaController::class,'autenticar'])->name('claveunica.login');
-Route::get('/claveunica/callback', [ClaveUnicaController::class,'callback'])->name('claveunica.callback');
+Route::get('/callback', [ClaveUnicaController::class,'callback']);
+Route::get('/callback-testing', [ClaveUnicaController::class,'callback']);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 

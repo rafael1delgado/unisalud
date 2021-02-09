@@ -26,6 +26,7 @@
     </a>
 </h6>
 <ul class="nav flex-column">
+    @auth
     <li class="nav-item">
         <a class="nav-link {{ active('profile.*') }}" href="{{ route('profile.show') }}">
         <span data-feather="user"></span>
@@ -38,6 +39,7 @@
         Cerrar sesión
         </a>
     </li>
+    @endauth
     <li class="nav-item d-block d-md-none">
         <a class="nav-link" href="/">
         <span data-feather="home"></span>
