@@ -65,7 +65,7 @@
     </div>
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center container">
-        <h1 class="display-5 mb-3">{{ env('APP_SS') }}</h1>
+        <h1 class="display-5 mb-3">{{ env('APP_NAME') }}</h1>
         <div class="d-flex justify-content-center">
             <table class="align-self-center">
                 <tr>
@@ -81,16 +81,16 @@
     <div class="container">
         <div class="card-deck mb-3 text-center">
 
-            <div class="card mb-4 shadow-sm">
+            <div class="card shadow-sm">
                 <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">Salud Iquique</h4>
+                    <h4 class="my-0 font-weight-normal">Portal de Salud</h4>
                 </div>
                 <div class="card-body">
 
                     <ul class="list-unstyled mt-3 mb-4">
-                        <h2>Portal de Salud</h2>
+                        <h2>Ciudadanía</h2>
                         <p>Bienvenido al portal de Salud de la Región de Tarapacá. Acá encontrarás la información 
-                        que esté disponible para ti, la podrás consultar en línea utilizando tu clave única del estado, 
+                        que esté disponible para ti y la podrás consultar en línea utilizando tu clave única del estado, 
                         haciendo click en el botón de abajo.</p>
 
                     </ul>
@@ -106,7 +106,7 @@
                 </div>
             </div>
 
-            <div class="card mb-4 shadow-sm">
+            <div class="card shadow-sm">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">Coronavirus</h4>
                 </div>
@@ -116,14 +116,14 @@
                 </div>
             </div>
 
-            <div class="card mb-4 shadow-sm">
+            <div class="card shadow-sm">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">Estado de Urgencias</h4>
                 </div>
 
                 @php($array = json_decode(file_get_contents('status.json'),true))
 
-                <p class="text-muted mt-4">Ultima actualización: {{ $array['updated'] }}</p>
+                <p class="text-muted mt-2 mb-2">Ultima actualización: {{ $array['updated'] }}</p>
 
                 <table class="table table-sm">
                     <tr>
@@ -149,7 +149,6 @@
             <div class="row">
                 <div class="col-12 col-md">
                     <img class="mb-2" src="{{ asset('images/logo_ssi_100px.png') }}" alt="Logo Servicio de Salud Iquique">
-                    <!--small class="d-block mb-3 text-muted">&copy; 2021</small-->
                 </div>
                 <div class="col-6 col-md">
                     <h5>Portales del estado</h5>
@@ -169,10 +168,11 @@
                     </ul>
                 </div>
                 <div class="col-6 col-md">
-                    <h5>Acerca</h5>
+                    <h5>Desarrollado por</h5>
                     <ul class="list-unstyled text-small">
-                        <li>Desarrollado por del Departamento TIC.</li>
+                        <li>Departamento TIC del SSI</li>
                         <li><a class="text-muted" href="mailto:sistemas.ssi@redsalud.gobc.">sistemas.ssi@redsalud.gob.cl</a></li>
+                        <small class="d-block mb-3 text-muted">&copy; 2021</small>
                     </ul>
                 </div>
             </div>

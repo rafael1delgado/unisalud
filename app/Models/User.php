@@ -59,4 +59,8 @@ class User extends Authenticatable
     public function getFirstNameAttribute() {
         return explode(' ',trim($this->name))[0];
     }
+
+    public function getFullNameAttribute() {
+        return $this->name.' '.$this->fathers_family.' '.$this->mothers_family;
+    }
 }

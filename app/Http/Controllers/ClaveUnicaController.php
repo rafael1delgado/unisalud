@@ -11,11 +11,11 @@ class ClaveUnicaController extends Controller
 {
     public function autenticar(Request $request){
         /* Primer paso, redireccionar al login de clave única */
-        $url_base = "https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize";
-        $client_id = env("CLAVEUNICA_CLIENT_ID");
+        $url_base   = "https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize";
+        $client_id  = env("CLAVEUNICA_CLIENT_ID");
         $redirect_uri = urlencode(env("CLAVEUNICA_CALLBACK"));
-        $state = csrf_token();
-        $scope = 'openid run name';
+        $state      = csrf_token();
+        $scope      = 'openid run name';
 
         $url=$url_base.urlencode('?client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&state='.$state);
         return redirect()->to($url)->send();
@@ -59,9 +59,9 @@ class ClaveUnicaController extends Controller
 
         if($user_local) {
             /* Actualiza el correo si es que ha cambiado */
-            if($user_clave_unica->email) {
+            if(property_exists($user_clave_unica,'email')) {
                 if($user_local->email != $user_clave_unica->email) {
-                    //$user_local->email = $user_clave_unica->email;
+                    $user_local->email = $user_clave_unica->email;
                     $user_local->save();
                 }
             }
@@ -73,7 +73,9 @@ class ClaveUnicaController extends Controller
             $user_local->name = implode(' ', $user_clave_unica->name->nombres);
             $user_local->fathers_family = $user_clave_unica->name->apellidos[0];
             $user_local->mothers_family = $user_clave_unica->name->apellidos[1];
-            if($user_clave_unica->email) { $user_local->email = $user_clave_unica->email; }
+            if(property_exists($user_clave_unica,'email')) { 
+                $user_local->email = $user_clave_unica->email; 
+            }
             $user_local->claveunica = true;
 
             $user_local->save();
@@ -112,17 +114,11 @@ class ClaveUnicaController extends Controller
         */
     }
 
-    public function logoutClaveUnica() {
+    public function logout() {
         $url_logout = "https://accounts.claveunica.gob.cl/api/v1/accounts/app/logout?redirect=";
         $url_redirect = "https://www.saludiquique.app/logout";
         $url = $url_logout.urlencode($url_redirect);
         return redirect()->to($url)->send();
     }
 
-    public function logout(){
-        Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
-        return redirect('/');
-    }
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Profile;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 Use App\Traits\GoogleToken;
@@ -24,6 +25,13 @@ class ProfileController extends Controller
         //}
     }
 
+    public function logout(){
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -40,13 +48,13 @@ class ProfileController extends Controller
         else {
             $user = false;
         }
-        return view('users.profile.show', compact('user'));
+        return view('profiles.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $i
      * @return \Illuminate\Http\Response
      */
     public function edit()
@@ -55,7 +63,7 @@ class ProfileController extends Controller
         $url = $this->getUrlBase().'Patient/'.auth()->user()->fhir_id;
         $response = Http::withToken($this->getToken())->get($url);   
         $user = $response->json();
-        return view('users.profile.edit', compact('user'));
+        return view('profiles.edit', compact('user'));
     }
 
     /**
@@ -81,7 +89,4 @@ class ProfileController extends Controller
         return redirect()->back();
     }
 
-    public function observationIndex(){
-        return view('users.profile.observation.index');
-    }
 }
