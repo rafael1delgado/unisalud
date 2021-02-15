@@ -48,7 +48,7 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 Route::prefix('parameter')->as('parameter.')->middleware('auth')->group(function () {
     Route::resource('permission', PermissionController::class);
 });
-    
+
 Route::prefix('profile')->name('profile.')->middleware('auth')->group(function(){
     Route::get('/', [ProfileController::class, 'show'])->name('show');
     Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');

@@ -75,17 +75,17 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        $fhir_file = app_path().'/Fhir/replace.json';
-        $array = json_decode(file_get_contents($fhir_file),true);
+        $fhir[0]['op'] = "replace";
+        $fhir[0]['path'] = "/birthDate";
+        //$fhir[0]['value'] = "2000-01-01";
 
-        $array[0]['value'] = $request->input('birthDate');
-        
-        $json = json_encode($array);
+        $fhir[0]['value'] = $request->input('birthDate');
         
         $url = $this->getUrlBase().'Patient/'.auth()->user()->fhir_id;
         $response = Http::withHeaders(['Content-Type'=>'application/json-patch+json'])
                         ->withToken($this->getToken())
-                        ->patch($url,$json);
+                        ->patch($url,$fhir);
+
         return redirect()->back();
     }
 
