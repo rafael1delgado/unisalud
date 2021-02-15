@@ -10,23 +10,25 @@
 </div>
 
 @if($response['total'] > 0)
-    <ul>
-    @foreach($response['entry'] as $entry)
-        <li>
-            <b>Fecha Resultado</b>
-            {{ $entry['resource']['effectiveDateTime']}}
-            <b>Resultado</b>
-            {{ $entry['resource']['valueCodeableConcept']['text'] }}
-            <b>ID Esmeralda</b>
-            {{ $id = $entry['resource']['identifier'][0]['value'] }}
-            <a target='_blank' href="{{ \Storage::temporaryUrl('esmeralda/informs/'.$id.'.pdf', now()->addMinutes(5)) }}">Informe</a>
-        </li>
-    @endforeach
-    </ul>
+
+<ul>
+@foreach($response['entry'] as $entry)
+    <li>
+        {!! optional($entry['resource'])['text']['div'] !!}
+        <p>
+            <b>Informe: </b>
+            <a target='_blank' href="{{ \Storage::temporaryUrl('esmeralda/informs/'.$entry['resource']['identifier'][0]['value'].'.pdf', now()->addMinutes(5)) }}"><span data-feather="paperclip"></span></a>
+        </p>
+    </li>
+@endforeach
+</ul>
+
 @else
+
 <div class="alert alert-info" role="alert">
     Actualmente no encontramos resultados de examenes en nuestra base de datos.
 </div>
+
 @endif
 
 @can('dev')

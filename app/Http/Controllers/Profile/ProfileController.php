@@ -13,7 +13,7 @@ class ProfileController extends Controller
     use GoogleToken;
 
     public function login($run) {
-        //if(env('APP_ENV') == 'local') {
+        if(env('APP_ENV') == 'local') {
             $user = User::find($run);
             if($user) {
                 auth()->login($user, true);
@@ -22,7 +22,7 @@ class ProfileController extends Controller
             else {
                 die('No encuentro el rut en la BD');
             }
-        //}
+        }
     }
 
     public function logout(){

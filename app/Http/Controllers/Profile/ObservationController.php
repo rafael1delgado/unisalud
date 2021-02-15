@@ -28,9 +28,7 @@ class ObservationController extends Controller
     }
 
     public function download($id) {
-        return Storage::temporaryUrl(
-            'esmeralda/informs/'.$id.'.pdf', now()->addMinutes(5)
-        );
+        return Storage::temporaryUrl('esmeralda/informs/'.$id.'.pdf', now()->addMinutes(5));
         //return $disk->download('esmeralda/informs/'.$id.'.pdf');
         //return Storage::download('file.jpg');
     }

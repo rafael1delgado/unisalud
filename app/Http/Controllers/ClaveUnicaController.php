@@ -11,14 +11,19 @@ class ClaveUnicaController extends Controller
 {
     public function autenticar(Request $request){
         /* Primer paso, redireccionar al login de clave única */
-        $url_base   = "https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize";
-        $client_id  = env("CLAVEUNICA_CLIENT_ID");
-        $redirect_uri = urlencode(env("CLAVEUNICA_CALLBACK"));
-        $state      = csrf_token();
-        $scope      = 'openid run name';
+        $url_base       = "https://accounts.claveunica.gob.cl/openid/authorize/";
+        $client_id      = env("CLAVEUNICA_CLIENT_ID");
+        $redirect_uri   = urlencode(env("CLAVEUNICA_CALLBACK"));
+        $state          = csrf_token();
+        $scope          = 'openid run name';
 
-        $url=$url_base.urlencode('?client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&state='.$state);
-        return redirect()->to($url)->send();
+        $params       = '?client_id='.$client_id.
+                        '&redirect_uri='.$redirect_uri.
+                        '&scope='.$scope.
+                        '&response_type=code'.
+                        '&state='.$state;
+
+        return redirect()->to($url_base.$params)->send();
     }
 
     public function callback(Request $request) {
@@ -32,7 +37,6 @@ class ClaveUnicaController extends Controller
             $client_id      = env("CLAVEUNICA_CLIENT_ID");
             $client_secret  = env("CLAVEUNICA_SECRET_ID");
             $redirect_uri   = urlencode(env("CLAVEUNICA_CALLBACK"));
-            $scope          = 'openid run name email'; //openid+run+name+email
     
             $response = Http::asForm()->post($url_base, [
                 'client_id' => $client_id,
