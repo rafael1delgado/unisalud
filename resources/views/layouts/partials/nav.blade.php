@@ -12,7 +12,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ active('profile.show') }}" href="{{ route('profile.show') }}">
+        <a class="nav-link {{ active(['profile.show', 'profile.edit']) }}" href="{{ route('profile.show') }}">
         <span data-feather="user"></span>
         Mi perfíl<span class="sr-only"></span>
         </a>

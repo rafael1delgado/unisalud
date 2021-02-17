@@ -47,11 +47,13 @@
                 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                     <div class="sidebar-sticky pt-3">
                         @auth
-                        @include('nav')
+                        @include('layouts.partials.nav')
                         @endauth
                     </div>
                 </nav>
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                    @include('layouts.partials.errors')
+                    @include('layouts.partials.flash_message')
                     @yield('content')
                 </main>
             </div>
