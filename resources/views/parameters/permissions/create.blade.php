@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">Crear nuevo permiso</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('parameters.permissions.store') }}">
+<form method="POST" class="form-horizontal" action="{{ route('parameter.permission.store') }}">
     @csrf
     @method('POST')
 
