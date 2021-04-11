@@ -1,7 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
-
 <div class="jumbotron mt-3">
     <div class="container">
         <h class="display-4">Portal de Salud</h1>
@@ -9,5 +5,3 @@
             Acá encontrarás la información que esté disponible para tí.</p>
     </div>
 </div>
-
-@endsection

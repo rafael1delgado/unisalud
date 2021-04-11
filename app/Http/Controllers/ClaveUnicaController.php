@@ -54,7 +54,7 @@ class ClaveUnicaController extends Controller
     public function getUserInfo($access_token) {
         /* Tercer Paso, obtener los datos de usuario  */
         $url_base = "https://www.claveunica.gob.cl/openid/userinfo";
-        $response = Http::withToken($access_token)->get($url_base);
+        $response = Http::withToken($access_token)->post($url_base);
 
         $user_clave_unica = json_decode($response);
 
