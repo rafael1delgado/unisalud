@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHumanNamesTable extends Migration
+class CreateHumanNameContactOrgTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,20 @@ class CreateHumanNamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('human_names', function (Blueprint $table) {
+        Schema::create('human_name_contact_org', function (Blueprint $table) {
             $table->id();
-            $table->enum('use', ['use', 'official', 'temp', 'nickname', 'anonymous', 'old', 'maiden',
+            $table->foreignId('human_name_contact_org_id')->nullable();
+            $table->enum('use', ['usual', 'official', 'temp', 'nickname', 'anonymous', 'old', 'maiden',
             ])->nullable();
-            $table->foreignId('human_names_id')->nullable();
             $table->string('text')->nullable();
-            $table->string('fathers_family')->nullable();
-            $table->string('mothers_family')->nullable();
+            $table->string('family')->nullable();
+            $table->string('given')->nullable();
             $table->string('prefix')->nullable();
             $table->string('suffix')->nullable();
-            $table->timestamps();
 
-            $table->foreign('human_names_id')->references('id')->on('human_names');
+            $table->timestamps();
+            $table->foreign('human_name_contact_org_id')->references('id')->on('human_name_contact_org');
+
         });
     }
 
@@ -36,6 +37,6 @@ class CreateHumanNamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('human_names');
+        Schema::dropIfExists('human_name_contact_org');
     }
 }

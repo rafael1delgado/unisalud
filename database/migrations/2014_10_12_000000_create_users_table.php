@@ -19,19 +19,41 @@ class CreateUsersTable extends Migration
             $table->boolean('active');
             $table->bigInteger('run')->unsigned()->unique();
             $table->char('dv');
-            $table->string('name');
-            $table->string('fathers_family')->nullable();
-            $table->string('mothers_family')->nullable();
-            $table->string('email')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
+            $table->foreignId('human_names_id')->nullable();
+            $table->foreignId('contact_point_id')->nullable();
+            $table->enum('gender', ['female', 'male', 'other', 'unknown',
+            ])->nullable();
+            $table->date('birthday')->nullable();
+            $table->datetime('deceased_datetime')->nullable();
+            $table->foreignId('address_id')->nullable();
+            $table->foreignId('codeable_concept_marital_id')->nullable(); /**matrimonio */
+            $table->Integer('multiple_birth')->nullable(); /** parto múltiple */
+            $table->foreignId('attachment_id')->nullable();
+            $table->foreignId('emergency_contact_id')->nullable(); /** parentezco con familiar */
+            $table->foreignId('communication')->nullable();
+            
 
+
+          /**  $table->timestamp('email_verified_at')->nullable(); */
+           /** DON'T KNOW THAT THESE ARE */
+            $table->string('password')->nullable();
+           
             $table->boolean('claveunica')->nullable();
             $table->string('fhir_id')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+
+            /**  CLAVES FORANEAS  */
+            $table->foreign('human_names_id')->references('id')->on('human_names');
+            $table->foreign('contact_point_id')->references('id')->on('contact_point');
+            $table->foreign('address_id')->references('id')->on('address');
+            $table->foreign('codeable_concept_marital_id')->references('id')->on('codeable_concept_marital');
+            $table->foreign('attachment_id')->references('id')->on('attachment');
+            $table->foreign('emergency_contact_id')->references('id')->on('emergency_contact');
+            $table->foreign('communication_id')->references('id')->on('communication');
+
         });
     }
 
