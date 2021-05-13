@@ -24,14 +24,13 @@ class CreateOrganizationTable extends Migration
             $table->foreignId('contact_point_organization_id')->nullable(); /** contact of the organization  */
             $table->foreignId('address_organization_id')->nullable(); 
             $table->string('partOf')->nullable(); /** the organization is part of... */
-            $table->foreignId('contact_organization_id')->nullable();/** emergency contact of the organization  */
+            $table->string('contact_organization_id')->nullable();/** emergency contact of the organization  */
 
             $table->timestamps();
             $table->foreign('contact_point_organization_id')->references('id')->on('contact_point');
             $table->foreign('codeable_con_organization_id')->references('id')->on('codeable_con_organization');
             $table->foreign('contact_point_organization_id')->references('id')->on('contact_point_organization');
             $table->foreign('address_organization_id')->references('id')->on('address_organization');
-            $table->foreign('contact_organization_id')->references('id')->on('contact_organization');
 
         });
     }

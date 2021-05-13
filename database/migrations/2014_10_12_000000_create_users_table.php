@@ -26,10 +26,10 @@ class CreateUsersTable extends Migration
             $table->date('birthday')->nullable();
             $table->datetime('deceased_datetime')->nullable();
             $table->foreignId('address_id')->nullable();
-            $table->foreignId('codeable_concept_marital_id')->nullable(); /**matrimonio */
-            $table->Integer('multiple_birth')->nullable(); /** parto múltiple */
+            $table->foreignId('codeable_concept_marital_id')->nullable(); /** marriage  */
+            $table->Integer('multiple_birth')->nullable(); /** esp: parto múltiple */
             $table->foreignId('attachment_id')->nullable();
-            $table->foreignId('emergency_contact_id')->nullable(); /** parentezco con familiar */
+            $table->foreignId('emergency_contact_id')->nullable(); /** It refers to: parentezco con familiar */
             $table->foreignId('communication')->nullable();
             
 
@@ -45,7 +45,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            /**  CLAVES FORANEAS  */
+            /**  FOREIGN KEYS  */
             $table->foreign('human_names_id')->references('id')->on('human_names');
             $table->foreign('contact_point_id')->references('id')->on('contact_point');
             $table->foreign('address_id')->references('id')->on('address');

@@ -17,9 +17,9 @@ class CreatePractitionerTable extends Migration
             $table->id();
             $table->string('identifier');
             $table->boolean('active');
-            $table->foreignId('human_name_practitioner_id')->nullable();
-            $table->foreignId('contact_point_practitioner_id')->nullable();
-            $table->foreignId('address_practitioner_id')->nullable();
+            $table->foreignId('human_names_id')->nullable();
+            $table->foreignId('contact_point_id')->nullable();
+            $table->foreignId('address_id')->nullable();
             $table->enum('gender', ['male', 'female', 'other', 'unknown',
             ])->nullable();
             $table->date('birthday')->nullable();
@@ -30,9 +30,12 @@ class CreatePractitionerTable extends Migration
 
 
             $table->timestamps();
-            $table->foreign('human_name_practitioner_id')->references('id')->on('human_name_practitioner');
-            $table->foreign('contact_point_practitioner_id')->references('id')->on('contact_point_practitioner');
-            $table->foreign('address_practitioner_id')->references('id')->on('address_practitioner');
+            $table->foreign('human_names_id')->references('id')->on('human_names');
+            $table->foreign('contact_point_id')->references('id')->on('contact_point');
+            $table->foreign('address_id')->references('id')->on('address');
+
+
+           
             $table->foreign('attachment_id')->references('id')->on('attachment');
             $table->foreign('codeable_con_practitioner_id')->references('id')->on('codeable_con_practitioner');
             $table->foreign('communication_id')->references('id')->on('communication');
