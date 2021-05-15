@@ -31,7 +31,10 @@ class CreateUsersTable extends Migration
             $table->foreignId('attachment_id')->nullable();
             $table->foreignId('emergency_contact_id')->nullable(); /** It refers to: parentezco con familiar */
             $table->foreignId('communication')->nullable();
-            
+            $table->foreignId('codeable_con_practitioner_id')->nullable();
+            $table->foreignId('codeable_con_practitioner_id')->nullable();
+            $table->string('team')->nullable();
+
 
 
           /**  $table->timestamp('email_verified_at')->nullable(); */
@@ -53,6 +56,7 @@ class CreateUsersTable extends Migration
             $table->foreign('attachment_id')->references('id')->on('attachment');
             $table->foreign('emergency_contact_id')->references('id')->on('emergency_contact');
             $table->foreign('communication_id')->references('id')->on('communication');
+            $table->foreign('codeable_con_practitioner_id')->references('id')->on('codeable_con_practitioner');
 
         });
     }
