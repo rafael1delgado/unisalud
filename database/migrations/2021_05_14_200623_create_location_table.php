@@ -26,11 +26,12 @@ class CreateLocationTable extends Migration
             $table->foreignId('contact_point_id')->nullable();
             $table->foreignId('address_id')->nullable();
             $table->foreignId('cod_con_physical_type_id')->nullable(); /**site,building,wing,ward,leve,corridor,room,bed,vehicle,house,cabinet,road,area,jurisdiction */
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('altitude')->nullable();
             $table->foreignId('codeable_con_organization_id')->nullable(); /** Refers to the organization responsible for provisioning and upkeep */
             $table->foreignId('hours_of_operation_id')->nullable(); /** Refers to the organization responsible for provisioning and upkeep */
             $table->string('AvailabilityExceptions')->nullable();
-
-            $table->string('name')->nullable();
 
             $table->timestamps();
 
