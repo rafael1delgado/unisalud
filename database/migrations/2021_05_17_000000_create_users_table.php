@@ -30,8 +30,7 @@ class CreateUsersTable extends Migration
             $table->Integer('multiple_birth')->nullable(); /** esp: parto múltiple */
             $table->foreignId('attachment_id')->nullable();
             $table->foreignId('emergency_contact_id')->nullable(); /** It refers to: parentezco con familiar */
-            $table->foreignId('communication')->nullable();
-            $table->foreignId('codeable_con_practitioner_id')->nullable();
+            $table->foreignId('communication_id')->nullable();
             $table->foreignId('codeable_con_practitioner_id')->nullable();
             $table->string('team')->nullable();
 
