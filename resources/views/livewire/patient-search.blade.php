@@ -21,12 +21,12 @@
                 <tr>
                     <td>{{ ++$key }}</td>
                     <td>
-                        <a href="{{ route('patient.show',$patient['resource']['id'])}}">
-                            {{ $patient['resource']['name'][0]['text'] }}
+                        <a href="{{ route('patient.show',$patient['id'])}}">
+                            {{ $patient['name'] }}
                         </a>
                     </td>
-                    <td>{{ $patient['resource']['birthDate'] ?? ''}}</td>
-                    <td>{{ $patient['resource']['gender'] ?? ''}}</td>
+{{--                    <td>{{ $patient['birthDate'] ?? ''}}</td>--}}
+{{--                    <td>{{ $patient['resource']['gender'] ?? ''}}</td>--}}
                 </tr>
             @endforeach
         </tbody>

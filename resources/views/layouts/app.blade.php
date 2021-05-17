@@ -37,7 +37,7 @@
             <span class="navbar-toggler-icon"></span>
             </button>
             <ul class="navbar-nav px-3 d-none d-md-block">
-                <li class="nav-item"> 
+                <li class="nav-item">
                     <span class="nav-link">@auth {{ auth()->user()->firstName }} @endauth</span>
                 </li>
             </ul>
@@ -54,7 +54,7 @@
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                     @include('layouts.partials.errors')
                     @include('layouts.partials.flash_message')
-                    {{ $slot }}
+{{--                    {{ $slot }}--}}
                     @yield('content')
                 </main>
             </div>

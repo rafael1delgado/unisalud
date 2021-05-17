@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->boolean('active');
             $table->bigInteger('run')->unsigned()->unique();
             $table->char('dv');
-            $table->foreignId('human_names_id')->nullable();
+//            $table->foreignId('human_names_id')->nullable();
             $table->foreignId('contact_point_id')->nullable();
             $table->enum('gender', ['female', 'male', 'other', 'unknown',
             ])->nullable();
@@ -39,7 +39,7 @@ class CreateUsersTable extends Migration
           /**  $table->timestamp('email_verified_at')->nullable(); */
            /** DON'T KNOW THAT THESE ARE */
             $table->string('password')->nullable();
-           
+
             $table->boolean('claveunica')->nullable();
             $table->string('fhir_id')->nullable();
 

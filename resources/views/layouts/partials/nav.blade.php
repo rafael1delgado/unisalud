@@ -4,7 +4,7 @@
     <span data-feather="plus-circle"></span>
     </a>
 </h6>
-<ul class="nav flex-column">   
+<ul class="nav flex-column">
     <li class="nav-item">
         <a class="nav-link {{ active('profile.observation.index') }}" href="{{ route('profile.observation.index') }}">
         <span data-feather="user"></span>
@@ -65,7 +65,7 @@
 </ul>
 @endcan
 
-<ul class="nav flex-column">   
+<ul class="nav flex-column">
     <li class="nav-item border-top">
         <a class="nav-link" href="{{ route('claveunica.logout') }}">
         <span data-feather="log-out"></span>
