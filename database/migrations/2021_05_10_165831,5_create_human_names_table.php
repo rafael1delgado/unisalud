@@ -23,7 +23,7 @@ class CreateHumanNamesTable extends Migration
             $table->string('mothers_family')->nullable();
             $table->string('prefix')->nullable();
             $table->string('suffix')->nullable();
-           $table->foreignId('user_id')->nullable();  
+            $table->foreignId('user_id')->nullable();  
 
             $table->timestamps();
             $table->foreign('human_name_id')->references('id')->on('human_names');
