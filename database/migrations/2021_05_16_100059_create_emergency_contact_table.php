@@ -17,7 +17,7 @@ class CreateEmergencyContactTable extends Migration
             $table->id();
             $table->foreignId('emergency_contact_id')->nullable();
             $table->foreignId('codeable_concept_relation_id')->nullable(); /** parentezco con familiar */
-            $table->foreignId('human_names_id')->nullable();
+//            $table->foreignId('human_names_id')->nullable();
             $table->foreignId('contact_point_id')->nullable();
             $table->foreignId('address_id')->nullable();
             $table->enum('gender', ['female', 'male', 'other', 'unknown',
@@ -28,7 +28,7 @@ class CreateEmergencyContactTable extends Migration
 
             $table->foreign('emergency_contact_id')->references('id')->on('emergency_contact');
             $table->foreign('codeable_concept_relation_id')->references('id')->on('codeable_concept_relation');
-            $table->foreign('human_names_id')->references('id')->on('human_names');
+//            $table->foreign('human_names_id')->references('id')->on('human_names');
             $table->foreign('contact_point_id')->references('id')->on('contact_point');
             $table->foreign('address_id')->references('id')->on('address');
 

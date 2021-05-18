@@ -28,7 +28,7 @@ class CreateHumanNamesTable extends Migration
             $table->timestamps();
 
             $table->foreign('human_names_id')->references('id')->on('human_names');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
