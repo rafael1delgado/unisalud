@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -37,6 +38,11 @@ class User extends Authenticatable
         'claveunica'
     ];
 
+    public function humanNames(): HasMany
+    {
+        return $this->hasMany(HumanName::class, 'user_id', );
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -60,10 +66,14 @@ class User extends Authenticatable
         return explode(' ',trim($this->name))[0];
     }
 
-    public function getFullNameAttribute() {
-        return $this->name.' '.$this->fathers_family.' '.$this->mothers_family;
+    public function getOfficialFullNameAttribute() {
+        return "{$this->officialHumanName()->first()->text} {$this->officialHumanName()->first()->fathers_family} {$this->officialHumanName()->first()->mothers_family}";
     }
 
+    public function officialHumanName()
+    {
+        return $this->humanNames()->where('use', 'official');
+    }
 
 
 }

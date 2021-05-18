@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 Use App\Traits\GoogleToken;
@@ -25,77 +26,83 @@ class PatientController extends Controller
         return view('patients.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//    /**
+//     * Show the form for creating a new resource.
+//     *
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function create()
+//    {
+//        $valueSetUrl = 'http://fhir-ssiq.cens.cl/ssiq/fhir/';
+//
+//        /* Nivel de Instrucción */
+//        // $url = $this->getUrlBase().'ValueSet/instruction-level';
+//        $url = $valueSetUrl.'ValueSet/instruction-level';
+//        $response = Http::withToken($this->getToken())->get($url);
+//        $instructionLevel = $response->json()['compose']['include'][0]['concept'];
+//
+//        /* Identidad de genero */
+//        // $url = $this->getUrlBase().'ValueSet/gender-identity';
+//        $url = $valueSetUrl.'ValueSet/gender-identity';
+//        $response = Http::withToken($this->getToken())->get($url);
+//        $genderIdentities = $response->json()['compose']['include'][0]['concept'];
+//
+//        /* Genero */
+//        // $url = $this->getUrlBase().'ValueSet/administrative-gender';
+//        $url = $valueSetUrl.'ValueSet/administrative-gender';
+//        $response = Http::withToken($this->getToken())->get($url);
+//        $administrativeGenders = $response->json()['compose']['include'][0]['concept'];
+//
+//        /* Previsión */
+//        // $url = $this->getUrlBase().'ValueSet/health-insurance';
+//        $url = $valueSetUrl.'ValueSet/health-insurance';
+//        $response = Http::withToken($this->getToken())->get($url);
+//        $previciones = $response->json()['compose']['include'][0]['concept'];
+//
+//        /* Comunas */
+//        // $url = $this->getUrlBase().'ValueSet/commune';
+//        $url = $valueSetUrl.'ValueSet/commune';
+//        $response = Http::withToken($this->getToken())->get($url);
+//        $communes = $response->json()['compose']['include'][0]['concept'];
+//
+//        /* Regiones */
+//        // $url = $this->getUrlBase().'ValueSet/region';
+//        $url = $valueSetUrl.'ValueSet/region';
+//        $response = Http::withToken($this->getToken())->get($url);
+//        $regions = $response->json()['compose']['include'][0]['concept'];
+//
+//        /* Pueblos originarios */
+//        // $url = $this->getUrlBase().'ValueSet/aboriginal-community';
+//        $url = $valueSetUrl.'ValueSet/aboriginal-community';
+//        $response = Http::withToken($this->getToken())->get($url);
+//        $aboriginals = $response->json()['compose']['include'][0]['concept'];
+//
+//        /* Vias de acceso */
+//        // $url = $this->getUrlBase().'ValueSet/street-type';
+//        $url = $valueSetUrl.'ValueSet/street-type';
+//        $response = Http::withToken($this->getToken())->get($url);
+//        $streetTypes = $response->json()['compose']['include'][0]['concept'];
+//
+//        /* Estado civil */
+//        // $url = $this->getUrlBase().'ValueSet/marital-status';
+//        $url = $valueSetUrl.'ValueSet/marital-status';
+//        $response = Http::withToken($this->getToken())->get($url);
+//        $maritalStatus = $response->json()['compose']['include'][0]['concept'];
+//
+//        /*
+//        https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/health-insurance
+//        https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/religious-affiliation
+//        */
+//        return view('patients.create', compact('instructionLevel',
+//            'genderIdentities','previciones','communes','regions','aboriginals',
+//            'streetTypes','maritalStatus'));
+//    }
+
     public function create()
     {
-        $valueSetUrl = 'http://fhir-ssiq.cens.cl/ssiq/fhir/';
-
-        /* Nivel de Instrucción */
-        // $url = $this->getUrlBase().'ValueSet/instruction-level';
-        $url = $valueSetUrl.'ValueSet/instruction-level';
-        $response = Http::withToken($this->getToken())->get($url);
-        $instructionLevel = $response->json()['compose']['include'][0]['concept'];
-
-        /* Identidad de genero */
-        // $url = $this->getUrlBase().'ValueSet/gender-identity';
-        $url = $valueSetUrl.'ValueSet/gender-identity';
-        $response = Http::withToken($this->getToken())->get($url);
-        $genderIdentities = $response->json()['compose']['include'][0]['concept'];
-
-        /* Genero */
-        // $url = $this->getUrlBase().'ValueSet/administrative-gender';
-        $url = $valueSetUrl.'ValueSet/administrative-gender';
-        $response = Http::withToken($this->getToken())->get($url);
-        $administrativeGenders = $response->json()['compose']['include'][0]['concept'];
-
-        /* Previsión */
-        // $url = $this->getUrlBase().'ValueSet/health-insurance';
-        $url = $valueSetUrl.'ValueSet/health-insurance';
-        $response = Http::withToken($this->getToken())->get($url);
-        $previciones = $response->json()['compose']['include'][0]['concept'];
-
-        /* Comunas */
-        // $url = $this->getUrlBase().'ValueSet/commune';
-        $url = $valueSetUrl.'ValueSet/commune';
-        $response = Http::withToken($this->getToken())->get($url);
-        $communes = $response->json()['compose']['include'][0]['concept'];
-
-        /* Regiones */
-        // $url = $this->getUrlBase().'ValueSet/region';
-        $url = $valueSetUrl.'ValueSet/region';
-        $response = Http::withToken($this->getToken())->get($url);
-        $regions = $response->json()['compose']['include'][0]['concept'];
-
-        /* Pueblos originarios */
-        // $url = $this->getUrlBase().'ValueSet/aboriginal-community';
-        $url = $valueSetUrl.'ValueSet/aboriginal-community';
-        $response = Http::withToken($this->getToken())->get($url);
-        $aboriginals = $response->json()['compose']['include'][0]['concept'];
-
-        /* Vias de acceso */
-        // $url = $this->getUrlBase().'ValueSet/street-type';
-        $url = $valueSetUrl.'ValueSet/street-type';
-        $response = Http::withToken($this->getToken())->get($url);
-        $streetTypes = $response->json()['compose']['include'][0]['concept'];
-
-        /* Estado civil */
-        // $url = $this->getUrlBase().'ValueSet/marital-status';
-        $url = $valueSetUrl.'ValueSet/marital-status';
-        $response = Http::withToken($this->getToken())->get($url);
-        $maritalStatus = $response->json()['compose']['include'][0]['concept'];
-
-        /*
-        https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/health-insurance
-        https://fhir-ssiq.cens.cl/ssiq/fhir/ValueSet/religious-affiliation
-        */
-        return view('patients.create', compact('instructionLevel',
-            'genderIdentities','previciones','communes','regions','aboriginals',
-            'streetTypes','maritalStatus'));
+        return view('patients.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -325,19 +332,26 @@ class PatientController extends Controller
         return redirect()->route('patient.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+//    /**
+//     * Display the specified resource.
+//     *
+//     * @param  int  $id
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function show($id)
+//    {
+//        $url = $this->getUrlBase().'Patient/'.$id;
+//        $patient = Http::withToken($this->getToken())->get($url)->json();
+//
+//        return view('patients.show', compact('patient'));
+//    }
+
     public function show($id)
     {
-        $url = $this->getUrlBase().'Patient/'.$id;
-        $patient = Http::withToken($this->getToken())->get($url)->json();
-
+        $patient = User::find($id);
         return view('patients.show', compact('patient'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
