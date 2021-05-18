@@ -17,10 +17,13 @@ class CreateCodConSpecialtyTable extends Migration
             $table->id();
             $table->foreignId('cod_con_specialty_id')->nullable();
             $table->foreignId('coding_id')->nullable();
+            $table->foreignId('appointment_id')->nullable();
             $table->string('text');
 
             $table->foreign('cod_con_specialty_id')->references('id')->on('cod_con_specialty');
             $table->foreign('coding_id')->references('id')->on('coding');
+            $table->foreign('appointment_id')->references('id')->on('appointment');
+
         });
     }
 

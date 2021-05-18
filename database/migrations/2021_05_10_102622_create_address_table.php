@@ -16,6 +16,7 @@ class CreateAddressTable extends Migration
         Schema::create('address', function (Blueprint $table) {
             $table->id();
             $table->foreignId('address_id')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->enum('use',['home','work','temp','old','billing',
             ])->nullable();
             $table->enum('type',['postal','physical','both',
@@ -30,6 +31,8 @@ class CreateAddressTable extends Migration
             $table->timestamps();
 
             $table->foreign('address_id')->references('id')->on('address');
+            $table->foreign('user_id')->references('id')->on('users');  
+
         });
     }
 

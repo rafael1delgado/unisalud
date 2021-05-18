@@ -16,7 +16,9 @@ class CreateParticipantTable extends Migration
         Schema::create('participant', function (Blueprint $table) {
             $table->id();
             $table->foreignId('participant_id')->nullable();
+            $table->foreignId('appointment_id')->nullable();
             $table->string('type')->nullable();
+            $table->foreignId('period_id')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('location_id')->nullable();
             $table->enum('required', ['required', 'optional', 'information-only',
@@ -27,6 +29,8 @@ class CreateParticipantTable extends Migration
             $table->timestamps();
 
             $table->foreign('participant_id')->references('id')->on('participant');
+            $table->foreign('period_id')->references('id')->on('period');
+            $table->foreign('appointment_id')->references('id')->on('appointment');
 
         });
     }
