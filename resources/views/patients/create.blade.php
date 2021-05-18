@@ -303,6 +303,28 @@
                 <input type="text" class="form-control" name="identifier"
                        id="for_identifier" required>
             </fieldset>
+
+            <fieldset class="form-group col-2">
+                <label for="">Vencimiento</label>
+                <input type="date" class="form-control" name="identifier"
+                       id="for_identifier" required>
+            </fieldset>
+        </div>
+
+        <div class="form-row">
+            <fieldset class="form-group col-2">
+                <label for="">Titular</label>
+                <input type="text" class="form-control" name="identifier"
+                       id="for_identifier" required>
+            </fieldset>
+        </div>
+
+        <div class="form-row">
+            <fieldset class="form-group col-2">
+                <label for="">Previsión</label>
+                <input type="text" class="form-control" name="identifier"
+                       id="for_identifier" required>
+            </fieldset>
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
