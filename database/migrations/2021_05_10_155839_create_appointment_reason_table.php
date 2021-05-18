@@ -17,10 +17,13 @@ class CreateAppointmentReasonTable extends Migration
             $table->id();
             $table->foreignId('appointment_reason_id')->nullable();
             $table->foreignId('coding_id')->nullable();
+            $table->foreignId('appointment_id')->nullable();
             $table->string('text');
 
             $table->foreign('appointment_reason_id')->references('id')->on('appointment_reason');
             $table->foreign('coding_id')->references('id')->on('coding');   
+            $table->foreign('appointment_id')->references('id')->on('appointment');
+
         });
     }
 

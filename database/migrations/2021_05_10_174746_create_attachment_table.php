@@ -16,6 +16,7 @@ class CreateAttachmentTable extends Migration
         Schema::create('attachment', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attachment_id')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->string('contentType')->nullable(); /** Technically, a code is restricted to a string which has at least one character and no leading or trailing whitespace, and where there is no whitespace other than single spaces in the contents*/
             $table->string('languaje')->nullable();
         /** $table->base64Binary('data')->nullable(); */ 
@@ -28,6 +29,7 @@ class CreateAttachmentTable extends Migration
             $table->timestamps();
 
             $table->foreign('attachment_id')->references('id')->on('attachment');
+            $table->foreign('user_id')->references('id')->on('users');  
 
         });
     }

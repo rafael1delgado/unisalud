@@ -17,9 +17,12 @@ class CreateCodConLocationTable extends Migration
             $table->id();
             $table->foreignId('cod_con_location_id')->nullable();
             $table->foreignId('coding_id')->nullable();
+            $table->foreignId('location_id')->nullable();
+
             $table->string('text');
 
             $table->foreign('cod_con_location_id')->references('id')->on('cod_con_location');
+            $table->foreign('location_id')->references('id')->on('location');
             $table->foreign('coding_id')->references('id')->on('coding');
         });
     }
