@@ -4,12 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
-Use App\Traits\GoogleToken;
+use App\Traits\GoogleToken;
 use Illuminate\Support\Facades\Http;
 
 class PatientSearch extends Component
 {
     use GoogleToken;
+
     public $searchf = null;
 
     public function render()
@@ -24,20 +25,12 @@ class PatientSearch extends Component
 //        }
 //        else $patients = array();
 
-//        $patients = User::query()
-//
-//            ->whereHas('name', 'like', "%$this->searchf%")
-//            ->get();
+        $patients = User::query()
+            ->whereHas('officialHumanName', function ($query) {
+                $query->where('text', 'like', "%$this->searchf");
+            })
+            ->get();
 
-
-
-//        if($query['total']>0) {
-//            $patients = $query['entry'];
-//        }
-//        else $patients = array();
-
-        //        return view('livewire.patient-search');
-        $patients = User::all();
-        return view('livewire.patient-search',['patients' => $patients]);
+        return view('livewire.patient-search', ['patients' => $patients]);
     }
 }
