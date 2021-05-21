@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCodeableConceptLanguajeTable extends Migration
+class CreateCodConRelationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCodeableConceptLanguajeTable extends Migration
      */
     public function up()
     {
-        Schema::create('codeable_concept_languaje', function (Blueprint $table) {
+        Schema::create('cod_con_relation', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('codeable_concept_languaje_id')->nullable();
+            $table->foreignId('cod_con_relation_id')->nullable();
             $table->foreignId('coding_id')->nullable();
             $table->string('text');
 
-            $table->foreign('codeable_concept_languaje_id')->references('id')->on('codeable_concept_languaje');
+            $table->foreign('cod_con_relation_id')->references('id')->on('cod_con_relation');
             $table->foreign('coding_id')->references('id')->on('coding');
         });
     }
@@ -31,6 +31,6 @@ class CreateCodeableConceptLanguajeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('codeable_concept_languaje');
+        Schema::dropIfExists('cod_con_relationship');
     }
 }

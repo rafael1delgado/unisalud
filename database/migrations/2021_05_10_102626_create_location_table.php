@@ -29,7 +29,7 @@ class CreateLocationTable extends Migration
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
             $table->string('altitude')->nullable();
-            $table->foreignId('codeable_con_organization_id')->nullable(); /** Refers to the organization responsible for provisioning and upkeep */
+            $table->foreignId('cod_con_organization_id')->nullable(); /** Refers to the organization responsible for provisioning and upkeep */
             $table->string('AvailabilityExceptions')->nullable();
 
             $table->timestamps();
@@ -38,7 +38,7 @@ class CreateLocationTable extends Migration
             $table->foreign('coding_id')->references('id')->on('coding');
             $table->foreign('address_id')->references('id')->on('address');
             $table->foreign('cod_con_physical_type_id')->references('id')->on('cod_con_physical_type');
-            $table->foreign('codeable_con_organization_id')->references('id')->on('codeable_con_organization');
+            $table->foreign('cod_con_organization_id')->references('id')->on('cod_con_organization');
 
         });
     }

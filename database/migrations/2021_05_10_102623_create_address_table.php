@@ -17,6 +17,7 @@ class CreateAddressTable extends Migration
             $table->id();
             $table->foreignId('address_id')->nullable();
             $table->foreignId('user_id')->nullable();
+            $table->foreignId('period_id')->nullable();
             $table->enum('use',['home','work','temp','old','billing',
             ])->nullable();
             $table->enum('type',['postal','physical','both',
@@ -31,6 +32,7 @@ class CreateAddressTable extends Migration
             $table->timestamps();
 
             $table->foreign('address_id')->references('id')->on('address');
+            $table->foreign('period_id')->references('id')->on('period');
             $table->foreign('user_id')->references('id')->on('users');  
 
         });

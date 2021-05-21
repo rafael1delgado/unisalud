@@ -16,14 +16,14 @@ class CreateCommunicationTable extends Migration
         Schema::create('communication', function (Blueprint $table) {
             $table->id();
             $table->foreignId('communication_id')->nullable();
-            $table->foreignId('codeable_concept_languaje_id')->nullable(); /** lenguaje */
+            $table->foreignId('cod_con_languaje_id')->nullable(); /** lenguaje */
             $table->foreignId('user_id')->nullable();
             $table->boolean('preferred')->nullable();
 
             $table->timestamps();
 
             $table->foreign('communication_id')->references('id')->on('communication');
-            $table->foreign('codeable_concept_languaje_id')->references('id')->on('codeable_concept_languaje');
+            $table->foreign('cod_con_languaje_id')->references('id')->on('cod_con_languaje');
             $table->foreign('user_id')->references('id')->on('users');  
 
         });
