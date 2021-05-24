@@ -23,7 +23,7 @@
     </div>
 @endif
 
-@can('dev')
+@can('Developer')
 <pre class="small">{{ print_r($user) }}</pre>
 @endcan
 

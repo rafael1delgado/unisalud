@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ClaveUnicaController;
+use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Home;
 
 use App\Http\Controllers\Parameter\PermissionController;
@@ -43,8 +44,9 @@ Route::get('/claveunica/logout', [ClaveUnicaController::class,'logout'])->name('
 Route::get('/login/{run}', [ProfileController::class, 'login']);
 Route::get('/logout', [ProfileController::class,'logout']);
 
-Route::get('/home', Home::class)->middleware('auth')->name('home');
-//Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+/** Ejempo con livewire */
+//Route::get('/home', Home::class)->middleware('auth')->name('home');
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 Route::prefix('parameter')->as('parameter.')->middleware('auth')->group(function () {
     Route::resource('permission', PermissionController::class);
