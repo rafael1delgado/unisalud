@@ -19,13 +19,13 @@ class CreateUsersTable extends Migration
             $table->string('identifier');
             $table->boolean('active');
             /* FIXME : debe permitir nulos nullable() */
-            $table->bigInteger('run')->unsigned()->unique();
+            $table->bigInteger('run')->nullable();
             $table->char('dv');
             $table->enum('gender', ['female', 'male', 'other', 'unknown',
             ])->nullable();
             $table->date('birthday')->nullable();
             $table->datetime('deceased_datetime')->nullable();
-            $table->foreignId('codeable_concept_marital_id')->nullable(); /** marriage  */
+            $table->foreignId('cod_con_marital_id')->nullable(); /** marriage  */
             $table->Integer('multiple_birth')->nullable(); /** esp: parto múltiple */
             $table->string('team')->nullable();
 
@@ -50,7 +50,7 @@ class CreateUsersTable extends Migration
 
             /**  FOREIGN KEYS  */
             $table->foreign('user_id')->references('id')->on('users');  
-            $table->foreign('codeable_concept_marital_id')->references('id')->on('codeable_concept_marital');
+            $table->foreign('cod_con_marital_id')->references('id')->on('cod_con_marital');
         });
     }
 

@@ -16,7 +16,7 @@ class CreateEmergencyContactTable extends Migration
         Schema::create('emergency_contact', function (Blueprint $table) {
             $table->id();
             $table->foreignId('emergency_contact_id')->nullable();
-            $table->foreignId('codeable_concept_relation_id')->nullable(); /** parentezco con familiar */
+            $table->foreignId('cod_con_relation_id')->nullable(); /** parentezco con familiar */
             $table->foreignId('human_name_id')->nullable();
             $table->foreignId('address_id')->nullable();
             $table->foreignId('user_id')->nullable();
@@ -26,7 +26,7 @@ class CreateEmergencyContactTable extends Migration
             $table->foreignId('period_id')->nullable();
 
             $table->foreign('emergency_contact_id')->references('id')->on('emergency_contact');
-            $table->foreign('codeable_concept_relation_id')->references('id')->on('codeable_concept_relation');
+            $table->foreign('cod_con_relation_id')->references('id')->on('cod_con_relation');
             $table->foreign('human_name_id')->references('id')->on('human_names');
             $table->foreign('address_id')->references('id')->on('address');
             $table->foreign('user_id')->references('id')->on('users');  
