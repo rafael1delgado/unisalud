@@ -73,3 +73,6 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
     Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
+
+Route::view('/some', 'some');
+Route::view('/crear_usuario', 'crear_usuario');
