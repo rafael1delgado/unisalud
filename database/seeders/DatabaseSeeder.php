@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             RegionSeeder::class,
             CodConMaritalSeeder::class,
-            //comunaaaaaaaaaaaaa, okaaaa
+            CommuneSeeder::class,
         ]);
     }
 }
