@@ -49,8 +49,8 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
 
             /**  FOREIGN KEYS  */
-            $table->foreign('user_id')->references('id')->on('users');  
-            $table->foreign('cod_con_marital_id')->references('id')->on('cod_con_marital');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('cod_con_marital_id')->references('id')->on('cod_con_maritals');
         });
     }
 
