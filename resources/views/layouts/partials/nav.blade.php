@@ -65,6 +65,27 @@
 </ul>
 {{--@endcan--}}
 
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>Programador médico</span>
+    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+    <span data-feather="plus-circle"></span>
+    </a>
+</h6>
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.operating_room_programming.index') }}" href="{{ route('medical_programmer.operating_room_programming.index') }}">
+        <span data-feather="lock"></span>
+        Programador de pabellones<span class="sr-only">(current)</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.activities.index') }}" href="{{ route('medical_programmer.activities.index') }}">
+        <span data-feather="unlock"></span>
+        Actividades
+        </a>
+    </li>
+</ul>
+
 <ul class="nav flex-column">
     <li class="nav-item border-top">
         <a class="nav-link" href="{{ route('claveunica.logout') }}">
@@ -73,30 +94,6 @@
         </a>
     </li>
 </ul>
-
-<p>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Programador médico
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-
-    <ul class="nav flex-column">
-      <li class="nav-item">
-          <a class="nav-link" href="{{ route('medical_programmer.operating_room_programming.index') }}">
-              <i class="fas fa-calendar-alt fa-fw" style='color:green'></i>
-              Programador de Pabellones
-          </a>
-      </li>
-    </ul>
-
-    <a class="dropdown-item" href="{{ route('medical_programmer.activities.index') }}">
-        <i class="fas fa-file-contract fa-fw"></i> Actividades
-    </a>
-
-  </div>
-</div>
 
 <!-- <p>
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
