@@ -168,6 +168,4 @@ class User extends Authenticatable
         }
         return $array;
     }
-
-
 }

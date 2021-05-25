@@ -17,6 +17,10 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\Fq\ContactUserController;
 use App\Http\Controllers\Fq\FqRequestController;
 
+use App\Http\Controllers\MedicalProgrammer\RrhhController;
+use App\Http\Controllers\MedicalProgrammer\ContractController;
+use App\Http\Controllers\MedicalProgrammer\ActivityController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -88,4 +92,51 @@ Route::prefix('fq')->as('fq.')->group(function(){
         Route::get('/create', [FqRequestController::class, 'create'])->name('create');
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
     });
+});
+
+Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('auth')->group(function(){
+  Route::prefix('operating_room_programming')->name('operating_room_programming.')->group(function(){
+    Route::get('/', [OperatingRoomProgrammingController::class, 'index'])->name('index');
+    Route::post('/', [OperatingRoomProgrammingController::class, 'store'])->name('store');
+    Route::get('/create', [OperatingRoomProgrammingController::class, 'create'])->name('create');
+    Route::get('/{patient}', [OperatingRoomProgrammingController::class, 'show'])->name('show');
+    Route::put('/{patient}', [OperatingRoomProgrammingController::class, 'update'])->name('update');
+    Route::delete('/{patient}', [OperatingRoomProgrammingController::class, 'destroy'])->name('destroy');
+    Route::get('/{patient}/edit', [OperatingRoomProgrammingController::class, 'edit'])->name('edit');
+
+    Route::get('saveMyEvent', [OperatingRoomProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
+    Route::get('updateMyEvent', [OperatingRoomProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
+    Route::get('deleteMyEvent', [OperatingRoomProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
+    Route::get('deleteMyEventForce', [OperatingRoomProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+  });
+
+  Route::prefix('rrhh')->name('rrhh.')->group(function(){
+    Route::get('/', [RrhhController::class, 'index'])->name('index');
+    Route::post('/', [RrhhController::class, 'store'])->name('store');
+    Route::get('/create', [RrhhController::class, 'create'])->name('create');
+    Route::get('/{rrhh}', [RrhhController::class, 'show'])->name('show');
+    Route::put('/{rrhh}', [RrhhController::class, 'update'])->name('update');
+    Route::delete('/{rrhh}', [RrhhController::class, 'destroy'])->name('destroy');
+    Route::get('/{rrhh}/edit', [RrhhController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('contracts')->name('contracts.')->group(function(){
+    Route::get('/', [ContractController::class, 'index'])->name('index');
+    Route::post('/', [ContractController::class, 'store'])->name('store');
+    Route::get('/create', [ContractController::class, 'create'])->name('create');
+    Route::get('/{contract}', [ContractController::class, 'show'])->name('show');
+    Route::put('/{contract}', [ContractController::class, 'update'])->name('update');
+    Route::delete('/{contract}', [ContractController::class, 'destroy'])->name('destroy');
+    Route::get('/{contract}/edit', [ContractController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('activities')->name('activities.')->group(function(){
+    Route::get('/', [ActivityController::class, 'index'])->name('index');
+    Route::post('/', [ActivityController::class, 'store'])->name('store');
+    Route::get('/create', [ActivityController::class, 'create'])->name('create');
+    Route::get('/{activity}', [ActivityController::class, 'show'])->name('show');
+    Route::put('/{activity}', [ActivityController::class, 'update'])->name('update');
+    Route::delete('/{activity}', [ActivityController::class, 'destroy'])->name('destroy');
+    Route::get('/{activity}/edit', [ActivityController::class, 'edit'])->name('edit');
+  });
 });
