@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             CountrySeeder::class,
             RegionSeeder::class,
-            //comunaaaaaaaaaaaaa
+            CodConMaritalSeeder::class,
+            //comunaaaaaaaaaaaaa, okaaaa
         ]);
     }
 }

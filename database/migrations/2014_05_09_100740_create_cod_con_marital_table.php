@@ -13,14 +13,15 @@ class CreateCodConMaritalTable extends Migration
      */
     public function up()
     {
-        Schema::create('cod_con_marital', function (Blueprint $table) {
+        Schema::create('cod_con_maritals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cod_con_marital_id')->nullable();
             $table->foreignId('coding_id')->nullable();
             $table->string('text');
 
-            $table->foreign('cod_con_marital_id')->references('id')->on('cod_con_marital');
+            $table->foreign('cod_con_marital_id')->references('id')->on('cod_con_maritals');
             $table->foreign('coding_id')->references('id')->on('coding');
+            $table->timestamps();
         });
     }
 
@@ -31,6 +32,6 @@ class CreateCodConMaritalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cod_con_marital');
+        Schema::dropIfExists('cod_con_maritals');
     }
 }
