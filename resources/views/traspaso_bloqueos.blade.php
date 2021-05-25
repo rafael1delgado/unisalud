@@ -61,7 +61,7 @@
       			<th scope="row"></th>
       			<td>9:00</td>
       			<td>
-					<label class="form-check-label" for="invalidCheck2">Francisco Carpio</label>
+					<label class="form-check-label" for="invalidCheck2">Cristian Carpio</label>
       				<input class="form-check-input col-md-1" type="checkbox" value="" id="invalidCheck2" required>
 				</td>
       			
@@ -73,7 +73,6 @@
 					
 					<label class="form-check-label" for="invalidCheck2">Mariano Carrasco</label>
       				<input class="form-check-input col-md-1" type="checkbox" value="" id="invalidCheck2" required>
-     		   		
 				</td>
       			
     		</tr>
