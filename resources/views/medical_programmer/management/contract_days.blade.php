@@ -31,7 +31,7 @@
 {{-- <h3 class="mb-3">Ingreso detalle</h3> --}}
 <hr />
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.theoretical_programming.store') }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.theoretical_programming.store') }}">
     @csrf
     @method('POST')
 

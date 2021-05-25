@@ -15,6 +15,9 @@ use App\Http\Controllers\Profile\ObservationController;
 use App\Http\Controllers\PatientController;
 
 use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
+
+use App\Http\Controllers\MedicalProgrammer\RrhhController;
+use App\Http\Controllers\MedicalProgrammer\ContractController;
 use App\Http\Controllers\MedicalProgrammer\ActivityController;
 
 
@@ -93,6 +96,26 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::get('updateMyEvent', [OperatingRoomProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
     Route::get('deleteMyEvent', [OperatingRoomProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
     Route::get('deleteMyEventForce', [OperatingRoomProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+  });
+
+  Route::prefix('rrhh')->name('rrhh.')->group(function(){
+    Route::get('/', [RrhhController::class, 'index'])->name('index');
+    Route::post('/', [RrhhController::class, 'store'])->name('store');
+    Route::get('/create', [RrhhController::class, 'create'])->name('create');
+    Route::get('/{rrhh}', [RrhhController::class, 'show'])->name('show');
+    Route::put('/{rrhh}', [RrhhController::class, 'update'])->name('update');
+    Route::delete('/{rrhh}', [RrhhController::class, 'destroy'])->name('destroy');
+    Route::get('/{rrhh}/edit', [RrhhController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('contracts')->name('contracts.')->group(function(){
+    Route::get('/', [ContractController::class, 'index'])->name('index');
+    Route::post('/', [ContractController::class, 'store'])->name('store');
+    Route::get('/create', [ContractController::class, 'create'])->name('create');
+    Route::get('/{contract}', [ContractController::class, 'show'])->name('show');
+    Route::put('/{contract}', [ContractController::class, 'update'])->name('update');
+    Route::delete('/{contract}', [ContractController::class, 'destroy'])->name('destroy');
+    Route::get('/{contract}/edit', [ContractController::class, 'edit'])->name('edit');
   });
 
   Route::prefix('activities')->name('activities.')->group(function(){

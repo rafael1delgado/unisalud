@@ -60,7 +60,7 @@ class RrhhController extends Controller
       $rrhh = new Rrhh($request->All());
       $rrhh->save();
 
-      return redirect()->route('ehr.hetg.rrhh.index');
+      return redirect()->route('medical_programmer.rrhh.index');
     }
 
     /**
@@ -119,7 +119,7 @@ class RrhhController extends Controller
         $rrhh->fill($request->all());
         $rrhh->save();
 
-        return redirect()->route('ehr.hetg.rrhh.index');
+        return redirect()->route('medical_programmer.rrhh.index');
     }
 
     /**
@@ -134,6 +134,6 @@ class RrhhController extends Controller
       $rrhh->delete();
       $rrhh->save();
       session()->flash('success', 'El recurso humano ha sido eliminado');
-      return redirect()->route('ehr.hetg.rrhh.index');
+      return redirect()->route('medical_programmer.rrhh.index');
     }
 }

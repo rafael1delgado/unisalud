@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Listado de RRHH</h3>
 
-<a class="btn btn-primary mb-3" href="{{ route('ehr.hetg.rrhh.create') }}">
+<a class="btn btn-primary mb-3" href="{{ route('medical_programmer.rrhh.create') }}">
     <i class="fas fa-plus"></i> Agregar nuevo
 </a>
 
@@ -30,11 +30,11 @@
             <td>{{ $people->mothers_family }}</td>
             <td>{{ $people->job_title }}</td>
             <td>
-      				<a href="{{ route('ehr.hetg.rrhh.edit', $people) }}"
+      				<a href="{{ route('medical_programmer.rrhh.edit', $people) }}"
       					class="btn btn-sm btn-outline-secondary">
       					<span class="fas fa-edit" aria-hidden="true"></span>
       				</a>
-      				<form method="POST" action="{{ route('ehr.hetg.rrhh.destroy', $people) }}" class="d-inline">
+      				<form method="POST" action="{{ route('medical_programmer.rrhh.destroy', $people) }}" class="d-inline">
       					@csrf
       					@method('DELETE')
       					<button type="submit" class="btn btn-outline-secondary btn-sm" onclick="return confirm('¿Está seguro de eliminar la información?');">

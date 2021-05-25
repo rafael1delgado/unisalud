@@ -9,7 +9,7 @@
         <tr>
             <td>Filtro</td>
             <td>
-              <form method="GET" id="form" class="form-horizontal" action="{{ route('ehr.hetg.theoretical_programming.programed_professionals') }}">
+              <form method="GET" id="form" class="form-horizontal" action="{{ route('medical_programmer.theoretical_programming.programed_professionals') }}">
                 <select name="filter" onchange="this.form.submit()">
                   <option value="0" {{ $request->filter == 0 ? 'selected' : '' }}>Todos</option>
                   <option value="1" {{ $request->filter == 1 ? 'selected' : '' }}>Con teórico</option>

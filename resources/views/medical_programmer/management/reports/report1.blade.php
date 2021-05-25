@@ -6,7 +6,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form method="post" action="{{ route('ehr.hetg.management.report.report1') }}">
+		<form method="post" action="{{ route('medical_programmer.management.report.report1') }}">
 			@csrf
 						<div class="input-group mb-3">
 

@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Editar Actividad Madre</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.mother_activities.update', $motherActivity) }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.mother_activities.update', $motherActivity) }}">
     @csrf
     @method('PUT')
 

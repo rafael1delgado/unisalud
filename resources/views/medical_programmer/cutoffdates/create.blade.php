@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Nueva Fecha de corte</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.cutoffdates.store') }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.cutoffdates.store') }}">
     @csrf
     @method('POST')
 

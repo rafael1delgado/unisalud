@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Nuevo Servicio</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.services.store') }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.services.store') }}">
     @csrf
     @method('POST')
 

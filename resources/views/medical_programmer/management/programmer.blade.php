@@ -63,7 +63,7 @@ bottom: 5px;
 
 <h5 class="mb-3"></h5>
 
-<form method="GET" id="form" class="form-horizontal" action="{{ route('ehr.hetg.calendar_programming.index') }}">
+<form method="GET" id="form" class="form-horizontal" action="{{ route('medical_programmer.calendar_programming.index') }}">
 
 <div align="right">
   <p>
@@ -82,7 +82,7 @@ bottom: 5px;
   <input type="hidden" id="rut" name="rut" value="{{$request->rut}}"/>
 </form>
 
-<form method="GET" id="form" class="form-horizontal" action="{{ route('ehr.hetg.calendar_programming.index') }}"> --}}
+<form method="GET" id="form" class="form-horizontal" action="{{ route('medical_programmer.calendar_programming.index') }}"> --}}
   <input type="hidden" id="date" name="date"/>
   <div class="row">
     <fieldset class="form-group col-3">
@@ -876,7 +876,7 @@ bottom: 5px;
       console.log(rut,specialty_id,profession_id,operating_room_id,start_date,end_date,activity_id);
 
       $.ajax({
-          url: "{{ route('ehr.hetg.calendar_programming.saveMyEvent') }}",
+          url: "{{ route('medical_programmer.calendar_programming.saveMyEvent') }}",
           type: 'post',
           data:{rut:rut,specialty_id:specialty_id,profession_id:profession_id,activity_id:activity_id,operating_room_id:operating_room_id,start_date:start_date,end_date:end_date},
           headers: {
@@ -919,7 +919,7 @@ bottom: 5px;
       console.log(rut + " " + operation_room_id_start + " " + operating_room_id + " F1" + start_date_start + " F1'" + start_date + " F2" + end_date_start + " F2'"  + end_date + " " + specialty_id);
 
       $.ajax({
-          url: "{{ route('ehr.hetg.calendar_programming.updateMyEvent') }}",
+          url: "{{ route('medical_programmer.calendar_programming.updateMyEvent') }}",
           type: 'post',
           data:{rut:rut,operation_room_id_start:operation_room_id_start, operating_room_id:operating_room_id,specialty_id:specialty_id,profession_id:profession_id,start_date_start:start_date_start, start_date:start_date,end_date_start:end_date_start, end_date:end_date},
           headers: {
@@ -953,7 +953,7 @@ bottom: 5px;
       }
 
       $.ajax({
-          url: "{{ route('ehr.hetg.calendar_programming.deleteMyEvent') }}",
+          url: "{{ route('medical_programmer.calendar_programming.deleteMyEvent') }}",
           type: 'post',
           data:{rut:rut,specialty_id:specialty_id,profession_id:profession_id,operating_room_id:operating_room_id,start_date:start_date,end_date:end_date},
           headers: {
@@ -992,7 +992,7 @@ bottom: 5px;
       }
 
       $.ajax({
-          url: "{{ route('ehr.hetg.calendar_programming.deleteMyEventForce') }}",
+          url: "{{ route('medical_programmer.calendar_programming.deleteMyEventForce') }}",
           type: 'post',
           data:{rut:rut,specialty_id:specialty_id,profession_id:profession_id,operating_room_id:operating_room_id,start_date:start_date,end_date:end_date},
           headers: {

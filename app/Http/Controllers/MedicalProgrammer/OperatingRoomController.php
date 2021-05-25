@@ -945,7 +945,7 @@ class OperatingRoomController extends Controller
         //$operatingRoom->user_id = Auth::id();
         $operatingRoom->save();
 
-        return redirect()->route('ehr.hetg.operating_rooms.index');
+        return redirect()->route('medical_programmer.operating_rooms.index');
     }
 
     /**
@@ -1051,7 +1051,7 @@ class OperatingRoomController extends Controller
         }
 
         session()->flash('info', 'El pabellón ha sido editado.');
-        return redirect()->route('ehr.hetg.operating_rooms.index');
+        return redirect()->route('medical_programmer.operating_rooms.index');
     }
 
     /**
@@ -1065,6 +1065,6 @@ class OperatingRoomController extends Controller
       //se elimina la cabecera y detalles
       $operatingRoom->delete();
       session()->flash('success', 'El pabellón ha sido eliminado');
-      return redirect()->route('ehr.hetg.operating_rooms.index');
+      return redirect()->route('medical_programmer.operating_rooms.index');
     }
 }

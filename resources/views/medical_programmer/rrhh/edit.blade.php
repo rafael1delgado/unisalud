@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Editar RRHH</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.rrhh.update', $rrhh) }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.rrhh.update', $rrhh) }}">
   @csrf
   @method('PUT')
 

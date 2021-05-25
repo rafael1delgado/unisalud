@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Editar Fecha de corte</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.cutoffdates.update', $cutoffdate) }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.cutoffdates.update', $cutoffdate) }}">
     @csrf
     @method('PUT')
 

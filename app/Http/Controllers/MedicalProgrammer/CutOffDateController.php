@@ -49,7 +49,7 @@ class CutOffDateController extends Controller
       $cutOffDate->save();
 
       session()->flash('info', 'La fecha de corte ha sido creada.');
-      return redirect()->route('ehr.hetg.cutoffdates.index');
+      return redirect()->route('medical_programmer.cutoffdates.index');
     }
 
     /**
@@ -88,7 +88,7 @@ class CutOffDateController extends Controller
       $cutoffdate->save();
 
       session()->flash('info', 'La fecha de corte ha sido editada.');
-      return redirect()->route('ehr.hetg.cutoffdates.index');
+      return redirect()->route('medical_programmer.cutoffdates.index');
     }
 
     /**
@@ -101,7 +101,7 @@ class CutOffDateController extends Controller
     {
       $cutoffdate->delete();
       session()->flash('success', 'La fecha de corte ha sido eliminada');
-      return redirect()->route('ehr.hetg.cutoffdates.index');
+      return redirect()->route('medical_programmer.cutoffdates.index');
     }
 
     public function consolidated_programming(CutOffDate $cutoffdate)
@@ -235,7 +235,7 @@ class CutOffDateController extends Controller
 
         $cutoffdates = CutOffDate::all();
         return view('medical_programmer.cutoffdates.index', compact('cutoffdates','array_programacion_medica', 'array_programacion_no_medica'));
-        // return redirect()->route('ehr.hetg.cutoffdates.index')->compact('array');
+        // return redirect()->route('medical_programmer.cutoffdates.index')->compact('array');
     }
 
     public function savePerformance(Request $request){
