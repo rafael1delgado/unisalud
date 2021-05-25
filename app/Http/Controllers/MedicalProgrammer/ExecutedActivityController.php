@@ -16,7 +16,7 @@ class ExecutedActivityController extends Controller
     public function index()
     {
         $executedActivities = ExecutedActivity::All();
-        return view('ehr.hetg.executed_activities.index',compact('executedActivities'));
+        return view('medical_programmer.executed_activities.index',compact('executedActivities'));
     }
 
 

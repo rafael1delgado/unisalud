@@ -19,7 +19,7 @@ class ActivityController extends Controller
     public function index()
     {
       $activities = Activity::all();
-      return view('ehr.hetg.activities.index', compact('activities'));
+      return view('medical_programmer.activities.index', compact('activities'));
     }
 
     /**
@@ -32,7 +32,7 @@ class ActivityController extends Controller
       $motherActivities = MotherActivity::orderBy('description','ASC')->get();
       $activityTypes = ActivityType::orderBy('name','ASC')->get();
 
-      return view('ehr.hetg.activities.create',compact('motherActivities','activityTypes'));
+      return view('medical_programmer.activities.create',compact('motherActivities','activityTypes'));
     }
 
     /**
@@ -48,7 +48,7 @@ class ActivityController extends Controller
       $activity->save();
 
       session()->flash('info', 'La actividad ha sido creada.');
-      return redirect()->route('ehr.hetg.activities.index');
+      return redirect()->route('medical_programmer.activities.index');
     }
 
     /**
@@ -72,7 +72,7 @@ class ActivityController extends Controller
     {
       $motherActivities = MotherActivity::orderBy('description','ASC')->get();
       $activityTypes = ActivityType::orderBy('name','ASC')->get();
-      return view('ehr.hetg.activities.edit', compact('activity','motherActivities','activityTypes'));
+      return view('medical_programmer.activities.edit', compact('activity','motherActivities','activityTypes'));
     }
 
     /**
@@ -89,7 +89,7 @@ class ActivityController extends Controller
         $activity->save();
 
         session()->flash('info', 'La actividad ha sido editada.');
-        return redirect()->route('ehr.hetg.activities.index');
+        return redirect()->route('medical_programmer.activities.index');
     }
 
     /**
@@ -102,6 +102,6 @@ class ActivityController extends Controller
     {
       $activity->delete();
       session()->flash('success', 'La actividad ha sido eliminada');
-      return redirect()->route('ehr.hetg.activities.index');
+      return redirect()->route('medical_programmer.activities.index');
     }
 }

@@ -91,6 +91,10 @@
       </li>
     </ul>
 
+    <a class="dropdown-item" href="{{ route('medical_programmer.activities.index') }}">
+        <i class="fas fa-file-contract fa-fw"></i> Actividades
+    </a>
+
   </div>
 </div>
 

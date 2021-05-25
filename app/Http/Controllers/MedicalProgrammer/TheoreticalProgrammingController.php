@@ -16,7 +16,7 @@ use App\Models\MedicalProgrammer\UserSpecialty;
 use App\Models\MedicalProgrammer\UserProfession;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -406,10 +406,10 @@ class TheoreticalProgrammingController extends Controller
     $monday = Carbon::parse($date)->startOfWeek();
     $sunday = Carbon::parse($date)->endOfWeek();
 
-      return view('ehr.hetg.management.theoretical_programmer', compact('request','array','activities','contract_days','date','theoreticalProgrammings','theoreticalProgrammingDeleted',
+      return view('medical_programmer.management.theoretical_programmer', compact('request','array','activities','contract_days','date','theoreticalProgrammings','theoreticalProgrammingDeleted',
                                                                         'rrhhs','permisos_administrativos', 'specialties','professions','contracts',
                                                                         'programming','OperatingRoomProgrammings','theoreticalProgrammingsAdministrative'));
-      // return view('ehr.hetg.management.theoretical_programmer',compact('request','rrhhs','array','theoricalProgrammings','contracts','rut','contract_days'));
+      // return view('medical_programmer.management.theoretical_programmer',compact('request','rrhhs','array','theoricalProgrammings','contracts','rut','contract_days'));
     }
 
     /**
@@ -979,7 +979,7 @@ class TheoreticalProgrammingController extends Controller
         // dd($array, usort($array,'cant'));
         // dd($total);
 
-        return view('ehr.hetg.management.reports.programed_professionals',compact('array','total','total_with_theorical','total_withnot_theorical','request'));
+        return view('medical_programmer.management.reports.programed_professionals',compact('array','total','total_with_theorical','total_withnot_theorical','request'));
     }
 
     public function programed_specialties(){
@@ -1007,7 +1007,7 @@ class TheoreticalProgrammingController extends Controller
                                                                                       ->count();
         }
 
-        return view('ehr.hetg.management.reports.programed_specialties',compact('array'));
+        return view('medical_programmer.management.reports.programed_specialties',compact('array'));
     }
 
     public function programed_by_services(){
@@ -1027,6 +1027,6 @@ class TheoreticalProgrammingController extends Controller
           $array[$service->service_name]['con_teorico'] = $profesionals[$service->service_name];
         }
 
-        return view('ehr.hetg.management.reports.programed_by_services',compact('array'));
+        return view('medical_programmer.management.reports.programed_by_services',compact('array'));
     }
 }

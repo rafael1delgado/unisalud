@@ -22,7 +22,7 @@ class CutOffDateController extends Controller
         $array_programacion_medica = null;
         $array_programacion_no_medica = null;
         $cutoffdates = CutOffDate::all();
-        return view('ehr.hetg.cutoffdates.index', compact('cutoffdates','array_programacion_medica', 'array_programacion_no_medica'));
+        return view('medical_programmer.cutoffdates.index', compact('cutoffdates','array_programacion_medica', 'array_programacion_no_medica'));
     }
 
     /**
@@ -33,7 +33,7 @@ class CutOffDateController extends Controller
     public function create()
     {
       // $cutoffdates = CutOffDate::orderBy('date','ASC')->get();
-      return view('ehr.hetg.cutoffdates.create');
+      return view('medical_programmer.cutoffdates.create');
     }
 
     /**
@@ -71,7 +71,7 @@ class CutOffDateController extends Controller
      */
     public function edit(CutOffDate $cutoffdate)
     {
-      return view('ehr.hetg.cutoffdates.edit', compact('cutoffdate'));
+      return view('medical_programmer.cutoffdates.edit', compact('cutoffdate'));
     }
 
     /**
@@ -234,7 +234,7 @@ class CutOffDateController extends Controller
         // dd($array_programacion_medica, $array_programacion_no_medica);
 
         $cutoffdates = CutOffDate::all();
-        return view('ehr.hetg.cutoffdates.index', compact('cutoffdates','array_programacion_medica', 'array_programacion_no_medica'));
+        return view('medical_programmer.cutoffdates.index', compact('cutoffdates','array_programacion_medica', 'array_programacion_no_medica'));
         // return redirect()->route('ehr.hetg.cutoffdates.index')->compact('array');
     }
 

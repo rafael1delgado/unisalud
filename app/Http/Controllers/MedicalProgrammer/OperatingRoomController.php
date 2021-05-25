@@ -38,12 +38,12 @@ class OperatingRoomController extends Controller
     public function index()
     {
         $operatingRooms = OperatingRoom::All();
-        return view('ehr.hetg.operating_rooms.index', compact('operatingRooms'));
+        return view('medical_programmer.operating_rooms.index', compact('operatingRooms'));
     }
 
     public function programmer()
     {
-        return view('ehr.hetg.operating_rooms.programmer');
+        return view('medical_programmer.operating_rooms.programmer');
     }
 
     public function ws_hospital_intervenciones(){
@@ -358,7 +358,7 @@ class OperatingRoomController extends Controller
 
         $request->flash();
 
-        return view('ehr.hetg.management.reports.specialty',compact('now','resumen','horas_ejecutadas','executedActivities'));
+        return view('medical_programmer.management.reports.specialty',compact('now','resumen','horas_ejecutadas','executedActivities'));
     }
 
     public function reportByProfesional(Request $request)
@@ -455,7 +455,7 @@ class OperatingRoomController extends Controller
         $total_habil = gmdate("H:i:s", $total_habil);
         $total_inhabil = gmdate("H:i:s", $total_inhabil);
 
-        return view('ehr.hetg.management.reports.by_profesional',
+        return view('medical_programmer.management.reports.by_profesional',
             compact('rrhh','now','profesional','current_activities','contracts',
             'programacion_pabellon','programacion_otras_actividades',
             'total_contratadas', 'total_ejecutadas','total_habil','total_inhabil','total_programadas'));
@@ -516,7 +516,7 @@ class OperatingRoomController extends Controller
       }
       $specialties = $specialties->sortByDesc('prom');
 
-      return view('ehr.hetg.management.reports.weekly',compact('now','current_activities','operatingRooms','specialties','operatingRoom_name'));
+      return view('medical_programmer.management.reports.weekly',compact('now','current_activities','operatingRooms','specialties','operatingRoom_name'));
     }
 
     public function reportDiary(Request $request)
@@ -568,7 +568,7 @@ class OperatingRoomController extends Controller
       $specialties = $specialties->sortByDesc('prom');
       // dd($specialties);
 
-      return view('ehr.hetg.management.reports.diary',compact('now','current_activities','operatingRooms','specialties','colors'));
+      return view('medical_programmer.management.reports.diary',compact('now','current_activities','operatingRooms','specialties','colors'));
     }
 
     public function report1(Request $request)
@@ -682,7 +682,7 @@ class OperatingRoomController extends Controller
       //   $specialty->color = $colors[$key];
       // }
 
-      return view('ehr.hetg.management.reports.report1',compact('from','to','average_total','executed_activities',));
+      return view('medical_programmer.management.reports.report1',compact('from','to','average_total','executed_activities',));
     }
 
     public function reportUrgency(Request $request)
@@ -738,7 +738,7 @@ class OperatingRoomController extends Controller
         }
 
 
-        return view('ehr.hetg.operating_rooms.reports.urgency', compact('resumen','resumen_por_especialidad'));
+        return view('medical_programmer.operating_rooms.reports.urgency', compact('resumen','resumen_por_especialidad'));
         //print_r($resumen_por_especialidad);
     }
 
@@ -912,7 +912,7 @@ class OperatingRoomController extends Controller
 
       $request->flash();
 
-      return view('ehr.hetg.management.reports.ProgramedVsTeoric',compact('now','array','operatingRooms','OperatingRoomSpecialtiesArray','OperatingRoomArray'));
+      return view('medical_programmer.management.reports.ProgramedVsTeoric',compact('now','array','operatingRooms','OperatingRoomSpecialtiesArray','OperatingRoomArray'));
     }
 
     function cmp($a, $b)
@@ -929,7 +929,7 @@ class OperatingRoomController extends Controller
      */
     public function create()
     {
-        return view('ehr.hetg.operating_rooms.create');
+        return view('medical_programmer.operating_rooms.create');
     }
 
     /**
@@ -969,7 +969,7 @@ class OperatingRoomController extends Controller
     {
         $specialties = Specialty::orderBy('specialty_name','ASC')->get();
         $professions = Profession::orderBy('profession_name','ASC')->get();
-        return view('ehr.hetg.operating_rooms.edit', compact('operatingRoom','specialties', 'professions'));
+        return view('medical_programmer.operating_rooms.edit', compact('operatingRoom','specialties', 'professions'));
     }
 
     /**

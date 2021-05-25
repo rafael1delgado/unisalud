@@ -24,7 +24,7 @@ class ContractController extends Controller
         }else{$year = Carbon::now()->format('Y');}
 
         $contracts = Contract::where('year',$year)->get();
-        return view('ehr.hetg.contracts.index', compact('contracts', 'request'));
+        return view('medical_programmer.contracts.index', compact('contracts', 'request'));
     }
 
     /**
@@ -36,7 +36,7 @@ class ContractController extends Controller
     {
       $rrhh = Rrhh::orderBy('name','ASC')->get();
       $services = Service::orderBy('service_name','ASC')->get();
-      return view('ehr.hetg.contracts.create', compact('rrhh','services'));
+      return view('medical_programmer.contracts.create', compact('rrhh','services'));
     }
 
     /**
@@ -76,7 +76,7 @@ class ContractController extends Controller
     {
       $rrhh = Rrhh::All();
       $services = Service::orderBy('service_name','ASC')->get();
-      return view('ehr.hetg.contracts.edit', compact('contract', 'rrhh', 'services'));
+      return view('medical_programmer.contracts.edit', compact('contract', 'rrhh', 'services'));
     }
 
     /**

@@ -17,7 +17,7 @@ class ServiceController extends Controller
   public function index()
   {
     $services = Service::all();
-    return view('ehr.hetg.services.index', compact('services'));
+    return view('medical_programmer.services.index', compact('services'));
   }
 
   /**
@@ -27,7 +27,7 @@ class ServiceController extends Controller
    */
   public function create()
   {
-      return view('ehr.hetg.services.create');
+      return view('medical_programmer.services.create');
   }
 
   /**
@@ -64,7 +64,7 @@ class ServiceController extends Controller
    */
   public function edit(Service $service)
   {
-      return view('ehr.hetg.services.edit', compact('service'));
+      return view('medical_programmer.services.edit', compact('service'));
   }
 
   /**

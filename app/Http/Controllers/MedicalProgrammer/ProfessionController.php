@@ -22,7 +22,7 @@ class ProfessionController extends Controller
                                         return $query->where('user_id',Auth::id());
                                     })->orderBy('profession_name','ASC')->get();
         // $professions = Profession::>orderBy('profession_name','ASC')->get();
-        return view('ehr.hetg.professions.index', compact('professions'));
+        return view('medical_programmer.professions.index', compact('professions'));
     }
 
     /**
@@ -34,7 +34,7 @@ class ProfessionController extends Controller
     {
         $activities = Activity:://where('mother_activity_id',2)
                                 where('activity_type_id',2)->orderBy('activity_name','ASC')->get(); //obtiene NO medicas
-        return view('ehr.hetg.professions.create',compact('activities'));
+        return view('medical_programmer.professions.create',compact('activities'));
     }
 
     /**
@@ -82,7 +82,7 @@ class ProfessionController extends Controller
     {
         $activities = Activity:://where('mother_activity_id',2)
                                 where('activity_type_id',2)->orderBy('activity_name','ASC')->get(); //obtiene NO medicas
-        return view('ehr.hetg.professions.edit', compact('profession','activities'));
+        return view('medical_programmer.professions.edit', compact('profession','activities'));
     }
 
     /**
