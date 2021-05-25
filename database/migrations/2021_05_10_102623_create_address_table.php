@@ -27,7 +27,7 @@ class CreateAddressTable extends Migration
             $table->string('city')->nullable();
             $table->string('district')->nullable(); /** should be deleted? */
             $table->string('state')->nullable(); /** should be deleted? */
-            $table->string('postalCode')->nullable();
+            $table->string('postal_code')->nullable();
             $table->string('country')->nullable(); /** should be deleted? */
             $table->timestamps();
 
