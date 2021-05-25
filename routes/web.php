@@ -13,6 +13,8 @@ use App\Http\Controllers\Profile\ObservationController;
 
 use App\Http\Controllers\PatientController;
 
+use App\Http\Controllers\Fq\ContactUserController;
+use App\Http\Controllers\Fq\FqRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,4 +74,16 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::put('/{patient}', [PatientController::class, 'update'])->name('update');
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
     Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
+});
+
+Route::prefix('fq')->as('fq.')->group(function(){
+    Route::prefix('contact_user')->name('contact_user.')->group(function(){
+        Route::get('/', [ContactUserController::class, 'index'])->name('index');
+    });
+    Route::prefix('request')->name('request.')->group(function(){
+        Route::get('/', [FqRequestController::class, 'index'])->name('index');
+        Route::get('/own_index', [FqRequestController::class, 'own_index'])->name('own_index');
+        Route::get('/create', [FqRequestController::class, 'create'])->name('create');
+        Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
+    });
 });
