@@ -16,7 +16,7 @@ use App\Models\MedicalProgrammer\OperatingRoom;
 use App\Models\MedicalProgrammer\UserOperatingRoom;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -231,7 +231,7 @@ class CalendarProgrammingController extends Controller
                                                         // dd($theoreticalProgrammings);
 
     //dd($rrhh->first()->contracts->first()->unscheduled_programmings->whereIn('activity_id',$ids_actividades)->WhereIn('specialty_id',$ids_specialities));
-    return view('ehr.hetg.management.programmer', compact('request', 'array', 'operatingRoomsTotal', 'operatingRooms', 'calendarProgrammings','calendarProgrammingsDeleted',
+    return view('medical_programmer.management.programmer', compact('request', 'array', 'operatingRoomsTotal', 'operatingRooms', 'calendarProgrammings','calendarProgrammingsDeleted',
                                                           'contract_days', 'date', 'theoreticalProgrammings', 'rrhhs', 'OperatingRoomProgrammings'));
   }
 
@@ -413,7 +413,7 @@ class CalendarProgrammingController extends Controller
                                                             // dd($theoreticalProgrammings);
 
         //dd($rrhh->first()->contracts->first()->unscheduled_programmings->whereIn('activity_id',$ids_actividades)->WhereIn('specialty_id',$ids_specialities));
-        return view('ehr.hetg.management.programmerbox', compact('request', 'array', 'operatingRoomsTotal', 'operatingRooms', 'calendarProgrammings','calendarProgrammingsDeleted',
+        return view('medical_programmer.management.programmerbox', compact('request', 'array', 'operatingRoomsTotal', 'operatingRooms', 'calendarProgrammings','calendarProgrammingsDeleted',
                                                               'contract_days', 'date', 'theoreticalProgrammings', 'rrhhs', 'OperatingRoomProgrammings'));
     }
 
@@ -454,7 +454,7 @@ class CalendarProgrammingController extends Controller
   //     $calendarProgramming->duration = $start->diffInMinutes($end)/60;
   //   }
   //
-  //   return view('ehr.hetg.management.programmer', compact('array','operatingRooms','calendarProgrammings', 'request'));
+  //   return view('medical_programmer.management.programmer', compact('array','operatingRooms','calendarProgrammings', 'request'));
   // }
 
   /**
@@ -639,7 +639,7 @@ class CalendarProgrammingController extends Controller
     //   $calendarProgramming->duration = $start->diffInMinutes($end)/60;
     // }
 
-    //return view('ehr.hetg.management.programmer', compact('array','operatingRooms','calendarProgrammings'));
+    //return view('medical_programmer.management.programmer', compact('array','operatingRooms','calendarProgrammings'));
 
     return $array;
   }
@@ -709,7 +709,7 @@ class CalendarProgrammingController extends Controller
 
 
     //dd($array);
-    return view('ehr.hetg.management.calendar_programmer_report', compact('array'));
+    return view('medical_programmer.management.calendar_programmer_report', compact('array'));
   }
 
   public function programed_in_pavilions(Request $request){
@@ -768,6 +768,6 @@ class CalendarProgrammingController extends Controller
 
         // dd($array);
 
-    return view('ehr.hetg.management.reports.programed_in_pavilions',compact('array'));
+    return view('medical_programmer.management.reports.programed_in_pavilions',compact('array'));
   }
 }

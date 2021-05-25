@@ -9,7 +9,7 @@ use App\Models\MedicalProgrammer\Specialty;
 use App\Models\MedicalProgrammer\Activity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\MedicalProgrammer\TheoreticalProgramming;
@@ -24,7 +24,7 @@ class UnscheduledProgrammingController extends Controller
     public function index()
     {
         $programming = UnscheduledProgramming::All();
-        return view('ehr.hetg.unscheduled_programming.index',compact('programming'));
+        return view('medical_programmer.unscheduled_programming.index',compact('programming'));
     }
 
     /**
@@ -38,7 +38,7 @@ class UnscheduledProgrammingController extends Controller
       $contracts = Contract::all();
       $specialties = Specialty::orderBy('specialty_name','ASC')->get();
       $activities = Activity::orderBy('id','ASC')->get();
-      return view('ehr.hetg.unscheduled_programming.create',compact('rrhh','contracts','specialties','activities'));
+      return view('medical_programmer.unscheduled_programming.create',compact('rrhh','contracts','specialties','activities'));
     }
 
     /**
@@ -94,7 +94,7 @@ class UnscheduledProgrammingController extends Controller
       $medica_programming->save();
 
       session()->flash('info', 'La programación ha sido creada.');
-      // return redirect()->route('ehr.hetg.unscheduled_programming.index');
+      // return redirect()->route('medical_programmer.unscheduled_programming.index');
       return redirect()->back();
     }
 
@@ -121,7 +121,7 @@ class UnscheduledProgrammingController extends Controller
       $contracts = Contract::all();
       $specialties = Specialty::orderBy('specialty_name','ASC')->get();
       $activities = Activity::orderBy('id','ASC')->get();
-      return view('ehr.hetg.unscheduled_programming.edit', compact('unscheduledProgramming','rrhh','contracts','specialties','activities'));
+      return view('medical_programmer.unscheduled_programming.edit', compact('unscheduledProgramming','rrhh','contracts','specialties','activities'));
     }
 
     /**
@@ -138,7 +138,7 @@ class UnscheduledProgrammingController extends Controller
       $unscheduledProgramming->save();
 
       session()->flash('info', 'La programación ha sido editada.');
-      // return redirect()->route('ehr.hetg.unscheduled_programming.index');
+      // return redirect()->route('medical_programmer.unscheduled_programming.index');
       return redirect()->back();
     }
 
@@ -152,7 +152,7 @@ class UnscheduledProgrammingController extends Controller
     {
       $unscheduledProgramming->delete();
       session()->flash('success', 'La programación ha sido eliminada');
-      // return redirect()->route('ehr.hetg.unscheduled_programming.index');
+      // return redirect()->route('medical_programmer.unscheduled_programming.index');
       return redirect()->back();
     }
 }

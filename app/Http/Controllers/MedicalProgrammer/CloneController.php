@@ -17,7 +17,7 @@ class CloneController extends Controller
      */
     public function index()
     {
-        return view('ehr.hetg.management.clone');
+        return view('medical_programmer.management.clone');
     }
 
     /**

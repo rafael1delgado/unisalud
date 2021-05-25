@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\MedicalProgrammer;
 
 use App\Models\MedicalProgrammer\Rrhh;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +18,7 @@ class RrhhController extends Controller
     public function index()
     {
         $rrhh = Rrhh::orderBy('name','ASC')->get();
-        return view('ehr.hetg.rrhh.index', compact('rrhh'));
+        return view('medical_programmer.rrhh.index', compact('rrhh'));
     }
 
     /**
@@ -28,7 +28,7 @@ class RrhhController extends Controller
      */
     public function create()
     {
-        return view('ehr.hetg.rrhh.create');
+        return view('medical_programmer.rrhh.create');
     }
 
     /**
@@ -60,7 +60,7 @@ class RrhhController extends Controller
       $rrhh = new Rrhh($request->All());
       $rrhh->save();
 
-      return redirect()->route('ehr.hetg.rrhh.index');
+      return redirect()->route('medical_programmer.rrhh.index');
     }
 
     /**
@@ -83,7 +83,7 @@ class RrhhController extends Controller
     public function edit(Rrhh $rrhh)
     {
         $user = User::where('id',$rrhh->rut)->count();
-        return view('ehr.hetg.rrhh.edit', compact('rrhh','user'));
+        return view('medical_programmer.rrhh.edit', compact('rrhh','user'));
     }
 
     /**
@@ -119,7 +119,7 @@ class RrhhController extends Controller
         $rrhh->fill($request->all());
         $rrhh->save();
 
-        return redirect()->route('ehr.hetg.rrhh.index');
+        return redirect()->route('medical_programmer.rrhh.index');
     }
 
     /**
@@ -134,6 +134,6 @@ class RrhhController extends Controller
       $rrhh->delete();
       $rrhh->save();
       session()->flash('success', 'El recurso humano ha sido eliminado');
-      return redirect()->route('ehr.hetg.rrhh.index');
+      return redirect()->route('medical_programmer.rrhh.index');
     }
 }

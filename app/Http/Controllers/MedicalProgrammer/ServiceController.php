@@ -17,7 +17,7 @@ class ServiceController extends Controller
   public function index()
   {
     $services = Service::all();
-    return view('ehr.hetg.services.index', compact('services'));
+    return view('medical_programmer.services.index', compact('services'));
   }
 
   /**
@@ -27,7 +27,7 @@ class ServiceController extends Controller
    */
   public function create()
   {
-      return view('ehr.hetg.services.create');
+      return view('medical_programmer.services.create');
   }
 
   /**
@@ -42,7 +42,7 @@ class ServiceController extends Controller
     $service->save();
 
     session()->flash('info', 'El servicio ha sido creado.');
-    return redirect()->route('ehr.hetg.services.index');
+    return redirect()->route('medical_programmer.services.index');
   }
 
   /**
@@ -64,7 +64,7 @@ class ServiceController extends Controller
    */
   public function edit(Service $service)
   {
-      return view('ehr.hetg.services.edit', compact('service'));
+      return view('medical_programmer.services.edit', compact('service'));
   }
 
   /**
@@ -80,7 +80,7 @@ class ServiceController extends Controller
     $service->save();
 
     session()->flash('info', 'El servicio ha sido editado.');
-    return redirect()->route('ehr.hetg.services.index');
+    return redirect()->route('medical_programmer.services.index');
   }
 
   /**
@@ -93,6 +93,6 @@ class ServiceController extends Controller
   {
     $service->delete();
     session()->flash('success', 'El servicio ha sido eliminado');
-    return redirect()->route('ehr.hetg.services.index');
+    return redirect()->route('medical_programmer.services.index');
   }
 }

@@ -17,7 +17,7 @@ class MotherActivityController extends Controller
     public function index()
     {
       $motherActivities = MotherActivity::all();
-      return view('ehr.hetg.mother_activities.index', compact('motherActivities'));
+      return view('medical_programmer.mother_activities.index', compact('motherActivities'));
     }
 
     /**
@@ -27,7 +27,7 @@ class MotherActivityController extends Controller
      */
     public function create()
     {
-        return view('ehr.hetg.mother_activities.create');
+        return view('medical_programmer.mother_activities.create');
     }
 
     /**
@@ -43,7 +43,7 @@ class MotherActivityController extends Controller
       $motherActivity->save();
 
       session()->flash('info', 'La actividad madre ha sido creada.');
-      return redirect()->route('ehr.hetg.mother_activities.index');
+      return redirect()->route('medical_programmer.mother_activities.index');
     }
 
     /**
@@ -65,7 +65,7 @@ class MotherActivityController extends Controller
      */
     public function edit(MotherActivity $motherActivity)
     {
-        return view('ehr.hetg.mother_activities.edit', compact('motherActivity'));
+        return view('medical_programmer.mother_activities.edit', compact('motherActivity'));
     }
 
     /**
@@ -82,7 +82,7 @@ class MotherActivityController extends Controller
       $motherActivity->save();
 
       session()->flash('info', 'La actividad madre ha sido editada.');
-      return redirect()->route('ehr.hetg.mother_activities.index');
+      return redirect()->route('medical_programmer.mother_activities.index');
     }
 
     /**
@@ -95,6 +95,6 @@ class MotherActivityController extends Controller
     {
       $motherActivity->delete();
       session()->flash('success', 'La actividad madre ha sido eliminada');
-      return redirect()->route('ehr.hetg.mother_activities.index');
+      return redirect()->route('medical_programmer.mother_activities.index');
     }
 }

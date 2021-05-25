@@ -7,17 +7,34 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Scripts -->
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+            crossorigin="anonymous"></script>
+
+        <script src="https://kit.fontawesome.com/7c4f606aba.js" SameSite="None"
+            crossorigin="anonymous"></script>
+
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        
+
         <link href="{{ asset('css/nunito.css') }}" rel="stylesheet">
         <!-- Styles -->
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+            crossorigin="anonymous">
+
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <!-- Bootstrap CSS -->
         <!--link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"-->
-        
+
         <!-- Custom styles for this template -->
         <link href="{{ asset('css/ssi.css') }}" rel="stylesheet"-->
 
@@ -31,6 +48,9 @@
         @else
         <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon-local.ico">
         @endproduction
+
+        <!-- programador -->
+        @yield('custom_js_head')
 
         @livewireStyles
     </head>
@@ -67,10 +87,18 @@
         <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script-->
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script>
             feather.replace()
         </script>
+
+        <!-- programador -->
+        <script src="{{ asset('js/jquery/jquery-3.4.1.min.js') }}"></script>
+        <script src="{{ asset('js/popper/popper.min.js') }}" ></script>
+        <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+        @yield('custom_js')
+
         @livewireScripts
     </body>
 </html>

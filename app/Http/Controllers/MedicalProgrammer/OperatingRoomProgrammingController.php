@@ -10,7 +10,7 @@ use App\Models\MedicalProgrammer\OperatingRoom;
 use App\Models\MedicalProgrammer\Specialty;
 use App\Models\MedicalProgrammer\Profession;
 
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -70,7 +70,7 @@ class OperatingRoomProgrammingController extends Controller
       $monday = Carbon::parse($date)->startOfWeek();
       $sunday = Carbon::parse($date)->endOfWeek();
 
-        return view('ehr.hetg.management.medical_ward_programmer', compact('request','operatingRooms','specialties','professions','date','operatingRoomProgrammings'));
+        return view('medical_programmer.management.medical_ward_programmer', compact('request','operatingRooms','specialties','professions','date','operatingRoomProgrammings'));
     }
 
     /**

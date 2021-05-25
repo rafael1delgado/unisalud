@@ -22,7 +22,7 @@ class SpecialtyController extends Controller
                                       return $query->where('user_id',Auth::id());
                                   })->orderBy('specialty_name','ASC')->get();
       // $specialties = Specialty::orderBy('specialty_name','ASC')->get();
-      return view('ehr.hetg.specialties.index', compact('specialties'));
+      return view('medical_programmer.specialties.index', compact('specialties'));
     }
 
     /**
@@ -34,7 +34,7 @@ class SpecialtyController extends Controller
     {
         $activities = Activity:://where('mother_activity_id',2)
                                 where('activity_type_id',1)->orderBy('activity_name','ASC')->get(); //obtiene medicas
-        return view('ehr.hetg.specialties.create',compact('activities'));
+        return view('medical_programmer.specialties.create',compact('activities'));
     }
 
     /**
@@ -58,7 +58,7 @@ class SpecialtyController extends Controller
       }
 
       session()->flash('info', 'La especialidad ha sido creada.');
-      return redirect()->route('ehr.hetg.specialties.index');
+      return redirect()->route('medical_programmer.specialties.index');
     }
 
     /**
@@ -82,7 +82,7 @@ class SpecialtyController extends Controller
     {
         $activities = Activity:://where('mother_activity_id',2)
                                 where('activity_type_id',1)->orderBy('activity_name','ASC')->get(); //obtiene medicas
-        return view('ehr.hetg.specialties.edit', compact('specialty','activities'));
+        return view('medical_programmer.specialties.edit', compact('specialty','activities'));
     }
 
     /**
@@ -110,7 +110,7 @@ class SpecialtyController extends Controller
       }
 
       session()->flash('info', 'La especialidad ha sido editada.');
-      return redirect()->route('ehr.hetg.specialties.index');
+      return redirect()->route('medical_programmer.specialties.index');
     }
 
     /**
@@ -125,6 +125,6 @@ class SpecialtyController extends Controller
 
         $specialty->delete();
         session()->flash('success', 'La especialidad ha sido eliminada');
-        return redirect()->route('ehr.hetg.specialties.index');
+        return redirect()->route('medical_programmer.specialties.index');
     }
 }
