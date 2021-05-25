@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('user_id')->nullable();
             $table->string('identifier');
             $table->boolean('active');
-            /* FIXME : debe permitir nulos nullable() */
+            /* FIXED --> FIXME : debe permitir nulos nullable() */
             $table->bigInteger('run')->nullable();
             $table->char('dv');
             $table->enum('gender', ['female', 'male', 'other', 'unknown',

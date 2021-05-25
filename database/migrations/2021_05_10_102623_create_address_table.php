@@ -25,10 +25,10 @@ class CreateAddressTable extends Migration
             $table->string('text')->nullable();
             $table->string('line')->nullable();
             $table->string('city')->nullable();
-            $table->string('district')->nullable();
-            $table->string('state')->nullable();
+            $table->string('district')->nullable(); /** should be deleted? */
+            $table->string('state')->nullable(); /** should be deleted? */
             $table->string('postalCode')->nullable();
-            $table->string('country')->nullable();
+            $table->string('country')->nullable(); /** should be deleted? */
             $table->timestamps();
 
             $table->foreign('address_id')->references('id')->on('addresses');

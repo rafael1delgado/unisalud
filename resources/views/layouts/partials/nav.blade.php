@@ -76,6 +76,26 @@
 
 <p>
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Programador médico
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+
+    <ul class="nav flex-column">
+      <li class="nav-item">
+          <a class="nav-link" href="{{ route('medical_programmer.operating_room_programming.index') }}">
+              <i class="fas fa-calendar-alt fa-fw" style='color:green'></i>
+              Programador de Pabellones
+          </a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<!-- <p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     Button with data-target
   </button>
 </p>
@@ -83,4 +103,4 @@
   <div class="card card-body">
     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
   </div>
-</div>
+</div> -->

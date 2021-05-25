@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ClaveUnicaController;
+use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Home;
 
 use App\Http\Controllers\Parameter\PermissionController;
@@ -12,6 +13,8 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Profile\ObservationController;
 
 use App\Http\Controllers\PatientController;
+
+use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
 
 
 /*
@@ -43,8 +46,9 @@ Route::get('/claveunica/logout', [ClaveUnicaController::class,'logout'])->name('
 Route::get('/login/{run}', [ProfileController::class, 'login']);
 Route::get('/logout', [ProfileController::class,'logout']);
 
-Route::get('/home', Home::class)->middleware('auth')->name('home');
-//Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+/** Ejempo con livewire */
+//Route::get('/home', Home::class)->middleware('auth')->name('home');
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 Route::prefix('parameter')->as('parameter.')->middleware('auth')->group(function () {
     Route::resource('permission', PermissionController::class);
@@ -73,3 +77,18 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
     Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
+
+Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('auth')->group(function(){
+  Route::prefix('operating_room_programming')->name('operating_room_programming.')->group(function(){
+    Route::get('/', [OperatingRoomProgrammingController::class, 'index'])->name('index');
+    // Route::post('/', [OperatingRoomProgrammingController::class, 'store'])->name('store');
+    // Route::get('/create', [OperatingRoomProgrammingController::class, 'create'])->name('create');
+    // Route::get('/{patient}', [OperatingRoomProgrammingController::class, 'show'])->name('show');
+    // Route::put('/{patient}', [OperatingRoomProgrammingController::class, 'update'])->name('update');
+    // Route::delete('/{patient}', [OperatingRoomProgrammingController::class, 'destroy'])->name('destroy');
+    // Route::get('/{patient}/edit', [OperatingRoomProgrammingController::class, 'edit'])->name('edit');
+  });
+});
+
+Route::view('/some', 'some');
+Route::view('/crear_usuario', 'crear_usuario');
