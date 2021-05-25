@@ -14,12 +14,13 @@ use App\Http\Controllers\Profile\ObservationController;
 
 use App\Http\Controllers\PatientController;
 
-use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
+use App\Http\Controllers\Fq\ContactUserController;
+use App\Http\Controllers\Fq\FqRequestController;
 
+use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\RrhhController;
 use App\Http\Controllers\MedicalProgrammer\ContractController;
 use App\Http\Controllers\MedicalProgrammer\ActivityController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +83,18 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
 
+Route::prefix('fq')->as('fq.')->group(function(){
+    Route::prefix('contact_user')->name('contact_user.')->group(function(){
+        Route::get('/', [ContactUserController::class, 'index'])->name('index');
+    });
+    Route::prefix('request')->name('request.')->group(function(){
+        Route::get('/', [FqRequestController::class, 'index'])->name('index');
+        Route::get('/own_index', [FqRequestController::class, 'own_index'])->name('own_index');
+        Route::get('/create', [FqRequestController::class, 'create'])->name('create');
+        Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
+    });
+});
+
 Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('auth')->group(function(){
   Route::prefix('operating_room_programming')->name('operating_room_programming.')->group(function(){
     Route::get('/', [OperatingRoomProgrammingController::class, 'index'])->name('index');
@@ -127,7 +140,5 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::delete('/{activity}', [ActivityController::class, 'destroy'])->name('destroy');
     Route::get('/{activity}/edit', [ActivityController::class, 'edit'])->name('edit');
   });
-});
 
-Route::view('/some', 'some');
-Route::view('/crear_usuario', 'crear_usuario');
+});
