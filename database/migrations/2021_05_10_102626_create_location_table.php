@@ -33,10 +33,10 @@ class CreateLocationTable extends Migration
             $table->string('AvailabilityExceptions')->nullable();
 
             $table->timestamps();
-            
+
             $table->foreign('location_id')->references('id')->on('location');
             $table->foreign('coding_id')->references('id')->on('coding');
-            $table->foreign('address_id')->references('id')->on('address');
+            $table->foreign('address_id')->references('id')->on('addresses');
             $table->foreign('cod_con_physical_type_id')->references('id')->on('cod_con_physical_type');
             $table->foreign('cod_con_organization_id')->references('id')->on('cod_con_organization');
 
