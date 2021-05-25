@@ -3,7 +3,7 @@
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Crear nuevo paciente FHIR</h1>
+        <h1 class="h2">Crear nuevo paciente</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
@@ -171,98 +171,9 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        <div class="form-row">
-            <fieldset class="form-group col-1">
-                <label for="for_addressType">Tipo de dirección</label>
-                <select name="addressType" id="for_addressType" class="form-control">
-                    <option value="particular">Particular</option>
-                    <option value="work">Trabajo</option>
-                </select>
-            </fieldset>
+        @livewire('user.user-addresses')
 
 
-{{--            <fieldset class="form-group col-1">--}}
-{{--                <label for="for_streeNameType">Via de acceso</label>--}}
-{{--                <select name="streeNameType" id="for_streeNameType" class="form-control">--}}
-{{--                    --}}{{--                @foreach($streetTypes as $type)--}}
-{{--                    --}}{{--                    <option value="{{ $type['code'] }}">{{ $type['display'] }}</option>--}}
-{{--                    --}}{{--                @endforeach--}}
-{{--                </select>--}}
-{{--            </fieldset>--}}
-
-            <fieldset class="form-group col-2">
-                <label for="for_streetName">Calle</label>
-                <input type="text" class="form-control" name="streetName"
-                       id="for_streetName" required
-                       value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}">
-            </fieldset>
-
-            <fieldset class="form-group col-1">
-                <label for="for_addressNumber">Número</label>
-                <input type="text" class="form-control" name="addressNumber"
-                       id="for_addressNumber" required value="{{ substr(str_shuffle('0123456789'), 0, 4) }}">
-            </fieldset>
-
-            <fieldset class="form-group col-1">
-                <label for="for_addressApartament">Depto</label>
-                <input type="text" class="form-control" name="addressApartament"
-                       id="for_addressApartament" required value="{{ substr(str_shuffle('0123456789'), 0, 2) }}">
-            </fieldset>
-
-            <fieldset class="form-group col-2">
-                <label for="for_poblacion">Población/Villa/Condominio</label>
-                <input type="text" class="form-control" name="poblacion"
-                       id="for_poblacion" required
-                       value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}">
-            </fieldset>
-
-            <fieldset class="form-group col-2">
-                <label for="for_district">Comuna</label>
-                <select name="district" id="for_district" class="form-control">
-                    <option value="1" selected >Iquique</option>
-                    {{--                @foreach($communes as $commune)--}}
-                    {{--                    <option value="{{ $commune['code'] }}">{{ $commune['display'] }}</option>--}}
-                    {{--                @endforeach--}}
-                </select>
-            </fieldset>
-
-            <fieldset class="form-group col-2">
-                <label for="for_state">Región</label>
-                <select name="state" id="for_state" class="form-control">
-                    <option value="1" selected>Tarapacá</option>
-                    {{--                @foreach($regions as $region)--}}
-                    {{--                    <option value="{{ $region['code'] }}">{{ $region['display'] }}</option>--}}
-                    {{--                @endforeach--}}
-                </select>
-            </fieldset>
-
-        </div>
-
-
-        <div class="form-row">
-            <fieldset class="form-group col-1">
-                <label for="for_latitud">Latitud</label>
-                <input type="text" class="form-control" name="latitud"
-                       id="for_latitud" required value="{{ substr(str_shuffle('0123456789'), 0, 8) }}">
-            </fieldset>
-            <fieldset class="form-group col-1">
-                <label for="for_longitud">Longitud</label>
-                <input type="text" class="form-control" name="longitud"
-                       id="for_longitud" required value="{{ substr(str_shuffle('0123456789'), 0, 8) }}">
-            </fieldset>
-            <fieldset class="form-group col-2">
-                <label for="for_city">Ciudad</label>
-                <input type="text" class="form-control" name="city"
-                       id="for_city" required value="Iquique">
-            </fieldset>
-            <fieldset class="form-group col-2">
-                <label for="for_conutry">País</label>
-                <select name="conutry" id="for_conutry" class="form-control">
-                    <option value="01">Chile</option>
-                </select>
-            </fieldset>
-
-        </div>
 
         <div class="border-bottom mt-3 mb-3"></div>
 
