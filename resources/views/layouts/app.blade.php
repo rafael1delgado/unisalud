@@ -10,14 +10,14 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        
+
         <link href="{{ asset('css/nunito.css') }}" rel="stylesheet">
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <!-- Bootstrap CSS -->
         <!--link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"-->
-        
+
         <!-- Custom styles for this template -->
         <link href="{{ asset('css/ssi.css') }}" rel="stylesheet"-->
 
@@ -31,6 +31,9 @@
         @else
         <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon-local.ico">
         @endproduction
+
+        <!-- programador -->
+        @yield('custom_js_head')
 
         @livewireStyles
     </head>
@@ -71,6 +74,13 @@
         <script>
             feather.replace()
         </script>
+
+        <!-- programador -->
+        <script src="{{ asset('js/jquery/jquery-3.4.1.min.js') }}"></script>
+        <script src="{{ asset('js/popper/popper.min.js') }}" ></script>
+        <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+        @yield('custom_js')
+
         @livewireScripts
     </body>
 </html>

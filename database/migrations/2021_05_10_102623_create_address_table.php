@@ -13,7 +13,7 @@ class CreateAddressTable extends Migration
      */
     public function up()
     {
-        Schema::create('address', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('address_id')->nullable();
             $table->foreignId('user_id')->nullable();
@@ -25,15 +25,15 @@ class CreateAddressTable extends Migration
             $table->string('text')->nullable();
             $table->string('line')->nullable();
             $table->string('city')->nullable();
-            $table->string('district')->nullable();
-            $table->string('state')->nullable();
+            $table->string('district')->nullable(); /** should be deleted? */
+            $table->string('state')->nullable(); /** should be deleted? */
             $table->string('postalCode')->nullable();
-            $table->string('country')->nullable();
+            $table->string('country')->nullable(); /** should be deleted? */
             $table->timestamps();
 
-            $table->foreign('address_id')->references('id')->on('address');
+            $table->foreign('address_id')->references('id')->on('addresses');
             $table->foreign('period_id')->references('id')->on('period');
-            $table->foreign('user_id')->references('id')->on('users');  
+            $table->foreign('user_id')->references('id')->on('users');
 
         });
     }
@@ -45,6 +45,6 @@ class CreateAddressTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('address');
+        Schema::dropIfExists('addresses');
     }
 }

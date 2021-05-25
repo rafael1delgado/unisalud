@@ -37,11 +37,16 @@
             </fieldset>
 
             <fieldset class="form-group col-2">
-                <label for="for_identifier">Identificador</label>
-                <input type="text" class="form-control" name="identifier"
-                       id="for_identifier" required>
+                <label for="for_run">Run</label>
+                <input type="text" class="form-control" name="run"
+                       id="for_run" required value=" {{substr(str_shuffle('1234567890'), 0, 8)}} ">
             </fieldset>
 
+            <fieldset class="form-group col-1">
+                <label for="for_dv">Dígito verificador</label>
+                <input type="text" class="form-control" name="dv"
+                       id="for_dv" required  value="{{substr(str_shuffle('1234567890k'), 0, 1)}}">
+            </fieldset>
 
         </div>
 
@@ -49,7 +54,7 @@
 
             <fieldset class="form-group col-2">
                 <label for="for_name">Nombres</label>
-                <input type="text" class="form-control" name="name"
+                <input type="text" class="form-control" name="text"
                        id="for_name" required value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}">
             </fieldset>
 
@@ -72,15 +77,16 @@
 
         <div class="form-row">
             <fieldset class="form-group col-2">
-                <label for="for_birthdate">Fecha de nacimiento</label>
-                <input type="date" class="form-control" name="birthdate"
-                       id="for_birthdate" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}">
+                <label for="for_birthday">Fecha de nacimiento</label>
+                <input type="date" class="form-control" name="birthday"
+                       id="for_birthday" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}">
             </fieldset>
 
             <fieldset class="form-group col-2">
                 <label for="for_gender">Sexo</label>
                 <select name="gender" id="for_gender" class="form-control">
-                    <option value="male">Masculino</option>
+                    <option value=""></option>
+                    <option value="male" selected>Masculino</option>
                     <option value="female">Femenino</option>
                     <option value="unknown">Desconocido</option>
                     <option value="other">Otro</option>
@@ -90,7 +96,8 @@
             <fieldset class="form-group col-2">
                 <label for="for_gender_identity">Identidad de Genero</label>
                 <select name="gender_identity" id="for_gender_identity" class="form-control">
-                    <option value="male">Masculino</option>
+                    <option value=""></option>
+                    <option value="male" selected>Masculino</option>
                     <option value="female">Femenino</option>
                     <option value="female">Femenino Trans "FT"</option>
                     <option value="female">Masculino Trans "MT"</option>
@@ -123,6 +130,9 @@
                 <label for="for_ethnicity">Pueblo originario</label>
                 <select name="ethnicity" id="for_ethnicity" class="form-control">
                     <option value=""></option>
+                    <option value="01" selected>Mapuche</option>
+
+
                     {{--                @foreach($aboriginals as $aboriginal)--}}
                     {{--                    <option value="{{ $aboriginal['code'] }}">{{ $aboriginal['display'] }}</option>--}}
                     {{--                @endforeach--}}
@@ -130,9 +140,10 @@
             </fieldset>
 
             <fieldset class="form-group col-2">
-                <label for="for_marital_status">Estado Civil</label>
-                <select name="marital_status" id="for_marital_status" class="form-control" required>
+                <label for="for_cod_con_marital_id">Estado Civil</label>
+                <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
                     <option value=""></option>
+                    <option value="1" selected>SOLTERO</option>
                     {{--                @foreach($maritalStatus as $status)--}}
                     {{--                    <option value="{{ $status['code'] }}">{{ $status['display'] }}</option>--}}
                     {{--                @endforeach--}}
@@ -170,14 +181,14 @@
             </fieldset>
 
 
-            <fieldset class="form-group col-1">
-                <label for="for_streeNameType">Via de acceso</label>
-                <select name="streeNameType" id="for_streeNameType" class="form-control">
-                    {{--                @foreach($streetTypes as $type)--}}
-                    {{--                    <option value="{{ $type['code'] }}">{{ $type['display'] }}</option>--}}
-                    {{--                @endforeach--}}
-                </select>
-            </fieldset>
+{{--            <fieldset class="form-group col-1">--}}
+{{--                <label for="for_streeNameType">Via de acceso</label>--}}
+{{--                <select name="streeNameType" id="for_streeNameType" class="form-control">--}}
+{{--                    --}}{{--                @foreach($streetTypes as $type)--}}
+{{--                    --}}{{--                    <option value="{{ $type['code'] }}">{{ $type['display'] }}</option>--}}
+{{--                    --}}{{--                @endforeach--}}
+{{--                </select>--}}
+{{--            </fieldset>--}}
 
             <fieldset class="form-group col-2">
                 <label for="for_streetName">Calle</label>
@@ -208,6 +219,7 @@
             <fieldset class="form-group col-2">
                 <label for="for_district">Comuna</label>
                 <select name="district" id="for_district" class="form-control">
+                    <option value="1" selected >Iquique</option>
                     {{--                @foreach($communes as $commune)--}}
                     {{--                    <option value="{{ $commune['code'] }}">{{ $commune['display'] }}</option>--}}
                     {{--                @endforeach--}}
@@ -217,6 +229,7 @@
             <fieldset class="form-group col-2">
                 <label for="for_state">Región</label>
                 <select name="state" id="for_state" class="form-control">
+                    <option value="1" selected>Tarapacá</option>
                     {{--                @foreach($regions as $region)--}}
                     {{--                    <option value="{{ $region['code'] }}">{{ $region['display'] }}</option>--}}
                     {{--                @endforeach--}}
@@ -301,13 +314,13 @@
             <fieldset class="form-group col-2">
                 <label for="">Rut Previsión</label>
                 <input type="text" class="form-control" name="identifier"
-                       id="for_identifier" required>
+                       id="for_identifier" >
             </fieldset>
 
             <fieldset class="form-group col-2">
                 <label for="">Vencimiento</label>
                 <input type="date" class="form-control" name="identifier"
-                       id="for_identifier" required>
+                       id="for_identifier" >
             </fieldset>
         </div>
 
@@ -315,15 +328,13 @@
             <fieldset class="form-group col-2">
                 <label for="">Titular</label>
                 <input type="text" class="form-control" name="identifier"
-                       id="for_identifier" required>
+                       id="for_identifier">
             </fieldset>
-        </div>
 
-        <div class="form-row">
             <fieldset class="form-group col-2">
                 <label for="">Previsión</label>
                 <input type="text" class="form-control" name="identifier"
-                       id="for_identifier" required>
+                       id="for_identifier">
             </fieldset>
         </div>
 
