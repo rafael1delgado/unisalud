@@ -3,7 +3,18 @@
 @section('title', 'crear_usuario')
 
 @section('content')
-
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ route('dummy.crear_usuario') }}">Crear usuario</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('dummy.some') }}">Agenda</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('dummy.traspaso') }}">Traspaso/bloqueo</a>
+  </li>
+ 
+</ul>
 <form> 
  
         <div class="row mt-5">
@@ -189,6 +200,45 @@
 	</div >
 
     <!--fin prevision-->
+
+	<div class="form-row">
+		<div class="form-group col-md-3">
+		<label for="inputEmail4">Paciente Crónico</label>
+		<select class="custom-select" multiple>
+  			<option selected>Diabetico</option>
+  			<option value="1">Artrosis</option>
+  			<option value="2">Hipertenso</option>
+		</select>
+        </div>
+        <div class="form-group col-md-3">
+    			<label for="inputEmail4">Etnia</label>
+    			<select id="inputState" class="form-control">
+        		    <option selected>Aymara</option>
+        			<option>Mapuche</option>
+					<option>Quechua</option>
+     			</select>
+    	</div>
+        <div class="form-group col-md-3">
+    			<label for="inputEmail4">Estado Civil</label>
+    			<select id="inputState" class="form-control">
+        		    <option selected>Solter@</option>
+        			<option>Casad@</option>
+                    <option>Viud@</option>
+                    <option>Divorciad@</option>
+     			</select>
+    	</div>
+		<div class="form-group col-md-2 mt-5 ml-4">
+			
+    		<input type="checkbox" class="form-check-input" id="exampleCheck1" >
+			<label class="form-check-label" for="exampleCheck1">Proxima</label>
+  		</div>
+
+	</div >
+
+
+
+
+
 
 
 </form>

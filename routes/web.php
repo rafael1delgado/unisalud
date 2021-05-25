@@ -141,3 +141,9 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::get('/{activity}/edit', [ActivityController::class, 'edit'])->name('edit');
   });
 });
+
+Route::prefix('dummy')->name('dummy.')->group(function(){
+    Route::view('/some', 'some')->name('some');
+    Route::view('/crear_usuario', 'crear_usuario')->name('crear_usuario');
+    Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
+}); 
