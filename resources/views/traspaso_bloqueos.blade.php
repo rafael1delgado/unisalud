@@ -13,7 +13,9 @@
   <li class="nav-item">
     <a class="nav-link active" href="{{route('dummy.traspaso') }}">Traspaso/bloqueo</a>
   </li>
- 
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('dummy.agenda') }}">Agenda</a>
+  </li>
 </ul>
 
 <form>
