@@ -2,11 +2,11 @@
 
 @section('content')
 
-@include('ehr.hetg.management.reports.wsInterventions', ['executedActivities' => $executedActivities] )
+@include('medical_programmer.management.reports.wsInterventions', ['executedActivities' => $executedActivities] )
 
 <h3 class="mb-3">Reporte uso de pabellón por especialidades</h3>
 
-<form class="form-inline" method="post" action="{{ route('ehr.hetg.management.report.specialty') }}">
+<form class="form-inline" method="post" action="{{ route('medical_programmer.management.report.specialty') }}">
 	@csrf
 	<div class="form-group mr-3">
 		<label for="for_year_week">Semana</label>
@@ -87,7 +87,7 @@
 			<td><i class="fas fa-flag"></i></td>
 			<td>{{ $medico->correlative }}</td>
 			<td>
-			<form class="form-inline" method="post" action="{{ route('ehr.hetg.management.report.by_profesional') }}">
+			<form class="form-inline" method="post" action="{{ route('medical_programmer.management.report.by_profesional') }}">
 				@csrf
 				<input type="hidden" value="{{ $medico->medic_rut }}" name="rut">
 				<input type="hidden" value="{{ $now->year }}-W{{ ($now->weekOfYear < 10)?'0'.$now->weekOfYear:$now->weekOfYear}}" name="year_week">

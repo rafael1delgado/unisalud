@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">Editar Profesión</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.professions.update', $profession) }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.professions.update', $profession) }}">
     @csrf
     @method('PUT')
 

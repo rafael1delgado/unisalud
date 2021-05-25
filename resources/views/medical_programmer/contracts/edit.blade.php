@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">Editar Contrato</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.contracts.update', $contract) }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.contracts.update', $contract) }}">
   @csrf
   @method('PUT')
 

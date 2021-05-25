@@ -5,12 +5,12 @@
     </a>
 </h6>
 <ul class="nav flex-column">
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link {{ active('profile.observation.index') }}" href="{{ route('profile.observation.index') }}">
         <span data-feather="user"></span>
         Mis exámenes<span class="sr-only"></span>
         </a>
-    </li>
+    </li> -->
     <li class="nav-item">
         <a class="nav-link {{ active(['profile.show', 'profile.edit']) }}" href="{{ route('profile.show') }}">
         <span data-feather="user"></span>
@@ -18,6 +18,16 @@
         </a>
     </li>
 </ul>
+
+{{--@if(App\Models\Fq\ContactUser::getAmIContact() > 0)
+
+  <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+      <span>Pacientes FQ</span>
+      <a class="d-flex align-items-center text-muted" href="{{ route('fq.request.create') }}" aria-label="Hola">
+      <span data-feather="plus-circle"></span>
+      </a>
+  </h6> -->
+@endif--}}
 
 {{--@can('Developer')--}}
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
@@ -39,6 +49,14 @@
         Ingresar nuevo
         </a>
     </li>
+    @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
+    <li class="nav-item">
+        <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.create') }}">
+        <span data-feather="plus-circle"></span>
+        Solicitudes Pacientes FQ
+        </a>
+    </li>
+    @endif
 </ul>
 {{--@endcan--}}
 
@@ -74,13 +92,28 @@
 <ul class="nav flex-column">
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.operating_room_programming.index') }}" href="{{ route('medical_programmer.operating_room_programming.index') }}">
-        <span data-feather="lock"></span>
+        <span data-feather="chevrons-right"></span>
         Programador de pabellones<span class="sr-only">(current)</span>
+        </a>
+    </li>
+
+
+    <!-- mantenedores -->
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
+        <span data-feather="chevrons-right"></span>
+        RRHH
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.contracts.index') }}" href="{{ route('medical_programmer.contracts.index') }}">
+        <span data-feather="chevrons-right"></span>
+        Contratos
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.activities.index') }}" href="{{ route('medical_programmer.activities.index') }}">
-        <span data-feather="unlock"></span>
+        <span data-feather="chevrons-right"></span>
         Actividades
         </a>
     </li>

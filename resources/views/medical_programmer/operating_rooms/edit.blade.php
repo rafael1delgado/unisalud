@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">Editar Pabellon</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.operating_rooms.update', $operatingRoom) }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.operating_rooms.update', $operatingRoom) }}">
   @csrf
   @method('PUT')
 

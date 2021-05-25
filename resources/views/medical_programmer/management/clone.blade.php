@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Clonar período</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.clone.store') }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.clone.store') }}">
     @csrf
     @method('POST')
     <div class="row">

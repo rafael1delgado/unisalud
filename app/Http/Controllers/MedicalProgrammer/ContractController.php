@@ -52,7 +52,7 @@ class ContractController extends Controller
       $contract->save();
 
       session()->flash('info', 'El contrato ha sido creado.');
-      return redirect()->route('ehr.hetg.contracts.index');
+      return redirect()->route('medical_programmer.contracts.index');
     }
 
     /**
@@ -93,7 +93,7 @@ class ContractController extends Controller
         $contract->save();
 
         session()->flash('info', 'El contrato ha sido editado.');
-        return redirect()->route('ehr.hetg.contracts.index');
+        return redirect()->route('medical_programmer.contracts.index');
     }
 
     /**
@@ -107,6 +107,6 @@ class ContractController extends Controller
       //se elimina la cabecera y detalles
       $contract->delete();
       session()->flash('success', 'El contrato ha sido eliminado');
-      return redirect()->route('ehr.hetg.contracts.index');
+      return redirect()->route('medical_programmer.contracts.index');
     }
 }
