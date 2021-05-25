@@ -52,7 +52,7 @@
       			<th scope="row"></th>
       			<td>8:00</td>
       			<td>
-				  <label class="form-check-label" for="invalidCheck2">Paciente 1</label>
+				  <label class="form-check-label" for="for_paciente1">Angelina Jolie</label>
       				<input class="form-check-input col-md-1" type="checkbox" value="" id="invalidCheck2" required>
 
 				  
@@ -63,7 +63,7 @@
       			<th scope="row"></th>
       			<td>9:00</td>
       			<td>
-					<label class="form-check-label" for="invalidCheck2">Paciente 2</label>
+					<label class="form-check-label" for="invalidCheck2">Cristian Carpio</label>
       				<input class="form-check-input col-md-1" type="checkbox" value="" id="invalidCheck2" required>
 				</td>
       			
@@ -72,10 +72,8 @@
       			<th scope="row"></th>
       			<td>10:00</td>
 				<td>
-					
-					<label class="form-check-label" for="invalidCheck2">Paciente 3</label>
+					<label class="form-check-label" for="invalidCheck2">Francisco Carpio</label>
       				<input class="form-check-input col-md-1" type="checkbox" value="" id="invalidCheck2" required>
-     		   		
 				</td>
       			
     		</tr>
