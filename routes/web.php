@@ -78,3 +78,4 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 
 Route::view('/some', 'some');
 Route::view('/crear_usuario', 'crear_usuario');
+Route::view('/traspaso_bloqueos', 'traspaso_bloqueos');
