@@ -13,6 +13,8 @@ use App\Http\Controllers\Profile\ObservationController;
 
 use App\Http\Controllers\PatientController;
 
+use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -72,4 +74,16 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::put('/{patient}', [PatientController::class, 'update'])->name('update');
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
     Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
+});
+
+Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('auth')->group(function(){
+  Route::prefix('operating_room_programming')->name('operating_room_programming.')->group(function(){
+    Route::get('/', [OperatingRoomProgrammingController::class, 'index'])->name('index');
+    // Route::post('/', [OperatingRoomProgrammingController::class, 'store'])->name('store');
+    // Route::get('/create', [OperatingRoomProgrammingController::class, 'create'])->name('create');
+    // Route::get('/{patient}', [OperatingRoomProgrammingController::class, 'show'])->name('show');
+    // Route::put('/{patient}', [OperatingRoomProgrammingController::class, 'update'])->name('update');
+    // Route::delete('/{patient}', [OperatingRoomProgrammingController::class, 'destroy'])->name('destroy');
+    // Route::get('/{patient}/edit', [OperatingRoomProgrammingController::class, 'edit'])->name('edit');
+  });
 });
