@@ -28,8 +28,8 @@ class CreateEmergencyContactTable extends Migration
             $table->foreign('emergency_contact_id')->references('id')->on('emergency_contact');
             $table->foreign('cod_con_relation_id')->references('id')->on('cod_con_relation');
             $table->foreign('human_name_id')->references('id')->on('human_names');
-            $table->foreign('address_id')->references('id')->on('address');
-            $table->foreign('user_id')->references('id')->on('users');  
+            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('period_id')->references('id')->on('period');
 
 

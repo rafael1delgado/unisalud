@@ -22,8 +22,8 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+        <link href="{{ asset('css/nunito.css') }}" rel="stylesheet">
         <!-- Styles -->
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -32,8 +32,11 @@
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+        <!-- Bootstrap CSS -->
+        <!--link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"-->
+
         <!-- Custom styles for this template -->
-        <link href="{{ asset('css/ssi.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/ssi.css') }}" rel="stylesheet"-->
 
         <!-- Favicons -->
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -45,6 +48,9 @@
         @else
         <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon-local.ico">
         @endproduction
+
+        <!-- programador -->
+        @yield('custom_js_head')
 
         @livewireStyles
     </head>
@@ -73,16 +79,26 @@
                     @include('layouts.partials.errors')
                     @include('layouts.partials.flash_message')
 {{--                    {{ $slot }}--}}
+                    <hr>
                     @yield('content')
                 </main>
             </div>
         </div>
+        <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script-->
+
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script>
             feather.replace()
         </script>
+
+        <!-- programador -->
+        <script src="{{ asset('js/jquery/jquery-3.4.1.min.js') }}"></script>
+        <script src="{{ asset('js/popper/popper.min.js') }}" ></script>
+        <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+        @yield('custom_js')
+
         @livewireScripts
     </body>
 </html>
