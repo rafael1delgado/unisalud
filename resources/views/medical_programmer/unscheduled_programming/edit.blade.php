@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Editar Programación Médica</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.unscheduled_programming.update', $unscheduledProgramming) }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.unscheduled_programming.update', $unscheduledProgramming) }}">
     @csrf
     @method('PUT')
 

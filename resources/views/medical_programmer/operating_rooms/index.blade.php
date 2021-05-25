@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Listado de pabellones</h3>
 
-<a class="btn btn-primary mb-3" href="{{ route('ehr.hetg.operating_rooms.create') }}">
+<a class="btn btn-primary mb-3" href="{{ route('medical_programmer.operating_rooms.create') }}">
     <i class="fas fa-plus"></i> Agregar nuevo
 </a>
 
@@ -33,11 +33,11 @@
             @else <td>Pabellón</td> @endif
             <td><span class="badge badge-primary" style="background-color: #{{$or->color}};">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
             <td>
-      				<a href="{{ route('ehr.hetg.operating_rooms.edit', $or) }}"
+      				<a href="{{ route('medical_programmer.operating_rooms.edit', $or) }}"
       					class="btn btn-sm btn-outline-secondary">
       					<span class="fas fa-edit" aria-hidden="true"></span>
       				</a>
-      				<form method="POST" action="{{ route('ehr.hetg.operating_rooms.destroy', $or) }}" class="d-inline">
+      				<form method="POST" action="{{ route('medical_programmer.operating_rooms.destroy', $or) }}" class="d-inline">
       					@csrf
       					@method('DELETE')
       					<button type="submit" class="btn btn-outline-secondary btn-sm" onclick="return confirm('¿Está seguro de eliminar la información?');">

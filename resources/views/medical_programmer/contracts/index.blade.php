@@ -4,11 +4,11 @@
 
 <h3 class="mb-3">Listado de Contratos</h3>
 
-<a class="btn btn-primary mb-3" href="{{ route('ehr.hetg.contracts.create') }}">
+<a class="btn btn-primary mb-3" href="{{ route('medical_programmer.contracts.create') }}">
     <i class="fas fa-plus"></i> Agregar nuevo
 </a>
 
-<form method="GET" class="form-horizontal" action="{{ route('ehr.hetg.contracts.index') }}">
+<form method="GET" class="form-horizontal" action="{{ route('medical_programmer.contracts.index') }}">
   <div class="input-group mb-3">
       <div class="input-group-prepend">
           <span class="input-group-text">Año contrato</span>
@@ -54,11 +54,11 @@
             <td>{{ $contract->weekly_hours }}</td>
             <td>{{ $contract->service->service_name }}</td>
             <td>
-      				<a href="{{ route('ehr.hetg.contracts.edit', $contract) }}"
+      				<a href="{{ route('medical_programmer.contracts.edit', $contract) }}"
       					class="btn btn-sm btn-outline-secondary">
       					<span class="fas fa-edit" aria-hidden="true"></span>
       				</a>
-      				<form method="POST" action="{{ route('ehr.hetg.contracts.destroy', $contract) }}" class="d-inline">
+      				<form method="POST" action="{{ route('medical_programmer.contracts.destroy', $contract) }}" class="d-inline">
       					@csrf
       					@method('DELETE')
       					<button type="submit" class="btn btn-outline-secondary btn-sm" onclick="return confirm('¿Está seguro de eliminar la información?');">

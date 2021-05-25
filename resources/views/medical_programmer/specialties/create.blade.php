@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">Nueva Especialidad</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.specialties.store') }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.specialties.store') }}">
     @csrf
     @method('POST')
 

@@ -58,7 +58,7 @@ class SpecialtyController extends Controller
       }
 
       session()->flash('info', 'La especialidad ha sido creada.');
-      return redirect()->route('ehr.hetg.specialties.index');
+      return redirect()->route('medical_programmer.specialties.index');
     }
 
     /**
@@ -110,7 +110,7 @@ class SpecialtyController extends Controller
       }
 
       session()->flash('info', 'La especialidad ha sido editada.');
-      return redirect()->route('ehr.hetg.specialties.index');
+      return redirect()->route('medical_programmer.specialties.index');
     }
 
     /**
@@ -125,6 +125,6 @@ class SpecialtyController extends Controller
 
         $specialty->delete();
         session()->flash('success', 'La especialidad ha sido eliminada');
-        return redirect()->route('ehr.hetg.specialties.index');
+        return redirect()->route('medical_programmer.specialties.index');
     }
 }

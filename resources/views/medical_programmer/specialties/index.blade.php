@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Listado de Especialidades</h3>
 
-<a class="btn btn-primary mb-3" href="{{ route('ehr.hetg.specialties.create') }}">
+<a class="btn btn-primary mb-3" href="{{ route('medical_programmer.specialties.create') }}">
     <i class="fas fa-plus"></i> Agregar nueva
 </a>
 
@@ -28,11 +28,11 @@
             <td>{{ $specialty->specialty_name }}</td>
             <td><span class="badge badge-primary" style="background-color: #{{$specialty->color}};">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
             <td>
-      				<a href="{{ route('ehr.hetg.specialties.edit', $specialty) }}"
+      				<a href="{{ route('medical_programmer.specialties.edit', $specialty) }}"
       					class="btn btn-sm btn-outline-secondary">
       					<span class="fas fa-edit" aria-hidden="true"></span>
       				</a>
-      				<form method="POST" action="{{ route('ehr.hetg.specialties.destroy', $specialty) }}" class="d-inline">
+      				<form method="POST" action="{{ route('medical_programmer.specialties.destroy', $specialty) }}" class="d-inline">
       					@csrf
       					@method('DELETE')
       					<button type="submit" class="btn btn-outline-secondary btn-sm" onclick="return confirm('¿Está seguro de eliminar la información?');">

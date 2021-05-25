@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">Nuevo Pabellon</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.operating_rooms.store') }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.operating_rooms.store') }}">
     @csrf
     @method('POST')
 

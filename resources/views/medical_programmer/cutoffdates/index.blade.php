@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Listado de Fechas de corte</h3>
 
-<a class="btn btn-primary mb-3" href="{{ route('ehr.hetg.cutoffdates.create') }}">
+<a class="btn btn-primary mb-3" href="{{ route('medical_programmer.cutoffdates.create') }}">
     <i class="fas fa-plus"></i> Agregar nueva
 </a>
 
@@ -24,11 +24,11 @@
             <td>{{ Carbon\Carbon::parse($cutoffdate->date)->format('Y-m-d') }}</td>
             <td>{{ $cutoffdate->observation }}</td>
             <td>
-      				<a href="{{ route('ehr.hetg.cutoffdates.edit', $cutoffdate) }}"
+      				<a href="{{ route('medical_programmer.cutoffdates.edit', $cutoffdate) }}"
       					class="btn btn-sm btn-outline-secondary">
       					<span class="fas fa-edit" aria-hidden="true"></span>
       				</a>
-      				<form method="POST" action="{{ route('ehr.hetg.cutoffdates.destroy', $cutoffdate) }}" class="d-inline">
+      				<form method="POST" action="{{ route('medical_programmer.cutoffdates.destroy', $cutoffdate) }}" class="d-inline">
       					@csrf
       					@method('DELETE')
       					<button type="submit" class="btn btn-outline-secondary btn-sm" onclick="return confirm('¿Está seguro de eliminar la información?');">
@@ -36,11 +36,11 @@
       					</button>
       				</form>
 
-                    <a href="{{ route('ehr.hetg.cutoffdates.consolidated_programming', $cutoffdate) }}"
+                    <a href="{{ route('medical_programmer.cutoffdates.consolidated_programming', $cutoffdate) }}"
                        class="btn btn-sm btn-outline-info">
                         Consolidado Programación
                     </a>
-                    <a href="{{ route('ehr.hetg.management.report.reportcut', $cutoffdate) }}" class="btn btn-sm btn-outline-info">
+                    <a href="{{ route('medical_programmer.management.report.reportcut', $cutoffdate) }}" class="btn btn-sm btn-outline-info">
                     Exportar a Excel
                     <i class="far fa-file-excel"></i></a>
       			</td>
@@ -324,7 +324,7 @@
 
         function savePerformance(id, performance_value) {
           $.ajax({
-              url: "{{ route('ehr.hetg.cutoffdates.savePerformance') }}",
+              url: "{{ route('medical_programmer.cutoffdates.savePerformance') }}",
               type: 'post',
               data:{id:id,performance_value:performance_value},
               headers: {

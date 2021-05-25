@@ -58,7 +58,7 @@ class ProfessionController extends Controller
       }
 
       session()->flash('info', 'La profesión ha sido creada.');
-      return redirect()->route('ehr.hetg.professions.index');
+      return redirect()->route('medical_programmer.professions.index');
     }
 
     /**
@@ -110,7 +110,7 @@ class ProfessionController extends Controller
       }
 
       session()->flash('info', 'La profesión ha sido editada.');
-      return redirect()->route('ehr.hetg.professions.index');
+      return redirect()->route('medical_programmer.professions.index');
     }
 
     /**
@@ -125,6 +125,6 @@ class ProfessionController extends Controller
 
         $profession->delete();
         session()->flash('success', 'La profesión ha sido eliminada');
-        return redirect()->route('ehr.hetg.professions.index');
+        return redirect()->route('medical_programmer.professions.index');
     }
 }

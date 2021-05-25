@@ -92,13 +92,28 @@
 <ul class="nav flex-column">
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.operating_room_programming.index') }}" href="{{ route('medical_programmer.operating_room_programming.index') }}">
-        <span data-feather="lock"></span>
+        <span data-feather="chevrons-right"></span>
         Programador de pabellones<span class="sr-only">(current)</span>
+        </a>
+    </li>
+
+
+    <!-- mantenedores -->
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
+        <span data-feather="chevrons-right"></span>
+        RRHH
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.contracts.index') }}" href="{{ route('medical_programmer.contracts.index') }}">
+        <span data-feather="chevrons-right"></span>
+        Contratos
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.activities.index') }}" href="{{ route('medical_programmer.activities.index') }}">
-        <span data-feather="unlock"></span>
+        <span data-feather="chevrons-right"></span>
         Actividades
         </a>
     </li>

@@ -94,7 +94,7 @@ class UnscheduledProgrammingController extends Controller
       $medica_programming->save();
 
       session()->flash('info', 'La programación ha sido creada.');
-      // return redirect()->route('ehr.hetg.unscheduled_programming.index');
+      // return redirect()->route('medical_programmer.unscheduled_programming.index');
       return redirect()->back();
     }
 
@@ -138,7 +138,7 @@ class UnscheduledProgrammingController extends Controller
       $unscheduledProgramming->save();
 
       session()->flash('info', 'La programación ha sido editada.');
-      // return redirect()->route('ehr.hetg.unscheduled_programming.index');
+      // return redirect()->route('medical_programmer.unscheduled_programming.index');
       return redirect()->back();
     }
 
@@ -152,7 +152,7 @@ class UnscheduledProgrammingController extends Controller
     {
       $unscheduledProgramming->delete();
       session()->flash('success', 'La programación ha sido eliminada');
-      // return redirect()->route('ehr.hetg.unscheduled_programming.index');
+      // return redirect()->route('medical_programmer.unscheduled_programming.index');
       return redirect()->back();
     }
 }

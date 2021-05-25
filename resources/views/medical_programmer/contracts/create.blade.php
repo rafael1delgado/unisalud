@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">Nuevo Contrato</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.contracts.store') }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.contracts.store') }}">
     @csrf
     @method('POST')
 

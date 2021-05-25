@@ -8,7 +8,7 @@
 
 <h3 class="mb-3">Programación Teórico de Profesionales.</h3>
 
-<form method="GET" id="form" class="form-horizontal" action="{{ route('ehr.hetg.theoretical_programming.index') }}">
+<form method="GET" id="form" class="form-horizontal" action="{{ route('medical_programmer.theoretical_programming.index') }}">
   <div class="row">
     <fieldset class="form-group col-3">
         <label for="for_unit_code">Año</label>
@@ -373,7 +373,7 @@
       // let specialty_id = event.extendedProps.description.toString();
 
       $.ajax({
-          url: "{{ route('ehr.hetg.theoretical_programming.saveMyEvent') }}",
+          url: "{{ route('medical_programmer.theoretical_programming.saveMyEvent') }}",
           type: 'post',
           data:{rut:rut,activity_id:activity_id,week_day:week_day,start_time:start_time, end_time:end_time, year:year},
           headers: {
@@ -401,7 +401,7 @@
       // let specialty_id = event.extendedProps.description.toString();
 
       $.ajax({
-          url: "{{ route('ehr.hetg.theoretical_programming.deleteMyEvent') }}",
+          url: "{{ route('medical_programmer.theoretical_programming.deleteMyEvent') }}",
           type: 'post',
           data:{rut:rut,activity_id:activity_id,week_day:week_day,start_time:start_time, end_time:end_time, year:year},
           headers: {
@@ -429,7 +429,7 @@
       // let specialty_id = event.extendedProps.description.toString();
 
       $.ajax({
-          url: "{{ route('ehr.hetg.theoretical_programming.deleteMyEventForce') }}",
+          url: "{{ route('medical_programmer.theoretical_programming.deleteMyEventForce') }}",
           type: 'post',
           data:{rut:rut,activity_id:activity_id,week_day:week_day,start_time:start_time, end_time:end_time, year:year},
           headers: {

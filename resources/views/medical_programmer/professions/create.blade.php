@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">Nueva Profesión</h3>
 
-<form method="POST" class="form-horizontal" action="{{ route('ehr.hetg.professions.store') }}">
+<form method="POST" class="form-horizontal" action="{{ route('medical_programmer.professions.store') }}">
     @csrf
     @method('POST')
 

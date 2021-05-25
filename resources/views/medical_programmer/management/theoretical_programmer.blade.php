@@ -59,14 +59,14 @@ bottom: 5px;
 
 <h3 class="mb-3">Programación de Horario Teórico.</h3>
 
-<form method="GET" id="form" class="form-horizontal" action="{{ route('ehr.hetg.theoretical_programming.index') }}">
+<form method="GET" id="form" class="form-horizontal" action="{{ route('medical_programmer.theoretical_programming.index') }}">
 
   {{-- <input type="hidden" id="date" name="date"/>
   <input type="hidden" id="year" name="year" value="{{$request->year}}"/>
   <input type="hidden" id="rut" name="rut" value="{{$request->rut}}"/>
 </form>
 
-<form method="GET" id="form" class="form-horizontal" action="{{ route('ehr.hetg.calendar_programming.index') }}"> --}}
+<form method="GET" id="form" class="form-horizontal" action="{{ route('medical_programmer.calendar_programming.index') }}"> --}}
 
   <input type="hidden" id="tipo" name="tipo" value="{{$request->tipo}}"/>
   <input type="hidden" id="date" name="date"/>
@@ -1001,7 +1001,7 @@ bottom: 5px;
       console.log(rut,activity_id,contract_id,specialty_id,profession_id, start_date, end_date, year, tipo_ingreso, tipo_evento);
 
       $.ajax({
-          url: "{{ route('ehr.hetg.theoretical_programming.saveMyEvent') }}",
+          url: "{{ route('medical_programmer.theoretical_programming.saveMyEvent') }}",
           type: 'post',
           data:{rut:rut,activity_id:activity_id,contract_id:contract_id,specialty_id:specialty_id,profession_id:profession_id, start_date:start_date, end_date:end_date, year:year, tipo_ingreso:tipo_ingreso, tipo_evento:tipo_evento},
           headers: {
@@ -1038,7 +1038,7 @@ bottom: 5px;
       // console.log(rut+" "+activity_id+" "+contract_id+" "+specialty_id+" "+profession_id+" "+start_date_start+" "+start_date+" "+end_date_start+" "+end_date+" "+year+" "+tipo);
 
       $.ajax({
-          url: "{{ route('ehr.hetg.theoretical_programming.updateMyEvent') }}",
+          url: "{{ route('medical_programmer.theoretical_programming.updateMyEvent') }}",
           type: 'post',
           data:{rut:rut,activity_id:activity_id,contract_id:contract_id,specialty_id:specialty_id,profession_id:profession_id,start_date_start:start_date_start, start_date:start_date,end_date_start:end_date_start, end_date:end_date, year:year, tipo:tipo},
           headers: {
@@ -1069,7 +1069,7 @@ bottom: 5px;
 
         console.log(rut,activity_id,contract_id,specialty_id,profession_id,start_date,end_date,year,tipo);
       $.ajax({
-          url: "{{ route('ehr.hetg.theoretical_programming.deleteMyEvent') }}",
+          url: "{{ route('medical_programmer.theoretical_programming.deleteMyEvent') }}",
           type: 'post',
           data:{rut:rut,activity_id:activity_id,contract_id:contract_id,specialty_id:specialty_id,profession_id:profession_id,start_date:start_date, end_date:end_date, year:year, tipo:tipo},
           headers: {
@@ -1099,7 +1099,7 @@ bottom: 5px;
         var profession_id = $("#for_profession_id"). val();
 
       $.ajax({
-          url: "{{ route('ehr.hetg.theoretical_programming.deleteMyEventForce') }}",
+          url: "{{ route('medical_programmer.theoretical_programming.deleteMyEventForce') }}",
           type: 'post',
           data:{rut:rut,activity_id:activity_id,contract_id:contract_id,specialty_id:specialty_id,profession_id:profession_id,start_date:start_date, end_date:end_date, year:year, tipo:tipo},
           headers: {

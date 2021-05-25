@@ -7,7 +7,7 @@
 
 <!-- <div class="row">
 	<div class="col">
-		<form method="post" action="{{ route('ehr.hetg.management.report.by_profesional') }}">
+		<form method="post" action="{{ route('medical_programmer.management.report.by_profesional') }}">
 			@csrf
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
@@ -31,7 +31,7 @@
 	</div>
 </div> -->
 
-<form method="post" action="{{ route('ehr.hetg.management.report.by_profesional') }}">
+<form method="post" action="{{ route('medical_programmer.management.report.by_profesional') }}">
 	@csrf
 <div class="row">
 		<fieldset class="form-group col-4">
