@@ -17,10 +17,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\Fq\ContactUserController;
 use App\Http\Controllers\Fq\FqRequestController;
 
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
->>>>>>> f8a5c2792604c722639098276a8ab5e40da48eb6
 use App\Http\Controllers\MedicalProgrammer\RrhhController;
 use App\Http\Controllers\MedicalProgrammer\ContractController;
 use App\Http\Controllers\MedicalProgrammer\ActivityController;
@@ -143,8 +140,4 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::delete('/{activity}', [ActivityController::class, 'destroy'])->name('destroy');
     Route::get('/{activity}/edit', [ActivityController::class, 'edit'])->name('edit');
   });
-<<<<<<< HEAD
-=======
-
->>>>>>> f8a5c2792604c722639098276a8ab5e40da48eb6
 });
