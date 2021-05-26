@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\CodConMarital;
+use App\Models\Commune;
+use App\Models\Country;
 use App\Models\HumanName;
+use App\Models\Region;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -103,7 +107,11 @@ class PatientController extends Controller
 
     public function create()
     {
-        return view('patients.create');
+        $maritalStatus = CodConMarital::all();
+        $countries = Country::all();
+        $communes = Commune::all();
+        $regions = Region::all();
+        return view('patients.create', compact('maritalStatus', 'countries', 'communes', 'regions'));
     }
 
 
@@ -125,9 +133,23 @@ class PatientController extends Controller
         $newHumanName->user_id = $newPatient->id;
         $newHumanName->save();
 
-        $newAddress = new Address($request->all());
-        $newAddress->user_id = $newPatient->id;
-        $newAddress->save();
+        if ($request->has('address_type')) {
+            foreach ($request->address_type as $key => $address_type) {
+                $newAddress = new Address();
+                $newAddress->user_id = $newPatient->id;
+                $newAddress->use = $request->address_type[$key];
+                $newAddress->type = 'physical';
+                $newAddress->text = $request->street_name[$key];
+                $newAddress->line = $request->line[$key];
+                $newAddress->apartment = $request->address_apartment[$key];
+                $newAddress->suburb = $request->poblacion[$key];
+                $newAddress->city = $request->city[$key];
+                $newAddress->district = $request->district[$key];
+                $newAddress->state = $request->state[$key];
+                $newAddress->country = $request->country[$key];
+                $newAddress->save();
+            }
+        }
 
         return redirect()->route('patient.index');
     }
