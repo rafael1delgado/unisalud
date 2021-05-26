@@ -8,7 +8,7 @@
     <a class="nav-link" href="{{ route('dummy.crear_usuario') }}">Crear usuario</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('dummy.some') }}">Agenda</a>
+    <a class="nav-link" href="{{ route('dummy.some') }}">Some</a>
   </li>
   <li class="nav-item">
     <a class="nav-link active" href="{{route('dummy.traspaso') }}">Traspaso/bloqueo</a>
@@ -51,8 +51,9 @@
    		</div>
 
 	</div>  
-	<!--tabla doctor-->                                                                                                               
-	<table class="table table-hover">
+	<!--tabla doctor--> 
+	<div class="table-responsive">                                                                                                              
+	<table class="table table-sm table-hover">
   		<thead>
     		<tr class="table-info">
       			<th scope="col">Dr JORGE MIRANDA</th>
@@ -66,8 +67,9 @@
       			<th scope="row"></th>
       			<td>8:00</td>
       			<td>
+				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
 				  <label class="form-check-label" for="invalidCheck2">Cristian Carpio</label>
-      				<input class="form-check-input col-md-1" type="checkbox" value="" id="invalidCheck2" required> 
+      				
 				</td>
       			
     		</tr>
@@ -75,8 +77,8 @@
       			<th scope="row"></th>
       			<td>9:00</td>
       			<td>
-					<label class="form-check-label" for="invalidCheck2">Cristian Carpio</label>
-      				<input class="form-check-input col-md-1" type="checkbox" value="" id="invalidCheck2" required>
+				  	<input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+					<label class="form-check-label" for="invalidCheck2">Alvaro Galleguillos</label>
 				</td>
       			
     		</tr>
@@ -84,9 +86,8 @@
       			<th scope="row"></th>
       			<td>10:00</td>
 				<td>
-					
+				<input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
 					<label class="form-check-label" for="invalidCheck2">Mariano Carrasco</label>
-      				<input class="form-check-input col-md-1" type="checkbox" value="" id="invalidCheck2" required>
 				</td>
       			
     		</tr>
@@ -94,13 +95,14 @@
       			<th scope="row"></th>
       			<td>11:00</td>
 				<td>
+					<input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
 					 <label class="form-check-label" for="invalidCheck2">Paciente 3</label>
-      				 <input class="form-check-input col-md-1" type="checkbox" value="" id="invalidCheck2" required>
 				</td>
       			
     		</tr>
 		</tbody>
 	</table>
+	</div>
 	<!--fin tabla doctor-->
 	<div class="form-row">
         
@@ -162,13 +164,15 @@
 
 
    <!--tabla agenda-->
+   <div class="table-responsive">
 
-   <table class="table table-hover">
+   <table class="table table-sm table-hover">
   		<thead>
     		<tr class="table-info">
       			<th scope="col">JUEVES 27 DE MAYO</th>
-      			<th scope="col"></th>
-      			<th scope="col"></th>
+      			  <th scope="col">Especialidad</th>
+				  <th scope="col"></th>
+      			  <th scope="col"></th>
 				  <th scope="col">CUPOS</th>
 				  <th scope="col">SOBRE CUPO</th>
 				  <th scope="col">ESTADO</th>
@@ -178,6 +182,7 @@
   		<tbody>
     		<tr>
       			<th scope="row">Dra Macarena Lopez</th>
+				<td>Neurología</td>
       			<td>
 				  <label class="form-check-label" for="invalidCheck2">8:00</label>
 				</td>
@@ -192,6 +197,7 @@
     		</tr>
    		 	<tr>
       			<th scope="row">Dr. Daniel Suarez</th>
+				  <td>Neurología</td>
       			<td></td>
       			<td>
 				    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required> 
@@ -207,6 +213,7 @@
 			<thead>
     		<tr class="table-info">
       			<th scope="col">VIERNES 28 DE MAYO</th>
+				  <th scope="col">Especialidad</th>
       			<th scope="col"></th>
       			<th scope="col-md-1"></th>
 				  <th scope="col" >CUPOS</th>
@@ -218,6 +225,7 @@
   		<tbody>
     		<tr>
       			<th scope="row">Dr. Jorge Lopez</th>
+				<td>Neurología</td>
       			<td>
 				  <label class="form-check-label" for="invalidCheck2">9:00</label>
 				  
@@ -233,6 +241,7 @@
     		</tr>
    		 	<tr>
       			<th scope="row">Dr. Daniel Suarez</th>
+				<td>Neurología</td>
       			<td></td>
       			<td>
 				    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required> 
@@ -247,7 +256,7 @@
     		
 		</tbody>
 	</table>
-
+    </div>
 
 
 </form>

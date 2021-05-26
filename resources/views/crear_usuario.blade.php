@@ -8,7 +8,7 @@
     <a class="nav-link active" href="{{ route('dummy.crear_usuario') }}">Crear usuario</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('dummy.some') }}">Agenda</a>
+    <a class="nav-link" href="{{ route('dummy.some') }}">Some</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{ route('dummy.traspaso') }}">Traspaso/bloqueo</a>
@@ -80,16 +80,16 @@
 
 			<div class="form-group col-md-3">
                  <label for="inputEmail4">Nombre</label>
-                <input type="nombre" class="form-control" id="inputEmail4" placeholder="Ingrese Nombre">
+                <input type="nombre" class="form-control" id="inputEmail4" placeholder="">
             </div>
 
             <div class="form-group col-md-2">
                 <label for="inputEmail4">Apellido Paterno</label>
-                <input type="apaterno" class="form-control" id="inputEmail4" placeholder="Ingrese el apellido paterno">
+                <input type="apaterno" class="form-control" id="inputEmail4" placeholder="">
             </div>
             <div class="form-group col-md-2">
                 <label for="inputPassword4">Apellido Materno</label>
-                <input type="amaterno" class="form-control" id="inputPassword4" placeholder="Ingrese el apellido materno">
+                <input type="amaterno" class="form-control" id="inputPassword4" placeholder="">
             </div>
 			<div class="form-group col-md-3">
 			    <label for="inputEmail4">Fecha de Nacimiento</label>
@@ -181,33 +181,31 @@
     <!--fin datos de direccion-->
 
     <!--datos de contacto-->
-        <div class="form-row">
+	<div class="form-row">
             <h5 class="card-title col-md-12">Contacto</h5>
 
-		    <div class="form-group col-md-4">
-			    <label for="inputEmail4">E-mail</label>
-			    <input type="e-mail" class="form-control" id="inputEmail4" placeholder="Ingrese e-mail">
-		    </div>
-            <div class="form-group col-md-2">
-    			<label for="inputEmail4">Tipo</label>
-    			<select id="inputState" class="form-control">
-        		    <option selected>Personal</option>
-                    <option>Trabajo</option>
-     			</select>
-    	     </div>
-            <div class="form-group col-md-4">
-			    <label for="inputEmail4">Telefono</label>
-			    <input type="telefono" class="form-control" id="inputEmail4" placeholder="Teléfono">
-		    </div>
-            <div class="form-group col-md-2">
-    			<label for="inputEmail4">Tipo</label>
-    			<select id="inputState" class="form-control">
-        		    <option selected>Personal</option>
-                    <option>Trabajo</option>
-     			</select>
-    	     </div>
+			<div class="form-group col-md-6">
+			<label for="inputEmail4">E-mail</label>
+					<div class="input-group">
+					<input type="text" aria-label="First name" class="form-control">
+						<select id="inputState" class="form-control col-md-3">
+							<option selected>Personal</option>
+							<option>Trabajo</option>
+						</select>
+					</div>
+			</div>
 
-		</div >
+			<div class="form-group col-md-6">
+			<label for="inputEmail4">Teléfono</label>
+					<div class="input-group">
+					<input type="text" aria-label="First name" class="form-control">
+						<select id="inputState" class="form-control col-md-3">
+							<option selected>Personal</option>
+							<option>Trabajo</option>
+						</select>
+					</div>
+			</div>
+	</div>
     <!--fin datos de contacto-->
 
     <!--prevision-->

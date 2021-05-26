@@ -30,6 +30,7 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'timeGridWeek',
+            allDaySlot: false,
             firstDay: 1,
             
             slotMinTime: "08:00:00",
