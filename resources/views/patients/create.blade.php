@@ -171,53 +171,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Contacto</h5>
-
-                <div class="form-row">
-                    <fieldset class="form-group col-1">
-                        <label for="for_phone1System">Tipo Contacto</label>
-                        <select name="phone1System" id="for_phone1System" class="form-control">
-                            <option value="phone">Telefono</option>
-                            <option value="mobile">Móvil</option>
-                            <option value="email">Email</option>
-                        </select>
-                    </fieldset>
-
-                    <fieldset class="form-group col-1">
-                        <label for="for_phone1">Contacto</label>
-                        <input type="text" class="form-control" name="phone1"
-                               id="for_phone1" required value="9{{ substr(str_shuffle('0123456789'), 0, 8) }}">
-                    </fieldset>
-
-                    <fieldset class="form-group col-1">
-                        <label for="for_phone2System">Tipo Contacto 2</label>
-                        <select name="phone2System" id="for_phone2System" class="form-control" readonly>
-                            <option value="phone">Telefono</option>
-                            <option value="mobile">Móvil</option>
-                            <option value="email">Email</option>
-                        </select>
-                    </fieldset>
-
-                    <fieldset class="form-group col-1">
-                        <label for="for_phone2">Contacto 2</label>
-                        <input type="text" class="form-control" name="phone2"
-                               id="for_phone2" readonly>
-                    </fieldset>
-
-                    <fieldset class="form-group col-2">
-                        <label for="for_email">Correo Electrónico</label>
-                        <input type="text" class="form-control" name="email"
-                               id="for_email" required
-                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 5) }}@gmail.com">
-                    </fieldset>
-
-                </div>
-
-            </div>
-        </div>
-
+        @livewire('user.user-contacts')
 
         <div class="border-bottom mt-3 mb-3"></div>
 

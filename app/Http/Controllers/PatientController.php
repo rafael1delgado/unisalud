@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\CodConMarital;
 use App\Models\Commune;
+use App\Models\ContactPoint;
 use App\Models\Country;
 use App\Models\HumanName;
 use App\Models\Region;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 Use App\Traits\GoogleToken;
 
@@ -120,35 +122,56 @@ class PatientController extends Controller
      *
      * @param Request $request
      * @return RedirectResponse
+     * @throws \Exception
      */
     public function store(Request $request)
     {
-        $newPatient = new User($request->all());
-        $newPatient->identifier = 1;
-        $newPatient->active = 1;
-        $newPatient->save();
+        DB::beginTransaction();
 
-        $newHumanName = new HumanName($request->all());
-        $newHumanName->use = 'official';
-        $newHumanName->user_id = $newPatient->id;
-        $newHumanName->save();
+        try {
+            $newPatient = new User($request->all());
+            $newPatient->identifier = 1;
+            $newPatient->active = 1;
+            $newPatient->save();
+            $newHumanName = new HumanName($request->all());
+            $newHumanName->use = 'official';
+            $newHumanName->user_id = $newPatient->id;
+            $newHumanName->save();
 
-        if ($request->has('address_type')) {
-            foreach ($request->address_type as $key => $address_type) {
-                $newAddress = new Address();
-                $newAddress->user_id = $newPatient->id;
-                $newAddress->use = $request->address_type[$key];
-                $newAddress->type = 'physical';
-                $newAddress->text = $request->street_name[$key];
-                $newAddress->line = $request->line[$key];
-                $newAddress->apartment = $request->address_apartment[$key];
-                $newAddress->suburb = $request->poblacion[$key];
-                $newAddress->city = $request->city[$key];
-                $newAddress->district = $request->district[$key];
-                $newAddress->state = $request->state[$key];
-                $newAddress->country = $request->country[$key];
-                $newAddress->save();
+            if ($request->has('address_type')) {
+                foreach ($request->address_type as $key => $address_type) {
+                    $newAddress = new Address();
+                    $newAddress->user_id = $newPatient->id;
+                    $newAddress->use = $request->address_type[$key];
+                    $newAddress->type = 'physical';
+                    $newAddress->text = $request->street_name[$key];
+                    $newAddress->line = $request->line[$key];
+                    $newAddress->apartment = $request->address_apartment[$key];
+                    $newAddress->suburb = $request->poblacion[$key];
+                    $newAddress->city = $request->city[$key];
+                    $newAddress->district = $request->district[$key];
+                    $newAddress->state = $request->state[$key];
+                    $newAddress->country = $request->country[$key];
+                    $newAddress->save();
+                }
             }
+
+            if ($request->has('contact_system')) {
+                foreach ($request->contact_system as $key => $contact_system) {
+                    $newContactPoint = new ContactPoint();
+                    $newContactPoint->system = $request->contact_system[$key];
+                    $newContactPoint->user_id = $newPatient->id;
+                    $newContactPoint->value = $request->contact_value[$key];
+                    $newContactPoint->use = $request->contact_use[$key];
+                    $newContactPoint->save();
+                }
+            }
+
+            DB::commit();
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
 
         return redirect()->route('patient.index');

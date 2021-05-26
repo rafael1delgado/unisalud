@@ -99,7 +99,7 @@
                         </select>
                     </fieldset>
                     @if($key != 0)
-                        <fieldset class="form-group offset-4 col-2">
+                        <fieldset class="form-group offset-4 col-1">
                             <label for=""></label>
                             <button class="btn btn-danger btn-block" wire:click.prevent="remove({{$key}})">Remover
                             </button>
