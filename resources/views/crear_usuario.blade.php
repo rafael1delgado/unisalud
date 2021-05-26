@@ -31,12 +31,12 @@
     			                    <label for="inputEmail4">RUT</label>
     			                    <input type="email" class="form-control" id="inputEmail4" placeholder="ingrese el rut">
     	                    </div>
-    	                    <div class="form-group col-md-1">
+    	                    <div class="form-group col-md-2">
       			                <label for="inputPassword4">Dv</label>
-      			                <input type="password" class="form-control" id="inputPassword4" placeholder="Dv">
+      			                <input type="text" class="form-control" id="inputPassword4" placeholder="Dv">
     	                    </div>
 		
-    	                    <div class="form-group col-md-4">
+    	                    <div class="form-group col-md-3">
 				                <label for="inputEmail4">&nbsp;</label>
 				                <button type="button" class="btn btn-primary form-control">Fonasa</button>
    		                    </div>
@@ -67,7 +67,7 @@
     	                    </div>
     	                    <div class="form-group col-md-6">
       			                <label for="inputPassword4">N° Documento</label>
-      			                <input type="password" class="form-control" id="inputPassword4" placeholder="Ingresar numero de documento">
+      			                <input type="text" class="form-control" id="inputPassword4" placeholder="Ingresar numero de documento">
     	                    </div>
 	                    </div>
 
@@ -78,29 +78,24 @@
 
         <div class="form-row mt-3">
 
-            <div class="form-group col-md-4">
+			<div class="form-group col-md-3">
+                 <label for="inputEmail4">Nombre</label>
+                <input type="nombre" class="form-control" id="inputEmail4" placeholder="Ingrese Nombre">
+            </div>
+
+            <div class="form-group col-md-2">
                 <label for="inputEmail4">Apellido Paterno</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="ingrese el apellido paterno">
+                <input type="apaterno" class="form-control" id="inputEmail4" placeholder="Ingrese el apellido paterno">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
                 <label for="inputPassword4">Apellido Materno</label>
-                <input type="password" class="form-control" id="inputPassword4" placeholder="ingrese el apellido materno">
+                <input type="amaterno" class="form-control" id="inputPassword4" placeholder="Ingrese el apellido materno">
             </div>
-            <div class="form-group col-md-4">
-                 <label for="inputEmail4">Nacionalidad</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Ingrese Nacionalidad">
-            </div>
-        </div>
-
-
-        <div class="form-row">
-
-		    <div class="form-group col-md-5">
+			<div class="form-group col-md-3">
 			    <label for="inputEmail4">Fecha de Nacimiento</label>
 			    <input type="date" class="form-control" id="inputEmail4" placeholder="Ingrese Fecha Nacimiento">
 		    </div>
-
-            <div class="form-group col-md-2">
+			<div class="form-group col-md-2">
     			<label for="inputEmail4">Sexo</label>
     			<select id="inputState" class="form-control">
         		    <option selected>Femenino</option>
@@ -108,6 +103,26 @@
                     <option>Otro</option>
      			</select>
     	     </div>
+            
+        </div>
+
+
+        <div class="form-row">
+
+			 <div class="form-group col-md-4">
+    			<label for="inputEmail4">Nacionalidad</label>
+    			<select id="inputState" class="form-control">
+        		    <option selected>Perú</option>
+        			<option>Argentina</option>
+                    <option>Brasil</option>
+					<option>Bolivia</option>
+					<option>Chile</option>
+					<option>Ecuador</option>
+					<option>Paraguay</option>
+					<option>Venezuela</option>
+     			</select>
+    	     </div>
+			 
 
 		</div>
         <!--datos de direccion-->
@@ -124,21 +139,41 @@
                     <option>Camino</option>
      			</select>
     	     </div>
-		    <div class="form-group col-md-4">
+		    <div class="form-group col-md-5">
 			    <label for="inputEmail4">Direccion</label>
 			    <input type="direccion" class="form-control" id="inputEmail4" placeholder="Ingrese direccion">
 		    </div>
-            <div class="form-group col-md-1">
+            <div class="form-group col-md-2">
 			    <label for="inputEmail4">Número</label>
 			    <input type="direccion" class="form-control" id="inputEmail4" placeholder="Número">
 		    </div>
-            <div class="form-group col-md-1">
+            <div class="form-group col-md-2">
 			    <label for="inputEmail4">Dpto.</label>
 			    <input type="direccion" class="form-control" id="inputEmail4" placeholder="N° Dpto.">
 		    </div>
-            <div class="form-group col-md-3">
+
+		</div >
+
+		<div class="form-row">
+        
+			<div class="form-group col-md-5">
 			    <label for="inputEmail4">Población/Villa</label>
 			    <input type="direccion" class="form-control" id="inputEmail4" placeholder="Población/Villa">
+		    </div>
+			<div class="form-group col-md-2">
+    			<label for="inputEmail4">Comuna</label>
+    			<select id="inputState" class="form-control">
+        		    <option selected>Iquique</option>
+        			<option>Alto Hospicio</option>
+                    <option>Camiña</option>
+					<option>Colchane</option>
+					<option>Huara</option>
+					
+     			</select>
+    	     </div>
+            <div class="form-group col-md-5">
+			    <label for="inputEmail4">Ciudad/Pueblo/Localidad</label>
+			    <input type="direccion" class="form-control" id="inputEmail4" placeholder="Ciudad/Pueblo/Localidad">
 		    </div>
 
 		</div >
