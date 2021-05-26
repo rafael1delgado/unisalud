@@ -4,14 +4,10 @@ namespace App\Http\Livewire\User;
 
 use Livewire\Component;
 
-class UserAddresses extends Component
+class UserContacts extends Component
 {
     public $inputs = [];
     public $i = 1;
-
-    public $communes;
-    public $regions;
-    public $countries;
 
     public function add($i)
     {
@@ -25,6 +21,7 @@ class UserAddresses extends Component
         unset($this->inputs[$i]);
     }
 
+
     public function mount()
     {
         $this->add(1);
@@ -32,6 +29,6 @@ class UserAddresses extends Component
 
     public function render()
     {
-        return view('livewire.user.user-addresses');
+        return view('livewire.user.user-contacts');
     }
 }
