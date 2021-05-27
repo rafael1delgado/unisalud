@@ -16,6 +16,9 @@
   <li class="nav-item">
     <a class="nav-link" href="{{route('dummy.agenda') }}">Agenda</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('dummy.lista_espera') }}">Lista Espera</a>
+  </li>
 </ul>
 <form> 
  
