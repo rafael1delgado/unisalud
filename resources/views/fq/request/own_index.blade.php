@@ -3,7 +3,7 @@
 @section('title', 'FQ - Mis Solicitudes')
 
 @section('content')
-<br>
+
 @include('fq.partials.nav')
 
 <br>
@@ -11,18 +11,13 @@
 <h5>Mis Solicitudes</h5>
 
 <div class="table-responsive">
-    <table class="table small table-striped table-bordered">
+    <table class="table table-sm table-striped table-bordered">
         <thead class="text-center">
             <tr>
                 <th style="width: 11%">Fecha</th>
                 <th>Estado</th>
                 <th>Motivo de Solicitud</th>
                 <th>observación</th>
-                <!-- <th>Nº Ficha</th> -->
-                <!-- <th>Teléfono</th>
-                <th>Email</th>
-                <th>Dirección</th> -->
-                <!-- <th style="width: 5%"></th> -->
                 <th style="width: 2%"></th>
             </tr>
         </thead>
@@ -38,7 +33,7 @@
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $my_req->id }}">
                         <i class="fas fa-edit"></i>
                     </button>
-                    @include('fq.request.modals.view_request')
+                    {{--@include('fq.request.modals.view_request')--}}
                 </td>
             </tr>
             @endforeach

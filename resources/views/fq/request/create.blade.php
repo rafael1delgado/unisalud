@@ -3,7 +3,7 @@
 @section('title', 'Nuevo Staff')
 
 @section('content')
-<br>
+
 @include('fq.partials.nav')
 
 <br>

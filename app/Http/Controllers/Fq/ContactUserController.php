@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Fq;
 
 use App\Models\Fq\ContactUser;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ContactUserController extends Controller
 {
@@ -24,7 +25,7 @@ class ContactUserController extends Controller
      */
     public function create()
     {
-        //
+        return view('fq.contact_user.create');
     }
 
     /**
@@ -35,7 +36,17 @@ class ContactUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $contactUser = new ContactUser($request->All());
+        $contactUser->telephone = '+56'.$contactUser->telephone;
+
+        if($contactUser->telephone2){
+            $contactUser->telephone2 = '+56'.$contactUser->telephone2;
+        }
+
+        $contactUser->save();
+
+        // session()->flash('success', 'Se ha creado la solicitud exitosamente');
+        // return redirect()->route('fq.request.own_index');
     }
 
     /**
