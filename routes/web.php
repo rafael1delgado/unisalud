@@ -21,6 +21,7 @@ use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\RrhhController;
 use App\Http\Controllers\MedicalProgrammer\ContractController;
 use App\Http\Controllers\MedicalProgrammer\ActivityController;
+use App\Http\Controllers\MedicalProgrammer\TheoreticalProgrammingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,6 +148,16 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::delete('/{activity}', [ActivityController::class, 'destroy'])->name('destroy');
     Route::get('/{activity}/edit', [ActivityController::class, 'edit'])->name('edit');
   });
+
+  Route::prefix('theoretical_programming')->name('theoretical_programming.')->group(function(){
+    Route::get('/', [TheoreticalProgrammingController::class, 'index'])->name('index');
+    Route::post('/', [TheoreticalProgrammingController::class, 'store'])->name('store');
+    Route::get('/create', [TheoreticalProgrammingController::class, 'create'])->name('create');
+    Route::get('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'show'])->name('show');
+    Route::put('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'update'])->name('update');
+    Route::delete('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'destroy'])->name('destroy');
+    Route::get('/{theoreticalProgramming}/edit', [TheoreticalProgrammingController::class, 'edit'])->name('edit');
+  });
 });
 
 Route::prefix('dummy')->name('dummy.')->group(function(){
@@ -154,4 +165,4 @@ Route::prefix('dummy')->name('dummy.')->group(function(){
     Route::view('/crear_usuario', 'crear_usuario')->name('crear_usuario');
     Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
     Route::view('/agenda', 'agenda')->name('agenda');
-}); 
+});

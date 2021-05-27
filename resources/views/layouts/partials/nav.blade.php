@@ -92,13 +92,35 @@
 <ul class="nav flex-column">
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.operating_room_programming.index') }}" href="{{ route('medical_programmer.operating_room_programming.index') }}">
-        <span data-feather="lock"></span>
+        <span data-feather="chevrons-right"></span>
         Programador de pabellones<span class="sr-only">(current)</span>
         </a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link">
+        <span data-feather="chevrons-right"></span>
+        Programador teórico<span class="sr-only">(current)</span>
+        </a>
+    </li>
+    <ul class="pl-4 nav flex-column">
+      <li class="nav-item">
+          <a class="nav-link {{ active('medical_programmer.theoretical_programming.index') }}" href="{{ route('medical_programmer.theoretical_programming.index','tipo=1') }}">
+          <span data-feather="chevron-right"></span>
+          Médico<span class="sr-only">(current)</span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link {{ active('medical_programmer.theoretical_programming.index') }}" href="{{ route('medical_programmer.theoretical_programming.index','tipo=2') }}">
+          <span data-feather="chevron-right"></span>
+          No médico<span class="sr-only">(current)</span>
+          </a>
+      </li>
+    </ul>
+
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.activities.index') }}" href="{{ route('medical_programmer.activities.index') }}">
-        <span data-feather="unlock"></span>
+        <span data-feather="chevrons-right"></span>
         Actividades
         </a>
     </li>
