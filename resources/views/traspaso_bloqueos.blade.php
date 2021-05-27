@@ -16,11 +16,14 @@
   <li class="nav-item">
     <a class="nav-link" href="{{route('dummy.agenda') }}">Agenda</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('dummy.lista_espera') }}">Lista Espera</a>
+  </li>
 </ul>
 
 <form>
 
-    <div class="form-row">
+    <div class="form-row mt-3">
         
         <div class="form-group col-md-4">
     			<label for="inputEmail4">Especialidad</label>
@@ -65,7 +68,10 @@
   		<tbody>
     		<tr>
       			<th scope="row"></th>
-      			<td>8:00</td>
+      			<td>
+				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">08:00</label>
+				</td>
       			<td>
 				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
 				  <label class="form-check-label" for="invalidCheck2">Cristian Carpio</label>
@@ -75,7 +81,10 @@
     		</tr>
    		 	<tr>
       			<th scope="row"></th>
-      			<td>9:00</td>
+      			<td>
+				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">09:00</label>
+				</td>
       			<td>
 				  	<input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
 					<label class="form-check-label" for="invalidCheck2">Alvaro Galleguillos</label>
@@ -84,7 +93,10 @@
     		</tr>
     		<tr>
       			<th scope="row"></th>
-      			<td>10:00</td>
+      			<td>
+				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">10:00</label>
+				</td>
 				<td>
 				<input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
 					<label class="form-check-label" for="invalidCheck2">Mariano Carrasco</label>
@@ -93,10 +105,13 @@
     		</tr>
 			<tr>
       			<th scope="row"></th>
-      			<td>11:00</td>
+      			<td>
+				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">11:00</label>
+				</td>
 				<td>
 					<input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
-					 <label class="form-check-label" for="invalidCheck2">Paciente 3</label>
+					 <label class="form-check-label" for="invalidCheck2">Maria Perez</label>
 				</td>
       			
     		</tr>
@@ -104,6 +119,15 @@
 	</table>
 	</div>
 	<!--fin tabla doctor-->
+	<div class="form-row">
+        
+        <div class="form-group col-md-10">
+    	</div>
+		<div class="form-group col-md-2">
+			<button type="button" class="btn btn-danger form-control">BLOQUEAR</button>
+		</div>
+	</div>  
+	
 	<div class="form-row">
         
         <div class="form-group col-md-3">
@@ -153,9 +177,12 @@
         <div class="form-group col-md-2">
     			<button type="button" class="btn btn-outline-primary">SIGUIENTE >></button>
     	</div>
-        <div class="form-group col-md-2">
-				<button type="button" class="btn btn-outline-primary">TRASPASAR</button>
-   		</div>
+		<div class="form-group col-md-6">
+		</div>
+		<div class="form-group col-md-2">
+			<button type="button" class="btn btn-primary form-control">TRASPASAR</button>
+		</div>
+		
 
 	</div>  
 	<!-- fin anterior,siguiente,traspasar-->
@@ -170,7 +197,7 @@
   		<thead>
     		<tr class="table-info">
       			<th scope="col">JUEVES 27 DE MAYO</th>
-      			  <th scope="col">Especialidad</th>
+      			  <th scope="col">ESPECIALIDAD</th>
 				  <th scope="col"></th>
       			  <th scope="col"></th>
 				  <th scope="col">CUPOS</th>
@@ -213,7 +240,7 @@
 			<thead>
     		<tr class="table-info">
       			<th scope="col">VIERNES 28 DE MAYO</th>
-				  <th scope="col">Especialidad</th>
+				<th scope="col">ESPECIALIDAD</th>
       			<th scope="col"></th>
       			<th scope="col-md-1"></th>
 				  <th scope="col" >CUPOS</th>
