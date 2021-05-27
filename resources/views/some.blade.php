@@ -3,6 +3,20 @@
 @section('title', 'some')
 
 @section('content')
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('dummy.crear_usuario') }}">Crear usuario</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ route('dummy.some') }}">Some</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('dummy.traspaso') }}">Traspaso/bloqueo</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('dummy.agenda') }}">Agenda</a>
+  </li>
+</ul>
 
 <form>
 
@@ -26,8 +40,8 @@
    		 </div>
 	</div>
 
-
-    <table class="table table-bordered">
+	<div class="table-responsive">
+    <table class="table table-sm table-bordered">
          <thead class="table-secondary">
                 <tr>
                     <th scope="col">Nombre:</th>
@@ -67,7 +81,7 @@
                 </tr>
         </tbody>
     </table>
-
+	</div>
 
 	<div class="card mb-3">
 		<div class="card-body">
@@ -98,14 +112,14 @@
         			<option>Traumatologia</option>
      			 </select>
     	</div>
-    	<div class="form-group col-md-4">
+    	<div class="form-group col-md-6">
       			<label for="inputPassword4">Profesional</label>
       			<select id="inputState" class="form-control">
         			<option selected>Dr Oscar Zavala</option>
         			<option>Dr Toby Cerdo</option>
      			 </select>
     	</div>
-		<div class="form-group col-md-4">
+		<div class="form-group col-md-2">
      	 		<label for="inputEmail4">Estado</label>
 				  <select id="inputState" class="form-control">
         			<option selected>Disponible</option>
@@ -114,17 +128,35 @@
     	</div>
     	
 	</div>
-
 	
-	<div class="form-group">
-    	<div class="form-check">
-      		<input class="form-check-input" type="checkbox" id="gridCheck">
-      		<label class="form-check-label" for="gridCheck">
-      			  Proxima Fecha Disponible
-      	    </label>
-    	</div>
-  	</div>
+	<div class="form-row">
 
+		<fieldset class="form-group col-4">
+			<label></label>
+			<div class="form-group mt-1 ml-4">
+      			<input class="form-check-input" type="checkbox" id="gridCheck">
+      			<label class="form-check-label" for="gridCheck">
+      			  Proxima Fecha Disponible
+      	    	</label>
+			</div>
+    	</fieldset>
+
+
+		<div class="form-group col-md-3">
+			<label for="inputEmail4">Desde</label>
+			<input type="date" class="form-control" id="inputEmail4" placeholder="Fecha inicio">
+		</div>
+
+		<div class="form-group col-md-3">
+		  	<label for="inputEmail4">Hasta</label>
+		   	<input type="date" class="form-control" id="inputEmail4" placeholder="Fecha fin">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="inputEmail4">&nbsp;</label>
+			<button type="button" class="btn btn-primary form-control">Buscar</button>
+		</div>
+		
+  	</div>
 
 
 	<div class="form-row">
@@ -143,11 +175,12 @@
 			<button type="button" class="btn btn-primary form-control">Buscar</button>
 		</div>
 	</div>
-
-	<table class="table table-striped">
+	<div class="table-responsive">
+	<table class="table table-sm table-striped">
   		<thead>
     		<tr>
       			<th scope="col">Profesional</th>
+				<th scope="col">Especialidad</th>
       			<th scope="col">Hora</th>
       			<th scope="col">Cupo</th>
       			<th scope="col">Sobre Cupo</th>
@@ -157,7 +190,8 @@
   		<tbody>
    			<tr>
      			<th scope="row">Esteban Rojas</th>
-      			<td>10:30</td>
+				<td>Traumatologiá</td>
+      			<td>09:30</td>
       			<td>3</td>
       			<td>2</td>
 				<td>Disponible</td>
@@ -165,7 +199,8 @@
 
 			<tr>
      			<th scope="row">Maria Perez</th>
-      			<td>11:30</td>
+				<td>Traumatologiá</td>
+      			<td>10:30</td>
       			<td>2</td>
       			<td>0</td>
 				<td>Disponible</td>
@@ -173,7 +208,8 @@
 
 			<tr>
      			<th scope="row">Juan Zavala</th>
-      			<td>8:00</td>
+				 <td>Traumatologiá</td>
+      			<td>11:30</td>
       			<td>1</td>
       			<td>0</td>
 				<td>Disponible</td>
@@ -181,7 +217,7 @@
     
  		 </tbody>
 	</table>
-
+	</div>
 
 
 </form>

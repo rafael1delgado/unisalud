@@ -13,7 +13,7 @@ class CreateContactPointTable extends Migration
      */
     public function up()
     {
-        Schema::create('contact_point', function (Blueprint $table) {
+        Schema::create('contact_points', function (Blueprint $table) {
             $table->id();
             $table->enum('system', ['phone', 'fax', 'email', 'pager', 'url', 'sms', 'other',
             ])->nullable();
@@ -26,8 +26,8 @@ class CreateContactPointTable extends Migration
             $table->unsignedInteger('rank')->nullable();
             $table->timestamps();
 
-            $table->foreign('contact_point_id')->references('id')->on('contact_point');
-            $table->foreign('user_id')->references('id')->on('users');  
+            $table->foreign('contact_point_id')->references('id')->on('contact_points');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('emergency_contact_id')->references('id')->on('emergency_contact');
             $table->foreign('location_id')->references('id')->on('location');
 
@@ -41,6 +41,6 @@ class CreateContactPointTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact_point');
+        Schema::dropIfExists('contact_points');
     }
 }

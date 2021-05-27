@@ -24,6 +24,8 @@ class CreateAddressTable extends Migration
             ])->nullable();
             $table->string('text')->nullable();
             $table->string('line')->nullable();
+            $table->string('apartment')->nullable();
+            $table->string('suburb')->nullable();
             $table->string('city')->nullable();
             $table->string('district')->nullable(); /** should be deleted? */
             $table->string('state')->nullable(); /** should be deleted? */
