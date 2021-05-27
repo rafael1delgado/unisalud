@@ -23,9 +23,12 @@ class CreateFqRequestsTable extends Migration
             $table->enum('status',['pending', 'complete', 'rejected']);
             $table->dateTime('date_confirm')->nullable();
             $table->longText('observation_request')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->dateTime('date_confirm_record')->nullable();
 
             $table->foreign('contact_user_id')->references('id')->on('fq_contact_users');
             $table->foreign('patient_id')->references('id')->on('fq_patients');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
             $table->softDeletes();

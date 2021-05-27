@@ -11,6 +11,18 @@ class FqRequest extends Model
     use HasFactory;
     use softDeletes;
 
+    protected $fillable = [
+        'name', 'patient_id', 'observation_patient', 'date_confirm', 'observation_request'
+    ];
+
+    public function patient() {
+        return $this->belongsTo('\App\Models\Fq\FqPatient');
+    }
+
+    public function contactUser() {
+        return $this->belongsTo('\App\Models\Fq\ContactUser');
+    }
+
     public function getNameValueAttribute(){
         switch ($this->name) {
             case 'specialty hours':
@@ -48,12 +60,12 @@ class FqRequest extends Model
         }
     }
 
-    protected $fillable = [
-        'name', 'patient_id', 'observation_patient'
-    ];
-
     protected $hidden = [
         'created_at', 'updated_at'
+    ];
+
+    protected $dates = [
+        'date_confirm', 'date_confirm_record'
     ];
 
     protected $table = 'fq_requests';
