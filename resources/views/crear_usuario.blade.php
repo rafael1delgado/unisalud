@@ -111,7 +111,14 @@
 
 
         <div class="form-row">
-
+			<div class="form-group col-md-4">
+    			<label for="imputText">Nombre Social</label>
+				<input type="Text" class="form-control" id="inputNombreSocial" placeholder="">
+    	     </div>
+			 <div class="form-group col-md-4">
+    			<label for="imputText">Género</label>
+				<input type="Text" class="form-control" id="inputGenero" placeholder="">
+    	     </div>
 			 <div class="form-group col-md-4">
     			<label for="inputEmail4">Nacionalidad</label>
     			<select id="inputState" class="form-control">
@@ -125,6 +132,7 @@
 					<option>Venezuela</option>
      			</select>
     	     </div>
+
 			 
 
 		</div>
@@ -249,14 +257,17 @@
   			<option value="2">Hipertenso</option>
 		</select>
         </div>
-        <div class="form-group col-md-3">
-    			<label for="inputEmail4">Etnia</label>
-    			<select id="inputState" class="form-control">
-        		    <option selected>Aymara</option>
-        			<option>Mapuche</option>
-					<option>Quechua</option>
-     			</select>
-    	</div>
+		<div class="form-group col-md-3">
+		<label for="inputEmail4">Etnia</label>
+		<select class="custom-select" multiple>
+  			<option selected>Mapuche</option>
+  			<option value="1">Quechua</option>
+  			<option value="2">Aimara</option>
+			<option value="2">Rapanui</option>
+			<option value="2">Yagán</option>
+
+		</select>
+        </div>
         <div class="form-group col-md-3">
     			<label for="inputEmail4">Estado Civil</label>
     			<select id="inputState" class="form-control">
@@ -266,12 +277,7 @@
                     <option>Divorciad@</option>
      			</select>
     	</div>
-		<div class="form-group col-md-2 mt-5 ml-4">
-			
-    		<input type="checkbox" class="form-check-input" id="exampleCheck1" >
-			<label class="form-check-label" for="exampleCheck1">Proxima</label>
-  		</div>
-
+		
 	</div >
 
 

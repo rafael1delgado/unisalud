@@ -68,7 +68,10 @@
   		<tbody>
     		<tr>
       			<th scope="row"></th>
-      			<td>8:00</td>
+      			<td>
+				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">08:00</label>
+				</td>
       			<td>
 				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
 				  <label class="form-check-label" for="invalidCheck2">Cristian Carpio</label>
@@ -78,7 +81,10 @@
     		</tr>
    		 	<tr>
       			<th scope="row"></th>
-      			<td>9:00</td>
+      			<td>
+				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">09:00</label>
+				</td>
       			<td>
 				  	<input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
 					<label class="form-check-label" for="invalidCheck2">Alvaro Galleguillos</label>
@@ -87,7 +93,10 @@
     		</tr>
     		<tr>
       			<th scope="row"></th>
-      			<td>10:00</td>
+      			<td>
+				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">10:00</label>
+				</td>
 				<td>
 				<input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
 					<label class="form-check-label" for="invalidCheck2">Mariano Carrasco</label>
@@ -96,10 +105,13 @@
     		</tr>
 			<tr>
       			<th scope="row"></th>
-      			<td>11:00</td>
+      			<td>
+				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">11:00</label>
+				</td>
 				<td>
 					<input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
-					 <label class="form-check-label" for="invalidCheck2">Paciente 3</label>
+					 <label class="form-check-label" for="invalidCheck2">Maria Perez</label>
 				</td>
       			
     		</tr>
@@ -107,7 +119,15 @@
 	</table>
 	</div>
 	<!--fin tabla doctor-->
-	<hr class="mt-3 mb-3">
+	<div class="form-row">
+        
+        <div class="form-group col-md-10">
+    	</div>
+		<div class="form-group col-md-2">
+			<button type="button" class="btn btn-danger form-control">BLOQUEAR</button>
+		</div>
+	</div>  
+	
 	<div class="form-row">
         
         <div class="form-group col-md-3">

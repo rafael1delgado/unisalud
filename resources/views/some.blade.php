@@ -86,7 +86,7 @@
         </tbody>
     </table>
 	</div>
-
+	<hr class="mt-3 mb-3">
 	<div class="form-row">
         
         <div class="form-group col-md-5">
@@ -195,6 +195,16 @@
 		</div>
 		
   	</div>
+	  <!--opcion asignar-->
+
+	<div class="form-row ">
+			<div class="form-group col-md-2">
+				<label for="inputAsignar">&nbsp;</label>
+				<button type="button" class="btn btn-primary form-control">Asignar</button>
+   		 </div>
+	</div>
+   <!-- fin opcion asignar-->
+		<!--inicio tabla profesionales-->
 	<div class="table-responsive">
 	<table class="table table-sm table-hover">
   		<thead class="table-info">
@@ -209,7 +219,11 @@
   		</thead>
   		<tbody>
    			<tr>
-     			<th scope="row">Esteban Rojas</th>
+     			<td>
+				 <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">Esteban Rojas</label>
+				 </td>
+				 
 				<td>Traumatologiá</td>
       			<td>09:30</td>
       			<td>3</td>
@@ -218,7 +232,11 @@
     		</tr>
 
 			<tr>
-     			<th scope="row">Maria Perez</th>
+     			<td>
+				 <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">Maria Rocha</label>
+				 
+				 </td>
 				<td>Traumatologiá</td>
       			<td>10:30</td>
       			<td>2</td>
@@ -227,8 +245,11 @@
     		</tr>
 
 			<tr>
-     			<th scope="row">Juan Zavala</th>
-				 <td>Traumatologiá</td>
+     			<td>
+				  <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required> 
+				  <label class="form-check-label" for="invalidCheck2">Juan Zavala</label>
+				 </td>
+				<td>Traumatologiá</td>
       			<td>11:30</td>
       			<td>1</td>
       			<td>0</td>
@@ -238,7 +259,16 @@
  		 </tbody>
 	</table>
 	</div>
+	<hr class="mt-3">
+	<!--opcion asignar-->
 
+	<div class="form-row ">
+			<div class="form-group col-md-2">
+				<label for="inputAsignar">&nbsp;</label>
+				<button type="button" class="btn btn-primary form-control">Asignar</button>
+   		 </div>
+	</div>
+   <!-- fin opcion asignar-->
 
 </form>
 
