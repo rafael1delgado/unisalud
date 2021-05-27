@@ -116,8 +116,13 @@
 				<input type="Text" class="form-control" id="inputNombreSocial" placeholder="">
     	     </div>
 			 <div class="form-group col-md-4">
-    			<label for="imputText">Género</label>
-				<input type="Text" class="form-control" id="inputGenero" placeholder="">
+    			<label for="imputText">Identidad de Género</label>
+				<select id="inputState" class="form-control">
+        		    <option selected>Transexual</option>
+        			<option>Bisexual</option>
+                    <option>Pansexual</option>
+     			</select>
+				
     	     </div>
 			 <div class="form-group col-md-4">
     			<label for="inputEmail4">Nacionalidad</label>
@@ -195,26 +200,28 @@
     <!--datos de contacto-->
 	<div class="form-row">
             <h5 class="card-title col-md-12">Contacto</h5>
-
 			<div class="form-group col-md-6">
-			<label for="inputEmail4">E-mail</label>
+				<label for="inputEmail4">E-mail</label>
 					<div class="input-group">
-					<input type="text" aria-label="First name" class="form-control">
+					<input type="text" aria-label="First name" class="form-control col-md-8">
 						<select id="inputState" class="form-control col-md-3">
 							<option selected>Personal</option>
 							<option>Trabajo</option>
 						</select>
+						<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03" col-md-1><i class="fas fa-user-plus"></i></button>
 					</div>
+					
 			</div>
 
 			<div class="form-group col-md-6">
 			<label for="inputEmail4">Teléfono</label>
 					<div class="input-group">
-					<input type="text" aria-label="First name" class="form-control">
+					<input type="text" aria-label="First name" class="form-control col-md-8">
 						<select id="inputState" class="form-control col-md-3">
 							<option selected>Personal</option>
 							<option>Trabajo</option>
 						</select>
+						<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03" col-md-1><i class="fas fa-user-plus"></i></button>
 					</div>
 			</div>
 	</div>
