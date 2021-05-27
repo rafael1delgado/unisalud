@@ -24,7 +24,7 @@
 
     	<div class="form-group col-md-4">
     			<label for="inputEmail4">RUT</label>
-    			<input type="email" class="form-control" id="inputEmail4" placeholder="ingrese el rut">
+    			<input type="email" class="form-control" id="inputEmail4" placeholder="Ingrese el rut">
     	</div>
     	<div class="form-group col-md-1">
       			<label for="inputPassword4">Dv</label>

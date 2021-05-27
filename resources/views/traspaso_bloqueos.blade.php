@@ -174,7 +174,7 @@
   		<thead>
     		<tr class="table-info">
       			<th scope="col">JUEVES 27 DE MAYO</th>
-      			  <th scope="col">Especialidad</th>
+      			  <th scope="col">ESPECIALIDAD</th>
 				  <th scope="col"></th>
       			  <th scope="col"></th>
 				  <th scope="col">CUPOS</th>
@@ -217,7 +217,7 @@
 			<thead>
     		<tr class="table-info">
       			<th scope="col">VIERNES 28 DE MAYO</th>
-				  <th scope="col">Especialidad</th>
+				<th scope="col">ESPECIALIDAD</th>
       			<th scope="col"></th>
       			<th scope="col-md-1"></th>
 				  <th scope="col" >CUPOS</th>
