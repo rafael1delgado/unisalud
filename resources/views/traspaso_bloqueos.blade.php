@@ -20,7 +20,7 @@
 
 <form>
 
-    <div class="form-row">
+    <div class="form-row mt-3">
         
         <div class="form-group col-md-4">
     			<label for="inputEmail4">Especialidad</label>
@@ -104,6 +104,7 @@
 	</table>
 	</div>
 	<!--fin tabla doctor-->
+	<hr class="mt-3 mb-3">
 	<div class="form-row">
         
         <div class="form-group col-md-3">
@@ -153,9 +154,12 @@
         <div class="form-group col-md-2">
     			<button type="button" class="btn btn-outline-primary">SIGUIENTE >></button>
     	</div>
-        <div class="form-group col-md-2">
-				<button type="button" class="btn btn-outline-primary">TRASPASAR</button>
-   		</div>
+		<div class="form-group col-md-6">
+		</div>
+		<div class="form-group col-md-2">
+			<button type="button" class="btn btn-primary form-control">TRASPASAR</button>
+		</div>
+		
 
 	</div>  
 	<!-- fin anterior,siguiente,traspasar-->

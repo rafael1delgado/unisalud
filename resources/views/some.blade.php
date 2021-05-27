@@ -41,8 +41,9 @@
 	</div>
 
 	<div class="table-responsive">
-    <table class="table table-sm table-bordered">
-         <thead class="table-secondary">
+    <table class="table table-sm table-hover">
+         <thead class="table-info">
+		 
                 <tr>
                     <th scope="col">Nombre:</th>
                     <th scope="col">Jose Cantero Palacios</th>
@@ -83,25 +84,30 @@
     </table>
 	</div>
 
-	<div class="card mb-3">
-		<div class="card-body">
-		
-			<div class="form-row">
+	<div class="form-row">
+        
+        <div class="form-group col-md-5">
+    			<label for="inputEmail4">Prevision</label>
+    			<select id="inputState" class="form-control">
+        		    <option selected>Fonasa</option>
+        			<option>Isapre</option>
+     			</select>
+    	</div>
+        <div class="form-group col-md-5">
+    			<label for="inputEmail4">Tramo</label>
+    			<select id="inputState" class="form-control">
+        		    <option selected>A</option>
+        			<option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+     			</select>
+    	</div>
+        <div class="form-group col-md-2">
+				    <label for="inputEmail4">&nbsp;</label>
+				    <button type="button" class="btn btn-primary form-control">Fonasa</button>
+   		</div>
 
-    			<div class="form-group col-md-4">
-    				<p class="card-text">Prevision</p>
-    			</div>
-				<div class="form-group col-md-6">
-    				<p class="card-text">Fonasa</p>
-    			</div>
-
-    			<div class="form-group col-md-2">
-					<button type="button" class="btn btn-primary form-control">Fonasa</button>
-   			    </div>
-			</div>
-		</div>
-	</div>
-
+	</div >
 
 	<div class="form-row">
 
@@ -127,6 +133,35 @@
      			 </select>
     	</div>
     	
+	</div>
+
+	<div class="form-row">
+
+    	<div class="form-group col-md-1">
+    			<label for="imputBool">Codigo</label>
+    			<input type="bool" class="form-control" id="inputBool" placeholder="">
+    	</div>
+		<div class="form-group col-md-4">
+    			<label for="imputBool">Prestación</label>
+    			<input type="bool" class="form-control" id="inputBool" placeholder="">
+    	</div>
+		<div class="form-group col-md-2">
+    			<label for="imputNumeric">Número de Interconsulta</label>
+    			<input type="numeric" class="form-control" id="inputNumeric" placeholder="">
+    	</div>
+		<div class="form-group col-md-3">
+			<label for="inputDate">Fecha de Interconsulta</label>
+			<input type="date" class="form-control" id="inputDate" placeholder="Fecha de interconsulta">
+		</div>
+		<div class="form-group col-md-2">
+     	 		<label for="inputEmail4">Procedencia</label>
+				  <select id="inputState" class="form-control">
+        			<option selected>Cesfam Videla</option>
+        			<option>Cesfam Aguirre</option>
+					<option>Cesfam Guzmán</option>
+					<option>Cesfam Sur</option>
+     			 </select>
+    	</div>
 	</div>
 	
 	<div class="form-row">
@@ -157,27 +192,9 @@
 		</div>
 		
   	</div>
-
-
-	<div class="form-row">
-
-		<div class="form-group col-md-5">
-			<label for="inputEmail4">Desde</label>
-			<input type="date" class="form-control" id="inputEmail4" placeholder="Fecha inicio">
-		</div>
-
-		<div class="form-group col-md-5">
-		  	<label for="inputEmail4">Hasta</label>
-		   	<input type="date" class="form-control" id="inputEmail4" placeholder="Fecha fin">
-		</div>
-		<div class="form-group col-md-2">
-			<label for="inputEmail4">&nbsp;</label>
-			<button type="button" class="btn btn-primary form-control">Buscar</button>
-		</div>
-	</div>
 	<div class="table-responsive">
-	<table class="table table-sm table-striped">
-  		<thead>
+	<table class="table table-sm table-hover">
+  		<thead class="table-info">
     		<tr>
       			<th scope="col">Profesional</th>
 				<th scope="col">Especialidad</th>

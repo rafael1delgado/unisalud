@@ -67,7 +67,7 @@
     	                    </div>
     	                    <div class="form-group col-md-6">
       			                <label for="inputPassword4">N° Documento</label>
-      			                <input type="text" class="form-control" id="inputPassword4" placeholder="Ingresar numero de documento">
+      			                <input type="text" class="form-control" id="inputPassword4" placeholder="Número de documento">
     	                    </div>
 	                    </div>
 
@@ -126,6 +126,7 @@
 
 		</div>
         <!--datos de direccion-->
+
 
         <div class="form-row">
             <h5 class="card-title col-md-12">DIRECCIÓN</h5>
