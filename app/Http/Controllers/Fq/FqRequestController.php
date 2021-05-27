@@ -9,6 +9,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewNotification;
+use App\Mail\AnswerNotification;
 
 class FqRequestController extends Controller
 {
@@ -19,7 +23,14 @@ class FqRequestController extends Controller
      */
     public function index()
     {
-        //
+        $pending_reqs = FqRequest::where('status', 'pending')
+            ->get();
+
+        $reqs = FqRequest::where('status', 'complete')
+            ->orWhere('status', 'rejected')
+            ->paginate(15);
+
+        return view('fq.request.index', compact('pending_reqs', 'reqs'));
     }
 
     public function own_index()
@@ -52,10 +63,14 @@ class FqRequestController extends Controller
      */
     public function store(Request $request, ContactUser $contactUser)
     {
-        $req = new FqRequest($request->All());
-        $req->contact_user_id = $contactUser->id;
-        $req->status = 'pending';
-        $req->save();
+        $fqRequest = new FqRequest($request->All());
+        $fqRequest->contact_user_id = $contactUser->id;
+        $fqRequest->status = 'pending';
+        $fqRequest->save();
+
+        // if (env('APP_ENV') == 'production') {
+            Mail::to(['ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
+        // }
 
         session()->flash('success', 'Se ha creado la solicitud exitosamente');
         return redirect()->route('fq.request.own_index');
@@ -92,7 +107,18 @@ class FqRequestController extends Controller
      */
     public function update(Request $request, FqRequest $fqRequest)
     {
-        //
+        $fqRequest->fill($request->all());
+        $fqRequest->status = 'complete';
+        $fqRequest->user_id = Auth()->user()->id;
+        $fqRequest->date_confirm_record = Carbon::now();
+        $fqRequest->save();
+
+        // if (env('APP_ENV') == 'production') {
+            Mail::to($fqRequest->contactUser->email)->bcc(['mirandal.jorge@gmail.com'])->send(new AnswerNotification($fqRequest));
+        // }
+
+        session()->flash('success', 'La solicitud fue correctamente atendida.');
+        return redirect()->route('fq.request.index');
     }
 
     /**

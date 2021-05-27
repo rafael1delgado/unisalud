@@ -21,6 +21,7 @@ use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\RrhhController;
 use App\Http\Controllers\MedicalProgrammer\ContractController;
 use App\Http\Controllers\MedicalProgrammer\ActivityController;
+use App\Http\Controllers\MedicalProgrammer\TheoreticalProgrammingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,15 +84,22 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
 
-Route::prefix('fq')->as('fq.')->group(function(){
+Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
     Route::prefix('contact_user')->name('contact_user.')->group(function(){
         Route::get('/', [ContactUserController::class, 'index'])->name('index');
+        Route::get('/create', [ContactUserController::class, 'create'])->name('create');
+        Route::post('/store', [ContactUserController::class, 'store'])->name('store');
+    });
+    Route::prefix('patient')->name('patient.')->group(function(){
+        Route::get('/', [FqPatientController::class, 'index'])->name('index');
+        Route::get('/create', [FqPatientController::class, 'create'])->name('create');
     });
     Route::prefix('request')->name('request.')->group(function(){
-        Route::get('/', [FqRequestController::class, 'index'])->name('index');
+        Route::get('/', [FqRequestController::class, 'index'])->name('index')->middleware(['permission:Fq: Answer request']);
         Route::get('/own_index', [FqRequestController::class, 'own_index'])->name('own_index');
         Route::get('/create', [FqRequestController::class, 'create'])->name('create');
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
+        Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')->middleware(['permission:Fq: Answer request']);;
     });
 });
 
@@ -139,6 +147,16 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::put('/{activity}', [ActivityController::class, 'update'])->name('update');
     Route::delete('/{activity}', [ActivityController::class, 'destroy'])->name('destroy');
     Route::get('/{activity}/edit', [ActivityController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('theoretical_programming')->name('theoretical_programming.')->group(function(){
+    Route::get('/', [TheoreticalProgrammingController::class, 'index'])->name('index');
+    Route::post('/', [TheoreticalProgrammingController::class, 'store'])->name('store');
+    Route::get('/create', [TheoreticalProgrammingController::class, 'create'])->name('create');
+    Route::get('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'show'])->name('show');
+    Route::put('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'update'])->name('update');
+    Route::delete('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'destroy'])->name('destroy');
+    Route::get('/{theoreticalProgramming}/edit', [TheoreticalProgrammingController::class, 'edit'])->name('edit');
   });
 });
 
