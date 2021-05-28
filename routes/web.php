@@ -22,6 +22,7 @@ use App\Http\Controllers\MedicalProgrammer\RrhhController;
 use App\Http\Controllers\MedicalProgrammer\ContractController;
 use App\Http\Controllers\MedicalProgrammer\ActivityController;
 use App\Http\Controllers\MedicalProgrammer\TheoreticalProgrammingController;
+use App\Http\Controllers\MedicalProgrammer\UnscheduledProgrammingController;
 
 
 use App\Http\Controllers\MedicalLicenceController;
@@ -159,7 +160,24 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::put('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'update'])->name('update');
     Route::delete('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'destroy'])->name('destroy');
     Route::get('/{theoreticalProgramming}/edit', [TheoreticalProgrammingController::class, 'edit'])->name('edit');
+
+    Route::get('saveMyEvent', [TheoreticalProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
+    Route::get('updateMyEvent', [TheoreticalProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
+    Route::get('deleteMyEvent', [TheoreticalProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
+    Route::get('deleteMyEventForce', [TheoreticalProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
   });
+
+  Route::prefix('unscheduled_programming')->name('unscheduled_programming.')->group(function(){
+    Route::get('/', [UnscheduledProgrammingController::class, 'index'])->name('index');
+    Route::post('/', [UnscheduledProgrammingController::class, 'store'])->name('store');
+    Route::get('/create', [UnscheduledProgrammingController::class, 'create'])->name('create');
+    Route::get('/{theoreticalProgramming}', [UnscheduledProgrammingController::class, 'show'])->name('show');
+    Route::put('/{theoreticalProgramming}', [UnscheduledProgrammingController::class, 'update'])->name('update');
+    Route::delete('/{theoreticalProgramming}', [UnscheduledProgrammingController::class, 'destroy'])->name('destroy');
+    Route::get('/{theoreticalProgramming}/edit', [UnscheduledProgrammingController::class, 'edit'])->name('edit');
+  });
+
+
 });
 
 Route::prefix('dummy')->name('dummy.')->group(function(){
