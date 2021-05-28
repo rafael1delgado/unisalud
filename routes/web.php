@@ -23,6 +23,8 @@ use App\Http\Controllers\MedicalProgrammer\ContractController;
 use App\Http\Controllers\MedicalProgrammer\ActivityController;
 use App\Http\Controllers\MedicalProgrammer\TheoreticalProgrammingController;
 
+
+use App\Http\Controllers\MedicalLicenceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -167,3 +169,11 @@ Route::prefix('dummy')->name('dummy.')->group(function(){
     Route::view('/agenda', 'agenda')->name('agenda');
     Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
 }); 
+
+Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
+  Route::get ('/create',[MedicalLicenceController::class,'create'])->name('create');
+  Route::post ('/',[MedicalLicenceController::class,'store'])->name('store');
+
+
+}); 
+
