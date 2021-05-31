@@ -12,6 +12,7 @@ class UserAddresses extends Component
     public $communes;
     public $regions;
     public $countries;
+    public $patient;
 
     public function add($i)
     {
@@ -27,6 +28,12 @@ class UserAddresses extends Component
 
     public function mount()
     {
+        if ($this->patient && $this->patient->addresses()->count() > 0) {
+            for ($i = 0; $i < $this->patient->addresses()->count(); $i++) {
+                $this->add($i);
+            }
+        }
+
         $this->add(1);
     }
 

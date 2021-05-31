@@ -19,7 +19,7 @@
         <script src="https://kit.fontawesome.com/7c4f606aba.js" SameSite="None"
             crossorigin="anonymous"></script>
 
-        <script src="{{ asset('js/app.js') }}" defer></script>
+{{--        <script src="{{ asset('js/app.js') }}" defer></script>--}}
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
 

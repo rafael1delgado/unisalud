@@ -10,6 +10,9 @@ use App\Models\Country;
 use App\Models\HumanName;
 use App\Models\Region;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -428,11 +431,16 @@ class PatientController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
-        //
+        $patient = User::find($id);
+        $maritalStatus = CodConMarital::all();
+        $countries = Country::all();
+        $communes = Commune::all();
+        $regions = Region::all();
+        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus'));
     }
 
     /**
