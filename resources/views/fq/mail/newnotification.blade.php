@@ -14,6 +14,7 @@
 
                     <p><strong>Fecha de Solicitud</strong>:  {{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</p>
                     <p><strong>Motivo de Solicitud</strong>: {{ $fqRequest->NameValue }}</p>
+                    <p><strong>Observación</strong>: {{ $fqRequest->observation_patient }}</p>
 
                     <br>
                     <p>Paciente:</p>

@@ -82,7 +82,7 @@
               </table>
           </div>
 
-          @if($fqRequest->status == 'pending')
+          @if($fqRequest->status == 'pending' && (Gate::check('Fq: Answer request') || Gate::check('Fq: Answer request medicines')))
           <form method="POST" class="form-horizontal" action="{{ route('fq.request.update', $fqRequest) }}">
               @csrf
               @method('PUT')

@@ -78,6 +78,49 @@
       </fieldset>
     </div>
 
+    <hr>
+
+    <h5>Ingreso de Paciente</h5>
+
+    <div class="form-row">
+        <fieldset class="form-group col-sm-2">
+            <label for="for_run_patient">RUT</label>
+            <input type="number" class="form-control" name="run_patient" id="for_run_patient" value=""
+              required>
+        </fieldset>
+        <fieldset class="form-group col-sm-1">
+            <label for="for_dv_patient">DV</label>
+            <input type="text" class="form-control" name="dv_patient" id="for_dv_patient" value=""
+              required>
+        </fieldset>
+        <fieldset class="form-group col-5">
+            <label for="for_name_patient">Nombres</label>
+            <input type="text" class="form-control" name="name_patient" id="for_name_patient" value=""
+              required>
+        </fieldset>
+        <fieldset class="form-group col-2">
+            <label for="for_name_patient">Apellido Paterno</label>
+            <input type="text" class="form-control" name="fathers_family_patient" id="for_fathers_family_patient" value=""
+              required>
+        </fieldset>
+        <fieldset class="form-group col-2">
+            <label for="for_name_patient">Apellido Materno</label>
+            <input type="text" class="form-control" name="mothers_family_patient" id="for_mothers_family_patient" value="">
+        </fieldset>
+    </div>
+
+    <div class="form-row">
+        <fieldset class="form-group col-sm-2">
+            <label for="for_clinical_history_number">Nº Ficha</label>
+            <input type="number" class="form-control" name="clinical_history_number"
+              id="for_clinical_history_number" value="" required>
+        </fieldset>
+        <fieldset class="form-group col-sm-10">
+            <label for="for_observation">Observación</label>
+            <input type="text" class="form-control" name="observation" id="for_observation" value="">
+        </fieldset>
+    </div>
+
     <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> Guardar</button>
 
 </form>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Fq;
 
 use App\Models\Fq\ContactUser;
+use App\Models\Fq\FqPatient;
+use App\Models\Fq\UserPatient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +17,8 @@ class ContactUserController extends Controller
      */
     public function index()
     {
-        //
+        $contactUsers = ContactUser::all();
+        return view('fq.contact_user.index', compact('contactUsers'));
     }
 
     /**
@@ -45,8 +48,33 @@ class ContactUserController extends Controller
 
         $contactUser->save();
 
-        // session()->flash('success', 'Se ha creado la solicitud exitosamente');
-        // return redirect()->route('fq.request.own_index');
+        $fqPatient = new FqPatient();
+        $fqPatient->run = $request->run_patient;
+        $fqPatient->dv = $request->dv_patient;
+        $fqPatient->name = $request->name_patient;
+        $fqPatient->fathers_family = $request->fathers_family_patient;
+        $fqPatient->mothers_family = $request->mothers_family_patient;
+
+        $fqPatient->clinical_history_number = $request->clinical_history_number;
+
+        $fqPatient->email = $contactUser->email;
+        $fqPatient->telephone = $contactUser->telephone;
+        $fqPatient->telephone2 = $contactUser->telephone2;
+        $fqPatient->commune = $contactUser->commune;
+        $fqPatient->address = $contactUser->address;
+
+        $fqPatient->observation = $request->observation;
+
+        $fqPatient->save();
+
+        $userPatient = new UserPatient();
+        $userPatient->contact_user_id = $contactUser->id;
+        $userPatient->patient_id = $fqPatient->id;
+
+        $userPatient->save();
+
+        session()->flash('success', 'Se ha creado exitosamente el Paciente: '.$fqPatient->name.' '.$fqPatient->fathers_family);
+        return redirect()->route('fq.contact_user.index');
     }
 
     /**

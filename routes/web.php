@@ -84,7 +84,7 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 });
 
 Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
-    Route::prefix('contact_user')->name('contact_user.')->group(function(){
+    Route::prefix('contact_user')->name('contact_user.')->middleware(['permission:Fq: admin'])->group(function(){
         Route::get('/', [ContactUserController::class, 'index'])->name('index');
         Route::get('/create', [ContactUserController::class, 'create'])->name('create');
         Route::post('/store', [ContactUserController::class, 'store'])->name('store');
@@ -94,11 +94,13 @@ Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
         Route::get('/create', [FqPatientController::class, 'create'])->name('create');
     });
     Route::prefix('request')->name('request.')->group(function(){
-        Route::get('/', [FqRequestController::class, 'index'])->name('index')->middleware(['permission:Fq: Answer request']);
+        Route::get('/', [FqRequestController::class, 'index'])->name('index')
+            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);
         Route::get('/own_index', [FqRequestController::class, 'own_index'])->name('own_index');
         Route::get('/create', [FqRequestController::class, 'create'])->name('create');
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
-        Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')->middleware(['permission:Fq: Answer request']);;
+        Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')
+            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);;
     });
 });
 
@@ -154,4 +156,4 @@ Route::prefix('dummy')->name('dummy.')->group(function(){
     Route::view('/crear_usuario', 'crear_usuario')->name('crear_usuario');
     Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
     Route::view('/agenda', 'agenda')->name('agenda');
-}); 
+});
