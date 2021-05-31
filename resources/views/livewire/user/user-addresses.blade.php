@@ -30,26 +30,32 @@
                         <label for="for_street_name">Calle</label>
                         <input type="text" class="form-control" name="street_name[]"
                                required
-                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}">
+{{--                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}"--}}
+                        >
                     </fieldset>
 
                     <fieldset class="form-group col-1">
                         <label for="for_line">Número</label>
                         <input type="text" class="form-control" name="line[]"
-                               required value="{{ substr(str_shuffle('0123456789'), 0, 4) }}">
+                               required
+{{--                               value="{{ substr(str_shuffle('0123456789'), 0, 4) }}"--}}
+                        >
                     </fieldset>
 
                     <fieldset class="form-group col-1">
                         <label for="for_address_apartament">Depto</label>
                         <input type="text" class="form-control" name="address_apartament[]"
-                               required value="{{ substr(str_shuffle('0123456789'), 0, 2) }}">
+                               required
+{{--                               value="{{ substr(str_shuffle('0123456789'), 0, 2) }}"--}}
+                        >
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_poblacion">Población/Villa/Condominio</label>
                         <input type="text" class="form-control" name="poblacion[]"
                                required
-                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}">
+{{--                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}"--}}
+                        >
                     </fieldset>
 
                     <fieldset class="form-group col-2">
@@ -77,17 +83,23 @@
                     <fieldset class="form-group col-1">
                         <label for="for_latitud">Latitud</label>
                         <input type="text" class="form-control" name="latitud[]"
-                               required value="{{ substr(str_shuffle('0123456789'), 0, 8) }}">
+                               required
+{{--                               value="{{ substr(str_shuffle('0123456789'), 0, 8) }}"--}}
+                        >
                     </fieldset>
                     <fieldset class="form-group col-1">
                         <label for="for_longitud">Longitud</label>
                         <input type="text" class="form-control" name="longitud[]"
-                               required value="{{ substr(str_shuffle('0123456789'), 0, 8) }}">
+                               required
+{{--                               value="{{ substr(str_shuffle('0123456789'), 0, 8) }}"--}}
+                        >
                     </fieldset>
                     <fieldset class="form-group col-2">
                         <label for="for_city">Ciudad</label>
                         <input type="text" class="form-control" name="city[]"
-                               required value="Iquique">
+                               required
+{{--                               value="Iquique"--}}
+                        >
                     </fieldset>
                     <fieldset class="form-group col-2">
                         <label for="for_country">País</label>
