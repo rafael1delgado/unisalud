@@ -14,6 +14,7 @@ use App\Http\Controllers\Profile\ObservationController;
 
 use App\Http\Controllers\PatientController;
 
+use App\Http\Controllers\Fq\CysticFibrosisRequest;
 use App\Http\Controllers\Fq\ContactUserController;
 use App\Http\Controllers\Fq\FqRequestController;
 
@@ -97,6 +98,7 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 });
 
 Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
+    Route::get('/', [CysticFibrosisRequest::class, 'index'])->name('index');
     Route::prefix('contact_user')->name('contact_user.')->middleware(['permission:Fq: admin'])->group(function(){
         Route::get('/', [ContactUserController::class, 'index'])->name('index');
         Route::get('/create', [ContactUserController::class, 'create'])->name('create');
@@ -298,8 +300,6 @@ Route::prefix('dummy')->name('dummy.')->group(function(){
     Route::view('/crear_usuario', 'crear_usuario')->name('crear_usuario');
     Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
     Route::view('/agenda', 'agenda')->name('agenda');
-<<<<<<< HEAD
-=======
     Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
 });
 
@@ -308,5 +308,4 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
   Route::post ('/',[MedicalLicenceController::class,'store'])->name('store');
 
 
->>>>>>> eed03f33f8c8662cf59d48f11e0ce2dca75042d4
 });
