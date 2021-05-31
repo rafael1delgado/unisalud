@@ -33,6 +33,8 @@ use App\Http\Controllers\MedicalProgrammer\CutOffDateController;
 use App\Http\Controllers\MedicalProgrammer\CloneController;
 use App\Http\Controllers\MedicalProgrammer\ReportController;
 
+
+use App\Http\Controllers\MedicalLicenceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -296,4 +298,11 @@ Route::prefix('dummy')->name('dummy.')->group(function(){
     Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
     Route::view('/agenda', 'agenda')->name('agenda');
     Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
+});
+
+Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
+  Route::get ('/create',[MedicalLicenceController::class,'create'])->name('create');
+  Route::post ('/',[MedicalLicenceController::class,'store'])->name('store');
+
+
 });
