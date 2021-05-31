@@ -18,8 +18,8 @@ class CreateCodingTable extends Migration
             $table->foreignId('coding_id')->nullable();
             $table->string('system')->nullable();
             $table->string('version')->nullable();
-            $table->string('code')->nullable(); /**code() Technica
-lly, a code is restricted to a string which has at least one character and no leading or trailing whitespace, and where there is no whitespace other than single spaces in the contents*/            $table->string('display')->nullable();
+            $table->string('code')->nullable(); /**code() Technically, a code is restricted to a string which has at least one character and no leading or trailing whitespace, and where there is no whitespace other than single spaces in the contents*/            
+            $table->string('display')->nullable();
             $table->boolean('userSelected')->nullable();
 
             $table->timestamps();

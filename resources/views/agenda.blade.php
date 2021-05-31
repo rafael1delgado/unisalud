@@ -9,7 +9,7 @@
     <a class="nav-link" href="{{ route('dummy.crear_usuario') }}">Crear usuario</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('dummy.some') }}">Agenda</a>
+    <a class="nav-link" href="{{ route('dummy.some') }}">Some</a>
   </li>
   <li class="nav-item">
     <a class="nav-link " href="{{route('dummy.traspaso') }}">Traspaso/bloqueo</a>
@@ -17,7 +17,44 @@
   <li class="nav-item">
     <a class="nav-link active" href="{{route('dummy.agenda') }}">Agenda</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('dummy.lista_espera') }}">Lista Espera</a>
+  </li>
 </ul>
+
+<!-- form especialidad, funcionario, fecha,buscar-->
+  <div class="form-row mt-3"  >
+          
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">Especialidad</label>
+            <select id="inputState" class="form-control">
+                  <option selected>Traumatología</option>
+                <option>Cardiología</option>
+                      <option>Ginecología</option>
+                      <option>Neurología</option>
+                      
+            </select>
+        </div>
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">Funcionario</label>
+            <select id="inputState" class="form-control">
+                  <option selected>Macarena Lopez</option>
+                <option>Daniel Suarez</option>
+                      <option>Jorge Miranda</option>
+                      <option>Maria Isabel Araya</option>
+            </select>
+        </div>
+          <div class="form-group col-md-3">
+            <label for="inputEmail4">Fecha </label>
+            <input type="date" class="form-control" id="inputEmail4" placeholder="Ingrese Fecha">
+      </div>
+          <div class="form-group col-md-1">
+          <label for="inputEmail4">&nbsp;</label>
+          <button type="button" class="btn btn-primary form-control">Buscar</button>
+        </div>
+
+    </div>  
+<!--  fin form especialidad, funcionario, fecha,buscar-->
 
 <html lang='en'>
   <head>

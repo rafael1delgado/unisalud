@@ -263,7 +263,7 @@ bottom: 5px;
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
       <br />
-      @include('ehr/hetg/unscheduled_programming/index')
+      @include('medical_programmer/unscheduled_programming/index')
 
   </div>
 </div>

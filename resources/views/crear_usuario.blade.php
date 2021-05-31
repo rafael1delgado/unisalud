@@ -16,6 +16,9 @@
   <li class="nav-item">
     <a class="nav-link" href="{{route('dummy.agenda') }}">Agenda</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('dummy.lista_espera') }}">Lista Espera</a>
+  </li>
 </ul>
 <form> 
  
@@ -67,7 +70,7 @@
     	                    </div>
     	                    <div class="form-group col-md-6">
       			                <label for="inputPassword4">N° Documento</label>
-      			                <input type="text" class="form-control" id="inputPassword4" placeholder="Ingresar numero de documento">
+      			                <input type="text" class="form-control" id="inputPassword4" placeholder="Número de documento">
     	                    </div>
 	                    </div>
 
@@ -108,7 +111,19 @@
 
 
         <div class="form-row">
-
+			<div class="form-group col-md-4">
+    			<label for="imputText">Nombre Social</label>
+				<input type="Text" class="form-control" id="inputNombreSocial" placeholder="">
+    	     </div>
+			 <div class="form-group col-md-4">
+    			<label for="imputText">Identidad de Género</label>
+				<select id="inputState" class="form-control">
+        		    <option selected>Transexual</option>
+        			<option>Bisexual</option>
+                    <option>Pansexual</option>
+     			</select>
+				
+    	     </div>
 			 <div class="form-group col-md-4">
     			<label for="inputEmail4">Nacionalidad</label>
     			<select id="inputState" class="form-control">
@@ -122,10 +137,12 @@
 					<option>Venezuela</option>
      			</select>
     	     </div>
+
 			 
 
 		</div>
         <!--datos de direccion-->
+
 
         <div class="form-row">
             <h5 class="card-title col-md-12">DIRECCIÓN</h5>
@@ -183,26 +200,28 @@
     <!--datos de contacto-->
 	<div class="form-row">
             <h5 class="card-title col-md-12">Contacto</h5>
-
 			<div class="form-group col-md-6">
-			<label for="inputEmail4">E-mail</label>
+				<label for="inputEmail4">E-mail</label>
 					<div class="input-group">
-					<input type="text" aria-label="First name" class="form-control">
+					<input type="text" aria-label="First name" class="form-control col-md-8">
 						<select id="inputState" class="form-control col-md-3">
 							<option selected>Personal</option>
 							<option>Trabajo</option>
 						</select>
+						<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03" col-md-1><i class="fas fa-user-plus"></i></button>
 					</div>
+					
 			</div>
 
 			<div class="form-group col-md-6">
 			<label for="inputEmail4">Teléfono</label>
 					<div class="input-group">
-					<input type="text" aria-label="First name" class="form-control">
+					<input type="text" aria-label="First name" class="form-control col-md-8">
 						<select id="inputState" class="form-control col-md-3">
 							<option selected>Personal</option>
 							<option>Trabajo</option>
 						</select>
+						<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03" col-md-1><i class="fas fa-user-plus"></i></button>
 					</div>
 			</div>
 	</div>
@@ -245,14 +264,17 @@
   			<option value="2">Hipertenso</option>
 		</select>
         </div>
-        <div class="form-group col-md-3">
-    			<label for="inputEmail4">Etnia</label>
-    			<select id="inputState" class="form-control">
-        		    <option selected>Aymara</option>
-        			<option>Mapuche</option>
-					<option>Quechua</option>
-     			</select>
-    	</div>
+		<div class="form-group col-md-3">
+		<label for="inputEmail4">Etnia</label>
+		<select class="custom-select" multiple>
+  			<option selected>Mapuche</option>
+  			<option value="1">Quechua</option>
+  			<option value="2">Aimara</option>
+			<option value="2">Rapanui</option>
+			<option value="2">Yagán</option>
+
+		</select>
+        </div>
         <div class="form-group col-md-3">
     			<label for="inputEmail4">Estado Civil</label>
     			<select id="inputState" class="form-control">
@@ -262,12 +284,7 @@
                     <option>Divorciad@</option>
      			</select>
     	</div>
-		<div class="form-group col-md-2 mt-5 ml-4">
-			
-    		<input type="checkbox" class="form-check-input" id="exampleCheck1" >
-			<label class="form-check-label" for="exampleCheck1">Proxima</label>
-  		</div>
-
+		
 	</div >
 
 

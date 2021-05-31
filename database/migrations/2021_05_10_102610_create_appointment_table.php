@@ -16,7 +16,7 @@ class CreateAppointmentTable extends Migration
         Schema::create('appointment', function (Blueprint $table) {
             $table->id();
             $table->foreignId('appointment_id')->nullable();
-            $table->string('identifier')->nullable();
+            $table->foreignId('identifiers_id')->nullable();
             $table->enum('status', ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'noshow', 'entered-in-error', 'checked-in', 'waitlist',
             ])->nullable();
             /** Add 6 cod con and reason code/reason */
@@ -31,6 +31,7 @@ class CreateAppointmentTable extends Migration
             $table->timestamps();
 
             $table->foreign('appointment_id')->references('id')->on('appointment');
+            $table->foreign('identifiers_id')->references('id')->on('identifiers');
             $table->foreign('cod_con_cancelation_reason_id')->references('id')->on('cod_con_cancelation_reason');
             $table->foreign('cod_con_appointment_type_id')->references('id')->on('cod_con_appointment_type');
 
