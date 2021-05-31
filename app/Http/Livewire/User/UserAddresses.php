@@ -28,13 +28,23 @@ class UserAddresses extends Component
 
     public function mount()
     {
+        //Agrega inputs según cantidad de direcciones que tenga
         if ($this->patient && $this->patient->addresses()->count() > 0) {
             for ($i = 0; $i < $this->patient->addresses()->count(); $i++) {
                 $this->add($i);
             }
         }
+        else {
+            $this->add(1);
+        }
 
-        $this->add(1);
+        // // Agrega unidad organizacional al editar
+        // if ($this->signature && $this->signature->signaturesFlowVisator->count() > 0) {
+        //     foreach ($this->inputs as $key => $value) {
+        //         $this->organizationalUnit[$value] = $this->signature->signaturesFlowVisator->slice($key, 1)->first()->ou_id;
+        //     }
+        // }
+        
     }
 
     public function render()
