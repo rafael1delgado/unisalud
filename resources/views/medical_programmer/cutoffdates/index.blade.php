@@ -40,7 +40,7 @@
                        class="btn btn-sm btn-outline-info">
                         Consolidado Programación
                     </a>
-                    <a href="{{ route('medical_programmer.management.report.reportcut', $cutoffdate) }}" class="btn btn-sm btn-outline-info">
+                    <a href="{{ route('medical_programmer.reports.reportcut', $cutoffdate) }}" class="btn btn-sm btn-outline-info">
                     Exportar a Excel
                     <i class="far fa-file-excel"></i></a>
       			</td>

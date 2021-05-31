@@ -23,6 +23,15 @@ use App\Http\Controllers\MedicalProgrammer\ContractController;
 use App\Http\Controllers\MedicalProgrammer\ActivityController;
 use App\Http\Controllers\MedicalProgrammer\TheoreticalProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\UnscheduledProgrammingController;
+use App\Http\Controllers\MedicalProgrammer\CalendarProgrammingController;
+use App\Http\Controllers\MedicalProgrammer\OperatingRoomController;
+use App\Http\Controllers\MedicalProgrammer\MotherActivityController;
+use App\Http\Controllers\MedicalProgrammer\ServiceController;
+use App\Http\Controllers\MedicalProgrammer\SpecialtyController;
+use App\Http\Controllers\MedicalProgrammer\ProfessionController;
+use App\Http\Controllers\MedicalProgrammer\CutOffDateController;
+use App\Http\Controllers\MedicalProgrammer\CloneController;
+use App\Http\Controllers\MedicalProgrammer\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,6 +184,109 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::get('/{theoreticalProgramming}/edit', [UnscheduledProgrammingController::class, 'edit'])->name('edit');
   });
 
+  Route::prefix('calendar_programming')->name('calendar_programming.')->group(function(){
+    Route::get('indexbox', [CalendarProgrammingController::class, 'indexbox'])->name('indexbox');
+
+    Route::get('/', [CalendarProgrammingController::class, 'index'])->name('index');
+    Route::post('/', [CalendarProgrammingController::class, 'store'])->name('store');
+    Route::get('/create', [CalendarProgrammingController::class, 'create'])->name('create');
+    Route::get('/{calendarProgramming}', [CalendarProgrammingController::class, 'show'])->name('show');
+    Route::put('/{calendarProgramming}', [CalendarProgrammingController::class, 'update'])->name('update');
+    Route::delete('/{calendarProgramming}', [CalendarProgrammingController::class, 'destroy'])->name('destroy');
+    Route::get('/{calendarProgramming}/edit', [CalendarProgrammingController::class, 'edit'])->name('edit');
+
+    Route::get('saveMyEvent', [CalendarProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
+    Route::get('updateMyEvent', [CalendarProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
+    Route::get('deleteMyEvent', [CalendarProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
+    Route::get('deleteMyEventForce', [CalendarProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+    Route::get('programed_in_pavilions', [CalendarProgrammingController::class, 'programed_in_pavilions'])->name('programed_in_pavilions');
+  });
+
+  Route::prefix('operating_rooms')->name('operating_rooms.')->group(function(){
+    Route::get('/', [OperatingRoomController::class, 'index'])->name('index');
+    Route::post('/', [OperatingRoomController::class, 'store'])->name('store');
+    Route::get('/create', [OperatingRoomController::class, 'create'])->name('create');
+    Route::get('/{operatingRoom}', [OperatingRoomController::class, 'show'])->name('show');
+    Route::put('/{operatingRoom}', [OperatingRoomController::class, 'update'])->name('update');
+    Route::delete('/{operatingRoom}', [OperatingRoomController::class, 'destroy'])->name('destroy');
+    Route::get('/{operatingRoom}/edit', [OperatingRoomController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('mother_activities')->name('mother_activities.')->group(function(){
+    Route::get('/', [MotherActivityController::class, 'index'])->name('index');
+    Route::post('/', [MotherActivityController::class, 'store'])->name('store');
+    Route::get('/create', [MotherActivityController::class, 'create'])->name('create');
+    Route::get('/{motherActivity}', [MotherActivityController::class, 'show'])->name('show');
+    Route::put('/{motherActivity}', [MotherActivityController::class, 'update'])->name('update');
+    Route::delete('/{motherActivity}', [MotherActivityController::class, 'destroy'])->name('destroy');
+    Route::get('/{motherActivity}/edit', [MotherActivityController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('services')->name('services.')->group(function(){
+    Route::get('/', [ServiceController::class, 'index'])->name('index');
+    Route::post('/', [ServiceController::class, 'store'])->name('store');
+    Route::get('/create', [ServiceController::class, 'create'])->name('create');
+    Route::get('/{service}', [ServiceController::class, 'show'])->name('show');
+    Route::put('/{service}', [ServiceController::class, 'update'])->name('update');
+    Route::delete('/{service}', [ServiceController::class, 'destroy'])->name('destroy');
+    Route::get('/{service}/edit', [ServiceController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('specialties')->name('specialties.')->group(function(){
+    Route::get('/', [SpecialtyController::class, 'index'])->name('index');
+    Route::post('/', [SpecialtyController::class, 'store'])->name('store');
+    Route::get('/create', [SpecialtyController::class, 'create'])->name('create');
+    Route::get('/{specialty}', [SpecialtyController::class, 'show'])->name('show');
+    Route::put('/{specialty}', [SpecialtyController::class, 'update'])->name('update');
+    Route::delete('/{specialty}', [SpecialtyController::class, 'destroy'])->name('destroy');
+    Route::get('/{specialty}/edit', [SpecialtyController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('professions')->name('professions.')->group(function(){
+    Route::get('/', [ProfessionController::class, 'index'])->name('index');
+    Route::post('/', [ProfessionController::class, 'store'])->name('store');
+    Route::get('/create', [ProfessionController::class, 'create'])->name('create');
+    Route::get('/{profession}', [ProfessionController::class, 'show'])->name('show');
+    Route::put('/{profession}', [ProfessionController::class, 'update'])->name('update');
+    Route::delete('/{profession}', [ProfessionController::class, 'destroy'])->name('destroy');
+    Route::get('/{profession}/edit', [ProfessionController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('cutoffdates')->name('cutoffdates.')->group(function(){
+    Route::get('consolidated_programming', [CutOffDateController::class, 'consolidated_programming'])->name('consolidated_programming');
+    Route::get('savePerformance', [CutOffDateController::class, 'savePerformance'])->name('savePerformance');
+
+    Route::get('/', [CutOffDateController::class, 'index'])->name('index');
+    Route::post('/', [CutOffDateController::class, 'store'])->name('store');
+    Route::get('/create', [CutOffDateController::class, 'create'])->name('create');
+    Route::get('/{cutoffdate}', [CutOffDateController::class, 'show'])->name('show');
+    Route::put('/{cutoffdate}', [CutOffDateController::class, 'update'])->name('update');
+    Route::delete('/{cutoffdate}', [CutOffDateController::class, 'destroy'])->name('destroy');
+    Route::get('/{cutoffdate}/edit', [CutOffDateController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('clone')->name('clone.')->group(function(){
+    Route::get('/', [CloneController::class, 'index'])->name('index');
+    Route::post('/', [CloneController::class, 'store'])->name('store');
+    Route::get('/create', [CloneController::class, 'create'])->name('create');
+    Route::get('/{theoreticalProgramming}', [CloneController::class, 'show'])->name('show');
+    Route::put('/{theoreticalProgramming}', [CloneController::class, 'update'])->name('update');
+    Route::delete('/{theoreticalProgramming}', [CloneController::class, 'destroy'])->name('destroy');
+    Route::get('/{theoreticalProgramming}/edit', [CloneController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('reports')->name('reports.')->group(function(){
+    Route::get('specialty', [OperatingRoomController::class, 'reportSpecialty'])->name('specialty');
+    Route::get('by_profesional', [OperatingRoomController::class, 'reportByProfesional'])->name('by_profesional');
+    Route::get('weekly', [OperatingRoomController::class, 'reportWeekly'])->name('weekly');
+    Route::get('diary', [OperatingRoomController::class, 'reportDiary'])->name('diary');
+    Route::get('report1', [OperatingRoomController::class, 'report1'])->name('report1');
+    Route::get('reportProgramedVsTeoric', [OperatingRoomController::class, 'reportProgramedVsTeoric'])->name('reportProgramedVsTeoric');
+    Route::get('urgency', [OperatingRoomController::class, 'reportUrgency'])->name('urgency');
+    Route::get('reportminsal', [ReportController::class, 'export'])->name('reportminsal');
+    Route::get('reportcut', [ReportController::class, 'exportcut'])->name('reportcut');
+  });
+
 
 });
 
@@ -184,4 +296,4 @@ Route::prefix('dummy')->name('dummy.')->group(function(){
     Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
     Route::view('/agenda', 'agenda')->name('agenda');
     Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
-}); 
+});
