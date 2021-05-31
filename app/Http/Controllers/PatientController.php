@@ -133,7 +133,7 @@ class PatientController extends Controller
 
         try {
             $newPatient = new User($request->all());
-            $newPatient->identifier = 1;
+            // $newPatient->identifier = 1;
             $newPatient->active = 1;
             $newPatient->save();
             $newHumanName = new HumanName($request->all());
