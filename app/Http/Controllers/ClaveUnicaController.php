@@ -9,12 +9,16 @@ use App\Models\User;
 
 class ClaveUnicaController extends Controller
 {
-    public function autenticar(Request $request){
+    public function autenticar(Request $request, $redirect = null){
         /* Primer paso, redireccionar al login de clave única */
         $url_base       = "https://accounts.claveunica.gob.cl/openid/authorize/";
         $client_id      = env("CLAVEUNICA_CLIENT_ID");
         $redirect_uri   = urlencode(env("CLAVEUNICA_CALLBACK"));
-        $state          = csrf_token();
+        /* $redirect tiene que tener formato: 
+            /claveunica/redirect/{ruta-a-redirigir} 
+            NO PUEDE TENER "/" la ruta-a-redirigir 
+        */
+        $state          = csrf_token().$redirect;
         $scope          = 'openid run name';
 
         $params       = '?client_id='.$client_id.
@@ -22,7 +26,7 @@ class ClaveUnicaController extends Controller
                         '&scope='.$scope.
                         '&response_type=code'.
                         '&state='.$state;
-
+                        
         return redirect()->to($url_base.$params)->send();
     }
 
@@ -30,14 +34,21 @@ class ClaveUnicaController extends Controller
         /* Segundo Paso: enviar credenciales de clave única */
         $code   = $request->input('code');
         $state  = $request->input('state');
-        
+        $redirect = null;
+
+        /* Si incluye redirect, el state es más largo que 40 */
+        if(strlen($state) > 40) {
+            $redirect = substr($state, 40);
+            $state    = substr($state, 0, 40);
+        }
+
         /* Validar que el state sea el mismo que le enviamos nosotros */
         if($state == csrf_token()) { 
             $url_base       = "https://accounts.claveunica.gob.cl/openid/token/";
             $client_id      = env("CLAVEUNICA_CLIENT_ID");
             $client_secret  = env("CLAVEUNICA_SECRET_ID");
             $redirect_uri   = urlencode(env("CLAVEUNICA_CALLBACK"));
-    
+
             $response = Http::asForm()->post($url_base, [
                 'client_id' => $client_id,
                 'client_secret' => $client_secret,
@@ -47,11 +58,11 @@ class ClaveUnicaController extends Controller
                 'state' => $state,
             ]);
 
-            return $this->getUserInfo(json_decode($response)->access_token);
+            return $this->getUserInfo(json_decode($response)->access_token, $redirect);
         }
     }
 
-    public function getUserInfo($access_token) {
+    public function getUserInfo($access_token, $redirect = null) {
         /* Tercer Paso, obtener los datos de usuario  */
         $url_base = "https://www.claveunica.gob.cl/openid/userinfo";
         $response = Http::withToken($access_token)->post($url_base);
@@ -87,7 +98,16 @@ class ClaveUnicaController extends Controller
 
         Auth::login($user_local, true);
         
-        return redirect()->route('home');
+        /* Si tiene una redirección o de lo contrario se va al home */
+        if($redirect) {
+            $route = $redirect;
+        }
+        else {
+            $route = 'home';
+        }
+
+        return redirect()->route($route);
+        
             
         /*
         [RolUnico] => stdClass Object
