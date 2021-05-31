@@ -97,7 +97,7 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 });
 
 Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
-    Route::prefix('contact_user')->name('contact_user.')->group(function(){
+    Route::prefix('contact_user')->name('contact_user.')->middleware(['permission:Fq: admin'])->group(function(){
         Route::get('/', [ContactUserController::class, 'index'])->name('index');
         Route::get('/create', [ContactUserController::class, 'create'])->name('create');
         Route::post('/store', [ContactUserController::class, 'store'])->name('store');
@@ -107,16 +107,23 @@ Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
         Route::get('/create', [FqPatientController::class, 'create'])->name('create');
     });
     Route::prefix('request')->name('request.')->group(function(){
-        Route::get('/', [FqRequestController::class, 'index'])->name('index')->middleware(['permission:Fq: Answer request']);
+        Route::get('/', [FqRequestController::class, 'index'])->name('index')
+            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);
         Route::get('/own_index', [FqRequestController::class, 'own_index'])->name('own_index');
         Route::get('/create', [FqRequestController::class, 'create'])->name('create');
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
-        Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')->middleware(['permission:Fq: Answer request']);;
+        Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')
+            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);;
     });
 });
 
 Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('auth')->group(function(){
   Route::prefix('operating_room_programming')->name('operating_room_programming.')->group(function(){
+    Route::post('saveMyEvent', [OperatingRoomProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
+    Route::post('updateMyEvent', [OperatingRoomProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
+    Route::post('deleteMyEvent', [OperatingRoomProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
+    Route::post('deleteMyEventForce', [OperatingRoomProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+
     Route::get('/', [OperatingRoomProgrammingController::class, 'index'])->name('index');
     Route::post('/', [OperatingRoomProgrammingController::class, 'store'])->name('store');
     Route::get('/create', [OperatingRoomProgrammingController::class, 'create'])->name('create');
@@ -124,11 +131,6 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::put('/{patient}', [OperatingRoomProgrammingController::class, 'update'])->name('update');
     Route::delete('/{patient}', [OperatingRoomProgrammingController::class, 'destroy'])->name('destroy');
     Route::get('/{patient}/edit', [OperatingRoomProgrammingController::class, 'edit'])->name('edit');
-
-    Route::get('saveMyEvent', [OperatingRoomProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
-    Route::get('updateMyEvent', [OperatingRoomProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
-    Route::get('deleteMyEvent', [OperatingRoomProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
-    Route::get('deleteMyEventForce', [OperatingRoomProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
   });
 
   Route::prefix('rrhh')->name('rrhh.')->group(function(){
@@ -162,6 +164,11 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
   });
 
   Route::prefix('theoretical_programming')->name('theoretical_programming.')->group(function(){
+    Route::post('saveMyEvent', [TheoreticalProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
+    Route::post('updateMyEvent', [TheoreticalProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
+    Route::post('deleteMyEvent', [TheoreticalProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
+    Route::post('deleteMyEventForce', [TheoreticalProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+
     Route::get('/', [TheoreticalProgrammingController::class, 'index'])->name('index');
     Route::post('/', [TheoreticalProgrammingController::class, 'store'])->name('store');
     Route::get('/create', [TheoreticalProgrammingController::class, 'create'])->name('create');
@@ -169,11 +176,6 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::put('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'update'])->name('update');
     Route::delete('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'destroy'])->name('destroy');
     Route::get('/{theoreticalProgramming}/edit', [TheoreticalProgrammingController::class, 'edit'])->name('edit');
-
-    Route::get('saveMyEvent', [TheoreticalProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
-    Route::get('updateMyEvent', [TheoreticalProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
-    Route::get('deleteMyEvent', [TheoreticalProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
-    Route::get('deleteMyEventForce', [TheoreticalProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
   });
 
   Route::prefix('unscheduled_programming')->name('unscheduled_programming.')->group(function(){
@@ -188,6 +190,11 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
   Route::prefix('calendar_programming')->name('calendar_programming.')->group(function(){
     Route::get('indexbox', [CalendarProgrammingController::class, 'indexbox'])->name('indexbox');
+    Route::post('saveMyEvent', [CalendarProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
+    Route::post('updateMyEvent', [CalendarProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
+    Route::post('deleteMyEvent', [CalendarProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
+    Route::post('deleteMyEventForce', [CalendarProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+    Route::post('programed_in_pavilions', [CalendarProgrammingController::class, 'programed_in_pavilions'])->name('programed_in_pavilions');
 
     Route::get('/', [CalendarProgrammingController::class, 'index'])->name('index');
     Route::post('/', [CalendarProgrammingController::class, 'store'])->name('store');
@@ -196,12 +203,6 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::put('/{calendarProgramming}', [CalendarProgrammingController::class, 'update'])->name('update');
     Route::delete('/{calendarProgramming}', [CalendarProgrammingController::class, 'destroy'])->name('destroy');
     Route::get('/{calendarProgramming}/edit', [CalendarProgrammingController::class, 'edit'])->name('edit');
-
-    Route::get('saveMyEvent', [CalendarProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
-    Route::get('updateMyEvent', [CalendarProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
-    Route::get('deleteMyEvent', [CalendarProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
-    Route::get('deleteMyEventForce', [CalendarProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
-    Route::get('programed_in_pavilions', [CalendarProgrammingController::class, 'programed_in_pavilions'])->name('programed_in_pavilions');
   });
 
   Route::prefix('operating_rooms')->name('operating_rooms.')->group(function(){
@@ -297,6 +298,8 @@ Route::prefix('dummy')->name('dummy.')->group(function(){
     Route::view('/crear_usuario', 'crear_usuario')->name('crear_usuario');
     Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
     Route::view('/agenda', 'agenda')->name('agenda');
+<<<<<<< HEAD
+=======
     Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
 });
 
@@ -305,4 +308,5 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
   Route::post ('/',[MedicalLicenceController::class,'store'])->name('store');
 
 
+>>>>>>> eed03f33f8c8662cf59d48f11e0ce2dca75042d4
 });

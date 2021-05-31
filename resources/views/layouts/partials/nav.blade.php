@@ -47,14 +47,14 @@
             </a>
         </li>
     @else
-      @can('Fq: Answer request')
+      @canany(['Fq: Answer request', 'Fq: Answer request medicines'])
           <li class="nav-item">
               <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.index') }}">
               <span data-feather="plus-circle"></span>
               Solicitudes Pacientes FQ
               </a>
           </li>
-      @endcan
+      @endcanany
     @endif
 
 </ul>
