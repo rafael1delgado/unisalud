@@ -16,9 +16,8 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
-            $table->string('identifier');
+           // $table->foreignId('identifiers_id')->nullable();
             $table->boolean('active');
-            /* FIXED --> FIXME : debe permitir nulos nullable() */
             $table->bigInteger('run')->nullable();
             $table->char('dv');
             $table->enum('gender', ['female', 'male', 'other', 'unknown',
