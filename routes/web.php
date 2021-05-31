@@ -117,6 +117,11 @@ Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
 
 Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('auth')->group(function(){
   Route::prefix('operating_room_programming')->name('operating_room_programming.')->group(function(){
+    Route::post('saveMyEvent', [OperatingRoomProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
+    Route::post('updateMyEvent', [OperatingRoomProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
+    Route::post('deleteMyEvent', [OperatingRoomProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
+    Route::post('deleteMyEventForce', [OperatingRoomProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+
     Route::get('/', [OperatingRoomProgrammingController::class, 'index'])->name('index');
     Route::post('/', [OperatingRoomProgrammingController::class, 'store'])->name('store');
     Route::get('/create', [OperatingRoomProgrammingController::class, 'create'])->name('create');
@@ -124,11 +129,6 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::put('/{patient}', [OperatingRoomProgrammingController::class, 'update'])->name('update');
     Route::delete('/{patient}', [OperatingRoomProgrammingController::class, 'destroy'])->name('destroy');
     Route::get('/{patient}/edit', [OperatingRoomProgrammingController::class, 'edit'])->name('edit');
-
-    Route::get('saveMyEvent', [OperatingRoomProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
-    Route::get('updateMyEvent', [OperatingRoomProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
-    Route::get('deleteMyEvent', [OperatingRoomProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
-    Route::get('deleteMyEventForce', [OperatingRoomProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
   });
 
   Route::prefix('rrhh')->name('rrhh.')->group(function(){
@@ -162,6 +162,11 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
   });
 
   Route::prefix('theoretical_programming')->name('theoretical_programming.')->group(function(){
+    Route::post('saveMyEvent', [TheoreticalProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
+    Route::post('updateMyEvent', [TheoreticalProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
+    Route::post('deleteMyEvent', [TheoreticalProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
+    Route::post('deleteMyEventForce', [TheoreticalProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+
     Route::get('/', [TheoreticalProgrammingController::class, 'index'])->name('index');
     Route::post('/', [TheoreticalProgrammingController::class, 'store'])->name('store');
     Route::get('/create', [TheoreticalProgrammingController::class, 'create'])->name('create');
@@ -169,11 +174,6 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::put('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'update'])->name('update');
     Route::delete('/{theoreticalProgramming}', [TheoreticalProgrammingController::class, 'destroy'])->name('destroy');
     Route::get('/{theoreticalProgramming}/edit', [TheoreticalProgrammingController::class, 'edit'])->name('edit');
-
-    Route::get('saveMyEvent', [TheoreticalProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
-    Route::get('updateMyEvent', [TheoreticalProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
-    Route::get('deleteMyEvent', [TheoreticalProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
-    Route::get('deleteMyEventForce', [TheoreticalProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
   });
 
   Route::prefix('unscheduled_programming')->name('unscheduled_programming.')->group(function(){
@@ -188,6 +188,11 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
   Route::prefix('calendar_programming')->name('calendar_programming.')->group(function(){
     Route::get('indexbox', [CalendarProgrammingController::class, 'indexbox'])->name('indexbox');
+    Route::post('saveMyEvent', [CalendarProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
+    Route::post('updateMyEvent', [CalendarProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
+    Route::post('deleteMyEvent', [CalendarProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
+    Route::post('deleteMyEventForce', [CalendarProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+    Route::post('programed_in_pavilions', [CalendarProgrammingController::class, 'programed_in_pavilions'])->name('programed_in_pavilions');
 
     Route::get('/', [CalendarProgrammingController::class, 'index'])->name('index');
     Route::post('/', [CalendarProgrammingController::class, 'store'])->name('store');
@@ -196,12 +201,6 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::put('/{calendarProgramming}', [CalendarProgrammingController::class, 'update'])->name('update');
     Route::delete('/{calendarProgramming}', [CalendarProgrammingController::class, 'destroy'])->name('destroy');
     Route::get('/{calendarProgramming}/edit', [CalendarProgrammingController::class, 'edit'])->name('edit');
-
-    Route::get('saveMyEvent', [CalendarProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
-    Route::get('updateMyEvent', [CalendarProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
-    Route::get('deleteMyEvent', [CalendarProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
-    Route::get('deleteMyEventForce', [CalendarProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
-    Route::get('programed_in_pavilions', [CalendarProgrammingController::class, 'programed_in_pavilions'])->name('programed_in_pavilions');
   });
 
   Route::prefix('operating_rooms')->name('operating_rooms.')->group(function(){

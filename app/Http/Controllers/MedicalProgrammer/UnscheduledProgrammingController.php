@@ -49,7 +49,6 @@ class UnscheduledProgrammingController extends Controller
      */
     public function store(Request $request)
     {
-
     //obtiene contrato
     $contracts = Contract::where('id',$request->contract_id)->get();
     //obtiene horas teóricas
@@ -84,7 +83,7 @@ class UnscheduledProgrammingController extends Controller
     $cantidad_adicional = $request->assigned_hour;
     $cantidad_contrato = $contracts->first()->weekly_hours;
     if (($cantidad_ingresada + $cantidad_adicional) > $cantidad_contrato) {
-        session()->flash('info', 'Excede la cantidad de horas contratadas.');
+        session()->flash('danger', 'Excede la cantidad de horas contratadas.');
         return redirect()->back();
     }
 
