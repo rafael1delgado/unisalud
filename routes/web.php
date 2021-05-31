@@ -14,6 +14,7 @@ use App\Http\Controllers\Profile\ObservationController;
 
 use App\Http\Controllers\PatientController;
 
+use App\Http\Controllers\Fq\CysticFibrosisRequest;
 use App\Http\Controllers\Fq\ContactUserController;
 use App\Http\Controllers\Fq\FqRequestController;
 
@@ -98,6 +99,7 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 });
 
 Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
+    Route::get('/', [CysticFibrosisRequest::class, 'index'])->name('index');
     Route::prefix('contact_user')->name('contact_user.')->middleware(['permission:Fq: admin'])->group(function(){
         Route::get('/', [ContactUserController::class, 'index'])->name('index');
         Route::get('/create', [ContactUserController::class, 'create'])->name('create');
