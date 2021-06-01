@@ -73,13 +73,13 @@
                 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                     <div class="sidebar-sticky pt-3">
                         @auth
-                        @include('layouts.partials.nav')
+                        @include('fq.partials.nav')
                         @endauth
                     </div>
                 </nav>
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                    @include('layouts.partials.errors')
-                    @include('layouts.partials.flash_message')
+                    @include('fq.partials.errors')
+                    @include('fq.partials.flash_message')
 {{--                    {{ $slot }}--}}
                     <hr>
                     @yield('content')

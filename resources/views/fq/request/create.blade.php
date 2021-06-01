@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('fq.app')
 
 @section('title', 'Nuevo Staff')
 
 @section('content')
 
-@include('fq.partials.nav')
+{{-- @include('fq.partials.nav') --}}
 
 <br>
 

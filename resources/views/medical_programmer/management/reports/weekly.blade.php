@@ -6,7 +6,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form method="post" action="{{ route('medical_programmer.management.report.weekly') }}">
+		<form method="post" action="{{ route('medical_programmer.reports.weekly') }}">
 			@csrf
             <!-- <div class="form-row align-items-center">
                 <div class="col-auto">

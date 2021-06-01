@@ -4,7 +4,7 @@
 
 <h3 class="mb-3">Reporte uso de pabellón por especialidades</h3>
 
-<form class="form-inline" method="post" action="{{ route('medical_programmer.management.report.reportProgramedVsTeoric') }}">
+<form class="form-inline" method="post" action="{{ route('medical_programmer.reports.reportProgramedVsTeoric') }}">
 	@csrf
 	<div class="form-group mr-3">
 		<label for="for_year_week">Semana</label>

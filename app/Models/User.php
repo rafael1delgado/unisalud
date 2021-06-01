@@ -44,6 +44,17 @@ class User extends Authenticatable
         return $this->hasMany(HumanName::class, 'user_id', );
     }
 
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id');
+    }
+
+
+    public function contactPoints()
+    {
+        return $this->hasMany(ContactPoint::class, 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -63,15 +74,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getFirstNameAttribute() {
-        return explode(' ',trim($this->name))[0];
-    }
+//    public function getFirstNameAttribute() {
+//        return explode(' ',trim($this->name))[0];
+//    }
 
     public function getOfficialFullNameAttribute() {
-        return "{$this->officialHumanName()->first()->text} {$this->officialHumanName()->first()->fathers_family} {$this->officialHumanName()->first()->mothers_family}";
+        return "{$this->officialHumanNames()->first()->text} {$this->officialHumanNames()->first()->fathers_family} {$this->officialHumanNames()->first()->mothers_family}";
     }
 
-    public function officialHumanName()
+    public function getOfficialNameAttribute()
+    {
+        return "{$this->officialHumanNames()->first()->text }";
+    }
+
+    public function getOfficialFathersFamilyAttribute()
+    {
+        return "{$this->officialHumanNames()->first()->fathers_family}";
+    }
+
+    public function getOfficialMothersFamilyAttribute()
+    {
+        return "{$this->officialHumanNames()->first()->mothers_family}";
+    }
+
+    public function officialHumanNames()
     {
         return $this->humanNames()->where('use', 'official');
     }

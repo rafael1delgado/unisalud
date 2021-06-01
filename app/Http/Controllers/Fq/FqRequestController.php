@@ -23,14 +23,30 @@ class FqRequestController extends Controller
      */
     public function index()
     {
+        /* Request General */
         $pending_reqs = FqRequest::where('status', 'pending')
+            ->latest()
             ->get();
 
-        $reqs = FqRequest::where('status', 'complete')
-            ->orWhere('status', 'rejected')
+        $reqs = FqRequest::whereIn('status', ['complete', 'rejected'])
+            ->latest()
             ->paginate(15);
+        /* --------------- */
 
-        return view('fq.request.index', compact('pending_reqs', 'reqs'));
+        /* Request Medicines */
+        $pending_reqs_medicines = FqRequest::where('status', 'pending')
+            ->whereIn('name', ['medicines'])
+            ->latest()
+            ->get();
+
+        $reqs_medicines = FqRequest::whereIn('status', ['complete', 'rejected'])
+            ->whereIn('name', ['medicines'])
+            ->latest()
+            ->paginate(15);
+        /* ----------------- */
+
+        return view('fq.request.index', compact('pending_reqs', 'reqs',
+                                                'pending_reqs_medicines', 'reqs_medicines'));
     }
 
     public function own_index()
@@ -38,6 +54,7 @@ class FqRequestController extends Controller
         $contactUser = ContactUser::where('run', Auth::user()->run)->first();
 
         $my_reqs = FqRequest::where('contact_user_id', $contactUser->id)
+            ->latest()
             ->get();
 
         return view('fq.request.own_index', compact('my_reqs'));
@@ -69,7 +86,12 @@ class FqRequestController extends Controller
         $fqRequest->save();
 
         // if (env('APP_ENV') == 'production') {
-            Mail::to(['ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
+            if($fqRequest->name == 'medicines'){
+                Mail::to(['valentina.andradea@redsalud.gob.cl'])->cc(['diego.leyton@redsalud.gob.cl', 'ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
+            }
+            else{
+                Mail::to(['ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
+            }
         // }
 
         session()->flash('success', 'Se ha creado la solicitud exitosamente');
@@ -114,7 +136,18 @@ class FqRequestController extends Controller
         $fqRequest->save();
 
         // if (env('APP_ENV') == 'production') {
-            Mail::to($fqRequest->contactUser->email)->bcc(['mirandal.jorge@gmail.com'])->send(new AnswerNotification($fqRequest));
+            if($fqRequest->name == 'medicines'){
+                Mail::to($fqRequest->contactUser->email)
+                    ->cc(['valentina.andradea@redsalud.gob.cl',
+                          'diego.leyton@redsalud.gob.cl',
+                          'ana.mujica@redsalud.gob.cl'])
+                    ->send(new AnswerNotification($fqRequest));
+            }
+            else{
+                Mail::to($fqRequest->contactUser->email)
+                    ->cc(['ana.mujica@redsalud.gob.cl'])
+                    ->send(new AnswerNotification($fqRequest));
+            }
         // }
 
         session()->flash('success', 'La solicitud fue correctamente atendida.');

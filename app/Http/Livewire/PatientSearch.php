@@ -26,7 +26,7 @@ class PatientSearch extends Component
 //        else $patients = array();
 
         $patients = User::query()
-            ->whereHas('officialHumanName', function ($query) {
+            ->whereHas('humanNames', function ($query) {
                 $query->where('text', 'like', "%$this->searchf");
             })
             ->get();

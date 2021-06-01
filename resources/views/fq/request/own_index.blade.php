@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('fq.app')
 
 @section('title', 'FQ - Mis Solicitudes')
 
 @section('content')
 
-@include('fq.partials.nav')
-
+{{-- @include('fq.partials.nav') --}}
 <br>
 
 <h5>Mis Solicitudes</h5>
@@ -22,18 +21,19 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($my_reqs as $my_req)
+            @foreach($my_reqs as $fqRequest)
             <tr>
-                <td>{{ $my_req->created_at->format('d-m-Y H:i:s') }}</td>
-                <td>{{ $my_req->StatusValue }}</td>
-                <td>{{ $my_req->NameValue }}</td>
-                <td>{{ $my_req->observation_patient }}</td>
+                <td>{{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</td>
+                <td>{{ $fqRequest->StatusValue }}</td>
+                <td>{{ $fqRequest->NameValue }}</td>
+                <td>{{ $fqRequest->observation_patient }}</td>
                 <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $my_req->id }}">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $fqRequest->id }}">
                         <i class="fas fa-edit"></i>
                     </button>
-                    {{--@include('fq.request.modals.view_request')--}}
+
+                    @include('fq.request.modals.view_request')
                 </td>
             </tr>
             @endforeach

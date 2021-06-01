@@ -30,6 +30,8 @@
         </fieldset>
     </div>
 
+    <a href="{{route('patient.edit', $patient->id)}}" class="btn btn-primary">Editar Paciente</a>
+
 
 @endsection
 

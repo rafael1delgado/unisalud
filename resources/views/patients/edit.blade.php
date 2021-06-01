@@ -3,7 +3,7 @@
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Crear nuevo paciente</h1>
+        <h1 class="h2">Editar paciente</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <form method="POST" class="form-horizontal" action="{{ route('patient.store') }}">
+    <form method="POST" class="form-horizontal" action="{{ route('patient.update', $patient->id) }}">
         @csrf
         @method('POST')
 
@@ -40,13 +40,13 @@
                     <fieldset class="form-group col-2">
                         <label for="for_run">Run</label>
                         <input type="text" class="form-control" name="run"
-                               id="for_run" required value=" {{substr(str_shuffle('1234567890'), 0, 8)}} ">
+                               id="for_run" required value="  ">
                     </fieldset>
 
                     <fieldset class="form-group col-1">
                         <label for="for_dv">Dígito verificador</label>
                         <input type="text" class="form-control" name="dv"
-                               id="for_dv" required value="{{substr(str_shuffle('1234567890k'), 0, 1)}}">
+                               id="for_dv" required value="">
                     </fieldset>
                 </div>
 
@@ -55,28 +55,28 @@
                         <label for="for_name">Nombres</label>
                         <input type="text" class="form-control" name="text"
                                id="for_name" required
-                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}">
+                               value="{{ $patient->officialName }}">
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_fathers_family">Apellido Paterno</label>
                         <input type="text" class="form-control" name="fathers_family"
                                id="for_fathers_family" required
-                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}">
+                               value="{{ $patient->officialFathersFamily }}">
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_mothers_family">Apellido Materno</label>
                         <input type="text" class="form-control" name="mothers_family"
                                id="for_mothers_family" required
-                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}">
+                               value="{{ $patient->officialMothersFamily }}">
                     </fieldset>
                 </div>
                 <div class="form-row">
                     <fieldset class="form-group col-2">
                         <label for="for_birthday">Fecha de nacimiento</label>
                         <input type="date" class="form-control" name="birthday"
-                               id="for_birthday" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}">
+                               id="for_birthday" value="{{ $patient->birthday }}">
                     </fieldset>
 
                     <fieldset class="form-group col-2">
@@ -138,7 +138,7 @@
                         <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($maritalStatus as $status)
-                                <option value="{{ $status->id }}">{{ $status->text }}</option>
+                                <option value="{{ $status->id }}" {{$status->id === $patient->cod_con_marital_id ? 'selected' : '' }} >{{ $status->text }}</option>
                             @endforeach
                         </select>
                     </fieldset>
@@ -167,11 +167,11 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-addresses', compact('communes', 'regions', 'countries'))
+        @livewire('user.user-addresses', compact('communes', 'regions', 'countries', 'patient'))
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-contact-points')
+        @livewire('user.user-contact-points', compact('patient'))
 
         <div class="border-bottom mt-3 mb-3"></div>
 

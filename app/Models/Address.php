@@ -24,6 +24,9 @@ class Address extends Model
         'state',
         'postal_code',
         'country',
+        'apartment',
+        'user_id',
+        'suburb',
     ];
 
 }

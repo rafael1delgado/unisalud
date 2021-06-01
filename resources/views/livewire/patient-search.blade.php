@@ -22,7 +22,7 @@
                     <td>{{ ++$key }}</td>
                     <td>
                         <a href="{{ route('patient.show',$patient->id)}}">
-                            {{ "{$patient->officialFullname}"  }}
+                            {{ "{$patient->officialFullName}"  }}
                         </a>
                     </td>
                     <td>{{ $patient->birthday ?? ''}}</td>
