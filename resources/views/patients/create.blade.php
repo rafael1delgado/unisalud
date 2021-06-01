@@ -171,7 +171,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-contacts')
+        @livewire('user.user-contact-points')
 
         <div class="border-bottom mt-3 mb-3"></div>
 

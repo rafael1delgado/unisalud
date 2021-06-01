@@ -14,9 +14,10 @@ class ClaveUnicaController extends Controller
         $url_base       = "https://accounts.claveunica.gob.cl/openid/authorize/";
         $client_id      = env("CLAVEUNICA_CLIENT_ID");
         $redirect_uri   = urlencode(env("CLAVEUNICA_CALLBACK"));
-        /* $redirect tiene que tener formato: 
-            /claveunica/redirect/{ruta-a-redirigir} 
-            NO PUEDE TENER "/" la ruta-a-redirigir 
+
+        /* Si se quiere agregar un $redirect tiene que tener formato: 
+            /claveunica/redirect/{ruta.a.redirigir} 
+            NO PUEDE TENER "/" la ruta.a.redirigir 
         */
         $state          = csrf_token().$redirect;
         $scope          = 'openid run name';
@@ -26,7 +27,7 @@ class ClaveUnicaController extends Controller
                         '&scope='.$scope.
                         '&response_type=code'.
                         '&state='.$state;
-                        
+
         return redirect()->to($url_base.$params)->send();
     }
 

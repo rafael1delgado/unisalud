@@ -13,6 +13,7 @@ class UserAddresses extends Component
     public $regions;
     public $countries;
     public $patient;
+    public $addresses = [];
 
     public function add($i)
     {
@@ -38,12 +39,21 @@ class UserAddresses extends Component
             $this->add(1);
         }
 
-        // // Agrega unidad organizacional al editar
-        // if ($this->signature && $this->signature->signaturesFlowVisator->count() > 0) {
-        //     foreach ($this->inputs as $key => $value) {
-        //         $this->organizationalUnit[$value] = $this->signature->signaturesFlowVisator->slice($key, 1)->first()->ou_id;
-        //     }
-        // }
+        // Agrega address al editar
+        if ($this->patient && $this->patient->addresses()->count() > 0) {
+            foreach ($this->inputs as $key => $value) {
+                $this->addresses[$value]['id'] = $this->patient->addresses->slice($key, 1)->first()->id;
+                $this->addresses[$value]['address_use'] = $this->patient->addresses->slice($key, 1)->first()->use;
+                $this->addresses[$value]['street_name'] = $this->patient->addresses->slice($key, 1)->first()->text;
+                $this->addresses[$value]['line'] = $this->patient->addresses->slice($key, 1)->first()->line;
+                $this->addresses[$value]['address_apartment'] = $this->patient->addresses->slice($key, 1)->first()->apartment;
+                $this->addresses[$value]['suburb'] = $this->patient->addresses->slice($key, 1)->first()->suburb;
+                $this->addresses[$value]['commune'] = $this->patient->addresses->slice($key, 1)->first()->district;
+                $this->addresses[$value]['state'] = $this->patient->addresses->slice($key, 1)->first()->state;
+                $this->addresses[$value]['city'] = $this->patient->addresses->slice($key, 1)->first()->city;
+                $this->addresses[$value]['country'] = $this->patient->addresses->slice($key, 1)->first()->country;
+            }
+        }
         
     }
 
