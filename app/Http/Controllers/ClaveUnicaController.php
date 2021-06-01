@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactPoint;
+use App\Models\HumanName;
+use App\Models\Identifier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
@@ -71,7 +74,11 @@ class ClaveUnicaController extends Controller
         $user_clave_unica = json_decode($response);
 
         /* Registrar los datos del usuario en la BD local */
-        $user_local = User::find($user_clave_unica->RolUnico->numero);
+        // $user_local = User::find($user_clave_unica->RolUnico->numero);
+
+        $user_local = User::query()
+                        ->getByDni($user_clave_unica->RolUnico->numero)
+                        ->first();
 
         if($user_local) {
             /* Actualiza el correo si es que ha cambiado */
@@ -84,17 +91,34 @@ class ClaveUnicaController extends Controller
         } 
         else {
             $user_local = new User();
-            $user_local->id = $user_clave_unica->RolUnico->numero;
-            $user_local->dv = $user_clave_unica->RolUnico->DV;
-            $user_local->name = implode(' ', $user_clave_unica->name->nombres);
-            $user_local->fathers_family = $user_clave_unica->name->apellidos[0];
-            $user_local->mothers_family = $user_clave_unica->name->apellidos[1];
-            if(property_exists($user_clave_unica,'email')) { 
-                $user_local->email = $user_clave_unica->email; 
-            }
+            $user_local->active = 1;
             $user_local->claveunica = true;
-
             $user_local->save();
+
+            $identifier = new Identifier();
+            $identifier->use = 'official';
+            $identifier->cod_con_identifier_type_id = 1; // DNI
+            $identifier->value = $user_clave_unica->RolUnico->numero;
+            $identifier->dv = $user_clave_unica->RolUnico->DV;
+            $identifier->user_id = $user_local->id;
+            $identifier->save();
+
+            $human_name = new HumanName();
+            $human_name->use = 'official';
+            $human_name->text = implode(' ', $user_clave_unica->name->nombres);
+            $human_name->fathers_family = $user_clave_unica->name->apellidos[0];
+            $human_name->mothers_family = $user_clave_unica->name->apellidos[1];
+            $human_name->user_id = $user_local->id;
+            $human_name->save();
+
+            if(property_exists($user_clave_unica,'email')) { 
+                $contact_point = new ContactPoint();
+                $contact_point->system = 'email'; 
+                $contact_point->use = 'home';
+                $contact_point->value = $user_clave_unica->email; 
+                $contact_point->user_id = $user_local->id;
+                $contact_point->save();
+            }
         }
 
         Auth::login($user_local, true);

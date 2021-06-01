@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function humanNames(): HasMany
     {
-        return $this->hasMany(HumanName::class, 'user_id', );
+        return $this->hasMany(HumanName::class, 'user_id',);
     }
 
     public function addresses()
@@ -83,13 +83,14 @@ class User extends Authenticatable
 //        return explode(' ',trim($this->name))[0];
 //    }
 
-    public function getOfficialFullNameAttribute() {
+    public function getOfficialFullNameAttribute()
+    {
         return "{$this->officialHumanNames()->first()->text} {$this->officialHumanNames()->first()->fathers_family} {$this->officialHumanNames()->first()->mothers_family}";
     }
 
     public function getOfficialNameAttribute()
     {
-        return "{$this->officialHumanNames()->first()->text }";
+        return "{$this->officialHumanNames()->first()->text}";
     }
 
     public function getOfficialFathersFamilyAttribute()
@@ -105,6 +106,14 @@ class User extends Authenticatable
     public function officialHumanNames()
     {
         return $this->humanNames()->where('use', 'official');
+    }
+
+    public function scopeGetByDni($query, $dni)
+    {
+        $query->whereHas('identifiers', function ($query) use ($dni) {
+            return $query->where('value', $dni)
+                ->where('cod_con_identifier_type_id', 1);
+        });
     }
 
     //Programador (relaciones)
