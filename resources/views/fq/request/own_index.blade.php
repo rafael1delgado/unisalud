@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('fq.app')
 
 @section('title', 'FQ - Mis Solicitudes')
 
 @section('content')
 
-@include('fq.partials.nav')
-
+{{-- @include('fq.partials.nav') --}}
 <br>
 
 <h5>Mis Solicitudes</h5>
