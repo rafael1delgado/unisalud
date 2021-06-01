@@ -1,14 +1,13 @@
-@extends('layouts.app')
+@extends('fq.app')
 
 @section('title', 'FQ - Mis Solicitudes')
 
 @section('content')
 
-@include('fq.partials.nav')
-
+{{-- @include('fq.partials.nav') --}}
 <br>
 
-<h5>Mis Solicitudes</h5>
+<h5><i class="fas fa-inbox"></i> Mis Solicitudes</h5>
 
 <div class="table-responsive">
     <table class="table table-sm table-striped table-bordered">
@@ -38,6 +37,37 @@
                 </td>
             </tr>
             @endforeach
+        </tbody>
+    </table>
+</div>
+
+<hr>
+
+<h5><i class="fas fa-calendar-alt"></i> Próximas visitas domiciliarias</h5>
+
+<div class="table-responsive">
+    <table class="table table-sm table-striped table-bordered">
+        <thead class="text-center">
+            <tr>
+                <th style="width: 11%">Fecha</th>
+                <th>Estado</th>
+                <th>Motivo de Solicitud</th>
+                <th>observación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>17-05-2021 15:00</td>
+                <td>Copletada</td>
+                <td>Medicamentos</td>
+                <td>Indicación sobre paciente</td>
+            </tr>
+            <tr>
+                <td>07-06-2021 12:00</td>
+                <td>Pendiente</td>
+                <td>Medicamentos</td>
+                <td>Observación sobre paciente</td>
+            </tr>
         </tbody>
     </table>
 </div>

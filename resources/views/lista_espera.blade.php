@@ -52,7 +52,7 @@
                 <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"> <i class="fas fa-edit"></i> </button></td>
             </tr>
             <tr>
-                <td>Adriana Barrientos Oviedo</td>
+                <td>Maria Barrientos </td>
                 <td>12456789-9</td>
                 <td>Salud Mental</td>
                 <td>Tripolaridad</td>
@@ -60,7 +60,7 @@
                 <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"> <i class="fas fa-edit"></i> </button></td>
             </tr>
             <tr>
-                <td>Oscar Zavala Cortéz</td>
+                <td>Oscar Cortéz</td>
                 <td>12456789-9</td>
                 <td>Medicina Intern</td>
                 <td>Mordedura de animal</td>

@@ -121,17 +121,17 @@ class User extends Authenticatable
     }
 
     public function specialties() {
-        return $this->belongsToMany('App\Models\MedicalProgrammer\Specialty', 'hm_user_specialties')
+        return $this->belongsToMany('App\Models\MedicalProgrammer\Specialty', 'mp_user_specialties')
             ->wherePivot('deleted_at', null);
     }
 
     public function professions() {
-        return $this->belongsToMany('App\Models\MedicalProgrammer\Profession', 'hm_user_professions')
+        return $this->belongsToMany('App\Models\MedicalProgrammer\Profession', 'mp_user_professions')
             ->wherePivot('deleted_at', null);
     }
 
     public function services() {
-        return $this->belongsToMany('App\Models\MedicalProgrammer\Service', 'hm_user_services')
+        return $this->belongsToMany('App\Models\MedicalProgrammer\Service', 'mp_user_services')
             ->wherePivot('deleted_at', null);
     }
 

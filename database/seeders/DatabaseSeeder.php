@@ -15,14 +15,31 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            UserSeeder::class,
             PermissionSeeder::class,
+            UserSeeder::class,
             CodConIdentifiersTypesSeeder::class,
            // IdentifierTypeSeeder::class,
             CountrySeeder::class,
             RegionSeeder::class,
             CodConMaritalSeeder::class,
             CommuneSeeder::class,
+
+
+            // // HmRrhhTableSeeder::class,
+            // HmMotherActivityTableSeeder::class,
+            // HmActivityTypesTableSeeder::class,
+            // HmActivitiesTableSeeder::class,
+            // HmSpecialtiesTableSeeder::class,
+            // HmSpecialtyActivitiesTableSeeder::class,
+            // HmProfessionsTableSeeder::class,
+            // // HmProfessionActivitiesTableSeeder::class,
+            // HmOperatingRoomsTableSeeder::class,
+            // HmContractsTableSeeder::class,
+            // // HmUnscheduledProgrammingTableSeeder::class,
+            // HmUserSpecialtiesTableSeeder::class,
+            // HmUserProfessionsTableSeeder::class,
+            // // HmTheoreticalProgrammingTableSeeder::class,
+            // HmOperatingRoomProgrammingTableSeeder::class,
         ]);
     }
 }

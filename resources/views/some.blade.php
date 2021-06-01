@@ -182,8 +182,8 @@
     	<div class="form-group col-md-6">
       			<label for="inputPassword4">Profesional</label>
       			<select id="inputState" class="form-control">
-        			<option selected>Dr Oscar Zavala</option>
-        			<option>Dr Toby Cerdo</option>
+        			<option selected>Dr Mauricio Soto</option>
+        			<option>Dr Rafael Campos</option>
      			 </select>
     	</div>
 		<div class="form-group col-md-2">

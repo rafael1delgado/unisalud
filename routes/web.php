@@ -98,8 +98,9 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
 
-Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
+Route::prefix('fq')->as('fq.')->group(function(){
     Route::get('/', [CysticFibrosisRequest::class, 'index'])->name('index');
+    Route::get('/home', [CysticFibrosisRequest::class, 'home'])->name('home');
     Route::prefix('contact_user')->name('contact_user.')->middleware(['permission:Fq: admin'])->group(function(){
         Route::get('/', [ContactUserController::class, 'index'])->name('index');
         Route::get('/create', [ContactUserController::class, 'create'])->name('create');

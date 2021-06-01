@@ -34,6 +34,24 @@ class UserSeeder extends Seeder
         $humanName->user_id = $user->id;
         $humanName->save();
 
-//        $user->givePermissionTo(Permission::all());
+        $user = new User();
+        $user->id = 17430005;
+        $user->active = 1;
+        $user->run = 17430005;
+        $user->dv = '4';
+        $user->claveunica = 1;
+        $user->birthday = now();
+        $user->gender = 'other';
+        $user->save();
+
+        $humanName = new HumanName();
+        $humanName->use = 'official';
+        $humanName->text = 'Administrador';
+        $humanName->fathers_family = 'Programador';
+        $humanName->mothers_family = 'Médico';
+        $humanName->user_id = $user->id;
+        $humanName->save();
+
+        // $user->givePermissionTo(Permission::all());
     }
 }

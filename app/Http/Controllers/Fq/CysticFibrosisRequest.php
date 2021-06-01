@@ -11,4 +11,11 @@ class CysticFibrosisRequest extends Controller
     {
         return view('fq.welcome');
     }
+
+    public function home()
+    {
+        return view('fq.home');
+    }
+
+
 }
