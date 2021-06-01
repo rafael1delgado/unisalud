@@ -20,7 +20,7 @@ class CreateCodConIdentifiersTypesTable extends Migration
             $table->string('text')->nullable();;
 
             $table->foreign('cod_con_identifiers_types_id')->references('id')->on('cod_con_identifiers_types');
-            $table->foreign('coding_id')->references('id')->on('coding');
+            $table->foreign('coding_id')->references('id')->on('codings');
             $table->timestamps();
         });
     }

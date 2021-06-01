@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCodConMaritalTable extends Migration
+class CreateCodConLanguajesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateCodConMaritalTable extends Migration
      */
     public function up()
     {
-        Schema::create('cod_con_maritals', function (Blueprint $table) {
+        Schema::create('cod_con_languajes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cod_con_marital_id')->nullable();
+            $table->foreignId('cod_con_languaje_id')->nullable();
             $table->foreignId('coding_id')->nullable();
             $table->string('text');
 
-            $table->foreign('cod_con_marital_id')->references('id')->on('cod_con_maritals');
-            $table->foreign('coding_id')->references('id')->on('coding');
-            $table->timestamps();
+            $table->foreign('cod_con_languaje_id')->references('id')->on('cod_con_languajes');
+            $table->foreign('coding_id')->references('id')->on('codings');
         });
     }
 
@@ -32,6 +31,6 @@ class CreateCodConMaritalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cod_con_maritals');
+        Schema::dropIfExists('cod_con_languaje');
     }
 }
