@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCodConLocationTable extends Migration
+class CreateCodConLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCodConLocationTable extends Migration
      */
     public function up()
     {
-        Schema::create('cod_con_location', function (Blueprint $table) {
+        Schema::create('cod_con_locations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cod_con_location_id')->nullable();
             $table->foreignId('coding_id')->nullable();
@@ -21,9 +21,9 @@ class CreateCodConLocationTable extends Migration
 
             $table->string('text');
 
-            $table->foreign('cod_con_location_id')->references('id')->on('cod_con_location');
-            $table->foreign('location_id')->references('id')->on('location');
-            $table->foreign('coding_id')->references('id')->on('coding');
+            $table->foreign('cod_con_location_id')->references('id')->on('cod_con_locations');
+            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('coding_id')->references('id')->on('codings');
         });
     }
 
