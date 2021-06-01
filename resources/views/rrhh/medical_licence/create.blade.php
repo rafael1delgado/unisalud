@@ -21,15 +21,15 @@
 
     <div class="form-group col-md-5">
        <label for="tipo_licencia" >TIPO LICENCIA</label>
-        <select id="inputState" class="form-control" name="tipo_licencia">
+        <select id="tipo_licencia" class="form-control" name="tipo_licencia">
             <option selected>Seleccione tipo</option>
-            <option value ="Enfermedad o accidente común">Enfermedad o accidente común</option>
-            <option value ="Prorroga medicina preventiva">Prorroga medicina preventiva</option>
-            <option value ="Licencia meternal pre y post natal">Licencia meternal pre y post natal</option>
-            <option value ="Enfermedad grave niño menorde 1 año<">Enfermedad grave niño menorde 1 año</option>
-            <option value ="Accidente del trabajo o del trayecto">Accidente del trabajo o del trayecto</option>
-            <option value ="Enfermedad profesional">Enfermedad profesional</option>
-            <option value ="Patología del embarazo">Patología del embarazo</option>
+            <option value ="1">Enfermedad o accidente común</option>
+            <option value ="2">Prorroga medicina preventiva</option>
+            <option value ="3">Licencia meternal pre y post natal</option>
+            <option value ="4">Enfermedad grave niño menorde 1 año</option>
+            <option value ="5">Accidente del trabajo o del trayecto</option>
+            <option value ="6">Enfermedad profesional</option>
+            <option value ="7">Patología del embarazo</option>
         </select>
     </div>
 
@@ -38,26 +38,37 @@
 
 <div class="form-row">
     <h5 class="card-title col-md-12">CARACTERISTICAS DEL REPOSO</h5>
-    <div class="form-group col-md-5">
+    <div class="form-group col-md-3">
        <label for="tipo_reposo">TIPO DE REPOSO</label>
-        <select id="inputState" class="form-control" name="tipo_reposo">
+        <select id="tipo_reposo" class="form-control" name="tipo_reposo">
             <option selected>Seleccione tipo</option>
-            <option value ="Reposo laboral Total">Reposo laboral Total</option>
-            <option value ="Prorroga laboral Parcial">Prorroga laboral Parcial</option>
+            <option value ="1">Reposo laboral Total</option>
+            <option value ="2">Reposo laboral Parcial</option>
         </select>
     </div>
-
-    <div class="form-group col-md-5">
-       <label for="lugar_reposo">LUGAR DE REPOSO</label>
-        <select id="inputState" class="form-control" name="lugar_reposo">
+        <!--div oculta-->
+        <div class="form-group col-md-3" id="reposo_parcial">
+        <label>REPOSO PARCIAL</label>
+        <select id="reposo_parcial" class="form-control" name="reposo_parcial">
             <option selected>Seleccione tipo</option>
-            <option value ="Domicilio">Domicilio</option>
-            <option value ="Hospital">Hospital</option>
-            <option value ="Otro">Otro</option>
+            <option value ="1">Mañana</option>
+            <option value ="2">Tarde </option>
+            <option value ="3">Noche</option>
         </select>
     </div>
+     <!-- fin div oculta-->
 
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-3">
+       <label>LUGAR DE REPOSO</label>
+        <select id="lugar_reposo" class="form-control" name="lugar_reposo" >
+            <option selected>Seleccione tipo</option>
+            <option value ="1">Domicilio</option>
+            <option value ="2">Hospital</option>
+            <option value ="3">Otro</option>
+        </select>
+    </div>
+ 
+    <div class="form-group col-md-3">
         <label for="">&nbsp;</label>
         <button type="submit" class="btn btn-primary form-control">Guardar</button>
     </div>
@@ -93,8 +104,36 @@
 </table>
 <!--fin-->
 
+
+
 @endsection
 
 @section('custom_js')
 
+<!---jquery ocultar elemento-->
+
+<script type="text/javascript">
+    $("#reposo_parcial").hide();
+
+    jQuery('select[name=tipo_reposo]').change(function(){
+        //var fieldsetName = $(this).val();
+        switch(this.value){
+            case "1":
+                $("#reposo_parcial").hide();
+                break;
+            case "2":
+                $("#reposo_parcial").show();
+                break;
+
+        }
+    });
+</script>
+<!--- fin jquery ocultar elemento-->
 @endsection
+
+
+
+
+
+
+
