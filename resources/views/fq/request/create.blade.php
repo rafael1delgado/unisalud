@@ -101,7 +101,15 @@
                 <option value="home hospitalization">Contacto con hospitalización domiciliaria</option>
             </select>
         </fieldset>
-        <fieldset class="form-group col-sm-9">
+
+        <fieldset class="form-group col-3">
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Receta</label>
+              <input class="form-control" type="file" id="formFile">
+            </div>
+        </fieldset>
+
+        <fieldset class="form-group col-sm-6">
             <label for="for_observation_patient">Observación</label>
             <input type="text" class="form-control" name="observation_patient" id="for_observation_patient">
         </fieldset>

@@ -50,6 +50,9 @@
 
 <ul class="nav flex-column">
     <li class="nav-item border-top">
+        <a class="nav-link" href="">
+            <i class="fas fa-user"></i> {{ Auth::user()->OfficialFullName }}
+        </a>
         <a class="nav-link" href="{{ route('claveunica.logout') }}">
             <i class="fas fa-sign-out-alt"></i> Cerrar sesión
         </a>
