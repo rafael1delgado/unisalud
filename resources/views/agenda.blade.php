@@ -176,6 +176,96 @@
                 end: '2021-05-28T12:45:00',
                 color: 'gray',
                 },
+                {
+                title: 'Control',
+                start: '2021-05-31T08:00:00',
+                end: '2021-05-31T12:00:00'
+                },
+                {
+                
+                title: 'Almuerzo',
+                start: '2021-05-31T12:00:00',
+                end: '2021-05-31T12:45:00',
+                color: 'gray',
+                
+               
+                },
+
+                {
+                
+                title: 'Nueva',
+                start: '2021-05-31T12:45:00',
+                end: '2021-05-31T16:30:00',
+                color: 'yellow',
+                textColor:'black'
+                },
+                {
+               
+                title: 'Pabellon',
+                start: '2021-06-01T08:00:00',
+                end: '2021-06-01T14:00:00',
+                color: 'pink',
+                textColor:'black'
+                },
+                
+                {
+                title: 'Control',
+                start: '2021-06-02T08:00:00',
+                end: '2021-06-02T12:00:00'
+                },
+                {
+                
+                title: 'Almuerzo',
+                start: '2021-06-02T12:00:00',
+                end: '2021-06-02T12:45:00',
+                color: 'gray',
+                },
+                {
+                title: 'Nueva',
+                start: '2021-06-02T12:45:00',
+                end: '2021-06-02T16:30:00',
+                color: 'yellow',
+                textColor:'black'
+                },
+                {
+                title: 'Reunión',
+                start: '2021-06-03T08:00:00',
+                end: '2021-06-03T09:00:00',
+                color: 'purple',
+                },
+                {
+                title: 'Otras Actividades',
+                start: '2021-06-03T09:00:00',
+                end: '2021-06-03T12:00:00',
+                color: 'orange',
+                textColor:'black'
+                },
+                {
+                
+                title: 'Almuerzo',
+                start: '2021-06-03T12:00:00',
+                end: '2021-06-03T12:45:00',
+                color: 'gray',
+                },
+                {
+                title: 'Control',
+                start: '2021-06-03T12:45:00',
+                end: '2021-06-03T16:30:00'
+                },
+                {
+                title: 'Control',
+                start: '2021-06-04T08:00:00',
+                end: '2021-06-04T12:00:00'
+                },
+                {
+                
+                title: 'Almuerzo',
+                start: '2021-06-04T12:00:00',
+                end: '2021-06-04T12:45:00',
+                color: 'gray',
+                },
+                
+
                
             ]
         });

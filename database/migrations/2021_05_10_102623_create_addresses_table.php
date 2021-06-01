@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAddressTable extends Migration
+class CreateAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -34,7 +34,7 @@ class CreateAddressTable extends Migration
             $table->timestamps();
 
             $table->foreign('address_id')->references('id')->on('addresses');
-            $table->foreign('period_id')->references('id')->on('period');
+            $table->foreign('period_id')->references('id')->on('periods');
             $table->foreign('user_id')->references('id')->on('users');
 
         });

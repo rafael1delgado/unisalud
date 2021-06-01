@@ -24,7 +24,7 @@ class CreateHoursOfOperationTable extends Migration
             $table->time('closingTime')->nullable();
 
             $table->foreign('hours_of_operation_id')->references('id')->on('hours_of_operation');
-            $table->foreign('location_id')->references('id')->on('location');
+            $table->foreign('location_id')->references('id')->on('locations');
 
         });
     }

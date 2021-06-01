@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateParticipantTable extends Migration
+class CreateParticipantsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateParticipantTable extends Migration
      */
     public function up()
     {
-        Schema::create('participant', function (Blueprint $table) {
+        Schema::create('participants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('participant_id')->nullable();
             $table->foreignId('appointment_id')->nullable();
@@ -28,9 +28,9 @@ class CreateParticipantTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('participant_id')->references('id')->on('participant');
-            $table->foreign('period_id')->references('id')->on('period');
-            $table->foreign('appointment_id')->references('id')->on('appointment');
+            $table->foreign('participant_id')->references('id')->on('participants');
+            $table->foreign('period_id')->references('id')->on('periods');
+            $table->foreign('appointment_id')->references('id')->on('appointments');
 
         });
     }

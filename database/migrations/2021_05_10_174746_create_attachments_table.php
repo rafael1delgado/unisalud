@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttachmentTable extends Migration
+class CreateAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAttachmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('attachment', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attachment_id')->nullable();
             $table->foreignId('user_id')->nullable();
@@ -28,7 +28,7 @@ class CreateAttachmentTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('attachment_id')->references('id')->on('attachment');
+            $table->foreign('attachment_id')->references('id')->on('attachments');
             $table->foreign('user_id')->references('id')->on('users');  
 
         });

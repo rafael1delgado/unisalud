@@ -14,6 +14,7 @@ use App\Http\Controllers\Profile\ObservationController;
 
 use App\Http\Controllers\PatientController;
 
+use App\Http\Controllers\Fq\CysticFibrosisRequest;
 use App\Http\Controllers\Fq\ContactUserController;
 use App\Http\Controllers\Fq\FqRequestController;
 
@@ -57,6 +58,7 @@ Route::get('/', function () {
 //Auth::routes();
 
 Route::get('/claveunica', [ClaveUnicaController::class,'autenticar'])->name('claveunica');
+Route::get('/claveunica/redirect/{redirect}', [ClaveUnicaController::class,'autenticar'])->name('claveunica.redirect');
 Route::get('/claveunica/callback', [ClaveUnicaController::class,'callback']);
 Route::get('/claveunica/callback-testing', [ClaveUnicaController::class,'callback']);
 Route::get('/claveunica/logout', [ClaveUnicaController::class,'logout'])->name('claveunica.logout');
@@ -91,12 +93,14 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::post('/', [PatientController::class, 'store'])->name('store');
     Route::get('/create', [PatientController::class, 'create'])->name('create');
     Route::get('/{patient}', [PatientController::class, 'show'])->name('show');
-    Route::put('/{patient}', [PatientController::class, 'update'])->name('update');
+    Route::post('/{patient}', [PatientController::class, 'update'])->name('update');
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
     Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
 
-Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
+Route::prefix('fq')->as('fq.')->group(function(){
+    Route::get('/', [CysticFibrosisRequest::class, 'index'])->name('index');
+    Route::get('/home', [CysticFibrosisRequest::class, 'home'])->name('home');
     Route::prefix('contact_user')->name('contact_user.')->middleware(['permission:Fq: admin'])->group(function(){
         Route::get('/', [ContactUserController::class, 'index'])->name('index');
         Route::get('/create', [ContactUserController::class, 'create'])->name('create');

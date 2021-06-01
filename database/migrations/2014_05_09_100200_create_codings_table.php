@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCodingTable extends Migration
+class CreateCodingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCodingTable extends Migration
      */
     public function up()
     {
-        Schema::create('coding', function (Blueprint $table) {
+        Schema::create('codings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('coding_id')->nullable();
             $table->string('system')->nullable();
@@ -23,7 +23,7 @@ class CreateCodingTable extends Migration
             $table->boolean('userSelected')->nullable();
 
             $table->timestamps();
-            $table->foreign('coding_id')->references('id')->on('coding');
+            $table->foreign('coding_id')->references('id')->on('codings');
 
         });
     }

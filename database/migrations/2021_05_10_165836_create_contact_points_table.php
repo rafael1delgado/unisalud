@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContactPointTable extends Migration
+class CreateContactPointsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -28,8 +28,8 @@ class CreateContactPointTable extends Migration
 
             $table->foreign('contact_point_id')->references('id')->on('contact_points');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('emergency_contact_id')->references('id')->on('emergency_contact');
-            $table->foreign('location_id')->references('id')->on('location');
+            $table->foreign('emergency_contact_id')->references('id')->on('emergency_contacts');
+            $table->foreign('location_id')->references('id')->on('locations');
 
         });
     }

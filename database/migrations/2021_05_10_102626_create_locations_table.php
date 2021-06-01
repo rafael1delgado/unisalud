@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocationTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLocationTable extends Migration
      */
     public function up()
     {
-        Schema::create('location', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('location_id')->nullable();
             $table->enum('status', ['active', 'suspended', 'inactive',
@@ -34,11 +34,11 @@ class CreateLocationTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('location_id')->references('id')->on('location');
-            $table->foreign('coding_id')->references('id')->on('coding');
+            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('coding_id')->references('id')->on('codings');
             $table->foreign('address_id')->references('id')->on('addresses');
-            $table->foreign('cod_con_physical_type_id')->references('id')->on('cod_con_physical_type');
-            $table->foreign('cod_con_organization_id')->references('id')->on('cod_con_organization');
+            $table->foreign('cod_con_physical_type_id')->references('id')->on('cod_con_physical_types');
+            $table->foreign('cod_con_organization_id')->references('id')->on('cod_con_organizations');
 
         });
     }
