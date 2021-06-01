@@ -3,7 +3,7 @@
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Crear nuevo paciente</h1>
+        <h1 class="h2">Editar paciente</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <form method="POST" class="form-horizontal" action="{{ route('patient.store') }}">
+    <form method="POST" class="form-horizontal" action="{{ route('patient.update', $patient->id) }}">
         @csrf
         @method('POST')
 
@@ -171,7 +171,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-contacts')
+        @livewire('user.user-contact-points', compact('patient'))
 
         <div class="border-bottom mt-3 mb-3"></div>
 
