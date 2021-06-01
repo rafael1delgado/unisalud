@@ -27,7 +27,6 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
-        'run',
         'dv',
         'gender',
         'birthday',
@@ -53,6 +52,12 @@ class User extends Authenticatable
     public function contactPoints()
     {
         return $this->hasMany(ContactPoint::class, 'user_id');
+    }
+
+
+    public function identifiers()
+    {
+        return $this->hasMany(Identifier::class, 'user_id');
     }
 
     /**

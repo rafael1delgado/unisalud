@@ -25,7 +25,6 @@ class UserContactPoints extends Component
 
     public function mount()
     {
-
         //Agrega inputs según cantidad de contactPoints que tenga
         if ($this->patient && $this->patient->contactPoints()->count() > 0) {
             for ($i = 0; $i < $this->patient->contactPoints()->count(); $i++) {

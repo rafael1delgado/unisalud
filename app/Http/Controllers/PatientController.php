@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\CodConIdentifierType;
 use App\Models\CodConMarital;
 use App\Models\Commune;
 use App\Models\ContactPoint;
 use App\Models\Country;
 use App\Models\HumanName;
+use App\Models\Identifier;
 use App\Models\Region;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
@@ -116,7 +118,8 @@ class PatientController extends Controller
         $countries = Country::all();
         $communes = Commune::all();
         $regions = Region::all();
-        return view('patients.create', compact('maritalStatus', 'countries', 'communes', 'regions'));
+        $identifierTypes = CodConIdentifierType::all();
+        return view('patients.create', compact('maritalStatus', 'countries', 'communes', 'regions', 'identifierTypes'));
     }
 
 
@@ -132,41 +135,52 @@ class PatientController extends Controller
         DB::beginTransaction();
 
         try {
-            $patient = new User($request->all());
-            // $patient->identifier = 1;
-            $patient->active = 1;
-            $patient->save();
+            $newPatient = new User($request->all());
+            $newPatient->active = 1;
+            $newPatient->save();
             $newHumanName = new HumanName($request->all());
             $newHumanName->use = 'official';
-            $newHumanName->user_id = $patient->id;
+            $newHumanName->user_id = $newPatient->id;
             $newHumanName->save();
 
-            if ($request->has('address_type')) {
-                foreach ($request->address_type as $key => $address_type) {
-                    $address = new Address();
-                    $address->user_id = $patient->id;
-                    $address->use = $request->address_type[$key];
-                    $address->type = 'physical';
-                    $address->text = $request->street_name[$key];
-                    $address->line = $request->line[$key];
-                    $address->apartment = $request->address_apartment[$key];
-                    $address->suburb = $request->poblacion[$key];
-                    $address->city = $request->city[$key];
-                    $address->district = $request->district[$key];
-                    $address->state = $request->state[$key];
-                    $address->country = $request->country[$key];
-                    $address->save();
+            if($request->has('id_type')){
+                foreach ($request->id_type as $key => $id_type) {
+                    $newIdentifier = new Identifier();
+                    $newIdentifier->user_id = $newPatient->id;
+                    $newIdentifier->use = $request->id_use[$key];
+                    $newIdentifier->cod_con_identifier_type_id = $request->id_type[$key];
+                    $newIdentifier->value = $request->id_value[$key];
+                    $newIdentifier->dv = $request->id_dv[$key];
+                    $newIdentifier->save();
+                }
+            }
+
+            if ($request->has('address_use')) {
+                foreach ($request->address_use as $key => $address_type) {
+                    $newAddress = new Address();
+                    $newAddress->user_id = $newPatient->id;
+                    $newAddress->use = $request->address_type[$key];
+                    $newAddress->type = 'physical';
+                    $newAddress->text = $request->street_name[$key];
+                    $newAddress->line = $request->line[$key];
+                    $newAddress->apartment = $request->address_apartment[$key];
+                    $newAddress->suburb = $request->suburb[$key];
+                    $newAddress->city = $request->city[$key];
+                    $newAddress->district = $request->district[$key];
+                    $newAddress->state = $request->state[$key];
+                    $newAddress->country = $request->country[$key];
+                    $newAddress->save();
                 }
             }
 
             if ($request->has('contact_system')) {
                 foreach ($request->contact_system as $key => $contact_system) {
-                    $contactPoint = new ContactPoint();
-                    $contactPoint->system = $request->contact_system[$key];
-                    $contactPoint->user_id = $patient->id;
-                    $contactPoint->value = $request->contact_value[$key];
-                    $contactPoint->use = $request->contact_use[$key];
-                    $contactPoint->save();
+                    $newContactPoint = new ContactPoint();
+                    $newContactPoint->system = $request->contact_system[$key];
+                    $newContactPoint->user_id = $newPatient->id;
+                    $newContactPoint->value = $request->contact_value[$key];
+                    $newContactPoint->use = $request->contact_use[$key];
+                    $newContactPoint->save();
                 }
             }
 
@@ -439,7 +453,8 @@ class PatientController extends Controller
         $countries = Country::all();
         $communes = Commune::all();
         $regions = Region::all();
-        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus'));
+        $identifierTypes = CodConIdentifierType::all();
+        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes'));
     }
 
     /**

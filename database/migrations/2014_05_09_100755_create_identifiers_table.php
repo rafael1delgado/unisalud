@@ -18,16 +18,17 @@ class CreateIdentifiersTable extends Migration
             $table->foreignId('identifiers_id')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->enum('use', ['usual', 'official', 'temp', 'secondary', 'old'])->nullable();
-            $table->foreignId('cod_con_identifiers_types_id')->nullable();
+            $table->foreignId('cod_con_identifier_type_id')->nullable();
             $table->string('system')->nullable();
             $table->string('value')->nullable();
+            $table->string('dv')->nullable();
             $table->foreignId('period_id')->nullable();
             $table->string('organization')->nullable(); //organization that issued id
             $table->timestamps();
 
             $table->foreign('identifiers_id')->references('id')->on('identifiers');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('cod_con_identifiers_types_id')->references('id')->on('cod_con_identifiers_types');
+            $table->foreign('cod_con_identifier_type_id')->references('id')->on('cod_con_identifier_types');
         
         });
     }

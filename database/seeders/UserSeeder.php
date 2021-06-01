@@ -21,8 +21,6 @@ class UserSeeder extends Seeder
         $user = new User();
         $user->id = 12345678;
         $user->active = 1;
-        $user->run = 12345678;
-        $user->dv = '9';
         $user->claveunica = 1;
         $user->birthday = now();
         $user->gender = 'other';
