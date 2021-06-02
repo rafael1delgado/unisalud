@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\User;
 
 use Livewire\Component;
+use App\Models\Commune;
 
 class UserAddresses extends Component
 {
@@ -19,12 +20,23 @@ class UserAddresses extends Component
     {
         $i = $i + 1;
         $this->i = $i;
-        array_push($this->inputs ,$i);
+        array_push($this->inputs, $i);
     }
 
     public function remove($i)
     {
         unset($this->inputs[$i]);
+    }
+
+    /**
+     * Obtiene comunas cuando se selecciona región
+     */
+    public function getCommunes($value)
+    {
+
+        $this->communes = Commune::query()
+            ->where('region_id', $this->addresses[$value]['state'])
+            ->get();
     }
 
     public function mount()
@@ -34,8 +46,7 @@ class UserAddresses extends Component
             for ($i = 0; $i < $this->patient->addresses()->count(); $i++) {
                 $this->add($i);
             }
-        }
-        else {
+        } else {
             $this->add(1);
         }
 
@@ -54,7 +65,6 @@ class UserAddresses extends Component
                 $this->addresses[$value]['country'] = $this->patient->addresses->slice($key, 1)->first()->country;
             }
         }
-        
     }
 
     public function render()

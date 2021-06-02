@@ -60,14 +60,14 @@
                 <div class="form-row">
                     <fieldset class="form-group col-2">
                         <label for="for_birthday">Fecha de nacimiento</label>
-                        <input type="date" class="form-control" name="birthday"
+                        <input type="date" class="form-control" name="birthday" required
                                {{-- id="for_birthday" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}" --}}
                                >
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_gender">Sexo</label>
-                        <select name="gender" id="for_gender" class="form-control">
+                        <select name="gender" id="for_gender" class="form-control" required>
                             <option value=""></option>
                             <option value="male">Masculino</option>
                             <option value="female">Femenino</option>
@@ -77,8 +77,8 @@
                     </fieldset>
 
                     <fieldset class="form-group col-2">
-                        <label for="for_gender_identity">Identidad de Genero</label>
-                        <select name="gender_identity" id="for_gender_identity" class="form-control">
+                        <label for="for_gender_identity">Identidad de Género</label>
+                        <select name="gender_identity" id="for_gender_identity" class="form-control" required>
                             <option value=""></option>
                             <option value="male">Masculino</option>
                             <option value="female">Femenino</option>
@@ -101,7 +101,7 @@
                 <div class="form-row">
                     <fieldset class="form-group col-2">
                         <label for="for_nacionality">Nacionalidad</label>
-                        <select name="nacionality" id="for_nacionality" class="form-control">
+                        <select name="nacionality" id="for_nacionality" class="form-control" required>
                             <option value=""></option>
                             @foreach($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -156,7 +156,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-addresses', compact('communes', 'regions', 'countries'))
+        @livewire('user.user-addresses', compact('regions', 'countries'))
 
         <div class="border-bottom mt-3 mb-3"></div>
 
