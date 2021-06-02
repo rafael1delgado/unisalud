@@ -16,17 +16,9 @@ class CreateFqContactUsersTable extends Migration
         Schema::create('fq_contact_users', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedInteger('run')->unique();
-            $table->char('dv',1);
-            $table->string('name');
-            $table->string('fathers_family');
-            $table->string('mothers_family')->nullable();
+            $table->foreignId('user_id')->nullable();
 
-            $table->string('email');
-            $table->string('telephone')->nullable();
-            $table->string('telephone2')->nullable();
-            $table->string('commune');
-            $table->string('address');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
             $table->softDeletes();

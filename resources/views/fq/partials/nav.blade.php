@@ -38,12 +38,14 @@
                     <i class="fas fa-inbox"></i> Solicitudes Pacientes FQ
                 </a>
             </li>
+        @endcanany
+        @can('Fq: admin')
             <li class="nav-item">
                 <a class="nav-link {{ active('fq.contact_user.create') }}" href="{{ route('fq.contact_user.create') }}">
                     <i class="fas fa-user-plus"></i> Crear contacto
                 </a>
             </li>
-        @endcanany
+        @endcan
     @endif
 
 </ul>
