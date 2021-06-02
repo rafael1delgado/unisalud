@@ -9,7 +9,7 @@
             <div class="form-row">
                 <fieldset class="form-group col-2">
                     <label for="for_id_type">Tipo de identificación</label>
-                    <select name="id_type[]" class="form-control" wire:model='identifiers.{{$value}}.id_type'>
+                    <select name="id_type[]" class="form-control" wire:model='identifiers.{{$value}}.id_type' required>
                         @foreach($identifierTypes as $identifierType)
                         <option value="{{ $identifierType->id }}">{{ $identifierType->text }}</option>
                         @endforeach
@@ -25,7 +25,7 @@
 
                 <fieldset class=" form-group col-1">
                     <label for="for_id_dv">Dígito verificador</label>
-                    <input type="text" class="form-control" name="id_dv[]" wire:model='identifiers.{{$value}}.dv' required
+                    <input type="text" class="form-control" name="id_dv[]" wire:model='identifiers.{{$value}}.dv' 
                         {{-- value="{{substr(str_shuffle('1234567890k'), 0, 1)}}" --}}>
                 </fieldset>
 
