@@ -15,10 +15,14 @@ class CreateMpSubActivitiesTable extends Migration
     {
         Schema::create('mp_sub_activities', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('specialty_id');
             $table->unsignedInteger('activity_id');
-            $table->string('sub_activity_name');
+            $table->string('sub_activity_abbreviated')->nullable();
+            $table->string('sub_activity_name')->nullable();
+            $table->string('sub_activity_description')->nullable();
             $table->decimal('performance', 8, 2)->nullable();
 
+            $table->foreign('specialty_id')->references('id')->on('mp_specialties');
             $table->foreign('activity_id')->references('id')->on('mp_activities');
             $table->timestamps();
             $table->softDeletes();

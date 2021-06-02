@@ -22,6 +22,7 @@ use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\RrhhController;
 use App\Http\Controllers\MedicalProgrammer\ContractController;
 use App\Http\Controllers\MedicalProgrammer\ActivityController;
+use App\Http\Controllers\MedicalProgrammer\SubActivityController;
 use App\Http\Controllers\MedicalProgrammer\TheoreticalProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\UnscheduledProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\CalendarProgrammingController;
@@ -165,6 +166,16 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::put('/{activity}', [ActivityController::class, 'update'])->name('update');
     Route::delete('/{activity}', [ActivityController::class, 'destroy'])->name('destroy');
     Route::get('/{activity}/edit', [ActivityController::class, 'edit'])->name('edit');
+  });
+
+  Route::prefix('subactivities')->name('subactivities.')->group(function(){
+    Route::get('/', [SubActivityController::class, 'index'])->name('index');
+    Route::post('/', [SubActivityController::class, 'store'])->name('store');
+    Route::get('/create', [SubActivityController::class, 'create'])->name('create');
+    Route::get('/{subactivity}', [SubActivityController::class, 'show'])->name('show');
+    Route::put('/{subactivity}', [SubActivityController::class, 'update'])->name('update');
+    Route::delete('/{subactivity}', [SubActivityController::class, 'destroy'])->name('destroy');
+    Route::get('/{subactivity}/edit', [SubActivityController::class, 'edit'])->name('edit');
   });
 
   Route::prefix('theoretical_programming')->name('theoretical_programming.')->group(function(){
