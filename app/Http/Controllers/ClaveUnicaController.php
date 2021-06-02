@@ -77,7 +77,7 @@ class ClaveUnicaController extends Controller
         // $user_local = User::find($user_clave_unica->RolUnico->numero);
 
         $user_local = User::query()
-                        ->getByDni($user_clave_unica->RolUnico->numero)
+                        ->getByRun($user_clave_unica->RolUnico->numero)
                         ->first();
 
         if($user_local) {
@@ -97,7 +97,7 @@ class ClaveUnicaController extends Controller
 
             $identifier = new Identifier();
             $identifier->use = 'official';
-            $identifier->cod_con_identifier_type_id = 1; // DNI
+            $identifier->cod_con_identifier_type_id = 1; // RUN
             $identifier->value = $user_clave_unica->RolUnico->numero;
             $identifier->dv = $user_clave_unica->RolUnico->DV;
             $identifier->user_id = $user_local->id;

@@ -108,10 +108,10 @@ class User extends Authenticatable
         return $this->humanNames()->where('use', 'official');
     }
 
-    public function scopeGetByDni($query, $dni)
+    public function scopeGetByRun($query, $run)
     {
-        $query->whereHas('identifiers', function ($query) use ($dni) {
-            return $query->where('value', $dni)
+        $query->whereHas('identifiers', function ($query) use ($run) {
+            return $query->where('value', $run)
                 ->where('cod_con_identifier_type_id', 1);
         });
     }

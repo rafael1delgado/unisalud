@@ -14,7 +14,7 @@ class CodConIdentifiersTypesSeeder extends Seeder
      */
     public function run()
     {
-        /* id = 1 */ CodConIdentifierType::Create(['text'=>'DNI']);
+        /* id = 1 */ CodConIdentifierType::Create(['text'=>'RUN']);
         /* id = 2 */ CodConIdentifierType::Create(['text'=>'Pasaporte']);
         /* id = 3 */ CodConIdentifierType::Create(['text'=>'CI']);
         /* id = 4 */ CodConIdentifierType::Create(['text'=>'Acta de Nacimiento']);
