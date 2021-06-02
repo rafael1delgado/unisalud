@@ -37,35 +37,39 @@
                         <label for="for_name">Nombres</label>
                         <input type="text" class="form-control" name="text"
                                id="for_name" required
-                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}">
+                               {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}
+                               >
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_fathers_family">Apellido Paterno</label>
                         <input type="text" class="form-control" name="fathers_family"
                                id="for_fathers_family" required
-                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}">
+                               {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}
+                               >
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_mothers_family">Apellido Materno</label>
                         <input type="text" class="form-control" name="mothers_family"
                                id="for_mothers_family" required
-                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}">
+                               {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}
+                               >
                     </fieldset>
                 </div>
                 <div class="form-row">
                     <fieldset class="form-group col-2">
                         <label for="for_birthday">Fecha de nacimiento</label>
                         <input type="date" class="form-control" name="birthday"
-                               id="for_birthday" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}">
+                               {{-- id="for_birthday" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}" --}}
+                               >
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_gender">Sexo</label>
                         <select name="gender" id="for_gender" class="form-control">
                             <option value=""></option>
-                            <option value="male" selected>Masculino</option>
+                            <option value="male">Masculino</option>
                             <option value="female">Femenino</option>
                             <option value="unknown">Desconocido</option>
                             <option value="other">Otro</option>
@@ -76,7 +80,7 @@
                         <label for="for_gender_identity">Identidad de Genero</label>
                         <select name="gender_identity" id="for_gender_identity" class="form-control">
                             <option value=""></option>
-                            <option value="male" selected>Masculino</option>
+                            <option value="male">Masculino</option>
                             <option value="female">Femenino</option>
                             <option value="female">Femenino Trans "FT"</option>
                             <option value="female">Masculino Trans "MT"</option>
@@ -98,7 +102,10 @@
                     <fieldset class="form-group col-2">
                         <label for="for_nacionality">Nacionalidad</label>
                         <select name="nacionality" id="for_nacionality" class="form-control">
-                            <option value="CL-Chile">Chile</option>
+                            <option value=""></option>
+                            @foreach($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                            @endforeach
                         </select>
                     </fieldset>
 
@@ -106,7 +113,7 @@
                         <label for="for_ethnicity">Pueblo originario</label>
                         <select name="ethnicity" id="for_ethnicity" class="form-control">
                             <option value=""></option>
-                            <option value="01" selected>Mapuche</option>
+                            <option value="01">Mapuche</option>
 
 
                             {{--                @foreach($aboriginals as $aboriginal)--}}

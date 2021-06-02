@@ -14,11 +14,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
-    /**
-     * El id no es incremental ya que es el run sin digito verificador
-     */
     protected $primaryKey = 'id';
-//    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.

@@ -9,8 +9,8 @@
 
                 <fieldset class="form-group col-1">
                     <label for="for_address_type">Tipo de dirección</label>
-                    <select name="address_use[]" class="form-control" wire:model='addresses.{{$value}}.address_use'>
-                        <option value=''></option>
+                    <select name="address_use[]" class="form-control" wire:model='addresses.{{$value}}.address_use' required>
+                        {{-- <option value=''></option> --}}
                         <option value="home" selected>Casa</option>
                         <option value="work">Trabajo</option>
                         <option value="temp">Temporal</option>

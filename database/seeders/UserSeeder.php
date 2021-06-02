@@ -37,8 +37,8 @@ class UserSeeder extends Seeder
         $user = new User();
         $user->id = 17430005;
         $user->active = 1;
-        $user->run = 17430005;
-        $user->dv = '4';
+        // $user->run = 17430005;
+        // $user->dv = '4';
         $user->claveunica = 1;
         $user->birthday = now();
         $user->gender = 'other';
