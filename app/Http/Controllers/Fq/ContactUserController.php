@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fq;
 
 use App\Models\Fq\ContactUser;
+use App\Models\User;
 use App\Models\Fq\FqPatient;
 use App\Models\Fq\UserPatient;
 use Illuminate\Http\Request;
@@ -26,9 +27,17 @@ class ContactUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('fq.contact_user.create');
+        if($request->input('search') != NULL){
+            $user = User::where('id', $request->input('search'))
+                              ->first();
+
+            return view('fq.contact_user.create', compact('request', 'user'));
+        }
+        else{
+            return view('fq.contact_user.create', compact('request'));
+        }
     }
 
     /**

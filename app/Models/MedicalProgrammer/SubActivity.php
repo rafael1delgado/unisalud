@@ -4,6 +4,7 @@ namespace App\Models\MedicalProgrammer;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class SubActivity extends Model implements Auditable
@@ -15,12 +16,17 @@ class SubActivity extends Model implements Auditable
    * @var array
    */
   protected $fillable = [
-      'id', 'activity_id', 'sub_activity_name', 'performance'
+      'id', 'specialty_id', 'activity_id', 'sub_activity_abbreviated', 'sub_activity_name', 'sub_activity_description', 'performance'
   ];
 
   public function theoretialProgrammings()
   {
       return $this->hasMany('App\Models\MedicalProgrammer\TheoreticalProgramming');
+  }
+
+  public function specialty()
+  {
+      return $this->belongsTo('App\Models\MedicalProgrammer\Specialty');
   }
 
   public function activity()

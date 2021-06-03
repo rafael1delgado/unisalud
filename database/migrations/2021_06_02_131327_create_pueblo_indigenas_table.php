@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFqContactUsersTable extends Migration
+class CreatePuebloIndigenasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateFqContactUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('fq_contact_users', function (Blueprint $table) {
+        Schema::create('pueblo_indigenas', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('user_id')->nullable();
-
-            $table->foreign('user_id')->references('id')->on('users');
-
+            $table->string('name')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +28,6 @@ class CreateFqContactUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fq_contact_users');
+        Schema::dropIfExists('pueblo_indigenas');
     }
 }

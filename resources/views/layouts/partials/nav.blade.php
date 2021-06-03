@@ -189,6 +189,13 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.subactivities.index') }}" href="{{ route('medical_programmer.subactivities.index') }}">
+        <span data-feather="chevrons-right"></span>
+        Sub-actividades
+        </a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.services.index') }}" href="{{ route('medical_programmer.services.index') }}">
         <span data-feather="chevrons-right"></span>
         Servicios
