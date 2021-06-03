@@ -16,7 +16,7 @@ class Country extends Model
    * @var array
    */
   protected $fillable = [
-    'id','id_minsal','name'
+    'id','iso_cod','name'
 ];
 
 use SoftDeletes;
