@@ -86,16 +86,16 @@
             </div>
 
             <div class="form-row">
-                <fieldset class="form-group col-1">
+                {{-- <fieldset class="form-group col-1">
                     <label for="for_latitud">Latitud</label>
                     <input type="text" class="form-control" name="latitud[]"
-                        {{--                               value="{{ substr(str_shuffle('0123456789'), 0, 8) }}"--}}>
-                </fieldset>
-                <fieldset class="form-group col-1">
+                        >
+                </fieldset> --}}
+                {{-- <fieldset class="form-group col-1">
                     <label for="for_longitud">Longitud</label>
                     <input type="text" class="form-control" name="longitud[]"
-                        {{--                               value="{{ substr(str_shuffle('0123456789'), 0, 8) }}"--}}>
-                </fieldset>
+                        >
+                </fieldset> --}}
                 <fieldset class="form-group col-2">
                     <label for="for_city">Ciudad</label>
                     <input type="text" class="form-control" name="city[]" wire:model='addresses.{{$value}}.city'

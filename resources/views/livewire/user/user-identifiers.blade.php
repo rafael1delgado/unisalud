@@ -17,7 +17,7 @@
                 </fieldset>
 
                 <fieldset class="form-group col-2">
-                    <label for="for_id_value">Run</label>
+                    <label for="for_id_value">Número</label>
                     <input type="text" class="form-control" name="id_value[]" wire:model='identifiers.{{$value}}.value' required
                         {{-- value=" {{substr(str_shuffle('1234567890'), 0, 8)}} " --}}
                         >

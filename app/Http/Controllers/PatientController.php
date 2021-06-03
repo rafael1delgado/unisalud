@@ -156,10 +156,10 @@ class PatientController extends Controller
             }
 
             if ($request->has('address_use')) {
-                foreach ($request->address_use as $key => $address_type) {
+                foreach ($request->address_use as $key => $address_use) {
                     $newAddress = new Address();
                     $newAddress->user_id = $newPatient->id;
-                    $newAddress->use = $request->address_type[$key];
+                    $newAddress->use = $request->address_use[$key];
                     $newAddress->type = 'physical';
                     $newAddress->text = $request->street_name[$key];
                     $newAddress->line = $request->line[$key];
