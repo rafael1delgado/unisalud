@@ -20,7 +20,7 @@
     </a>
 </h6>
 <ul class="nav flex-column">
-    @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
+    {{-- @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
         <li class="nav-item">
             <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.create') }}">
                 <i class="fas fa-plus"></i> Nueva Solicitud
@@ -46,8 +46,15 @@
                 </a>
             </li>
         @endcan
-    @endif
+    @endif --}}
 
+    @can('Fq: admin')
+        <li class="nav-item">
+            <a class="nav-link {{ active('fq.contact_user.create') }}" href="{{ route('fq.contact_user.create') }}">
+                <i class="fas fa-user-plus"></i> Crear contacto
+            </a>
+        </li>
+    @endcan
 </ul>
 
 <ul class="nav flex-column">
