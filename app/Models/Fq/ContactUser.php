@@ -13,8 +13,7 @@ class ContactUser extends Model
     use softDeletes;
 
     protected $fillable = [
-        'run', 'dv', 'name', 'fathers_family', 'mothers_family', 'email',
-        'telephone', 'telephone2', 'address', 'commune'
+        'user_id'
     ];
 
     public function usersPatients() {

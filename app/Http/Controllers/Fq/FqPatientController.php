@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Fq;
 
 use App\Models\Fq\FqPatient;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class FqPatientController extends Controller
 {

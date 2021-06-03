@@ -29,15 +29,17 @@ class ContactUserController extends Controller
      */
     public function create(Request $request)
     {
-        if($request->input('search') != NULL){
-            $user = User::where('id', $request->input('search'))
-                              ->first();
+        //Limpia mensajes anteriores.
+        session()->flush();
 
-            return view('fq.contact_user.create', compact('request', 'user'));
+        $contactUsers = ContactUser::paginate(10);
+        $user = User::GetByRun($request->input('search'))->first();
+        if($user == NULL && $request->input('search') != NULL){
+            session()->flash('danger', 'El Paciente/Contacto no se encuentra en nuestros registros,
+                                        Favor solicitar su ingreso en SOME');
         }
-        else{
-            return view('fq.contact_user.create', compact('request'));
-        }
+
+        return view('fq.contact_user.create', compact('request', 'user', 'contactUsers'));
     }
 
     /**
@@ -46,41 +48,44 @@ class ContactUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        $contactUser = new ContactUser($request->All());
-        $contactUser->telephone = '+56'.$contactUser->telephone;
-
-        if($contactUser->telephone2){
-            $contactUser->telephone2 = '+56'.$contactUser->telephone2;
-        }
-
+        $contactUser = new ContactUser();
+        $contactUser->user_id = $user->id;
         $contactUser->save();
-
-        $fqPatient = new FqPatient();
-        $fqPatient->run = $request->run_patient;
-        $fqPatient->dv = $request->dv_patient;
-        $fqPatient->name = $request->name_patient;
-        $fqPatient->fathers_family = $request->fathers_family_patient;
-        $fqPatient->mothers_family = $request->mothers_family_patient;
-
-        $fqPatient->clinical_history_number = $request->clinical_history_number;
-
-        $fqPatient->email = $contactUser->email;
-        $fqPatient->telephone = $contactUser->telephone;
-        $fqPatient->telephone2 = $contactUser->telephone2;
-        $fqPatient->commune = $contactUser->commune;
-        $fqPatient->address = $contactUser->address;
-
-        $fqPatient->observation = $request->observation;
-
-        $fqPatient->save();
-
-        $userPatient = new UserPatient();
-        $userPatient->contact_user_id = $contactUser->id;
-        $userPatient->patient_id = $fqPatient->id;
-
-        $userPatient->save();
+        // $contactUser = new ContactUser($request->All());
+        // $contactUser->telephone = '+56'.$contactUser->telephone;
+        //
+        // if($contactUser->telephone2){
+        //     $contactUser->telephone2 = '+56'.$contactUser->telephone2;
+        // }
+        //
+        // $contactUser->save();
+        //
+        // $fqPatient = new FqPatient();
+        // $fqPatient->run = $request->run_patient;
+        // $fqPatient->dv = $request->dv_patient;
+        // $fqPatient->name = $request->name_patient;
+        // $fqPatient->fathers_family = $request->fathers_family_patient;
+        // $fqPatient->mothers_family = $request->mothers_family_patient;
+        //
+        // $fqPatient->clinical_history_number = $request->clinical_history_number;
+        //
+        // $fqPatient->email = $contactUser->email;
+        // $fqPatient->telephone = $contactUser->telephone;
+        // $fqPatient->telephone2 = $contactUser->telephone2;
+        // $fqPatient->commune = $contactUser->commune;
+        // $fqPatient->address = $contactUser->address;
+        //
+        // $fqPatient->observation = $request->observation;
+        //
+        // $fqPatient->save();
+        //
+        // $userPatient = new UserPatient();
+        // $userPatient->contact_user_id = $contactUser->id;
+        // $userPatient->patient_id = $fqPatient->id;
+        //
+        // $userPatient->save();
 
         session()->flash('success', 'Se ha creado exitosamente el Paciente: '.$fqPatient->name.' '.$fqPatient->fathers_family);
         return redirect()->route('fq.contact_user.index');

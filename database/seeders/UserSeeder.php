@@ -59,6 +59,13 @@ class UserSeeder extends Seeder
         $contactPoint->use = 'work';
         $contactPoint->save();
 
+        $contactPoint = new ContactPoint();
+        $contactPoint->system = 'email';
+        $contactPoint->user_id = $user->id;
+        $contactPoint->value = 'e.mail@mail.com';
+        $contactPoint->use = 'home';
+        $contactPoint->save();
+
         $address = new Address();
         $address->user_id = $user->id;
         $address->type = 'physical';
