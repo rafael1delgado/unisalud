@@ -33,7 +33,6 @@ class UserAddresses extends Component
      */
     public function getCommunes($value)
     {
-
         $this->communes = Commune::query()
             ->where('region_id', $this->addresses[$value]['state'])
             ->get();

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Http\Livewire\Parameter\Permission;
 use App\Models\HumanName;
+use App\Models\Identifier;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
@@ -33,6 +34,14 @@ class UserSeeder extends Seeder
         $humanName->mothers_family = 'araya';
         $humanName->user_id = $user->id;
         $humanName->save();
+
+        $identifier = new Identifier();
+        $identifier->use = 'official';
+        $identifier->cod_con_identifier_type_id = 1; // RUN
+        $identifier->value = 12345678;
+        $identifier->dv = 5;
+        $identifier->user_id = $user->id;
+        $identifier->save();
 
         $user = new User();
         $user->id = 17430005;
