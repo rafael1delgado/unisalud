@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Http\Livewire\Parameter\Permission;
+use App\Models\Address;
+use App\Models\ContactPoint;
 use App\Models\HumanName;
 use App\Models\Identifier;
 use App\Models\User;
@@ -42,6 +44,31 @@ class UserSeeder extends Seeder
         $identifier->dv = 5;
         $identifier->user_id = $user->id;
         $identifier->save();
+
+        $contactPoint = new ContactPoint();
+        $contactPoint->system = 'phone';
+        $contactPoint->user_id = $user->id;
+        $contactPoint->value = 88993344;
+        $contactPoint->use = 'mobile';
+        $contactPoint->save();
+
+        $contactPoint = new ContactPoint();
+        $contactPoint->system = 'phone';
+        $contactPoint->user_id = $user->id;
+        $contactPoint->value = 425563;
+        $contactPoint->use = 'work';
+        $contactPoint->save();
+
+        $address = new Address();
+        $address->user_id = $user->id;
+        $address->type = 'physical';
+        $address->text = 'pampa ilusion';
+        $address->line = 1313;
+        $address->city = 'iquique';
+        $address->district = 5;
+        $address->state = 1;
+        $address->country = 42;
+        $address->save();
 
         $user = new User();
         $user->id = 17430005;
