@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             CodConMaritalSeeder::class,
             CommuneSeeder::class,
+            PuebloIndigenasSeeder::class,
 
 
             // // HmRrhhTableSeeder::class,
