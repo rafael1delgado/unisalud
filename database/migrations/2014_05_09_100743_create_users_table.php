@@ -17,7 +17,9 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->boolean('active');
-            $table->enum('gender', ['female', 'male', 'other', 'unknown',
+            $table->enum('sex', ['female', 'male', 'other', 'unknown',
+            ])->nullable();
+            $table->enum('gender', ['female', 'male', 'non-binary', 'transgender-male', 'transgender-female', 'other', 'non-disclose'
             ])->nullable();
             $table->date('birthday')->nullable();
             $table->datetime('deceased_datetime')->nullable();
