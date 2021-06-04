@@ -16,6 +16,10 @@ class ContactUser extends Model
         'user_id'
     ];
 
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
+
     public function usersPatients() {
         return $this->hasMany('\App\Models\Fq\UserPatient');
     }
