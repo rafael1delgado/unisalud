@@ -77,9 +77,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-//    public function getFirstNameAttribute() {
-//        return explode(' ',trim($this->name))[0];
-//    }
+    public function officialHumanNames()
+    {
+        return $this->humanNames()->where('use', 'official');
+    }
 
     public function getOfficialFullNameAttribute()
     {
@@ -101,9 +102,12 @@ class User extends Authenticatable
         return "{$this->officialHumanNames()->first()->mothers_family}";
     }
 
-    public function officialHumanNames()
+    public function getActualOfficialHumanNameAttribute()
     {
-        return $this->humanNames()->where('use', 'official');
+        return $this->officialHumanNames()
+            ->where('use', 'official')
+            ->latest()
+            ->first();
     }
 
     public function scopeGetByRun($query, $run)

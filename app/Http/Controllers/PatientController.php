@@ -41,7 +41,7 @@ class PatientController extends Controller
         $maritalStatus = CodConMarital::all();
         $countries = Country::all();
         $regions = Region::all();
-        $etnias = Etnia::all(); 
+        $etnias = Etnia::all();
         $identifierTypes = CodConIdentifierType::all();
         return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes', 'etnias'));
     }
@@ -63,7 +63,7 @@ class PatientController extends Controller
             $newPatient->active = 1;
             $newPatient->save();
             $newHumanName = new HumanName($request->all());
-            $newHumanName->use = 'official';
+            $newHumanName->use = $request->human_name_use;
             $newHumanName->user_id = $newPatient->id;
             $newHumanName->save();
 
@@ -156,10 +156,27 @@ class PatientController extends Controller
             $patient = User::find($id);
             $patient->fill($request->all());
 
+            //HUMAN NAMES
+            $actualOfficialHumanName = $patient->actualOfficialHumanName;
+
+            if (
+                $actualOfficialHumanName->use != $request->human_name_use ||
+                $actualOfficialHumanName->text != $request->text ||
+                $actualOfficialHumanName->fathers_family != $request->fathers_family ||
+                $actualOfficialHumanName->mothers_family != $request->mothers_family
+            ) {
+                $newHumanName = new HumanName($request->all());
+                $newHumanName->use = $request->human_name_use;
+                $newHumanName->user_id = $patient->id;
+                $newHumanName->save();
+            }
+
+            // dd($humanName);
+
+            //ADDRESSES
             $storedAddressIds = $patient->addresses->pluck('id')->toArray();
             if ($request->has('address_use')) {
-
-                //forearch para actualizar/agregar
+                //forearch para actualizar/agregar direcciones
                 foreach ($request->address_use as $key => $address_use) {
                     if ($request->address_id[$key] == null) {
                         $newAddress = new Address();
@@ -192,7 +209,7 @@ class PatientController extends Controller
                     }
                 }
 
-                //foreach para eliminar
+                //foreach para eliminar direcciones
                 foreach ($storedAddressIds as $key => $storedAddressId) {
                     if (!in_array($storedAddressId, $request->address_id)) {
                         $address = Address::find($storedAddressId);

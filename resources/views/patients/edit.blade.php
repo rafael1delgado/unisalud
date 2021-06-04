@@ -31,26 +31,27 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">Datos Personales</h5>
+                <input type="hidden" name='human_name_use' value='official'>
                 <div class="form-row">
                     <fieldset class="form-group col-2">
                         <label for="for_name">Nombres</label>
                         <input type="text" class="form-control" name="text"
                                id="for_name" required
-                               value="{{ $patient->officialName }}">
+                               value="{{ $patient->actualOfficialHumanName->text }}">
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_fathers_family">Apellido Paterno</label>
                         <input type="text" class="form-control" name="fathers_family"
                                id="for_fathers_family" required
-                               value="{{ $patient->officialFathersFamily }}">
+                               value="{{ $patient->actualOfficialHumanName->fathers_family }}">
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_mothers_family">Apellido Materno</label>
                         <input type="text" class="form-control" name="mothers_family"
                                id="for_mothers_family" required
-                               value="{{ $patient->officialMothersFamily }}">
+                               value="{{ $patient->actualOfficialHumanName->mothers_family }}">
                     </fieldset>
                 </div>
                 <div class="form-row">
