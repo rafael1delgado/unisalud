@@ -30,9 +30,9 @@ class ContactUserController extends Controller
     public function create(Request $request)
     {
         //Limpia mensajes anteriores.
-        session()->flush();
+        //session()->flush();
 
-        $contactUsers = ContactUser::paginate(10);
+        $contactUsers = ContactUser::all();
         $user = User::GetByRun($request->input('search'))->first();
         if($user == NULL && $request->input('search') != NULL){
             session()->flash('danger', 'El Paciente/Contacto no se encuentra en nuestros registros,
@@ -50,9 +50,22 @@ class ContactUserController extends Controller
      */
     public function store(Request $request, User $user)
     {
-        $contactUser = new ContactUser();
-        $contactUser->user_id = $user->id;
-        $contactUser->save();
+        $exist = ContactUser::where('user_id', $user->id)->first();
+
+        if($exist){
+            session()->flash('danger', 'El Contacto ya fue ingresado anteriormente.');
+            return redirect()->route('fq.contact_user.create');
+        }
+        else{
+            $contactUser = new ContactUser();
+            $contactUser->user_id = $user->id;
+            $contactUser->save();
+            session()->flash('success', 'Se ha creado exitosamente el Contacto');
+            return redirect()->route('fq.contact_user.create');
+        }
+
+        //$flight->restore();
+
         // $contactUser = new ContactUser($request->All());
         // $contactUser->telephone = '+56'.$contactUser->telephone;
         //
@@ -87,8 +100,7 @@ class ContactUserController extends Controller
         //
         // $userPatient->save();
 
-        session()->flash('success', 'Se ha creado exitosamente el Paciente: '.$fqPatient->name.' '.$fqPatient->fathers_family);
-        return redirect()->route('fq.contact_user.index');
+
     }
 
     /**
