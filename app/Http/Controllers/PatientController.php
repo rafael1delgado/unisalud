@@ -8,6 +8,7 @@ use App\Models\CodConMarital;
 use App\Models\Commune;
 use App\Models\ContactPoint;
 use App\Models\Country;
+use App\Models\Etnia;
 use App\Models\HumanName;
 use App\Models\Identifier;
 use App\Models\Region;
@@ -40,9 +41,9 @@ class PatientController extends Controller
         $maritalStatus = CodConMarital::all();
         $countries = Country::all();
         $regions = Region::all();
-        
+        $etnias = Etnia::all(); 
         $identifierTypes = CodConIdentifierType::all();
-        return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes'));
+        return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes', 'etnias'));
     }
 
 

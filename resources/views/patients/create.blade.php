@@ -110,15 +110,12 @@
                     </fieldset>
 
                     <fieldset class="form-group col-2">
-                        <label for="for_ethnicity">Pueblo originario</label>
-                        <select name="ethnicity" id="for_ethnicity" class="form-control">
+                        <label for="for_etnia">Pueblo originario</label>
+                        <select name="etnia_id" id="for_etnia_id" class="form-control">
                             <option value=""></option>
-                            <option value="01">Mapuche</option>
-
-
-                            {{--                @foreach($aboriginals as $aboriginal)--}}
-                            {{--                    <option value="{{ $aboriginal['code'] }}">{{ $aboriginal['display'] }}</option>--}}
-                            {{--                @endforeach--}}
+                                @foreach($etnias as $etnia)
+                                    <option value="{{ $etnia->id }}">{{ $etnia->name}}</option>
+                                @endforeach
                         </select>
                     </fieldset>
 
