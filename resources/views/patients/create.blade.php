@@ -66,8 +66,8 @@
                     </fieldset>
 
                     <fieldset class="form-group col-2">
-                        <label for="for_gender">Sexo</label>
-                        <select name="gender" id="for_gender" class="form-control" required>
+                        <label for="for_sex">Sexo</label>
+                        <select name="sex" id="for_sex" class="form-control" required>
                             <option value=""></option>
                             <option value="male">Masculino</option>
                             <option value="female">Femenino</option>
@@ -77,13 +77,13 @@
                     </fieldset>
 
                     <fieldset class="form-group col-2">
-                        <label for="for_gender_identity">Identidad de Género</label>
-                        <select name="gender_identity" id="for_gender_identity" class="form-control" required>
+                        <label for="for_gender">Identidad de Género</label>
+                        <select name="gender" id="for_gender" class="form-control" required>
                             <option value=""></option>
                             <option value="male">Masculino</option>
                             <option value="female">Femenino</option>
-                            <option value="female">Femenino Trans "FT"</option>
-                            <option value="female">Masculino Trans "MT"</option>
+                            <option value="transgender-female">Femenino Trans "FT"</option>
+                            <option value="transgender-male">Masculino Trans "MT"</option>
                             {{--                @foreach ($genderIdentities as $identity)--}}
                             {{--                    <option value="{{ $identity['code'] }}">{{ $identity['display'] }}</option>--}}
                             {{--                @endforeach--}}
