@@ -24,7 +24,7 @@
                 </fieldset>
 
                 <fieldset class=" form-group col-1">
-                    <label for="for_id_dv">Dígito verificador</label>
+                    <label for="for_id_dv">DV</label>
                     <input type="text" class="form-control" name="id_dv[]" wire:model='identifiers.{{$value}}.dv' 
                         {{-- value="{{substr(str_shuffle('1234567890k'), 0, 1)}}" --}}>
                 </fieldset>

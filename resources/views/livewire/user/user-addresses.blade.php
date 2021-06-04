@@ -8,7 +8,7 @@
                 <input type="hidden" name='address_id[]' wire:model='addresses.{{$value}}.id'>
 
                 <fieldset class="form-group col-1">
-                    <label for="for_address_type">Tipo de dirección</label>
+                    <label for="for_address_type">Tipo</label>
                     <select name="address_use[]" class="form-control" wire:model='addresses.{{$value}}.address_use'
                         required>
                         <option value=''></option>
