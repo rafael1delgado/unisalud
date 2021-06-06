@@ -79,7 +79,8 @@ class User extends Authenticatable
 
     public function officialHumanNames()
     {
-        return $this->humanNames()->where('use', 'official');
+        return $this->humanNames()->first()->where('use', 'official');
+
     }
 
     public function getOfficialFullNameAttribute()
