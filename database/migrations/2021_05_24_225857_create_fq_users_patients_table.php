@@ -19,8 +19,8 @@ class CreateFqUsersPatientsTable extends Migration
             $table->foreignId('contact_user_id');
             $table->foreignId('patient_id');
 
-            $table->foreign('contact_user_id')->references('id')->on('fq_contact_users');
-            $table->foreign('patient_id')->references('id')->on('fq_patients');
+            $table->foreign('contact_user_id')->references('id')->on('users');
+            $table->foreign('patient_id')->references('id')->on('users');
 
             $table->timestamps();
             $table->softDeletes();
