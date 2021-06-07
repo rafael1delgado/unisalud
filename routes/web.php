@@ -127,8 +127,11 @@ Route::prefix('fq')->as('fq.')->group(function(){
 
 Route::prefix('surveys')->as('surveys.')->middleware('auth')->group(function(){
     Route::prefix('teleconsultation')->name('teleconsultation.')->group(function(){
+        Route::get('/', [TeleconsultationSurveyController::class, 'index'])->name('index');
         Route::get('/create', [TeleconsultationSurveyController::class, 'create'])->name('create');
         Route::post('/store', [TeleconsultationSurveyController::class, 'store'])->name('store');
+        Route::get('/my_survey', [TeleconsultationSurveyController::class, 'my_survey'])->name('my_survey');
+        Route::get('/show/{teleconsultationSurvey}', [TeleconsultationSurveyController::class, 'show'])->name('show');
     });
 });
 
@@ -193,6 +196,10 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::post('updateMyEvent', [TheoreticalProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
     Route::post('deleteMyEvent', [TheoreticalProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
     Route::post('deleteMyEventForce', [TheoreticalProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+
+    Route::get('event_detail/{rut}/{activity_id}/{contract_id}/{specialty_id}/{profession_id}/{start_date}/{end_date}', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
+    // Route::get('event_detail/{info}', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
+    // Route::post('event_detail', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
 
     Route::get('/', [TheoreticalProgrammingController::class, 'index'])->name('index');
     Route::post('/', [TheoreticalProgrammingController::class, 'store'])->name('store');

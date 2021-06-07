@@ -58,6 +58,11 @@ class Activity extends Model implements Auditable
             ->withPivot('performance');
     }
 
+    public function subactivities()
+    {
+        return $this->hasMany('App\Models\MedicalProgrammer\SubActivity');
+    }
+
     use SoftDeletes;
     /**
      * The attributes that should be mutated to dates.

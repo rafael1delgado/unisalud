@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Surveys;
 
-use App\Models\TeleconsultationSurvey;
+use App\Models\Surveys\TeleconsultationSurvey;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TeleconsultationSurveyController extends Controller
 {
@@ -15,7 +16,16 @@ class TeleconsultationSurveyController extends Controller
      */
     public function index()
     {
-        //
+        $teleconsultationSurveys = TeleconsultationSurvey::paginate(10);
+        // dd($teleconsultationSurvey);
+        return view('surveys.teleconsultation_survey.index', compact('teleconsultationSurveys'));
+    }
+
+    public function my_survey(TeleconsultationSurvey $teleconsultationSurvey)
+    {
+        $teleconsultationSurvey = TeleconsultationSurvey::where('user_id', Auth::user()->id)->first();
+
+        return view('surveys.teleconsultation_survey.my_survey', compact('teleconsultationSurvey'));
     }
 
     /**
@@ -25,7 +35,7 @@ class TeleconsultationSurveyController extends Controller
      */
     public function create()
     {
-        return view('surveys.create');
+        return view('surveys.teleconsultation_survey.create');
     }
 
     /**
@@ -36,7 +46,12 @@ class TeleconsultationSurveyController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $teleconsultationSurvey = new TeleconsultationSurvey($request->All());
+        $teleconsultationSurvey->user_id = Auth::user()->id;
+
+        $teleconsultationSurvey->save();
+
+        return view('fq.home');
     }
 
     /**
@@ -47,7 +62,7 @@ class TeleconsultationSurveyController extends Controller
      */
     public function show(TeleconsultationSurvey $teleconsultationSurvey)
     {
-        //
+        return view('surveys.teleconsultation_survey.show', compact('teleconsultationSurvey'));
     }
 
     /**
