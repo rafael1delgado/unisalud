@@ -197,6 +197,10 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::post('deleteMyEvent', [TheoreticalProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
     Route::post('deleteMyEventForce', [TheoreticalProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
 
+    Route::get('event_detail/{rut}/{activity_id}/{contract_id}/{specialty_id}/{profession_id}/{start_date}/{end_date}', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
+    // Route::get('event_detail/{info}', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
+    // Route::post('event_detail', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
+
     Route::get('/', [TheoreticalProgrammingController::class, 'index'])->name('index');
     Route::post('/', [TheoreticalProgrammingController::class, 'store'])->name('store');
     Route::get('/create', [TheoreticalProgrammingController::class, 'create'])->name('create');

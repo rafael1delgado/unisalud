@@ -19,14 +19,14 @@
     <div class="form-row">
         <fieldset class="form-group col-3">
             <label for=""> <b> Rut: </b> </label>
-            <span> {{"$patient->run - $patient->dv"}} </span>
+            <span> {{"{$patient->identifierRun->value} - {$patient->identifierRun->dv}"}} </span>
         </fieldset>
     </div>
 
     <div class="form-row">
         <fieldset class="form-group col-3">
             <label for=""> <b> Nombre: </b> </label>
-            <span> {{"$patient->OfficialfullName"}} </span>
+            <span> {{"$patient->officialfullName"}} </span>
         </fieldset>
     </div>
 
