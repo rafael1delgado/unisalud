@@ -171,7 +171,37 @@ class PatientController extends Controller
                 $newHumanName->save();
             }
 
-            // dd($humanName);
+            //USER ID
+            $storedUserIds = $patient->identifiers->pluck('id')->toArray();
+            if ($request->has('id_type')) {
+                //foreach para actualizar/agregar identifiers
+                foreach ($request->id_type as $key => $id_type) {
+                    if ($request->identifier_id[$key] == null) {
+                        $newIdentifier = new Identifier();
+                        $newIdentifier->user_id = $patient->id;
+                        $newIdentifier->use = $request->id_use[$key];
+                        $newIdentifier->cod_con_identifier_type_id = $request->id_type[$key];
+                        $newIdentifier->value = $request->id_value[$key];
+                        $newIdentifier->dv = $request->id_dv[$key];
+                        $newIdentifier->save();
+                    } elseif (in_array($request->identifier_id[$key], $storedUserIds)) {
+                        $identifier = Identifier::find($request->identifier_id[$key]);
+                        $identifier->user_id = $patient->id;
+                        $identifier->use = $request->id_use[$key];
+                        $identifier->cod_con_identifier_type_id = $request->id_type[$key];
+                        $identifier->value = $request->id_value[$key];
+                        $identifier->dv = $request->id_dv[$key];
+                        $identifier->save();
+                    }
+                }
+                //foreach para eliminar identificadores
+                foreach ($storedUserIds as $key => $storedUserId) {
+                    if (!in_array($storedUserId, $request->identifier_id)) {
+                        $identifier = Identifier::find($storedUserId);
+                        $identifier->delete();
+                    }
+                }
+            }
 
             //ADDRESSES
             $storedAddressIds = $patient->addresses->pluck('id')->toArray();
@@ -218,14 +248,33 @@ class PatientController extends Controller
                 }
             }
 
+            //CONTACT
+            $storedContactIds = $patient->contactPoints->pluck('id')->toArray();
             if ($request->has('contact_system')) {
+                //forearch para actualizar/agregar contactos
                 foreach ($request->contact_system as $key => $contact_system) {
-                    $contactPoint = ContactPoint::find($request->contact_point_id[$key]);
-                    $contactPoint->system = $request->contact_system[$key];
-                    $contactPoint->user_id = $patient->id;
-                    $contactPoint->value = $request->contact_value[$key];
-                    $contactPoint->use = $request->contact_use[$key];
-                    $contactPoint->save();
+                    if ($request->contact_point_id[$key] == null) {
+                        $newContactPoint = new ContactPoint();
+                        $newContactPoint->system = $request->contact_system[$key];
+                        $newContactPoint->user_id = $patient->id;
+                        $newContactPoint->value = $request->contact_value[$key];
+                        $newContactPoint->use = $request->contact_use[$key];
+                        $newContactPoint->save();
+                    } elseif (in_array($request->contact_point_id[$key], $storedContactIds)) {
+                        $contactPoint = ContactPoint::find($request->contact_point_id[$key]);
+                        $contactPoint->system = $request->contact_system[$key];
+                        $contactPoint->user_id = $patient->id;
+                        $contactPoint->value = $request->contact_value[$key];
+                        $contactPoint->use = $request->contact_use[$key];
+                        $contactPoint->save();
+                    }
+                }
+                //foreach para eliminar contactos
+                foreach ($storedContactIds as $key => $storedContactId) {
+                    if (!in_array($storedContactId, $request->contact_point_id)) {
+                        $contactPoint = ContactPoint::find($storedContactId);
+                        $contactPoint->delete();
+                    }
                 }
             }
 
