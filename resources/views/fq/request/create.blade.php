@@ -206,13 +206,6 @@
 @section('custom_js')
 
 <script type="text/javascript">
-    function hide (elements) {
-      elements = elements.length ? elements : [elements];
-        for (var index = 0; index < elements.length; index++) {
-        elements[index].style.display = 'none';
-      }
-    }
-
     $('#for_specialties').attr("disabled", true);
     $('#for_other_specialty').attr("disabled", true);
     $('#for_prescription_file').attr("disabled", true);

@@ -32,7 +32,7 @@
             </a>
         </li>
     @else
-        @canany(['Fq: Answer request', 'Fq: Answer request medicines'])
+        @canany(['Fq: Answer request', 'Fq: Answer request medicines', 'Fq: admin'])
             <li class="nav-item">
                 <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.index') }}">
                     <i class="fas fa-inbox"></i> Solicitudes Pacientes FQ
@@ -81,7 +81,7 @@
 <ul class="nav flex-column">
     <li class="nav-item border-top">
         <a class="nav-link" href="">
-            <i class="fas fa-user"></i> {{ Auth::user()->OfficialFullName }}
+            <i class="fas fa-user"></i> {{ Auth()->user()->OfficialFullName }}
         </a>
         <a class="nav-link" href="{{ route('claveunica.logout') }}">
             <i class="fas fa-sign-out-alt"></i> Cerrar sesión

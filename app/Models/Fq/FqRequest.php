@@ -13,15 +13,16 @@ class FqRequest extends Model
 
     protected $fillable = [
         'name', 'specialties', 'other_specialty', 'observation_patient',
-        'prescription_file', 'date_confirm', 'observation_patient', 'patient_id'
+        'prescription_file', 'attention', 'date_confirm', 'link',
+        'observation_request', 'patient_id'
     ];
 
-    public function patient() {
-        return $this->belongsTo('\App\Models\Fq\FqPatient');
+    public function contactUser() {
+        return $this->belongsTo('\App\Models\User', 'contact_user_id');
     }
 
-    public function contactUser() {
-        return $this->belongsTo('\App\Models\Fq\ContactUser');
+    public function patient() {
+        return $this->belongsTo('\App\Models\User', 'patient_id');
     }
 
     public function getNameValueAttribute(){

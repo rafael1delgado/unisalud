@@ -116,12 +116,12 @@ Route::prefix('fq')->as('fq.')->group(function(){
     });
     Route::prefix('request')->name('request.')->group(function(){
         Route::get('/', [FqRequestController::class, 'index'])->name('index')
-            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);
+            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines|Fq: admin']);
         Route::get('/own_index', [FqRequestController::class, 'own_index'])->name('own_index');
         Route::get('/create', [FqRequestController::class, 'create'])->name('create');
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
         Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')
-            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);
+            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines|Fq: admin']);
     });
 });
 

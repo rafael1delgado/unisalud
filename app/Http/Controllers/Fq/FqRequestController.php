@@ -84,7 +84,6 @@ class FqRequestController extends Controller
         $fqRequest->status = 'pending';
         $fqRequest->save();
 
-
         // if (env('APP_ENV') == 'production') {
         //     if($fqRequest->name == 'medicines'){
         //         Mail::to(['valentina.andradea@redsalud.gob.cl'])->cc(['diego.leyton@redsalud.gob.cl', 'ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
@@ -136,18 +135,18 @@ class FqRequestController extends Controller
         $fqRequest->save();
 
         // if (env('APP_ENV') == 'production') {
-            if($fqRequest->name == 'medicines'){
-                Mail::to($fqRequest->contactUser->email)
-                    ->cc(['valentina.andradea@redsalud.gob.cl',
-                          'diego.leyton@redsalud.gob.cl',
-                          'ana.mujica@redsalud.gob.cl'])
-                    ->send(new AnswerNotification($fqRequest));
-            }
-            else{
-                Mail::to($fqRequest->contactUser->email)
-                    ->cc(['ana.mujica@redsalud.gob.cl'])
-                    ->send(new AnswerNotification($fqRequest));
-            }
+            // if($fqRequest->name == 'medicines'){
+            //     Mail::to($fqRequest->contactUser->email)
+            //         ->cc(['valentina.andradea@redsalud.gob.cl',
+            //               'diego.leyton@redsalud.gob.cl',
+            //               'ana.mujica@redsalud.gob.cl'])
+            //         ->send(new AnswerNotification($fqRequest));
+            // }
+            // else{
+            //     Mail::to($fqRequest->contactUser->email)
+            //         ->cc(['ana.mujica@redsalud.gob.cl'])
+            //         ->send(new AnswerNotification($fqRequest));
+            // }
         // }
 
         session()->flash('success', 'La solicitud fue correctamente atendida.');
