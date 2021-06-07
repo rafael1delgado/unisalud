@@ -17,6 +17,8 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\Fq\CysticFibrosisRequest;
 use App\Http\Controllers\Fq\ContactUserController;
 use App\Http\Controllers\Fq\FqRequestController;
+
+use App\Http\Controllers\Surveys\TeleconsultationSurveyController;
 use App\Http\Controllers\Fq\FqPatientController;
 
 use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
@@ -119,7 +121,14 @@ Route::prefix('fq')->as('fq.')->group(function(){
         Route::get('/create', [FqRequestController::class, 'create'])->name('create');
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
         Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')
-            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);;
+            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);
+    });
+});
+
+Route::prefix('surveys')->as('surveys.')->middleware('auth')->group(function(){
+    Route::prefix('teleconsultation')->name('teleconsultation.')->group(function(){
+        Route::get('/create', [TeleconsultationSurveyController::class, 'create'])->name('create');
+        Route::post('/store', [TeleconsultationSurveyController::class, 'store'])->name('store');
     });
 });
 

@@ -38,7 +38,7 @@ class User extends Authenticatable
 
     public function humanNames(): HasMany
     {
-        return $this->hasMany(HumanName::class, 'user_id',);
+        return $this->hasMany(HumanName::class, 'user_id');
     }
 
     public function addresses()
@@ -79,12 +79,12 @@ class User extends Authenticatable
 
     public function officialHumanNames()
     {
-        return $this->humanNames()->where('use', 'official');
+        return $this->humanNames()->first();
     }
 
     public function getOfficialFullNameAttribute()
     {
-        return "{$this->officialHumanNames()->first()->text} {$this->officialHumanNames()->first()->fathers_family} {$this->officialHumanNames()->first()->mothers_family}";
+        return "{$this->officialHumanNames()->text} {$this->officialHumanNames()->fathers_family} {$this->officialHumanNames()->mothers_family}";
     }
 
     public function getOfficialNameAttribute()
@@ -209,5 +209,13 @@ class User extends Authenticatable
             $array[$key] = $userOperatingRoom->operating_room_id;
         }
         return $array;
+    }
+
+    // public function usersPatients() {
+    //     return $this->hasMany(Fq\UserPatient::class, 'contact_user_id');
+    // }
+
+    public function usersPatients() {
+        return $this->hasMany(Fq\UserPatient::class, 'contact_user_id');
     }
 }

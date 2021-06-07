@@ -11,8 +11,8 @@ class UserPatient extends Model
     use HasFactory;
     use softDeletes;
 
-    public function patient() {
-        return $this->belongsTo('\App\Models\Fq\FqPatient');
+    public function user() {
+        return $this->belongsTo('\App\Models\User', 'patient_id');
     }
 
     protected $table = 'fq_users_patients';

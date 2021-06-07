@@ -38,36 +38,55 @@
                 <div class="table-responsive">
                     <table class="table table-sm table-hover">
                         <thead class="table-info">
-
                             <tr>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">{{ $user->OfficialFullName }}</th>
+                                <th scope="col" colspan="4">{{ $user->OfficialFullName }}</th>
                             </tr>
-
                         </thead>
                         <tbody>
-                          @foreach($user->identifiers as $identifier)
                             <tr>
                                 <th scope="row">Identificación</th>
-                                <td>{{ $identifier->value }}-{{ $identifier->dv }}</td>
+                                <td colspan="4">
+                                    @foreach($user->identifiers as $identifier)
+                                      {{ $identifier->value }}-{{ $identifier->dv }}
+                                    @endforeach
+                                </td>
                             </tr>
-                          @endforeach
                             <tr>
                                 <th scope="row">Dirección</th>
-                                <td colspan="2"></td>
+                                <td>
+                                  @foreach($user->addresses as $address)
+                                    {{ $address->text }} {{ $address->line }}<br>
+                                  @endforeach
+                                </td>
+                                <th scope="row">Departamento</th>
+                                <td>
+                                  @foreach($user->addresses as $address)
+                                    {{ $address->apartment }}<br>
+                                  @endforeach
+                                </td>
+                                <td>
+                                  @foreach($user->addresses as $address)
+                                    {{ $address->suburb }}<br>
+                                  @endforeach
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">Comuna</th>
-                                <td colspan="2"></td>
+                                <td colspan="4">
+                                  @foreach($user->addresses as $address)
+                                    {{ $address->city }}<br>
+                                  @endforeach
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">Teléfono</th>
-                                <td colspan="2"></td>
+                                <td colspan="4"></td>
                             </tr>
                           @foreach($user->contactPoints->where('system', 'email') as $contactPoint)
                             <tr>
                                 <th scope="row">Correo</th>
-                                <td colspan="2">{{ $contactPoint->value }}</td>
+                                <td>{{ $contactPoint->value }}</td>
                             </tr>
                           @endforeach
                         </tbody>
@@ -107,7 +126,7 @@
                                   {{ $identifier->value }}-{{ $identifier->dv }}<br>
                                 @endforeach
                               </td>
-                              <td>{{ $contactUser->user->OfficialFullName}}</td>
+                              <td>{{ $contactUser->user->OfficialFullName }}</td>
                               <td></td>
                               <td>
                                 @foreach($contactUser->user->addresses as $address)
