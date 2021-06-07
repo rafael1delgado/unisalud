@@ -24,52 +24,34 @@
             </fieldset>
         </div>
 
+        @livewire('user.user-identifiers', compact('identifierTypes', 'patient'))
+
+        <div class="border-bottom mt-3 mb-3"></div>
+
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">Datos Personales</h5>
-                <div class="form-row">
-                    <fieldset class="form-group col-2">
-                        <label for="for_id_type">Tipo de identificación</label>
-                        <select name="id_type" id="for_id_type" class="form-control">
-                            <option value="PN">RUN</option>
-                            <option value="PPN">Pasaporte</option>
-                            <option value="MR">N° ficha</option>
-                        </select>
-                    </fieldset>
-
-                    <fieldset class="form-group col-2">
-                        <label for="for_run">Run</label>
-                        <input type="text" class="form-control" name="run"
-                               id="for_run" required value="  ">
-                    </fieldset>
-
-                    <fieldset class="form-group col-1">
-                        <label for="for_dv">Dígito verificador</label>
-                        <input type="text" class="form-control" name="dv"
-                               id="for_dv" required value="">
-                    </fieldset>
-                </div>
-
+                <input type="hidden" name='human_name_use' value='official'>
                 <div class="form-row">
                     <fieldset class="form-group col-2">
                         <label for="for_name">Nombres</label>
                         <input type="text" class="form-control" name="text"
                                id="for_name" required
-                               value="{{ $patient->officialName }}">
+                               value="{{ $patient->actualOfficialHumanName->text }}">
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_fathers_family">Apellido Paterno</label>
                         <input type="text" class="form-control" name="fathers_family"
                                id="for_fathers_family" required
-                               value="{{ $patient->officialFathersFamily }}">
+                               value="{{ $patient->actualOfficialHumanName->fathers_family }}">
                     </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_mothers_family">Apellido Materno</label>
                         <input type="text" class="form-control" name="mothers_family"
                                id="for_mothers_family" required
-                               value="{{ $patient->officialMothersFamily }}">
+                               value="{{ $patient->actualOfficialHumanName->mothers_family }}">
                     </fieldset>
                 </div>
                 <div class="form-row">

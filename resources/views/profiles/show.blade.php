@@ -12,15 +12,12 @@
     </div>
 </div>
 
-@if($user)
+{{-- @if($user)
     {!! $user['text']['div'] !!}
-@else
-    <p><b>RUN:</b> {{ auth()->id() }}-{{ auth()->user()->dv }}</p>
+@else --}}
+    <p><b>RUN:</b> {{ auth()->user()->identifierRun->value }}-{{ auth()->user()->identifierRun->dv }}</p>
     <p><b>Nombre:</b> {{ auth()->user()->officialFullname }}</p>
-    <div class="alert alert-info" role="alert">
-        No encontramos información suya registrada en nuestra base de datos.
-    </div>
-@endif
+{{-- @endif --}}
 
 @can('Developer')
 <pre class="small">{{ print_r($user) }}</pre>

@@ -32,6 +32,7 @@ class CreateAddressesTable extends Migration
             $table->string('postal_code')->nullable();
             $table->string('country')->nullable(); /** should be deleted? */
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('address_id')->references('id')->on('addresses');
             $table->foreign('period_id')->references('id')->on('periods');

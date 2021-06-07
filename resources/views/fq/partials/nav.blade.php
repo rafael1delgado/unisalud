@@ -20,7 +20,7 @@
     </a>
 </h6>
 <ul class="nav flex-column">
-    {{-- @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
+    @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
         <li class="nav-item">
             <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.create') }}">
                 <i class="fas fa-plus"></i> Nueva Solicitud
@@ -46,15 +46,21 @@
                 </a>
             </li>
         @endcan
-    @endif --}}
+    @endif
+</ul>
 
-    @can('Fq: admin')
-        <li class="nav-item">
-            <a class="nav-link {{ active('fq.contact_user.create') }}" href="{{ route('fq.contact_user.create') }}">
-                <i class="fas fa-user-plus"></i> Crear contacto
-            </a>
-        </li>
-    @endcan
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>Encuentas</span>
+    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+    <!-- <span data-feather="plus-circle"></span> -->
+    </a>
+</h6>
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link {{ active('surveys.teleconsultation.create') }}" href="{{ route('surveys.teleconsultation.create') }}">
+            <i class="fas fa-laptop"></i> Habilitantes Teleconsulta
+        </a>
+    </li>
 </ul>
 
 <ul class="nav flex-column">

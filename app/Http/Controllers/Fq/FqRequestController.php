@@ -51,7 +51,7 @@ class FqRequestController extends Controller
 
     public function own_index()
     {
-        $contactUser = ContactUser::where('run', Auth::user()->run)->first();
+        $contactUser = ContactUser::where('user_id', Auth::user()->id)->first();
 
         $my_reqs = FqRequest::where('contact_user_id', $contactUser->id)
             ->latest()
@@ -68,8 +68,8 @@ class FqRequestController extends Controller
      */
     public function create()
     {
-        $contactUser = ContactUser::where('run', Auth::user()->run)->first();
-        return view('fq.request.create', compact('contactUser'));
+        $contactUsers = ContactUser::where('user_id', Auth::user()->id)->get();
+        return view('fq.request.create', compact('contactUsers'));
     }
 
     /**

@@ -13,16 +13,19 @@ class ContactUser extends Model
     use softDeletes;
 
     protected $fillable = [
-        'run', 'dv', 'name', 'fathers_family', 'mothers_family', 'email',
-        'telephone', 'telephone2', 'address', 'commune'
+        'user_id'
     ];
 
-    public function usersPatients() {
-        return $this->hasMany('\App\Models\Fq\UserPatient');
+    public function user() {
+        return $this->belongsTo('App\Models\User');
     }
 
+    // public function usersPatients() {
+    //     return $this->hasMany('\App\Models\Fq\UserPatient');
+    // }
+
     public static function getAmIContact(){
-        $contactUser = ContactUser::where('run', Auth::user()->run)->count();
+        $contactUser = ContactUser::where('user_id', Auth::user()->id)->count();
         return $contactUser;
     }
 

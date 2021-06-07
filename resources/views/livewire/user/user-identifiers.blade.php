@@ -17,14 +17,14 @@
                 </fieldset>
 
                 <fieldset class="form-group col-2">
-                    <label for="for_id_value">Run</label>
+                    <label for="for_id_value">Número</label>
                     <input type="text" class="form-control" name="id_value[]" wire:model='identifiers.{{$value}}.value' required
                         {{-- value=" {{substr(str_shuffle('1234567890'), 0, 8)}} " --}}
                         >
                 </fieldset>
 
                 <fieldset class=" form-group col-1">
-                    <label for="for_id_dv">Dígito verificador</label>
+                    <label for="for_id_dv">DV</label>
                     <input type="text" class="form-control" name="id_dv[]" wire:model='identifiers.{{$value}}.dv' 
                         {{-- value="{{substr(str_shuffle('1234567890k'), 0, 1)}}" --}}>
                 </fieldset>

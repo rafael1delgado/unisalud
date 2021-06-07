@@ -6,151 +6,161 @@
 
 <br>
 
-<h5>Ingreso de Contacto</h5>
+<h5><i class="fas fa-user-plus"></i> Crear Contacto</h5>
 
 <br>
 
-@if($request->has('search'))
-@foreach($user->humanNames->where('use', 'official') as $humanName)
-  {{ $humanName->text }}
-@endforeach
-@endif
+<!-- <div class="row">
+    <div class="col-6"> -->
+        <form method="GET" class="form-horizontal" action="{{ route('fq.contact_user.create') }}">
+            <div class="input-group mb-sm-0">
+                <input class="form-control" type="text" name="search" autocomplete="off"
+                  id="for_search" style="text-transform: uppercase;"
+                  placeholder="RUN (sin dígito verificador) / OTRA IDENTIFICACION / NOMBRE"
+                  value="{{ $request->search }}" required>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+            </div>
+        </form>
+    <!-- </div>
+</div> -->
 
-<form method="GET" class="form-horizontal" action="{{ route('fq.contact_user.create') }}">
-    <div class="input-group mb-sm-0">
-        <input class="form-control" type="text" name="search" autocomplete="off"
-          id="for_search" style="text-transform: uppercase;"
-          placeholder="RUN (sin dígito verificador) / OTRA IDENTIFICACION / NOMBRE"
-          value="{{ $request->search }}" required>
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
+<br>
+
+<div class="row">
+    <div class="col">
+    @if($user)
+        <div class="card">
+            <div class="card-body">
+                <h6><i class="fas fa-user"></i> Datos de Contacto</h6>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead class="table-info">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col" colspan="4">{{ $user->OfficialFullName }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Identificación</th>
+                                <td colspan="4">
+                                    @foreach($user->identifiers as $identifier)
+                                      {{ $identifier->value }}-{{ $identifier->dv }}
+                                    @endforeach
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Dirección</th>
+                                <td>
+                                  @foreach($user->addresses as $address)
+                                    {{ $address->text }} {{ $address->line }}<br>
+                                  @endforeach
+                                </td>
+                                <th scope="row">Departamento</th>
+                                <td>
+                                  @foreach($user->addresses as $address)
+                                    {{ $address->apartment }}<br>
+                                  @endforeach
+                                </td>
+                                <td>
+                                  @foreach($user->addresses as $address)
+                                    {{ $address->suburb }}<br>
+                                  @endforeach
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Comuna</th>
+                                <td colspan="4">
+                                  @foreach($user->addresses as $address)
+                                    {{ $address->city }}<br>
+                                  @endforeach
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Teléfono</th>
+                                <td colspan="4"></td>
+                            </tr>
+                          @foreach($user->contactPoints->where('system', 'email') as $contactPoint)
+                            <tr>
+                                <th scope="row">Correo</th>
+                                <td>{{ $contactPoint->value }}</td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <a href="{{ route('fq.contact_user.store', $user) }}" class="btn btn-primary float-right"><i class="fas fa-save"></i> Agregar a Contactos</a>
+            </div>
         </div>
+    @endif
     </div>
-</form>
-
-<br>
-
-<div class="card">
-  <div class="card-body">
-    <form method="POST" class="form-horizontal" action="{{ route('fq.contact_user.store') }}">
-        @csrf
-        @method('POST')
-
-        <div class="form-row">
-            <fieldset class="form-group col-sm-2">
-                <label for="for_run">RUT</label>
-                <input type="number" class="form-control" name="run" id="for_run" value=""
-                  required>
-            </fieldset>
-            <fieldset class="form-group col-sm-1">
-                <label for="for_dv">DV</label>
-                <input type="text" class="form-control" name="dv" id="for_dv" value=""
-                  required>
-            </fieldset>
-            <fieldset class="form-group col-5">
-                <label for="for_name">Nombres</label>
-                <input type="text" class="form-control" name="name" id="for_name" value=""
-                  required>
-            </fieldset>
-            <fieldset class="form-group col-2">
-                <label for="for_name">Apellido Paterno</label>
-                <input type="text" class="form-control" name="fathers_family" id="for_fathers_family" value=""
-                  required>
-            </fieldset>
-            <fieldset class="form-group col-2">
-                <label for="for_name">Apellido Materno</label>
-                <input type="text" class="form-control" name="mothers_family" id="for_mothers_family" value="">
-            </fieldset>
-        </div>
-
-        <div class="form-row">
-          <fieldset class="form-group col-sm-3">
-              <label for="for_email">Correo Electrónico</label>
-              <input type="text" class="form-control" name="email" id="for_email" placeholder="correo@mail.com"
-                required>
-          </fieldset>
-          <fieldset class="form-group col-sm-2">
-              <label for="for_telephone">Teléfono</label>
-              <input type="number" class="form-control" name="telephone" id="for_telephone" placeholder="9xxxxxxxx"
-                required>
-          </fieldset>
-          <fieldset class="form-group col-sm-2">
-              <label for="for_telephone2">Teléfono</label>
-              <input type="number" class="form-control" name="telephone2" id="for_telephone2" placeholder="9xxxxxxxx">
-          </fieldset>
-          <fieldset class="form-group col-sm-3">
-              <label for="for_address">Dirección</label>
-              <input type="text" class="form-control" name="address" id="for_address"
-                required>
-          </fieldset>
-          <fieldset class="form-group col-2">
-              <label for="for_commune">Comuna</label>
-              <select name="commune" id="for_commune" class="form-control" required>
-                  <option value="">Seleccione...</option>
-                  <option value="alto hospicio">Alto Hospicio</option>
-                  <option value="camina">Camiña</option>
-                  <option value="colchane">Colchane</option>
-                  <option value="huara">Huara</option>
-                  <option value="iquique">Iquique</option>
-                  <option value="pica">Pica</option>
-                  <option value="pozo almonte">Pozo Almonte</option>
-              </select>
-          </fieldset>
-        </div>
-      </form>
-  </div>
 </div>
-
 <br>
-
-<form method="POST" class="form-horizontal" action="{{ route('fq.contact_user.store') }}">
-    @csrf
-    @method('POST')
-
-    <h5>Ingreso de Paciente</h5>
-
-    <div class="form-row">
-        <fieldset class="form-group col-sm-2">
-            <label for="for_run_patient">RUT</label>
-            <input type="number" class="form-control" name="run_patient" id="for_run_patient" value=""
-              required>
-        </fieldset>
-        <fieldset class="form-group col-sm-1">
-            <label for="for_dv_patient">DV</label>
-            <input type="text" class="form-control" name="dv_patient" id="for_dv_patient" value=""
-              required>
-        </fieldset>
-        <fieldset class="form-group col-5">
-            <label for="for_name_patient">Nombres</label>
-            <input type="text" class="form-control" name="name_patient" id="for_name_patient" value=""
-              required>
-        </fieldset>
-        <fieldset class="form-group col-2">
-            <label for="for_name_patient">Apellido Paterno</label>
-            <input type="text" class="form-control" name="fathers_family_patient" id="for_fathers_family_patient" value=""
-              required>
-        </fieldset>
-        <fieldset class="form-group col-2">
-            <label for="for_name_patient">Apellido Materno</label>
-            <input type="text" class="form-control" name="mothers_family_patient" id="for_mothers_family_patient" value="">
-        </fieldset>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h6><i class="fas fa-user"></i> Listado de Contactos</h6>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead class="table-info">
+                            <tr>
+                                <th scope="col">Identificación</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Paciente</th>
+                                <th scope="col">Dirección</th>
+                                <th scope="col">Comuna</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                          @foreach($contactUsers as $contactUser)
+                            <tr>
+                              <td>
+                                @foreach($contactUser->user->identifiers as $identifier)
+                                  {{ $identifier->value }}-{{ $identifier->dv }}<br>
+                                @endforeach
+                              </td>
+                              <td>{{ $contactUser->user->OfficialFullName }}</td>
+                              <td></td>
+                              <td>
+                                @foreach($contactUser->user->addresses as $address)
+                                  {{ $address->text }}{{ $address->line }}<br>
+                                @endforeach
+                              </td>
+                              <td>
+                                @foreach($contactUser->user->addresses as $address)
+                                  {{ $address->city }}<br>
+                                @endforeach
+                              </td>
+                              <td>
+                                @foreach($contactUser->user->contactPoints->where('system', 'email') as $contactPoint)
+                                  {{ $contactPoint->value }}<br>
+                                @endforeach
+                              </td>
+                              <td>
+                                @foreach($contactUser->user->contactPoints->where('system', 'phone') as $contactPoint)
+                                  +56 {{ $contactPoint->value }}<br>
+                                @endforeach
+                              </td>
+                              <td>
+                                  <a href="" class="btn btn-outline-secondary btn-sm" title="Ir" target="_blank"> <i class="far fa-eye"></i></a>
+                              </td>
+                            </tr>
+                          @endforeach
+                        <tbody>
+                        <tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="form-row">
-        <fieldset class="form-group col-sm-2">
-            <label for="for_clinical_history_number">Nº Ficha</label>
-            <input type="number" class="form-control" name="clinical_history_number"
-              id="for_clinical_history_number" value="" required>
-        </fieldset>
-        <fieldset class="form-group col-sm-10">
-            <label for="for_observation">Observación</label>
-            <input type="text" class="form-control" name="observation" id="for_observation" value="">
-        </fieldset>
-    </div>
-
-    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> Guardar</button>
-
-</form>
+</div>
 
 @endsection
 

@@ -18,6 +18,9 @@ use App\Http\Controllers\Fq\CysticFibrosisRequest;
 use App\Http\Controllers\Fq\ContactUserController;
 use App\Http\Controllers\Fq\FqRequestController;
 
+use App\Http\Controllers\Surveys\TeleconsultationSurveyController;
+use App\Http\Controllers\Fq\FqPatientController;
+
 use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\RrhhController;
 use App\Http\Controllers\MedicalProgrammer\ContractController;
@@ -105,7 +108,7 @@ Route::prefix('fq')->as('fq.')->group(function(){
     Route::prefix('contact_user')->name('contact_user.')->middleware(['permission:Fq: admin'])->group(function(){
         Route::get('/', [ContactUserController::class, 'index'])->name('index');
         Route::get('/create', [ContactUserController::class, 'create'])->name('create');
-        Route::post('/store', [ContactUserController::class, 'store'])->name('store');
+        Route::get('/store/{user}', [ContactUserController::class, 'store'])->name('store');
     });
     Route::prefix('patient')->name('patient.')->group(function(){
         Route::get('/', [FqPatientController::class, 'index'])->name('index');
@@ -118,7 +121,14 @@ Route::prefix('fq')->as('fq.')->group(function(){
         Route::get('/create', [FqRequestController::class, 'create'])->name('create');
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
         Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')
-            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);;
+            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);
+    });
+});
+
+Route::prefix('surveys')->as('surveys.')->middleware('auth')->group(function(){
+    Route::prefix('teleconsultation')->name('teleconsultation.')->group(function(){
+        Route::get('/create', [TeleconsultationSurveyController::class, 'create'])->name('create');
+        Route::post('/store', [TeleconsultationSurveyController::class, 'store'])->name('store');
     });
 });
 

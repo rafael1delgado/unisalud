@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Fq;
+namespace App\Http\Controllers\Surveys;
 
-use App\Models\Fq\FqPatient;
+use App\Models\TeleconsultationSurvey;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class FqPatientController extends Controller
+class TeleconsultationSurveyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class FqPatientController extends Controller
      */
     public function create()
     {
-        //
+        return view('surveys.create');
     }
 
     /**
@@ -36,16 +36,16 @@ class FqPatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Fq\FqPatient  $fqPatient
+     * @param  \App\Models\TeleconsultationSurvey  $teleconsultationSurvey
      * @return \Illuminate\Http\Response
      */
-    public function show(FqPatient $fqPatient)
+    public function show(TeleconsultationSurvey $teleconsultationSurvey)
     {
         //
     }
@@ -53,10 +53,10 @@ class FqPatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Fq\FqPatient  $fqPatient
+     * @param  \App\Models\TeleconsultationSurvey  $teleconsultationSurvey
      * @return \Illuminate\Http\Response
      */
-    public function edit(FqPatient $fqPatient)
+    public function edit(TeleconsultationSurvey $teleconsultationSurvey)
     {
         //
     }
@@ -65,10 +65,10 @@ class FqPatientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Fq\FqPatient  $fqPatient
+     * @param  \App\Models\TeleconsultationSurvey  $teleconsultationSurvey
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FqPatient $fqPatient)
+    public function update(Request $request, TeleconsultationSurvey $teleconsultationSurvey)
     {
         //
     }
@@ -76,10 +76,10 @@ class FqPatientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Fq\FqPatient  $fqPatient
+     * @param  \App\Models\TeleconsultationSurvey  $teleconsultationSurvey
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FqPatient $fqPatient)
+    public function destroy(TeleconsultationSurvey $teleconsultationSurvey)
     {
         //
     }

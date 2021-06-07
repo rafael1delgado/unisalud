@@ -43,6 +43,15 @@
 
 <hr>
 
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ route('dummy.crear_usuario') }}">Proximas Solicitudes Agendadas</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('fq.request.agenda') }}"><i class="fas fa-calendar-alt"></i> Calendario</a>
+  </li>
+</ul>
+
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
