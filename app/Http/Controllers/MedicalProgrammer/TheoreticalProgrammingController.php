@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MedicalProgrammer;
 
 use App\Models\MedicalProgrammer\MotherActivity;
 use App\Models\MedicalProgrammer\Activity;
+use App\Models\MedicalProgrammer\SubActivity;
 use App\Models\MedicalProgrammer\Specialty;
 use App\Models\MedicalProgrammer\Profession;
 use App\Models\MedicalProgrammer\Service;
@@ -1029,4 +1030,35 @@ class TheoreticalProgrammingController extends Controller
 
         return view('medical_programmer.management.reports.programed_by_services',compact('array'));
     }
+
+
+    public function event_detail($rut, $activity_id,$contract_id,$specialty_id,$profession_id,$start_date,$end_date){
+      // dd(date("m/d/Y H:i", $start_date/1000));
+      // dd($rut,$activity_id,$contract_id,$specialty_id,$profession_id,date("m/d/Y H:i", $start_date/1000),date("m/d/Y H:i", $end_date/1000));
+
+      $theoreticalProgramming = TheoreticalProgramming::where('rut',$rut)
+                                                      ->where('activity_id',$activity_id)
+                                                      ->where('contract_id',$contract_id)
+                                                      // ->where('specialty_id',$specialty_id)
+                                                      ->when($specialty_id != "undefined", function ($q) use ($specialty_id) {
+                                                          return $q->where('specialty_id', $specialty_id);
+                                                      })
+                                                      // ->where('profession_id',$profession_id)
+                                                      ->when($profession_id != "undefined", function ($q) use ($profession_id) {
+                                                          return $q->where('profession_id', $profession_id);
+                                                      })
+                                                      ->where('start_date',Carbon::parse(date("m/d/Y H:i", $start_date/1000)))
+                                                      ->where('end_date',Carbon::parse(date("m/d/Y H:i", $end_date/1000)))
+                                                      ->first();
+
+      $subactivities = SubActivity::where('specialty_id',$specialty_id)->get();
+      // dd($subactivities);
+
+      return view('medical_programmer.management.event_detail',compact('theoreticalProgramming','subactivities'));
+    }
+    // public function event_detail($info){
+    //   dd($info);
+    //
+    // }
+
 }
