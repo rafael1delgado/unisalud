@@ -127,8 +127,11 @@ Route::prefix('fq')->as('fq.')->group(function(){
 
 Route::prefix('surveys')->as('surveys.')->middleware('auth')->group(function(){
     Route::prefix('teleconsultation')->name('teleconsultation.')->group(function(){
+        Route::get('/', [TeleconsultationSurveyController::class, 'index'])->name('index');
         Route::get('/create', [TeleconsultationSurveyController::class, 'create'])->name('create');
         Route::post('/store', [TeleconsultationSurveyController::class, 'store'])->name('store');
+        Route::get('/my_survey', [TeleconsultationSurveyController::class, 'my_survey'])->name('my_survey');
+        Route::get('/show/{teleconsultationSurvey}', [TeleconsultationSurveyController::class, 'show'])->name('show');
     });
 });
 

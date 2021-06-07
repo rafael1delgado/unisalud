@@ -51,9 +51,7 @@ class FqRequestController extends Controller
 
     public function own_index()
     {
-        $contactUser = ContactUser::where('user_id', Auth::user()->id)->first();
-
-        $my_reqs = FqRequest::where('contact_user_id', $contactUser->id)
+        $my_reqs = FqRequest::where('contact_user_id', Auth::user()->id)
             ->latest()
             ->get();
 
@@ -81,18 +79,20 @@ class FqRequestController extends Controller
     public function store(Request $request, ContactUser $contactUser)
     {
         $fqRequest = new FqRequest($request->All());
-        $fqRequest->contact_user_id = $contactUser->id;
+        $fqRequest->contact_user_id = $contactUser->user->id;
+        $fqRequest->patient_id = $request->patient_id;
         $fqRequest->status = 'pending';
         $fqRequest->save();
 
+
         // if (env('APP_ENV') == 'production') {
-            if($fqRequest->name == 'medicines'){
-                Mail::to(['valentina.andradea@redsalud.gob.cl'])->cc(['diego.leyton@redsalud.gob.cl', 'ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
-            }
-            else{
-                Mail::to(['ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
-            }
-        // }
+        //     if($fqRequest->name == 'medicines'){
+        //         Mail::to(['valentina.andradea@redsalud.gob.cl'])->cc(['diego.leyton@redsalud.gob.cl', 'ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
+        //     }
+        //     else{
+        //         Mail::to(['ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
+        //     }
+        // // }
 
         session()->flash('success', 'Se ha creado la solicitud exitosamente');
         return redirect()->route('fq.request.own_index');
