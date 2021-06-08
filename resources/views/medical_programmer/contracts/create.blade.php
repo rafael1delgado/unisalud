@@ -12,18 +12,18 @@
 
     <div class="row">
         <fieldset class="form-group col-4">
-            <label for="for_rut">Rut</label>
-            <input type="text" class="form-control" id="for_rut" disabled>
+            <label for="for_user_id">Rut</label>
+            <input type="text" class="form-control" id="for_user_id" disabled>
         </fieldset>
 
-        <input type="hidden" class="form-control" id="for_rut2" name="rut">
+        <input type="hidden" class="form-control" id="for_user_id2" name="user_id">
 
         <fieldset class="form-group col-8">
-            <label for="for_rrhh">Especialista</label>
+            <label for="for_user_id">Especialista</label>
             <select name="rrhh" id="rrhh" class="form-control selectpicker" required="" data-live-search="true" data-size="5">
               <option>--</option>
-              @foreach($rrhh as $trab)
-                <option value="{{$trab->rut}}">{{$trab->getFullNameAttribute()}}</option>
+              @foreach($users as $user)
+                <option value="{{$user->id}}">{{$user->OfficialFullName}}</option>
               @endforeach
             </select>
         </fieldset>
@@ -157,8 +157,8 @@
 
 <script>
 $( "#rrhh" ).change(function() {
-  $( "#for_rut" ).val($( "#rrhh" ).val());
-  $( "#for_rut2" ).val($( "#rrhh" ).val());
+  $( "#for_user_id" ).val($( "#rrhh" ).val());
+  $( "#for_user_id2" ).val($( "#rrhh" ).val());
 });
 </script>
 @endsection

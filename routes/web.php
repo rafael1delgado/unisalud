@@ -157,10 +157,10 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::get('/', [RrhhController::class, 'index'])->name('index');
     Route::post('/', [RrhhController::class, 'store'])->name('store');
     Route::get('/create', [RrhhController::class, 'create'])->name('create');
-    Route::get('/{rrhh}', [RrhhController::class, 'show'])->name('show');
-    Route::put('/{rrhh}', [RrhhController::class, 'update'])->name('update');
-    Route::delete('/{rrhh}', [RrhhController::class, 'destroy'])->name('destroy');
-    Route::get('/{rrhh}/edit', [RrhhController::class, 'edit'])->name('edit');
+    Route::get('/{user}', [RrhhController::class, 'show'])->name('show');
+    Route::put('/{user}', [RrhhController::class, 'update'])->name('update');
+    Route::delete('/{user}', [RrhhController::class, 'destroy'])->name('destroy');
+    Route::get('/{user}/edit', [RrhhController::class, 'edit'])->name('edit');
   });
 
   Route::prefix('contracts')->name('contracts.')->group(function(){

@@ -8,11 +8,11 @@
     @csrf
     @method('POST')
 
-    <div class="row">
+    <!-- <div class="row">
         <fieldset class="form-group col-4">
             <input type="checkbox" name="user_create" id="user_create" checked> Crear como usuario
         </fieldset>
-    </div>
+    </div> -->
 
     <div class="row">
 
@@ -27,8 +27,8 @@
         </fieldset>
 
         <fieldset class="form-group col-3">
-            <label for="for_barcode">Rut</label>
-            <input type="text" class="form-control" id="for_rut" placeholder="Rut" name="rut" required="">
+            <label for="for_value">Rut</label>
+            <input type="text" class="form-control" id="for_value" placeholder="Rut" name="value" required="">
         </fieldset>
 
         <fieldset class="form-group col-1">
@@ -65,8 +65,8 @@
 
     <div class="row">
         <fieldset class="form-group col-4">
-          <label for="for_name">Nombre</label>
-          <input type="text" class="form-control" id="for_name" placeholder="" name="name" required="">
+          <label for="for_text">Nombre</label>
+          <input type="text" class="form-control" id="for_text" placeholder="" name="text" required="">
         </fieldset>
 
         <fieldset class="form-group col-4">

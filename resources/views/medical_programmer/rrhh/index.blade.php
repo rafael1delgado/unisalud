@@ -13,9 +13,9 @@
         <tr>
             <th>RUT</th>
             <th>DV</th>
-            <th>Nombe</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
+            <th>Nombre</th>
+            <!-- <th>Apellido Paterno</th>
+            <th>Apellido Materno</th> -->
             <th>Función</th>
             <th></th>
         </tr>
@@ -23,11 +23,11 @@
     <tbody>
         @foreach( $rrhh as $people)
         <tr>
-            <td>{{ $people->rut }}</td>
-            <td>{{ $people->dv }}</td>
-            <td>{{ $people->name }}</td>
-            <td>{{ $people->fathers_family }}</td>
-            <td>{{ $people->mothers_family }}</td>
+            <td>{{ $people->IdentifierRun->value }}</td>
+            <td>{{ $people->IdentifierRun->dv }}</td>
+            <td>{{ $people->OfficialFullName }}</td>
+            <!-- <td>{{ $people->fathers_family }}</td>
+            <td>{{ $people->mothers_family }}</td> -->
             <td>{{ $people->job_title }}</td>
             <td>
       				<a href="{{ route('medical_programmer.rrhh.edit', $people) }}"

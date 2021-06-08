@@ -40,14 +40,11 @@ class TheoreticalProgrammingController extends Controller
         //primer form
       if ($request->get('date')) {
         $date = $request->get('date');
-        // $year = $request->get('year');
         $year = date('Y', strtotime($date));
-        // dd($year);
         $rut = $request->get('rut');
       }
       elseif ($request->get('date2')) {
         $date = $request->get('date2');
-        // $year = $request->get('year');
         $year = date('Y', strtotime($date));
         $rut= $request->get('rut');
       }
@@ -60,24 +57,24 @@ class TheoreticalProgrammingController extends Controller
       }
 
 
-    $motherActivities = MotherActivity::where('id',2)->get();
-    $ids_actividades = $motherActivities->first()->activities->pluck('id')->toArray(); //se obtienen actividades de pabellón teórico
+      $motherActivities = MotherActivity::where('id',2)->get();
+      $ids_actividades = $motherActivities->first()->activities->pluck('id')->toArray(); //se obtienen actividades de pabellón teórico
 
-    //obtengo usuario propio
-    $users = User::find(Auth::id());
+      //obtengo usuario propio
+      $users = User::find(Auth::id());
 
-    // //obtengo rrhh segun especalidades asociadas al usuario logeado
-    // $rrhhs = Rrhh::whereHas('contracts', function ($query) use ($year) {
-    //                 return $query->where('year',$year);
-    //             })
-    //             // ->whereHas('unscheduled_programmings', function ($query) use ($users) {
-    //             //     return $query->whereHas('specialty', function ($query) use ($users) {
-    //             //         return $query->whereIn('specialty_id',$users->getSpecialtiesArray());
-    //             //     });
-    //             // })
-    //             ->orderby('name','ASC')->get();
+      // //obtengo rrhh segun especalidades asociadas al usuario logeado
+      // $rrhhs = Rrhh::whereHas('contracts', function ($query) use ($year) {
+      //                 return $query->where('year',$year);
+      //             })
+      //             // ->whereHas('unscheduled_programmings', function ($query) use ($users) {
+      //             //     return $query->whereHas('specialty', function ($query) use ($users) {
+      //             //         return $query->whereIn('specialty_id',$users->getSpecialtiesArray());
+      //             //     });
+      //             // })
+      //             ->orderby('name','ASC')->get();
 
-    // dd(UserSpecialty::select('user_id')->groupBy('user_id')->get()->toArray());
+      // dd(UserSpecialty::select('user_id')->groupBy('user_id')->get()->toArray());
 
     //si es admin, se devuelve todo, si no, se devuelve lo configurado
     if (Auth::user()->hasPermissionTo('Medical Programmer: administrator')) {
@@ -1035,8 +1032,7 @@ class TheoreticalProgrammingController extends Controller
 
 
     public function event_detail($rut, $activity_id,$contract_id,$specialty_id,$profession_id,$start_date,$end_date,$year){
-
-      $theoreticalProgramming = TheoreticalProgramming::where('rut',$rut)
+      $theoreticalProgramming = TheoreticalProgramming::where('user_id',$rut)
                                                       ->where('activity_id',$activity_id)
                                                       ->where('contract_id',$contract_id)
                                                       // ->where('specialty_id',$specialty_id)

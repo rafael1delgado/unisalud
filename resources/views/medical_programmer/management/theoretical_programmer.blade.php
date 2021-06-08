@@ -97,7 +97,7 @@ bottom: 5px;
         <select name="rut" id="rut" class="form-control selectpicker" required="" onchange="this.form.submit()" data-live-search="true" data-size="5">
           <option>--</option>
           @foreach($rrhhs as $rrhh)
-            <option value="{{$rrhh->rut}}" {{ $rrhh->rut == $request->rut ? 'selected' : '' }}>{{$rrhh->getFullNameAttribute()}}</option>
+            <option value="{{$rrhh->id}}" {{ $rrhh->id == $request->rut ? 'selected' : '' }}>{{$rrhh->OfficialFullName}}</option>
           @endforeach
         </select>
     </fieldset>
@@ -468,12 +468,12 @@ bottom: 5px;
               @if($theoricalProgramming->subactivity)
                   { id: '{{$theoricalProgramming->activity_id}}', title: '{{$theoricalProgramming->subactivity->sub_activity_name}}',
                     start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                    description: 'teorico', color:'#85C1E9'
+                    description: 'teorico', color:'#F7DC6F'
                   },
               @else
                   { id: '{{$theoricalProgramming->activity_id}}', title: '{{$theoricalProgramming->activity->activity_name}}',
                     start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                    description: 'teorico', color:'#F7DC6F'
+                    description: 'teorico', color:'#85C1E9'
                   },
               @endif
 
