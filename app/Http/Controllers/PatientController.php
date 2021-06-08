@@ -250,9 +250,9 @@ class PatientController extends Controller
                         $address->apartment = $request->address_apartment[$key];
                         $address->suburb = $request->suburb[$key];
                         $address->city = $request->city[$key];
-                        $address->district = $request->district[$key];
-                        $address->state = $request->state[$key];
-                        $address->country = $request->country[$key];
+                        $address->commune_id = $request->district[$key];
+                        $address->region_id = $request->state[$key];
+                        $address->country_id = $request->country[$key];
                         $address->save();
                     }
                 }
