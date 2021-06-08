@@ -22,8 +22,10 @@ class CreateMedicalLicencesTable extends Migration
             $table->string("tipo_licencia");
             $table->string("tipo_reposo");
             $table->string("lugar_reposo");
+            $table->string("reposo_parcial");
             $table->date("fecha_inicio_reposo");
             $table->timestamps();
+            $table->softDeletes();//para softdelte
         });
         //fin
     }

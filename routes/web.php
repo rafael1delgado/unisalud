@@ -339,8 +339,8 @@ Route::prefix('dummy')->name('dummy.')->group(function(){
 });
 
 Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
-  Route::get ('/create',[MedicalLicenceController::class,'create'])->name('create');
-  Route::post ('/',[MedicalLicenceController::class,'store'])->name('store');
-
-
+    Route::get('/find-user',[MedicalLicenceController::class,'findUserForm'])->name('find-user-form');
+    Route::post('/find-user',[MedicalLicenceController::class,'findUser'])->name('find-user');
+    Route::get('/create/{user}',[MedicalLicenceController::class,'create'])->name('create');
+    Route::post('/',[MedicalLicenceController::class,'store'])->name('store');
 });

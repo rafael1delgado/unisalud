@@ -5,9 +5,24 @@
 @section('content')
 
 <!--inicio-->
+
+{{ $user->birthday }}
+
+<input type="text" class="form-control" name="id" value="{{ $user->id }}">
+
+<div class="form-row">
+    <div class="form-group col-md-5">
+       <label for="for-rut">RUT</label>
+       <input type="number" class="form-control" name="rut" id="rut">
+    </div>
+    <div class="form-group col-md-3">
+        <label for="">&nbsp;</label>
+        <button type="submit" class="btn btn-primary form-control">Buscar</button>
+    </div>
+</div>
+
 <form method="post" action="{{route('medical_licence.store')}}">
 @csrf
-
 <div class="form-row">
     <div class="form-group col-md-5">
        <label for="for-fecha_inicio_reposo">FECHA INICIO REPOSO</label>
@@ -86,6 +101,7 @@
                 <th>N° de días</th>
                 <th>Tipo de licencia</th>
                 <th>Tipo de reposo</th>
+                <th>Reposo parcial</th>
                 <th>Lugar de reposo</th>
             </t>
         </thead>
@@ -96,6 +112,7 @@
                 <td>{{ $ml->n_dias}}</td>
                 <td>{{ $ml->tipo_licencia}}</td>
                 <td>{{ $ml->tipo_reposo}}</td>
+                <td>{{ $ml->reposo_parcial}}</td>
                 <td>{{ $ml->lugar_reposo}}</td>
             </tr>
             @endforeach
