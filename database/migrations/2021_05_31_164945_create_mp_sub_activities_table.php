@@ -27,6 +27,10 @@ class CreateMpSubActivitiesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::table('mp_theoretical_programming', function (Blueprint $table) {
+            $table->string('sub_activity_id')->after('activity_id')->nullable();
+        });
     }
 
     /**
@@ -37,5 +41,9 @@ class CreateMpSubActivitiesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('mp_sub_activities');
+
+        Schema::table('mp_theoretical_programming', function (Blueprint $table) {
+            $table->dropColumn('sub_activity_id');
+        });
     }
 }

@@ -465,10 +465,15 @@ bottom: 5px;
       events: [
           @foreach ($theoreticalProgrammings as $key => $theoricalProgramming)
             //teóricos
-              @if($theoricalProgramming->activity)
+              @if($theoricalProgramming->subactivity)
+                  { id: '{{$theoricalProgramming->activity_id}}', title: '{{$theoricalProgramming->subactivity->sub_activity_name}}',
+                    start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
+                    description: 'teorico', color:'#85C1E9'
+                  },
+              @else
                   { id: '{{$theoricalProgramming->activity_id}}', title: '{{$theoricalProgramming->activity->activity_name}}',
                     start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                    description: 'teorico'
+                    description: 'teorico', color:'#F7DC6F'
                   },
               @endif
 
@@ -823,7 +828,7 @@ bottom: 5px;
         var specialty_id = $("#for_specialty_id"). val();
         var profession_id = $("#for_profession_id"). val();
 
-        window.open('theoretical_programming/event_detail/'+rut+"/"+activity_id+"/"+contract_id+"/"+specialty_id+"/"+profession_id+"/"+start_date+"/"+end_date,'_blank');
+        window.open('theoretical_programming/event_detail/'+rut+"/"+activity_id+"/"+contract_id+"/"+specialty_id+"/"+profession_id+"/"+start_date+"/"+end_date+"/"+year,"_self");
       },
 
       //######## redimención de eventos

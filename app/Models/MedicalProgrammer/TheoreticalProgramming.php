@@ -17,7 +17,7 @@ class TheoreticalProgramming extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'id', 'contract_id', 'rut', 'specialty_id', 'activity_id', 'profession_id', 'start_date','end_date',
+        'id', 'contract_id', 'rut', 'specialty_id', 'activity_id', 'sub_activity_id', 'profession_id', 'start_date','end_date',
         // 'week_day', 'start_time', 'end_time',
         'performance', 'year', 'contract_day_type'
     ];
@@ -45,6 +45,11 @@ class TheoreticalProgramming extends Model implements Auditable
     public function activity()
     {
         return $this->belongsTo('App\Models\MedicalProgrammer\Activity');
+    }
+
+    public function subactivity()
+    {
+        return $this->belongsTo('App\Models\MedicalProgrammer\SubActivity','sub_activity_id');
     }
 
     public function profession()

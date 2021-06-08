@@ -1032,9 +1032,7 @@ class TheoreticalProgrammingController extends Controller
     }
 
 
-    public function event_detail($rut, $activity_id,$contract_id,$specialty_id,$profession_id,$start_date,$end_date){
-      // dd(date("m/d/Y H:i", $start_date/1000));
-      // dd($rut,$activity_id,$contract_id,$specialty_id,$profession_id,date("m/d/Y H:i", $start_date/1000),date("m/d/Y H:i", $end_date/1000));
+    public function event_detail($rut, $activity_id,$contract_id,$specialty_id,$profession_id,$start_date,$end_date,$year){
 
       $theoreticalProgramming = TheoreticalProgramming::where('rut',$rut)
                                                       ->where('activity_id',$activity_id)
@@ -1051,14 +1049,114 @@ class TheoreticalProgrammingController extends Controller
                                                       ->where('end_date',Carbon::parse(date("m/d/Y H:i", $end_date/1000)))
                                                       ->first();
 
-      $subactivities = SubActivity::where('specialty_id',$specialty_id)->get();
+      $subactivities = SubActivity::where('specialty_id',$specialty_id)
+                                  ->where('activity_id',$activity_id)
+                                  ->get();
       // dd($subactivities);
 
       return view('medical_programmer.management.event_detail',compact('theoreticalProgramming','subactivities'));
     }
-    // public function event_detail($info){
-    //   dd($info);
-    //
-    // }
+
+    public function editMyEvent(Request $request){
+
+      $theoreticalProgramming = TheoreticalProgramming::find($request->id);
+      $year = $theoreticalProgramming->year;
+      $first_date = new Carbon($theoreticalProgramming->start_date);
+      $last_date = new Carbon($theoreticalProgramming->end_date);
+
+      if ($request->action == "Esta semana") {
+
+        $theoreticalProgramming->sub_activity_id = $request->sub_activity_id;
+        $theoreticalProgramming->save();
+
+      }elseif($request->action == "Todas las semanas"){
+        while (date('Y', strtotime($first_date)) == $year) {
+              $theoreticalProgrammingUpdt = TheoreticalProgramming::where('rut',$theoreticalProgramming->rut)
+                                                              ->where('activity_id',$theoreticalProgramming->activity_id)
+                                                              ->where('contract_id',$theoreticalProgramming->contract_id)
+                                                              ->where('specialty_id',$theoreticalProgramming->specialty_id)
+                                                              ->where('profession_id',$theoreticalProgramming->profession_id)
+                                                              ->where('start_date',$first_date)
+                                                              ->where('end_date',$last_date)->first();
+              if ($theoreticalProgrammingUpdt != null) {
+                $theoreticalProgrammingUpdt->sub_activity_id = $request->sub_activity_id;
+                $theoreticalProgrammingUpdt->save();
+              }
+
+              $first_date = $first_date->addWeek(1);
+              $last_date = $last_date->addWeek(1);
+          }
+      }elseif($request->action == "Semana volante"){
+        while (date('Y', strtotime($first_date)) == $year) {
+              $theoreticalProgrammingUpdt = TheoreticalProgramming::where('rut',$theoreticalProgramming->rut)
+                                                              ->where('activity_id',$theoreticalProgramming->activity_id)
+                                                              ->where('contract_id',$theoreticalProgramming->contract_id)
+                                                              ->where('specialty_id',$theoreticalProgramming->specialty_id)
+                                                              ->where('profession_id',$theoreticalProgramming->profession_id)
+                                                              ->where('start_date',$first_date)
+                                                              ->where('end_date',$last_date)->first();
+              if ($theoreticalProgrammingUpdt != null) {
+                $theoreticalProgrammingUpdt->sub_activity_id = $request->sub_activity_id;
+                $theoreticalProgrammingUpdt->save();
+              }
+
+              $first_date = $first_date->addWeek(6);
+              $last_date = $last_date->addWeek(6);
+          }
+      }
+
+      $parametros = explode("?", $request->url);
+      return redirect()->route('medical_programmer.theoretical_programming.index', $parametros[1]);
+    }
+
+    public function deleteMyEventId(Request $request){
+
+      $theoreticalProgramming = TheoreticalProgramming::find($request->id);
+      $year = $theoreticalProgramming->year;
+      $first_date = new Carbon($theoreticalProgramming->start_date);
+      $last_date = new Carbon($theoreticalProgramming->end_date);
+
+      if ($request->action == "Esta semana") {
+        $theoreticalProgramming->delete();
+
+      }elseif($request->action == "Todas las semanas"){
+        while (date('Y', strtotime($first_date)) == $year) {
+              $theoreticalProgrammingDelete = TheoreticalProgramming::where('rut',$theoreticalProgramming->rut)
+                                                              ->where('activity_id',$theoreticalProgramming->activity_id)
+                                                              ->where('contract_id',$theoreticalProgramming->contract_id)
+                                                              ->where('specialty_id',$theoreticalProgramming->specialty_id)
+                                                              ->where('profession_id',$theoreticalProgramming->profession_id)
+                                                              ->where('start_date',$first_date)
+                                                              ->where('end_date',$last_date)->first();
+              if ($theoreticalProgrammingDelete != null) {
+                $theoreticalProgrammingDelete->delete();
+              }
+
+              $first_date = $first_date->addWeek(1);
+              $last_date = $last_date->addWeek(1);
+          }
+      }elseif($request->action == "Semana volante"){
+        while (date('Y', strtotime($first_date)) == $year) {
+              $theoreticalProgrammingDelete = TheoreticalProgramming::where('rut',$theoreticalProgramming->rut)
+                                                              ->where('activity_id',$theoreticalProgramming->activity_id)
+                                                              ->where('contract_id',$theoreticalProgramming->contract_id)
+                                                              ->where('specialty_id',$theoreticalProgramming->specialty_id)
+                                                              ->where('profession_id',$theoreticalProgramming->profession_id)
+                                                              ->where('start_date',$first_date)
+                                                              ->where('end_date',$last_date)->first();
+              if ($theoreticalProgrammingDelete != null) {
+                $theoreticalProgrammingDelete->delete();
+              }
+
+              $first_date = $first_date->addWeek(6);
+              $last_date = $last_date->addWeek(6);
+          }
+      }
+
+
+
+      $parametros = explode("?", $request->url);
+      return redirect()->route('medical_programmer.theoretical_programming.index', $parametros[1]);
+    }
 
 }
