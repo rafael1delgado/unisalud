@@ -134,6 +134,12 @@ class User extends Authenticatable
         });
     }
 
+    public static function getUserByRun($run){
+        return User::whereHas('identifiers', function($query) use ($run) { 
+            return $query->where('value',$run)->where('cod_con_identifier_type_id', 1); 
+        })->first();
+    }
+
     //Programador (relaciones)
     public function userSpecialties()
     {

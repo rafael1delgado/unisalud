@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -27,6 +30,48 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+
+    public function login()
+    {
+        return view('auth.login');
+    }
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'run' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        /*
+        * Limpiar run y quitar el DV
+        */
+        $credentials['run'] = str_replace('.','',$credentials['run']);
+        $credentials['run'] = str_replace('-','',$credentials['run']);
+        $credentials['run'] = substr($credentials['run'], 0, -1);
+
+        $user = User::getUserByRun($credentials['run']);
+
+        if($user) {
+            unset($credentials['run']);
+            $credentials['id'] = $user->id;
+
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+    
+                return redirect()->intended('home');
+            }
+    
+            return back()->withErrors([
+                'run' => 'Clave incorrecta',
+            ]);
+        }
+        else {
+            return redirect()->back()->withErrors(['No existe el usuario']);;
+        }
+        
+    }
 
     /**
      * Create a new controller instance.
