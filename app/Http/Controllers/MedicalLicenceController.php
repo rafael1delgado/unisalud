@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RRHH\MedicalLicence;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class MedicalLicenceController extends Controller
 {
@@ -17,17 +18,36 @@ class MedicalLicenceController extends Controller
         //
     }
 
+    /** de tipo get */
+    public function findUserForm() {
+        return view('rrhh.medical_licence.finduser');
+    }
+
+    public function findUser(Request $request) {
+
+        $user = User::getUserByRun($request->input('run'));
+
+        if($user) {
+            return redirect()->route('medical_licence.create',[$user]);
+        }
+        else {
+            return back()->withErrors(['No se ha encontrado el usuario en la base de datos']);
+        }
+        
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(User $user)
     {
         //
-        $medicalLicences =MedicalLicence::all();
+        $medicalLicences = MedicalLicence::all();
         //inicio
-        return view ('rrhh.medical_licence.create', compact('medicalLicences'));
+        return view ('rrhh.medical_licence.create', compact('medicalLicences','user'));
         //fin
     }
 
