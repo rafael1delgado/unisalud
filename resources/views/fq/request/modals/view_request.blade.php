@@ -1,9 +1,9 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal-{{ $fqRequest->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Detalle de Solicitud</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -106,6 +106,30 @@
             </table>
         </div>
 
+        @if($fqRequest->name == 'dispensing')
+            <h6><i class="fas fa-capsules"></i> Medicamentos o Insumos Solicitados</h6>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="text-center">
+                              <td>#</td>
+                              <td>Medicamento</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach($fqRequest->fq_medicines as $key => $fq_medicine)
+                            <tr>
+                              <td>{{ $key+1 }}</td>
+                              <td>{{ $fq_medicine->medicine->name }}</td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+        @endif
+
         @if($fqRequest->status == 'pending' && (Gate::check('Fq: Answer request') ||
                                                 Gate::check('Fq: Answer request medicines') ||
                                                 Gate::check('Fq: admin')))
@@ -116,7 +140,8 @@
             <div class="form-row">
                 <fieldset class="form-group col-sm-3">
                     <label for="for_attention">Tipo de Atención</label>
-                    <select name="attention" id="for_attention" class="form-control" required>
+                    <select name="attention" id="for_attention" class="form-control"
+                      onchange="myFunction()" @if($fqRequest->name != 'specialty hours') disabled @endif>
                         <option value="">Seleccione...</option>
                         <option value="face-to-face">Presencial</option>
                         <option value="teleconsultation">Teleconsulta</option>
@@ -130,7 +155,8 @@
 
                 <fieldset class="form-group col-sm-6">
                     <label for="for_link">Link</label>
-                    <input type="text" class="form-control" name="link" id="for_link">
+                    <input type="text" class="form-control" name="link" id="for_link"
+                      @if($fqRequest->name != 'specialty hours') disabled @endif>
                 </fieldset>
             </div>
 
@@ -171,40 +197,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-    $('#for_link').attr("disabled", true);
-    //$('#for_link').prop( "disabled", true );
-
-    jQuery('select[name=name]').change(function(){
-        var fieldsetName = $(this).val();
-        switch(this.value){
-            case "specialty hours":
-                $('#for_specialties').attr("disabled", false);
-                $('#for_prescription_file').attr("disabled", true);
-                document.getElementById('for_prescription_file').value = '';
-                $('#farm').hide();
-                break;
-
-            case "dispensing":
-                $('#for_prescription_file').attr("disabled", false);
-                $('#farm').show();
-                $('#for_specialties').attr("disabled", true);
-                document.getElementById('for_specialties').value = '';
-                $('#for_other_specialty').attr("disabled", true);
-                document.getElementById('for_other_specialty').value = '';
-                break;
-
-            default:
-                $('#for_specialties').attr("disabled", true);
-                document.getElementById('for_specialties').value = '';
-                $('#for_other_specialty').attr("disabled", true);
-                document.getElementById('for_other_specialty').value = '';
-                $('#for_prescription_file').attr("disabled", true);
-                document.getElementById('for_prescription_file').value = '';
-                $('#farm').hide();
-
-                break;
-        }
-    });
-</script>

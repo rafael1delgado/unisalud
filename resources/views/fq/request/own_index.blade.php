@@ -4,7 +4,6 @@
 
 @section('content')
 
-{{-- @include('fq.partials.nav') --}}
 <br>
 
 <h5><i class="fas fa-inbox"></i> Mis Solicitudes</h5>
@@ -13,6 +12,7 @@
     <table class="table table-sm table-striped table-bordered">
         <thead class="text-center">
             <tr>
+                <th></th>
                 <th style="width: 11%">Fecha</th>
                 <th>Estado</th>
                 <th>Motivo de Solicitud</th>
@@ -23,6 +23,14 @@
         <tbody>
             @foreach($my_reqs as $fqRequest)
             <tr>
+                <td class="text-center">
+                    @if($fqRequest->status == 'pending')
+                      <i class="fas fa-clock fa-lg"></i>
+                    @endif
+                    @if($fqRequest->status == 'complete')
+                      <i class="fas fa-check-circle fa-lg" style="color: green"></i>
+                    @endif
+                </td>
                 <td>{{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ $fqRequest->StatusValue }}</td>
                 <td>{{ $fqRequest->NameValue }}</td>
@@ -55,7 +63,7 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
-            allDaySlot: false,
+            allDaySlot: true,
             firstDay: 1,
 
             slotMinTime: "08:00:00",
@@ -73,188 +81,16 @@
               meridiem: 'short'
             },
 
+
             events: [
-
+              @foreach($my_reqs->where('status', 'complete') as $fqRequest)
                 {
-
-                title: 'Control',
-                start: '2021-05-24T08:00:00',
-                end: '2021-05-24T12:00:00'
+                title: '{{ $fqRequest->NameValue }}',
+                description: '{{ $fqRequest->SpecialtiesValue }}',
+                start: '{{ $fqRequest->date_confirm->format("Y-m-d\TH:i:s") }}',
+                end: '{{ $fqRequest->date_confirm->addMinutes(20)->format("Y-m-d\TH:i:s") }}'
                 },
-                {
-
-                title: 'Almuerzo',
-                start: '2021-05-24T12:00:00',
-                end: '2021-05-24T12:45:00',
-                color: 'gray',
-
-
-                },
-
-                {
-
-                title: 'Nueva',
-                start: '2021-05-24T12:45:00',
-                end: '2021-05-24T16:30:00',
-                color: 'yellow',
-                textColor:'black'
-                },
-                {
-
-                title: 'Pabellon',
-                start: '2021-05-25T08:00:00',
-                end: '2021-05-25T15:00:00',
-                color: 'pink',
-                textColor:'black'
-                },
-
-                {
-                title: 'Control',
-                start: '2021-05-26T08:00:00',
-                end: '2021-05-26T12:00:00'
-                },
-                {
-
-                title: 'Almuerzo',
-                start: '2021-05-26T12:00:00',
-                end: '2021-05-26T12:45:00',
-                color: 'gray',
-                },
-                {
-                title: 'Nueva',
-                start: '2021-05-26T12:45:00',
-                end: '2021-05-26T16:30:00',
-                color: 'yellow',
-                textColor:'black'
-                },
-                {
-                title: 'Reunión',
-                start: '2021-05-27T08:00:00',
-                end: '2021-05-27T09:00:00',
-                color: 'purple',
-                },
-                {
-                title: 'Otras Actividades',
-                start: '2021-05-27T09:00:00',
-                end: '2021-05-27T12:00:00',
-                color: 'orange',
-                textColor:'black'
-                },
-                {
-
-                title: 'Almuerzo',
-                start: '2021-05-27T12:00:00',
-                end: '2021-05-27T12:45:00',
-                color: 'gray',
-                },
-                {
-                title: 'Control',
-                start: '2021-05-27T12:45:00',
-                end: '2021-05-27T16:30:00'
-                },
-                {
-                title: 'Control',
-                start: '2021-05-28T08:00:00',
-                end: '2021-05-28T12:00:00'
-                },
-                {
-
-                title: 'Almuerzo',
-                start: '2021-05-28T12:00:00',
-                end: '2021-05-28T12:45:00',
-                color: 'gray',
-                },
-                {
-                title: 'Control',
-                start: '2021-05-31T08:00:00',
-                end: '2021-05-31T12:00:00'
-                },
-                {
-
-                title: 'Almuerzo',
-                start: '2021-05-31T12:00:00',
-                end: '2021-05-31T12:45:00',
-                color: 'gray',
-
-
-                },
-
-                {
-
-                title: 'Nueva',
-                start: '2021-05-31T12:45:00',
-                end: '2021-05-31T16:30:00',
-                color: 'yellow',
-                textColor:'black'
-                },
-                {
-
-                title: 'Pabellon',
-                start: '2021-06-01T08:00:00',
-                end: '2021-06-01T14:00:00',
-                color: 'pink',
-                textColor:'black'
-                },
-
-                {
-                title: 'Control',
-                start: '2021-06-02T08:00:00',
-                end: '2021-06-02T12:00:00'
-                },
-                {
-
-                title: 'Almuerzo',
-                start: '2021-06-02T12:00:00',
-                end: '2021-06-02T12:45:00',
-                color: 'gray',
-                },
-                {
-                title: 'Nueva',
-                start: '2021-06-02T12:45:00',
-                end: '2021-06-02T16:30:00',
-                color: 'yellow',
-                textColor:'black'
-                },
-                {
-                title: 'Reunión',
-                start: '2021-06-03T08:00:00',
-                end: '2021-06-03T09:00:00',
-                color: 'purple',
-                },
-                {
-                title: 'Otras Actividades',
-                start: '2021-06-03T09:00:00',
-                end: '2021-06-03T12:00:00',
-                color: 'orange',
-                textColor:'black'
-                },
-                {
-
-                title: 'Almuerzo',
-                start: '2021-06-03T12:00:00',
-                end: '2021-06-03T12:45:00',
-                color: 'gray',
-                },
-                {
-                title: 'Control',
-                start: '2021-06-03T12:45:00',
-                end: '2021-06-03T16:30:00'
-                },
-                {
-                title: 'Control',
-                start: '2021-06-04T08:00:00',
-                end: '2021-06-04T12:00:00'
-                },
-                {
-
-                title: 'Almuerzo',
-                start: '2021-06-04T12:00:00',
-                end: '2021-06-04T12:45:00',
-                color: 'gray',
-                },
-
-
-
+              @endforeach
             ]
         });
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExtMedicinesTable extends Migration
+class CreateFqMedicinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateExtMedicinesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ext_medicines', function (Blueprint $table) {
+        Schema::create('fq_medicines', function (Blueprint $table) {
             $table->id();
 
-            $table->string('health_strategy')->nullable();
-            $table->string('code')->nullable();
-            $table->string('name')->nullable();
+            $table->foreignId('request_id');
+            $table->foreignId('medicines_id');
+
+            $table->foreign('request_id')->references('id')->on('fq_requests');
+            $table->foreign('medicines_id')->references('id')->on('ext_medicines');
 
             $table->timestamps();
             $table->softDeletes();
@@ -32,6 +34,6 @@ class CreateExtMedicinesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ext_medicines');
+        Schema::dropIfExists('fq_medicines');
     }
 }

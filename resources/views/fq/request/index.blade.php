@@ -14,6 +14,7 @@
     <table class="table table-sm table-striped table-bordered">
         <thead class="text-center">
             <tr>
+                <th>Fecha</th>
                 <th style="width: 11%">Fecha</th>
                 <th>Estado</th>
                 <th>Motivo de Solicitud</th>
@@ -25,6 +26,14 @@
         <tbody>
             @foreach($pending_reqs as $fqRequest)
             <tr>
+                <td class="text-center">
+                    @if($fqRequest->status == 'pending')
+                      <i class="fas fa-clock fa-lg"></i>
+                    @endif
+                    @if($fqRequest->status == 'complete')
+                      <i class="fas fa-check-circle fa-lg" style="color: green"></i>
+                    @endif
+                </td>
                 <td>{{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ $fqRequest->StatusValue }}</td>
                 <td>{{ $fqRequest->NameValue }}</td>
@@ -71,6 +80,7 @@
     <table class="table table-sm table-striped table-bordered">
         <thead class="text-center">
             <tr>
+                <th></th>
                 <th style="width: 11%">Fecha</th>
                 <th>Estado</th>
                 <th>Motivo de Solicitud</th>
@@ -82,6 +92,14 @@
         <tbody>
             @foreach($reqs as $fqRequest)
             <tr>
+                <td class="text-center">
+                    @if($fqRequest->status == 'pending')
+                      <i class="fas fa-clock fa-lg"></i>
+                    @endif
+                    @if($fqRequest->status == 'complete')
+                      <i class="fas fa-check-circle fa-lg" style="color: green"></i>
+                    @endif
+                </td>
                 <td>{{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ $fqRequest->StatusValue }}</td>
                 <td>{{ $fqRequest->NameValue }}</td>

@@ -25,19 +25,46 @@ class FqRequest extends Model
         return $this->belongsTo('\App\Models\User', 'patient_id');
     }
 
+    public function fq_medicines() {
+        return $this->HasMany('\App\Models\Fq\FqMedicine', 'request_id');
+    }
+
     public function getNameValueAttribute(){
         switch ($this->name) {
             case 'specialty hours':
               return 'Horas de especialidad';
               break;
-            case 'medicines':
-              return 'Medicamentos';
+            case 'dispensing':
+              return 'Dispensación de receta';
               break;
             case 'exam order':
               return 'Orden de exámenes';
               break;
             case 'home hospitalization':
               return 'Contacto con hospitalización domiciliaria';
+              break;
+            default:
+              return '';
+              break;
+        }
+    }
+
+    public function getSpecialtiesValueAttribute(){
+        switch ($this->specialties) {
+            case 'broncopulmonar':
+              return 'Broncopulmonar';
+              break;
+            case 'otorrinolaringología':
+              return 'Otorrinolaringología';
+              break;
+            case 'endocrinología':
+              return 'Endocrinología';
+              break;
+            case 'gastroenterología':
+              return 'Gastroenterología';
+              break;
+            case 'other':
+              return 'Otra';
               break;
             default:
               return '';

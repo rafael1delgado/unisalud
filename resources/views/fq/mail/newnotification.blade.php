@@ -4,29 +4,65 @@
         <div class="justify">
             <div class="card">
                 <div class="card-body">
-                    <h3>Estimado/a: </h3>
+                    <h5>Estimado/a: </h5>
 
                     <br>
 
-                    <p>A través del presente, se informa ingreso de solicitud:</p>
+                    <p>A través del presente, se informa ingreso de solicitud nueva solicitud:</p>
 
-                    <br>
+                    <ul>
+                        <li><strong>Fecha de Solicitud</strong>: {{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</li>
+                        <li><strong>Motivo de Solicitud</strong>: {{ $fqRequest->NameValue }}</li>
+                        <li><strong>Observación</strong>: {{ $fqRequest->observation_patient }}</li>
 
-                    <p><strong>Fecha de Solicitud</strong>:  {{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</p>
-                    <p><strong>Motivo de Solicitud</strong>: {{ $fqRequest->NameValue }}</p>
-                    <p><strong>Observación</strong>: {{ $fqRequest->observation_patient }}</p>
+                        <hr>
+                        <br>
+                        <li><strong>Paciente</strong>:</p>
+                        <li><strong>RUN</strong>: {{ $fqRequest->patient->IdentifierRun->value }}-{{ $fqRequest->patient->IdentifierRun->dv }}</li>
+                        <li><strong>Nombre</strong>: {{ $fqRequest->patient->officialFullName }}</li>
+                        <li><strong>Teléfono</strong>:
+                          @foreach($fqRequest->contactUser->contactPoints->where('system', 'phone') as $contactPoint)
+                            +59 {{ $contactPoint->value }}
+                          @endforeach
+                        </li>
+                        <li><strong>Correo electrónico</strong>:
+                          @foreach($fqRequest->contactUser->contactPoints->where('system', 'email') as $contactPoint)
+                            {{ $contactPoint->value }}
+                          @endforeach
+                        </li>
+                        <li><strong>Dirección</strong>:
+                            @foreach($fqRequest->contactUser->addresses as $address)
+                              {{ $address->text }} {{ $address->line }}<br>
+                            @endforeach
+                        </li>
+                        <li><strong>Departamento</strong>:
+                            @foreach($fqRequest->contactUser->addresses as $address)
+                              {{ $address->apartment }}<br>
+                            @endforeach
+                        </li>
+                        <li><strong>Condominio/Población/Villa</strong>:
+                            @foreach($fqRequest->contactUser->addresses as $address)
+                              {{ $address->suburb }}<br>
+                            @endforeach
+                        </li>
+                        <li><strong>Comuna</strong>:
+                            @foreach($fqRequest->contactUser->addresses as $address)
+                              {{ $address->city }}<br>
+                            @endforeach
+                        </li>
+                    </ul>
 
-                    <br>
-                    <p>Paciente:</p>
-                    <br>
-                    <p><strong>RUN</strong>: {{ $fqRequest->patient->RunFormat }}</p>
-                    <p><strong>Nombre</strong>: {{ $fqRequest->patient->FullName }}</p>
-                    <p><strong>Nº Ficha</strong>: {{ $fqRequest->patient->clinical_history_number }}</p>
-                    <p><strong>Teléfono</strong>: {{ $fqRequest->patient->telephone }} - {{ $fqRequest->patient->telephone2 }}</p>
-                    <p><strong>Correo electrónico</strong>: {{ $fqRequest->patient->email }}</p>
-                    <p><strong>Dirección</strong>: {{ $fqRequest->patient->address }} - {{ $fqRequest->patient->commune }}</p>
+                    @if($fqRequest->name == 'dispensing')
+                        <p>Medicamentos o Insumos Solicitados:</p>
+                        <ul>
+                        @foreach($fqRequest->fq_medicines as $key => $fq_medicine)
+                            <li>{{ $fq_medicine->medicine->name }}</li>
+                        @endforeach
+                        </ul>
 
+                    @endif
                     <hr>
+
                 </div>
             </div>
 

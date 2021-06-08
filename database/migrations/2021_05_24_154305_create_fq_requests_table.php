@@ -28,6 +28,9 @@ class CreateFqRequestsTable extends Migration
             $table->enum('attention',['face-to-face', 'teleconsultation'])->nullable();
             $table->longText('link')->nullable();
             $table->dateTime('date_confirm')->nullable();
+            $table->string('place')->nullable();
+            $table->string('doctor_name')->nullable();
+            $table->string('value')->nullable();
             $table->longText('observation_request')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->dateTime('date_confirm_record')->nullable();

@@ -152,7 +152,7 @@
                         <option value="otorrinolaringología">Otorrinolaringología</option>
                         <option value="endocrinología">Endocrinología</option>
                         <option value="gastroenterología">Gastroenterología</option>
-                        <option value="other">Otros</option>
+                        <option value="other">Otra</option>
                     </select>
                 </fieldset>
 
@@ -180,6 +180,9 @@
                       <label for="for_medicines" class="form-label">Farmacos</label>
                       <select name="medicines[]" id="for_medicines" class="form-control selectpicker" multiple>
                           <option value="">Seleccione...</option>
+                          @foreach($ext_medicines as $ext_medicine)
+                            <option value="{{ $ext_medicine->id }}">{{ $ext_medicine->name }}</option>
+                          @endforeach
                       </select>
                     </div>
                 </fieldset>
