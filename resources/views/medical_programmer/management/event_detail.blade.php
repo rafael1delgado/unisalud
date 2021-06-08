@@ -12,12 +12,12 @@
 <div class="row">
     <fieldset class="form-group col">
         <label for="for_start_date">Rut</label>
-        <input type="text" class="form-control" id="for_start_date" name="start_date" required value="{{$theoreticalProgramming->rut}}" readonly >
+        <input type="text" class="form-control" id="for_start_date" name="start_date" required value="{{$theoreticalProgramming->user->IdentifierRun->value}}" readonly >
     </fieldset>
 
     <fieldset class="form-group col">
         <label for="for_id">Nombre</label>
-        <input type="text" class="form-control" id="for_id" name="name" required value="{{$theoreticalProgramming->rrhh->getFullNameAttribute()}}" readonly>
+        <input type="text" class="form-control" id="for_id" name="name" required value="{{$theoreticalProgramming->user->OfficialFullName}}" readonly>
     </fieldset>
 
     <fieldset class="form-group col">

@@ -14,17 +14,17 @@ class HmUserProfessionsTableSeeder extends Seeder
      */
     public function run()
     {
-        UserProfession::Create(['user_id' => 2,'profession_id'=>1]);
-        UserProfession::Create(['user_id' => 2,'profession_id'=>2]);
-        UserProfession::Create(['user_id' => 2,'profession_id'=>3]);
-        UserProfession::Create(['user_id' => 2,'profession_id'=>4]);
-        UserProfession::Create(['user_id' => 2,'profession_id'=>5]);
-        UserProfession::Create(['user_id' => 2,'profession_id'=>6]);
-        UserProfession::Create(['user_id' => 2,'profession_id'=>7]);
-        UserProfession::Create(['user_id' => 2,'profession_id'=>8]);
-        UserProfession::Create(['user_id' => 2,'profession_id'=>9]);
-        UserProfession::Create(['user_id' => 2,'profession_id'=>10]);
-        UserProfession::Create(['user_id' => 2,'profession_id'=>11]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>1]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>2]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>3]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>4]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>5]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>6]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>7]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>8]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>9]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>10]);
+        UserProfession::Create(['user_id' => 4,'profession_id'=>11]);
 
         // UserProfession::Create(['user_id' => 15432977,'profession_id'=>1]);
         // UserProfession::Create(['user_id' => 15432977,'profession_id'=>2]);
@@ -414,7 +414,7 @@ class HmUserProfessionsTableSeeder extends Seeder
         // UserProfession::Create(['user_id' => 12836258,'profession_id'=>4]);
         // UserProfession::Create(['user_id' => 18898498,'profession_id'=>4]);
         // UserProfession::Create(['user_id' => 16866568,'profession_id'=>4]);
-        // UserProfession::Create(['user_id' => 21020515,'profession_id'=>4]);
+        // UserProfession::Create(['user_id' => 41020515,'profession_id'=>4]);
         // UserProfession::Create(['user_id' => 18275365,'profession_id'=>4]);
         // UserProfession::Create(['user_id' => 16892319,'profession_id'=>4]);
         // UserProfession::Create(['user_id' => 16628726,'profession_id'=>4]);

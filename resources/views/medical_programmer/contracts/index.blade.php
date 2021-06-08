@@ -47,8 +47,8 @@
     <tbody>
         @foreach( $contracts as $contract )
         <tr>
-            <td>{{ $contract->id }}</td>
-            <td>{{ $contract->rrhh->getFullNameAttribute() }}</td>
+            <td>{{ $contract->user->IdentifierRun->value }}</td>
+            <td>{{ $contract->user->OfficialFullName }}</td>
             <td>{{ $contract->law }}</td>
             <td>{{ $contract->contract_id }}</td>
             <td>{{ $contract->weekly_hours }}</td>

@@ -36,12 +36,13 @@ class DatabaseSeeder extends Seeder
             HmProfessionsTableSeeder::class,
             HmProfessionActivitiesTableSeeder::class,
             HmOperatingRoomsTableSeeder::class,
-            // HmContractsTableSeeder::class,
+            HmServicesTableSeeder::class,
+            HmUserServicesTableSeeder::class,
+            HmContractsTableSeeder::class,
             // // HmUnscheduledProgrammingTableSeeder::class,
             HmUserSpecialtiesTableSeeder::class,
             HmUserProfessionsTableSeeder::class,
-            HmServicesTableSeeder::class,
-            HmUserServicesTableSeeder::class,
+
             // // HmTheoreticalProgrammingTableSeeder::class,
             // HmOperatingRoomProgrammingTableSeeder::class,
         ]);

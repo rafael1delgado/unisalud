@@ -14,6 +14,7 @@ class HmUserServicesTableSeeder extends Seeder
      */
     public function run()
     {
-        UserService::Create(['service_id'=>1, 'user_id'=>2, 'principal' => 1]);
+        UserService::Create(['service_id'=>1, 'user_id'=>3, 'principal' => 1]);
+        UserService::Create(['service_id'=>2, 'user_id'=>4, 'principal' => 1]);
     }
 }

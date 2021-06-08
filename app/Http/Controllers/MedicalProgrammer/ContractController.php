@@ -36,9 +36,9 @@ class ContractController extends Controller
     public function create()
     {
       // $rrhh = Rrhh::orderBy('name','ASC')->get();
-      $rrhh = User::all();
+      $users = User::all();
       $services = Service::orderBy('service_name','ASC')->get();
-      return view('medical_programmer.contracts.create', compact('rrhh','services'));
+      return view('medical_programmer.contracts.create', compact('users','services'));
     }
 
     /**
@@ -77,9 +77,9 @@ class ContractController extends Controller
     public function edit(Contract $contract)
     {
       // $rrhh = Rrhh::All();
-      $rrhh = User::all();
+      $users = User::all();
       $services = Service::orderBy('service_name','ASC')->get();
-      return view('medical_programmer.contracts.edit', compact('contract', 'rrhh', 'services'));
+      return view('medical_programmer.contracts.edit', compact('contract', 'users', 'services'));
     }
 
     /**

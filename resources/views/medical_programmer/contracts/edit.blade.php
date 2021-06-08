@@ -12,18 +12,18 @@
 
     <div class="row">
         <fieldset class="form-group col-4">
-            <label for="for_rut">Rut</label>
-            <input type="text" class="form-control" id="for_rut" disabled value="{{$contract->rut}}">
+            <label for="for_user_id">Rut</label>
+            <input type="text" class="form-control" id="for_user_id" disabled value="{{$contract->user_id}}">
         </fieldset>
 
-        <input type="hidden" class="form-control" id="for_rut2" name="rut" value="{{$contract->rut}}">
+        <input type="hidden" class="form-control" id="for_user_id2" name="user_id" value="{{$contract->user_id}}">
 
         <fieldset class="form-group col-8">
             <label for="for_rrhh">Especialista</label>
             <select name="rrhh" id="rrhh" class="form-control selectpicker" required="" data-live-search="true" data-size="5">
               <option>--</option>
-              @foreach($rrhh as $trab)
-                <option value="{{$trab->rut}}" {{ $trab->rut == $contract->rut ? 'selected' : '' }}>{{$trab->getFullNameAttribute()}}</option>
+              @foreach($users as $user)
+                <option value="{{$user->id}}" {{ $user->id == $contract->user_id ? 'selected' : '' }}>{{$user->OfficialFullName}}</option>
               @endforeach
             </select>
         </fieldset>
@@ -164,8 +164,8 @@
 
 <script>
 $( "#rrhh" ).change(function() {
-  $( "#for_rut" ).val($( "#rrhh" ).val());
-  $( "#for_rut2" ).val($( "#rrhh" ).val());
+  $( "#for_user_id" ).val($( "#rrhh" ).val());
+  $( "#for_user_id2" ).val($( "#rrhh" ).val());
 });
 </script>
 @endsection
