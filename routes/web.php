@@ -6,6 +6,7 @@ use App\Http\Controllers\ClaveUnicaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Home;
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Parameter\PermissionController;
 use App\Http\Controllers\Profile\ProfileController;
 
@@ -67,7 +68,8 @@ Route::get('/claveunica/callback', [ClaveUnicaController::class,'callback']);
 Route::get('/claveunica/callback-testing', [ClaveUnicaController::class,'callback']);
 Route::get('/claveunica/logout', [ClaveUnicaController::class,'logout'])->name('claveunica.logout');
 
-Route::get('/login/{run}', [ProfileController::class, 'login']);
+Route::get('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::get('/logout', [ProfileController::class,'logout']);
 
 /** Ejempo con livewire */
