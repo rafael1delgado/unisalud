@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fq;
 
 use App\Models\Fq\ContactUser;
+use App\Models\User;
 use App\Models\Fq\FqPatient;
 use App\Models\Fq\UserPatient;
 use Illuminate\Http\Request;
@@ -26,9 +27,19 @@ class ContactUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('fq.contact_user.create');
+        //Limpia mensajes anteriores.
+        //session()->flush();
+
+        $contactUsers = ContactUser::all();
+        $user = User::GetByRun($request->input('search'))->first();
+        if($user == NULL && $request->input('search') != NULL){
+            session()->flash('danger', 'El Paciente/Contacto no se encuentra en nuestros registros,
+                                        Favor solicitar su ingreso en SOME');
+        }
+
+        return view('fq.contact_user.create', compact('request', 'user', 'contactUsers'));
     }
 
     /**
@@ -37,44 +48,59 @@ class ContactUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        $contactUser = new ContactUser($request->All());
-        $contactUser->telephone = '+56'.$contactUser->telephone;
+        $exist = ContactUser::where('user_id', $user->id)->first();
 
-        if($contactUser->telephone2){
-            $contactUser->telephone2 = '+56'.$contactUser->telephone2;
+        if($exist){
+            session()->flash('danger', 'El Contacto ya fue ingresado anteriormente.');
+            return redirect()->route('fq.contact_user.create');
+        }
+        else{
+            $contactUser = new ContactUser();
+            $contactUser->user_id = $user->id;
+            $contactUser->save();
+            session()->flash('success', 'Se ha creado exitosamente el Contacto');
+            return redirect()->route('fq.contact_user.create');
         }
 
-        $contactUser->save();
+        //$flight->restore();
 
-        $fqPatient = new FqPatient();
-        $fqPatient->run = $request->run_patient;
-        $fqPatient->dv = $request->dv_patient;
-        $fqPatient->name = $request->name_patient;
-        $fqPatient->fathers_family = $request->fathers_family_patient;
-        $fqPatient->mothers_family = $request->mothers_family_patient;
+        // $contactUser = new ContactUser($request->All());
+        // $contactUser->telephone = '+56'.$contactUser->telephone;
+        //
+        // if($contactUser->telephone2){
+        //     $contactUser->telephone2 = '+56'.$contactUser->telephone2;
+        // }
+        //
+        // $contactUser->save();
+        //
+        // $fqPatient = new FqPatient();
+        // $fqPatient->run = $request->run_patient;
+        // $fqPatient->dv = $request->dv_patient;
+        // $fqPatient->name = $request->name_patient;
+        // $fqPatient->fathers_family = $request->fathers_family_patient;
+        // $fqPatient->mothers_family = $request->mothers_family_patient;
+        //
+        // $fqPatient->clinical_history_number = $request->clinical_history_number;
+        //
+        // $fqPatient->email = $contactUser->email;
+        // $fqPatient->telephone = $contactUser->telephone;
+        // $fqPatient->telephone2 = $contactUser->telephone2;
+        // $fqPatient->commune = $contactUser->commune;
+        // $fqPatient->address = $contactUser->address;
+        //
+        // $fqPatient->observation = $request->observation;
+        //
+        // $fqPatient->save();
+        //
+        // $userPatient = new UserPatient();
+        // $userPatient->contact_user_id = $contactUser->id;
+        // $userPatient->patient_id = $fqPatient->id;
+        //
+        // $userPatient->save();
 
-        $fqPatient->clinical_history_number = $request->clinical_history_number;
 
-        $fqPatient->email = $contactUser->email;
-        $fqPatient->telephone = $contactUser->telephone;
-        $fqPatient->telephone2 = $contactUser->telephone2;
-        $fqPatient->commune = $contactUser->commune;
-        $fqPatient->address = $contactUser->address;
-
-        $fqPatient->observation = $request->observation;
-
-        $fqPatient->save();
-
-        $userPatient = new UserPatient();
-        $userPatient->contact_user_id = $contactUser->id;
-        $userPatient->patient_id = $fqPatient->id;
-
-        $userPatient->save();
-
-        session()->flash('success', 'Se ha creado exitosamente el Paciente: '.$fqPatient->name.' '.$fqPatient->fathers_family);
-        return redirect()->route('fq.contact_user.index');
     }
 
     /**

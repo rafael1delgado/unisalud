@@ -15,12 +15,19 @@ class UnscheduledProgramming extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'id', 'contract_id', 'rut', 'specialty_id', 'profession_id',  'activity_id', 'assigned_hour', 'hour_performance', 'year'
+        'id', 'contract_id',
+        // 'rut',
+        'user_id',
+        'specialty_id', 'profession_id',  'activity_id', 'assigned_hour', 'hour_performance', 'year'
         //, 'user_id'
     ];
 
-    public function rrhh() {
-        return $this->belongsTo('App\Models\MedicalProgrammer\Rrhh', 'rut');
+    // public function rrhh() {
+    //     return $this->belongsTo('App\Models\MedicalProgrammer\Rrhh', 'rut');
+    // }
+
+    public function user() {
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     public function contract() {
@@ -39,9 +46,9 @@ class UnscheduledProgramming extends Model implements Auditable
         return $this->belongsTo('App\Models\MedicalProgrammer\Profession');
     }
 
-    public function user() {
-        return $this->belongsTo('App\User');
-    }
+    // public function user() {
+    //     return $this->belongsTo('App\User');
+    // }
 
     // public function calendarProgrammings() {
     //     return $this->hasMany('App\Models\MedicalProgrammer\CalendarProgramming');

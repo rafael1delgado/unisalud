@@ -86,7 +86,7 @@
                     </ul>
                     <div class="row justify-content-center">
                     <!-- Código para visualizar botón oficial iniciar sesión con ClaveÚnica-->
-                    <a class="btn-cu btn-m  btn-color-estandar" href="{{ route('claveunica.redirect', 'fq')}}"
+                    <a class="btn-cu btn-m  btn-color-estandar" href="{{ route('claveunica.redirect', 'fq.home')}}"
                         title="Este es el botón Iniciar sesión de ClaveÚnica">
                         <span class="cl-claveunica"></span>
                         <span class="texto">Iniciar sesión</span>

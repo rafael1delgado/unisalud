@@ -39,7 +39,7 @@
         Ingresar nuevo
         </a>
     </li>
-    @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
+    {{-- @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
         <li class="nav-item">
             <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.create') }}">
             <span data-feather="plus-circle"></span>
@@ -55,7 +55,7 @@
               </a>
           </li>
       @endcanany
-    @endif
+    @endif --}}
 
 </ul>
 {{--@endcan--}}
@@ -185,6 +185,13 @@
         <a class="nav-link {{ active('medical_programmer.activities.index') }}" href="{{ route('medical_programmer.activities.index') }}">
         <span data-feather="chevrons-right"></span>
         Actividades
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.subactivities.index') }}" href="{{ route('medical_programmer.subactivities.index') }}">
+        <span data-feather="chevrons-right"></span>
+        Sub-actividades
         </a>
     </li>
 

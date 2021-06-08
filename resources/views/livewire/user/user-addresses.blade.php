@@ -8,8 +8,9 @@
                 <input type="hidden" name='address_id[]' wire:model='addresses.{{$value}}.id'>
 
                 <fieldset class="form-group col-1">
-                    <label for="for_address_type">Tipo de dirección</label>
-                    <select name="address_use[]" class="form-control" wire:model='addresses.{{$value}}.address_use'>
+                    <label for="for_address_type">Tipo</label>
+                    <select name="address_use[]" class="form-control" wire:model='addresses.{{$value}}.address_use'
+                        required>
                         <option value=''></option>
                         <option value="home" selected>Casa</option>
                         <option value="work">Trabajo</option>
@@ -54,15 +55,13 @@
                 <fieldset class="form-group col-2">
                     <label for="for_poblacion">Población/Villa/Condominio</label>
                     <input type="text" class="form-control" name="suburb[]" wire:model='addresses.{{$value}}.suburb'
-                        required
                         {{--                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}"--}}>
                 </fieldset>
 
-
-
                 <fieldset class="form-group col-2">
                     <label for="for_state">Región</label>
-                    <select name="state[]" class="form-control" wire:model='addresses.{{$value}}.state'>
+                    <select name="state[]" class="form-control" wire:model='addresses.{{$value}}.state'
+                        wire:change='getCommunes({{$value}})'>
                         <option value=""></option>
                         @foreach($regions as $region)
                         <option value="{{ $region->id }}">{{ $region->name }}</option>
@@ -72,27 +71,31 @@
 
                 <fieldset class="form-group col-2">
                     <label for="for_district">Comuna</label>
-                    <select name="district[]" class="form-control" wire:model='addresses.{{$value}}.commune'>
+                    <select name="district[]" class="form-control" wire:model='addresses.{{$value}}.commune' required>
                         <option value=""></option>
-                        @foreach($communes as $commune)
-                        <option value="{{ $commune->id }}">{{ $commune->name }}</option>
-                        @endforeach
+
+                        @if ($communes)
+                            @foreach($communes as $commune)
+                                <option value="{{ $commune->id }}">{{ $commune->name }}</option>
+                            @endforeach
+                        @endif
+
                     </select>
                 </fieldset>
 
             </div>
 
             <div class="form-row">
-                <fieldset class="form-group col-1">
+                {{-- <fieldset class="form-group col-1">
                     <label for="for_latitud">Latitud</label>
                     <input type="text" class="form-control" name="latitud[]"
-                        {{--                               value="{{ substr(str_shuffle('0123456789'), 0, 8) }}"--}}>
-                </fieldset>
-                <fieldset class="form-group col-1">
+                        >
+                </fieldset> --}}
+                {{-- <fieldset class="form-group col-1">
                     <label for="for_longitud">Longitud</label>
                     <input type="text" class="form-control" name="longitud[]"
-                        {{--                               value="{{ substr(str_shuffle('0123456789'), 0, 8) }}"--}}>
-                </fieldset>
+                        >
+                </fieldset> --}}
                 <fieldset class="form-group col-2">
                     <label for="for_city">Ciudad</label>
                     <input type="text" class="form-control" name="city[]" wire:model='addresses.{{$value}}.city'
@@ -100,7 +103,7 @@
                 </fieldset>
                 <fieldset class="form-group col-2">
                     <label for="for_country">País</label>
-                    <select name="country[]" class="form-control" wire:model='addresses.{{$value}}.country'>
+                    <select name="country[]" class="form-control" wire:model='addresses.{{$value}}.country' required>
                         <option value=""></option>
                         @foreach($countries as $country)
                         <option value="{{ $country->id }}">{{ $country->name }}</option>

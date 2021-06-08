@@ -15,10 +15,13 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('id_minsal')->nullable();
+            $table->foreignId('country_id')->nullable();
+            $table->string('iso_cod')->nullable();
             $table->string('name')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('country_id')->references('id')->on('countries');
+
         });
     }
 

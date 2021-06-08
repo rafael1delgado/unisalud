@@ -4,31 +4,61 @@
         <div class="justify">
             <div class="card">
                 <div class="card-body">
-                    <h3>Estimado/a: </h3>
+
+                    <p><strong>Estimado Usuario</strong></p>
 
                     <br>
 
-                    <p>A través del presente, ... ingreso de solicitud:</p>
+                    @if($fqRequest->name == 'specialty hours' && $fqRequest->attention == 'teleconsultation')
+                    <p>Por medio de este mail, se informa citación vía telemedicina para el día {{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }} con el {{-- Dr. Juan Perez --}}, vía zoom.
+                    Para ingresar a tu consulta debes ingresar al siguiente enlace:
+                    <a href="{{ $fqRequest->link }}">{{ $fqRequest->link }}</a></p>
 
                     <br>
-                    
-                    <p><strong>Fecha de Solicitud</strong>:  {{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</p>
-                    <p><strong>Motivo de Solicitud</strong>: {{ $fqRequest->NameValue }}</p>
 
-                    <br>
-                    <p>Paciente:</p>
-                    <br>
-                    <p><strong>RUN</strong>: {{ $fqRequest->patient->RunFormat }}</p>
-                    <p><strong>Nombre</strong>: {{ $fqRequest->patient->FullName }}</p>
-                    <p><strong>Nº Ficha</strong>: {{ $fqRequest->patient->clinical_history_number }}</p>
-                    <p><strong>Teléfono</strong>: {{ $fqRequest->patient->telephone }} - {{ $fqRequest->patient->telephone2 }}</p>
-                    <p><strong>Correo electrónico</strong>: {{ $fqRequest->patient->email }}</p>
-                    <p><strong>Dirección</strong>: {{ $fqRequest->patient->address }} - {{ $fqRequest->patient->commune }}</p>
+                    <p>Recomendaciones para el día de tu cita:</p>
 
-                    <hr>
+                    <ul>
+                    	  <li>Recomendamos que te conectes 10 minutos antes de la cita, para comprobar que tu cámara, micrófono y parlante funcione correctamente.</li>
+                        <li>Idealmente usar un computador para realizar la video llamada, sin embargo, también se puede realizar desde dispositivos móviles como tablets o celulares.</li>
+                        <li>Contar con una buena y estable conexión a internet.</li>
+                        <li>Escoger un lugar tranquilo y sin ruido.</li>
+                        <li>En la plataforma de atención, podrás adjuntar archivos, tales como exámenes, recetas o cualquier otro documento que sea importante y necesario para la evaluación del médico.</li>
+                    </ul>
 
-                    <p><strong>Fecha (Agendada)</strong>: {{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</p>
-                    <p><strong>Observación</strong>     : {{ $fqRequest->observation_request }}</p>
+                    <p>Si presentas algún inconveniente en la conexión, favor escribe a mail <strong>fq.iquique@redsalud.gob.cl</strong></p>
+
+                    <p><strong>Equipo Telemedicina</p>
+                    <p><strong>Hospital Dr Ernesto Torres</p>
+                    <p><strong>Servicio de Salud Iquique</p>
+                    </p>
+                    @endif
+
+                    @if($fqRequest->name == 'specialty hours' && $fqRequest->attention ==  'face-to-face')
+
+                    <p>Por medio de este mail, se informa citación presencial:</p>
+
+                    <ul>
+                    	  <li><strong>Día y Hora</strong>: {{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</li>
+                        <li><strong>Nombre Medico</strong>: {{-- Dr. Juan Perez --}}</li>
+                        <hr>
+                        <li><strong>Paciente</strong>: {{ $fqRequest->patient->officialFullName }}</li>
+                        <li><strong>Rut</strong>: {{ $fqRequest->patient->IdentifierRun->value }}-{{ $fqRequest->patient->IdentifierRun->dv }}</li>
+                        <li><strong>Especialidad</strong>: {{ $fqRequest->SpecialtiesValue }}</li>
+
+                        <li><strong>Especialidad</strong>: PFQ POLI FIBROSIS QUISTICA</li>
+                        <li><strong>Valor a pagar</strong>:</li>
+                    </ul>
+                    @endif
+
+                    @if($fqRequest->name == 'dispensing' || $fqRequest->name =='home hospitalization')
+                    <p>Por medio de este mail, se informa respuesta a su solicitud de <strong>{{ $fqRequest->NameValue }}</strong>:</p>
+
+                    <ul>
+                    	  <li><strong>Día y Hora</strong>: {{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</li>
+                        <li><strong>Observación</strong>: {{ $fqRequest->observation_request }}</li>
+                    </ul>
+                    @endif
 
                     <hr>
                 </div>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Fq;
 
 use App\Models\Fq\FqRequest;
 use App\Models\Fq\ContactUser;
+use App\Models\Fq\FqMedicine;
 use App\Models\User;
+use App\Models\ExtMedicine;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,9 +53,7 @@ class FqRequestController extends Controller
 
     public function own_index()
     {
-        $contactUser = ContactUser::where('run', Auth::user()->run)->first();
-
-        $my_reqs = FqRequest::where('contact_user_id', $contactUser->id)
+        $my_reqs = FqRequest::where('contact_user_id', Auth::user()->id)
             ->latest()
             ->get();
 
@@ -68,8 +68,9 @@ class FqRequestController extends Controller
      */
     public function create()
     {
-        $contactUser = ContactUser::where('run', Auth::user()->run)->first();
-        return view('fq.request.create', compact('contactUser'));
+        $ext_medicines = ExtMedicine::all();
+        $contactUsers = ContactUser::where('user_id', Auth::user()->id)->get();
+        return view('fq.request.create', compact('contactUsers', 'ext_medicines'));
     }
 
     /**
@@ -81,18 +82,30 @@ class FqRequestController extends Controller
     public function store(Request $request, ContactUser $contactUser)
     {
         $fqRequest = new FqRequest($request->All());
-        $fqRequest->contact_user_id = $contactUser->id;
+        $fqRequest->contact_user_id = $contactUser->user->id;
+        $fqRequest->patient_id = $request->patient_id;
         $fqRequest->status = 'pending';
         $fqRequest->save();
 
+        if($fqRequest->name == 'dispensing'){
+            foreach ($request->medicines as $key => $medicine_name) {
+                $fq_medicine = new FqMedicine();
+                $fq_medicine->request_id = $fqRequest->id;
+                $fq_medicine->medicines_id = $medicine_name;
+                $fq_medicine->save();
+            }
+        }
+
         // if (env('APP_ENV') == 'production') {
-            if($fqRequest->name == 'medicines'){
-                Mail::to(['valentina.andradea@redsalud.gob.cl'])->cc(['diego.leyton@redsalud.gob.cl', 'ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
+            if($fqRequest->name == 'dispensing'){
+                Mail::to(['valentina.andradea@redsalud.gob.cl'])->cc(['diego.leyton@redsalud.gob.cl',
+                                                                      'ana.mujica@redsalud.gob.cl',
+                                                                      'fq.iquique@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
             }
             else{
-                Mail::to(['ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
+                Mail::to(['fq.iquique@redsalud.gob.cl', 'ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
             }
-        // }
+        // // }
 
         session()->flash('success', 'Se ha creado la solicitud exitosamente');
         return redirect()->route('fq.request.own_index');
@@ -135,17 +148,24 @@ class FqRequestController extends Controller
         $fqRequest->date_confirm_record = Carbon::now();
         $fqRequest->save();
 
+        foreach($fqRequest->contactUser->contactPoints->where('system', 'email') as $contactPoint){
+            $send_to[] = $contactPoint->value;
+
+        }
+
         // if (env('APP_ENV') == 'production') {
-            if($fqRequest->name == 'medicines'){
-                Mail::to($fqRequest->contactUser->email)
+            if($fqRequest->name == 'dispensing'){
+                Mail::to($send_to)
                     ->cc(['valentina.andradea@redsalud.gob.cl',
                           'diego.leyton@redsalud.gob.cl',
-                          'ana.mujica@redsalud.gob.cl'])
+                          'ana.mujica@redsalud.gob.cl',
+                          'fq.iquique@redsalud.gob.cl'])
                     ->send(new AnswerNotification($fqRequest));
             }
             else{
-                Mail::to($fqRequest->contactUser->email)
-                    ->cc(['ana.mujica@redsalud.gob.cl'])
+                Mail::to($send_to)
+                    ->cc(['ana.mujica@redsalud.gob.cl',
+                          'fq.iquique@redsalud.gob.cl'])
                     ->send(new AnswerNotification($fqRequest));
             }
         // }

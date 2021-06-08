@@ -18,10 +18,14 @@ use App\Http\Controllers\Fq\CysticFibrosisRequest;
 use App\Http\Controllers\Fq\ContactUserController;
 use App\Http\Controllers\Fq\FqRequestController;
 
+use App\Http\Controllers\Surveys\TeleconsultationSurveyController;
+use App\Http\Controllers\Fq\FqPatientController;
+
 use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\RrhhController;
 use App\Http\Controllers\MedicalProgrammer\ContractController;
 use App\Http\Controllers\MedicalProgrammer\ActivityController;
+use App\Http\Controllers\MedicalProgrammer\SubActivityController;
 use App\Http\Controllers\MedicalProgrammer\TheoreticalProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\UnscheduledProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\CalendarProgrammingController;
@@ -104,7 +108,7 @@ Route::prefix('fq')->as('fq.')->group(function(){
     Route::prefix('contact_user')->name('contact_user.')->middleware(['permission:Fq: admin'])->group(function(){
         Route::get('/', [ContactUserController::class, 'index'])->name('index');
         Route::get('/create', [ContactUserController::class, 'create'])->name('create');
-        Route::post('/store', [ContactUserController::class, 'store'])->name('store');
+        Route::get('/store/{user}', [ContactUserController::class, 'store'])->name('store');
     });
     Route::prefix('patient')->name('patient.')->group(function(){
         Route::get('/', [FqPatientController::class, 'index'])->name('index');
@@ -112,12 +116,22 @@ Route::prefix('fq')->as('fq.')->group(function(){
     });
     Route::prefix('request')->name('request.')->group(function(){
         Route::get('/', [FqRequestController::class, 'index'])->name('index')
-            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);
+            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines|Fq: admin']);
         Route::get('/own_index', [FqRequestController::class, 'own_index'])->name('own_index');
         Route::get('/create', [FqRequestController::class, 'create'])->name('create');
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
         Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')
-            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines']);;
+            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines|Fq: admin']);
+    });
+});
+
+Route::prefix('surveys')->as('surveys.')->middleware('auth')->group(function(){
+    Route::prefix('teleconsultation')->name('teleconsultation.')->group(function(){
+        Route::get('/', [TeleconsultationSurveyController::class, 'index'])->name('index');
+        Route::get('/create', [TeleconsultationSurveyController::class, 'create'])->name('create');
+        Route::post('/store', [TeleconsultationSurveyController::class, 'store'])->name('store');
+        Route::get('/my_survey', [TeleconsultationSurveyController::class, 'my_survey'])->name('my_survey');
+        Route::get('/show/{teleconsultationSurvey}', [TeleconsultationSurveyController::class, 'show'])->name('show');
     });
 });
 
@@ -167,11 +181,28 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::get('/{activity}/edit', [ActivityController::class, 'edit'])->name('edit');
   });
 
+  Route::prefix('subactivities')->name('subactivities.')->group(function(){
+    Route::get('/', [SubActivityController::class, 'index'])->name('index');
+    Route::post('/', [SubActivityController::class, 'store'])->name('store');
+    Route::get('/create', [SubActivityController::class, 'create'])->name('create');
+    Route::get('/{subactivity}', [SubActivityController::class, 'show'])->name('show');
+    Route::put('/{subactivity}', [SubActivityController::class, 'update'])->name('update');
+    Route::delete('/{subactivity}', [SubActivityController::class, 'destroy'])->name('destroy');
+    Route::get('/{subactivity}/edit', [SubActivityController::class, 'edit'])->name('edit');
+  });
+
   Route::prefix('theoretical_programming')->name('theoretical_programming.')->group(function(){
     Route::post('saveMyEvent', [TheoreticalProgrammingController::class, 'saveMyEvent'])->name('saveMyEvent');
     Route::post('updateMyEvent', [TheoreticalProgrammingController::class, 'updateMyEvent'])->name('updateMyEvent');
     Route::post('deleteMyEvent', [TheoreticalProgrammingController::class, 'deleteMyEvent'])->name('deleteMyEvent');
     Route::post('deleteMyEventForce', [TheoreticalProgrammingController::class, 'deleteMyEventForce'])->name('deleteMyEventForce');
+    Route::post('editMyEvent', [TheoreticalProgrammingController::class, 'editMyEvent'])->name('editMyEvent');
+
+    Route::get('event_detail/{rut}/{activity_id}/{contract_id}/{specialty_id}/{profession_id}/{start_date}/{end_date}/{year}', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
+    Route::post('deleteMyEventId/{id}', [TheoreticalProgrammingController::class, 'deleteMyEventId'])->name('deleteMyEventId');
+
+    // Route::get('event_detail/{info}', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
+    // Route::post('event_detail', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
 
     Route::get('/', [TheoreticalProgrammingController::class, 'index'])->name('index');
     Route::post('/', [TheoreticalProgrammingController::class, 'store'])->name('store');

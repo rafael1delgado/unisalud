@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommunesTable extends Migration
+class CreateFqMedicinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateCommunesTable extends Migration
      */
     public function up()
     {
-        Schema::create('communes', function (Blueprint $table) {
+        Schema::create('fq_medicines', function (Blueprint $table) {
             $table->id();
-            $table->string('id_minsal')->nullable();
-            $table->string('name')->nullable();
+
+            $table->foreignId('request_id');
+            $table->foreignId('medicines_id');
+
+            $table->foreign('request_id')->references('id')->on('fq_requests');
+            $table->foreign('medicines_id')->references('id')->on('ext_medicines');
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +34,6 @@ class CreateCommunesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('communes');
+        Schema::dropIfExists('fq_medicines');
     }
 }

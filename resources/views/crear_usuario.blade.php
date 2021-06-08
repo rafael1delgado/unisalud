@@ -60,7 +60,7 @@
     	                    <div class="form-group col-md-6">
     			                    <label for="inputEmail4">Tipo de Documento</label>
     			                        <select id="inputState" class="form-control">
-        			                        <option selected>DNI</option>
+        			                        <option selected>RUN</option>
         			                        <option>Pasaporte</option>
                                             <option>Acta</option>
                                             <option>Otro</option>

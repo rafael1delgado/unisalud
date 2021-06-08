@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            UserSeeder::class,
             PermissionSeeder::class,
             CodConIdentifiersTypesSeeder::class,
            // IdentifierTypeSeeder::class,
@@ -23,6 +22,26 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             CodConMaritalSeeder::class,
             CommuneSeeder::class,
+            EtniaSeeder::class,
+            UserSeeder::class,
+
+
+
+            // // HmRrhhTableSeeder::class,
+            HmMotherActivityTableSeeder::class,
+            HmActivityTypesTableSeeder::class,
+            HmActivitiesTableSeeder::class,
+            HmSpecialtiesTableSeeder::class,
+            HmSpecialtyActivitiesTableSeeder::class,
+            HmProfessionsTableSeeder::class,
+            HmProfessionActivitiesTableSeeder::class,
+            HmOperatingRoomsTableSeeder::class,
+            // HmContractsTableSeeder::class,
+            // // HmUnscheduledProgrammingTableSeeder::class,
+            // HmUserSpecialtiesTableSeeder::class,
+            // HmUserProfessionsTableSeeder::class,
+            // // HmTheoreticalProgrammingTableSeeder::class,
+            // HmOperatingRoomProgrammingTableSeeder::class,
         ]);
     }
 }

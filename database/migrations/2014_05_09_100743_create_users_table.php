@@ -16,16 +16,16 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
-           // $table->foreignId('identifiers_id')->nullable();
             $table->boolean('active');
-            $table->bigInteger('run')->nullable();
-            $table->char('dv');
-            $table->enum('gender', ['female', 'male', 'other', 'unknown',
+            $table->enum('sex', ['female', 'male', 'other', 'unknown',
+            ])->nullable();
+            $table->enum('gender', ['female', 'male', 'non-binary', 'transgender-male', 'transgender-female', 'other', 'non-disclose'
             ])->nullable();
             $table->date('birthday')->nullable();
             $table->datetime('deceased_datetime')->nullable();
             $table->foreignId('cod_con_marital_id')->nullable(); /** marriage  */
-            $table->Integer('multiple_birth')->nullable(); /** esp: parto múltiple */
+            $table->Integer('multiple_birth')->nullable();
+            $table->foreignId('etnia_id')->nullable(); /** Pueblo originario */
             $table->string('team')->nullable();
 
 
@@ -50,6 +50,8 @@ class CreateUsersTable extends Migration
             /**  FOREIGN KEYS  */
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('cod_con_marital_id')->references('id')->on('cod_con_maritals');
+            $table->foreign('etnia_id')->references('id')->on('etnias');
+
         });
     }
 

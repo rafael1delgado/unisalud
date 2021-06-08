@@ -465,10 +465,15 @@ bottom: 5px;
       events: [
           @foreach ($theoreticalProgrammings as $key => $theoricalProgramming)
             //teóricos
-              @if($theoricalProgramming->activity)
+              @if($theoricalProgramming->subactivity)
+                  { id: '{{$theoricalProgramming->activity_id}}', title: '{{$theoricalProgramming->subactivity->sub_activity_name}}',
+                    start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
+                    description: 'teorico', color:'#85C1E9'
+                  },
+              @else
                   { id: '{{$theoricalProgramming->activity_id}}', title: '{{$theoricalProgramming->activity->activity_name}}',
                     start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                    description: 'teorico'
+                    description: 'teorico', color:'#F7DC6F'
                   },
               @endif
 
@@ -799,92 +804,31 @@ bottom: 5px;
       },
 
       eventClick: function(info) {
-        info.jsEvent.preventDefault(); // don't let the browser navigate
+        // let start_date = formatDateWithHour(info.event.start);
+        // let end_date = formatDateWithHour(info.event.end);
 
-        console.log(info.event);
-        // if (info.event.id) {
-            var event = calendar.getEventById(info.event.id);
+        let start_date = info.event.start.getTime();
+        let end_date = info.event.end.getTime();
+        // console.log(start_date);
 
-            if(confirm(info.event.title + "\n" + formatDateWithHour(info.event.start) + " - " + formatDateWithHour(info.event.end) + "\n" + "\n" + "¿Desea eliminar la hora?")){
-                var inicio = info.event.start;
-                var termino = info.event.end;
-                var diff =(termino.getTime() - inicio.getTime()) / 1000;
-                diff /= 60;
-                diff_ = diff/60;
+        let activity_id = info.event.id.toString();
+        var rut = {{$request->rut}};
+        // var year = {{$request->year}};
 
-                var tipo_evento = info.event.extendedProps.description;
+        @if ($request->date2 != null)
+            var year = {{date('Y', strtotime($request->date2))}};
+        @else
+            @if ($request->date != null)
+                var year = {{date('Y', strtotime($request->date))}};
+            @else
+                var year = {{now()->year}};
+            @endif
+        @endif
+        var contract_id = $("#for_contract_id"). val();
+        var specialty_id = $("#for_specialty_id"). val();
+        var profession_id = $("#for_profession_id"). val();
 
-                //tipo de evento teorico
-                if (tipo_evento == 'teorico') {
-                    // if (confirm('¿Desea eliminar solo este evento?')) {
-                    //     info.event.remove();
-                    //     deleteMyData(info.event, 1);
-                    // } else {
-                    //     info.event.remove();
-                    //     deleteMyData(info.event, 2);
-                    // }
-
-                    $(function() {
-                        $( "#dialog-confirm" ).dialog({
-                          resizable: false,
-                          height: "auto",
-                          width: 400,
-                          modal: true,
-                          buttons: {
-                            "Esta semana": function() {
-                                info.event.remove();
-                                deleteMyData(info.event, 1);
-                                $(this).dialog('close');
-                            },
-                            "Todas las semanas": function() {
-                                info.event.remove();
-                                deleteMyData(info.event, 2);
-                              $(this).dialog('close');
-                            },
-                            "Semana volante": function() {
-                              info.event.remove();
-                              deleteMyData(info.event, 3);
-                              $(this).dialog('close');
-                            }
-                        },
-                        close: function(event, ui){
-
-                            @foreach ($activities as $key => $activity)
-                                if(info.event.id == "{{$activity->id}}"){
-                                    document.getElementById("{{$activity->id}}").innerHTML = (bolsa_{{$activity->id}} - diff_);
-                                    bolsa_{{$activity->id}} = bolsa_{{$activity->id}} - diff_;
-
-                                    disponible_contrato = disponible_contrato - diff_;
-                                    document.getElementById("disponible_contrato").innerHTML = disponible_contrato;
-                                }
-                            @endforeach
-                        }
-
-                        });
-                    });
-
-                }
-                //tipo de evento administrativo
-                else{
-                    info.event.remove();
-                    deleteMyData(info.event, 1);
-
-                    //se verifica si se debe restar 0.5 hrs o 1 dia entero.
-                    var cont = 1;
-                    if (formatHour(termino) == '12:59' || formatHour(inicio) == '13:00') {
-                        cont = 0.5;
-                    }
-
-                    //actualiza bolsas de administrativos
-                    @foreach ($permisos_administrativos as $key => $permiso_administrativo)
-                        if(tipo_evento == "{{$key}}"){
-                          document.getElementById("{{$key}}").innerHTML = (bolsa_{{$key}} + cont);
-                          bolsa_{{$key}} = bolsa_{{$key}} + cont;
-                        }
-                    @endforeach
-                }
-            }
-        // }
+        window.open('theoretical_programming/event_detail/'+rut+"/"+activity_id+"/"+contract_id+"/"+specialty_id+"/"+profession_id+"/"+start_date+"/"+end_date+"/"+year,"_self");
       },
 
       //######## redimención de eventos

@@ -20,7 +20,8 @@ class CreateCodConAppointmentTypesTable extends Migration
             $table->string('text');
 
             $table->foreign('cod_con_appointment_type_id')->references('id')->on('cod_con_appointment_types');
-            $table->foreign('coding_id')->references('id')->on('codings');        });
+            $table->foreign('coding_id')->references('id')->on('codings');        
+        });
     }
 
     /**
