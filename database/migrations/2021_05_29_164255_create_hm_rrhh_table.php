@@ -13,28 +13,29 @@ class CreateHmRrhhTable extends Migration
      */
     public function up()
     {
-        Schema::create('mp_rrhh', function (Blueprint $table) {
-            $table->integer('id_deis')->nullable();
-            $table->integer('cod_estab_sirh')->nullable();
-            $table->integer('rut')->unsigned()->unique();
-            $table->char('dv',1);
-            $table->boolean('risk_group')->default(0);
-            $table->boolean('missing_condition')->default(0);
-            $table->string('missing_reason')->nullable();
-            $table->string('name');
-            $table->string('fathers_family');
-            $table->string('mothers_family')->nullable();
-            $table->string('job_title');
-            //$table->unsignedBigInteger('user_id');
-
-            //$table->foreign('user_id')->references('id')->on('users');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        // Schema::create('mp_rrhh', function (Blueprint $table) {
+        //     $table->integer('id_deis')->nullable();
+        //     $table->integer('cod_estab_sirh')->nullable();
+        //     $table->integer('rut')->unsigned()->unique();
+        //     $table->char('dv',1);
+        //     $table->boolean('risk_group')->default(0);
+        //     $table->boolean('missing_condition')->default(0);
+        //     $table->string('missing_reason')->nullable();
+        //     $table->string('name');
+        //     $table->string('fathers_family');
+        //     $table->string('mothers_family')->nullable();
+        //     $table->string('job_title');
+        //     //$table->unsignedBigInteger('user_id');
+        //
+        //     //$table->foreign('user_id')->references('id')->on('users');
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        // });
 
         Schema::create('mp_contracts', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('rut'); //fk
+            // $table->unsignedInteger('rut'); //fk
+            $table->unsignedBigInteger('user_id');
             $table->string('law')->nullable();
             $table->integer('contract_id')->nullable();
             $table->integer('weekly_hours')->nullable();
@@ -51,10 +52,9 @@ class CreateHmRrhhTable extends Migration
             $table->string('unit')->nullable();
             $table->string('unit_code')->nullable();
             $table->integer('year')->nullable();
-            //$table->unsignedBigInteger('user_id');
 
-            //$table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('rut')->references('rut')->on('mp_rrhh')->onDelete('cascade');
+            // $table->foreign('rut')->references('rut')->on('mp_rrhh')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
             $table->softDeletes();
@@ -170,7 +170,8 @@ class CreateHmRrhhTable extends Migration
         Schema::create('mp_unscheduled_programming', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('contract_id')->nullable();
-            $table->unsignedInteger('rut')->nullable();
+            // $table->unsignedInteger('rut')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedInteger('specialty_id')->nullable();
             $table->unsignedInteger('profession_id')->nullable();
             $table->unsignedInteger('activity_id')->nullable();
@@ -178,11 +179,10 @@ class CreateHmRrhhTable extends Migration
             $table->decimal('assigned_hour', 8, 2)->nullable();
             $table->decimal('hour_performance', 8, 2)->nullable();
             $table->string('year')->nullable();
-            //$table->unsignedBigInteger('user_id');
 
-            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('contract_id')->references('id')->on('mp_contracts')->onDelete('cascade');
-            $table->foreign('rut')->references('rut')->on('mp_rrhh')->onDelete('cascade');
+            // $table->foreign('rut')->references('rut')->on('mp_rrhh')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('specialty_id')->references('id')->on('mp_specialties')->onDelete('cascade');
             $table->foreign('profession_id')->references('id')->on('mp_professions')->onDelete('cascade');
             $table->foreign('activity_id')->references('id')->on('mp_activities')->onDelete('cascade');

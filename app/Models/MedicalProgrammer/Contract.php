@@ -15,15 +15,21 @@ class Contract extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'id', 'rut', 'year', 'law', 'contract_id',  'weekly_hours', 'shift_system',
+        'id',
+        // 'rut',
+        'user_id', 'year', 'law', 'contract_id',  'weekly_hours', 'shift_system',
         'obs', 'legal_holidays', 'compensatory_rest', 'administrative_permit',
         'training_days', 'breastfeeding_time', 'weekly_collation',
         'contract_start_date', 'contract_end_date', 'unit', 'unit_code','service_id'
         //, 'user_id'
     ];
 
-    public function rrhh() {
-        return $this->belongsTo('App\Models\MedicalProgrammer\Rrhh', 'rut');
+    // public function rrhh() {
+    //     return $this->belongsTo('App\Models\MedicalProgrammer\Rrhh', 'rut');
+    // }
+
+    public function user() {
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     public function unscheduled_programmings() {

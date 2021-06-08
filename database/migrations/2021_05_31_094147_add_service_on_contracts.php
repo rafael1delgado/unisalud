@@ -16,7 +16,7 @@ class AddServiceOnContracts extends Migration
       Schema::table('mp_contracts', function (Blueprint $table) {
           // $table->dropColumn('unit');
           // $table->dropColumn('unit_code');
-          $table->unsignedBigInteger('service_id')->default(1)->after('rut');
+          $table->unsignedBigInteger('service_id')->default(1)->after('user_id');
           $table->foreign('service_id')->references('id')->on('mp_services');
       });
 

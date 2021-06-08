@@ -15,8 +15,9 @@ class CalendarProgramming extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'id', 'rut', 'specialty_id', 'profession_id', 'activity_id', 'operating_room_id', 'start_date', 'end_date'
-        //, 'user_id'
+        'id',
+        // 'rut',
+        'user_id','specialty_id', 'profession_id', 'activity_id', 'operating_room_id', 'start_date', 'end_date'
     ];
 
     public function operatingRoom()
@@ -28,9 +29,14 @@ class CalendarProgramming extends Model implements Auditable
     //     return $this->belongsTo('App\Models\MedicalProgrammer\UnscheduledProgramming');
     // }
 
-    public function rrhh()
+    // public function rrhh()
+    // {
+    //     return $this->belongsTo('App\Models\MedicalProgrammer\Rrhh', 'rut');
+    // }
+
+    public function user()
     {
-        return $this->belongsTo('App\Models\MedicalProgrammer\Rrhh', 'rut');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     public function specialty()
@@ -48,10 +54,10 @@ class CalendarProgramming extends Model implements Auditable
         return $this->belongsTo('App\Models\MedicalProgrammer\Activity');
     }
 
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
+    // public function user()
+    // {
+    //     return $this->belongsTo('App\User');
+    // }
 
     use SoftDeletes;
     /**

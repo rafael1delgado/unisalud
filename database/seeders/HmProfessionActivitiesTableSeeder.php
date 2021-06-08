@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\MedicalProgrammer\ProfessionActivity;
 
@@ -12,11 +14,11 @@ class HmProfessionActivitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        SpecialtyActivity::Create(['profession_id'=>1,'activity_id'=>141, 'performance'=>3]);
-        SpecialtyActivity::Create(['profession_id'=>1,'activity_id'=>143, 'performance'=>3]);
-        SpecialtyActivity::Create(['profession_id'=>1,'activity_id'=>67]);
-        SpecialtyActivity::Create(['profession_id'=>1,'activity_id'=>114]);
-        SpecialtyActivity::Create(['profession_id'=>1,'activity_id'=>76, 'performance'=>2]);
-        SpecialtyActivity::Create(['profession_id'=>1,'activity_id'=>70]);
+        ProfessionActivity::Create(['profession_id'=>1,'activity_id'=>141, 'performance'=>3]);
+        ProfessionActivity::Create(['profession_id'=>1,'activity_id'=>143, 'performance'=>3]);
+        ProfessionActivity::Create(['profession_id'=>1,'activity_id'=>67]);
+        ProfessionActivity::Create(['profession_id'=>1,'activity_id'=>114]);
+        ProfessionActivity::Create(['profession_id'=>1,'activity_id'=>76, 'performance'=>2]);
+        ProfessionActivity::Create(['profession_id'=>1,'activity_id'=>70]);
     }
 }

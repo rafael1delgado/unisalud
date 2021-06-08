@@ -25,7 +25,7 @@ class CreateHmExecutedActivitiesTable extends Migration
         // });
 
         Schema::table('mp_specialties', function (Blueprint $table) {
-            $table->string('id_sigte')->after('id_specialty');
+            $table->string('id_sigte')->after('id_specialty')->nullable();
         });
 
         Schema::create('mp_executed_activities', function (Blueprint $table) {
