@@ -84,8 +84,8 @@
             </div>
             <div class="form-row">
                 <fieldset class="form-group col-2">
-                    <label for="for_nacionality">Nacionalidad</label>
-                    <select name="nacionality" id="for_nacionality" class="form-control" required>
+                    <label for="for_nationality_id">Nacionalidad</label>
+                    <select name="nationality_id" id="for_nationality_id" class="form-control" required>
                         <option value=""></option>
                         @foreach($countries as $country)
                         <option value="{{ $country->id }}">{{ $country->name }}</option>

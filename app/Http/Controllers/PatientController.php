@@ -152,8 +152,9 @@ class PatientController extends Controller
         $countries = Country::all();
         $communes = Commune::all();
         $regions = Region::all();
+        $etnias = Etnia::all();
         $identifierTypes = CodConIdentifierType::all();
-        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes'));
+        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'etnias'));
     }
 
     /**
@@ -171,6 +172,7 @@ class PatientController extends Controller
         DB::beginTransaction();
 
         try {
+            // dd($request);
             $patient = User::find($id);
             $patient->fill($request->all());
 

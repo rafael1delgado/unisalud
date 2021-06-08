@@ -62,27 +62,25 @@
                     </fieldset>
 
                     <fieldset class="form-group col-2">
-                        <label for="for_gender">Sexo</label>
-                        <select name="gender" id="for_gender" class="form-control">
+                        <label for="for_sex">Sexo</label>
+                        <select name="sex" id="for_sex" class="form-control">
                             <option value=""></option>
-                            <option value="male" selected>Masculino</option>
-                            <option value="female">Femenino</option>
-                            <option value="unknown">Desconocido</option>
-                            <option value="other">Otro</option>
+                            <option value="male" {{$patient->sex === 'male'? 'selected' : ''}}>Masculino</option>
+                            <option value="female" {{$patient->sex === 'female'? 'selected' : ''}}>Femenino</option>
+                            <option value="unknown" {{$patient->sex === 'unknown'? 'selected' : ''}}>Desconocido</option>
+                            <option value="other" {{$patient->sex === 'other'? 'selected' : ''}}>Otro</option>
                         </select>
                     </fieldset>
 
                     <fieldset class="form-group col-2">
-                        <label for="for_gender_identity">Identidad de Genero</label>
-                        <select name="gender_identity" id="for_gender_identity" class="form-control">
+                        <label for="for_gender">Identidad de Genero</label>
+                        <select name="gender" id="for_gender" class="form-control">
                             <option value=""></option>
-                            <option value="male" selected>Masculino</option>
-                            <option value="female">Femenino</option>
-                            <option value="female">Femenino Trans "FT"</option>
-                            <option value="female">Masculino Trans "MT"</option>
-                            {{--                @foreach ($genderIdentities as $identity)--}}
-                            {{--                    <option value="{{ $identity['code'] }}">{{ $identity['display'] }}</option>--}}
-                            {{--                @endforeach--}}
+                        <option value="male" {{$patient->gender === 'male'? 'selected' : ''}}>Masculino</option>
+                        <option value="female" {{$patient->gender === 'female'? 'selected' : ''}}>Femenino</option>
+                        <option value="transgender-female" {{$patient->gender === 'transgender-female'? 'selected' : ''}}>Femenino Trans "FT"</option>
+                        <option value="transgender-male" {{$patient->gender === 'transgender-male'? 'selected' : ''}}>Masculino Trans "MT"</option>
+                        <option value="other" {{$patient->gender === 'other'? 'selected' : ''}}>Otro</option>
                         </select>
                     </fieldset>
 
@@ -95,25 +93,26 @@
 
                 </div>
                 <div class="form-row">
-                    <fieldset class="form-group col-2">
-                        <label for="for_nacionality">Nacionalidad</label>
-                        <select name="nacionality" id="for_nacionality" class="form-control">
-                            <option value="CL-Chile">Chile</option>
-                        </select>
-                    </fieldset>
 
-                    <fieldset class="form-group col-2">
-                        <label for="for_ethnicity">Pueblo originario</label>
-                        <select name="ethnicity" id="for_ethnicity" class="form-control">
-                            <option value=""></option>
-                            <option value="01" selected>Mapuche</option>
+                <fieldset class="form-group col-2">
+                    <label for="for_nationality_id">Nacionalidad</label>
+                    <select name="nationality_id" id="for_nationality_id" class="form-control" required>
+                        <option value=""></option>
+                        @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{$country->id === $patient->nationality_id ? 'selected' : ''}} >{{ $country->name }}</option>
+                        @endforeach
+                    </select>
+                </fieldset>
 
-
-                            {{--                @foreach($aboriginals as $aboriginal)--}}
-                            {{--                    <option value="{{ $aboriginal['code'] }}">{{ $aboriginal['display'] }}</option>--}}
-                            {{--                @endforeach--}}
-                        </select>
-                    </fieldset>
+                <fieldset class="form-group col-2">
+                    <label for="for_etnia">Pueblo originario</label>
+                    <select name="etnia_id" id="for_etnia_id" class="form-control">
+                        <option value=""></option>
+                        @foreach($etnias as $etnia)
+                        <option value="{{ $etnia->id }}" {{$etnia->id === $patient->etnia_id ? 'selected' : ''}} >{{ $etnia->name}}</option>
+                        @endforeach
+                    </select>
+                </fieldset>
 
                     <fieldset class="form-group col-2">
                         <label for="for_cod_con_marital_id">Estado Civil</label>

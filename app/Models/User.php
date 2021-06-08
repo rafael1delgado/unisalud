@@ -30,6 +30,7 @@ class User extends Authenticatable
         'deceased_datetime',
         'cod_con_marital_id',
         'etnia_id',
+        'nationality_id',
         'claveunica',
         'fhir_id',
         'password',
