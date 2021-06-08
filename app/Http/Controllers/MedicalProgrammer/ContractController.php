@@ -4,7 +4,8 @@ namespace App\Http\Controllers\MedicalProgrammer;
 
 use App\Models\MedicalProgrammer\Contract;
 use App\Models\MedicalProgrammer\Service;
-use App\Models\MedicalProgrammer\Rrhh;
+// use App\Models\MedicalProgrammer\Rrhh;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,7 +35,8 @@ class ContractController extends Controller
      */
     public function create()
     {
-      $rrhh = Rrhh::orderBy('name','ASC')->get();
+      // $rrhh = Rrhh::orderBy('name','ASC')->get();
+      $rrhh = User::all();
       $services = Service::orderBy('service_name','ASC')->get();
       return view('medical_programmer.contracts.create', compact('rrhh','services'));
     }
@@ -74,7 +76,8 @@ class ContractController extends Controller
      */
     public function edit(Contract $contract)
     {
-      $rrhh = Rrhh::All();
+      // $rrhh = Rrhh::All();
+      $rrhh = User::all();
       $services = Service::orderBy('service_name','ASC')->get();
       return view('medical_programmer.contracts.edit', compact('contract', 'rrhh', 'services'));
     }

@@ -9,7 +9,7 @@ use App\Models\MedicalProgrammer\Specialty;
 use App\Models\MedicalProgrammer\Profession;
 use App\Models\MedicalProgrammer\Service;
 use App\Models\MedicalProgrammer\CalendarProgramming;
-use App\Models\MedicalProgrammer\Rrhh;
+// use App\Models\MedicalProgrammer\Rrhh;
 use App\Models\MedicalProgrammer\Contract;
 use App\Models\MedicalProgrammer\UnscheduledProgramming;
 use App\Models\MedicalProgrammer\TheoreticalProgramming;
@@ -81,25 +81,27 @@ class TheoreticalProgrammingController extends Controller
 
     //si es admin, se devuelve todo, si no, se devuelve lo configurado
     if (Auth::user()->hasPermissionTo('Medical Programmer: administrator')) {
-        $rrhhs = Rrhh::whereHas('contracts', function ($query) use ($year) {
+        $rrhhs = User::whereHas('contracts', function ($query) use ($year) {
                         return $query->where('year',$year);
                     })
                     //if - se devuelven solo usuarios que tengan asignada especialidad
                     ->when($request->get('tipo') == 1, function ($query) {
-                        $query->whereIn('rut',UserSpecialty::select('user_id')->groupBy('user_id')->get()->toArray());
+                        $query->whereIn('id',UserSpecialty::select('user_id')->groupBy('user_id')->get()->toArray());
                     })
                     //if - se devuelven solo usuarios que tengan asignada profesión
                     ->when($request->get('tipo') == 2, function ($query) {
-                        $query->whereIn('rut',UserProfession::select('user_id')->groupBy('user_id')->get()->toArray());
+                        $query->whereIn('id',UserProfession::select('user_id')->groupBy('user_id')->get()->toArray());
                     })
-                    ->orderby('name','ASC')->get();
+                    // ->orderby('name','ASC')
+                    ->get();
                     // dd($rrhhs);
     }else{
-        $rrhhs = Rrhh::whereHas('contracts', function ($query) use ($year) {
+        $rrhhs = User::whereHas('contracts', function ($query) use ($year) {
                         return $query->where('year',$year);
                     })
-                    ->where('rut',Auth::user()->id)
-                    ->orderby('name','ASC')->get();
+                    ->where('id',Auth::user()->id)
+                    // ->orderby('name','ASC')
+                    ->get();
     }
 
     //valida información
@@ -110,7 +112,7 @@ class TheoreticalProgrammingController extends Controller
     }
 
     //información para días contrato
-    $contracts = Contract::where('rut',$rut)->where('year',$year)->get();
+    $contracts = Contract::where('user_id',$rut)->where('year',$year)->get();
 
     //obtiene contrato_id para obtener información
     $contract_id=null;
@@ -171,7 +173,7 @@ class TheoreticalProgrammingController extends Controller
         // }
 
         //obtiene especialidades ordenadas (si es que existe horario teorico, devuelve esa especialidad primero)
-        $TheoreticalProgramming = TheoreticalProgramming::whereNotNull('specialty_id')->where('rut',$rut)->first();
+        $TheoreticalProgramming = TheoreticalProgramming::whereNotNull('specialty_id')->where('user_id',$rut)->first();
         if ($rut != null) {
             if ($TheoreticalProgramming!=null) {
                 $collection1 = Specialty::where('id',$TheoreticalProgramming->specialty_id)->get();
@@ -220,7 +222,7 @@ class TheoreticalProgrammingController extends Controller
                                 // dd($activities->first()->specialties->where('id',42)->first()->pivot);
 
         //corresponde a la actividad no programable (que se guarda en el modelo UnscheduledProgramming)
-        $programming = UnscheduledProgramming::where('rut',$rut)
+        $programming = UnscheduledProgramming::where('user_id',$rut)
                                              ->where('year',$year)
                                              ->where('contract_id', $contract_id)
                                              ->where('specialty_id', $var)
@@ -250,7 +252,7 @@ class TheoreticalProgrammingController extends Controller
         // }
 
         //obtiene especialidades ordenadas (si es que existe horario teorico, devuelve esa especialidad primero)
-        $TheoreticalProgramming = TheoreticalProgramming::whereNotNull('profession_id')->where('rut',$rut)->first();
+        $TheoreticalProgramming = TheoreticalProgramming::whereNotNull('profession_id')->where('user_id',$rut)->first();
         if ($rut != null) {
             if ($TheoreticalProgramming!=null) {
                 $collection1 = Profession::where('id',$TheoreticalProgramming->profession_id)->get();
@@ -292,7 +294,7 @@ class TheoreticalProgrammingController extends Controller
                                 ->get();
 
         //corresponde a la actividad no programable (que se guarda en el modelo UnscheduledProgramming)
-        $programming = UnscheduledProgramming::where('rut',$rut)
+        $programming = UnscheduledProgramming::where('user_id',$rut)
                                              ->where('year',$year)
                                              ->where('contract_id', $contract_id)
                                              ->where('profession_id', $var)
@@ -307,7 +309,7 @@ class TheoreticalProgrammingController extends Controller
 
     //obtiene horas teóricas
     $theoreticalProgrammings = TheoreticalProgramming::where('year',$year)
-                                                  ->where('rut',$rut)
+                                                  ->where('user_id',$rut)
                                                   ->whereNull('contract_day_type')
                                                   ->where('contract_id', $contract_id)
                                                   ->where('specialty_id', $request->get('specialty_id'))
@@ -326,7 +328,7 @@ class TheoreticalProgrammingController extends Controller
 
       //obtiene teóricos administrativos
       $theoreticalProgrammingsAdministrative = TheoreticalProgramming::where('year',$year)
-                                                    ->where('rut',$rut)
+                                                    ->where('user_id',$rut)
                                                     ->whereNotNull('contract_day_type')
                                                     ->where('contract_id', $contract_id)
                                                     // ->where('specialty_id', $request->get('specialty_id'))
@@ -346,7 +348,7 @@ class TheoreticalProgrammingController extends Controller
 
       //obtiene teoricos eliminados
       $theoreticalProgrammingDeleted = TheoreticalProgramming::where('year',$year)
-                                                    ->where('rut',$rut)
+                                                    ->where('user_id',$rut)
                                                     ->whereNull('contract_day_type')
                                                     ->where('contract_id', $contract_id)
                                                     ->where('specialty_id', $request->get('specialty_id'))
@@ -363,7 +365,7 @@ class TheoreticalProgrammingController extends Controller
 
     //obtiene información de programas médicos asignados
     $unscheduledProgrammings = UnscheduledProgramming::where('year',$year)
-                                            ->where('rut',$rut)
+                                            ->where('user_id',$rut)
                                             ->whereIn('activity_id',$ids_actividades)
                                             ->get();
     $array = array();
@@ -392,7 +394,7 @@ class TheoreticalProgrammingController extends Controller
     // $permisos_administrativos = array(); //temporalmente hasta que se empiece a utilizar
 
     // obtiene información de dias administrativos
-    $contract_days = TheoreticalProgramming::where('rut',$rut)
+    $contract_days = TheoreticalProgramming::where('user_id',$rut)
                                             ->whereNotNull('contract_day_type')
                                             ->where('year',$year)
                                             ->get();
@@ -434,11 +436,11 @@ class TheoreticalProgrammingController extends Controller
         // ### Validaciones ###
 
         //### Validación 1: que no se topen los dias con ya registrados
-        $count1 = CalendarProgramming::where('rut',$request->rut)
+        $count1 = CalendarProgramming::where('user_id',$request->rut)
                                      ->whereNotNull('contract_day_type')
                                      ->whereRaw('? between start_date and end_date', [$request->start_date])
                                      ->count();
-        $count2 = CalendarProgramming::where('rut',$request->rut)
+        $count2 = CalendarProgramming::where('user_id',$request->rut)
                                      ->whereRaw('? between start_date and end_date', [$request->end_date])
                                      ->count();
         if (($count1 + $count2) != 0) {
@@ -455,7 +457,7 @@ class TheoreticalProgrammingController extends Controller
         $register_days = $start->diffInDays($end)+1;
 
         //se obtienen los permisos de contrato ya candelarizados
-        $contract_days = CalendarProgramming::where('rut',$request->rut)
+        $contract_days = CalendarProgramming::where('user_id',$request->rut)
                                             ->whereNotNull('contract_day_type')
                                             ->whereYear('start_date', $request->year)
                                             ->get();
@@ -486,7 +488,7 @@ class TheoreticalProgrammingController extends Controller
         $contract_matrix['administrative_permit'] = 0;
         $contract_matrix['training_days'] = 0;
 
-        $contracts = Contract::where('rut',$request->rut)
+        $contracts = Contract::where('user_id',$request->rut)
                              ->where('year',$request->year)
                              ->get();
         foreach ($contracts as $key => $contract) {
@@ -592,7 +594,7 @@ class TheoreticalProgrammingController extends Controller
             //registro permisos administrativos
             if ($request->tipo_evento != "teorico") {
                 $theoreticalProgramming = new TheoreticalProgramming();
-                $theoreticalProgramming->rut = $request->rut;
+                $theoreticalProgramming->user_id = $request->rut;
                 $theoreticalProgramming->contract_id = $request->contract_id;
                 $theoreticalProgramming->specialty_id = $request->specialty_id;
                 $theoreticalProgramming->profession_id = $request->profession_id;
@@ -618,7 +620,7 @@ class TheoreticalProgrammingController extends Controller
                 //solo se inserta en esta semana
                 if ($request->tipo_ingreso == 1) {
                     $theoreticalProgramming = new TheoreticalProgramming();
-                    $theoreticalProgramming->rut = $request->rut;
+                    $theoreticalProgramming->user_id = $request->rut;
                     $theoreticalProgramming->contract_id = $request->contract_id;
                     $theoreticalProgramming->specialty_id = $request->specialty_id;
                     $theoreticalProgramming->profession_id = $request->profession_id;
@@ -635,7 +637,7 @@ class TheoreticalProgrammingController extends Controller
                     // Storage::put('errores.txt',$year . " " . date('Y', strtotime($first_date)));
                     while (date('Y', strtotime($first_date)) == $year) {
                         $theoreticalProgramming = new TheoreticalProgramming();
-                        $theoreticalProgramming->rut = $request->rut;
+                        $theoreticalProgramming->user_id = $request->rut;
                         $theoreticalProgramming->contract_id = $request->contract_id;
                         $theoreticalProgramming->specialty_id = $request->specialty_id;
                         $theoreticalProgramming->profession_id = $request->profession_id;
@@ -655,7 +657,7 @@ class TheoreticalProgrammingController extends Controller
                 elseif($request->tipo_ingreso == 3) {
                   while (date('Y', strtotime($first_date)) == $year) {
                       $theoreticalProgramming = new TheoreticalProgramming();
-                      $theoreticalProgramming->rut = $request->rut;
+                      $theoreticalProgramming->user_id = $request->rut;
                       $theoreticalProgramming->contract_id = $request->contract_id;
                       $theoreticalProgramming->specialty_id = $request->specialty_id;
                       $theoreticalProgramming->profession_id = $request->profession_id;
@@ -703,7 +705,7 @@ class TheoreticalProgrammingController extends Controller
 
           //solo se modifica el evento actual
           if ($request->tipo == 1) {
-              $theoreticalProgramming = TheoreticalProgramming::where('rut',$request->rut)
+              $theoreticalProgramming = TheoreticalProgramming::where('user_id',$request->rut)
                                                               ->where('activity_id',$request->activity_id)
                                                               ->where('contract_id',$request->contract_id)
                                                               ->where('specialty_id',$request->specialty_id)
@@ -720,7 +722,7 @@ class TheoreticalProgrammingController extends Controller
           //se modifican todos los eventos hacia adelante
           elseif($request->tipo == 2){
               while (date('Y', strtotime($start_date)) == $year) {
-                  $theoreticalProgramming = TheoreticalProgramming::where('rut',$request->rut)
+                  $theoreticalProgramming = TheoreticalProgramming::where('user_id',$request->rut)
                                                                   ->where('activity_id',$request->activity_id)
                                                                   ->where('contract_id',$request->contract_id)
                                                                   ->where('specialty_id',$request->specialty_id)
@@ -744,7 +746,7 @@ class TheoreticalProgrammingController extends Controller
           //se modifican eventos semana por medio
           elseif($request->tipo == 3){
               while (date('Y', strtotime($start_date)) == $year) {
-                  $theoreticalProgramming = TheoreticalProgramming::where('rut',$request->rut)
+                  $theoreticalProgramming = TheoreticalProgramming::where('user_id',$request->rut)
                                                                   ->where('activity_id',$request->activity_id)
                                                                   ->where('contract_id',$request->contract_id)
                                                                   ->where('specialty_id',$request->specialty_id)
@@ -766,7 +768,7 @@ class TheoreticalProgrammingController extends Controller
           }
           //administrativos
           elseif ($request->tipo == 4) {
-              $theoreticalProgramming = TheoreticalProgramming::where('rut',$request->rut)
+              $theoreticalProgramming = TheoreticalProgramming::where('user_id',$request->rut)
                                                               ->where('activity_id',$request->activity_id)
                                                               ->where('contract_id',$request->contract_id)
                                                               ->where('specialty_id',$request->specialty_id)
@@ -795,7 +797,7 @@ class TheoreticalProgrammingController extends Controller
 
             //solo se elimina el evento actual
               if ($request->tipo == 1) {
-                  $theoreticalProgramming = TheoreticalProgramming::where('rut',$request->rut)
+                  $theoreticalProgramming = TheoreticalProgramming::where('user_id',$request->rut)
                                                                   ->where('activity_id',$request->activity_id)
                                                                   ->where('contract_id',$request->contract_id)
                                                                   ->where('specialty_id',$request->specialty_id)
@@ -807,7 +809,7 @@ class TheoreticalProgrammingController extends Controller
               //se elimina desde el evento actual
               elseif($request->tipo == 2){
                   while (date('Y', strtotime($first_date)) == $year) {
-                      $theoreticalProgramming = TheoreticalProgramming::where('rut',$request->rut)
+                      $theoreticalProgramming = TheoreticalProgramming::where('user_id',$request->rut)
                                                                       ->where('activity_id',$request->activity_id)
                                                                       ->where('contract_id',$request->contract_id)
                                                                       ->where('specialty_id',$request->specialty_id)
@@ -825,7 +827,7 @@ class TheoreticalProgrammingController extends Controller
               //se elimina semana volante
               elseif($request->tipo == 3){
                   while (date('Y', strtotime($first_date)) == $year) {
-                      $theoreticalProgramming = TheoreticalProgramming::where('rut',$request->rut)
+                      $theoreticalProgramming = TheoreticalProgramming::where('user_id',$request->rut)
                                                                       ->where('activity_id',$request->activity_id)
                                                                       ->where('contract_id',$request->contract_id)
                                                                       ->where('specialty_id',$request->specialty_id)
@@ -842,7 +844,7 @@ class TheoreticalProgrammingController extends Controller
               }
               //administrativos
               elseif ($request->tipo == 4) {
-                  $theoreticalProgramming = TheoreticalProgramming::where('rut',$request->rut)
+                  $theoreticalProgramming = TheoreticalProgramming::where('user_id',$request->rut)
                                                                   ->where('contract_id',$request->contract_id)
                                                                   ->where('specialty_id',$request->specialty_id)
                                                                   ->where('profession_id',$request->profession_id)
@@ -862,7 +864,7 @@ class TheoreticalProgrammingController extends Controller
       $first_date = new Carbon($request->start_date);
       $last_date = new Carbon($request->end_date);
       while (date('Y', strtotime($first_date)) == $year) {
-          $theoreticalProgramming = TheoreticalProgramming::where('rut',$request->rut)
+          $theoreticalProgramming = TheoreticalProgramming::where('user_id',$request->rut)
                                                           ->where('activity_id',$request->activity_id)
                                                           ->where('contract_id',$request->contract_id)
                                                           ->where('specialty_id',$request->specialty_id)
@@ -911,7 +913,7 @@ class TheoreticalProgrammingController extends Controller
 
         //busca usuarios en rrhh
         // $rrhhs = Rrhh::orderby('name','ASC')->get();
-        $rrhhs = Rrhh::whereIn('rut',$users)->orderby('name','ASC')->whereHas(
+        $rrhhs = User::whereIn('rut',$users)->orderby('name','ASC')->whereHas(
             'contracts', function($q){
                 $q->where('law', 'LEY 19.664');
             })->get();

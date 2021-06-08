@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\MedicalProgrammer;
 
-use App\Models\MedicalProgrammer\Rrhh;
+// use App\Models\MedicalProgrammer\Rrhh;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,7 +17,8 @@ class RrhhController extends Controller
      */
     public function index()
     {
-        $rrhh = Rrhh::orderBy('name','ASC')->get();
+        // $rrhh = Rrhh::orderBy('name','ASC')->get();
+        $rrhh = User::all();
         return view('medical_programmer.rrhh.index', compact('rrhh'));
     }
 

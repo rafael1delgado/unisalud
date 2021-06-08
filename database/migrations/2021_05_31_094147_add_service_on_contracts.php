@@ -21,7 +21,7 @@ class AddServiceOnContracts extends Migration
       });
 
       Schema::table('mp_services', function (Blueprint $table) {
-          $table->string('service_code')->after('id');
+          $table->string('service_code')->after('id')->nullable();
       });
     }
 

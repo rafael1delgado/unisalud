@@ -22,7 +22,6 @@ class UserSeeder extends Seeder
     {
 
         $user = new User();
-        $user->id = 12345678;
         $user->active = 1;
         $user->claveunica = 1;
         $user->birthday = now();
@@ -78,10 +77,7 @@ class UserSeeder extends Seeder
         $address->save();
 
         $user = new User();
-        $user->id = 17430005;
         $user->active = 1;
-        // $user->run = 17430005;
-        // $user->dv = '4';
         $user->claveunica = 1;
         $user->birthday = now();
         $user->gender = 'other';
@@ -95,6 +91,12 @@ class UserSeeder extends Seeder
         $humanName->user_id = $user->id;
         $humanName->save();
 
-        // $user->givePermissionTo(Permission::all());
+        $identifier = new Identifier();
+        $identifier->use = 'official';
+        $identifier->cod_con_identifier_type_id = 1; // RUN
+        $identifier->value = 17430005;
+        $identifier->dv = 4;
+        $identifier->user_id = $user->id;
+        $identifier->save();
     }
 }

@@ -40,9 +40,9 @@ class Contract extends Model implements Auditable
         return $this->hasMany('App\Models\MedicalProgrammer\TheoreticalProgramming');
     }
 
-    public function user() {
-        return $this->belongsTo('App\User');
-    }
+    // public function user() {
+    //     return $this->belongsTo('App\User');
+    // }
 
     public function logs() {
         return $this->morphMany('App\Models\MedicalProgrammer\Log','model')->where('diferences','<>',"[]");
