@@ -26,16 +26,16 @@
 	<div class="form-row mt-3">
 
     	<div class="form-group col-md-4">
-    			<label for="inputEmail4">RUT</label>
-    			<input type="email" class="form-control" id="inputEmail4" placeholder="Ingrese el rut">
+    			<label for="inputrut">RUT</label>
+    			<input type="text" class="form-control" id="inputEmail4" placeholder="Ingrese el rut">
     	</div>
     	<div class="form-group col-md-1">
-      			<label for="inputPassword4">Dv</label>
-      			<input type="password" class="form-control" id="inputPassword4" placeholder="Dv">
+      			<label for="inputdv">Dv</label>
+      			<input type="text" class="form-control" id="inputPassword4" placeholder="Dv">
     	</div>
 		<div class="form-group col-md-5">
-     	 		<label for="inputEmail4">Nombre</label>
-      	 		<input type="email" class="form-control" id="inputEmail4" placeholder="Ingrese Nombre">
+     	 		<label for="inputnombre">Nombre</label>
+      	 		<input type="text" class="form-control" id="inputEmail4" placeholder="Ingrese Nombre">
     	</div>
     	<div class="form-group col-md-2">
 				<label for="inputEmail4">&nbsp;</label>
@@ -269,6 +269,7 @@
     		<tr>
       			<th scope="col">Profesional</th>
 				<th scope="col">Especialidad</th>
+				<th scope="col">Subespecialidad</th>
       			<th scope="col">Hora</th>
       			<th scope="col">Cupo</th>
       			<th scope="col">Sobre Cupo</th>
@@ -283,6 +284,7 @@
 				 </td>
 				 
 				<td>Traumatologiá</td>
+				<td>traumatologia/pie</td>
       			<td>09:30</td>
       			<td>3</td>
       			<td>2</td>
@@ -296,6 +298,7 @@
 				 
 				 </td>
 				<td>Traumatologiá</td>
+				<td>Traumatologiá/brazo</td>
       			<td>10:30</td>
       			<td>2</td>
       			<td>0</td>
@@ -308,6 +311,7 @@
 				  <label class="form-check-label" for="invalidCheck2">Juan Zavala</label>
 				 </td>
 				<td>Traumatologiá</td>
+				<td>Traumatologiá/pierna</td>
       			<td>11:30</td>
       			<td>1</td>
       			<td>0</td>
