@@ -26,10 +26,7 @@ class UserSeeder extends Seeder
         $user->claveunica = 1;
         $user->birthday = now();
         $user->gender = 'other';
-        if( \App::environment('local') )
-            $user->password = bcrypt('admin');  
-        
-
+        if( \App::environment('local') ) $user->password = bcrypt('admin');
         $user->save();
 
         $humanName = new HumanName();
@@ -86,10 +83,8 @@ class UserSeeder extends Seeder
         $user->active = 1;
         $user->claveunica = 1;
         $user->birthday = now();
-        if( \App::environment('local') )
-            $user->password = bcrypt('admin');
-        
         $user->gender = 'other';
+        if( \App::environment('local') ) $user->password = bcrypt('admin');
         $user->save();
 
         $humanName = new HumanName();
@@ -116,6 +111,7 @@ class UserSeeder extends Seeder
         $user->claveunica = 1;
         $user->birthday = now();
         $user->gender = 'other';
+        if( \App::environment('local') ) $user->password = bcrypt('admin');
         $user->save();
 
         $humanName = new HumanName();
@@ -140,6 +136,7 @@ class UserSeeder extends Seeder
         $user->claveunica = 1;
         $user->birthday = now();
         $user->gender = 'other';
+        if( \App::environment('local') ) $user->password = bcrypt('admin');
         $user->save();
 
         $humanName = new HumanName();
