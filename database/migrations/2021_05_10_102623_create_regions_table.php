@@ -15,10 +15,14 @@ class CreateRegionsTable extends Migration
     {
         Schema::create('regions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('region_id')->nullable();
             $table->string('id_minsal')->nullable();
             $table->string('name')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('region_id')->references('id')->on('regions');
+
         });
     }
 

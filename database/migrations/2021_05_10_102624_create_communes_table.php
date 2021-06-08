@@ -15,11 +15,13 @@ class CreateCommunesTable extends Migration
     {
         Schema::create('communes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('commune_id')->nullable();
             $table->string('name')->nullable();
             $table->string('code_deis')->nullable();
             $table->foreignId('region_id');
 
             $table->foreign('region_id')->references('id')->on('regions');
+            $table->foreign('commune_id')->references('id')->on('communes');
 
             $table->timestamps();
             $table->softDeletes();

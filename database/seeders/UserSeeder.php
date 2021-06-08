@@ -72,9 +72,9 @@ class UserSeeder extends Seeder
         $address->text = 'pampa ilusion';
         $address->line = 1313;
         $address->city = 'iquique';
-        $address->district = 5;
-        $address->state = 1;
-        $address->country = 42;
+        $address->commune_id = 5;
+        $address->region_id = 1;
+        $address->country_id = 42;
         $address->save();
 
         $user = new User();
