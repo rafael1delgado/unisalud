@@ -20,6 +20,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+// use Illuminate\Support\Facades\Input;
 use App\Traits\GoogleToken;
 
 class PatientController extends Controller
@@ -56,8 +57,13 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        DB::beginTransaction();
+        //Busca los pacientes que ya esten ingresados con los datos de request
+        // $matchingPatients = $this->getMatchingPatients($request);
+        // if($matchingPatients->count() > 0){
+        //     return view('patients.matching_patients', compact('matchingPatients'));
+        // }
 
+        DB::beginTransaction();
         try {
             $newPatient = new User($request->all());
             $newPatient->active = 1;
@@ -90,9 +96,9 @@ class PatientController extends Controller
                     $newAddress->apartment = $request->address_apartment[$key];
                     $newAddress->suburb = $request->suburb[$key];
                     $newAddress->city = $request->city[$key];
-                    $newAddress->district = $request->district[$key];
-                    $newAddress->state = $request->state[$key];
-                    $newAddress->country = $request->country[$key];
+                    $newAddress->commune_id = $request->district[$key];
+                    $newAddress->region_id = $request->state[$key];
+                    $newAddress->country_id = $request->country[$key];
                     $newAddress->save();
                 }
             }
@@ -115,6 +121,15 @@ class PatientController extends Controller
         }
 
         return redirect()->route('patient.index');
+    }
+
+    public function getMatchingPatients(Request $request){
+        $patients = User::query();
+        foreach ($request->id_type as $key => $id_type) {
+            $patients->getByIdentifier($request->id_value[$key], $id_type);
+        }        
+
+        return $patients->get();
     }
 
     public function show($id)
@@ -150,6 +165,9 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        
+
         DB::beginTransaction();
 
         try {
@@ -218,9 +236,9 @@ class PatientController extends Controller
                         $newAddress->apartment = $request->address_apartment[$key];
                         $newAddress->suburb = $request->suburb[$key];
                         $newAddress->city = $request->city[$key];
-                        $newAddress->district = $request->district[$key];
-                        $newAddress->state = $request->state[$key];
-                        $newAddress->country = $request->country[$key];
+                        $newAddress->commune_id = $request->district[$key];
+                        $newAddress->region_id = $request->state[$key];
+                        $newAddress->country_id = $request->country[$key];
                         $newAddress->save();
                     } elseif (in_array($request->address_id[$key], $storedAddressIds)) {
                         $address = Address::find($request->address_id[$key]);

@@ -77,6 +77,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function officialHumanNames()
     {
         return $this->humanNames();
@@ -123,6 +124,13 @@ class User extends Authenticatable
         $query->whereHas('identifiers', function ($query) use ($run) {
             return $query->where('value', $run)
                 ->where('cod_con_identifier_type_id', 1);
+        });
+    }
+
+    public function scopeGetByIdentifier($query, $value, $identifierType){
+        $query->whereHas('identifiers', function ($query) use ($value, $identifierType) {
+            return $query->where('value', $value)
+                ->where('cod_con_identifier_type_id', $identifierType);
         });
     }
 
