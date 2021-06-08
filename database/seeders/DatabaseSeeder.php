@@ -17,13 +17,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             CodConIdentifiersTypesSeeder::class,
-            UserSeeder::class,
            // IdentifierTypeSeeder::class,
             CountrySeeder::class,
             RegionSeeder::class,
             CodConMaritalSeeder::class,
             CommuneSeeder::class,
             EtniaSeeder::class,
+            UserSeeder::class,
+
 
 
             // // HmRrhhTableSeeder::class,

@@ -27,15 +27,18 @@ class CreateAddressesTable extends Migration
             $table->string('apartment')->nullable();
             $table->string('suburb')->nullable();
             $table->string('city')->nullable();
-            $table->string('district')->nullable(); /** should be deleted? */
-            $table->string('state')->nullable(); /** should be deleted? */
+            $table->foreignId('country_id')->nullable();
+            $table->foreignId('commune_id')->nullable();
             $table->string('postal_code')->nullable();
-            $table->string('country')->nullable(); /** should be deleted? */
+            $table->foreignId('region_id')->nullable(); 
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('address_id')->references('id')->on('addresses');
             $table->foreign('period_id')->references('id')->on('periods');
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('commune_id')->references('id')->on('communes');
+            $table->foreign('region_id')->references('id')->on('regions');
             $table->foreign('user_id')->references('id')->on('users');
 
         });

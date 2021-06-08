@@ -21,7 +21,7 @@
                 <th style="width: 2%"></th>
             </tr>
         </thead>
-        @can('Fq: Answer request')
+        @canany(['Fq: Answer request','Fq: admin'])
         <tbody>
             @foreach($pending_reqs as $fqRequest)
             <tr>
@@ -31,16 +31,17 @@
                 <td>{{ $fqRequest->observation_patient }}</td>
                 <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $fqRequest->id }}">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#exampleModal-{{ $fqRequest->id }}">
                         <i class="fas fa-edit"></i>
                     </button>
+
                     @include('fq.request.modals.view_request')
                 </td>
             </tr>
             @endforeach
         </tbody>
-        @endcan
-        @can('Fq: Answer request medicines')
+        @endcanany
+        @canany(['Fq: Answer request','Fq: admin'])
         <tbody>
             @foreach($pending_reqs_medicines as $fqRequest)
             <tr>
@@ -50,15 +51,16 @@
                 <td>{{ $fqRequest->observation_patient }}</td>
                 <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $fqRequest->id }}">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#exampleModal-{{ $fqRequest->id }}">
                         <i class="fas fa-edit"></i>
                     </button>
+
                     @include('fq.request.modals.view_request')
                 </td>
             </tr>
             @endforeach
         </tbody>
-        @endcan
+        @endcanany
     </table>
 </div>
 
@@ -76,7 +78,7 @@
                 <th style="width: 2%"></th>
             </tr>
         </thead>
-        @can('Fq: Answer request')
+        @canany(['Fq: Answer request', 'Fq: admin'])
         <tbody>
             @foreach($reqs as $fqRequest)
             <tr>
@@ -86,7 +88,7 @@
                 <td>{{ $fqRequest->observation_patient }}</td>
                 <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $fqRequest->id }}">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#exampleModal-{{ $fqRequest->id }}">
                         <i class="fas fa-edit"></i>
                     </button>
 

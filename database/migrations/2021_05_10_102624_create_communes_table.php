@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegionsTable extends Migration
+class CreateCommunesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,20 @@ class CreateRegionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('regions', function (Blueprint $table) {
+        Schema::create('communes', function (Blueprint $table) {
             $table->id();
-            $table->string('id_minsal')->nullable();
+            $table->foreignId('commune_id')->nullable();
             $table->string('name')->nullable();
+            $table->string('code_deis')->nullable();
+            $table->foreignId('region_id');
+
+            $table->foreign('region_id')->references('id')->on('regions');
+            $table->foreign('commune_id')->references('id')->on('communes');
+
             $table->timestamps();
             $table->softDeletes();
+
+
         });
     }
 
@@ -29,6 +37,6 @@ class CreateRegionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regions');
+        Schema::dropIfExists('communes');
     }
 }

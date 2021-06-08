@@ -32,6 +32,7 @@
             <div class="card-body">
                 <h5 class="card-title">Datos Personales</h5>
                 
+                <input type="hidden" name='human_name_use' value='official'>
                 <div class="form-row">
                     <fieldset class="form-group col-2">
                         <label for="for_name">Nombres</label>
@@ -84,18 +85,8 @@
                             <option value="female">Femenino</option>
                             <option value="transgender-female">Femenino Trans "FT"</option>
                             <option value="transgender-male">Masculino Trans "MT"</option>
-                            {{--                @foreach ($genderIdentities as $identity)--}}
-                            {{--                    <option value="{{ $identity['code'] }}">{{ $identity['display'] }}</option>--}}
-                            {{--                @endforeach--}}
                         </select>
                     </fieldset>
-
-                    {{-- <fieldset class="form-group col-2">
-                        <label for="for_birth_place">País de nacimeinto</label>
-                        <select name="birth_place" id="for_birth_place" class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </fieldset> --}}
 
                 </div>
                 <div class="form-row">
@@ -128,15 +119,6 @@
                             @endforeach
                         </select>
                     </fieldset>
-
-                    {{--        <fieldset class="form-group col-2">--}}
-                    {{--            <label for="for_instrucionLevel">Nivel de Instrucción</label>--}}
-                    {{--            <select name="instrucionLevel" id="for_instrucionLevel" class="form-control">--}}
-                    {{--                @foreach($instructionLevel as $level)--}}
-                    {{--                    <option value="{{ $level['code'] }}">{{ $level['display'] }}</option>--}}
-                    {{--                @endforeach--}}
-                    {{--            </select>--}}
-                    {{--        </fieldset>--}}
 
                     {{--        <fieldset class="form-group col-2">--}}
                     {{--            <label for="for_prevision">Previsión</label>--}}
@@ -196,6 +178,9 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
+
+        
+
 
     </form>
 @endsection

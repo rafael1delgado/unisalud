@@ -16,18 +16,24 @@ class CreateFqRequestsTable extends Migration
         Schema::create('fq_requests', function (Blueprint $table) {
             $table->id();
 
-            $table->enum('name',['specialty hours', 'medicines', 'exam order', 'home hospitalization']);
+            $table->enum('name',['specialty hours', 'dispensing', 'home hospitalization']);
+            $table->enum('specialties',['broncopulmonar', 'otorrinolaringología',
+                                        'endocrinología', 'gastroenterología', 'other'])->nullable();
+            $table->enum('other_specialty',['kinesiología', 'nutrición', 'enfermería'])->nullable();
+            $table->string('prescription_file')->nullable();
             $table->foreignId('contact_user_id');
             $table->foreignId('patient_id');
             $table->longText('observation_patient')->nullable();
             $table->enum('status',['pending', 'complete', 'rejected']);
+            $table->enum('attention',['face-to-face', 'teleconsultation'])->nullable();
+            $table->longText('link')->nullable();
             $table->dateTime('date_confirm')->nullable();
             $table->longText('observation_request')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->dateTime('date_confirm_record')->nullable();
 
-            $table->foreign('contact_user_id')->references('id')->on('fq_contact_users');
-            $table->foreign('patient_id')->references('id')->on('fq_patients');
+            $table->foreign('contact_user_id')->references('id')->on('users');
+            $table->foreign('patient_id')->references('id')->on('users');
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();

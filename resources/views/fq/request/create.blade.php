@@ -120,7 +120,7 @@
                     <fieldset class="form-group">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="patient_id"
-                                value="{{-- $usersPatients->patient->id --}}" required>
+                                value="{{ $usersPatient->user->id }}" required>
                         </div>
                     </fieldset>
                 </td>
@@ -131,60 +131,85 @@
 
     <hr>
 
-    <div class="form-row">
-        <fieldset class="form-group col-sm-3">
-            <label for="for_name">Motivo de Solicitud</label>
-            <select name="name" id="for_name" class="form-control" required>
-                <option value="">Seleccione...</option>
-                <option value="specialty hours">Horas de especialidad</option>
-                <option value="prescription">Renovación de receta</option>
-                <option value="home hospitalization">Contacto con hospitalización domiciliaria</option>
-            </select>
-        </fieldset>
+    <div class="card">
+        <div class="card-body">
+            <div class="form-row">
+                <fieldset class="form-group col-sm-4">
+                    <label for="for_name">Motivo de Solicitud</label>
+                    <select name="name" id="for_name" class="form-control" required>
+                        <option value="">Seleccione...</option>
+                        <option value="specialty hours">Horas de especialidad</option>
+                        <option value="dispensing">Dispensación de receta</option>
+                        <option value="home hospitalization">Contacto con hospitalización domiciliaria</option>
+                    </select>
+                </fieldset>
 
-        <fieldset class="form-group col-sm-3">
-            <label for="for_specialties">Especialidad</label>
-            <select name="specialties" id="for_specialties" class="form-control" required>
-                <option value="">Seleccione...</option>
-                <option value="1">Broncopulmonar</option>
-                <option value="2">Otorrinolaringología</option>
-                <option value="3">Endocrinología</option>
-                <option value="4">Gastroenterología</option>
-                <option value="other">Otros</option>
-            </select>
-        </fieldset>
+                <fieldset class="form-group col-sm-4">
+                    <label for="for_specialties">Especialidad</label>
+                    <select name="specialties" id="for_specialties" class="form-control" required>
+                        <option value="">Seleccione...</option>
+                        <option value="broncopulmonar">Broncopulmonar</option>
+                        <option value="otorrinolaringología">Otorrinolaringología</option>
+                        <option value="endocrinología">Endocrinología</option>
+                        <option value="gastroenterología">Gastroenterología</option>
+                        <option value="other">Otros</option>
+                    </select>
+                </fieldset>
 
-        <fieldset class="form-group col-sm-3">
-            <label for="for_other_specialty">Otra especialidad</label>
-            <input type="text" class="form-control" name="other_specialty" id="for_other_specialty">
-        </fieldset>
-
-        <fieldset class="form-group col-sm-3">
-            <div class="mb-3">
-              <label for="for_prescription_file" class="form-label">Receta</label>
-              <input class="form-control" type="file" name="prescription_file" id="for_prescription_file">
+                <fieldset class="form-group col-sm-4">
+                    <label for="for_other_specialty">Especialidad</label>
+                    <select name="other_specialty" id="for_other_specialty" class="form-control" required>
+                        <option value="">Seleccione...</option>
+                        <option value="kinesiología">Kinesiología</option>
+                        <option value="nutrición">Nutrición</option>
+                        <option value="enfermería">Enfermería</option>
+                    </select>
+                </fieldset>
             </div>
-        </fieldset>
 
-        <fieldset class="form-group col-sm">
-          <label for="observation_patient" class="form-label">Observación</label>
-          <textarea class="form-control" name="observation_patient" id="for_observation_patient" rows="3"></textarea>
-        </fieldset>
+            <div class="form-row" id="farm">
+                <fieldset class="form-group col-sm-4">
+                    <div class="mb-3">
+                      <label for="for_prescription_file" class="form-label">Receta</label>
+                      <input class="form-control" type="file" name="prescription_file" id="for_prescription_file">
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group col-sm-4">
+                    <div class="mb-3">
+                      <label for="for_medicines" class="form-label">Farmacos</label>
+                      <select name="medicines[]" id="for_medicines" class="form-control selectpicker" multiple>
+                          <option value="">Seleccione...</option>
+                      </select>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="form-row">
+                <fieldset class="form-group col-sm">
+                  <label for="observation_patient" class="form-label">Observación</label>
+                  <textarea class="form-control" name="observation_patient" id="for_observation_patient" rows="3"></textarea>
+                </fieldset>
+            </div>
+
+            <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> Guardar</button>
+        </div>
     </div>
 
-    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> Guardar</button>
 
 </form>
+
+<br><br>
 
 @endsection
 
 @section('custom_js')
 
 <script type="text/javascript">
-
     $('#for_specialties').attr("disabled", true);
-    document.getElementById('for_other_specialty').readOnly = true;
+    $('#for_other_specialty').attr("disabled", true);
     $('#for_prescription_file').attr("disabled", true);
+    $('#farm').hide();
 
     jQuery('select[name=name]').change(function(){
         var fieldsetName = $(this).val();
@@ -193,23 +218,26 @@
                 $('#for_specialties').attr("disabled", false);
                 $('#for_prescription_file').attr("disabled", true);
                 document.getElementById('for_prescription_file').value = '';
+                $('#farm').hide();
                 break;
 
-            case "prescription":
+            case "dispensing":
                 $('#for_prescription_file').attr("disabled", false);
+                $('#farm').show();
                 $('#for_specialties').attr("disabled", true);
                 document.getElementById('for_specialties').value = '';
-                document.getElementById('for_other_specialty').readOnly = true;
+                $('#for_other_specialty').attr("disabled", true);
                 document.getElementById('for_other_specialty').value = '';
                 break;
 
             default:
                 $('#for_specialties').attr("disabled", true);
                 document.getElementById('for_specialties').value = '';
-                document.getElementById('for_other_specialty').readOnly = true;
+                $('#for_other_specialty').attr("disabled", true);
                 document.getElementById('for_other_specialty').value = '';
                 $('#for_prescription_file').attr("disabled", true);
                 document.getElementById('for_prescription_file').value = '';
+                $('#farm').hide();
 
                 break;
         }
@@ -219,16 +247,18 @@
         var fieldsetName = $(this).val();
         switch(this.value){
             case "other":
-                document.getElementById('for_other_specialty').readOnly = false;
+                $('#for_other_specialty').attr("disabled", false);
                 break;
 
             default:
-                document.getElementById('for_other_specialty').readOnly = true;
+                $('#for_other_specialty').attr("disabled", true);
                 document.getElementById('for_other_specialty').value = '';
-
                 break;
         }
     });
 </script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
 @endsection
