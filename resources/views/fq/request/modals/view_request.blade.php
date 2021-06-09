@@ -18,7 +18,6 @@
                         <th>Estado</th>
                         <th>Nombre Contacto</th>
                         <th>Motivo</th>
-                        <th>Nombre</th>
                         <th>Observación Paciente</th>
                     </tr>
                 </thead>
@@ -28,7 +27,6 @@
                         <td>{{ $fqRequest->StatusValue }}</td>
                         <td>{{ $fqRequest->contactUser->officialFullName }}</td>
                         <td>{{ $fqRequest->NameValue }}</td>
-                        <td>{{ $fqRequest->observation_patient }}</td>
                         <td>{{ $fqRequest->observation_patient }}</td>
                     </tr>
                 </tbody>
