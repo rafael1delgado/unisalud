@@ -59,10 +59,10 @@ class LoginController extends Controller
 
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
-    
+
                 return redirect()->intended('home');
             }
-    
+
             return back()->withErrors([
                 'run' => 'Clave incorrecta',
             ]);
@@ -70,7 +70,7 @@ class LoginController extends Controller
         else {
             return redirect()->back()->withErrors(['No existe el usuario']);;
         }
-        
+
     }
 
     /**

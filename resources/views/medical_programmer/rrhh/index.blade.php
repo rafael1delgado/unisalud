@@ -17,24 +17,39 @@
             <!-- <th>Apellido Paterno</th>
             <th>Apellido Materno</th> -->
             <th>Función</th>
+            <th>Prof/Espec</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach( $rrhh as $people)
+        @foreach( $rrhh as $user)
         <tr>
-            <td>{{ $people->IdentifierRun->value }}</td>
-            <td>{{ $people->IdentifierRun->dv }}</td>
-            <td>{{ $people->OfficialFullName }}</td>
-            <!-- <td>{{ $people->fathers_family }}</td>
-            <td>{{ $people->mothers_family }}</td> -->
-            <td>{{ $people->job_title }}</td>
+            <td>{{ $user->IdentifierRun->value }}</td>
+            <td>{{ $user->IdentifierRun->dv }}</td>
+            <td>{{ $user->OfficialFullName }}</td>
+            <!-- <td>{{ $user->fathers_family }}</td>
+            <td>{{ $user->mothers_family }}</td> -->
+            <td>{{ $user->job_title }}</td>
+            <td nowrap>
+                @foreach ($user->specialties as $key => $specialty)
+                    {{$specialty->specialty_name}},
+                    @if ($key == 2)
+                        @break
+                    @endif
+                @endforeach
+                @foreach ($user->professions as $key => $profession)
+                    {{$profession->profession_name}},
+                    @if ($key == 2)
+                        @break
+                    @endif
+                @endforeach
+            </td>
             <td>
-      				<a href="{{ route('medical_programmer.rrhh.edit', $people) }}"
+      				<a href="{{ route('medical_programmer.rrhh.edit', $user) }}"
       					class="btn btn-sm btn-outline-secondary">
       					<span class="fas fa-edit" aria-hidden="true"></span>
       				</a>
-      				<form method="POST" action="{{ route('medical_programmer.rrhh.destroy', $people) }}" class="d-inline">
+      				<form method="POST" action="{{ route('medical_programmer.rrhh.destroy', $user) }}" class="d-inline">
       					@csrf
       					@method('DELETE')
       					<button type="submit" class="btn btn-outline-secondary btn-sm" onclick="return confirm('¿Está seguro de eliminar la información?');">
