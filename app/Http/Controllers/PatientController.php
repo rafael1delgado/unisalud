@@ -20,7 +20,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-// use Illuminate\Support\Facades\Input;
 use App\Traits\GoogleToken;
 
 class PatientController extends Controller
@@ -55,14 +54,21 @@ class PatientController extends Controller
      * @return RedirectResponse
      * @throws \Exception
      */
-    public function store(Request $request)
+    public function store(Request $request, $save = null)
     {
         //Busca los pacientes que ya esten ingresados con los datos de request
-        // $matchingPatients = $this->getMatchingPatients($request);
-        // if($matchingPatients->count() > 0){
-        //     return view('patients.matching_patients', compact('matchingPatients'));
-        // }
+        $matchingPatients = $this->getMatchingPatients($request);
+        if ($matchingPatients->count() === 0 || $save == true) {
+           $this->savePatientData($request); 
+        }else {
+            return view('patients.matching_patients', compact('matchingPatients', 'request'));
+        }
 
+        return redirect()->route('patient.index');
+    }
+
+    public function savePatientData(Request $request)
+    {
         DB::beginTransaction();
         try {
             $newPatient = new User($request->all());
@@ -119,15 +125,14 @@ class PatientController extends Controller
             DB::rollBack();
             throw $e;
         }
-
-        return redirect()->route('patient.index');
     }
 
-    public function getMatchingPatients(Request $request){
+    public function getMatchingPatients(Request $request)
+    {
         $patients = User::query();
         foreach ($request->id_type as $key => $id_type) {
             $patients->getByIdentifier($request->id_value[$key], $id_type);
-        }        
+        }
 
         return $patients->get();
     }
@@ -167,7 +172,7 @@ class PatientController extends Controller
     public function update(Request $request, $id)
     {
 
-        
+
 
         DB::beginTransaction();
 
