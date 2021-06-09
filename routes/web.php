@@ -111,6 +111,8 @@ Route::prefix('fq')->as('fq.')->group(function(){
         Route::get('/', [ContactUserController::class, 'index'])->name('index');
         Route::get('/create', [ContactUserController::class, 'create'])->name('create');
         Route::get('/store/{user}', [ContactUserController::class, 'store'])->name('store');
+        Route::get('/addPatient/{contactUser}', [ContactUserController::class, 'addPatient'])->name('addPatient');
+        Route::get('/storeAddPatient/{contactUser}/{user}', [ContactUserController::class, 'storeAddPatient'])->name('storeAddPatient');
     });
     Route::prefix('patient')->name('patient.')->group(function(){
         Route::get('/', [FqPatientController::class, 'index'])->name('index');

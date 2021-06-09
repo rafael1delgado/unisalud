@@ -12,7 +12,7 @@ class ExtMedicine extends Model
     use softDeletes;
 
     protected $hidden = [
-        'created_at', 'updated_at'
+        'id', 'health_strategy', 'code', 'name', 'created_at', 'updated_at'
     ];
 
     protected $table = 'ext_medicines';
