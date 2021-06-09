@@ -87,6 +87,85 @@
       </fieldset>
     </div>
 
+    <hr />
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+            <h4>Permisos</h4>
+            <select class="selectpicker" name="permissions[]" multiple>
+                @foreach($permissions as $permission)
+                    <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                @endforeach
+            </select>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+            <h4>Especialidades</h4>
+            <select id="specialties" class="selectpicker" name="specialties[]" multiple>
+                @foreach($specialties as $specialty)
+                    <option value="{{ $specialty->id }}" >{{ $specialty->specialty_name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-sm">
+            <h4>Especialidad Principal</h4>
+            <select id="principal_specialty" name="principal_specialty">
+
+            </select>
+        </div>
+
+
+      </div>
+    </div>
+
+    <br>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+            <h4>Profesiones</h4>
+            <select id="professions" class="selectpicker" name="professions[]" multiple>
+                @foreach($professions as $profession)
+                    <option value="{{ $profession->id }}">{{ $profession->profession_name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-sm">
+            <h4>Profesión Principal</h4>
+            <select id="principal_profession" name="principal_profession">
+
+            </select>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+            <h4>Box</h4>
+            <select class="selectpicker" name="operating_rooms[]" multiple>
+                @foreach($operating_rooms as $operating_room)
+                    <option value="{{ $operating_room->id }}">{{ $operating_room->description }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-sm">
+
+        </div>
+      </div>
+    </div>
+
     <button type="submit" class="btn btn-primary">Crear</button>
 
 </form>
@@ -94,9 +173,52 @@
 @endsection
 
 @section('custom_js')
-  <script>
-    $( document ).ready(function() {
-      document.getElementById("for_rut").focus();
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}">
+
+<script src='{{asset("js/jquery.rut.chileno.js")}}'></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  //especialidades
+  //al modificar especialidades
+  $('#services').on('change', function() {
+    $('#principal_service').empty();
+    $.each($("#services option:selected"), function(){
+        optionText = $(this).text();
+        optionValue = $(this).val();
+        $('#principal_service').append('<option value="'+optionValue+'">'+optionText+'</option>');
     });
-  </script>
+  });
+
+
+  //especialidades
+  //al modificar especialidades
+  $('#specialties').on('change', function() {
+    $('#principal_specialty').empty();
+    $.each($("#specialties option:selected"), function(){
+        optionText = $(this).text();
+        optionValue = $(this).val();
+        $('#principal_specialty').append('<option value="'+optionValue+'">'+optionText+'</option>');
+    });
+
+  });
+
+
+  //profesiones
+  //al modificar especialidades
+  $('#professions').on('change', function() {
+    $('#principal_profession').empty();
+    $.each($("#professions option:selected"), function(){
+        optionText = $(this).text();
+        optionValue = $(this).val();
+        $('#principal_profession').append('<option value="'+optionValue+'">'+optionText+'</option>');
+    });
+  });
+
+});
+
+</script>
+<script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('js/defaults-es_CL.min.js') }}"></script>
 @endsection

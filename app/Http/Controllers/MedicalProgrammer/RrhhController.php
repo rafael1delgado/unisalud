@@ -6,10 +6,16 @@ namespace App\Http\Controllers\MedicalProgrammer;
 use App\Models\User;
 use App\Models\HumanName;
 use App\Models\Identifier;
+use App\Models\MedicalProgrammer\Service;
+use App\Models\MedicalProgrammer\Specialty;
+use App\Models\MedicalProgrammer\Profession;
+use App\Models\MedicalProgrammer\OperatingRoom;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -35,7 +41,13 @@ class RrhhController extends Controller
      */
     public function create()
     {
-        return view('medical_programmer.rrhh.create');
+        $permissions = Permission::OrderBy('name')->get();
+        // $roles = Role::OrderBy('name')->get();
+        $specialties = Specialty::OrderBy('specialty_name')->get();
+        $professions = Profession::OrderBy('profession_name')->get();
+        $operating_rooms = OperatingRoom::OrderBy('id')->where('description','LIKE', 'Box%')->get();
+        $services = Service::OrderBy('service_name')->get();
+        return view('medical_programmer.rrhh.create', compact('permissions','specialties','professions','operating_rooms','services'));
     }
 
     /**
@@ -142,8 +154,15 @@ class RrhhController extends Controller
      */
     public function edit(User $user)
     {
-        // $user = User::where('id',$rrhh->rut)->count();
-        return view('medical_programmer.rrhh.edit', compact('user'));
+        // $user = User::where('id',$user->id)->count();
+        $permissions = Permission::OrderBy('name')->get();
+        // $roles = Role::OrderBy('name')->get();
+        $specialties = Specialty::OrderBy('specialty_name')->get();
+        $professions = Profession::OrderBy('profession_name')->get();
+        $operating_rooms = OperatingRoom::OrderBy('id')->where('description','LIKE', 'Box%')->get();
+        $services = Service::OrderBy('service_name')->get();
+        // dd($permissions, $roles, $specialties, $professions, $operating_rooms, $services);
+        return view('medical_programmer.rrhh.edit', compact('user','permissions','specialties','professions','operating_rooms', 'services'));
     }
 
     /**

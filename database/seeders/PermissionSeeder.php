@@ -17,8 +17,17 @@ class PermissionSeeder extends Seeder
     {
         Permission::create(['name'=>'Administrator','description'=>'Administrador del sistema']);
         Permission::create(['name'=>'Developer','description'=>'Desarrollador']);
-        Permission::create(['name'=>'Medical Programmer: administrator','description'=>'Administrador del programador médico']);
-        Permission::create(['name'=>'Fq: admin','description'=>'Administrador de Fq']);
 
+        // Permission::create(['name'=>'Mp:  administrator','description'=>'Administrador del programador médico']);
+        Permission::create(['name' => 'Mp: administrador']);
+        Permission::create(['name' => 'Mp: programacion teorica']);
+        Permission::create(['name' => 'Mp: programacion medica']);
+        Permission::create(['name' => 'Mp: programacion no medica']);
+        Permission::create(['name' => 'Mp: programador pabellon']);
+        Permission::create(['name' => 'Mp: programador']);
+        Permission::create(['name' => 'Mp: reportes']);
+        Permission::create(['name' => 'Mp: mantenedores']);
+
+        Permission::create(['name'=>'Fq: admin','description'=>'Administrador de Fq']);
     }
 }
