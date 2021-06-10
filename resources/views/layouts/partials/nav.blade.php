@@ -80,7 +80,25 @@
         Mis permisos
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('dummy.crear_usuario') }}"><span data-feather="user-plus"></span>Crear usuario</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link " href="{{ route('dummy.some') }}"><span data-feather="file-text"></span>Some</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('dummy.traspaso') }}"><span data-feather="repeat"></span>Traspaso/bloqueo</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('dummy.agenda') }}"><span data-feather="calendar"></span>Agenda</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('dummy.lista_espera') }}"><span data-feather="list"></span>Lista Espera</a>
+  </li>
 </ul>
+
+
+
 {{--@endcan--}}
 
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
