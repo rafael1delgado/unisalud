@@ -68,9 +68,9 @@ Route::get('/claveunica/callback', [ClaveUnicaController::class,'callback']);
 Route::get('/claveunica/callback-testing', [ClaveUnicaController::class,'callback']);
 Route::get('/claveunica/logout', [ClaveUnicaController::class,'logout'])->name('claveunica.logout');
 
-Route::get('/login', [LoginController::class, 'login']);
+Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
-Route::get('/logout', [ProfileController::class,'logout']);
+Route::get('/logout', [LoginController::class,'logout'])->name('logout');
 
 /** Ejempo con livewire */
 //Route::get('/home', Home::class)->middleware('auth')->name('home');

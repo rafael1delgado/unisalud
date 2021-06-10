@@ -73,6 +73,19 @@ class LoginController extends Controller
 
     }
 
+    public function logout(){
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        if(env('APP_ENV') == 'local'){
+            return redirect()->route('login');
+        }
+        else {
+            return redirect('welcome');
+        }
+        
+    }
+
     /**
      * Create a new controller instance.
      *
