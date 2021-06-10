@@ -29,14 +29,13 @@ class ContactUserController extends Controller
      */
     public function create(Request $request)
     {
-        //Limpia mensajes anteriores.
-        //session()->flush();
-
         $contactUsers = ContactUser::all();
-        $user = User::GetByRun($request->input('search'))->first();
+
+        $user = User::getUserByRun($request->input('search'));
+
         if($user == NULL && $request->input('search') != NULL){
             session()->flash('danger', 'El Paciente/Contacto no se encuentra en nuestros registros,
-                                        Favor solicitar su ingreso en SOME');
+                                        Favor solicitar su ingreso');
         }
 
         return view('fq.contact_user.create', compact('request', 'user', 'contactUsers'));
@@ -64,35 +63,6 @@ class ContactUserController extends Controller
             return redirect()->route('fq.contact_user.create');
         }
 
-        //$flight->restore();
-
-        // $contactUser = new ContactUser($request->All());
-        // $contactUser->telephone = '+56'.$contactUser->telephone;
-        //
-        // if($contactUser->telephone2){
-        //     $contactUser->telephone2 = '+56'.$contactUser->telephone2;
-        // }
-        //
-        // $contactUser->save();
-        //
-        // $fqPatient = new FqPatient();
-        // $fqPatient->run = $request->run_patient;
-        // $fqPatient->dv = $request->dv_patient;
-        // $fqPatient->name = $request->name_patient;
-        // $fqPatient->fathers_family = $request->fathers_family_patient;
-        // $fqPatient->mothers_family = $request->mothers_family_patient;
-        //
-        // $fqPatient->clinical_history_number = $request->clinical_history_number;
-        //
-        // $fqPatient->email = $contactUser->email;
-        // $fqPatient->telephone = $contactUser->telephone;
-        // $fqPatient->telephone2 = $contactUser->telephone2;
-        // $fqPatient->commune = $contactUser->commune;
-        // $fqPatient->address = $contactUser->address;
-        //
-        // $fqPatient->observation = $request->observation;
-        //
-        // $fqPatient->save();
         //
         // $userPatient = new UserPatient();
         // $userPatient->contact_user_id = $contactUser->id;
@@ -101,6 +71,34 @@ class ContactUserController extends Controller
         // $userPatient->save();
 
 
+    }
+
+    public function addPatient(Request $request, ContactUser $contactUser)
+    {
+        $user = User::getUserByRun($request->input('search'));
+
+        return view('fq.contact_user.add_patient', compact('contactUser', 'request', 'user'));
+    }
+
+    public function storeAddPatient(ContactUser $contactUser, User $user)
+    {
+        $exist = UserPatient::where('contact_user_id', $contactUser->user_id)
+            ->where('patient_id', $user->id)
+            ->first();
+
+        if($exist){
+            session()->flash('danger', 'El Contacto ya fue ingresado anteriormente.');
+            return redirect()->route('fq.contact_user.create');
+        }
+        else{
+            $userPatient = new UserPatient();
+            $userPatient->contact_user_id = $contactUser->user_id;
+            $userPatient->patient_id = $user->id;
+
+            $userPatient->save();
+            session()->flash('success', 'Se ha creado exitosamente el Contacto');
+            return redirect()->route('fq.contact_user.create');
+        }
     }
 
     /**
