@@ -14,12 +14,13 @@
     <table class="table table-sm table-striped table-bordered">
         <thead class="text-center">
             <tr>
-                <th>Fecha</th>
-                <th style="width: 11%">Fecha</th>
-                <th>Estado</th>
+                <th></th>
+                <th style="width: 10%">Fecha</th>
+                <th style="width: 8%">Estado</th>
                 <th>Motivo de Solicitud</th>
+                <th>Especialidad</th>
                 <th>observación</th>
-                <th style="width: 2%"></th>
+                <th></th>
             </tr>
         </thead>
         @canany(['Fq: Answer request','Fq: admin'])
@@ -37,6 +38,7 @@
                 <td>{{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ $fqRequest->StatusValue }}</td>
                 <td>{{ $fqRequest->NameValue }}</td>
+                <td>{{ $fqRequest->SpecialtiesValue }}</td>
                 <td>{{ $fqRequest->observation_patient }}</td>
                 <td>
                     <!-- Button trigger modal -->
@@ -81,11 +83,12 @@
         <thead class="text-center">
             <tr>
                 <th></th>
-                <th style="width: 11%">Fecha</th>
-                <th>Estado</th>
+                <th style="width: 10%">Fecha</th>
+                <th style="width: 8%">Estado</th>
                 <th>Motivo de Solicitud</th>
+                <th>Especialidad</th>
                 <th>observación</th>
-                <th style="width: 2%"></th>
+                <th></th>
             </tr>
         </thead>
         @canany(['Fq: Answer request', 'Fq: admin'])
@@ -103,6 +106,7 @@
                 <td>{{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ $fqRequest->StatusValue }}</td>
                 <td>{{ $fqRequest->NameValue }}</td>
+                <td>{{ $fqRequest->SpecialtiesValue }}</td>
                 <td>{{ $fqRequest->observation_patient }}</td>
                 <td>
                     <!-- Button trigger modal -->

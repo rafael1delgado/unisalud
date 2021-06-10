@@ -25,18 +25,23 @@ class CreateFqRequestsTable extends Migration
             $table->foreignId('patient_id');
             $table->longText('observation_patient')->nullable();
             $table->enum('status',['pending', 'complete', 'rejected']);
-            $table->enum('attention',['face-to-face', 'teleconsultation'])->nullable();
-            $table->longText('link')->nullable();
+
+
             $table->dateTime('date_confirm')->nullable();
-            $table->string('place')->nullable();
-            $table->string('doctor_name')->nullable();
+            $table->enum('attention',['face-to-face', 'teleconsultation'])->nullable();
+            $table->foreignId('practitioner_id')->nullable();
             $table->string('value')->nullable();
+            $table->longText('link')->nullable();
+            $table->string('place')->nullable();
+
             $table->longText('observation_request')->nullable();
+
             $table->foreignId('user_id')->nullable();
             $table->dateTime('date_confirm_record')->nullable();
 
             $table->foreign('contact_user_id')->references('id')->on('users');
             $table->foreign('patient_id')->references('id')->on('users');
+            $table->foreign('practitioner_id')->references('id')->on('practitioners');
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
