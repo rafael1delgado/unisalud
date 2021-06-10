@@ -93,14 +93,17 @@
 <ul class="nav flex-column">
 
     <!-- programador de pabellones -->
+    @canany(['Mp: programador pabellon'])
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.operating_room_programming.index') }}" href="{{ route('medical_programmer.operating_room_programming.index') }}">
         <span data-feather="chevrons-right"></span>
         Programador de pabellones<span class="sr-only">(current)</span>
         </a>
     </li>
+    @endcanany
 
     <!-- programador teorico -->
+    @canany(['Mp: programacion teorica'])
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.theoretical_programming.index') }}">
         <span data-feather="chevrons-right"></span>
@@ -108,19 +111,25 @@
         </a>
     </li>
     <ul class="pl-4 nav flex-column">
+      @canany(['Mp: programacion medica'])
       <li class="nav-item">
           <a class="nav-link" href="{{ route('medical_programmer.theoretical_programming.index','tipo=1') }}">
           <span data-feather="chevron-right"></span>
           Médico<span class="sr-only">(current)</span>
           </a>
       </li>
+      @endcanany
+
+      @canany(['Mp: programacion no medica'])
       <li class="nav-item">
           <a class="nav-link" href="{{ route('medical_programmer.theoretical_programming.index','tipo=2') }}">
           <span data-feather="chevron-right"></span>
           No médico<span class="sr-only">(current)</span>
           </a>
       </li>
+      @endcanany
     </ul>
+    @endcanany
 
     <!-- programador real -->
     <li class="nav-item">
@@ -145,6 +154,7 @@
     </ul>
 
     <!-- mantenedores -->
+    @canany(['Mp: mantenedores'])
     <li class="nav-item">
         <a class="nav-link">
         <span data-feather="chevrons-right"></span>
@@ -239,6 +249,7 @@
         </a>
     </li> -->
     </ul>
+    @endcanany
 
 </ul>
 

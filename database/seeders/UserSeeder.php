@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Http\Livewire\Parameter\Permission;
+// use App\Http\Livewire\Parameter\Permission;
 use App\Models\Address;
 use App\Models\ContactPoint;
 use App\Models\HumanName;
@@ -10,6 +10,7 @@ use App\Models\Identifier;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -86,7 +87,7 @@ class UserSeeder extends Seeder
         $user->birthday = now();
         $user->gender = 'other';
         $user->nationality_id = 41;
-        if( \App::environment('local') ) $user->password = bcrypt('admin');
+        $user->password = bcrypt('admin');
         $user->save();
 
         $humanName = new HumanName();
@@ -105,7 +106,7 @@ class UserSeeder extends Seeder
         $identifier->user_id = $user->id;
         $identifier->save();
 
-        $user->givePermissionTo('Medical Programmer: administrator');
+        $user->givePermissionTo(Permission::all());
 
         // funcionario médico
         $user = new User();
@@ -114,24 +115,27 @@ class UserSeeder extends Seeder
         $user->birthday = now();
         $user->gender = 'other';
         $user->nationality_id = 41;
-        if( \App::environment('local') ) $user->password = bcrypt('admin');
+        $user->password = bcrypt('admin');
         $user->save();
 
         $humanName = new HumanName();
         $humanName->use = 'official';
-        $humanName->text = 'Usuario1';
-        $humanName->fathers_family = 'Médico';
-        $humanName->mothers_family = 'Materno';
+        $humanName->text = 'LEIDY JOHANA';
+        $humanName->fathers_family = 'MOLINA';
+        $humanName->mothers_family = 'PRIETO';
         $humanName->user_id = $user->id;
         $humanName->save();
 
         $identifier = new Identifier();
         $identifier->use = 'official';
         $identifier->cod_con_identifier_type_id = 1; // RUN
-        $identifier->value = 6313249;
-        $identifier->dv = 5;
+        $identifier->value = 44202611;
+        $identifier->dv = 4;
         $identifier->user_id = $user->id;
         $identifier->save();
+
+        $user->givePermissionTo('Mp: programacion teorica');
+        $user->givePermissionTo('Mp: programacion medica');
 
         // funcionario no médico
         $user = new User();
@@ -140,23 +144,26 @@ class UserSeeder extends Seeder
         $user->birthday = now();
         $user->gender = 'other';
         $user->nationality_id = 41;
-        if( \App::environment('local') ) $user->password = bcrypt('admin');
+        $user->password = bcrypt('admin');
         $user->save();
 
         $humanName = new HumanName();
         $humanName->use = 'official';
-        $humanName->text = 'Usuario2';
-        $humanName->fathers_family = 'No médico';
-        $humanName->mothers_family = 'Materno';
+        $humanName->text = 'ARMANDO';
+        $humanName->fathers_family = 'HENER';
+        $humanName->mothers_family = 'NUÑEZ';
         $humanName->user_id = $user->id;
         $humanName->save();
 
         $identifier = new Identifier();
         $identifier->use = 'official';
         $identifier->cod_con_identifier_type_id = 1; // RUN
-        $identifier->value = 13255487;
-        $identifier->dv = 6;
+        $identifier->value = 5177420;
+        $identifier->dv = 5;
         $identifier->user_id = $user->id;
         $identifier->save();
+
+        $user->givePermissionTo('Mp: programacion teorica');
+        $user->givePermissionTo('Mp: programacion no medica');
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes; //para softdelte
 
-class MedicalLicence extends Model
+class medicalLicence extends Model
 {
     use HasFactory;
     use SoftDeletes;//para softdelte

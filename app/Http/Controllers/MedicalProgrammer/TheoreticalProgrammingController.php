@@ -77,7 +77,7 @@ class TheoreticalProgrammingController extends Controller
       // dd(UserSpecialty::select('user_id')->groupBy('user_id')->get()->toArray());
 
     //si es admin, se devuelve todo, si no, se devuelve lo configurado
-    if (Auth::user()->hasPermissionTo('Medical Programmer: administrator')) {
+    if (Auth::user()->hasPermissionTo('Mp: administrador')) {
         $rrhhs = User::whereHas('contracts', function ($query) use ($year) {
                         return $query->where('year',$year);
                     })
@@ -175,7 +175,7 @@ class TheoreticalProgrammingController extends Controller
             if ($TheoreticalProgramming!=null) {
                 $collection1 = Specialty::where('id',$TheoreticalProgramming->specialty_id)->get();
                 //si es admin, se devuelve todo, si no, se devuelve lo configurado
-                if (Auth::user()->hasPermissionTo('Medical Programmer: administrator')) {
+                if (Auth::user()->hasPermissionTo('Mp: administrador')) {
                     $collection2 = Specialty::where('id','!=',$TheoreticalProgramming->specialty_id)->orderBy('specialty_name','ASC')->get();
                 }else{
                     $collection2 = Specialty::whereIn('id',Auth::user()->getSpecialtiesArray())->orderBy('specialty_name','ASC')->get();
@@ -190,7 +190,7 @@ class TheoreticalProgrammingController extends Controller
             }else{
 
                 //si es admin, se devuelve todo, si no, se devuelve lo configurado
-                if (Auth::user()->hasPermissionTo('Medical Programmer: administrator')) {
+                if (Auth::user()->hasPermissionTo('Mp: administrador')) {
                     $specialties = Specialty::orderBy('specialty_name','ASC')->get();
                 }else{
 
@@ -201,7 +201,7 @@ class TheoreticalProgrammingController extends Controller
             }
         }else{
             //si es admin, se devuelve todo, si no, se devuelve lo configurado
-            if (Auth::user()->hasPermissionTo('Medical Programmer: administrator')) {
+            if (Auth::user()->hasPermissionTo('Mp: administrador')) {
                 $specialties = Specialty::orderBy('specialty_name','ASC')->get();
             }else{
                 $specialties = Specialty::whereIn('id',Auth::user()->getSpecialtiesArray())->orderBy('specialty_name','ASC')->get();
@@ -253,7 +253,7 @@ class TheoreticalProgrammingController extends Controller
         if ($rut != null) {
             if ($TheoreticalProgramming!=null) {
                 $collection1 = Profession::where('id',$TheoreticalProgramming->profession_id)->get();
-                // if (Auth::user()->hasPermissionTo('Medical Programmer: administrator')) {
+                // if (Auth::user()->hasPermissionTo('Mp: administrador')) {
                 //     $collection2 = Profession::where('id','!=',$TheoreticalProgramming->profession_id)->orderBy('profession_name','ASC')->get();
                 // }else{
                 //     $collection2 = Profession::whereIn('id',Auth::user()->getProfessionsArray())->orderBy('profession_name','ASC')->get();
@@ -266,7 +266,7 @@ class TheoreticalProgrammingController extends Controller
                 $professions = $collection1;
                 // $request->merge(['profession_id' => $collection1->first()->id]);
             }else{
-                // if (Auth::user()->hasPermissionTo('Medical Programmer: administrator')) {
+                // if (Auth::user()->hasPermissionTo('Mp: administrador')) {
                 //     $professions = Profession::orderBy('profession_name','ASC')->get();
                 // }else{
                 //     $professions = Profession::whereIn('id',Auth::user()->getProfessionsArray())->orderBy('profession_name','ASC')->get();
@@ -274,7 +274,7 @@ class TheoreticalProgrammingController extends Controller
                 $professions = Profession::whereIn('id',Auth::user()->getProfessionsArray())->orderBy('profession_name','ASC')->get();
             }
         }else{
-            // if (Auth::user()->hasPermissionTo('Medical Programmer: administrator')) {
+            // if (Auth::user()->hasPermissionTo('Mp: administrador')) {
             //     $professions = Profession::orderBy('profession_name','ASC')->get();
             // }else{
             //     $professions = Profession::whereIn('id',Auth::user()->getProfessionsArray())->orderBy('profession_name','ASC')->get();
@@ -1069,7 +1069,7 @@ class TheoreticalProgrammingController extends Controller
 
       }elseif($request->action == "Todas las semanas"){
         while (date('Y', strtotime($first_date)) == $year) {
-              $theoreticalProgrammingUpdt = TheoreticalProgramming::where('rut',$theoreticalProgramming->rut)
+              $theoreticalProgrammingUpdt = TheoreticalProgramming::where('user_id',$theoreticalProgramming->user_id)
                                                               ->where('activity_id',$theoreticalProgramming->activity_id)
                                                               ->where('contract_id',$theoreticalProgramming->contract_id)
                                                               ->where('specialty_id',$theoreticalProgramming->specialty_id)
@@ -1086,7 +1086,7 @@ class TheoreticalProgrammingController extends Controller
           }
       }elseif($request->action == "Semana volante"){
         while (date('Y', strtotime($first_date)) == $year) {
-              $theoreticalProgrammingUpdt = TheoreticalProgramming::where('rut',$theoreticalProgramming->rut)
+              $theoreticalProgrammingUpdt = TheoreticalProgramming::where('user_id',$theoreticalProgramming->user_id)
                                                               ->where('activity_id',$theoreticalProgramming->activity_id)
                                                               ->where('contract_id',$theoreticalProgramming->contract_id)
                                                               ->where('specialty_id',$theoreticalProgramming->specialty_id)
@@ -1119,7 +1119,7 @@ class TheoreticalProgrammingController extends Controller
 
       }elseif($request->action == "Todas las semanas"){
         while (date('Y', strtotime($first_date)) == $year) {
-              $theoreticalProgrammingDelete = TheoreticalProgramming::where('rut',$theoreticalProgramming->rut)
+              $theoreticalProgrammingDelete = TheoreticalProgramming::where('user_id',$theoreticalProgramming->user_id)
                                                               ->where('activity_id',$theoreticalProgramming->activity_id)
                                                               ->where('contract_id',$theoreticalProgramming->contract_id)
                                                               ->where('specialty_id',$theoreticalProgramming->specialty_id)
@@ -1135,7 +1135,7 @@ class TheoreticalProgrammingController extends Controller
           }
       }elseif($request->action == "Semana volante"){
         while (date('Y', strtotime($first_date)) == $year) {
-              $theoreticalProgrammingDelete = TheoreticalProgramming::where('rut',$theoreticalProgramming->rut)
+              $theoreticalProgrammingDelete = TheoreticalProgramming::where('user_id',$theoreticalProgramming->user_id)
                                                               ->where('activity_id',$theoreticalProgramming->activity_id)
                                                               ->where('contract_id',$theoreticalProgramming->contract_id)
                                                               ->where('specialty_id',$theoreticalProgramming->specialty_id)

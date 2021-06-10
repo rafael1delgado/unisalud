@@ -102,7 +102,7 @@ bottom: 5px;
         <select name="rut" id="rut" class="form-control selectpicker" required="" onchange="this.form.submit()" data-live-search="true" data-size="5">
           <option value="0">Todos</option>
           @foreach($rrhhs as $rrhh)
-            <option value="{{$rrhh->rut}}" {{ $rrhh->rut == $request->rut ? 'selected' : '' }}>{{$rrhh->getFullNameAttribute()}}</option>
+            <option value="{{$rrhh->rut}}" {{ $rrhh->rut == $request->rut ? 'selected' : '' }}>{{$rrhh->OfficialFullName}}</option>
           @endforeach
         </select>
     </fieldset>

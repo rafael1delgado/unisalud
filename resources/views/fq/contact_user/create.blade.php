@@ -111,7 +111,6 @@
                             <tr>
                                 <th scope="col">Identificación</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Paciente</th>
                                 <th scope="col">Dirección</th>
                                 <th scope="col">Comuna</th>
                                 <th scope="col">Correo</th>
@@ -127,7 +126,6 @@
                                 @endforeach
                               </td>
                               <td>{{ $contactUser->user->OfficialFullName }}</td>
-                              <td></td>
                               <td>
                                 @foreach($contactUser->user->addresses as $address)
                                   {{ $address->text }}{{ $address->line }}<br>
@@ -149,7 +147,9 @@
                                 @endforeach
                               </td>
                               <td>
-                                  <a href="" class="btn btn-outline-secondary btn-sm" title="Ir" target="_blank"> <i class="far fa-eye"></i></a>
+                                  <a href="{{ route('fq.contact_user.addPatient', $contactUser) }}" class="btn btn-outline-secondary btn-sm" title="Pacientes">
+                                    <i class="fas fa-users"></i>
+                                  </a>
                               </td>
                             </tr>
                           @endforeach

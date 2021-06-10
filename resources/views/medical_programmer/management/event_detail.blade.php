@@ -106,6 +106,11 @@
     </fieldset>
 
     </form>
+
+    <fieldset class="form-group col">
+        <label for="for_sub_activity_id"></label>
+        <button type="button" class="form-control btn btn-light" id="btn_eliminar"><i class="fas fa-angle-double-left"></i>Volver</button>
+    </fieldset>
 </div>
 
 @endsection
