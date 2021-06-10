@@ -18,6 +18,7 @@ class CreateAttachmentsTable extends Migration
             $table->foreignId('attachment_id')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->string('contentType')->nullable(); /** Technically, a code is restricted to a string which has at least one character and no leading or trailing whitespace, and where there is no whitespace other than single spaces in the contents*/
+            $table->foreignId('practitioner_id')->nullable();
             $table->string('languaje')->nullable();
         /** $table->base64Binary('data')->nullable(); */ 
             $table->string('url')->nullable();
@@ -30,6 +31,8 @@ class CreateAttachmentsTable extends Migration
 
             $table->foreign('attachment_id')->references('id')->on('attachments');
             $table->foreign('user_id')->references('id')->on('users');  
+            $table->foreign('practitioner_id')->references('id')->on('practitioners');
+
 
         });
     }

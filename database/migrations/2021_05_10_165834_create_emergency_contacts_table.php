@@ -22,7 +22,7 @@ class CreateEmergencyContactsTable extends Migration
             $table->foreignId('user_id')->nullable();
             $table->enum('gender', ['female', 'male', 'other', 'unknown',
             ])->nullable();
-            $table->string('organization')->nullable();
+            $table->foreignId('organization_id')->nullable();
             $table->foreignId('period_id')->nullable();
 
             $table->foreign('emergency_contact_id')->references('id')->on('emergency_contacts');
@@ -31,6 +31,7 @@ class CreateEmergencyContactsTable extends Migration
             $table->foreign('address_id')->references('id')->on('addresses');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('period_id')->references('id')->on('periods');
+            $table->foreign('organization_id')->references('id')->on('organizations');
 
 
         });
