@@ -31,7 +31,7 @@ class MedicalLicenceController extends Controller
             return redirect()->route('medical_licence.create',[$user]);
         }
         else {
-            return back()->withErrors(['No se ha encontrado el usuario en la base de datos']);
+            return back()->withErrors(['Usuario no encontrado']);
         }
         
     }

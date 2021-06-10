@@ -66,7 +66,7 @@
         <div class="form-row mt-3">
 
 			<div class="form-group col-md-3">
-                 <label for="inputEmail4">Nombre</label>
+                 <label for="inputEmail4">Nombres</label>
                 <input type="nombre" class="form-control" id="inputEmail4" placeholder="">
             </div>
 
@@ -140,9 +140,13 @@
                     <option>Camino</option>
      			</select>
     	     </div>
-		    <div class="form-group col-md-5">
-			    <label for="inputEmail4">Direccion</label>
+		    <div class="form-group col-md-5" >
+			<div class="input-group">
+			    <label for="inputEmail4">Dirección</label>
+				
 			    <input type="direccion" class="form-control" id="inputEmail4" placeholder="Ingrese direccion">
+				
+			
 		    </div>
             <div class="form-group col-md-2">
 			    <label for="inputEmail4">Número</label>

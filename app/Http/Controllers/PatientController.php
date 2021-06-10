@@ -59,8 +59,8 @@ class PatientController extends Controller
         //Busca los pacientes que ya esten ingresados con los datos de request
         $matchingPatients = $this->getMatchingPatients($request);
         if ($matchingPatients->count() === 0 || $save == true) {
-           $this->savePatientData($request); 
-        }else {
+            $this->savePatientData($request);
+        } else {
             return view('patients.matching_patients', compact('matchingPatients', 'request'));
         }
 
@@ -129,12 +129,44 @@ class PatientController extends Controller
 
     public function getMatchingPatients(Request $request)
     {
-        $patients = User::query();
+        $patientsByIdentifiers = User::query();
         foreach ($request->id_type as $key => $id_type) {
-            $patients->getByIdentifier($request->id_value[$key], $id_type);
+            $patientsByIdentifiers->getByIdentifier(
+                $request->id_value[$key],
+                $id_type
+            );
         }
 
-        return $patients->get();
+        $patientsByHumanNames = User::query();
+        $patientsByHumanNames->getByHumanName(
+            $request->text,
+            $request->fathers_family,
+            $request->mothers_family
+        );
+
+        $patientsByAddress = User::query();
+        foreach ($request->address_use as $key => $address_use) {
+            $patientsByAddress->getByAddress(
+                $request->street_name[$key],
+                $request->line[$key],
+                $request->address_apartment,
+                $request->country,
+                $request->district,
+                $request->state
+            );
+        }
+
+        $patientsByContactPoint = User::query();
+        foreach ($request->contact_system as $key => $contact_system) {
+            $patientsByContactPoint->getByContactPoint($request->contact_value[$key]);
+        }
+
+        $allPatients = $patientsByIdentifiers->get()
+            ->merge($patientsByAddress->get())
+            ->merge($patientsByHumanNames->get())
+            ->merge($patientsByContactPoint->get());
+
+        return $allPatients;
     }
 
     public function show($id)
@@ -171,9 +203,6 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
-
         DB::beginTransaction();
 
         try {

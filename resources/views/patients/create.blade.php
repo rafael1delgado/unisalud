@@ -33,33 +33,33 @@
 
             <input type="hidden" name='human_name_use' value='official'>
             <div class="form-row">
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-6">
                     <label for="for_name">Nombres</label>
                     <input type="text" class="form-control" name="text" id="for_name" required
                         {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-3">
                     <label for="for_fathers_family">Apellido Paterno</label>
                     <input type="text" class="form-control" name="fathers_family" id="for_fathers_family" required
                         {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-3">
                     <label for="for_mothers_family">Apellido Materno</label>
                     <input type="text" class="form-control" name="mothers_family" id="for_mothers_family" required
                         {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                 </fieldset>
             </div>
             <div class="form-row">
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-4">
                     <label for="for_birthday">Fecha de nacimiento</label>
                     <input type="date" class="form-control" name="birthday" required
                         {{-- id="for_birthday" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}"
                         --}}>
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-4">
                     <label for="for_sex">Sexo</label>
                     <select name="sex" id="for_sex" class="form-control" required>
                         <option value=""></option>
@@ -70,7 +70,7 @@
                     </select>
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-4">
                     <label for="for_gender">Identidad de Género</label>
                     <select name="gender" id="for_gender" class="form-control" required>
                         <option value=""></option>
@@ -83,7 +83,7 @@
 
             </div>
             <div class="form-row">
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-4">
                     <label for="for_nationality_id">Nacionalidad</label>
                     <select name="nationality_id" id="for_nationality_id" class="form-control" required>
                         <option value=""></option>
@@ -93,7 +93,7 @@
                     </select>
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-4">
                     <label for="for_etnia">Pueblo originario</label>
                     <select name="etnia_id" id="for_etnia_id" class="form-control">
                         <option value=""></option>
@@ -103,7 +103,7 @@
                     </select>
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-4">
                     <label for="for_cod_con_marital_id">Estado Civil</label>
                     <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
                         <option value=""></option>
@@ -142,27 +142,28 @@
             <h5 class="card-title">Previsión</h5>
 
             <div class="form-row">
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-2">
                     <label for="">Rut Previsión</label>
                     <input type="text" class="form-control" name="identifier" id="for_identifier">
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-4">
                     <label for="">Vencimiento</label>
                     <input type="date" class="form-control" name="identifier" id="for_identifier">
                 </fieldset>
-            </div>
+                <!--de aui saque la div CERRADA-->
 
-            <div class="form-row">
-                <fieldset class="form-group col-2">
+                <!--<div class="form-row">-->
+                <fieldset class="form-group col-md-3">
                     <label for="">Titular</label>
                     <input type="text" class="form-control" name="identifier" id="for_identifier">
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-3">
                     <label for="">Previsión</label>
                     <input type="text" class="form-control" name="identifier" id="for_identifier">
                 </fieldset>
+                <!--</div>-->
             </div>
         </div>
     </div>
