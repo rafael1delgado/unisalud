@@ -78,7 +78,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    //HumanNames
     public function officialHumanNames()
     {
         return $this->humanNames();
@@ -112,6 +112,8 @@ class User extends Authenticatable
         return "{$this->actualOfficialHumanName->first()->mothers_family}";
     }
 
+
+    //Identificadores
     public function getIdentifierRunAttribute()
     {
         return $this->identifiers()
@@ -120,6 +122,38 @@ class User extends Authenticatable
             ->first();
     }
 
+    public static function getUserByRun($run){
+        return User::whereHas('identifiers', function($query) use ($run) {
+            return $query->where('value',$run)->where('cod_con_identifier_type_id', 1);
+        })->first();
+    }
+
+    //ContactPoints
+    public function getOfficialPhoneAttribute()
+    {
+        return $this->contactPoints()
+        ->where('system', 'phone')
+        ->first('value')->value;
+    }
+
+    public function getOfficialEmailAttribute()
+    {
+        $email = $this->contactPoints()
+            ->where('system', 'email')
+            ->first('value');
+        return ($email) ? $email->value : null;
+    }
+
+    //Addresses
+    public function getOfficialFullAddressAttribute()
+    {
+        $address = $this->addresses()
+            ->first(['text', 'line', 'apartment']);
+        return "$address->text $address->line $address->apartment";
+
+    }
+
+    //Scopes
     public function scopeGetByRun($query, $run)
     {
         $query->whereHas('identifiers', function ($query) use ($run) {
@@ -165,11 +199,7 @@ class User extends Authenticatable
         });
     }
 
-    public static function getUserByRun($run){
-        return User::whereHas('identifiers', function($query) use ($run) {
-            return $query->where('value',$run)->where('cod_con_identifier_type_id', 1);
-        })->first();
-    }
+
 
     //Programador (relaciones)
     public function userSpecialties()

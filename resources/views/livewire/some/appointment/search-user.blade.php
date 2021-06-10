@@ -3,19 +3,19 @@
 
         <div class="form-group col-md-4">
             <label for="inputrut">RUT</label>
-            <input type="text" class="form-control" id="inputEmail4" placeholder="Ingrese el rut">
+            <input type="text" class="form-control"  placeholder="Ingrese el rut" wire:model="run">
         </div>
         <div class="form-group col-md-1">
             <label for="inputdv">Dv</label>
-            <input type="text" class="form-control" id="inputPassword4" placeholder="Dv">
+            <input type="text" class="form-control"  placeholder="Dv">
         </div>
         <div class="form-group col-md-5">
             <label for="inputnombre">Nombre</label>
-            <input type="text" class="form-control" id="inputEmail4" placeholder="Ingrese Nombre">
+            <input type="text" class="form-control"  placeholder="Ingrese Nombre">
         </div>
         <div class="form-group col-md-2">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control">Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="searchUser()">Buscar</button>
         </div>
     </div>
 
@@ -24,42 +24,40 @@
             <div class="table-responsive">
                 <table class="table table-sm table-hover">
                     <thead class="table-info">
-
                     <tr>
                         <th scope="col">Nombre:</th>
-                        <th scope="col">Jose Cantero Palacios</th>
+                        <th scope="col">{{ ($user) ? $user->officialFullName : '' }}</th>
 
                     </thead>
                     <tbody>
                     <tr>
                         <th scope="row">Identificación</th>
-                        <td>26225358-9</td>
-
+                        <td>{{($user) ? $user->identifierRun->value . '-' . $user->identifierRun->dv : ''}}</td>
                     </tr>
 
                     <tr>
                         <th scope="row">Edad</th>
-                        <td>19 años</td>
+                        <td>{{($user) ? \Carbon\Carbon::parse($user->birthday)->age .' años' : ''}}</td>
                     </tr>
 
                     <tr>
                         <th scope="row">Sexo</th>
-                        <td colspan="2">Masculino</td>
+                        <td colspan="2"> {{($user) ? $user->sex : '' }} </td>
                     </tr>
 
                     <tr>
                         <th scope="row">Dirección</th>
-                        <td colspan="2">Anibal pinto 814</td>
+                        <td colspan="2"> {{($user) ? $user->officialFullAddress : ''}}  </td>
                     </tr>
 
                     <tr>
                         <th scope="row">Teléfono</th>
-                        <td colspan="2">942422656</td>
+                        <td colspan="2">{{($user) ? $user->officialPhone : ''}}</td>
                     </tr>
 
                     <tr>
                         <th scope="row">Correo</th>
-                        <td colspan="2">josecp@gmail.com</td>
+                        <td colspan="2">{{($user && $user->officialEmail) ? $user->officialEmail : ''}}</td>
                     </tr>
                     </tbody>
                 </table>
