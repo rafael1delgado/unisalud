@@ -142,27 +142,28 @@
             <h5 class="card-title">Previsión</h5>
 
             <div class="form-row">
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-2">
                     <label for="">Rut Previsión</label>
                     <input type="text" class="form-control" name="identifier" id="for_identifier">
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-4">
                     <label for="">Vencimiento</label>
                     <input type="date" class="form-control" name="identifier" id="for_identifier">
                 </fieldset>
-            </div>
+                <!--de aui saque la div CERRADA-->
 
-            <div class="form-row">
-                <fieldset class="form-group col-2">
+                <!--<div class="form-row">-->
+                <fieldset class="form-group col-md-3">
                     <label for="">Titular</label>
                     <input type="text" class="form-control" name="identifier" id="for_identifier">
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-3">
                     <label for="">Previsión</label>
                     <input type="text" class="form-control" name="identifier" id="for_identifier">
                 </fieldset>
+                <!--</div>-->
             </div>
         </div>
     </div>

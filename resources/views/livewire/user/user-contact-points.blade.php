@@ -8,7 +8,7 @@
             <input type="hidden" name='contact_point_id[]' wire:model='contactPoints.{{$value}}.id'>
 
             <div class="form-row">
-                <fieldset class="form-group col-1">
+                <fieldset class="form-group col-md-4">
                     <label for="for_contact_system">Tipo Contacto</label>
                     <select name="contact_system[]" class="form-control" wire:model='contactPoints.{{$value}}.system'
                         required>
@@ -21,7 +21,7 @@
                     </select>
                 </fieldset>
 
-                <fieldset class="form-group col-1">
+                <fieldset class="form-group col-md-4">
                     <label for="for_contact_use">Uso</label>
                     <select name="contact_use[]" class="form-control" 
                     wire:model='contactPoints.{{$value}}.use'
@@ -34,7 +34,7 @@
                     </select>
                 </fieldset>
 
-                <fieldset class="form-group col-3">
+                <fieldset class="form-group col-md-4">
                     <label for="for_contact_value">Contacto</label>
                     <input type="text" class="form-control" name="contact_value[]" required
                         wire:model='contactPoints.{{$value}}.value' required
