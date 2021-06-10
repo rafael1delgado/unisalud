@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
 
 
-
             // // HmRrhhTableSeeder::class,
             HmMotherActivityTableSeeder::class,
             HmActivityTypesTableSeeder::class,
