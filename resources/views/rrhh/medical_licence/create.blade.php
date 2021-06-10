@@ -6,9 +6,14 @@
 
 <!--inicio-->
 
-{{ $user->birthday }}
+<!--{{ $user->birthday }} mostrar la fecha de nacimiento del usuario encontrado --> 
+<div class="card w-20">
+  <div class="card-body">
+    <h5 class="card-title" class="form-control" name="id" value="{{ $user->id }}"></h5>
+  </div>
+</div>
 
-<input type="text" class="form-control" name="id" value="{{ $user->id }}">
+<!--<input type="text" class="form-control" name="id" value="{{ $user->id }}">-->
 
 <div class="form-row">
     <div class="form-group col-md-5">
