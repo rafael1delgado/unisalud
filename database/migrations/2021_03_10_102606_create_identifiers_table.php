@@ -23,13 +23,19 @@ class CreateIdentifiersTable extends Migration
             $table->string('value')->nullable();
             $table->string('dv')->nullable();
             $table->foreignId('period_id')->nullable();
-            $table->string('organization')->nullable(); //organization that issued id
+            $table->foreignId('practitioner_id')->nullable();
+            $table->foreignId('organization_id')->nullable();
+            $table->foreignId('appointment_id')->nullable();
+
             $table->timestamps();
 
             $table->foreign('identifiers_id')->references('id')->on('identifiers');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('cod_con_identifier_type_id')->references('id')->on('cod_con_identifier_types');
-        
+            $table->foreign('practitioner_id')->references('id')->on('practitioners');
+            $table->foreign('organization_id')->references('id')->on('organizations');
+            $table->foreign('appointment_id')->references('id')->on('appointments');
+
         });
     }
 
