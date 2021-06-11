@@ -171,11 +171,6 @@ bottom: 5px;
       </div>
 
       <br><hr>
-      {{-- <h4>Traumatología</h4>
-      <div>
-        <div ><small>Hrs.Contratadas: <b>14</b></small></div>
-        <div ><small>Hrs.Disponibles: <b><span id="total_traumatologia"></span></b></small></div>
-      </div>--}}
 
       <h4>Subtotales</h4>
       @foreach ($array as $key => $specialty)
