@@ -173,7 +173,7 @@ class CalendarProgrammingController extends Controller
     $calendarProgrammings = CalendarProgramming::whereBetween('start_date', [$monday, $sunday])
                                                ->whereNotNull('operating_room_id')
                                                ->when($rut != 0, function ($query) use ($rut) {
-                                                  return $query->where('rut', $rut);
+                                                  return $query->where('user_id', $rut);
                                                 })
                                                 ->whereHas('specialty', function ($query) {
                                                   return $query->whereIn('id', Auth::user()->getSpecialtiesArray()); //actividad de pabellón
@@ -198,7 +198,7 @@ class CalendarProgrammingController extends Controller
     $calendarProgrammingsDeleted = CalendarProgramming::whereBetween('start_date', [$monday, $sunday])
                                                ->whereNotNull('operating_room_id')
                                                ->when($rut != 0, function ($query) use ($rut) {
-                                                  return $query->where('rut', $rut);
+                                                  return $query->where('user_id', $rut);
                                                 })
                                                 ->whereHas('specialty', function ($query) {
                                                   return $query->whereIn('id', Auth::user()->getSpecialtiesArray()); //actividad de pabellón
@@ -236,7 +236,7 @@ class CalendarProgrammingController extends Controller
                                                         ->get();
                                                         // dd($OperatingRoomProgrammings);
                                                         // dd($theoreticalProgrammings);
-
+    // dd($array);
     //dd($rrhh->first()->contracts->first()->unscheduled_programmings->whereIn('activity_id',$ids_actividades)->WhereIn('specialty_id',$ids_specialities));
     return view('medical_programmer.management.programmer', compact('request', 'array', 'operatingRoomsTotal', 'operatingRooms', 'calendarProgrammings','calendarProgrammingsDeleted',
                                                           'contract_days', 'date', 'theoreticalProgrammings', 'rrhhs', 'OperatingRoomProgrammings'));
@@ -282,17 +282,15 @@ class CalendarProgrammingController extends Controller
             return $query->where('mother_activity_id', 2)->where('programmable',1); //actividad de pabellón y programables
           })
           ->when($rut != 0, function ($query) use ($rut) {
-             return $query->where('rut', $rut);
+             return $query->where('user_id', $rut);
            })
-           ->whereHas('specialty', function ($query) {
-             return $query->whereIn('id', Auth::user()->getSpecialtiesArray()); //actividad de pabellón
-           })
-           ->OrwhereHas('profession', function ($query) {
-             return $query->whereIn('id', Auth::user()->getProfessionsArray()); //actividad de pabellón
-           })
+           // ->whereHas('specialty', function ($query) {
+           //   return $query->whereIn('id', Auth::user()->getSpecialtiesArray()); //actividad de pabellón
+           // })
+           // ->OrwhereHas('profession', function ($query) {
+           //   return $query->whereIn('id', Auth::user()->getProfessionsArray()); //actividad de pabellón
+           // })
           ->get();
-
-
           // dd($theoreticalProgrammings);
 
         $formated_date = new Carbon($date);
@@ -307,6 +305,7 @@ class CalendarProgrammingController extends Controller
           $end    = new Carbon($theoricalProgramming->end_date);
           $theoricalProgramming->duration_theorical_programming = $start->diffInMinutes($end) / 60;
         }
+        // dd($theoreticalProgrammings);
 
         //programables - PROGRAMACION MÉDICA
         $array = array();
@@ -337,14 +336,17 @@ class CalendarProgrammingController extends Controller
 
 
         //pabellones
-        // dd($request->operating_rooms);
+        // dd($rut);
         $operatingRoomsTotal = OperatingRoom::where('medic_box', 1)
                                             ->orderBy('name', 'ASC')
-                                            ->whereHas('specialties', function ($query) {
-                                              return $query->whereIn('id', Auth::user()->getSpecialtiesArray()); //actividad de pabellón
-                                            })
-                                            ->OrwhereHas('professions', function ($query) {
-                                              return $query->whereIn('id', Auth::user()->getProfessionsArray()); //actividad de pabellón
+                                            // ->whereHas('specialties', function ($query) {
+                                            //   return $query->whereIn('id', Auth::user()->getSpecialtiesArray()); //actividad de pabellón
+                                            // })
+                                            // ->OrwhereHas('professions', function ($query) {
+                                            //   return $query->whereIn('id', Auth::user()->getProfessionsArray()); //actividad de pabellón
+                                            // })
+                                            ->whereHas('userOperatingRooms', function ($query) use ($rut) {
+                                              return $query->where('user_id', Auth::user()->id); //actividad de pabellón
                                             })
                                             ->get();
                                             // dd($operatingRoomsTotal);
@@ -359,14 +361,18 @@ class CalendarProgrammingController extends Controller
                                         ->when($array_operating_room != null, function ($q) use ($array_operating_room) {
                                             return $q->whereIn('id', $array_operating_room);
                                         })
-                                        ->whereHas('specialties', function ($query) {
-                                          return $query->whereIn('id', Auth::user()->getSpecialtiesArray()); //actividad de pabellón
-                                        })
-                                        ->OrwhereHas('professions', function ($query) {
-                                          return $query->whereIn('id', Auth::user()->getProfessionsArray()); //actividad de pabellón
+                                        // ->whereHas('specialties', function ($query) {
+                                        //   return $query->whereIn('id', Auth::user()->getSpecialtiesArray()); //actividad de pabellón
+                                        // })
+                                        // ->OrwhereHas('professions', function ($query) {
+                                        //   return $query->whereIn('id', Auth::user()->getProfessionsArray()); //actividad de pabellón
+                                        // })
+                                        ->whereHas('userOperatingRooms', function ($query) use ($rut) {
+                                          return $query->where('user_id', Auth::user()->id); //actividad de pabellón
                                         })
                                         ->orderBy('name', 'ASC')
                                         ->get();
+                                        // dd($operatingRooms);
 
 
         //obtiene horas programadas de la semana
@@ -375,7 +381,7 @@ class CalendarProgrammingController extends Controller
         $calendarProgrammings = CalendarProgramming::whereBetween('start_date', [$monday, $sunday])
                                                    ->whereNotNull('operating_room_id')
                                                    ->when($rut != 0, function ($query) use ($rut) {
-                                                      return $query->where('rut', $rut);
+                                                      return $query->where('user_id', $rut);
                                                     })
                                                     ->get();
 
@@ -390,7 +396,7 @@ class CalendarProgrammingController extends Controller
         $calendarProgrammingsDeleted = CalendarProgramming::whereBetween('start_date', [$monday, $sunday])
                                                    ->whereNotNull('operating_room_id')
                                                    ->when($rut != 0, function ($query) use ($rut) {
-                                                      return $query->where('rut', $rut);
+                                                      return $query->where('user_id', $rut);
                                                     })
                                                     ->onlyTrashed()
                                                     ->get();
@@ -564,7 +570,7 @@ class CalendarProgrammingController extends Controller
       $end_date_start = new Carbon($request->end_date_start);
 
       //modifica evento
-      $theoreticalProgramming = CalendarProgramming::where('rut', $request->rut)
+      $theoreticalProgramming = CalendarProgramming::where('user_id', $request->rut)
         ->where('specialty_id', $request->specialty_id)
         ->where('operating_room_id', $request->operation_room_id_start)
         ->where('start_date', $start_date_start)
@@ -582,7 +588,7 @@ class CalendarProgrammingController extends Controller
   //elimina, deja registro
   public function deleteMyEvent(Request $request)
   {
-    $calendarProgramming = CalendarProgramming::where('rut', $request->rut)
+    $calendarProgramming = CalendarProgramming::where('user_id', $request->rut)
       ->where('specialty_id', $request->specialty_id)
       ->where('operating_room_id', $request->operating_room_id)
       ->where('start_date', $request->start_date)
@@ -593,7 +599,7 @@ class CalendarProgrammingController extends Controller
   //elimina, no deja registro
   public function deleteMyEventForce(Request $request)
   {
-    $calendarProgramming = CalendarProgramming::where('rut', $request->rut)
+    $calendarProgramming = CalendarProgramming::where('user_id', $request->rut)
       ->where('specialty_id', $request->specialty_id)
       ->where('operating_room_id', $request->operating_room_id)
       ->where('start_date', $request->start_date)
@@ -697,10 +703,10 @@ class CalendarProgrammingController extends Controller
 
           //obtiene info sumatoria de horas por semana
           $array2 = array();
-          foreach ($CalendarProgrammings->where('rut', $rrhh->rut) as $key => $CalendarProgramming) {
+          foreach ($CalendarProgrammings->where('user_id', $rrhh->rut) as $key => $CalendarProgramming) {
             $array2[$rrhh->rut][$CalendarProgramming->week] = 0;
           }
-          foreach ($CalendarProgrammings->where('rut', $rrhh->rut) as $key => $CalendarProgramming) {
+          foreach ($CalendarProgrammings->where('user_id', $rrhh->rut) as $key => $CalendarProgramming) {
             $start  = new Carbon($CalendarProgramming->start_date);
             $end    = new Carbon($CalendarProgramming->end_date);
             $array2[$rrhh->rut][$CalendarProgramming->week] += $start->diffInMinutes($end) / 60;
@@ -709,7 +715,7 @@ class CalendarProgrammingController extends Controller
 
           // según profesional, se obtiene objeto de rrhh, y su calendario programado
           $array[$this->formatear_cadena($unscheduled_programming->Specialty->specialty_name)][$rrhh->rut]['rrhh'] = $rrhh;
-          $array[$this->formatear_cadena($unscheduled_programming->Specialty->specialty_name)][$rrhh->rut]['calendar_programming'] = $CalendarProgrammings->where('rut', $rrhh->rut);
+          $array[$this->formatear_cadena($unscheduled_programming->Specialty->specialty_name)][$rrhh->rut]['calendar_programming'] = $CalendarProgrammings->where('user_id', $rrhh->rut);
           $array[$this->formatear_cadena($unscheduled_programming->Specialty->specialty_name)][$rrhh->rut]['array'] = $array2;
         }
       }
@@ -735,7 +741,7 @@ class CalendarProgrammingController extends Controller
     //       $profesionals[$service->service_name] += 1;
     //     }
     //   }
-    //   $array[$service->service_name]['total'] = $service->contracts->groupBy('rut')->count();
+    //   $array[$service->service_name]['total'] = $service->contracts->groupBy('user_id')->count();
     //   $array[$service->service_name]['con_teorico'] = $profesionals[$service->service_name];
     // }
 
@@ -752,7 +758,7 @@ class CalendarProgrammingController extends Controller
 
     //busca usuarios en rrhh
     $array = array();
-    $rrhhs = User::whereIn('rut',$users)
+    $rrhhs = User::whereIn('id',$users)
                  // ->orderby('name','ASC')
                  ->whereHas('contracts', function($q){
                                 $q->where('law', 'LEY 19.664');

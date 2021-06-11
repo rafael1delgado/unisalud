@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewNotification;
 use App\Mail\AnswerNotification;
+use Illuminate\Support\Facades\Storage;
 
 class FqRequestController extends Controller
 {
@@ -82,9 +83,19 @@ class FqRequestController extends Controller
     public function store(Request $request, ContactUser $contactUser)
     {
         $fqRequest = new FqRequest($request->All());
+
+        if($request->hasFile('prescription_file')){
+            //file
+            $now = Carbon::now()->format('Y_m_d_H_i_s');
+            $file_name = $now.'_cv_'.$contactUser->user_id.'_'.$request->patient_id;
+            $file = $request->file('prescription_file');
+            $fqRequest->prescription_file = $file->storeAs('/unisalud/fq/prescription/', $file_name.'.'.$file->extension(), 'gcs');
+        }
+
         $fqRequest->contact_user_id = $contactUser->user->id;
         $fqRequest->patient_id = $request->patient_id;
         $fqRequest->status = 'pending';
+
         $fqRequest->save();
 
         if($fqRequest->name == 'dispensing'){
@@ -142,6 +153,7 @@ class FqRequestController extends Controller
      */
     public function update(Request $request, FqRequest $fqRequest)
     {
+        dd($request);
         $fqRequest->fill($request->all());
         $fqRequest->status = 'complete';
         $fqRequest->user_id = Auth()->user()->id;
@@ -183,5 +195,10 @@ class FqRequestController extends Controller
     public function destroy(FqRequest $fqRequest)
     {
         //
+    }
+
+    public function view_file(FqRequest $fqRequest)
+    {
+        return Storage::disk('gcs')->response($fqRequest->prescription_file);
     }
 }

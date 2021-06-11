@@ -3,23 +3,7 @@
 @section('title', 'traspaso_bloqueos')
 
 @section('content')
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('dummy.crear_usuario') }}">Crear usuario</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('dummy.some') }}">Some</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="{{route('dummy.traspaso') }}">Traspaso/bloqueo</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{route('dummy.agenda') }}">Agenda</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{route('dummy.lista_espera') }}">Lista Espera</a>
-  </li>
-</ul>
+
 
 <form>
 

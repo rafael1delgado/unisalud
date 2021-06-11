@@ -71,7 +71,7 @@
 <br>
 
 @if($contactUser->user->usersPatients->count() > 0 )
-    <div class="row">
+    <div class="row" id="search_div">
         <div class="col">
             <div class="card">
                 <div class="card-body">
@@ -214,10 +214,12 @@
                 <a href="{{ route('fq.contact_user.storeAddPatient',
                               ['contactUser' => $contactUser, 'user' => $user]) }}" class="btn btn-primary float-right"><i class="fas fa-save"></i> Agregar Paciente</a>
             </div>
-
         @endif
     </div>
 </div>
+
+
+<br><br><br>
 
 @endsection
 

@@ -15,7 +15,7 @@
         @foreach( $programming as $row )
         <tr>
             <td>{{ $row->contract->law }}</td>
-            <td>{{ $row->rrhh->getFullNameAttribute() }}</td>
+            <td>{{ $row->user->OfficialFullName }}</td>
             @if($request->tipo == 1) <td>{{ $row->specialty->specialty_name }}</td> @endif
             @if($request->tipo == 2) <td>{{ $row->profession->profession_name }}</td> @endif
             <td>{{ $row->activity->activity_name }}</td>
@@ -44,7 +44,7 @@
     @method('POST')
 
     <input type="hidden" id="year" name="year" value="{{$request->year}}"/>
-    <input type="hidden" id="rut" name="rut" value="{{$request->rut}}"/>
+    <input type="hidden" id="user_id" name="user_id" value="{{$request->rut}}"/>
     <input type="hidden" id="date" name="date" value="{{$date}}"/>
     <input type="hidden" id="tipo" name="tipo" value="{{$request->tipo}}"/>
 
@@ -65,7 +65,7 @@
       <fieldset class="form-group col">
           <label for="for_activity_id">Actividad</label>
           <select name="activity_id" id="for_activity_id" class="form-control selectpicker" required="" data-live-search="true" data-size="5">
-            @foreach($activities as $activity)
+            @foreach($non_programable_activities as $activity)
               <option value="{{$activity->id}}">{{$activity->id}} - {{$activity->activity_name}}</option>
             @endforeach
           </select>

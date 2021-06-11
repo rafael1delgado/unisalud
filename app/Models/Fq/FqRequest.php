@@ -25,6 +25,10 @@ class FqRequest extends Model
         return $this->belongsTo('\App\Models\User', 'patient_id');
     }
 
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
+
     public function fq_medicines() {
         return $this->HasMany('\App\Models\Fq\FqMedicine', 'request_id');
     }
