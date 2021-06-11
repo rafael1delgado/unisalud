@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEtniasTable extends Migration
+class CreateCongregationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateEtniasTable extends Migration
      */
     public function up()
     {
-        Schema::create('etnias', function (Blueprint $table) {
+        Schema::create('congregations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('etnia_id')->nullable();
+            $table->foreignId('congregation_id')->nullable();
             $table->string('name')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('etnia_id')->references('id')->on('etnias');
+            $table->foreign('congregation_id')->references('id')->on('congregations');
 
         });
     }
@@ -32,6 +32,6 @@ class CreateEtniasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('etnias');
+        Schema::dropIfExists('congregations');
     }
 }
