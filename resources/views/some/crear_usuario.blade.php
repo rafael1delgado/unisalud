@@ -253,7 +253,7 @@
 		</select>
         </div>
 		<div class="form-group col-md-3">
-		<label for="inputEmail4">Etnia</label>
+		<label for="inputEmail4">Congregation</label>
 		<select class="custom-select" multiple>
   			<option selected>Mapuche</option>
   			<option value="1">Quechua</option>

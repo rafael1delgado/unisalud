@@ -13,10 +13,6 @@
       <div class="input-group-prepend">
           <span class="input-group-text">Año contrato</span>
       </div>
-
-      {{-- <input type="date" class="form-control" id="for_year" name="year"
-          value="{{ ($request->get('year'))?$request->get('year'):date('Y-m-d') }}"
-          required > --}}
       <select name="year" id="for_year" class="form-control">
         <option value="2020" {{ $request->get('year') == "2020" ? 'selected' : '' }}>2020</option>
         <option value="2021" {{ $request->get('year') == "2021" ? 'selected' : '' }}>2021</option>
