@@ -10,7 +10,9 @@ use App\Models\MedicalProgrammer\Service;
 use App\Models\MedicalProgrammer\Specialty;
 use App\Models\MedicalProgrammer\Profession;
 use App\Models\MedicalProgrammer\OperatingRoom;
-
+use App\Models\MedicalProgrammer\UserSpecialty;
+use App\Models\MedicalProgrammer\UserProfession;
+use App\Models\MedicalProgrammer\UserOperatingRoom;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -95,34 +97,65 @@ class RrhhController extends Controller
           $newIdentifier->cod_con_identifier_type_id = 1;
           $newIdentifier->save();
 
-          // if ($request->has('address_use')) {
-          //     foreach ($request->address_use as $key => $address_use) {
-          //         $newAddress = new Address();
-          //         $newAddress->user_id = $newPatient->id;
-          //         $newAddress->use = $request->address_use[$key];
-          //         $newAddress->type = 'physical';
-          //         $newAddress->text = $request->street_name[$key];
-          //         $newAddress->line = $request->line[$key];
-          //         $newAddress->apartment = $request->address_apartment[$key];
-          //         $newAddress->suburb = $request->suburb[$key];
-          //         $newAddress->city = $request->city[$key];
-          //         $newAddress->commune_id = $request->district[$key];
-          //         $newAddress->region_id = $request->state[$key];
-          //         $newAddress->country_id = $request->country[$key];
-          //         $newAddress->save();
-          //     }
-          // }
 
-          // if ($request->has('contact_system')) {
-          //     foreach ($request->contact_system as $key => $contact_system) {
-          //         $newContactPoint = new ContactPoint();
-          //         $newContactPoint->system = $request->contact_system[$key];
-          //         $newContactPoint->user_id = $newPatient->id;
-          //         $newContactPoint->value = $request->contact_value[$key];
-          //         $newContactPoint->use = $request->contact_use[$key];
-          //         $newContactPoint->save();
-          //     }
-          // }
+
+
+          $user->syncPermissions(
+              is_array($request->input('permissions')) ? $request->input('permissions') : array()
+          );
+
+          //asigna especialidades
+          if($request->input('specialties')!=null){
+
+              //agrega las nuevas especialidades
+              foreach ($request->input('specialties') as $key => $value) {
+
+                $userSpecialty = new UserSpecialty();
+                $userSpecialty->specialty_id = $value;
+                $userSpecialty->user_id = $user->id;
+                if ($value == $request->principal_specialty) {
+                  $userSpecialty->principal = 1;
+                }else{
+                  $userSpecialty->principal = 0;
+                }
+                $userSpecialty->save();
+              }
+          }
+
+          //asigna profesiones
+          if($request->input('professions')!=null){
+
+              //agrega las nuevas profesiones
+              foreach ($request->input('professions') as $key => $value) {
+
+                $userProfession = new UserProfession();
+                $userProfession->profession_id = $value;
+                $userProfession->user_id = $user->id;
+                if ($value == $request->principal_profession) {
+                  $userProfession->principal = 1;
+                }else{
+                  $userProfession->principal = 0;
+                }
+                $userProfession->save();
+              }
+          }
+
+          //asigna pabellones
+          if ($request->input('operating_rooms')!=null) {
+              foreach ($request->input('operating_rooms') as $key => $value) {
+                  $userOperatingRoom = UserOperatingRoom::where('operating_room_id',$value)
+                                                  ->where('user_id', $user->id)
+                                                  ->get();
+                  if ($userOperatingRoom->count() == 0) {
+                      $userOperatingRoom = new UserOperatingRoom();
+                      $userOperatingRoom->operating_room_id = $value;
+                      $userOperatingRoom->user_id = $user->id;
+                      $userOperatingRoom->save();
+                  }
+              }
+          }
+
+
 
           DB::commit();
           session()->flash('success', 'El usuario ha sido creado.');
@@ -218,112 +251,97 @@ class RrhhController extends Controller
                 $newHumanName->save();
             }
 
-            // //USER ID
-            // $storedUserIds = $user->identifiers->pluck('id')->toArray();
-            // if ($request->has('id_type')) {
-            //     //foreach para actualizar/agregar identifiers
-            //     foreach ($request->id_type as $key => $id_type) {
-            //         if ($request->identifier_id[$key] == null) {
-            //             $newIdentifier = new Identifier();
-            //             $newIdentifier->user_id = $user->id;
-            //             $newIdentifier->use = $request->id_use[$key];
-            //             $newIdentifier->cod_con_identifier_type_id = $request->id_type[$key];
-            //             $newIdentifier->value = $request->id_value[$key];
-            //             $newIdentifier->dv = $request->id_dv[$key];
-            //             $newIdentifier->save();
-            //         } elseif (in_array($request->identifier_id[$key], $storedUserIds)) {
-            //             $identifier = Identifier::find($request->identifier_id[$key]);
-            //             $identifier->user_id = $user->id;
-            //             $identifier->use = $request->id_use[$key];
-            //             $identifier->cod_con_identifier_type_id = $request->id_type[$key];
-            //             $identifier->value = $request->id_value[$key];
-            //             $identifier->dv = $request->id_dv[$key];
-            //             $identifier->save();
-            //         }
-            //     }
-            //     //foreach para eliminar identificadores
-            //     foreach ($storedUserIds as $key => $storedUserId) {
-            //         if (!in_array($storedUserId, $request->identifier_id)) {
-            //             $identifier = Identifier::find($storedUserId);
-            //             $identifier->delete();
-            //         }
-            //     }
-            // }
+            // //asigna permisos
+            // $user->syncRoles(
+            //     is_array($request->input('roles')) ? $request->input('roles') : array()
+            // );
 
-            // //ADDRESSES
-            // $storedAddressIds = $user->addresses->pluck('id')->toArray();
-            // if ($request->has('address_use')) {
-            //     //forearch para actualizar/agregar direcciones
-            //     foreach ($request->address_use as $key => $address_use) {
-            //         if ($request->address_id[$key] == null) {
-            //             $newAddress = new Address();
-            //             $newAddress->user_id = $user->id;
-            //             $newAddress->use = $request->address_use[$key];
-            //             $newAddress->type = 'physical';
-            //             $newAddress->text = $request->street_name[$key];
-            //             $newAddress->line = $request->line[$key];
-            //             $newAddress->apartment = $request->address_apartment[$key];
-            //             $newAddress->suburb = $request->suburb[$key];
-            //             $newAddress->city = $request->city[$key];
-            //             $newAddress->commune_id = $request->district[$key];
-            //             $newAddress->region_id = $request->state[$key];
-            //             $newAddress->country_id = $request->country[$key];
-            //             $newAddress->save();
-            //         } elseif (in_array($request->address_id[$key], $storedAddressIds)) {
-            //             $address = Address::find($request->address_id[$key]);
-            //             $address->user_id = $user->id;
-            //             $address->use = $request->address_use[$key];
-            //             $address->type = 'physical';
-            //             $address->text = $request->street_name[$key];
-            //             $address->line = $request->line[$key];
-            //             $address->apartment = $request->address_apartment[$key];
-            //             $address->suburb = $request->suburb[$key];
-            //             $address->city = $request->city[$key];
-            //             $address->district = $request->district[$key];
-            //             $address->state = $request->state[$key];
-            //             $address->country = $request->country[$key];
-            //             $address->save();
-            //         }
-            //     }
-            //
-            //     //foreach para eliminar direcciones
-            //     foreach ($storedAddressIds as $key => $storedAddressId) {
-            //         if (!in_array($storedAddressId, $request->address_id)) {
-            //             $address = Address::find($storedAddressId);
-            //             $address->delete();
-            //         }
-            //     }
-            // }
+            $user->syncPermissions(
+                is_array($request->input('permissions')) ? $request->input('permissions') : array()
+            );
 
-            // //CONTACT
-            // $storedContactIds = $user->contactPoints->pluck('id')->toArray();
-            // if ($request->has('contact_system')) {
-            //     //forearch para actualizar/agregar contactos
-            //     foreach ($request->contact_system as $key => $contact_system) {
-            //         if ($request->contact_point_id[$key] == null) {
-            //             $newContactPoint = new ContactPoint();
-            //             $newContactPoint->system = $request->contact_system[$key];
-            //             $newContactPoint->user_id = $user->id;
-            //             $newContactPoint->value = $request->contact_value[$key];
-            //             $newContactPoint->use = $request->contact_use[$key];
-            //             $newContactPoint->save();
-            //         } elseif (in_array($request->contact_point_id[$key], $storedContactIds)) {
-            //             $contactPoint = ContactPoint::find($request->contact_point_id[$key]);
-            //             $contactPoint->system = $request->contact_system[$key];
-            //             $contactPoint->user_id = $user->id;
-            //             $contactPoint->value = $request->contact_value[$key];
-            //             $contactPoint->use = $request->contact_use[$key];
-            //             $contactPoint->save();
-            //         }
-            //     }
-            //     //foreach para eliminar contactos
-            //     foreach ($storedContactIds as $key => $storedContactId) {
-            //         if (!in_array($storedContactId, $request->contact_point_id)) {
-            //             $contactPoint = ContactPoint::find($storedContactId);
-            //             $contactPoint->delete();
-            //         }
-            //     }
-            // }
+            //asigna especialidades
+            if($request->input('specialties')!=null){
+
+                //elimina lo no seleccionado
+                $userSpecialties = UserSpecialty::where('user_id', $user->id)->whereNotIn('specialty_id',$request->input('specialties'))->delete();
+
+                //agrega las nuevas especialidades
+                foreach ($request->input('specialties') as $key => $value) {
+                    $userSpecialty = UserSpecialty::where('specialty_id',$value)
+                                                  ->where('user_id', $user->id)
+                                                  ->first();
+
+                    if ($userSpecialty == null) {
+                        $userSpecialty = new UserSpecialty();
+                        $userSpecialty->specialty_id = $value;
+                        $userSpecialty->user_id = $user->id;
+                        if ($value == $request->principal_specialty) {
+                          $userSpecialty->principal = 1;
+                        }else{
+                          $userSpecialty->principal = 0;
+                        }
+                        $userSpecialty->save();
+                    }else{
+                      if ($value == $request->principal_specialty) {
+                        // $userSpecialty->where('specialty_id',$value)->update(['principal' => 1]);
+                        $userSpecialty->where('specialty_id',$value)->where('user_id', $user->id)->update(['principal' => 1]);
+                      }else{
+                        // $userSpecialty->where('specialty_id',$value)->update(['principal' => 0]);
+                        $userSpecialty->where('specialty_id',$value)->where('user_id', $user->id)->update(['principal' => 0]);
+                      }
+                    }
+                }
+            }
+
+            //asigna profesiones
+            if($request->input('professions')!=null){
+
+                //elimina lo no seleccionado
+                $UserProfessions = UserProfession::where('user_id', $user->id)->whereNotIn('profession_id',$request->input('professions'))->delete();
+
+                //agrega las nuevas profesiones
+                foreach ($request->input('professions') as $key => $value) {
+                    $userProfession = UserProfession::where('profession_id',$value)
+                                                    ->where('user_id', $user->id)
+                                                    ->first();
+                    if ($userProfession == null) {
+                        $userProfession = new UserProfession();
+                        $userProfession->profession_id = $value;
+                        $userProfession->user_id = $user->id;
+                        if ($value == $request->principal_profession) {
+                          $userProfession->principal = 1;
+                        }else{
+                          $userProfession->principal = 0;
+                        }
+                        $userProfession->save();
+                    }else{
+                      if ($value == $request->principal_specialty) {
+                        // $userProfession->where('profession_id',$value)->update(['principal' => 1]);
+                        $userProfession->where('profession_id',$value)->where('user_id', $user->id)->update(['principal' => 1]);
+                      }else{
+                        // $userProfession->where('profession_id',$value)->update(['principal' => 0]);
+                        $userProfession->where('profession_id',$value)->where('user_id', $user->id)->update(['principal' => 0]);
+                      }
+                    }
+                }
+            }
+
+
+            //asigna pabellones
+            if($request->input('operating_rooms')!=null){
+                foreach ($request->input('operating_rooms') as $key => $value) {
+                    $userOperatingRoom = UserOperatingRoom::where('operating_room_id',$value)
+                                                          ->where('user_id', $user->id)
+                                                         ->get();
+                    if ($userOperatingRoom->count() == 0) {
+                        $userOperatingRoom = new UserOperatingRoom();
+                        $userOperatingRoom->operating_room_id = $value;
+                        $userOperatingRoom->user_id = $user->id;
+                        $userOperatingRoom->save();
+                    }
+                }
+            }
 
             $user->save();
             Db::commit();

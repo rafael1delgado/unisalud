@@ -55,7 +55,7 @@ class UnscheduledProgrammingController extends Controller
     $monday = Carbon::parse($request->date)->startOfWeek();
     $sunday = Carbon::parse($request->date)->endOfWeek();
     $theoreticalProgrammings = TheoreticalProgramming::where('year',$request->year)
-                                                  ->where('rut',$request->rut)
+                                                  ->where('user_id',$request->rut)
                                                   ->where('contract_id', $request->contract_id)
                                                   ->where('specialty_id', $request->specialty_id)
                                                   ->where('profession_id', $request->profession_id)
@@ -71,7 +71,7 @@ class UnscheduledProgrammingController extends Controller
     }
     //obtiene horas no programables
     $unscheduled_programmings = UnscheduledProgramming::where('year',$request->year)
-                                              ->where('rut',$request->rut)
+                                              ->where('user_id',$request->rut)
                                               ->where('contract_id', $request->contract_id)
                                               ->where('specialty_id', $request->specialty_id)
                                               ->where('profession_id', $request->profession_id)

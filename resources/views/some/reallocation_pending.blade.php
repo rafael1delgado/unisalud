@@ -4,23 +4,6 @@
 
 @section('content')
 
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('dummy.crear_usuario') }}">Crear usuario</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('dummy.some') }}">Agenda</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link " href="{{route('dummy.traspaso') }}">Traspaso/bloqueo</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{route('dummy.agenda') }}">Agenda</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="{{route('dummy.lista_espera') }}">Lista Espera</a>
-  </li>
-</ul>
 
 <div class="row mt-3">
     <table class="table table-sm table-bordered">

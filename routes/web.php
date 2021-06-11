@@ -104,6 +104,13 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
 
+Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
+    Route::view('/appointment','some.appointment')->name('appointment');
+    Route::view('/reallocate', 'some.reallocate')->name('reallocate');
+    Route::view('/agenda', 'some.agenda')->name('agenda');
+    Route::view('/reallocation_pending', 'some.reallocation_pending')->name('reallocationPending');
+});
+
 Route::prefix('fq')->as('fq.')->group(function(){
     Route::get('/', [CysticFibrosisRequest::class, 'index'])->name('index');
     Route::get('/home', [CysticFibrosisRequest::class, 'home'])->name('home');
@@ -333,13 +340,13 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
 });
 
-Route::prefix('dummy')->name('dummy.')->group(function(){
-    Route::view('/some', 'some')->name('some');
-    Route::view('/crear_usuario', 'crear_usuario')->name('crear_usuario');
-    Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
-    Route::view('/agenda', 'agenda')->name('agenda');
-    Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
-});
+//Route::prefix('dummy')->name('dummy.')->group(function(){
+//    Route::view('/some', 'some')->name('some');
+//    Route::view('/crear_usuario', 'crear_usuario')->name('crear_usuario');
+//    Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
+//    Route::view('/agenda', 'agenda')->name('agenda');
+//    Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
+//});
 
 Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
     Route::get('/find-user',[MedicalLicenceController::class,'findUserForm'])->name('find-user-form');

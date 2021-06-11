@@ -25,7 +25,7 @@ class OperatingRoom extends Model implements Auditable
     }
 
     public function userOperatingRooms() {
-        return $this->belongsToMany('App\Models\MedicalProgrammer\UserOperatingRoom');
+        return $this->hasMany('App\Models\MedicalProgrammer\UserOperatingRoom');
     }
 
     public function user() {

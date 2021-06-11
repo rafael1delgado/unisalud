@@ -215,8 +215,16 @@ class TheoreticalProgrammingController extends Controller
                                 ->whereHas('specialties', function($q) use($var) {
                                     $q->where('specialty_id', $var);
                                 })
+                                ->where('programmable',1)
                                 ->get();
-                                // dd($activities->first()->specialties->where('id',42)->first()->pivot);
+
+        $non_programable_activities = Activity::orderBy('activity_name','ASC')
+                                              ->where('activity_type_id',1) //ejemplo: actividades medicas
+                                              ->whereHas('specialties', function($q) use($var) {
+                                                  $q->where('specialty_id', $var);
+                                              })
+                                              ->where('programmable',0)
+                                              ->get();
 
         //corresponde a la actividad no programable (que se guarda en el modelo UnscheduledProgramming)
         $programming = UnscheduledProgramming::where('user_id',$rut)
@@ -224,7 +232,7 @@ class TheoreticalProgrammingController extends Controller
                                              ->where('contract_id', $contract_id)
                                              ->where('specialty_id', $var)
                                              ->get();
-                                         // dd($programming);
+                                         // dd($non_programable_activities);
 
         //obtiene operating operation_rooms
         $OperatingRoomProgrammings = OperatingRoomProgramming::where('specialty_id',$var)
@@ -288,7 +296,16 @@ class TheoreticalProgrammingController extends Controller
                                 ->whereHas('professions', function($q) use($var) {
                                     $q->where('profession_id', $var);
                                 })
+                                ->where('programmable',1)
                                 ->get();
+
+        $non_programable_activities = Activity::orderBy('activity_name','ASC')
+                                              ->where('activity_type_id',2) //ejemplo: actividades medicas
+                                              ->whereHas('specialties', function($q) use($var) {
+                                                  $q->where('specialty_id', $var);
+                                              })
+                                              ->where('programmable',0)
+                                              ->get();
 
         //corresponde a la actividad no programable (que se guarda en el modelo UnscheduledProgramming)
         $programming = UnscheduledProgramming::where('user_id',$rut)
@@ -406,7 +423,7 @@ class TheoreticalProgrammingController extends Controller
     $monday = Carbon::parse($date)->startOfWeek();
     $sunday = Carbon::parse($date)->endOfWeek();
 
-      return view('medical_programmer.management.theoretical_programmer', compact('request','array','activities','contract_days','date','theoreticalProgrammings','theoreticalProgrammingDeleted',
+      return view('medical_programmer.management.theoretical_programmer', compact('request','array','activities','non_programable_activities','contract_days','date','theoreticalProgrammings','theoreticalProgrammingDeleted',
                                                                         'rrhhs','permisos_administrativos', 'specialties','professions','contracts',
                                                                         'programming','OperatingRoomProgrammings','theoreticalProgrammingsAdministrative'));
       // return view('medical_programmer.management.theoretical_programmer',compact('request','rrhhs','array','theoricalProgrammings','contracts','rut','contract_days'));
