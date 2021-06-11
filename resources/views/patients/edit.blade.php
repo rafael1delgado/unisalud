@@ -105,11 +105,11 @@
                 </fieldset>
 
                 <fieldset class="form-group col-2">
-                    <label for="for_etnia">Pueblo originario</label>
-                    <select name="etnia_id" id="for_etnia_id" class="form-control">
+                    <label for="for_congregation">Pueblo originario</label>
+                    <select name="congregation_id" id="for_congregation_id" class="form-control">
                         <option value=""></option>
-                        @foreach($etnias as $etnia)
-                        <option value="{{ $etnia->id }}" {{$etnia->id === $patient->etnia_id ? 'selected' : ''}} >{{ $etnia->name}}</option>
+                        @foreach($congregations as $congregation)
+                        <option value="{{ $congregation->id }}" {{$congregation->id === $patient->congregation_id ? 'selected' : ''}} >{{ $congregation->name}}</option>
                         @endforeach
                     </select>
                 </fieldset>

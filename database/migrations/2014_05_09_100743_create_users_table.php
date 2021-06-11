@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->datetime('deceased_datetime')->nullable();
             $table->foreignId('cod_con_marital_id')->nullable(); /** marriage  */
             $table->Integer('multiple_birth')->nullable();
-            $table->foreignId('etnia_id')->nullable(); /** Pueblo originario */
+            $table->foreignId('congregation_id')->nullable(); /** Pueblo originario */
             $table->foreignId('nationality_id')->nullable();
             $table->string('team')->nullable();
 
@@ -51,7 +51,7 @@ class CreateUsersTable extends Migration
             /**  FOREIGN KEYS  */
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('cod_con_marital_id')->references('id')->on('cod_con_maritals');
-            $table->foreign('etnia_id')->references('id')->on('etnias');
+            $table->foreign('congregation_id')->references('id')->on('congregations');
             $table->foreign('nationality_id')->references('id')->on('countries');
 
         });
