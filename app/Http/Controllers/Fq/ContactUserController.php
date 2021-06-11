@@ -39,6 +39,8 @@ class ContactUserController extends Controller
         }
 
         return view('fq.contact_user.create', compact('request', 'user', 'contactUsers'));
+
+
     }
 
     /**
@@ -96,7 +98,7 @@ class ContactUserController extends Controller
             $userPatient->patient_id = $user->id;
 
             $userPatient->save();
-            session()->flash('success', 'Se ha creado exitosamente el Contacto');
+            session()->flash('success', 'El paciene fue asignado exitosamente.');
             return redirect()->route('fq.contact_user.create');
         }
     }

@@ -40,7 +40,28 @@
                 </tbody>
             </table>
         </div>
+
         <br>
+        @if($fqRequest->prescription_file)
+            <h6><i class="far fa-file-alt"></i> Receta</h6>
+            <div class="card">
+                <div class="card-body">
+                  <a href="{{ route('fq.request.view_file', $fqRequest) }}"
+                      @if($fqRequest->prescription_file)
+                          class="btn btn-outline-secondary btn-sm"
+                      @else
+                          class="btn btn-outline-secondary btn-sm disabled"
+                      @endif
+                      title="Receta"
+                      target="_blank">
+                      <i class="far fa-file-alt"></i>
+                  </a>
+                </div>
+            </div>
+            <br>
+        @endif
+
+
         <h6><i class="fas fa-hospital-user"></i> Paciente</h6>
         <div class="table-responsive">
             <table class="table table-sm table-bordered table-nostriped">
