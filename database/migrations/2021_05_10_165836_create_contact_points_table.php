@@ -22,6 +22,7 @@ class CreateContactPointsTable extends Migration
             $table->foreignId('location_id')->nullable();
             $table->foreignId('emergency_contact_id')->nullable();
             $table->string('value')->nullable();
+            $table->foreignId('organization_id')->nullable();
             $table->enum('use', ['home', 'work', 'temp', 'old', 'mobile'])->nullable();
             $table->unsignedInteger('rank')->nullable();
             $table->timestamps();
@@ -30,6 +31,7 @@ class CreateContactPointsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('emergency_contact_id')->references('id')->on('emergency_contacts');
             $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('organization_id')->references('id')->on('organizations');
 
         });
     }

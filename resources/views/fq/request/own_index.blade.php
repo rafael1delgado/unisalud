@@ -13,11 +13,12 @@
         <thead class="text-center">
             <tr>
                 <th></th>
-                <th style="width: 11%">Fecha</th>
+                <th>Fecha</th>
                 <th>Estado</th>
                 <th>Motivo de Solicitud</th>
-                <th>observación</th>
-                <th style="width: 2%"></th>
+                <th>Especialidad</th>
+                <th>Observación</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@
                 <td>{{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ $fqRequest->StatusValue }}</td>
                 <td>{{ $fqRequest->NameValue }}</td>
+                <td>{{ $fqRequest->SpecialtiesValue }}</td>
                 <td>{{ $fqRequest->observation_patient }}</td>
                 <td>
                     <!-- Button trigger modal -->

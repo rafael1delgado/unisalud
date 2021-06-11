@@ -142,6 +142,7 @@ class FqRequestController extends Controller
      */
     public function update(Request $request, FqRequest $fqRequest)
     {
+        dd($request);
         $fqRequest->fill($request->all());
         $fqRequest->status = 'complete';
         $fqRequest->user_id = Auth()->user()->id;

@@ -31,6 +31,8 @@ class CreateAddressesTable extends Migration
             $table->foreignId('commune_id')->nullable();
             $table->string('postal_code')->nullable();
             $table->foreignId('region_id')->nullable(); 
+            $table->foreignId('organization_id')->nullable();
+            $table->foreignId('practitioner_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -40,6 +42,9 @@ class CreateAddressesTable extends Migration
             $table->foreign('commune_id')->references('id')->on('communes');
             $table->foreign('region_id')->references('id')->on('regions');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('organization_id')->references('id')->on('organizations');
+            $table->foreign('practitioner_id')->references('id')->on('practitioners');
+
 
         });
     }
