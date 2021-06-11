@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "saludiquique",
+  "private_key_id": "e189acf3e293bb6ab035614f436b946f19477f3e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDAk0H/FDyFDPaZ\n24nzLmMuSdLrnSY9CzPQES7DZOrFHcekOXXojo7CfxTj35l1oliTvXMpB6zPtBig\n9FQ2WchxFzC8GJn94DCxNiZ2awnwPrTWnjz0JCyHMvMHy7XsgT0XBb/igRoDNGTx\nB0A06/+Vp66od6YULqQ4k/MgE0ITmr1V6h2MdqCQUWaGMp6l75RJm/3rsG7JGbV7\n3M4jUbAc48suji7GN9qZnGeL08DbybWTThsFmhy3cNw4cRFE2HrxiC1uP+pmFpDB\nj30QhCDSotU7nrxwV4a15GZpoGiEPVqTHg9SrFYQFsumKMp64oX4DFFDLb2on+CO\nP6CWg9bBAgMBAAECggEAArz9TN8Y6rPn3EFzxVRRJvb4A69m/Cp4/MIHyhG46F9f\nZ7mE8I75XvDfZ0uWQybRL12b4fcY2RW4nW5H9cNiTyBbKiuH4gUicByi4J9uQ18i\n42PZ3kdW5j++Vqup/TBLwfRsGXCIQggoUMiPfEkoR9Sb7kuQPhx5K5BH/lpjv8NW\nyJBo6P/UH0vWfPwhZeMzicK7gPDfPoYv6FOx4h1awLK3mIISejgvZWFf7+5gdhDo\nr9k/dt14hErLKPSZqJc3xxvFtdQv88m4X94tZx+eHFsc2UCCSzuj4Qyvg214hmvb\nao+YhckyCqql7Zhae7Wjd04jstZUy+B2c70R/rsdiQKBgQD3kG1X5Bh11Ze3OnsR\n5oDiunYILwvxGadUu7sDCS2JPDeEGPjKqGDO/W+VDyNDURLJR/eaM12KK85ugMUu\nhVKoET6gX7mB4FgYsmJIyojcPFqq3FKg7wwVPsDr2fuNBp3GnSk9XVah8m5zg+hR\nkq1om6UqguI9vGGI45XwaJZnOQKBgQDHIyV9Dgy/y/C4poMTuxzZVaiVOt+1uKso\n4GIE2DaGiFxBQN+rzkPwJ6fpCF1IBcD70EiUFsLwxOVegWDJ3kpZiL4UdqLDmORw\nIxREo6dYyS4dSrLNzBqdvtJIf18XwGlVAUAsECDVf00LUYdK+l+3SRNCXc0prIHU\n/AG0WtAjyQKBgFASMZuE1fh+ziRgUN/4SuWKY5TACr+/iWSZl6IivMyvYlFidk2t\n6inoxMdUbxZdyZK6qTYBuRZwlsMc+SnTy2k6sqPSckC0nCnYwHtErsF07+pleoA8\n8Q6KDoH6Lidt5WgQ+v6zCss0i07nciO4Kkg0V1aJoL1RCcbpvVxVp5fZAoGAZ5ox\nds5Ic8B2jJqUtz8x0yBthLYMjU52Pd3/IOYb+AIZfRlzRL8bOWZoRSTE4yObM2c5\nW1I8OWc2reRBpsSvicVKnvrZ00lID88wTEWYWujPxQ2H2OnHLyqH3I/nuUOxiTgN\nWt9JNcn1G15fNPLtuT2bd3u1sWi+Y0B44owcnYECgYAmefpDkX1w+AXF2GCgeA65\nck3aHZar7xmptviCQYjZrGC+sQU449URVRMENWZcIu7rNjKzcm1QG9SGke5k5KSh\nsD1qPZDzckhOdLqmbVRiVmotMcsbzdVK7ohX8HOnLWJqFum5Xx/TrtqI/Lt+/WAd\nNKl4St/QcxNyoUEgCKLqXw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "tic-ssi@saludiquique.iam.gserviceaccount.com",
+  "client_id": "110181670009450235210",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tic-ssi%40saludiquique.iam.gserviceaccount.com"
+}
