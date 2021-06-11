@@ -60,6 +60,31 @@
 </ul>
 {{--@endcan--}}
 
+
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>SOME</span>
+    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+        <span data-feather="plus-circle"></span>
+    </a>
+</h6>
+<ul class="nav flex-column">
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link" href="{{ route('dummy.crear_usuario') }}"><span data-feather="user-plus"></span>Crear usuario</a>--}}
+{{--    </li>--}}
+    <li class="nav-item">
+        <a class="nav-link " href="{{ route('some.appointment') }}"><span data-feather="file-text"></span>Cita</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('some.reallocate') }}"><span data-feather="repeat"></span>Reasignación/Reserva</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('some.agenda') }}"><span data-feather="calendar"></span>Agenda</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('some.reallocationPending') }}"><span data-feather="list"></span>Pendiente de reasignación</a>
+    </li>
+</ul>
+
 {{--@can('Administrator')--}}
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Administrador</span>
@@ -80,21 +105,6 @@
         Mis permisos
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('dummy.crear_usuario') }}"><span data-feather="user-plus"></span>Crear usuario</a>
-    </li>
-    <li class="nav-item">
-    <a class="nav-link " href="{{ route('dummy.some') }}"><span data-feather="file-text"></span>Some</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('dummy.traspaso') }}"><span data-feather="repeat"></span>Traspaso/bloqueo</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{route('dummy.agenda') }}"><span data-feather="calendar"></span>Agenda</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{route('dummy.lista_espera') }}"><span data-feather="list"></span>Lista Espera</a>
-  </li>
 </ul>
 
 
