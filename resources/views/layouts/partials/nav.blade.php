@@ -121,14 +121,14 @@
 <ul class="nav flex-column">
 
     <!-- programador de pabellones -->
-    @canany(['Mp: programador pabellon'])
+    <!-- @canany(['Mp: programador pabellon'])
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.operating_room_programming.index') }}" href="{{ route('medical_programmer.operating_room_programming.index') }}">
         <span data-feather="chevrons-right"></span>
         Programador de pabellones<span class="sr-only">(current)</span>
         </a>
     </li>
-    @endcanany
+    @endcanany -->
 
     <!-- programador teorico -->
     @canany(['Mp: programacion teorica'])
@@ -160,7 +160,7 @@
     @endcanany
 
     <!-- programador real -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link">
         <span data-feather="chevrons-right"></span>
         Programador Real<span class="sr-only">(current)</span>
@@ -179,7 +179,7 @@
           Box's<span class="sr-only">(current)</span>
           </a>
       </li>
-    </ul>
+    </ul> -->
 
     <!-- mantenedores -->
     @canany(['Mp: mantenedores'])

@@ -140,39 +140,42 @@ class OperatingRoomProgrammingController extends Controller
     }
 
     public function saveMyEvent(Request $request){
-        $year = $request->year;
-        $first_date = new Carbon($request->start_date);
-        $last_date = new Carbon($request->end_date);
+        try {
+          $year = $request->year;
+          $first_date = new Carbon($request->start_date);
+          $last_date = new Carbon($request->end_date);
 
-        if ($request->tipo_ingreso == 1) {
-            $operatingRoomProgramming = new OperatingRoomProgramming();
-            $operatingRoomProgramming->operating_room_id = $request->operating_room_id;
-            $operatingRoomProgramming->specialty_id = $request->specialty_id;
-            $operatingRoomProgramming->profession_id = $request->profession_id;
-            $operatingRoomProgramming->start_date = $first_date;
-            $operatingRoomProgramming->end_date = $last_date;
-            $operatingRoomProgramming->year = $year;
-            //$operatingRoomProgramming->user_id = Auth::id();
-            $operatingRoomProgramming->save();
+          if ($request->tipo_ingreso == 1) {
+              $operatingRoomProgramming = new OperatingRoomProgramming();
+              $operatingRoomProgramming->operating_room_id = $request->operating_room_id;
+              $operatingRoomProgramming->specialty_id = $request->specialty_id;
+              $operatingRoomProgramming->profession_id = $request->profession_id;
+              $operatingRoomProgramming->start_date = $first_date;
+              $operatingRoomProgramming->end_date = $last_date;
+              $operatingRoomProgramming->year = $year;
+              //$operatingRoomProgramming->user_id = Auth::id();
+              $operatingRoomProgramming->save();
+          }
+          //se inserta desde esta semana hacia adelante
+          else {
+              while (date('Y', strtotime($first_date)) == $year) {
+                  $operatingRoomProgramming = new OperatingRoomProgramming();
+                  $operatingRoomProgramming->operating_room_id = $request->operating_room_id;
+                  $operatingRoomProgramming->specialty_id = $request->specialty_id;
+                  $operatingRoomProgramming->profession_id = $request->profession_id;
+                  $operatingRoomProgramming->start_date = $first_date;
+                  $operatingRoomProgramming->end_date = $last_date;
+                  $operatingRoomProgramming->year = $year;
+                  //$operatingRoomProgramming->user_id = Auth::id();
+                  $operatingRoomProgramming->save();
+
+                  $first_date = $first_date->addWeek(1);
+                  $last_date = $last_date->addWeek(1);
+              }
+          }
+        } catch (\Exception $e) {
+            Storage::put('errores.txt', $e->getMessage());
         }
-        //se inserta desde esta semana hacia adelante
-        else {
-            while (date('Y', strtotime($first_date)) == $year) {
-                $operatingRoomProgramming = new OperatingRoomProgramming();
-                $operatingRoomProgramming->operating_room_id = $request->operating_room_id;
-                $operatingRoomProgramming->specialty_id = $request->specialty_id;
-                $operatingRoomProgramming->profession_id = $request->profession_id;
-                $operatingRoomProgramming->start_date = $first_date;
-                $operatingRoomProgramming->end_date = $last_date;
-                $operatingRoomProgramming->year = $year;
-                //$operatingRoomProgramming->user_id = Auth::id();
-                $operatingRoomProgramming->save();
-
-                $first_date = $first_date->addWeek(1);
-                $last_date = $last_date->addWeek(1);
-            }
-        }
-
     }
 
     public function updateMyEvent(Request $request){
