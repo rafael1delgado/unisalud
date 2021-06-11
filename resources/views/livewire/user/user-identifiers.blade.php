@@ -56,7 +56,9 @@
     @endforeach
 
     <div class="form-row">
-        <button type="button" class="btn btn-primary" wire:click.prevent="add({{$i}})">Agregar otro
-            identificador</button>
-    </div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" wire:click.prevent="add({{$i}})">Agregar otro
+                identificador</button>
+        </div>
+   </div>
 </div>
