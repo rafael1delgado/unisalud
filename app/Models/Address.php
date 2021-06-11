@@ -31,4 +31,34 @@ class Address extends Model
         'suburb',
     ];
 
+    public function getUseValueAttribute(){
+        switch ($this->use) {
+            case 'home':
+              return 'Hogar';
+              break;
+            case 'work':
+              return 'Trabajo';
+              break;
+            case 'old':
+              return 'Antiguo';
+              break;
+            case 'temp':
+              return 'Temporal';
+              break;
+            case 'mobile':
+              return 'Móvil';
+              break;
+            default:
+              return '';
+              break;
+        }
+    }
+
+    public function commune(){
+        return $this->belongsTo('App\Models\Commune', 'commune_id');
+    }
+
+    public function region(){
+        return $this->belongsTo('App\Models\Region', 'region_id');
+    }
 }

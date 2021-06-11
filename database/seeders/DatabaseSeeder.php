@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             CodConMaritalSeeder::class,
             CommuneSeeder::class,
-            EtniaSeeder::class,
+            CongregationSeeder::class,
             UserSeeder::class,
 
 
