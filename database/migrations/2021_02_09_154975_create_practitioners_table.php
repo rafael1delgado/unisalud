@@ -17,6 +17,8 @@ class CreatePractitionersTable extends Migration
             $table->id();
             $table->foreignId('practitioner_id')->nullable();
             $table->boolean('active')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('organization_id')->nullable();
             $table->enum('sex', ['female', 'male', 'other', 'unknown'])->nullable();
             $table->date('birthDate')->nullable();
 
@@ -25,6 +27,8 @@ class CreatePractitionersTable extends Migration
             $table->timestamps();
 
             $table->foreign('practitioner_id')->references('id')->on('practitioners');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('organization_id')->references('id')->on('organizations');
 
         });
     }
