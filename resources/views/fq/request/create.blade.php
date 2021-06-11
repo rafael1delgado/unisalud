@@ -53,7 +53,12 @@
                 @endforeach
               </td>
               <td>
-                  <a href="" class="btn btn-outline-secondary btn-sm" title="Ir" target="_blank"> <i class="far fa-eye"></i></a>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#viewPersonalInformatioModal">
+                      <i class="fas fa-edit"></i>
+                  </button>
+
+                  @include('fq.request.modals.view_personal_information')
               </td>
             </tr>
           @endforeach

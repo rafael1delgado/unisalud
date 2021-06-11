@@ -133,6 +133,7 @@ Route::prefix('fq')->as('fq.')->group(function(){
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
         Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')
             ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines|Fq: admin']);
+        Route::get('/view_file/{fqRequest}', [FqRequestController::class, 'view_file'])->name('view_file');
     });
 });
 
