@@ -171,11 +171,6 @@ bottom: 5px;
       </div>
 
       <br><hr>
-      {{-- <h4>Traumatología</h4>
-      <div>
-        <div ><small>Hrs.Contratadas: <b>14</b></small></div>
-        <div ><small>Hrs.Disponibles: <b><span id="total_traumatologia"></span></b></small></div>
-      </div>--}}
 
       <h4>Subtotales</h4>
       @foreach ($array as $key => $specialty)
@@ -274,12 +269,12 @@ bottom: 5px;
             // ciclo para obtener totales por profesional segun eventos guardados en bd
             var cont_eventos_bd = 0;
             @foreach ($calendarProgrammings as $key3 => $calendarProgramming)
-              @if($theo->id . "_" . $theo->activity_id == $calendarProgramming->id . "_" . $calendarProgramming->activity_id)
+              @if($theo->user_id . "_" . $theo->activity_id == $calendarProgramming->user_id . "_" . $calendarProgramming->activity_id)
                 cont_eventos_bd+= {{$calendarProgramming->duration_calendar_programming}};
               @endif
             @endforeach
 
-            var bolsa_{{$theo->id . "_" . $theo->activity_id}} = {{$theo->assigned_hour}} - cont_eventos_bd;
+            var bolsa_{{$theo->user_id . "_" . $theo->activity_id}} = {{$theo->assigned_hour}} - cont_eventos_bd;
 
         @endforeach
 
@@ -300,8 +295,8 @@ bottom: 5px;
 
         @foreach ($doc as $key3 => $theo)
 
-            document.getElementById("{{$theo->id . "_" . $theo->activity_id}}").innerHTML = bolsa_{{$theo->id . "_" . $theo->activity_id}};
-            cont += bolsa_{{$theo->id . "_" . $theo->activity_id}};
+            document.getElementById("{{$theo->user_id . "_" . $theo->activity_id}}").innerHTML = bolsa_{{$theo->user_id . "_" . $theo->activity_id}};
+            cont += bolsa_{{$theo->user_id . "_" . $theo->activity_id}};
             cont_contratado += {{$theo->assigned_hour}};
 
         @endforeach
@@ -379,13 +374,13 @@ bottom: 5px;
         @foreach ($calendarProgrammings as $key => $calendarProgramming)
             //se imprimen horas de profesiones
             @if($calendarProgramming->specialty != null)
-                { id: '{{$calendarProgramming->id . "_" . $calendarProgramming->activity_id}}', title: '{{$calendarProgramming->user->OfficialFullName . " - " . $calendarProgramming->activity->activity_name}}',
+                { id: '{{$calendarProgramming->user_id . "_" . $calendarProgramming->activity_id}}', title: '{{$calendarProgramming->user->OfficialFullName . " - " . $calendarProgramming->activity->activity_name}}',
                   color:'#{{$calendarProgramming->specialty->color}}', resourceId: '{{$calendarProgramming->operating_room_id}}',
                   start: '{{$calendarProgramming->start_date}}', end: '{{$calendarProgramming->end_date}}',
                   specialty_id: '{{$calendarProgramming->specialty_id}}'},
             @else
             //se imprimen horas de especialistas
-                { id: '{{$calendarProgramming->id . "_" . $calendarProgramming->activity_id}}', title: '{{$calendarProgramming->user->OfficialFullName . " - " . $calendarProgramming->activity->activity_name}}',
+                { id: '{{$calendarProgramming->user_id . "_" . $calendarProgramming->activity_id}}', title: '{{$calendarProgramming->user->OfficialFullName . " - " . $calendarProgramming->activity->activity_name}}',
                   color:'#{{$calendarProgramming->profession->color}}', resourceId: '{{$calendarProgramming->operating_room_id}}',
                   start: '{{$calendarProgramming->start_date}}', end: '{{$calendarProgramming->end_date}}',
                   profession_id: '{{$calendarProgramming->profession_id}}'},
@@ -395,7 +390,7 @@ bottom: 5px;
         //Solo si es que se selecciona un profesional, se cargan sus teoricos.
         @if($request->rut != 0)
           @foreach ($theoreticalProgrammings as $key => $theoreticalProgramming)
-            @if($theoreticalProgramming->id == $request->rut)
+            @if($theoreticalProgramming->user_id == $request->rut)
                 { id:99999, title: 'teorico', rendering: 'background', //overlap: false,
                   start: '{{$theoreticalProgramming->start_date}}', end: '{{$theoreticalProgramming->end_date}}'},
             @endif
@@ -405,7 +400,7 @@ bottom: 5px;
         // Solo si es que se selecciona un profesional, se cargan sus dias de contrato (feriados, etc).
         @if($request->rut != 0)
           @foreach ($contract_days as $key => $contract_day)
-            @if($contract_day->id == $request->rut)
+            @if($contract_day->user_id == $request->rut)
                 { id:99999, title: 'Administrativos', rendering: 'background', //overlap: false,
                   start: '{{$contract_day->start_date}}', end: '{{$contract_day->end_date}}'},
             @endif
@@ -463,12 +458,12 @@ bottom: 5px;
 
             @foreach ($doc as $key3 => $theo)
 
-                if(info.event.id == "{{$theo->id . "_" . $theo->activity_id}}"){
-                  if((bolsa_{{$theo->id . "_" . $theo->activity_id}} - 1) < 0){alert("Excedió horas semanales contratas.");info.event.remove();return;} //revierte si se llega a cero
-                  document.getElementById("{{$theo->id . "_" . $theo->activity_id}}").innerHTML = (bolsa_{{$theo->id . "_" . $theo->activity_id}} - 1);
-                  bolsa_{{$theo->id . "_" . $theo->activity_id}} = bolsa_{{$theo->id . "_" . $theo->activity_id}} - 1;
+                if(info.event.id == "{{$theo->user_id . "_" . $theo->activity_id}}"){
+                  if((bolsa_{{$theo->user_id . "_" . $theo->activity_id}} - 1) < 0){alert("Excedió horas semanales contratas.");info.event.remove();return;} //revierte si se llega a cero
+                  document.getElementById("{{$theo->user_id . "_" . $theo->activity_id}}").innerHTML = (bolsa_{{$theo->user_id . "_" . $theo->activity_id}} - 1);
+                  bolsa_{{$theo->user_id . "_" . $theo->activity_id}} = bolsa_{{$theo->user_id . "_" . $theo->activity_id}} - 1;
                 }
-                cont += bolsa_{{$theo->id . "_" . $theo->activity_id}};
+                cont += bolsa_{{$theo->user_id . "_" . $theo->activity_id}};
 
             @endforeach
 
@@ -503,7 +498,7 @@ bottom: 5px;
         //eventos teóricos
         var id = info.event.id;
         @foreach ($theoreticalProgrammings as $key => $theoreticalProgramming)
-          if({{$theoreticalProgramming->id . "_" . $theoreticalProgramming->activity_id}} == id){
+          if({{$theoreticalProgramming->user_id . "_" . $theoreticalProgramming->activity_id}} == id){
               var event={id:99999, title: 'teorico', rendering: 'background', //overlap: false,
                         start: '{{$theoreticalProgramming->start_date}}', end: '{{$theoreticalProgramming->end_date}}'};
               calendar.addEvent(event);
@@ -512,7 +507,7 @@ bottom: 5px;
 
         //eventos días administrativos
         @foreach ($contract_days as $key => $contract_day)
-            if({{$contract_day->id . "_" . $theoreticalProgramming->activity_id}} == id){
+            if({{$contract_day->user_id . "_" . $theoreticalProgramming->activity_id}} == id){
                 var event={id:99999, title: 'Administrativo', rendering: 'background', //overlap: false,
                           start: '{{$contract_day->start_date}}', end: '{{$contract_day->end_date}}'};
                 calendar.addEvent(event);
@@ -595,12 +590,12 @@ bottom: 5px;
 
                 @foreach ($doc as $key3 => $activity)
 
-                    if(info.event.id == "{{$activity->id . "_" . $activity->activity_id}}"){
-                      if((bolsa_{{$activity->id . "_" . $activity->activity_id}} - + diff_) < 0){alert("Excedió horas semanales contratas.");info.event.revert();return;}
-                      document.getElementById("{{$activity->id . "_" . $activity->activity_id}}").innerHTML = (bolsa_{{$activity->id . "_" . $activity->activity_id}} + diff_);
-                      bolsa_{{$activity->id . "_" . $activity->activity_id}} = bolsa_{{$activity->id . "_" . $activity->activity_id}} + diff_;
+                    if(info.event.id == "{{$activity->user_id . "_" . $activity->activity_id}}"){
+                      if((bolsa_{{$activity->user_id . "_" . $activity->activity_id}} - + diff_) < 0){alert("Excedió horas semanales contratas.");info.event.revert();return;}
+                      document.getElementById("{{$activity->user_id . "_" . $activity->activity_id}}").innerHTML = (bolsa_{{$activity->user_id . "_" . $activity->activity_id}} + diff_);
+                      bolsa_{{$activity->user_id . "_" . $activity->activity_id}} = bolsa_{{$activity->user_id . "_" . $activity->activity_id}} + diff_;
                     }
-                    cont += bolsa_{{$activity->id . "_" . $activity->activity_id}};
+                    cont += bolsa_{{$activity->user_id . "_" . $activity->activity_id}};
 
                 @endforeach
 
@@ -642,11 +637,11 @@ bottom: 5px;
 
                     @foreach ($doc as $key3 => $activity)
 
-                        if(info.event.id == "{{$activity->id . "_" . $activity->activity_id}}"){
-                          document.getElementById("{{$activity->id . "_" . $activity->activity_id}}").innerHTML = (bolsa_{{$activity->id . "_" . $activity->activity_id}} + diff_);
-                          bolsa_{{$activity->id . "_" . $activity->activity_id}} = bolsa_{{$activity->id . "_" . $activity->activity_id}} + diff_;
+                        if(info.event.id == "{{$activity->user_id . "_" . $activity->activity_id}}"){
+                          document.getElementById("{{$activity->user_id . "_" . $activity->activity_id}}").innerHTML = (bolsa_{{$activity->user_id . "_" . $activity->activity_id}} + diff_);
+                          bolsa_{{$activity->user_id . "_" . $activity->activity_id}} = bolsa_{{$activity->user_id . "_" . $activity->activity_id}} + diff_;
                         }
-                        cont += bolsa_{{$activity->id . "_" . $activity->activity_id}};
+                        cont += bolsa_{{$activity->user_id . "_" . $activity->activity_id}};
 
                     @endforeach
 
@@ -679,7 +674,7 @@ bottom: 5px;
         //eventos teóricos
         var rut = info.event.id;
         @foreach ($theoreticalProgrammings as $key => $theoreticalProgramming)
-          if({{$theoreticalProgramming->id}} == rut){
+          if({{$theoreticalProgramming->user_id}} == rut){
               var event={id:99999, title: 'teorico', rendering: 'background', //overlap: false,
                         start: '{{$theoreticalProgramming->start_date}}', end: '{{$theoreticalProgramming->end_date}}'};
               calendar.addEvent(event);
@@ -688,7 +683,7 @@ bottom: 5px;
 
         //eventos días administrativos
         @foreach ($contract_days as $key => $contract_day)
-            if({{$contract_day->id}} == rut){
+            if({{$contract_day->user_id}} == rut){
                 var event={id:99999, title: 'Administrativo', rendering: 'background', //overlap: false,
                           start: '{{$contract_day->start_date}}', end: '{{$contract_day->end_date}}'};
                 calendar.addEvent(event);
@@ -745,12 +740,12 @@ bottom: 5px;
 
             @foreach ($doc as $key3 => $activity)
 
-                if(info.event.id == "{{$activity->id . "_" . $activity->activity_id}}"){
-                  if((bolsa_{{$activity->id . "_" . $activity->activity_id}} - diff) < 0){alert("Excedió horas semanales contratas.");info.revert();return;} //revierte si se llega a cero
-                  document.getElementById("{{$activity->id . "_" . $activity->activity_id}}").innerHTML = (bolsa_{{$activity->id . "_" . $activity->activity_id}} - diff);
-                  bolsa_{{$activity->id . "_" . $activity->activity_id}} = bolsa_{{$activity->id . "_" . $activity->activity_id}} - diff;
+                if(info.event.id == "{{$activity->user_id . "_" . $activity->activity_id}}"){
+                  if((bolsa_{{$activity->user_id . "_" . $activity->activity_id}} - diff) < 0){alert("Excedió horas semanales contratas.");info.revert();return;} //revierte si se llega a cero
+                  document.getElementById("{{$activity->user_id . "_" . $activity->activity_id}}").innerHTML = (bolsa_{{$activity->user_id . "_" . $activity->activity_id}} - diff);
+                  bolsa_{{$activity->user_id . "_" . $activity->activity_id}} = bolsa_{{$activity->user_id . "_" . $activity->activity_id}} - diff;
                 }
-                cont += bolsa_{{$activity->id . "_" . $activity->activity_id}};
+                cont += bolsa_{{$activity->user_id . "_" . $activity->activity_id}};
 
             @endforeach
 
@@ -797,7 +792,7 @@ bottom: 5px;
         //eventos teóricos
         var rut = $(this).attr('data-id');
         @foreach ($theoreticalProgrammings as $key => $theoreticalProgramming)
-          if('{{$theoreticalProgramming->id . "_" . $theoreticalProgramming->activity_id}}' == rut){
+          if('{{$theoreticalProgramming->user_id . "_" . $theoreticalProgramming->activity_id}}' == rut){
               @foreach ($OperatingRoomProgrammings as $key => $OperatingRoomProgramming)
                 @if(date('d', strtotime($OperatingRoomProgramming->start_date)) == date('d', strtotime($theoreticalProgramming->start_date)) &&
                     $theoreticalProgramming->specialty_id == $OperatingRoomProgramming->specialty_id)

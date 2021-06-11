@@ -123,6 +123,8 @@
     @endforeach
 
     <div class="form-row">
-        <button type="button" class="btn btn-primary" wire:click.prevent="add({{$i}})">Agregar otra dirección</button>
+        <div class="col">            
+            <button type="button" class="btn btn-primary" wire:click.prevent="add({{$i}})">Agregar otra dirección</button>
+        </div>
     </div>
 </div>
