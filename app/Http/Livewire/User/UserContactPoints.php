@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\User;
 
 use Livewire\Component;
+use App\Models\ContactPoint;
 
 class UserContactPoints extends Component
 {
@@ -41,9 +42,29 @@ class UserContactPoints extends Component
                 $this->contactPoints[$value]['system'] = $this->patient->contactPoints->slice($key, 1)->first()->system;
                 $this->contactPoints[$value]['value'] = $this->patient->contactPoints->slice($key, 1)->first()->value;
                 $this->contactPoints[$value]['use'] = $this->patient->contactPoints->slice($key, 1)->first()->use;
+                $this->contactPoints[$value]['actually'] = $this->patient->contactPoints->slice($key, 1)->first()->actually;
             }
         }
     }
+    public function setActuallyContact($index){
+            foreach ($this->inputs as $key => $value) {
+                $fContact  =  ContactPoint::find($this->contactPoints[$value]["id"]);
+                if(isset($fContact)  && $fContact!=""){
+                    if($fContact->id == $this->contactPoints[$index]["id"]){
+                        
+                        $fContact->actually = 1;
+
+                    }else{
+                        
+                        $fContact->actually = 0;
+
+                    }
+                $fContact->update();
+                }
+             }
+            }
+
+
 
     public function render()
     {
