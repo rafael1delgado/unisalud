@@ -136,12 +136,12 @@
       <fieldset class="form-group col">
           <label for="for_unit_code">Año de contrato válido</label>
           <select name="year" id="for_year" class="form-control" required="">
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-            <option value="2025">2025</option>
+            <option value="2020" {{ 2020 == Carbon\Carbon::now()->format('Y') ? 'selected' : '' }}>2020</option>
+            <option value="2021" {{ 2021 == Carbon\Carbon::now()->format('Y') ? 'selected' : '' }}>2021</option>
+            <option value="2022" {{ 2022 == Carbon\Carbon::now()->format('Y') ? 'selected' : '' }}>2022</option>
+            <option value="2023" {{ 2023 == Carbon\Carbon::now()->format('Y') ? 'selected' : '' }}>2023</option>
+            <option value="2024" {{ 2024 == Carbon\Carbon::now()->format('Y') ? 'selected' : '' }}>2024</option>
+            <option value="2025" {{ 2025 == Carbon\Carbon::now()->format('Y') ? 'selected' : '' }}>2025</option>
           </select>
       </fieldset>
     </div>
