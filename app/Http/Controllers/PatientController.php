@@ -189,7 +189,7 @@ class PatientController extends Controller
         $countries = Country::all();
         $communes = Commune::all();
         $regions = Region::all();
-        $congregation = Congregation::all();
+        $congregations = Congregation::all();
         $identifierTypes = CodConIdentifierType::all();
         return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations'));
     }
