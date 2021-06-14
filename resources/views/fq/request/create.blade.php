@@ -71,7 +71,6 @@
 
 <h6>Paciente</h6>
 <br>
-{{-- dd($contactUser->user->usersPatients->first()->user) --}}
 
 <form method="POST" class="form-horizontal" action="{{ route('fq.request.store', $contactUser) }}" enctype="multipart/form-data">
     @csrf
@@ -214,6 +213,7 @@
 @section('custom_js')
 
 <script type="text/javascript">
+    alert('hola');
     $('#for_specialties').attr("disabled", true);
     $('#for_other_specialty').attr("disabled", true);
     $('#for_prescription_file').attr("disabled", true);
