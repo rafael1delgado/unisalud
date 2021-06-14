@@ -29,25 +29,22 @@ class AppointmentController extends Controller
 
         foreach ($theoreticalProgrammings as $theoreticalProgramming) {
             $startDate = Carbon::parse($theoreticalProgramming->start_date);
-            $endDate = Carbon::parse($theoreticalProgramming->end_date);
-            $diffInMinutes = $endDate->diffInMinutes($startDate);
-            $period = $diffInMinutes / $theoreticalProgramming->performance;
+            $period = 60 / $theoreticalProgramming->performance;
 
             for ($i = 0; $i < $theoreticalProgramming->performance; $i++) {
                 $newAppointment = new Appointment;
                 if ($i === 0) {
                     $newAppointment->start = $theoreticalProgramming->start_date;
-                }else{
+                } else {
                     $newAppointment->start = $startDate->addMinutes($period);
                 }
+                $newAppointment->status = 'proposed';
                 $newAppointment->mp_theoretical_programming_id = $theoreticalProgramming->id;
                 $newAppointment->save();
             }
-
-
         }
 
-
+        return view('some.agenda');
     }
 
     public function openTProgrammerView(Request $request){
