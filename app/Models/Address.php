@@ -29,6 +29,7 @@ class Address extends Model
         'apartment',
         'user_id',
         'suburb',
+        'actually',
     ];
 
     public function getUseValueAttribute(){
