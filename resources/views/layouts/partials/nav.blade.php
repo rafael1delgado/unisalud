@@ -78,6 +78,9 @@
         <a class="nav-link" href="{{ route('some.reallocate') }}"><span data-feather="repeat"></span>Reasignación/Reserva</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{route('some.open_tprogrammer') }}"><span data-feather="calendar"></span>Aperturar agenda</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{route('some.agenda') }}"><span data-feather="calendar"></span>Agenda</a>
     </li>
     <li class="nav-item">
