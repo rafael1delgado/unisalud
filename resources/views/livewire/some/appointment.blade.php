@@ -228,7 +228,7 @@
     <div class="form-row ">
         <div class="form-group col-md-2">
             <label for="inputAsignar">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control">Asignar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="asignAppointment()">Asignar</button>
         </div>
     </div>
     <!-- fin opcion asignar-->
@@ -241,27 +241,27 @@
                 <th scope="col">Especialidad</th>
                 <th scope="col">Subespecialidad</th>
                 <th scope="col">Hora</th>
-                <th scope="col">Cupo</th>
-                <th scope="col">Sobre Cupo</th>
+{{--                <th scope="col">Cupo</th>--}}
+{{--                <th scope="col">Sobre Cupo</th>--}}
                 <th scope="col">Estado</th>
             </tr>
             </thead>
             <tbody>
             @if($appointments)
 
-                @foreach($appointments as $appointment)
+                @foreach($appointments as $key => $appointment)
                     <tr>
                         <td>
-                            <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
+                            <input class="form-check-input " type="checkbox" value="{{$appointment->id}}" name="selectedAppointments[{{$key}}]" wire:model="selectedAppointments" required>
                             <label class="form-check-label" for="invalidCheck2">{{$appointment->theoreticalProgramming->User->officialFullName}}</label>
                         </td>
 
                         <td>{{$appointment->theoreticalProgramming->activity->activity_name}}</td>
-                        <td></td>
-                        <td>09:30</td>
-                        <td>3</td>
-                        <td>2</td>
-                        <td>Disponible</td>
+                        <td>{{($appointment->theoreticalProgramming->subactivity) ? $appointment->theoreticalProgramming->subactivity->sub_activity_name : ''}}</td>
+                        <td>{{$appointment->start}}</td>
+{{--                        <td>3</td>--}}
+{{--                        <td>2</td>--}}
+                        <td>{{$appointment->status}}</td>
                     </tr>
                 @endforeach
             @endif

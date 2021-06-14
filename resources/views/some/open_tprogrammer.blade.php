@@ -25,7 +25,7 @@
 </form>
 
 
-<form method="POST" class="form-horizontal" action="{{ route('some.open_tprogrammer') }}">
+<form method="POST" class="form-horizontal" action="{{ route('some.openAgenda') }}">
 @csrf
 @method('POST')
 

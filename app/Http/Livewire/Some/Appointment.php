@@ -10,6 +10,7 @@ class Appointment extends Component
     public $run;
     public $user;
     public $appointments;
+    public $selectedAppointments = [];
 
     public function searchUser()
     {
@@ -19,6 +20,12 @@ class Appointment extends Component
     public function searchAppointments()
     {
         $this->appointments = \App\Models\Some\Appointment::all();
+    }
+
+    public function asignAppointment()
+    {
+        $selectedAppointments = \App\Models\Some\Appointment::find([$this->selectedAppointments]);
+        dump($selectedAppointments);
     }
 
     public function render()
