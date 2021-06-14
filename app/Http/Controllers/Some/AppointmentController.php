@@ -17,19 +17,24 @@ class AppointmentController extends Controller
     }
 
 //    public function openAgenda()
-    public function openAgenda()
+    public function openAgenda(Request $request)
     {
-        $start_date = Carbon::parse('14-06-2021');
-        $end_date = Carbon::parse('18-06-2021');
+        $start_date = $request->from;
+        $end_date = $request->to;
 
         $theoreticalProgrammings = TheoreticalProgramming::query()
-            ->where('start_date', '>=', $start_date)
-            ->where('end_date', '<=', $end_date)
+            ->whereDate('start_date', '>=', $start_date)
+            ->whereDate('end_date', '<=', $end_date)
             ->get();
 
         foreach ($theoreticalProgrammings as $theoreticalProgramming) {
             $startDate = Carbon::parse($theoreticalProgramming->start_date);
-            $period = 60 / $theoreticalProgramming->performance;
+
+            if ($theoreticalProgramming->subactivity) {
+                $period = 60 / $theoreticalProgramming->subactivity->performance;
+            }else{
+                $period = 60 / $theoreticalProgramming->performance;
+            }
 
             for ($i = 0; $i < $theoreticalProgramming->performance; $i++) {
                 $newAppointment = new Appointment;
