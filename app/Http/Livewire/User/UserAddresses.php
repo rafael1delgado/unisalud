@@ -4,6 +4,7 @@ namespace App\Http\Livewire\User;
 
 use Livewire\Component;
 use App\Models\Commune;
+use App\Models\Address;
 
 class UserAddresses extends Component
 {
@@ -62,10 +63,35 @@ class UserAddresses extends Component
                 $this->addresses[$value]['state'] = $this->patient->addresses->slice($key, 1)->first()->region_id;
                 $this->addresses[$value]['city'] = $this->patient->addresses->slice($key, 1)->first()->city;
                 $this->addresses[$value]['country'] = $this->patient->addresses->slice($key, 1)->first()->country_id;
+                $this->addresses[$value]['actually'] = $this->patient->addresses->slice($key, 1)->first()->actually;
             }
         }
     }
+    public function setActuallyAddress($index){
+        // $index);
+       // dd( $this->addresses[$index] ) ;
+         $log = "";
 
+      foreach ($this->inputs as $key => $value) {
+         // $log .= $this->addresses[$value]['id']."||" ;
+        $fAddress  =  Address::find($this->addresses[$value]["id"]);
+
+         if(isset($fAddress)  && $fAddress!=""){
+            if($fAddress->id == $this->addresses[$index]["id"]){
+                $fAddress->actually = 1;
+
+                $log .= "true";
+            }else{
+                $fAddress->actually = 0;
+
+                $log .= "false";
+            }
+            $fAddress->update();
+         }
+      }
+       // dd($log);
+
+    }
     public function render()
     {
         return view('livewire.user.user-addresses');

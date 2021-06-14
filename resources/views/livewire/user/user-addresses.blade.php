@@ -101,7 +101,7 @@
                     <input type="text" class="form-control" name="city[]" wire:model='addresses.{{$value}}.city'
                         required {{--                               value="Iquique"--}}>
                 </fieldset>
-                <fieldset class="form-group col-md-3">
+                <fieldset class="form-group col-md-2">
                     <label for="for_country">País</label>
                     <select name="country[]" class="form-control" wire:model='addresses.{{$value}}.country' required>
                         <option value=""></option>
@@ -110,6 +110,13 @@
                         @endforeach
                     </select>
                 </fieldset>
+                 <fieldset class=" form-group col-md-1">
+                    <label for="for_id_dv">Predeterminado</label>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" {{ ( (isset($addresses[$value]) && $addresses[$value]["actually"] == 1 )? "checked" : "" )}} wire:click="setActuallyAddress({{$value}});" name="actual-address" value="{{$value}}">
+                    </div>
+
+                </fieldset>  
                 @if($key != 0)
                 <fieldset class="form-group offset-4 col-1">
                     <label for=""></label>
