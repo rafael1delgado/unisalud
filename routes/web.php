@@ -111,6 +111,7 @@ Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::view('/reallocation_pending', 'some.reallocation_pending')->name('reallocationPending');
     Route::get('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
+    Route::match(['get', 'post'],'/open_tprogrammer', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
 });
 
 Route::prefix('fq')->as('fq.')->group(function(){
