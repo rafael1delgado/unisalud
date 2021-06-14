@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Some\Appointment;
+namespace App\Http\Livewire\Some;
 
 use App\Models\User;
 use Livewire\Component;
 
-class SearchUser extends Component
+class Appointment extends Component
 {
     public $run;
     public $user;
@@ -17,6 +17,6 @@ class SearchUser extends Component
 
     public function render()
     {
-        return view('livewire.some.appointment.search-user');
+        return view('livewire.some.appointment');
     }
 }
