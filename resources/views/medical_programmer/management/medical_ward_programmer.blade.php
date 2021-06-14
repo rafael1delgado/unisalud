@@ -67,7 +67,7 @@ bottom: 5px;
 
 <div align="right">
   <p>
-    {{-- <button id='next'><i class="fas fa-calendar-alt fa-fw"></i></button> --}}
+    <!-- <button id='next'><i class="fas fa-calendar-alt fa-fw"></i></button> -->
     <input id="date2" name="date2" type="date" onchange="this.form.submit()">
     <button id='prev'>Anterior</button>
     <button id='next'>Próximo</button>
@@ -291,7 +291,6 @@ bottom: 5px;
         // } else {
         //     saveMyData(info.event, 2);
         // }
-
         $(function() {
             $( "#dialog-confirm" ).dialog({
               resizable: false,
