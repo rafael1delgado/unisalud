@@ -41,7 +41,7 @@ class PatientController extends Controller
         $maritalStatus = CodConMarital::all();
         $countries = Country::all();
         $regions = Region::all();
-        $congregation = Congregation::all();
+        $congregations = Congregation::all();
         $identifierTypes = CodConIdentifierType::all();
         return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations'));
     }

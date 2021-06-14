@@ -23,7 +23,7 @@
 
                 <fieldset class="form-group col-md-4">
                     <label for="for_contact_use">Uso</label>
-                    <select name="contact_use[]" class="form-control" 
+                    <select name="contact_use[]" class="form-control"
                     wire:model='contactPoints.{{$value}}.use'
                         required>
                         <option value="mobile">Móvil</option>
