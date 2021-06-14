@@ -7,8 +7,14 @@ use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
+    public function index()
+    {
+        return view('some.appointment');
+    }
+
+
     public function openAgenda($from, $to)
     {
-        
+
     }
 }
