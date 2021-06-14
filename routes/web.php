@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Some\AppointmentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ClaveUnicaController;
@@ -105,10 +106,11 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 });
 
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
-    Route::view('/appointment','some.appointment')->name('appointment');
+    Route::get('/appointment', [AppointmentController::class, 'index'])->name('appointment');
     Route::view('/reallocate', 'some.reallocate')->name('reallocate');
     Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::view('/reallocation_pending', 'some.reallocation_pending')->name('reallocationPending');
+    Route::get('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
 });
 
 Route::prefix('fq')->as('fq.')->group(function(){
