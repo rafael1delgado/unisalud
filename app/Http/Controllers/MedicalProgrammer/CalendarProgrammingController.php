@@ -90,6 +90,7 @@ class CalendarProgrammingController extends Controller
 
     $monday = Carbon::parse($date)->startOfWeek();
     $sunday = Carbon::parse($date)->endOfWeek();
+    // dd($monday);
     // dd($monday, $sunday);
     // $specialties = Specialty::whereIn('id',Auth::user()->getSpecialtiesArray())->get();
     // $professions = Profession::whereIn('id',Auth::user()->getProfessionsArray())->get();
@@ -99,10 +100,10 @@ class CalendarProgrammingController extends Controller
 
     //obtiene datos programables del período
     $theoreticalProgrammings = TheoreticalProgramming::whereBetween('start_date', [$monday, $sunday])
-      ->whereNull('contract_day_type')
-      ->whereHas('activity', function ($query) {
-        return $query->where('mother_activity_id', 1); //actividad de pabellón y actividad programable
-      })
+                                                     ->whereNull('contract_day_type')
+                                                     ->whereHas('activity', function ($query) {
+                                                        return $query->where('mother_activity_id', 1); //actividad de pabellón y actividad programable
+                                                      })
       // ->whereHas('specialty', function ($query) {
       //   return $query->whereIn('id', Auth::user()->getSpecialtiesArray()); //actividad de pabellón
       // })
