@@ -4,52 +4,35 @@
 
 <div style="text-align: justify;">
 
-  <h5>Estimado/a: </h5>
+  <h4>Estimado/a: </h4>
 
   <br>
 
-  <p>A través del presente, se informa ingreso de solicitud nueva solicitud:</p>
+  <p>A través del presente, se informa ingreso de nueva solicitud:</p>
 
   <ul>
       <li><strong>Fecha de Solicitud</strong>: {{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</li>
       <li><strong>Motivo de Solicitud</strong>: {{ $fqRequest->NameValue }}</li>
+      @if($fqRequest->name == 'specialty hours' && $fqRequest->specialties == 'other')
+      <li><strong>Especialidad</strong>: {{ $fqRequest->SpecialtiesValue }} / {{ $fqRequest->OtherSpecialtiesValue }}</li>
+      @else
+      <li><strong>Especialidad</strong>: {{ $fqRequest->SpecialtiesValue }}</li>
+      @endif
       <li><strong>Observación</strong>: {{ $fqRequest->observation_patient }}</li>
-
-      <hr>
-      <br>
-      <li><strong>Paciente</strong>:</p>
+  </ul>
+  <hr>
+  <br>
+  <p>Paciente:</p>
+  <ul>
       <li><strong>RUN</strong>: {{ $fqRequest->patient->IdentifierRun->value }}-{{ $fqRequest->patient->IdentifierRun->dv }}</li>
       <li><strong>Nombre</strong>: {{ $fqRequest->patient->officialFullName }}</li>
-      <li><strong>Teléfono</strong>:
-        @foreach($fqRequest->contactUser->contactPoints->where('system', 'phone') as $contactPoint)
-          +59 {{ $contactPoint->value }}
-        @endforeach
-      </li>
-      <li><strong>Correo electrónico</strong>:
-        @foreach($fqRequest->contactUser->contactPoints->where('system', 'email') as $contactPoint)
-          {{ $contactPoint->value }}
-        @endforeach
-      </li>
-      <li><strong>Dirección</strong>:
-          @foreach($fqRequest->contactUser->addresses as $address)
-            {{ $address->text }} {{ $address->line }}<br>
-          @endforeach
-      </li>
-      <li><strong>Departamento</strong>:
-          @foreach($fqRequest->contactUser->addresses as $address)
-            {{ $address->apartment }}<br>
-          @endforeach
-      </li>
-      <li><strong>Condominio/Población/Villa</strong>:
-          @foreach($fqRequest->contactUser->addresses as $address)
-            {{ $address->suburb }}<br>
-          @endforeach
-      </li>
-      <li><strong>Comuna</strong>:
-          @foreach($fqRequest->contactUser->addresses as $address)
-            {{ $address->city }}<br>
-          @endforeach
-      </li>
+      {{-- @foreach($fqRequest->contactUser->user->contactPoints->where('system', 'phone') as $contactPoint) --}}
+      @foreach($fqRequest->contactUser->contactPoints->where('system', 'phone') as $contactPoint)
+      <li><strong>Teléfono - {{ $contactPoint->UseValue }}</strong>: +56 {{ $contactPoint->value }}</li>
+      @endforeach
+      @foreach($fqRequest->contactUser->contactPoints->where('system', 'email') as $contactPoint)
+      <li><strong>E-mail - {{ $contactPoint->UseValue }}</strong>: {{ $contactPoint->value }}</li>
+      @endforeach
   </ul>
 
   @if($fqRequest->name == 'dispensing')
@@ -61,7 +44,6 @@
       </ul>
 
   @endif
-  <hr>
 
 </div>
 

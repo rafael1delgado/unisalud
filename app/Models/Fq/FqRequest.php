@@ -76,6 +76,23 @@ class FqRequest extends Model
         }
     }
 
+    public function getOtherSpecialtiesValueAttribute(){
+        switch ($this->other_specialty) {
+            case 'kinesiología':
+              return 'Kinesiología';
+              break;
+            case 'nutrición':
+              return 'Nutrición';
+              break;
+            case 'enfermería':
+              return 'Enfermería';
+              break;
+            default:
+              return '';
+              break;
+        }
+    }
+
     public function getStatusValueAttribute(){
         switch ($this->status) {
             case 'pending':

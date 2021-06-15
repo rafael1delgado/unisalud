@@ -26,30 +26,31 @@ class FqRequestController extends Controller
      */
     public function index()
     {
-        /* Request General */
-        $pending_reqs = FqRequest::where('status', 'pending')
-            ->latest()
-            ->get();
+        if (Auth::user()->can('Fq: admin')) {
+            $pending_reqs = FqRequest::where('status', 'pending')
+                ->latest()
+                ->get();
 
-        $reqs = FqRequest::whereIn('status', ['complete', 'rejected'])
-            ->latest()
-            ->paginate(15);
-        /* --------------- */
+            $reqs = FqRequest::whereIn('status', ['complete', 'rejected'])
+                ->latest()
+                ->paginate(15);
 
-        /* Request Medicines */
-        $pending_reqs_medicines = FqRequest::where('status', 'pending')
-            ->whereIn('name', ['medicines'])
-            ->latest()
-            ->get();
+            return view('fq.request.index', compact('pending_reqs', 'reqs'));
+        }
 
-        $reqs_medicines = FqRequest::whereIn('status', ['complete', 'rejected'])
-            ->whereIn('name', ['medicines'])
-            ->latest()
-            ->paginate(15);
-        /* ----------------- */
+        if (Auth::user()->can('Fq: answer request dispensing')) {
+            $pending_reqs = FqRequest::where('status', 'pending')
+                ->whereIn('name', ['dispensing'])
+                ->latest()
+                ->get();
 
-        return view('fq.request.index', compact('pending_reqs', 'reqs',
-                                                'pending_reqs_medicines', 'reqs_medicines'));
+            $reqs = FqRequest::whereIn('status', ['complete', 'rejected'])
+                ->whereIn('name', ['dispensing'])
+                ->latest()
+                ->paginate(15);
+
+            return view('fq.request.index', compact('pending_reqs', 'reqs'));
+        }
     }
 
     public function own_index()
@@ -59,7 +60,6 @@ class FqRequestController extends Controller
             ->get();
 
         return view('fq.request.own_index', compact('my_reqs'));
-
     }
 
     /**
@@ -153,7 +153,6 @@ class FqRequestController extends Controller
      */
     public function update(Request $request, FqRequest $fqRequest)
     {
-        dd($request);
         $fqRequest->fill($request->all());
         $fqRequest->status = 'complete';
         $fqRequest->user_id = Auth()->user()->id;

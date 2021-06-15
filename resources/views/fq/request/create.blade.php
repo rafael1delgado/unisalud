@@ -1,6 +1,6 @@
 @extends('fq.app')
 
-@section('title', 'Nuevo Staff')
+@section('title', 'Tebi')
 
 @section('content')
 
@@ -81,10 +81,10 @@
             <tr>
                 <th scope="col" style="width: 5%">Identificación</th>
                 <th scope="col" style="width: 20%">Nombre Completo</th>
-                <th scope="col" style="width: 20%">Dirección</th>
+                <!-- <th scope="col" style="width: 20%">Dirección</th>
                 <th scope="col">Comuna</th>
                 <th scope="col">Correo</th>
-                <th scope="col">Teléfono</th>
+                <th scope="col">Teléfono</th> -->
                 <!-- <th style="width: 5%"></th> -->
                 <th style="width: 4%"></th>
             </tr>
@@ -100,27 +100,27 @@
                 <td>
                   {{ $usersPatient->user->OfficialFullName }}<br>
                 </td>
-                <td>
-                  @foreach($usersPatient->user->addresses as $address)
+                <!-- <td> -->
+                  {{-- @foreach($usersPatient->user->addresses as $address)
                     {{ $address->text }} {{ $address->line }}<br>
-                  @endforeach
-                </td>
-                <td>
-                  @foreach($usersPatient->user->addresses as $address)
+                  @endforeach --}}
+                <!-- </td>
+                <td> -->
+                  {{-- @foreach($usersPatient->user->addresses as $address)
                     {{ $address->city }}<br>
-                  @endforeach
-                </td>
-                <td>
-                  @foreach($usersPatient->user->contactPoints->where('system', 'email') as $contactPoint)
+                  @endforeach --}}
+                <!-- </td>
+                <td> -->
+                  {{-- @foreach($usersPatient->user->contactPoints->where('system', 'email') as $contactPoint)
                     {{ $contactPoint->value }}<br>
-                  @endforeach
-                </td>
-                <td>
-                  @foreach($usersPatient->user->contactPoints->where('system', 'phone') as $contactPoint)
+                  @endforeach --}}
+                <!-- </td>
+                <td> -->
+                  {{-- @foreach($usersPatient->user->contactPoints->where('system', 'phone') as $contactPoint)
                     +56 {{ $contactPoint->value }}<br>
-                  @endforeach
-                </td>
-                <td>
+                  @endforeach --}}
+                <!-- </td> -->
+                <td class="text-center">
                     <fieldset class="form-group">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="patient_id"
@@ -213,7 +213,6 @@
 @section('custom_js')
 
 <script type="text/javascript">
-    alert('hola');
     $('#for_specialties').attr("disabled", true);
     $('#for_other_specialty').attr("disabled", true);
     $('#for_prescription_file').attr("disabled", true);
@@ -267,6 +266,6 @@
 </script>
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script> -->
 
 @endsection

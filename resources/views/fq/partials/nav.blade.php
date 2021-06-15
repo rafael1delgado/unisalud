@@ -32,9 +32,9 @@
             </a>
         </li>
     @else
-        @canany(['Fq: Answer request', 'Fq: Answer request medicines', 'Fq: admin'])
+        @canany(['Fq: answer request dispensing','Fq: admin'])
             <li class="nav-item">
-                <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.index') }}">
+                <a class="nav-link {{ active('fq.request.index') }}" href="{{ route('fq.request.index') }}">
                     <i class="fas fa-inbox"></i> Solicitudes Pacientes FQ
                 </a>
             </li>
