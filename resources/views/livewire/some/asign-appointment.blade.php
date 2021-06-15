@@ -187,7 +187,7 @@
                         <option></option>
                         @if($practitioners != null)
                             @foreach($practitioners as $practitioner)
-                                <option value="{{$practitioner->id}}">{{$practitioner->OfficialFullName}}</option>
+                                <option value="{{$practitioner->id}}">{{$practitioner->user->OfficialFullName}}</option>
                             @endforeach
                         @endif
                     </select>
