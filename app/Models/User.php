@@ -59,6 +59,11 @@ class User extends Authenticatable
         return $this->hasMany(Identifier::class, 'user_id');
     }
 
+    public function practitioners()
+    {
+        return $this->hasMany(Practitioner::class, 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
