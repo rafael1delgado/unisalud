@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>@yield('firmante')</title>
+        <title>{{-- @yield('firmante') --}}</title>
         <style>
             body {
                 font-family: Arial, Helvetica, sans-serif;
@@ -80,7 +80,7 @@
                                 font-family: Arial, Helvetica, sans-serif;
                                 color: #505050;
                                 font-weight: 800;
-                                width: 140px;">{{ config('app.ss') }}</div>
+                                width: 140px;">{{ env('APP_SS') }}</div>
                     <div class="letra_ministerio"
                         style="font-size:9.0pt;
                                 font-family: Arial, Helvetica, sans-serif;
@@ -97,9 +97,9 @@
             </tr>
         </table>
 
-        <!-- <table class="cuerpo">
+        <table class="cuerpo">
             <tr>
-                <td width="160" id="margen_izquierdo"></td>
+                <!-- <td width="160" id="margen_izquierdo"></td> -->
                 <td class="texto">
                     @yield('content')
                     <br>
@@ -123,7 +123,7 @@
                     </p>
                 </td>
             </tr>
-        </table> -->
+        </table>
 
     </body>
 
