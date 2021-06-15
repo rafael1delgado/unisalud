@@ -5,7 +5,7 @@
 @section('content')
 
 <form>
-    @livewire('some.appointment')
+    @livewire('some.asign-appointment')
 
 
 
