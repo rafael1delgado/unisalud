@@ -21,9 +21,9 @@
                     </select>
                 </fieldset>
 
-                <fieldset class="form-group col-md-4">
+                <fieldset class="form-group col-md-3">
                     <label for="for_contact_use">Uso</label>
-                    <select name="contact_use[]" class="form-control" 
+                    <select name="contact_use[]" class="form-control"
                     wire:model='contactPoints.{{$value}}.use'
                         required>
                         <option value="mobile">Móvil</option>
@@ -37,9 +37,16 @@
                 <fieldset class="form-group col-md-4">
                     <label for="for_contact_value">Contacto</label>
                     <input type="text" class="form-control" name="contact_value[]" required
-                        wire:model='contactPoints.{{$value}}.value' required
+                        wire:model='contactPoints.{{$value}}.value' required 
                         {{-- value="9{{ substr(str_shuffle('0123456789'), 0, 8) }}" --}}
                         >
+                </fieldset>
+
+                <fieldset class=" form-group col-md-1">
+                    <label for="for_id_dv">Predeterminado</label>
+                    <div class="form-check form-check-inline">
+                        <input type="radio"  name="actual-contact" class="form-check-input" value="{{$value}}"  {{ ( ( isset($contactPoints[$value]) && $contactPoints[$value]["actually"] == 1 )? "checked" : "" )}} wire:click="setActuallyContact({{$value}});">
+                    </div>
                 </fieldset>
 
                 @if($key != 0)

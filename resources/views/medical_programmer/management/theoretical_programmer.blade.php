@@ -61,17 +61,17 @@ bottom: 5px;
 
 <form method="GET" id="form" class="form-horizontal" action="{{ route('medical_programmer.theoretical_programming.index') }}">
 
-  {{-- <input type="hidden" id="date" name="date"/>
+  <!-- <input type="hidden" id="date" name="date"/>
   <input type="hidden" id="year" name="year" value="{{$request->year}}"/>
   <input type="hidden" id="rut" name="rut" value="{{$request->rut}}"/>
 </form>
 
-<form method="GET" id="form" class="form-horizontal" action="{{ route('medical_programmer.calendar_programming.index') }}"> --}}
+<form method="GET" id="form" class="form-horizontal" action="{{ route('medical_programmer.calendar_programming.index') }}">  -->
 
   <input type="hidden" id="tipo" name="tipo" value="{{$request->tipo}}"/>
   <input type="hidden" id="date" name="date"/>
   <div class="row">
-    {{-- <fieldset class="form-group col">
+   <!-- <fieldset class="form-group col">
         <label for="for_unit_code">Año</label>
         <select name="year" id="for_year" class="form-control" required="" onchange="this.form.submit()">
           <option value="2020" {{ 2020 == $request->year ? 'selected' : '' }}>2020</option>
@@ -81,9 +81,9 @@ bottom: 5px;
           <option value="2024" {{ 2024 == $request->year ? 'selected' : '' }}>2024</option>
           <option value="2025" {{ 2025 == $request->year ? 'selected' : '' }}>2025</option>
         </select>
-    </fieldset> --}}
+    </fieldset>  -->
 
-    {{-- {{dd($request->date)}} --}}
+    <!-- dd($request->date) -->
     @if ($request->date2 != null)
         <input type="hidden" id="for_year" name="year" value="{{date('Y', strtotime($request->date2))}}">
     @else
