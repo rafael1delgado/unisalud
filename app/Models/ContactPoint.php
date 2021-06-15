@@ -20,6 +20,8 @@ class ContactPoint extends Model
         'use',
         'rank',
         'period_id',
+        'actually',
+        
     ];
 
     public function getUseValueAttribute(){

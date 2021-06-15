@@ -97,8 +97,8 @@
                     <label for="for_etnia">Pueblo originario</label>
                     <select name="etnia_id" id="for_etnia_id" class="form-control">
                         <option value=""></option>
-                        @foreach($etnias as $etnia)
-                        <option value="{{ $etnia->id }}">{{ $etnia->name}}</option>
+                        @foreach($congregations as $congregation)
+                        <option value="{{ $congregation->id }}">{{ $congregation->name}}</option>
                         @endforeach
                     </select>
                 </fieldset>
@@ -192,7 +192,7 @@
     </div>
 
 
-    
+
 
     <button type="submit" class="btn btn-primary">Guardar</button>
 
