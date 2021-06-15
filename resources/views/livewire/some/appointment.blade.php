@@ -3,15 +3,15 @@
 
         <div class="form-group col-md-4">
             <label for="inputrut">RUT</label>
-            <input type="text" class="form-control"  placeholder="Ingrese el rut" wire:model="run">
+            <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model="run">
         </div>
         <div class="form-group col-md-1">
             <label for="inputdv">Dv</label>
-            <input type="text" class="form-control"  placeholder="Dv">
+            <input type="text" class="form-control" placeholder="Dv">
         </div>
         <div class="form-group col-md-5">
             <label for="inputnombre">Nombre</label>
-            <input type="text" class="form-control"  placeholder="Ingrese Nombre">
+            <input type="text" class="form-control" placeholder="Ingrese Nombre">
         </div>
         <div class="form-group col-md-2">
             <label for="inputEmail4">&nbsp;</label>
@@ -138,7 +138,7 @@
             <button type="button" class="btn btn-primary form-control">Fonasa</button>
         </div>
 
-    </div >
+    </div>
 
     <div class="form-row">
 
@@ -219,7 +219,7 @@
         </div>
         <div class="form-group col-md-2">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control">Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()">Buscar</button>
         </div>
 
     </div>
@@ -228,7 +228,7 @@
     <div class="form-row ">
         <div class="form-group col-md-2">
             <label for="inputAsignar">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control">Asignar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="asignAppointment()">Asignar</button>
         </div>
     </div>
     <!-- fin opcion asignar-->
@@ -241,53 +241,30 @@
                 <th scope="col">Especialidad</th>
                 <th scope="col">Subespecialidad</th>
                 <th scope="col">Hora</th>
-                <th scope="col">Cupo</th>
-                <th scope="col">Sobre Cupo</th>
+{{--                <th scope="col">Cupo</th>--}}
+{{--                <th scope="col">Sobre Cupo</th>--}}
                 <th scope="col">Estado</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">Esteban Rojas</label>
-                </td>
+            @if($appointments)
 
-                <td>Traumatologiá</td>
-                <td>traumatologia/pie</td>
-                <td>09:30</td>
-                <td>3</td>
-                <td>2</td>
-                <td>Disponible</td>
-            </tr>
+                @foreach($appointments as $key => $appointment)
+                    <tr>
+                        <td>
+                            <input class="form-check-input " type="checkbox" value="{{$appointment->id}}" name="selectedAppointments[{{$key}}]" wire:model="selectedAppointments" required>
+                            <label class="form-check-label" for="invalidCheck2">{{$appointment->theoreticalProgramming->User->officialFullName}}</label>
+                        </td>
 
-            <tr>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">Maria Rocha</label>
-
-                </td>
-                <td>Traumatologiá</td>
-                <td>Traumatologiá/brazo</td>
-                <td>10:30</td>
-                <td>2</td>
-                <td>0</td>
-                <td>Disponible</td>
-            </tr>
-
-            <tr>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">Juan Zavala</label>
-                </td>
-                <td>Traumatologiá</td>
-                <td>Traumatologiá/pierna</td>
-                <td>11:30</td>
-                <td>1</td>
-                <td>0</td>
-                <td>Disponible</td>
-            </tr>
-
+                        <td>{{$appointment->theoreticalProgramming->activity->activity_name}}</td>
+                        <td>{{($appointment->theoreticalProgramming->subactivity) ? $appointment->theoreticalProgramming->subactivity->sub_activity_name : ''}}</td>
+                        <td>{{$appointment->start}}</td>
+{{--                        <td>3</td>--}}
+{{--                        <td>2</td>--}}
+                        <td>{{$appointment->status}}</td>
+                    </tr>
+                @endforeach
+            @endif
             </tbody>
         </table>
     </div>
