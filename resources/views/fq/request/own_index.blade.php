@@ -35,7 +35,11 @@
                 <td>{{ $fqRequest->created_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ $fqRequest->StatusValue }}</td>
                 <td>{{ $fqRequest->NameValue }}</td>
+                @if($fqRequest->name == 'specialty hours' && $fqRequest->specialties == 'other')
+                <td>{{ $fqRequest->SpecialtiesValue }} / {{ $fqRequest->OtherSpecialtiesValue }}</td>
+                @else
                 <td>{{ $fqRequest->SpecialtiesValue }}</td>
+                @endif
                 <td>{{ $fqRequest->observation_patient }}</td>
                 <td>
                     <a href="{{ route('fq.request.view_file', $fqRequest) }}"

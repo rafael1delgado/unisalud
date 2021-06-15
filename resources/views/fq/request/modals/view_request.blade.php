@@ -34,7 +34,11 @@
                         <td>{{ $fqRequest->StatusValue }}</td>
                         <td>{{ $fqRequest->contactUser->officialFullName }}</td>
                         <td>{{ $fqRequest->NameValue }}</td>
+                        @if($fqRequest->name == 'specialty hours' && $fqRequest->specialties == 'other')
+                        <td>{{ $fqRequest->SpecialtiesValue }} / {{ $fqRequest->OtherSpecialtiesValue }}</td>
+                        @else
                         <td>{{ $fqRequest->SpecialtiesValue }}</td>
+                        @endif
                         <td>{{ $fqRequest->observation_patient }}</td>
                     </tr>
                 </tbody>
@@ -249,6 +253,8 @@
 @section('custom_js')
 
 <script type="text/javascript">
+    alert('hola');
+    
     document.getElementById("for_link").disabled = true;
     document.getElementById("for_place").disabled = true;
 

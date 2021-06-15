@@ -121,7 +121,3 @@
     </div>
   </div>
 </div>
-
-@section('custom_js')
-
-@endsection

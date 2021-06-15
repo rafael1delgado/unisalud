@@ -21,7 +21,6 @@ use App\Http\Controllers\Fq\ContactUserController;
 use App\Http\Controllers\Fq\FqRequestController;
 
 use App\Http\Controllers\Surveys\TeleconsultationSurveyController;
-use App\Http\Controllers\Fq\FqPatientController;
 
 use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
 use App\Http\Controllers\MedicalProgrammer\RrhhController;
@@ -123,18 +122,18 @@ Route::prefix('fq')->as('fq.')->group(function(){
         Route::get('/addPatient/{contactUser}', [ContactUserController::class, 'addPatient'])->name('addPatient');
         Route::get('/storeAddPatient/{contactUser}/{user}', [ContactUserController::class, 'storeAddPatient'])->name('storeAddPatient');
     });
-    Route::prefix('patient')->name('patient.')->group(function(){
-        Route::get('/', [FqPatientController::class, 'index'])->name('index');
-        Route::get('/create', [FqPatientController::class, 'create'])->name('create');
-    });
+    // Route::prefix('patient')->name('patient.')->group(function(){
+    //     Route::get('/', [FqPatientController::class, 'index'])->name('index');
+    //     Route::get('/create', [FqPatientController::class, 'create'])->name('create');
+    // });
     Route::prefix('request')->name('request.')->group(function(){
         Route::get('/', [FqRequestController::class, 'index'])->name('index')
-            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines|Fq: admin']);
+            ->middleware(['permission:Fq: answer request dispensing|Fq: admin']);
         Route::get('/own_index', [FqRequestController::class, 'own_index'])->name('own_index');
         Route::get('/create', [FqRequestController::class, 'create'])->name('create');
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
         Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')
-            ->middleware(['permission:Fq: Answer request|Fq: Answer request medicines|Fq: admin']);
+            ->middleware(['permission:Fq: answer request dispensing|Fq: admin']);
         Route::get('/view_file/{fqRequest}', [FqRequestController::class, 'view_file'])->name('view_file');
     });
 });
