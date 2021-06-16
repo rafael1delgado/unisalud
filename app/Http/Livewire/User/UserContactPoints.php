@@ -47,21 +47,21 @@ class UserContactPoints extends Component
         }
     }
     public function setActuallyContact($index){
-            foreach ($this->inputs as $key => $value) {
-                $fContact  =  ContactPoint::find($this->contactPoints[$value]["id"]);
-                if(isset($fContact)  && $fContact!=""){
-                    if($fContact->id == $this->contactPoints[$index]["id"]){
+            // foreach ($this->inputs as $key => $value) {
+            //     $fContact  =  ContactPoint::find($this->contactPoints[$value]["id"]);
+            //     if(isset($fContact)  && $fContact!=""){
+            //         if($fContact->id == $this->contactPoints[$index]["id"]){
                         
-                        $fContact->actually = 1;
+            //             $fContact->actually = 1;
 
-                    }else{
+            //         }else{
                         
-                        $fContact->actually = 0;
+            //             $fContact->actually = 0;
 
-                    }
-                $fContact->update();
-                }
-             }
+            //         }
+            //     $fContact->update();
+            //     }
+            //  }
             }
 
 
