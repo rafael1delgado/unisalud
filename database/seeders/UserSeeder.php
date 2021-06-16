@@ -108,62 +108,62 @@ class UserSeeder extends Seeder
 
         $user->givePermissionTo(Permission::all());
 
-        // funcionario médico
-        $user = new User();
-        $user->active = 1;
-        $user->claveunica = 1;
-        $user->birthday = now();
-        $user->gender = 'other';
-        $user->nationality_id = 41;
-        if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
-        $user->save();
-
-        $humanName = new HumanName();
-        $humanName->use = 'official';
-        $humanName->text = 'LEIDY JOHANA';
-        $humanName->fathers_family = 'MOLINA';
-        $humanName->mothers_family = 'PRIETO';
-        $humanName->user_id = $user->id;
-        $humanName->save();
-
-        $identifier = new Identifier();
-        $identifier->use = 'official';
-        $identifier->cod_con_identifier_type_id = 1; // RUN
-        $identifier->value = 44202611;
-        $identifier->dv = 4;
-        $identifier->user_id = $user->id;
-        $identifier->save();
-
-        $user->givePermissionTo('Mp: programacion teorica');
-        $user->givePermissionTo('Mp: programacion medica');
-
-        // funcionario no médico
-        $user = new User();
-        $user->active = 1;
-        $user->claveunica = 1;
-        $user->birthday = now();
-        $user->gender = 'other';
-        $user->nationality_id = 41;
-        if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
-        $user->save();
-
-        $humanName = new HumanName();
-        $humanName->use = 'official';
-        $humanName->text = 'ARMANDO';
-        $humanName->fathers_family = 'HENER';
-        $humanName->mothers_family = 'NUÑEZ';
-        $humanName->user_id = $user->id;
-        $humanName->save();
-
-        $identifier = new Identifier();
-        $identifier->use = 'official';
-        $identifier->cod_con_identifier_type_id = 1; // RUN
-        $identifier->value = 5177420;
-        $identifier->dv = 5;
-        $identifier->user_id = $user->id;
-        $identifier->save();
-
-        $user->givePermissionTo('Mp: programacion teorica');
-        $user->givePermissionTo('Mp: programacion no medica');
+        // // funcionario médico
+        // $user = new User();
+        // $user->active = 1;
+        // $user->claveunica = 1;
+        // $user->birthday = now();
+        // $user->gender = 'other';
+        // $user->nationality_id = 41;
+        // if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
+        // $user->save();
+        //
+        // $humanName = new HumanName();
+        // $humanName->use = 'official';
+        // $humanName->text = 'LEIDY JOHANA';
+        // $humanName->fathers_family = 'MOLINA';
+        // $humanName->mothers_family = 'PRIETO';
+        // $humanName->user_id = $user->id;
+        // $humanName->save();
+        //
+        // $identifier = new Identifier();
+        // $identifier->use = 'official';
+        // $identifier->cod_con_identifier_type_id = 1; // RUN
+        // $identifier->value = 44202611;
+        // $identifier->dv = 4;
+        // $identifier->user_id = $user->id;
+        // $identifier->save();
+        //
+        // $user->givePermissionTo('Mp: programacion teorica');
+        // $user->givePermissionTo('Mp: programacion medica');
+        //
+        // // funcionario no médico
+        // $user = new User();
+        // $user->active = 1;
+        // $user->claveunica = 1;
+        // $user->birthday = now();
+        // $user->gender = 'other';
+        // $user->nationality_id = 41;
+        // if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
+        // $user->save();
+        //
+        // $humanName = new HumanName();
+        // $humanName->use = 'official';
+        // $humanName->text = 'ARMANDO';
+        // $humanName->fathers_family = 'HENER';
+        // $humanName->mothers_family = 'NUÑEZ';
+        // $humanName->user_id = $user->id;
+        // $humanName->save();
+        //
+        // $identifier = new Identifier();
+        // $identifier->use = 'official';
+        // $identifier->cod_con_identifier_type_id = 1; // RUN
+        // $identifier->value = 5177420;
+        // $identifier->dv = 5;
+        // $identifier->user_id = $user->id;
+        // $identifier->save();
+        //
+        // $user->givePermissionTo('Mp: programacion teorica');
+        // $user->givePermissionTo('Mp: programacion no medica');
     }
 }

@@ -26,7 +26,7 @@ class HmUserProfessionsTableSeeder extends Seeder
         UserProfession::Create(['user_id' => 2,'profession_id'=>10]);
         UserProfession::Create(['user_id' => 2,'profession_id'=>11]);
 
-        UserProfession::Create(['user_id' => 4,'profession_id'=>1]);
+        // UserProfession::Create(['user_id' => 4,'profession_id'=>1]);
 
     }
 }

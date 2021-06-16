@@ -36,8 +36,8 @@ class DatabaseSeeder extends Seeder
             HmProfessionActivitiesTableSeeder::class,
             HmOperatingRoomsTableSeeder::class,
             HmServicesTableSeeder::class,
-            HmUserServicesTableSeeder::class,
-            HmContractsTableSeeder::class,
+            // HmUserServicesTableSeeder::class,
+            // HmContractsTableSeeder::class,
             // // HmUnscheduledProgrammingTableSeeder::class,
             HmUserSpecialtiesTableSeeder::class,
             HmUserProfessionsTableSeeder::class,
@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
             // HmOperatingRoomProgrammingTableSeeder::class,
 
             ExtMedicineSeeder::class,
+            PractitionerSeeder::class,
         ]);
     }
 }

@@ -19,8 +19,8 @@ class CreatePractitionersTable extends Migration
             $table->boolean('active')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('organization_id')->nullable();
-            $table->enum('sex', ['female', 'male', 'other', 'unknown'])->nullable();
-            $table->date('birthDate')->nullable();
+//            $table->enum('sex', ['female', 'male', 'other', 'unknown'])->nullable();
+//            $table->date('birthDate')->nullable();
 
 
 
