@@ -113,7 +113,7 @@
                  <fieldset class=" form-group col-md-1">
                     <label for="for_id_dv">Predeterminado</label>
                     <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" {{ ( (isset($addresses[$value]) && $addresses[$value]["actually"] == 1 )? "checked" : "" )}} wire:click="setActuallyAddress({{$value}});" name="actual-address" value="{{$value}}">
+                        <input type="radio" class="form-check-input" {{ ( (isset($addresses[$value]) && isset($addresses[$value]["actually"]) && $addresses[$value]["actually"] == 1 )? "checked" : "" )}} name="actually[]"  >
                     </div>
 
                 </fieldset>  
