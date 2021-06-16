@@ -5,8 +5,14 @@
 @section('content')
 
 <h5><i class="fas fa-tasks"></i> Encuestas: Habilitantes Teleconsulta</h5>
-
 <br>
+@if(App\Models\Fq\ContactUser::getAmIContact() > 0)
+<a class="btn btn-primary" href="{{ route('surveys.teleconsultation.create') }}">
+    <i class="fas fa-plus"></i> Nueva Respuesta
+</a>
+@endif
+
+<br><br>
 <div class="table-responsive">
     <table class="table table-sm table-hover">
         <thead class="table-info">

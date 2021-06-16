@@ -45,8 +45,8 @@ class DatabaseSeeder extends Seeder
             // // HmTheoreticalProgrammingTableSeeder::class,
             // HmOperatingRoomProgrammingTableSeeder::class,
 
+            //PractitionerSeeder::class,
             ExtMedicineSeeder::class,
-            PractitionerSeeder::class,
         ]);
     }
 }

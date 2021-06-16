@@ -155,13 +155,13 @@ class FqRequestController extends Controller
     {
         $fqRequest->fill($request->all());
         $fqRequest->status = 'complete';
-        $fqRequest->user_id = Auth()->user()->id;
         $fqRequest->date_confirm_record = Carbon::now();
+        $fqRequest->user_id = Auth()->user()->id;
+
         $fqRequest->save();
 
         foreach($fqRequest->contactUser->contactPoints->where('system', 'email') as $contactPoint){
             $send_to[] = $contactPoint->value;
-
         }
 
         // if (env('APP_ENV') == 'production') {

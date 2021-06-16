@@ -12,9 +12,9 @@ class FqRequest extends Model
     use softDeletes;
 
     protected $fillable = [
-        'name', 'specialties', 'other_specialty', 'observation_patient',
-        'prescription_file', 'attention', 'date_confirm', 'link',
-        'observation_request', 'patient_id'
+        'name', 'specialties', 'other_specialty', 'prescription_file',
+        'patient_id', 'observation_patient', 'date_confirm', 'attention', 'value',
+        'link', 'place', 'observation_request'
     ];
 
     public function contactUser() {
