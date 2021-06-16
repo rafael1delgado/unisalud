@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Organization;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,8 @@ class DatabaseSeeder extends Seeder
             CommuneSeeder::class,
             CongregationSeeder::class,
             UserSeeder::class,
+            // PractitionerSeeder::class,
+
 
 
             // // HmRrhhTableSeeder::class,
@@ -45,8 +48,9 @@ class DatabaseSeeder extends Seeder
             // // HmTheoreticalProgrammingTableSeeder::class,
             // HmOperatingRoomProgrammingTableSeeder::class,
 
+            //PractitionerSeeder::class,
             ExtMedicineSeeder::class,
-            PractitionerSeeder::class,
+            OrganizationSeeder::class,
         ]);
     }
 }

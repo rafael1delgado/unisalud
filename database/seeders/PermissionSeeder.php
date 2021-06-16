@@ -29,5 +29,6 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'Mp: mantenedores']);
 
         Permission::create(['name'=>'Fq: admin','description'=>'Administrador de Fq']);
+        Permission::create(['name'=>'Fq: answer request dispensing','description'=>'Atención de requerimientos de medicamentos']);
     }
 }
