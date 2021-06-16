@@ -127,18 +127,36 @@ class User extends Authenticatable
             ->first();
     }
 
-    public static function getUserByRun($run){
-        return User::whereHas('identifiers', function($query) use ($run) {
-            return $query->where('value',$run)->where('cod_con_identifier_type_id', 1);
+    public static function getUserByRun($run)
+    {
+        return User::whereHas('identifiers', function ($query) use ($run) {
+            return $query->where('value', $run)->where('cod_con_identifier_type_id', 1);
         })->first();
+    }
+
+    public static function getUsersByName($searchText)
+    {
+        $queryUser = User::query();
+        $arraySearch = explode(' ', $searchText);
+
+        foreach ($arraySearch as $word) {
+            $queryUser->whereHas('humanNames', function ($q) use ($word) {
+                $q->where('text', 'LIKE', '%' . $word . '%')
+                    ->orwhere('fathers_family', 'LIKE', '%' . $word . '%')
+                    ->orwhere('mothers_family', 'LKE', '%' . $word . '%');
+            });
+        }
+
+        return $queryUser;
+
     }
 
     //ContactPoints
     public function getOfficialPhoneAttribute()
     {
         return $this->contactPoints()
-        ->where('system', 'phone')
-        ->first('value')->value;
+            ->where('system', 'phone')
+            ->first('value')->value;
     }
 
     public function getOfficialEmailAttribute()
@@ -167,43 +185,46 @@ class User extends Authenticatable
         });
     }
 
-    public function scopeGetByIdentifier($query, $value, $identifierType){
+    public function scopeGetByIdentifier($query, $value, $identifierType)
+    {
         $query->orWhereHas('identifiers', function ($query) use ($value, $identifierType) {
             return $query->where('value', $value)
                 ->where('cod_con_identifier_type_id', $identifierType);
         });
     }
 
-    public function scopeGetByHumanName($query, $text, $fathers_family, $mothers_family){
-        $query->orWhereHas('humanNames', function($query) use ($text, $fathers_family, $mothers_family){
+    public function scopeGetByHumanName($query, $text, $fathers_family, $mothers_family)
+    {
+        $query->orWhereHas('humanNames', function ($query) use ($text, $fathers_family, $mothers_family) {
             return $query->where('text', $text)
-                    ->where('fathers_family', $fathers_family)
-                    ->where('mothers_family', $mothers_family);
+                ->where('fathers_family', $fathers_family)
+                ->where('mothers_family', $mothers_family);
         });
     }
 
-    public function scopeGetByAddress($query, $text, $line, $apartment, $country_id, $commune_id, $region_id){
-        $query->orWhereHas('addresses', function($query) use ($text, $line, $apartment, $country_id, $commune_id, $region_id){
+    public function scopeGetByAddress($query, $text, $line, $apartment, $country_id, $commune_id, $region_id)
+    {
+        $query->orWhereHas('addresses', function ($query) use ($text, $line, $apartment, $country_id, $commune_id, $region_id) {
             return $query->where('text', $text)
-                    ->where('text', 'like' , '%' . $text . '%')
-                    ->where('line', $line)
-                    ->when($apartment, function($query, $apartment){
-                        return $query->where('apartment', $apartment);
-                    })
-                    ->where('country_id', $country_id)
-                    ->where('commune_id', $commune_id)
-                    ->where('region_id', $region_id);
+                ->where('text', 'like', '%' . $text . '%')
+                ->where('line', $line)
+                ->when($apartment, function ($query, $apartment) {
+                    return $query->where('apartment', $apartment);
+                })
+                ->where('country_id', $country_id)
+                ->where('commune_id', $commune_id)
+                ->where('region_id', $region_id);
         });
 
     }
 
 
-    public function scopeGetByContactPoint($query, $value){
+    public function scopeGetByContactPoint($query, $value)
+    {
         $query->orWhereHas('contactPoints', function ($query) use ($value) {
             return $query->where('value', $value);
         });
     }
-
 
 
     //Programador (relaciones)

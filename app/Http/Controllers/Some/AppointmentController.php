@@ -28,7 +28,9 @@ class AppointmentController extends Controller
             ->get();
 
         foreach ($theoreticalProgrammings as $theoreticalProgramming) {
-            $startDate = Carbon::parse($theoreticalProgramming->start_date);
+            $startDateTheoretical = Carbon::parse($theoreticalProgramming->start_date);
+            $endDateTheoretical = Carbon::parse($theoreticalProgramming->end_date);
+            $diffMinutesTheoretical = $endDateTheoretical->diffInMinutes($startDateTheoretical);
 
             if ($theoreticalProgramming->subactivity) {
                 $period = 60 / $theoreticalProgramming->subactivity->performance;
@@ -36,12 +38,14 @@ class AppointmentController extends Controller
                 $period = 60 / $theoreticalProgramming->performance;
             }
 
-            for ($i = 0; $i < $theoreticalProgramming->performance; $i++) {
+            $qntAppointments = $diffMinutesTheoretical / $period;
+
+            for ($i = 0; $i < $qntAppointments; $i++) {
                 $newAppointment = new Appointment;
                 if ($i === 0) {
                     $newAppointment->start = $theoreticalProgramming->start_date;
                 } else {
-                    $newAppointment->start = $startDate->addMinutes($period);
+                    $newAppointment->start = $startDateTheoretical->addMinutes($period);
                 }
                 $newAppointment->status = 'proposed';
                 $newAppointment->mp_theoretical_programming_id = $theoreticalProgramming->id;

@@ -7,13 +7,16 @@ use App\Models\MedicalProgrammer\Specialty;
 use App\Models\Practitioner;
 use App\Models\Some\Appointment;
 use App\Models\User;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class AsignAppointment extends Component
 {
     public $run;
+    public $name;
     public $user;
     public $appointments;
+    public $appointmentsHistory;
     public $selectedAppointments = [];
     public $profession_id;
     public $type;
@@ -22,6 +25,8 @@ class AsignAppointment extends Component
     public $specialties;
     public $practitioners;
     public $practitioner_id;
+    public $appointments_from;
+    public $appointments_to;
 
 //    public function mount()
 //    {
@@ -30,12 +35,55 @@ class AsignAppointment extends Component
 
     public function searchUser()
     {
-        $this->user = User::getUserByRun($this->run);
+        if ($this->run) {
+            $this->user = User::getUserByRun($this->run);
+        } elseif ($this->name) {
+            $this->user = User::getUsersByName($this->name)->first();
+        }
+
+        $this->appointmentsHistory = Appointment::query()
+            ->where('user_id', $this->user->id)
+            ->get();
+
+//        dd($this->appointmentsHistory);
+
     }
+
 
     public function searchAppointments()
     {
-        $this->appointments = Appointment::all();
+        //todo validar que this->specialty_id no sea nulo
+
+        $userPractitioner = null;
+        if ($this->practitioner_id) {
+            $userPractitioner = Practitioner::find($this->practitioner_id)->user;
+        }
+
+        $query = Appointment::query();
+        $query->when($this->appointments_from === null && $this->appointments_to === null, function ($q) {
+            return $q->whereDate('start', '>=', Carbon::now()->toDateString());
+        });
+        $query->when($this->appointments_from != null && $this->appointments_to != null, function ($q) {
+            return $q->whereDate('start', '>=', $this->appointments_from)
+                ->whereDate('start', '<=', $this->appointments_to);
+        });
+        $query->when($this->appointments_from === null && $this->appointments_to != null, function ($q) {
+            return $q->whereDate('start', '<=', $this->appointments_to);
+        });
+        $query->when($this->appointments_from != null && $this->appointments_to === null, function ($q) {
+            return $q->whereDate('start', '<=', $this->appointments_from);
+        });
+        $query->whereHas('theoreticalProgramming', function ($q) {
+            return $q->where('specialty_id', $this->specialty_id);
+        });
+        $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
+            return $q->whereHas('theoreticalProgramming', function ($q) use($userPractitioner) {
+                return $q->where('user_id', $userPractitioner->id);
+            });
+        });
+
+        $this->appointments = $query->get();
+
     }
 
     public function asignAppointment()
@@ -49,7 +97,7 @@ class AsignAppointment extends Component
         return redirect()->route('some.appointment');
     }
 
-    public function render()
+    public function getPractitioners()
     {
         $this->specialties = null;
         $this->professions = null;
@@ -93,6 +141,10 @@ class AsignAppointment extends Component
 //                ->has('practitioners')
 //                ->get();
         }
+    }
+
+    public function render()
+    {
 
         return view('livewire.some.asign-appointment');
     }
