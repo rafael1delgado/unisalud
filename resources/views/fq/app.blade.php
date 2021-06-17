@@ -100,6 +100,12 @@
             integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg=="
             crossorigin="anonymous"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/i18n/defaults-es_CL.min.js"
+            integrity="sha512-RN/dgJo36dNkKVnb1XGzePP4/8XGa/r+On4XYUy8I1C5z+9SsIEU2rFh6TrunAnddKwtXwMdI0Se8HZxd0GtiQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+        </script>
+
         <script src="https://kit.fontawesome.com/7c4f606aba.js" SameSite="None"
             crossorigin="anonymous"></script>
 

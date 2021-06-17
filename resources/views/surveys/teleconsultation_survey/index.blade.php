@@ -16,12 +16,12 @@
 <div class="table-responsive">
     <table class="table table-sm table-hover">
         <thead class="table-info">
-            <tr>
+            <tr class="text-center">
                 <th scope="col">Identificación</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Paciente</th>
                 <th scope="col">Fecha Ingreso</th>
-                <th scope="col"></th>
+                <th scope="col" colspan="2"</th>
             </tr>
         </thead>
         <tbody>
@@ -43,13 +43,17 @@
                 <td>
                     {{ $teleconsultationSurvey->created_at->format('d-m-Y H:i:s') }}<br>
                 </td>
-
-              <td>
-                  <a href="{{ route('surveys.teleconsultation.show', $teleconsultationSurvey) }}"
-                    class="btn btn-outline-secondary btn-sm" title="Ir">
-                    <i class="far fa-eye"></i>
-                  </a>
-              </td>
+                <td>
+                    @if()
+                        <i class="fas fa-circle fa-lg" style="color: green;"></i>
+                    @endif
+                </td>
+                <td>
+                    <a href="{{ route('surveys.teleconsultation.show', $teleconsultationSurvey) }}"
+                        class="btn btn-outline-secondary btn-sm" title="Ir">
+                        <i class="far fa-eye"></i>
+                    </a>
+                </td>
             </tr>
           @endforeach
         </tbody>
