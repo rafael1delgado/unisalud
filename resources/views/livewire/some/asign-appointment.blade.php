@@ -10,14 +10,16 @@
             <input type="text" class="form-control" placeholder="Dv">
         </div>
 
-{{--        <div class="form-group col-md-4">--}}
-{{--            <label for="inputnombre">Nombre</label>--}}
-{{--            <input type="text" class="form-control" placeholder="Ingrese Nombre" wire:model.lazy="name">--}}
-{{--        </div>--}}
+        {{--        <div class="form-group col-md-4">--}}
+        {{--            <label for="inputnombre">Nombre</label>--}}
+        {{--            <input type="text" class="form-control" placeholder="Ingrese Nombre" wire:model.lazy="name">--}}
+        {{--        </div>--}}
 
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control">...</button>
+            <button type="button" class="btn btn-primary form-control" data-toggle="modal"
+                    data-target="#searchUserModal">...
+            </button>
         </div>
         <div class="form-group col-md-2">
             <label for="inputEmail4">&nbsp;</label>
@@ -294,6 +296,9 @@
             </tbody>
         </table>
     </div>
+
+   @livewire('some.search-user')
+
     <hr class="mt-3">
 
 </div>

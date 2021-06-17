@@ -28,6 +28,8 @@ class AsignAppointment extends Component
     public $appointments_from;
     public $appointments_to;
 
+    protected $listeners = ['userSelected' => 'setUser',
+    ];
 //    public function mount()
 //    {
 //
@@ -49,6 +51,10 @@ class AsignAppointment extends Component
 
     }
 
+    public function setUser($userId)
+    {
+        $this->user = User::find($userId);
+    }
 
     public function searchAppointments()
     {
