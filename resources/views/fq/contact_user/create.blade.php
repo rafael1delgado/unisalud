@@ -33,65 +33,108 @@
     @if($user)
         <div class="card">
             <div class="card-body">
-                <h6><i class="fas fa-user"></i> Datos de Contacto</h6>
-                <br>
-                <div class="table-responsive">
-                    <table class="table table-sm table-hover">
-                        <thead class="table-info">
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col" colspan="4">{{ $user->OfficialFullName }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">Identificación</th>
-                                <td colspan="4">
-                                    @foreach($user->identifiers as $identifier)
-                                      {{ $identifier->value }}-{{ $identifier->dv }}
-                                    @endforeach
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Dirección</th>
-                                <td>
-                                  @foreach($user->addresses as $address)
-                                    {{ $address->text }} {{ $address->line }}<br>
-                                  @endforeach
-                                </td>
-                                <th scope="row">Departamento</th>
-                                <td>
-                                  @foreach($user->addresses as $address)
-                                    {{ $address->apartment }}<br>
-                                  @endforeach
-                                </td>
-                                <td>
-                                  @foreach($user->addresses as $address)
-                                    {{ $address->suburb }}<br>
-                                  @endforeach
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Comuna</th>
-                                <td colspan="4">
-                                  @foreach($user->addresses as $address)
-                                    {{ $address->city }}<br>
-                                  @endforeach
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Teléfono</th>
-                                <td colspan="4"></td>
-                            </tr>
-                          @foreach($user->contactPoints->where('system', 'email') as $contactPoint)
-                            <tr>
-                                <th scope="row">Correo</th>
-                                <td>{{ $contactPoint->value }}</td>
-                            </tr>
-                          @endforeach
-                        </tbody>
-                    </table>
+                <div class="card">
+                    <div class="card-body">
+                        <h6><i class="fas fa-user"></i> Datos Personales</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th scope="col" class="table-info" style="width: 20%">Nombre</th>
+                                        <th scope="col">{{ $user->OfficialFullName }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="table-info">Identificación</th>
+                                        <td>
+                                            @foreach($user->identifiers as $identifier)
+                                              {{ $identifier->value }}-{{ $identifier->dv }}
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-info">Nº Ficha</th>
+                                        <td>
+                                            {{-- $fqRequest->patient->clinical_history_number --}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6><i class="fas fa-phone"></i> Teléfonos</h6>
+
+                                <table class="table table-sm table-bordered table-nostriped">
+                                    <tbody>
+                                      @foreach($user->contactPoints->where('system', 'phone') as $contactPoint)
+                                        <tr>
+                                            <th class="table-info" style="width: 20%">{{ $contactPoint->UseValue }}<br></th>
+                                            <td colspan="4">
+                                                +56 {{ $contactPoint->value }}<br>
+                                            </td>
+                                        </tr>
+                                      @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6><i class="fas fa-at"></i> E-mail</h6>
+                                <table class="table table-sm table-bordered table-nostriped">
+                                    <tbody>
+                                      @foreach($user->contactPoints->where('system', 'email') as $contactPoint)
+                                        <tr>
+                                            <th class="table-info" style="width: 20%">{{ $contactPoint->UseValue }}<br></th>
+                                            <td colspan="4">
+                                                {{ $contactPoint->value }}<br>
+                                            </td>
+                                        </tr>
+                                      @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h6><i class="fas fa-house-user"></i> Direcciones:</h6>
+                        <table class="table table-sm table-hover table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <th class="table-info">Dirección</th>
+                                    <th class="table-info">Depto.</th>
+                                    <td class="table-info">Condominio/Villa/Localidad</th>
+                                    <th class="table-info">Comuna</th>
+                                    <th class="table-info">Región</th>
+                                </tr>
+                              @foreach($user->addresses as $address)
+                                <tr>
+                                    <th class="table-info">{{ $address->UseValue }}</th>
+                                    <td>{{ $address->text }} {{ $address->line }}</td>
+                                    <td>{{ $address->apartment }}</td>
+                                    <td>{{ $address->suburb }}</td>
+                                    <td>{{ $address->commune->name }}</td>
+                                    <td>{{ $address->region->name }}</td>
+                                </tr>
+                              @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br>
                 <a href="{{ route('fq.contact_user.store', $user) }}" class="btn btn-primary float-right"><i class="fas fa-save"></i> Agregar a Contactos</a>
             </div>
         </div>

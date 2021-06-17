@@ -72,23 +72,23 @@ class UserAddresses extends Component
        // dd( $this->addresses[$index] ) ;
          $log = "";
 
-      foreach ($this->inputs as $key => $value) {
-         // $log .= $this->addresses[$value]['id']."||" ;
-        $fAddress  =  Address::find($this->addresses[$value]["id"]);
+      // foreach ($this->inputs as $key => $value) {
+      //    // $log .= $this->addresses[$value]['id']."||" ;
+      //   $fAddress  =  Address::find($this->addresses[$value]["id"]);
 
-         if(isset($fAddress)  && $fAddress!=""){
-            if($fAddress->id == $this->addresses[$index]["id"]){
-                $fAddress->actually = 1;
+      //    if(isset($fAddress)  && $fAddress!=""){
+      //       if($fAddress->id == $this->addresses[$index]["id"]){
+      //           $fAddress->actually = 1;
 
-                $log .= "true";
-            }else{
-                $fAddress->actually = 0;
+      //           $log .= "true";
+      //       }else{
+      //           $fAddress->actually = 0;
 
-                $log .= "false";
-            }
-            $fAddress->update();
-         }
-      }
+      //           $log .= "false";
+      //       }
+      //       $fAddress->update();
+      //    }
+      // }
        // dd($log);
 
     }

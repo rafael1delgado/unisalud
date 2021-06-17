@@ -95,14 +95,13 @@
 
                 <fieldset class="form-group col-md-4">
                     <label for="for_etnia">Pueblo originario</label>
-                    <select name="etnia_id" id="for_etnia_id" class="form-control">
+                    <select name="etnia_id[]" id="for_etnia_id" class="form-control selectpicker" data-live-search="true" multiple="" data-size="10" title="Seleccione..." multiple data-actions-box="true" required>
                         <option value=""></option>
                         @foreach($congregations as $congregation)
                         <option value="{{ $congregation->id }}">{{ $congregation->name}}</option>
                         @endforeach
                     </select>
-                </fieldset>
-
+                
                 <fieldset class="form-group col-md-4">
                     <label for="for_cod_con_marital_id">Estado Civil</label>
                     <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
@@ -197,8 +196,6 @@
     <button type="submit" class="btn btn-primary">Guardar</button>
 
 
-
-
 </form>
 @endsection
 {{-- @section('custom_js')
@@ -210,3 +207,22 @@
         </script>
     @endif
 @endsection --}}
+
+@section('custom_js')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}">
+
+<script src='{{asset("js/jquery.rut.chileno.js")}}'></script>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        //obtiene digito verificador
+        $('input[name=run]').keyup(function(e) {
+            var str = $("#for_run").val();
+            $('#for_dv').val($.rut.dv(str));
+        });
+    });
+</script>
+<script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('js/defaults-es_CL.min.js') }}"></script>
+
+@endsection
+

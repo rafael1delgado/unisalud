@@ -16,7 +16,7 @@
                             {{ __('RUN') }}</label>
 
                             <div class="col-md-6">
-                                <input id="run" type="text" class="form-control @error('run') is-invalid @enderror" 
+                                <input id="run" type="text" class="form-control @error('run') is-invalid @enderror"
                                     name="run" value="{{ old('run') }}" required autocomplete="run" autofocus>
 
                                 @error('run')
@@ -56,7 +56,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Iniciar seción') }}
+                                    {{ __('Iniciar sesión') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
