@@ -21,7 +21,7 @@
         <fieldset class="form-group col-8">
             <label for="for_rrhh">Especialista</label>
             <select name="rrhh" id="rrhh" class="form-control selectpicker" required="" data-live-search="true" data-size="5">
-              <option>--</option>
+              <!-- <option>--</option> -->
               @foreach($users as $user)
                 <option value="{{$user->id}}" {{ $user->id == $contract->user_id ? 'selected' : '' }}>{{$user->OfficialFullName}}</option>
               @endforeach
