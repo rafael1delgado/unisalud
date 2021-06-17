@@ -113,7 +113,7 @@ Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::match(['get', 'post'],'/open_tprogrammer', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
 });
 
-Route::prefix('fq')->as('fq.')->group(function(){
+Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
     Route::get('/', [CysticFibrosisRequest::class, 'index'])->name('index');
     Route::get('/home', [CysticFibrosisRequest::class, 'home'])->name('home');
     Route::prefix('contact_user')->name('contact_user.')->middleware(['permission:Fq: admin'])->group(function(){

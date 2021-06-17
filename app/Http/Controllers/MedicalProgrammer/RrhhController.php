@@ -32,7 +32,7 @@ class RrhhController extends Controller
     public function index()
     {
         // $rrhh = Rrhh::orderBy('name','ASC')->get();
-        $rrhh = User::all();
+        $rrhh = User::orderBy('id','ASC')->paginate(50);
         return view('medical_programmer.rrhh.index', compact('rrhh'));
     }
 
