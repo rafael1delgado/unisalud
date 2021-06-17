@@ -21,7 +21,7 @@ class AppointmentController extends Controller
     }
 
     /**
-     * Descompone las programaciones en appointements
+     * Descompone las programaciones en appointments
      * @param Request $request
      * @return Application|Factory|View
      */
@@ -60,7 +60,7 @@ class AppointmentController extends Controller
             }
         }
 
-        return view('some.agenda', compact('start_date', 'end_date','appointments'));
+        return view('some.agenda', compact('start_date', 'end_date', 'appointments'));
     }
 
     public function openTProgrammerView(Request $request)

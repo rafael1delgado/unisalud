@@ -101,7 +101,7 @@
                         <option value="{{ $congregation->id }}">{{ $congregation->name}}</option>
                         @endforeach
                     </select>
-                
+
                 <fieldset class="form-group col-md-4">
                     <label for="for_cod_con_marital_id">Estado Civil</label>
                     <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
@@ -167,46 +167,11 @@
         </div>
     </div>
 
-    <div class="modal fade" id="flowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Flujo Firmas</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div id="flowsModalBody">
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
     <button type="submit" class="btn btn-primary">Guardar</button>
 
 
 </form>
 @endsection
-{{-- @section('custom_js')
-    @if(!empty($openModal) && $openModal == true)
-        <script>
-            $(function() {
-                $('#flowModal').modal('show');
-            });
-        </script>
-    @endif
-@endsection --}}
 
 @section('custom_js')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}">
