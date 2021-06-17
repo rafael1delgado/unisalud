@@ -67,6 +67,8 @@
     </tbody>
 </table>
 
+{{ $contracts->links() }}
+
 @endsection
 
 @section('custom_js')

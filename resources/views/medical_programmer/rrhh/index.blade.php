@@ -62,6 +62,8 @@
     </tbody>
 </table>
 
+{{ $rrhh->links() }}
+
 @endsection
 
 @section('custom_js')
