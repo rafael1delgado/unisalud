@@ -24,6 +24,9 @@
 
 </form>
 
+<hr>
+
+<h4>{{$theoreticalProgrammings->first()->user->OfficialFullName}}</h4>
 
 <form method="POST" class="form-horizontal" action="{{ route('some.openAgenda') }}">
 @csrf
@@ -33,8 +36,9 @@
 
   <div class="form-group col-md-6">
     <label for="inputEmail4">&nbsp;</label>
-    <!-- <button type="submit" class="btn btn-primary form-control">Buscar</button> -->
   </div>
+
+  <input type="hidden" name="user_id" value="{{$theoreticalProgrammings->first()->user_id}}">
 
   <div class="form-group col-md-2">
     <label for="inputEmail4">Desde</label>
