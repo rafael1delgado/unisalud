@@ -42,7 +42,7 @@ class CloneController extends Controller
         $contracts = Contract::where('year',$request->source_year)->get();
         foreach ($contracts as $key => $contract) {
           $new_contract = new Contract();
-          $new_contract->rut = $contract->rut;
+          $new_contract->user_id = $contract->user_id;
           $new_contract->year = $request->destination_year;
           $new_contract->law = $contract->law;
           $new_contract->contract_id = $contract->contract_id;
@@ -82,7 +82,7 @@ class CloneController extends Controller
             // dd($theoreticalProgramming->contract_id, Contract::find($theoreticalProgramming->contract_id));
             $old_contract = Contract::find($theoreticalProgramming->contract_id);
             $new_contract = Contract::where('year',$request->destination_year)
-                                    ->where('rut',$old_contract->rut)
+                                    ->where('user_id',$old_contract->user_id)
                                     ->where('law',$old_contract->law)
                                     ->where('weekly_hours',$old_contract->weekly_hours)
                                     ->first();
@@ -94,7 +94,7 @@ class CloneController extends Controller
               print_r($theoreticalProgramming->id ." " .$new_start_date . " " . $new_end_date ."<br>");
               $NewTheoreticalProgramming = new TheoreticalProgramming();
               $NewTheoreticalProgramming->contract_id = $new_contract->id;
-              $NewTheoreticalProgramming->rut = $theoreticalProgramming->rut;
+              $NewTheoreticalProgramming->user_id = $theoreticalProgramming->user_id;
               $NewTheoreticalProgramming->specialty_id = $theoreticalProgramming->specialty_id;
               $NewTheoreticalProgramming->activity_id = $theoreticalProgramming->activity_id;
               $NewTheoreticalProgramming->profession_id = $theoreticalProgramming->profession_id;
