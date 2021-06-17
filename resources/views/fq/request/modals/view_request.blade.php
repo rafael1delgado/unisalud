@@ -199,8 +199,8 @@
                         </fieldset>
 
                         <fieldset class="form-group col-sm-3">
-                            <label for="for_attention">Tipo de Atención</label>
-                            <select name="attention" id="for_attention" class="form-control"
+                            <label for="for_attention_{{$fqRequest->id}}">Tipo de Atención</label>
+                            <select name="attention" id="for_attention_{{$fqRequest->id}}" class="form-control"
                               @if($fqRequest->name != 'specialty hours') disabled @endif>
                                 <option value="">Seleccione...</option>
                                 <option value="face-to-face">Presencial</option>
@@ -226,13 +226,20 @@
                     <div class="form-row">
                         <fieldset class="form-group col-sm-9">
                             <label for="for_link">Link</label>
-                            <input type="text" class="form-control" name="link" id="for_link"
+                            <input type="text" class="form-control" name="link" id="for_link_{{$fqRequest->id}}"
                               @if($fqRequest->name != 'specialty hours') disabled @endif>
                         </fieldset>
 
                         <fieldset class="form-group col-sm-3">
                             <label for="for_place">Lugar</label>
-                            <input type="text" class="form-control" name="place" id="for_place">
+                            <input type="text" class="form-control" name="place" id="for_place_{{$fqRequest->id}}">
+                        </fieldset>
+                    </div>
+
+                    <div class="form-row">
+                        <fieldset class="form-group col-sm">
+                          <label for="observation_request" class="form-label">Observación</label>
+                          <textarea class="form-control" name="observation_request" id="for_observation_request" rows="3"></textarea>
                         </fieldset>
                     </div>
 
@@ -245,26 +252,86 @@
         @endif
 
         @if($fqRequest->status == 'complete' || $fqRequest->status == 'rejected')
-        <h6><i class="far fa-calendar-alt"></i> Atendido</h6>
-        <div class="table-responsive">
-            <table class="table table-sm table-bordered table-nostriped">
-                <thead>
-                    <tr class="text-center">
-                        <th style="width: 10%">Fecha Respuesta</th>
-                        <th style="width: 20%">Respuesta por:</th>
-                        <th>Observación</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</td>
-                        <td>{{ $fqRequest->user->officialFullName }}</td>
-                        <td>{{ $fqRequest->observation_request }}</td>
-                    </tr>
-                </tbody>
-            </table>
+
+        <div class="card">
+            <div class="card-body">
+                <h6><i class="fas fa-calendar-alt"></i> Citación</h6>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered table-nostriped">
+                        <tbody>
+                            <tr>
+                              <td class="table-active">Día y Hora</td>
+                              <td>{{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</td>
+                            </tr>
+                            <tr>
+                              <td class="table-active">Nombre Medico</td>
+                              <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered table-nostriped">
+                        <tbody>
+                            <tr>
+                              <td class="table-active">Paciente</td>
+                              <td>{{ $fqRequest->patient->officialFullName }}</td>
+                            </tr>
+                            <tr>
+                              <td class="table-active">Rut</td>
+                              <td>{{ $fqRequest->patient->IdentifierRun->value }}-{{ $fqRequest->patient->IdentifierRun->dv }}</td>
+                            </tr>
+                            <tr>
+                              @if($fqRequest->name == 'specialty hours' && $fqRequest->specialties == 'other')
+                              <td class="table-active">Especialidad</td>
+                              <td>{{ $fqRequest->SpecialtiesValue }} / {{ $fqRequest->OtherSpecialtiesValue }}</td>
+                              @else
+                              <td class="table-active">Especialidad</td>
+                              <td>{{ $fqRequest->SpecialtiesValue }}</td>
+                              @endif
+                            </tr>
+                            <tr>
+                              <td class="table-active">Observación</td>
+                              <td>{{ $fqRequest->observation_request }}</td>
+                            </tr>
+                            <tr>
+                              <td class="table-active">Lugar</td>
+                              <td>{{ $fqRequest->place }}</td>
+                            </tr>
+                            <tr>
+                              <td class="table-active">Fecha de Respuesta</td>
+                              <td>{{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</td>
+                            </tr>
+                            <tr>
+                              <td class="table-active">Valor a pagar</td>
+                              <td>${{ number_format($fqRequest->value, 0, ',','.') }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered table-nostriped">
+                        <tbody>
+                            <tr>
+                              <td class="table-active">Fecha de Respuesta</td>
+                              <td>{{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</td>
+                            </tr>
+                            <tr>
+                              <td class="table-active">Funcionario</td>
+                              <td>{{ $fqRequest->user->officialFullName }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
         @endif
+
+        {{$fqRequest->id}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -276,29 +343,29 @@
 @section('custom_js')
 
 <script type="text/javascript">
-    document.getElementById("for_link").disabled = true;
-    document.getElementById("for_place").disabled = true;
+    document.getElementById("for_link_{{$fqRequest->id}}").disabled = true;
+    document.getElementById("for_place_{{$fqRequest->id}}").disabled = true;
 
     jQuery('select[name=attention]').change(function(){
         var fieldsetName = $(this).val();
         switch(this.value){
             case "teleconsultation":
-                document.getElementById("for_link").disabled = false;
-                document.getElementById("for_place").disabled = true;
-                document.getElementById('for_place').value = '';
+                document.getElementById("for_link_{{$fqRequest->id}}").disabled = false;
+                document.getElementById("for_place_{{$fqRequest->id}}").disabled = true;
+                document.getElementById("for_place_{{$fqRequest->id}}").value = '';
                 break;
 
             case "face-to-face":
-                document.getElementById("for_place").disabled = false;
-                document.getElementById("for_link").disabled = true;
-                document.getElementById('for_link').value = '';
+                document.getElementById("for_place_{{$fqRequest->id}}").disabled = false;
+                document.getElementById("for_link_{{$fqRequest->id}}").disabled = true;
+                document.getElementById("for_link_{{$fqRequest->id}}").value = '';
                 break;
 
             default:
-                document.getElementById("for_link").disabled = true;
-                document.getElementById('for_link').value = '';
-                document.getElementById("for_place").disabled = true;
-                document.getElementById('for_place').value = '';
+                document.getElementById("for_link_{{$fqRequest->id}}").disabled = true;
+                document.getElementById("for_link_{{$fqRequest->id}}").value = '';
+                document.getElementById("for_place_{{$fqRequest->id}}").disabled = true;
+                document.getElementById("for_place_{{$fqRequest->id}}").value = '';
                 break;
         }
     });

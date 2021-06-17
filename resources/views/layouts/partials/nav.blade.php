@@ -273,12 +273,13 @@
         </a>
     </li> -->
 
-    <!-- <li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.clone.index') }}" href="{{ route('medical_programmer.clone.index') }}">
         <span data-feather="chevrons-right"></span>
         Clonar
         </a>
-    </li> -->
+    </li>
+    
     </ul>
     @endcanany
 

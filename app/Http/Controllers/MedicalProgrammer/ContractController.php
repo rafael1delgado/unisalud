@@ -24,7 +24,7 @@ class ContractController extends Controller
           $year = $request->get('year');
         }else{$year = Carbon::now()->format('Y');}
 
-        $contracts = Contract::where('year',$year)->get();
+        $contracts = Contract::where('year',$year)->paginate(50);
         return view('medical_programmer.contracts.index', compact('contracts', 'request'));
     }
 
@@ -76,8 +76,7 @@ class ContractController extends Controller
      */
     public function edit(Contract $contract)
     {
-      // $rrhh = Rrhh::All();
-      $users = User::all();
+      $users = User::where('id',$contract->user_id)->get();
       $services = Service::orderBy('service_name','ASC')->get();
       return view('medical_programmer.contracts.edit', compact('contract', 'users', 'services'));
     }

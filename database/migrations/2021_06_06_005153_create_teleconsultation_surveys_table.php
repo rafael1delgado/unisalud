@@ -17,6 +17,7 @@ class CreateTeleconsultationSurveysTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->boolean('computer_or_similar')->nullable();
+            $table->boolean('internet')->nullable();
             $table->boolean('audio')->nullable();
             $table->boolean('webcam')->nullable();
             $table->boolean('microphone')->nullable();
@@ -26,7 +27,7 @@ class CreateTeleconsultationSurveysTable extends Migration
             $table->boolean('hearing_or_visual_impairment')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
-            
+
             $table->timestamps();
             $table->softDeletes();
         });

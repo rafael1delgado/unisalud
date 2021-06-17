@@ -53,7 +53,7 @@
             <li><strong>Observación</strong>: {{ $fqRequest->observation_request }}</li>
 
             <li><strong>Lugar</strong>: {{ $fqRequest->place }}</li>
-            <li><strong>Valor a pagar</strong>: {{ $fqRequest->value }}</li>
+            <li><strong>Valor a pagar</strong>: ${{ number_format($fqRequest->value, 0, ',','.') }}</li>
         </ul>
     @endif
 
