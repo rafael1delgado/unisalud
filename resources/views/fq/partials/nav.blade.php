@@ -64,15 +64,13 @@
       @endcan
       @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
         @if(App\Models\Surveys\TeleconsultationSurvey::getAnswerSurvey() > 0)
-          <a class="nav-link {{ active('surveys.teleconsultation.my_survey') }}" href="{{ route('surveys.teleconsultation.my_survey') }}">
-              <i class="fas fa-laptop"></i> Habilitantes Teleconsulta
-                <span class="badge bg-secondary"><i class="fas fa-check"></i></span>
-          </a>
+            <a class="nav-link {{ active('surveys.teleconsultation.own_index') }}" href="{{ route('surveys.teleconsultation.own_index') }}">
+                <i class="fas fa-laptop"></i> Habilitantes Teleconsulta <i class="fas fa-check-square" style="color: green;"></i>
+            </a>
         @else
-          <a class="nav-link {{ active('surveys.teleconsultation.create') }}" href="{{ route('surveys.teleconsultation.create') }}">
-              <i class="fas fa-laptop"></i> Habilitantes Teleconsulta
-                <span class="badge bg-warning text-dark"><i class="fas fa-clock"></i></span>
-          </a>
+            <a class="nav-link {{ active('surveys.teleconsultation.create') }}" href="{{ route('surveys.teleconsultation.create') }}">
+                <i class="fas fa-laptop"></i> Habilitantes Teleconsulta <i class="fas fa-clock"></i>
+            </a>
         @endif
       @endif
     </li>

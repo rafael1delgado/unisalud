@@ -16,8 +16,17 @@ class TeleconsultationSurveyController extends Controller
      */
     public function index()
     {
-        $teleconsultationSurveys = TeleconsultationSurvey::paginate(10);
-        // dd($teleconsultationSurvey);
+        $teleconsultationSurveys = TeleconsultationSurvey::latest()
+        ->paginate(10);
+        return view('surveys.teleconsultation_survey.index', compact('teleconsultationSurveys'));
+    }
+
+    public function own_index()
+    {
+        $teleconsultationSurveys = TeleconsultationSurvey::where('user_id', Auth::user()->id)
+          ->latest()
+          ->paginate(10);
+
         return view('surveys.teleconsultation_survey.index', compact('teleconsultationSurveys'));
     }
 
@@ -51,7 +60,7 @@ class TeleconsultationSurveyController extends Controller
 
         $teleconsultationSurvey->save();
 
-        return view('fq.home');
+        return redirect()->route('surveys.teleconsultation.own_index');
     }
 
     /**

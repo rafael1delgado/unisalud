@@ -17,15 +17,15 @@
                 <h6><i class="fas fa-user"></i> Datos de Contacto</h6>
                 <br>
                 <div class="table-responsive">
-                    <table class="table table-sm table-striped table-hover table-bordered">
+                    <table class="table table-sm table-hover table-bordered">
                         <thead class="table-info text-center">
                             <tr>
                               <th scope="col" style="width: 5%">Identificación</th>
                               <th scope="col" style="width: 20%">Nombre Completo</th>
                               <th scope="col" style="width: 20%">Dirección</th>
-                                <th scope="col">Comuna</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Teléfono</th>
+                              <th scope="col">Comuna</th>
+                              <th scope="col">Correo</th>
+                              <th scope="col">Teléfono</th>
                             </tr>
                         </thead>
                           {{-- @foreach($contactUsers as $contactUser) --}}
@@ -153,7 +153,7 @@
         </form>
         <br>
         @if($user)
-            <h6><i class="fas fa-user"></i> Datos de Contacto</h6>
+            <h6><i class="fas fa-user"></i> Datos de Paciente</h6>
             <br>
             <div class="table-responsive">
                 <table class="table table-sm table-hover">
@@ -172,43 +172,6 @@
                                 @endforeach
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">Dirección</th>
-                            <td>
-                              @foreach($user->addresses as $address)
-                                {{ $address->text }} {{ $address->line }}<br>
-                              @endforeach
-                            </td>
-                            <th scope="row">Departamento</th>
-                            <td>
-                              @foreach($user->addresses as $address)
-                                {{ $address->apartment }}<br>
-                              @endforeach
-                            </td>
-                            <td>
-                              @foreach($user->addresses as $address)
-                                {{ $address->suburb }}<br>
-                              @endforeach
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Comuna</th>
-                            <td colspan="4">
-                              @foreach($user->addresses as $address)
-                                {{ $address->city }}<br>
-                              @endforeach
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Teléfono</th>
-                            <td colspan="4"></td>
-                        </tr>
-                      @foreach($user->contactPoints->where('system', 'email') as $contactPoint)
-                        <tr>
-                            <th scope="row">Correo</th>
-                            <td>{{ $contactPoint->value }}</td>
-                        </tr>
-                      @endforeach
                     </tbody>
                 </table>
                 <a href="{{ route('fq.contact_user.storeAddPatient',
