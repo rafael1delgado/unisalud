@@ -126,7 +126,7 @@ class PatientController extends Controller
                 }
             }
 
-            if ($request->has('organization_id')) {
+            if ($request->has('organization_id') && $request->organization_id[$key] != null ) {
                 foreach ($request->organization_id as $key => $organization_id) {
                     $newPractitioner = new Practitioner();
                     $newPractitioner->active = 1;
