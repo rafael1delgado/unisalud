@@ -167,7 +167,13 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <div class="border-bottom mt-3 mb-3"></div>
+
+   @livewire('user.user-practitioners', compact('organizations', 'specialties'))
+
+    <div class="border-bottom mt-3 mb-3"></div>
+
+    <button type="submit" class="btn btn-primary mb-3">Guardar</button>
 
 
 </form>

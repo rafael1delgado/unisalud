@@ -190,6 +190,11 @@
             </div>
         </div>
 
+        <div class="border-bottom mt-3 mb-3"></div>
+
+        @livewire('user.user-practitioners', compact('organizations', 'specialties', 'patient'))
+
+        <div class="border-bottom mt-3 mb-3"></div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
 
