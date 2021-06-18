@@ -12,7 +12,7 @@
                         <label for="for_organization_id">Organización</label>
                         <select name="organization_id[]" class="form-control"
                                 wire:model='practitioners.{{$value}}.organization_id'
-                                required>
+                                >
                             <option value=""></option>
                             @foreach($organizations as $organization)
                                 <option value="{{ $organization->id }}">{{ $organization->alias }}</option>
@@ -24,7 +24,7 @@
                         <label for="for_specialty_id">Especialidad</label>
                         <select name="specialty_id[]" class="form-control"
                                 wire:model='practitioners.{{$value}}.specialty_id'
-                                required>
+                                >
 
                             <option value=""></option>
                             @foreach($specialties as $specialty)
