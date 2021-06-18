@@ -50,7 +50,7 @@
                                         <td>{{($user) ? $user->officialFullAddress : ''}}</td>
                                         <td>{{($user) ? $user->officialPhone : ''}}</td>
                                         <td>{{($user && $user->officialEmail) ? $user->officialEmail : ''}}</td>
-                                        <td><button class="btn-primary btn-sm" wire:click="selectUser({{$user->id}})"> <i class="fas fa-check"></i> </button></td>
+                                        <td><button type="button" class="btn-primary btn-sm" wire:click="selectUser({{$user->id}})"> <i class="fas fa-check"></i> </button></td>
                                     </tr>
                                 @endforeach
                             @endif

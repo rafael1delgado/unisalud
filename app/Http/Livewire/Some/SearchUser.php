@@ -25,6 +25,7 @@ class SearchUser extends Component
     public function selectUser($userId)
     {
          $this->emit('userSelected', $userId);
+//         $this->dispatchBrowserEvent('userSelected');
     }
 
     public function render()
