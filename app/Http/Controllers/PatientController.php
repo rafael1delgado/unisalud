@@ -11,11 +11,15 @@ use App\Models\Country;
 use App\Models\Congregation;
 use App\Models\HumanName;
 use App\Models\Identifier;
+use App\Models\MedicalProgrammer\Specialty;
+use App\Models\Organization;
+use App\Models\Practitioner;
 use App\Models\Region;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +33,7 @@ class PatientController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -43,7 +47,9 @@ class PatientController extends Controller
         $regions = Region::all();
         $congregations = Congregation::all();
         $identifierTypes = CodConIdentifierType::all();
-        return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations'));
+        $organizations = Organization::all();
+        $specialties = Specialty::all();
+        return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations', 'organizations', 'specialties'));
     }
 
 
@@ -120,6 +126,17 @@ class PatientController extends Controller
                 }
             }
 
+            if ($request->has('organization_id')) {
+                foreach ($request->organization_id as $key => $organization_id) {
+                    $newPractitioner = new Practitioner();
+                    $newPractitioner->active = 1;
+                    $newPractitioner->user_id = $newPatient->id;
+                    $newPractitioner->organization_id = $request->organization_id[$key];
+                    $newPractitioner->specialty_id = $request->specialty_id[$key];
+                    $newPractitioner->save();
+                }
+            }
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -191,7 +208,9 @@ class PatientController extends Controller
         $regions = Region::all();
         $congregations = Congregation::all();
         $identifierTypes = CodConIdentifierType::all();
-        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations'));
+        $organizations = Organization::all();
+        $specialties = Specialty::all();
+        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'specialties'));
     }
 
     /**
@@ -328,6 +347,36 @@ class PatientController extends Controller
                     if (!in_array($storedContactId, $request->contact_point_id)) {
                         $contactPoint = ContactPoint::find($storedContactId);
                         $contactPoint->delete();
+                    }
+                }
+            }
+
+            //PRACTITIONER
+            $storedPractitionerIds = $patient->practitioners->pluck('id')->toArray();
+            if ($request->has('organization_id')) {
+                //forearch para actualizar/agregar practitioners
+                foreach ($request->organization_id as $key => $organization_id) {
+                    if ($request->practitioner_id[$key] == null) {
+                        $newPractitioner = new Practitioner();
+                        $newPractitioner->active = 1;
+                        $newPractitioner->user_id = $patient->id;
+                        $newPractitioner->organization_id = $request->organization_id[$key];
+                        $newPractitioner->specialty_id = $request->specialty_id[$key];
+                        $newPractitioner->save();
+                    } elseif (in_array($request->practioner_id[$key], $storedPractitionerIds)) {
+                        $practitioner = Practitioner::find($request->practitioner_id[$key]);
+                        $practitioner->active = 1;
+                        $practitioner->user_id = $patient->id;
+                        $practitioner->organization_id = $request->organization_id[$key];
+                        $practitioner->specialty_id = $request->specialty_id[$key];
+                        $practitioner->save();
+                    }
+                }
+                //foreach para eliminar practitioners
+                foreach ($storedPractitionerIds as $key => $storedPractitionerId) {
+                    if (!in_array($storedPractitionerId, $request->practitioner_id)) {
+                        $practitioner = Practitioner::find($storedPractitionerId);
+                        $practitioner->delete();
                     }
                 }
             }
