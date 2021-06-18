@@ -301,4 +301,13 @@
 
     <hr class="mt-3">
 
+{{--    @livewireScripts--}}
+
+    <script>
+        Livewire.on('userSelected', () => {
+            $("#searchUserModal").modal('hide');
+        })
+    </script>
 </div>
+
+

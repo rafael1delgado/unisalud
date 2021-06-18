@@ -30,10 +30,6 @@ class AsignAppointment extends Component
 
     protected $listeners = ['userSelected' => 'setUser',
     ];
-//    public function mount()
-//    {
-//
-//    }
 
     public function searchUser()
     {
