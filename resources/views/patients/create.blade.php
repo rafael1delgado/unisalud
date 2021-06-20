@@ -95,13 +95,22 @@
 
                 <fieldset class="form-group col-md-4">
                     <label for="for_etnia">Pueblo originario</label>
-                    <select name="etnia_id[]" id="for_etnia_id" class="form-control selectpicker" data-live-search="true" multiple="" data-size="10" title="Seleccione..." multiple data-actions-box="true" required>
-                        <option value=""></option>
+                    <select name="etnia_id" id="for_etnia_id" class="form-control selectpicker" data-live-search="true" multiple="" data-size="10" title="Seleccione..." multiple data-actions-box="true" required>
                         @foreach($congregations as $congregation)
                         <option value="{{ $congregation->id }}">{{ $congregation->name}}</option>
                         @endforeach
                     </select>
+                </fieldset>
+             
+                <div id="otro_etnia">
+                <fieldset class="form-group col-md-16">
+                    <label for="for_etnia">Otro Pueblo Originario</label>
+                    <input type="text" class="form-control" name="etnia" id="for_etnia" required>
+                </fieldset>
+                </div>
+            </div>
 
+                <div class="form-row">
                 <fieldset class="form-group col-md-4">
                     <label for="for_cod_con_marital_id">Estado Civil</label>
                     <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
@@ -190,6 +199,23 @@
             var str = $("#for_run").val();
             $('#for_dv').val($.rut.dv(str));
         });
+        $('#otro_etnia').hide();
+        jQuery('select[name=etnia_id]').change(function(){
+        var fieldsetName = $(this).val();
+        switch(this.value){
+            case "10":
+             //   $('#for_other_specialty').attr("disabled", false);
+             $('#otro_etnia').show();
+                break;
+
+            default:
+            $('#otro_etnia').show();
+                $('##otro_etnia').attr("disabled", true);
+                document.getElementById('#otro_etnia').value = '';
+                break;
+        }
+    });
+
     });
 </script>
 <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
