@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\HumanName;
 use App\Models\User;
 
 class UserController extends Controller
@@ -34,11 +35,31 @@ class UserController extends Controller
         $user->fill($request->all());
 
         $user->syncPermissions( is_array($request->input('permissions')) ? $request->input('permissions') : array() );
-        
+
         $user->save();
 
         session()->flash('success', 'El usuario '.$user->name.' ha sido actualizado.');
 
         return redirect()->back();
+    }
+
+    public function searchByName(Request $request){
+      $term = $request->get('term');
+
+      $querys = HumanName::where('text','LIKE','%'.$term.'%')
+                         ->orwhere('fathers_family','LIKE','%'.$term.'%')
+                         ->orwhere('mothers_family','LIKE','%'.$term.'%')
+                         ->get();
+
+      $data = [];
+
+      foreach($querys as $query){
+         $data[] = [
+           'label' => $query->text . " " . $query->fathers_family . " " . $query->mothers_family,
+           'id' => $query->user_id
+        ];
+      }
+
+      return $data;
     }
 }
