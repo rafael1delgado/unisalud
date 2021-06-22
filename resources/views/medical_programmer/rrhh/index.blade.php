@@ -62,7 +62,7 @@
     </tbody>
 </table>
 
-{{ $rrhh->links() }}
+{{ $rrhh->links('pagination::bootstrap-4') }}
 
 @endsection
 

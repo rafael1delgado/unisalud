@@ -36,9 +36,9 @@ class ContractController extends Controller
     public function create()
     {
       // $rrhh = Rrhh::orderBy('name','ASC')->get();
-      $users = User::all();
+      // $users = User::all();
       $services = Service::orderBy('service_name','ASC')->get();
-      return view('medical_programmer.contracts.create', compact('users','services'));
+      return view('medical_programmer.contracts.create', compact('services'));
     }
 
     /**
