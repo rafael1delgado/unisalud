@@ -130,14 +130,17 @@ class PatientController extends Controller
                 }
             }
             //&& $request->organization_id[$key] != null
-            if ($request->has('organization_id')) {
+            if ($request->has('organization_id') ) {
                 foreach ($request->organization_id as $key => $organization_id) {
-                    $newPractitioner = new Practitioner();
-                    $newPractitioner->active = 1;
-                    $newPractitioner->user_id = $newPatient->id;
-                    $newPractitioner->organization_id = $request->organization_id[$key];
-                    $newPractitioner->specialty_id = $request->specialty_id[$key];
-                    $newPractitioner->save();
+
+                    if ($organization_id != null) {
+                        $newPractitioner = new Practitioner();
+                        $newPractitioner->active = 1;
+                        $newPractitioner->user_id = $newPatient->id;
+                        $newPractitioner->organization_id = $request->organization_id[$key];
+                        $newPractitioner->specialty_id = $request->specialty_id[$key];
+                        $newPractitioner->save();
+                    }
                 }
             }
 
