@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MedicalProgrammer\Contract;
 use App\Models\MedicalProgrammer\TheoreticalProgramming;
+use App\Models\User;
 use Carbon\Carbon;
 
 class CloneController extends Controller
@@ -17,6 +18,7 @@ class CloneController extends Controller
      */
     public function index()
     {
+        // $rrhhs = User::all();
         return view('medical_programmer.management.clone');
     }
 
@@ -38,8 +40,21 @@ class CloneController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->source_year == $request->destination_year || $request->source_year > $request->destination_year) {
+          session()->flash('warning', 'El año de origen debe ser inferior al año de destino.');
+          return redirect()->back();
+        }
+
         // contratos
-        $contracts = Contract::where('year',$request->source_year)->get();
+        $contracts = Contract::where('year',$request->source_year)
+                             ->where('user_id',$request->user_id)
+                             ->get();
+
+        if ($contracts->count() == 0) {
+          session()->flash('warning', 'No exista contratos que clonar.');
+          return redirect()->back();
+        }
+
         foreach ($contracts as $key => $contract) {
           $new_contract = new Contract();
           $new_contract->user_id = $contract->user_id;
@@ -63,8 +78,8 @@ class CloneController extends Controller
           $new_contract->save();
         }
 
-        set_time_limit(3600);
-        ini_set('memory_limit', '1024M');
+        set_time_limit(7200);
+        ini_set('memory_limit', '2048M');
 
         $date = Carbon::parse($request->source_year.'-12-31');
         for ($i=1; $i <= 7 ; $i++) {
@@ -72,10 +87,11 @@ class CloneController extends Controller
           $date->subDays(7);
           $weekStartDate = $date->startOfWeek()->format('Y-m-d H:i');
           $weekEndDate = $date->endOfWeek()->format('Y-m-d H:i');
-          print_r("<br> ********************" . $weekStartDate . " " . $weekEndDate . "<br><br>");
+          // print_r("<br> ********************" . $weekStartDate . " " . $weekEndDate . "<br><br>");
 
           $theoreticalProgrammings = TheoreticalProgramming::whereBetween('start_date',[$weekStartDate,$weekEndDate])
                                                            ->whereHas('contract')
+                                                           ->where('user_id',$request->user_id)
                                                            ->orderBy('id','ASC')->get();
           foreach ($theoreticalProgrammings as $key => $theoreticalProgramming) {
 
@@ -91,7 +107,7 @@ class CloneController extends Controller
             $new_end_date = Carbon::parse($theoreticalProgramming->end_date)->addWeeks(7);
             // print_r($theoreticalProgramming->id ." " .$new_start_date . " " . $new_end_date ."<br>");
             while ($new_end_date->format('Y') != ($request->destination_year + 1)) {
-              print_r($theoreticalProgramming->id ." " .$new_start_date . " " . $new_end_date ."<br>");
+              // print_r($theoreticalProgramming->id ." " .$new_start_date . " " . $new_end_date ."<br>");
               $NewTheoreticalProgramming = new TheoreticalProgramming();
               $NewTheoreticalProgramming->contract_id = $new_contract->id;
               $NewTheoreticalProgramming->user_id = $theoreticalProgramming->user_id;
@@ -111,7 +127,7 @@ class CloneController extends Controller
           }
         }
 
-        dd($weekStartDate);
+        // dd($weekStartDate);
 
         session()->flash('info', 'Se han clonado ' . $key . ' filas.');
         return redirect()->back();

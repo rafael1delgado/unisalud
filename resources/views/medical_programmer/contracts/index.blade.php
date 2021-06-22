@@ -67,7 +67,7 @@
     </tbody>
 </table>
 
-{{ $contracts->links() }}
+{{ $contracts->links('pagination::bootstrap-4') }}
 
 @endsection
 
