@@ -25,6 +25,7 @@ class CongregationSeeder extends Seeder
        /** 08 */ Congregation::Create(['id' => 8,'name'=>'Kawésqar']);
        /** 09 */ Congregation::Create(['id' => 9,'name'=>'Yagán (Yámana)']);
        /** 10 */ Congregation::Create(['id' => 10,'name'=>'Otro (Especificar)']);
+       /** 96 */ Congregation::Create(['id' => 96,'name'=>'Ninguno']);
    
     }
 }
