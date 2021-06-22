@@ -23,13 +23,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
-        // 'dv',
         'sex',
         'gender',
         'birthday',
         'deceased_datetime',
         'cod_con_marital_id',
-        'congregation_id',
         'nationality_id',
         'claveunica',
         'fhir_id',
