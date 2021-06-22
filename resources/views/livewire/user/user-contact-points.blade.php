@@ -11,7 +11,7 @@
                 <fieldset class="form-group col-md-4">
                     <label for="for_contact_system">Tipo Contacto</label>
                     <select name="contact_system[]" class="form-control" wire:model='contactPoints.{{$value}}.system'
-                        required>
+                        >
                         <option value="phone">Teléfono</option>
                         <option value="email">Email</option>
                         <option value="fax">Fax</option>
@@ -25,7 +25,7 @@
                     <label for="for_contact_use">Uso</label>
                     <select name="contact_use[]" class="form-control"
                     wire:model='contactPoints.{{$value}}.use'
-                        required>
+                        >
                         <option value="mobile">Móvil</option>
                         <option value="home">Casa</option>
                         <option value="work">Trabajo</option>
@@ -36,8 +36,8 @@
 
                 <fieldset class="form-group col-md-4">
                     <label for="for_contact_value">Contacto</label>
-                    <input type="text" class="form-control" name="contact_value[]" required
-                        wire:model='contactPoints.{{$value}}.value' required 
+                    <input type="text" class="form-control" name="contact_value[]"
+                        wire:model='contactPoints.{{$value}}.value'
                         {{-- value="9{{ substr(str_shuffle('0123456789'), 0, 8) }}" --}}
                         >
                 </fieldset>
