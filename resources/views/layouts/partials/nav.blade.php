@@ -33,12 +33,14 @@
         Ver todos<span class="sr-only">(current)</span>
         </a>
     </li>
+    @can('Administrator')
     <li class="nav-item">
         <a class="nav-link {{ active('patient.create') }}" href="{{ route('patient.create') }}">
         <span data-feather="plus-circle"></span>
         Ingresar nuevo
         </a>
     </li>
+    @endcan
     {{-- @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
         <li class="nav-item">
             <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.create') }}">
@@ -61,6 +63,7 @@
 {{--@endcan--}}
 
 
+@can('Administrador')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>SOME</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
@@ -87,8 +90,9 @@
         <a class="nav-link" href="{{route('some.reallocationPending') }}"><span data-feather="list"></span>Pendiente de reasignación</a>
     </li>
 </ul>
+@endcan
 
-{{--@can('Administrator')--}}
+@can('Administrator')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Administrador</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
@@ -112,7 +116,7 @@
 
 
 
-{{--@endcan--}}
+@endcan
 
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Programador médico</span>
@@ -279,7 +283,7 @@
         Clonar
         </a>
     </li>
-    
+
     </ul>
     @endcanany
 
