@@ -13,8 +13,8 @@ class FqRequest extends Model
 
     protected $fillable = [
         'name', 'specialties', 'other_specialty', 'prescription_file',
-        'patient_id', 'observation_patient', 'date_confirm', 'attention', 'value',
-        'link', 'place', 'observation_request'
+        'patient_id', 'observation_patient', 'date_confirm', 'attention',
+        'practitioner_id', 'value', 'link', 'place', 'observation_request'
     ];
 
     public function contactUser() {
@@ -31,6 +31,11 @@ class FqRequest extends Model
 
     public function fq_medicines() {
         return $this->HasMany('\App\Models\Fq\FqMedicine', 'request_id');
+    }
+
+    public function practitioner()
+    {
+        return $this->belongsTo('\App\Models\Practitioner', 'practitioner_id');
     }
 
     public function getNameValueAttribute(){

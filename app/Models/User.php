@@ -340,12 +340,14 @@ class User extends Authenticatable
         return $array;
     }
 
-    // public function usersPatients() {
-    //     return $this->hasMany(Fq\UserPatient::class, 'contact_user_id');
-    // }
 
     public function usersPatients()
     {
         return $this->hasMany(Fq\UserPatient::class, 'contact_user_id');
+    }
+
+    public function teleconsultationSurveys()
+    {
+        return $this->hasMany(Surveys\TeleconsultationSurvey::class, 'user_id');
     }
 }

@@ -16,13 +16,13 @@
         @method('POST')
         <div class="row active">
             <div class="col">
-              1-. ¿Cuenta con computador o dispositivo similar con conexión a internet?
+              1-. ¿Cuenta con computador o dispositivo similar?
             </div>
             <div class="col">
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="computer_or_similar"
                   id="for_computer_or_similar" value="1">
-                <label class="form-check-label" for="exampleRadios1">
+                <label class="form-check-label" for="for_computer_or_similar">
                   Si
                 </label>
               </div>
@@ -31,7 +31,7 @@
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="computer_or_similar"
                 id="for_computer_or_similar" value="0">
-                <label class="form-check-label" for="exampleRadios2">
+                <label class="form-check-label" for="for_computer_or_similar">
                   No
                 </label>
               </div>
@@ -42,7 +42,33 @@
 
         <div class="row active">
             <div class="col">
-              2-. ¿Cuenta con sistema de audio? (Parlantes o Audifonos).
+              2-. ¿Cuenta con conexión a internet?
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="internet"
+                  id="for_internet" value="1">
+                <label class="form-check-label" for="for_internet">
+                  Si
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="internet"
+                id="for_internet" value="0">
+                <label class="form-check-label" for="for_internet">
+                  No
+                </label>
+              </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row active">
+            <div class="col">
+              3-. ¿Cuenta con sistema de audio? (Parlantes o Audifonos).
             </div>
             <div class="col">
               <div class="form-check">
@@ -68,7 +94,7 @@
 
         <div class="row active">
             <div class="col">
-              3-. ¿Cuenta con cámara web?
+              4-. ¿Cuenta con cámara web?
             </div>
             <div class="col">
               <div class="form-check">
@@ -94,7 +120,7 @@
 
         <div class="row active">
             <div class="col">
-              4-. ¿Cuenta con micrófono?
+              5-. ¿Cuenta con micrófono?
             </div>
             <div class="col">
               <div class="form-check">
@@ -120,7 +146,7 @@
 
         <div class="row active">
             <div class="col">
-              5-. ¿Como definiría su habilidad con el internet: ?
+              6-. ¿Como definiría su habilidad con el internet: ?
             </div>
             <div class="col">
               <fieldset class="form-group">
@@ -141,7 +167,7 @@
 
         <div class="row active">
             <div class="col">
-              6-. ¿Cuenta con un lugar con buena luz, espacio físico y privacidad para
+              7-. ¿Cuenta con un lugar con buena luz, espacio físico y privacidad para
               poder desarrollar una sesión de telemedicina ?
             </div>
             <div class="col">
@@ -168,7 +194,7 @@
 
         <div class="row active">
             <div class="col">
-              7-. ¿Ha tenido experiencia previa con atención con modalidad remota?
+              8-. ¿Ha tenido experiencia previa con atención con modalidad remota?
             </div>
             <div class="col">
               <div class="form-check">
@@ -194,7 +220,7 @@
 
         <div class="row active">
             <div class="col">
-              8-. ¿Presenta alguna dificultad visual o auditiva ?
+              9-. ¿Presenta alguna dificultad visual o auditiva ?
             </div>
             <div class="col">
               <div class="form-check">
