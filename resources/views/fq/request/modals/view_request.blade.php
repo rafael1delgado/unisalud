@@ -181,39 +181,47 @@
                         </tbody>
                     </table>
                 </div>
-
         @endif
 
         @if($fqRequest->status == 'pending' && (Gate::check('Fq: answer request dispensing') ||
                                                 Gate::check('Fq: admin')))
-        <div class="card">
-            <div class="card-body">
-                @if(App\Models\Surveys\TeleconsultationSurvey
-                    ::getSurveyResults($fqRequest->contactUser->teleconsultationSurveys->last()) == 'green')
-                    <i class="fas fa-circle fa-lg" style="color: green;"></i>
-                    Usuario con habilitantes técnicas para realizar teleconsulta.
-                    (revisar <a href="{{ route('surveys.teleconsultation.show',
-                                            $fqRequest->contactUser->teleconsultationSurveys->last()) }}"
-                              target="_blank">aquí</a>)
-                @endif
-                @if(App\Models\Surveys\TeleconsultationSurvey
-                    ::getSurveyResults($fqRequest->contactUser->teleconsultationSurveys->last()) == 'orange')
-                    <i class="fas fa-circle fa-lg" style="color: orange;"></i>
-                    Usuario con observaciones en habilitantes técnicas para realizar teleconsulta.
-                    (revisar <a href="{{ route('surveys.teleconsultation.show',
-                                            $fqRequest->contactUser->teleconsultationSurveys->last()) }}"
-                              target="_blank">aquí</a>)
-                @endif
-                @if(App\Models\Surveys\TeleconsultationSurvey::
-                    getSurveyResults($fqRequest->contactUser->teleconsultationSurveys->last()) == 'red')
-                    <i class="fas fa-circle fa-lg" style="color: red;"></i>
-                    Usuario sin habilitantes técnicas para realizar teleconsulta.
-                    (revisar <a href="{{ route('surveys.teleconsultation.show',
-                                            $fqRequest->contactUser->teleconsultationSurveys->last()) }}"
-                              target="_blank">aquí</a>)
-                @endif
-            </div>
-        </div>
+            @if($fqRequest->contactUser->teleconsultationSurveys->count() > 0)
+                <div class="card">
+                    <div class="card-body">
+                        @if(App\Models\Surveys\TeleconsultationSurvey
+                            ::getSurveyResults($fqRequest->contactUser->teleconsultationSurveys->last()) == 'green')
+                            <i class="fas fa-circle fa-lg" style="color: green;"></i>
+                            Usuario con habilitantes técnicas para realizar teleconsulta.
+                            (revisar <a href="{{ route('surveys.teleconsultation.show',
+                                                  $fqRequest->contactUser->teleconsultationSurveys->last()) }}"
+                                                  target="_blank">aquí</a>)
+                        @endif
+                        @if(App\Models\Surveys\TeleconsultationSurvey
+                            ::getSurveyResults($fqRequest->contactUser->teleconsultationSurveys->last()) == 'orange')
+                            <i class="fas fa-circle fa-lg" style="color: orange;"></i>
+                            Usuario con observaciones en habilitantes técnicas para realizar teleconsulta.
+                            (revisar <a href="{{ route('surveys.teleconsultation.show',
+                                                  $fqRequest->contactUser->teleconsultationSurveys->last()) }}"
+                                                  target="_blank">aquí</a>)
+                        @endif
+                        @if(App\Models\Surveys\TeleconsultationSurvey
+                            ::getSurveyResults($fqRequest->contactUser->teleconsultationSurveys->last()) == 'red')
+                            <i class="fas fa-circle fa-lg" style="color: red;"></i>
+                            Usuario sin habilitantes técnicas para realizar teleconsulta.
+                            (revisar <a href="{{ route('surveys.teleconsultation.show',
+                                                  $fqRequest->contactUser->teleconsultationSurveys->last()) }}"
+                                                  target="_blank">aquí</a>)
+                        @endif
+                    </div>
+                </div>
+            @else
+                <div class="card">
+                    <div class="card-body">
+                        <i class="fas fa-clock"></i>
+                        Usuario sin encuesta de habilitantes técnicos registrada.
+                    </div>
+                </div>
+            @endif
 
         <br>
 
@@ -242,8 +250,8 @@
                         <fieldset class="form-group col-sm-3">
                             <label for="for_practitioner_id">Médico</label>
                             <select name="practitioner_id" id="for_practitioner_id" class="form-control"
-                              @if($fqRequest->name != 'specialty hours') disabled @endif>
-                                <option value="0">Seleccione...</option>
+                              @if($fqRequest->name != 'specialty hours') disabled @else required @endif>
+                                <option value="">Seleccione...</option>
                                 @foreach($practitioners as $practitioner)
                                 <option value="{{ $practitioner->id }}">{{ $practitioner->user->officialFullName }}</option>
                                 @endforeach
@@ -293,12 +301,16 @@
                     <table class="table table-sm table-bordered table-nostriped">
                         <tbody>
                             <tr>
-                              <td class="table-active">Día y Hora</td>
+                              <th class="table-active" width="20%">Día / Hora</th>
                               <td>{{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</td>
                             </tr>
                             <tr>
-                              <td class="table-active">Nombre Medico</td>
+                              <th class="table-active">Nombre Profesional</th>
                               <td>{{ $fqRequest->practitioner->user->officialFullName }}</td>
+                            </tr>
+                            <tr>
+                              <th class="table-active">Tipo de Atención</th>
+                              <td>{{ $fqRequest->AttentionValue }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -308,36 +320,42 @@
                     <table class="table table-sm table-bordered table-nostriped">
                         <tbody>
                             <tr>
-                              <td class="table-active">Paciente</td>
+                              <th class="table-active" width="20%">Paciente</th>
                               <td>{{ $fqRequest->patient->officialFullName }}</td>
                             </tr>
                             <tr>
-                              <td class="table-active">Rut</td>
+                              <th class="table-active">Rut</th>
                               <td>{{ $fqRequest->patient->IdentifierRun->value }}-{{ $fqRequest->patient->IdentifierRun->dv }}</td>
                             </tr>
                             <tr>
+                                <th class="table-active">Nº Ficha</th>
+                                <td></td>
+                            </tr>
+                            <tr>
                               @if($fqRequest->name == 'specialty hours' && $fqRequest->specialties == 'other')
-                              <td class="table-active">Especialidad</td>
+                              <th class="table-active">Especialidad</th>
                               <td>{{ $fqRequest->SpecialtiesValue }} / {{ $fqRequest->OtherSpecialtiesValue }}</td>
                               @else
-                              <td class="table-active">Especialidad</td>
+                              <th class="table-active">Especialidad</th>
                               <td>{{ $fqRequest->SpecialtiesValue }}</td>
                               @endif
                             </tr>
                             <tr>
-                              <td class="table-active">Observación</td>
+                              <th class="table-active">Observación</th>
                               <td>{{ $fqRequest->observation_request }}</td>
                             </tr>
                             <tr>
-                              <td class="table-active">Lugar</td>
+                              @if($fqRequest->attention == 'face-to-face')
+                              <th class="table-active">Lugar</th>
                               <td>{{ $fqRequest->place }}</td>
+                              @endif
+                              @if($fqRequest->attention == 'teleconsultation')
+                              <th class="table-active">Link</th>
+                              <td><a href="{{ $fqRequest->link }}" target="_blank">{{ $fqRequest->link }}</a></td>
+                              @endif
                             </tr>
                             <tr>
-                              <td class="table-active">Fecha de Respuesta</td>
-                              <td>{{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</td>
-                            </tr>
-                            <tr>
-                              <td class="table-active">Valor a pagar</td>
+                              <th class="table-active">Valor a pagar</th>
                               <td>${{ number_format($fqRequest->value, 0, ',','.') }}</td>
                             </tr>
                         </tbody>
@@ -348,11 +366,11 @@
                     <table class="table table-sm table-bordered table-nostriped">
                         <tbody>
                             <tr>
-                              <td class="table-active">Fecha de Respuesta</td>
-                              <td>{{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</td>
+                              <th class="table-active" width="20%">Fecha de Respuesta</th>
+                              <td>{{ $fqRequest->date_confirm_record->format('d-m-Y H:i:s') }}</td>
                             </tr>
                             <tr>
-                              <td class="table-active">Funcionario</td>
+                              <th class="table-active">Funcionario</th>
                               <td>{{ $fqRequest->user->officialFullName }}</td>
                             </tr>
                         </tbody>
