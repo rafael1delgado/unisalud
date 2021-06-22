@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\CodConIdentifierType;
 use App\Models\CodConMarital;
 use App\Models\Commune;
+use App\Models\CongregationUser;
 use App\Models\ContactPoint;
 use App\Models\Country;
 use App\Models\Congregation;
@@ -75,6 +76,9 @@ class PatientController extends Controller
 
     public function savePatientData(Request $request)
     {
+//        dd($request);
+
+
         DB::beginTransaction();
         try {
             $newPatient = new User($request->all());
@@ -134,6 +138,20 @@ class PatientController extends Controller
                     $newPractitioner->organization_id = $request->organization_id[$key];
                     $newPractitioner->specialty_id = $request->specialty_id[$key];
                     $newPractitioner->save();
+                }
+            }
+
+            if ($request->has('congregation_id')) {
+                foreach ($request->congregation_id as $key => $congregation_id) {
+                    $newCongregationUser = new CongregationUser();
+                    $newCongregationUser->user_id = $newPatient->id;
+                    $newCongregationUser->congregation_id = $congregation_id;
+
+                    if ($congregation_id == 10) {
+                        $newCongregationUser->other = $request->congregation_other;
+                    }
+
+                    $newCongregationUser->save();
                 }
             }
 
