@@ -33,21 +33,21 @@
                 <h5 class="card-title">Datos Personales</h5>
                 <input type="hidden" name='human_name_use' value='official'>
                 <div class="form-row">
-                    <fieldset class="form-group col-2">
+                    <fieldset class="form-group col-md-6">
                         <label for="for_name">Nombres</label>
                         <input type="text" class="form-control" name="text"
                                id="for_name" required
                                value="{{ $patient->actualOfficialHumanName->text }}">
                     </fieldset>
 
-                    <fieldset class="form-group col-2">
+                    <fieldset class="form-group col-md-3">
                         <label for="for_fathers_family">Apellido Paterno</label>
                         <input type="text" class="form-control" name="fathers_family"
                                id="for_fathers_family" required
                                value="{{ $patient->actualOfficialHumanName->fathers_family }}">
                     </fieldset>
 
-                    <fieldset class="form-group col-2">
+                    <fieldset class="form-group col-md-3">
                         <label for="for_mothers_family">Apellido Materno</label>
                         <input type="text" class="form-control" name="mothers_family"
                                id="for_mothers_family" required
@@ -55,13 +55,13 @@
                     </fieldset>
                 </div>
                 <div class="form-row">
-                    <fieldset class="form-group col-2">
+                    <fieldset class="form-group col-md-4">
                         <label for="for_birthday">Fecha de nacimiento</label>
                         <input type="date" class="form-control" name="birthday"
                                id="for_birthday" value="{{ $patient->birthday }}">
                     </fieldset>
 
-                    <fieldset class="form-group col-2">
+                    <fieldset class="form-group col-md-4">
                         <label for="for_sex">Sexo</label>
                         <select name="sex" id="for_sex" class="form-control">
                             <option value=""></option>
@@ -72,7 +72,7 @@
                         </select>
                     </fieldset>
 
-                    <fieldset class="form-group col-2">
+                    <fieldset class="form-group col-md-4">
                         <label for="for_gender">Identidad de Genero</label>
                         <select name="gender" id="for_gender" class="form-control">
                             <option value=""></option>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="form-row">
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-4">
                     <label for="for_nationality_id">Nacionalidad</label>
                     <select name="nationality_id" id="for_nationality_id" class="form-control" required>
                         <option value=""></option>
@@ -104,17 +104,28 @@
                     </select>
                 </fieldset>
 
-                <fieldset class="form-group col-2">
+                <fieldset class="form-group col-md-4">
                     <label for="for_congregation">Pueblo originario</label>
-                    <select name="congregation_id" id="for_congregation_id" class="form-control">
-                        <option value=""></option>
+                    <select name="congregation_id" id="for_congregation_id" class="form-control selectpicker"
+                            data-live-search="true" multiple="" data-size="10" title="Seleccione..." multiple
+                            data-actions-box="true">
                         @foreach($congregations as $congregation)
                         <option value="{{ $congregation->id }}" {{$congregation->id === $patient->congregation_id ? 'selected' : ''}} >{{ $congregation->name}}</option>
                         @endforeach
                     </select>
                 </fieldset>
 
-                    <fieldset class="form-group col-2">
+                {{--                <div id="otro_etnia">--}}
+                    <fieldset class="form-group col-md-4">
+                        <label for="for_congregation_other">Otro Pueblo Originario</label>
+                        <input type="text" class="form-control" name="congregation_other" id="for_congregation_other"
+                               disabled>
+                    </fieldset>
+                    {{--                </div>--}}
+                </div>
+
+                <div class="form-row">
+                    <fieldset class="form-group col-md-4">
                         <label for="for_cod_con_marital_id">Estado Civil</label>
                         <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
                             <option value=""></option>
@@ -142,7 +153,7 @@
                     {{--            </select>--}}
                     {{--        </fieldset>--}}
                 </div>
-            </div>
+            
         </div>
 
 
@@ -161,27 +172,25 @@
                 <h5 class="card-title">Previsión</h5>
 
                 <div class="form-row">
-                    <fieldset class="form-group col-2">
+                    <fieldset class="form-group col-md-2">
                         <label for="">Rut Previsión</label>
                         <input type="text" class="form-control" name="identifier"
                                id="for_identifier">
                     </fieldset>
 
-                    <fieldset class="form-group col-2">
+                    <fieldset class="form-group col-md-4">
                         <label for="">Vencimiento</label>
                         <input type="date" class="form-control" name="identifier"
                                id="for_identifier">
                     </fieldset>
-                </div>
 
-                <div class="form-row">
-                    <fieldset class="form-group col-2">
+                    <fieldset class="form-group col-md-3">
                         <label for="">Titular</label>
                         <input type="text" class="form-control" name="identifier"
                                id="for_identifier">
                     </fieldset>
 
-                    <fieldset class="form-group col-2">
+                    <fieldset class="form-group col-md-3">
                         <label for="">Previsión</label>
                         <input type="text" class="form-control" name="identifier"
                                id="for_identifier">
@@ -199,4 +208,50 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
 
     </form>
+@endsection
+@section('custom_js')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}">
+
+    <script src='{{asset("js/jquery.rut.chileno.js")}}'></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            //obtiene digito verificador
+            $('input[name=run]').keyup(function (e) {
+                var str = $("#for_run").val();
+                $('#for_dv').val($.rut.dv(str));
+            });
+
+            // $('#otro_etnia').hide();
+            $('#for_congregation_id').change(function () {
+                var fieldsetName = $(this).val();
+                // console.log(fieldsetName);
+
+                if (fieldsetName.includes("10")) {
+                    $('#for_congregation_other').attr("disabled", false);
+                    $('#for_congregation_other').attr("required", true);
+                } else {
+                    $('#for_congregation_other').val('');
+                    $('#for_congregation_other').attr("required", false);
+                    $('#for_congregation_other').attr("disabled", true);
+                }
+
+                // switch(this.value){
+                //     case "10":
+                //      //   $('#for_other_specialty').attr("disabled", false);
+                //      $('#otro_etnia').show();
+                //         break;
+                //
+                //     default:
+                //     $('#otro_etnia').show();
+                //         $('#otro_etnia').attr("disabled", true);
+                //         document.getElementById('#otro_etnia').value = '';
+                //         break;
+                // }
+            });
+
+        });
+    </script>
+    <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('js/defaults-es_CL.min.js') }}"></script>
+
 @endsection
