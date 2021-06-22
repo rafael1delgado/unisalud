@@ -115,6 +115,20 @@ class FqRequest extends Model
         }
     }
 
+    public function getAttentionValueAttribute(){
+        switch ($this->attention) {
+            case 'face-to-face':
+              return 'Presencial';
+              break;
+            case 'teleconsultation':
+              return 'Teleconsulta';
+              break;
+            default:
+              return '';
+              break;
+        }
+    }
+
     protected $hidden = [
         'created_at', 'updated_at'
     ];
