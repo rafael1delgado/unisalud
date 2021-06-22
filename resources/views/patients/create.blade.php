@@ -101,13 +101,13 @@
                         @endforeach
                     </select>
                 </fieldset>
-             
-                <div id="otro_etnia">
-                <fieldset class="form-group col-md-16">
+
+{{--                <div id="otro_etnia">--}}
+                <fieldset class="form-group col-md-4">
                     <label for="for_etnia">Otro Pueblo Originario</label>
-                    <input type="text" class="form-control" name="etnia" id="for_etnia" required>
+                    <input type="text" class="form-control" name="etnia" id="for_etnia" disabled >
                 </fieldset>
-                </div>
+{{--                </div>--}}
             </div>
 
                 <div class="form-row">
@@ -199,21 +199,30 @@
             var str = $("#for_run").val();
             $('#for_dv').val($.rut.dv(str));
         });
-        $('#otro_etnia').hide();
+
+        // $('#otro_etnia').hide();
         jQuery('select[name=etnia_id]').change(function(){
         var fieldsetName = $(this).val();
-        switch(this.value){
-            case "10":
-             //   $('#for_other_specialty').attr("disabled", false);
-             $('#otro_etnia').show();
-                break;
+        // console.log(fieldsetName);
 
-            default:
-            $('#otro_etnia').show();
-                $('##otro_etnia').attr("disabled", true);
-                document.getElementById('#otro_etnia').value = '';
-                break;
-        }
+            if (fieldsetName.includes("10")) {
+                $('#for_etnia').attr("disabled", false);
+            } else {
+                $('#for_etnia').attr("disabled", true);
+            }
+
+        // switch(this.value){
+        //     case "10":
+        //      //   $('#for_other_specialty').attr("disabled", false);
+        //      $('#otro_etnia').show();
+        //         break;
+        //
+        //     default:
+        //     $('#otro_etnia').show();
+        //         $('#otro_etnia').attr("disabled", true);
+        //         document.getElementById('#otro_etnia').value = '';
+        //         break;
+        // }
     });
 
     });
