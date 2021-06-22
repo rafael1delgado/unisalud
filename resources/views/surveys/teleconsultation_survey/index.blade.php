@@ -44,8 +44,15 @@
                     {{ $teleconsultationSurvey->created_at->format('d-m-Y H:i:s') }}<br>
                 </td>
                 <td>
-                    @if()
+                    {{-- dd(App\Models\Surveys\TeleconsultationSurvey::getSurveyResults($teleconsultationSurvey)) --}}
+                    @if(App\Models\Surveys\TeleconsultationSurvey::getSurveyResults($teleconsultationSurvey) == 'green')
                         <i class="fas fa-circle fa-lg" style="color: green;"></i>
+                    @endif
+                    @if(App\Models\Surveys\TeleconsultationSurvey::getSurveyResults($teleconsultationSurvey) == 'orange')
+                        <i class="fas fa-circle fa-lg" style="color: orange;"></i>
+                    @endif
+                    @if(App\Models\Surveys\TeleconsultationSurvey::getSurveyResults($teleconsultationSurvey) == 'red')
+                        <i class="fas fa-circle fa-lg" style="color: red;"></i>
                     @endif
                 </td>
                 <td>

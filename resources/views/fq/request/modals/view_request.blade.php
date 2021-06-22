@@ -184,8 +184,39 @@
 
         @endif
 
-        @if($fqRequest->status == 'pending' && (Gate::check('Fq: Answer request medicines') ||
+        @if($fqRequest->status == 'pending' && (Gate::check('Fq: answer request dispensing') ||
                                                 Gate::check('Fq: admin')))
+        <div class="card">
+            <div class="card-body">
+                @if(App\Models\Surveys\TeleconsultationSurvey
+                    ::getSurveyResults($fqRequest->contactUser->teleconsultationSurveys->last()) == 'green')
+                    <i class="fas fa-circle fa-lg" style="color: green;"></i>
+                    Usuario con habilitantes técnicas para realizar teleconsulta.
+                    (revisar <a href="{{ route('surveys.teleconsultation.show',
+                                            $fqRequest->contactUser->teleconsultationSurveys->last()) }}"
+                              target="_blank">aquí</a>)
+                @endif
+                @if(App\Models\Surveys\TeleconsultationSurvey
+                    ::getSurveyResults($fqRequest->contactUser->teleconsultationSurveys->last()) == 'orange')
+                    <i class="fas fa-circle fa-lg" style="color: orange;"></i>
+                    Usuario con observaciones en habilitantes técnicas para realizar teleconsulta.
+                    (revisar <a href="{{ route('surveys.teleconsultation.show',
+                                            $fqRequest->contactUser->teleconsultationSurveys->last()) }}"
+                              target="_blank">aquí</a>)
+                @endif
+                @if(App\Models\Surveys\TeleconsultationSurvey::
+                    getSurveyResults($fqRequest->contactUser->teleconsultationSurveys->last()) == 'red')
+                    <i class="fas fa-circle fa-lg" style="color: red;"></i>
+                    Usuario sin habilitantes técnicas para realizar teleconsulta.
+                    (revisar <a href="{{ route('surveys.teleconsultation.show',
+                                            $fqRequest->contactUser->teleconsultationSurveys->last()) }}"
+                              target="_blank">aquí</a>)
+                @endif
+            </div>
+        </div>
+
+        <br>
+
         <form method="POST" class="form-horizontal" action="{{ route('fq.request.update', $fqRequest) }}">
             @csrf
             @method('PUT')
@@ -213,8 +244,9 @@
                             <select name="practitioner_id" id="for_practitioner_id" class="form-control"
                               @if($fqRequest->name != 'specialty hours') disabled @endif>
                                 <option value="0">Seleccione...</option>
-                                <option value="1">Jose Fernandez</option>
-                                <option value="2">Francisco Rojas</option>
+                                @foreach($practitioners as $practitioner)
+                                <option value="{{ $practitioner->id }}">{{ $practitioner->user->officialFullName }}</option>
+                                @endforeach
                             </select>
                         </fieldset>
 
@@ -266,7 +298,7 @@
                             </tr>
                             <tr>
                               <td class="table-active">Nombre Medico</td>
-                              <td></td>
+                              <td>{{ $fqRequest->practitioner->user->officialFullName }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -330,8 +362,6 @@
         </div>
 
         @endif
-
-        {{$fqRequest->id}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

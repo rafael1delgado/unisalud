@@ -125,8 +125,8 @@ class PatientController extends Controller
                     $newContactPoint->save();
                 }
             }
-
-            if ($request->has('organization_id') && $request->organization_id[$key] != null ) {
+            //&& $request->organization_id[$key] != null
+            if ($request->has('organization_id')) {
                 foreach ($request->organization_id as $key => $organization_id) {
                     $newPractitioner = new Practitioner();
                     $newPractitioner->active = 1;

@@ -18,6 +18,7 @@
                 <th scope="col">Nombre de Contacto</th>
                 <th scope="col">Paciente</th>
                 <th scope="col">Fecha Ingreso Encuesta</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,9 @@
                 </td>
                 <td>
                     {{ $teleconsultationSurvey->created_at->format('d-m-Y H:i:s') }}<br>
+                </td>
+                <td>
+                    
                 </td>
             </tr>
         </tbody>
@@ -68,7 +72,28 @@
 
     <div class="row active">
         <div class="col-sm-6">
-          2-. ¿Cuenta con sistema de audio? (Parlantes o Audifonos).
+          2-. ¿Cuenta con conexión a internet?
+        </div>
+        @if($teleconsultationSurvey->internet == 1)
+        <div class="col-sm-4">
+          <div class="form-check">
+            Sí <i class="fas fa-check" style="color:green"></i>
+          </div>
+        </div>
+        @else
+        <div class="col-sm-4">
+          <div class="form-check">
+            No <i class="fas fa-times" style="color:red"></i>
+          </div>
+        </div>
+        @endif
+    </div>
+
+    <hr>
+
+    <div class="row active">
+        <div class="col-sm-6">
+          3-. ¿Cuenta con sistema de audio? (Parlantes o Audifonos).
         </div>
         @if($teleconsultationSurvey->audio == 1)
         <div class="col-sm-4">
@@ -89,7 +114,7 @@
 
     <div class="row active">
         <div class="col-sm-6">
-          3-. ¿Cuenta con cámara web?
+          4-. ¿Cuenta con cámara web?
         </div>
         @if($teleconsultationSurvey->webcam == 1)
         <div class="col-sm-4">
@@ -110,7 +135,7 @@
 
     <div class="row active">
         <div class="col-sm-6">
-          4-. ¿Cuenta con micrófono?
+          5-. ¿Cuenta con micrófono?
         </div>
         @if($teleconsultationSurvey->microphone == 1)
         <div class="col-sm-4">
@@ -152,7 +177,7 @@
 
     <div class="row active">
         <div class="col-sm-6">
-          6-. ¿Cuenta con un lugar con buena luz, espacio físico y privacidad para
+          7-. ¿Cuenta con un lugar con buena luz, espacio físico y privacidad para
           poder desarrollar una sesión de telemedicina ?
         </div>
         @if($teleconsultationSurvey->place == 1)
@@ -174,7 +199,7 @@
 
     <div class="row active">
         <div class="col-sm-6">
-          7-. ¿Ha tenido experiencia previa con atención con modalidad remota?
+          8-. ¿Ha tenido experiencia previa con atención con modalidad remota?
         </div>
         @if($teleconsultationSurvey->has_experience == 1)
         <div class="col-sm-4">
@@ -195,7 +220,7 @@
 
     <div class="row active">
         <div class="col-sm-6">
-          8-. ¿Presenta alguna dificultad visual o auditiva ?
+          9-. ¿Presenta alguna dificultad visual o auditiva ?
         </div>
         @if($teleconsultationSurvey->hearing_or_visual_impairment == 1)
         <div class="col-sm-4">

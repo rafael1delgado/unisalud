@@ -6,7 +6,9 @@ use App\Models\Fq\FqRequest;
 use App\Models\Fq\ContactUser;
 use App\Models\Fq\FqMedicine;
 use App\Models\User;
+use App\Models\Practitioner;
 use App\Models\ExtMedicine;
+use App\Models\Surveys\TeleconsultationSurvey;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,6 +29,8 @@ class FqRequestController extends Controller
     public function index()
     {
         if (Auth::user()->can('Fq: admin')) {
+            $practitioners = Practitioner::where('active', 1)->get();
+
             $pending_reqs = FqRequest::where('status', 'pending')
                 ->latest()
                 ->get();
@@ -35,7 +39,7 @@ class FqRequestController extends Controller
                 ->latest()
                 ->paginate(15);
 
-            return view('fq.request.index', compact('pending_reqs', 'reqs'));
+            return view('fq.request.index', compact('pending_reqs', 'reqs', 'practitioners'));
         }
 
         if (Auth::user()->can('Fq: answer request dispensing')) {
@@ -109,12 +113,10 @@ class FqRequestController extends Controller
 
         // if (env('APP_ENV') == 'production') {
             if($fqRequest->name == 'dispensing'){
-                Mail::to(['valentina.andradea@redsalud.gob.cl'])->cc(['diego.leyton@redsalud.gob.cl',
-                                                                      'ana.mujica@redsalud.gob.cl',
-                                                                      'fq.iquique@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
+                Mail::to(explode(',', env('APP_FQ_REFERENCE_DISP')))->send(new NewNotification($fqRequest));
             }
             else{
-                Mail::to(['fq.iquique@redsalud.gob.cl', 'ana.mujica@redsalud.gob.cl'])->send(new NewNotification($fqRequest));
+                Mail::to(explode(',', env('APP_FQ_REFERENCE')))->send(new NewNotification($fqRequest));
             }
         // // }
 
@@ -167,16 +169,12 @@ class FqRequestController extends Controller
         // if (env('APP_ENV') == 'production') {
             if($fqRequest->name == 'dispensing'){
                 Mail::to($send_to)
-                    ->cc(['valentina.andradea@redsalud.gob.cl',
-                          'diego.leyton@redsalud.gob.cl',
-                          'ana.mujica@redsalud.gob.cl',
-                          'fq.iquique@redsalud.gob.cl'])
+                    ->cc(explode(',', env('APP_FQ_REFERENCE_DISP')))
                     ->send(new AnswerNotification($fqRequest));
             }
             else{
                 Mail::to($send_to)
-                    ->cc(['ana.mujica@redsalud.gob.cl',
-                          'fq.iquique@redsalud.gob.cl'])
+                    ->cc(explode(',', env('APP_FQ_REFERENCE')))
                     ->send(new AnswerNotification($fqRequest));
             }
         // }
