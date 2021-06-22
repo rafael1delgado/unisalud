@@ -253,7 +253,7 @@
                               @if($fqRequest->name != 'specialty hours') disabled @else required @endif>
                                 <option value="">Seleccione...</option>
                                 @foreach($practitioners as $practitioner)
-                                <option value="{{ $practitioner->id }}">{{ $practitioner->user->officialFullName }}</option>
+                                <option value="{{ $practitioner->id }}">{{ $practitioner->user->officialFullName }} - {{ $practitioner->specialty->specialty_name }}</option>
                                 @endforeach
                             </select>
                         </fieldset>
@@ -295,8 +295,11 @@
 
         <div class="card">
             <div class="card-body">
+                @if($fqRequest->name == 'specialty hours')
                 <h6><i class="fas fa-calendar-alt"></i> Citación</h6>
-
+                @else
+                <h6><i class="fas fa-calendar-alt"></i> Entrega</h6>
+                @endif
                 <div class="table-responsive">
                     <table class="table table-sm table-bordered table-nostriped">
                         <tbody>
@@ -304,14 +307,16 @@
                               <th class="table-active" width="20%">Día / Hora</th>
                               <td>{{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</td>
                             </tr>
+                            @if($fqRequest->name == 'specialty hours')
                             <tr>
                               <th class="table-active">Nombre Profesional</th>
-                              <td>{{ $fqRequest->practitioner->user->officialFullName }}</td>
+                              <td>{{ $fqRequest->practitioner->user->officialFullName }} - {{ $fqRequest->practitioner->specialty->specialty_name }}</td>
                             </tr>
                             <tr>
                               <th class="table-active">Tipo de Atención</th>
                               <td>{{ $fqRequest->AttentionValue }}</td>
                             </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -331,8 +336,9 @@
                                 <th class="table-active">Nº Ficha</th>
                                 <td></td>
                             </tr>
+                            @if($fqRequest->name == 'specialty hours')
                             <tr>
-                              @if($fqRequest->name == 'specialty hours' && $fqRequest->specialties == 'other')
+                              @if($fqRequest->specialties == 'other')
                               <th class="table-active">Especialidad</th>
                               <td>{{ $fqRequest->SpecialtiesValue }} / {{ $fqRequest->OtherSpecialtiesValue }}</td>
                               @else
@@ -340,6 +346,7 @@
                               <td>{{ $fqRequest->SpecialtiesValue }}</td>
                               @endif
                             </tr>
+                            @endif
                             <tr>
                               <th class="table-active">Observación</th>
                               <td>{{ $fqRequest->observation_request }}</td>
