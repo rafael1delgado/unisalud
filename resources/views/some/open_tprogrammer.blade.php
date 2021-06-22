@@ -26,7 +26,9 @@
 
 <hr>
 
+@if($theoreticalProgrammings)
 <h4>{{$theoreticalProgrammings->first()->user->OfficialFullName}}</h4>
+@endif
 
 <form method="POST" class="form-horizontal" action="{{ route('some.openAgenda') }}">
 @csrf
@@ -38,7 +40,9 @@
     <label for="inputEmail4">&nbsp;</label>
   </div>
 
+  @if($theoreticalProgrammings)
   <input type="hidden" name="user_id" value="{{$theoreticalProgrammings->first()->user_id}}">
+  @endif
 
   <div class="form-group col-md-2">
     <label for="inputEmail4">Desde</label>
