@@ -231,7 +231,9 @@ class PatientController extends Controller
         $identifierTypes = CodConIdentifierType::all();
         $organizations = Organization::all();
         $specialties = Specialty::all();
-        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'specialties'));
+        $patientCongregationIds = $patient->congregations->pluck('id')->toArray();
+        $congregationOther = ($patient->congregationUsers()->where('congregation_id', 10)->first()) ?  $patient->congregationUsers()->where('congregation_id', 10)->first()->other : '';
+        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'specialties', 'patientCongregationIds', 'congregationOther'));
     }
 
     /**
@@ -386,7 +388,7 @@ class PatientController extends Controller
                         $newPractitioner->specialty_id = $request->specialty_id[$key];
                         $newPractitioner->save();
                     } elseif (in_array($request->practioner_id[$key], $storedPractitionerIds)) {
-                    
+
                         $practitioner = Practitioner::find($request->practitioner_id[$key]);
                         $practitioner->active = 1;
                         $practitioner->user_id = $patient->id;
@@ -404,7 +406,17 @@ class PatientController extends Controller
                 }
             }
 
+            //CONGREGATIONS
+            $patient->congregations()->sync($request->congregation_id);
+
             $patient->save();
+
+            $otherCongregation = $patient->congregationUsers()->where('congregation_id', 10);
+            if ($otherCongregation->count() > 0) {
+                $otherCongregation->update(['other' => $request->congregation_other,
+                ]);
+            }
+
             Db::commit();
         } catch (\Throwable $th) {
             DB::rollBack();

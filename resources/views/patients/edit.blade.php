@@ -15,14 +15,14 @@
         @csrf
         @method('POST')
 
-        <div class="form-row">
-            <fieldset class="form-group col-2">
-                <label for="for_id_type">Tipo de paciente</label>
-                <select name="id_patient_type" id="for_id_patient_type" class="form-control">
-                    <option value="PN">Normal</option>
-                </select>
-            </fieldset>
-        </div>
+{{--        <div class="form-row">--}}
+{{--            <fieldset class="form-group col-2">--}}
+{{--                <label for="for_id_type">Tipo de paciente</label>--}}
+{{--                <select name="id_patient_type" id="for_id_patient_type" class="form-control">--}}
+{{--                    <option value="PN">Normal</option>--}}
+{{--                </select>--}}
+{{--            </fieldset>--}}
+{{--        </div>--}}
 
         @livewire('user.user-identifiers', compact('identifierTypes', 'patient'))
 
@@ -106,11 +106,11 @@
 
                 <fieldset class="form-group col-md-4">
                     <label for="for_congregation">Pueblo originario</label>
-                    <select name="congregation_id" id="for_congregation_id" class="form-control selectpicker"
+                    <select name="congregation_id[]" id="for_congregation_id" class="form-control selectpicker"
                             data-live-search="true" multiple="" data-size="10" title="Seleccione..." multiple
                             data-actions-box="true">
                         @foreach($congregations as $congregation)
-                        <option value="{{ $congregation->id }}" {{$congregation->id === $patient->congregation_id ? 'selected' : ''}} >{{ $congregation->name}}</option>
+                        <option value="{{ $congregation->id }}" {{in_array($congregation->id, $patientCongregationIds)  ? 'selected' : ''}} >{{ $congregation->name}}</option>
                         @endforeach
                     </select>
                 </fieldset>
@@ -119,6 +119,7 @@
                     <fieldset class="form-group col-md-4">
                         <label for="for_congregation_other">Otro Pueblo Originario</label>
                         <input type="text" class="form-control" name="congregation_other" id="for_congregation_other"
+                               value="{{$congregationOther}}"
                                disabled>
                     </fieldset>
                     {{--                </div>--}}
@@ -153,7 +154,7 @@
                     {{--            </select>--}}
                     {{--        </fieldset>--}}
                 </div>
-            
+
         </div>
 
 
