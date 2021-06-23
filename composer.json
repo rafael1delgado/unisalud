@@ -71,6 +71,9 @@
         ],
         "post-install-cmd": [
             "chmod -R 755 bootstrap\/cache"
+        ],
+        "clear-all": [
+            "@php artisan config:clear"
         ]
     }
 }
