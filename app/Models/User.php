@@ -62,6 +62,16 @@ class User extends Authenticatable
         return $this->hasMany(Practitioner::class, 'user_id');
     }
 
+    public function congregations()
+    {
+        return $this->belongsToMany(Congregation::class, 'congregation_users')->withTimestamps();
+    }
+
+    public function congregationUsers()
+    {
+        return $this->hasMany(CongregationUser::class, 'user_id');
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.
