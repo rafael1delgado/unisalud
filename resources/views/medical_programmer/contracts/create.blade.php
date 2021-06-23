@@ -12,20 +12,16 @@
 
     <div class="row">
         <fieldset class="form-group col-4">
-            <label for="for_user_id">Rut</label>
+            <label for="for_user_id">Id</label>
             <input type="text" class="form-control" id="for_user_id" disabled>
         </fieldset>
 
-        <input type="hidden" class="form-control" id="for_user_id2" name="user_id">
+        <!-- <input type="hidden" class="form-control" id="for_user_id2" name="user_id"> -->
 
         <fieldset class="form-group col-8">
             <label for="for_user_id">Especialista</label>
-            <select name="rrhh" id="rrhh" class="form-control selectpicker" required="" data-live-search="true" data-size="5">
-              <option>--</option>
-              @foreach($users as $user)
-                <option value="{{$user->id}}">{{$user->OfficialFullName}}</option>
-              @endforeach
-            </select>
+            <input type="text" class="form-control" id="search" name="" value="">
+            <input type="hidden" name="user_id" id="user_id" value="">
         </fieldset>
     </div>
 
@@ -155,10 +151,38 @@
 @section('custom_js')
 <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
 
-<script>
+<!-- <script>
 $( "#rrhh" ).change(function() {
   $( "#for_user_id" ).val($( "#rrhh" ).val());
   $( "#for_user_id2" ).val($( "#rrhh" ).val());
 });
+</script> -->
+
+<script src='{{asset('js/jquery-ui.min.js')}}'></script>
+<link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}">
+
+<script>
+
+$('#search').autocomplete({
+   source: function(request, response){
+	 $.ajax({
+           url: "{{route('user.search_by_name')}}",
+           dataType: 'json',
+           async: false,
+           data: {
+             term: request.term
+           },
+           success: function(data){
+             response(data)
+	         }
+   });
+ },
+  select: function(event, ui) {
+     $("#user_id").val(ui.item.id),
+     $("#for_user_id").val(ui.item.id)
+  }
+});
+
+
 </script>
 @endsection

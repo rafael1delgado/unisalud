@@ -6,16 +6,21 @@ use App\Models\Address;
 use App\Models\CodConIdentifierType;
 use App\Models\CodConMarital;
 use App\Models\Commune;
+use App\Models\CongregationUser;
 use App\Models\ContactPoint;
 use App\Models\Country;
 use App\Models\Congregation;
 use App\Models\HumanName;
 use App\Models\Identifier;
+use App\Models\MedicalProgrammer\Specialty;
+use App\Models\Organization;
+use App\Models\Practitioner;
 use App\Models\Region;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +34,7 @@ class PatientController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -43,7 +48,9 @@ class PatientController extends Controller
         $regions = Region::all();
         $congregations = Congregation::all();
         $identifierTypes = CodConIdentifierType::all();
-        return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations'));
+        $organizations = Organization::all();
+        $specialties = Specialty::all();
+        return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations', 'organizations', 'specialties'));
     }
 
 
@@ -69,6 +76,9 @@ class PatientController extends Controller
 
     public function savePatientData(Request $request)
     {
+//        dd($request);
+
+
         DB::beginTransaction();
         try {
             $newPatient = new User($request->all());
@@ -119,6 +129,34 @@ class PatientController extends Controller
                     $newContactPoint->use = $request->contact_use[$key];
                     $newContactPoint->actually = ( (isset($request->contact_actually[$key]) && $request->contact_actually[$key] == 1) ? 1:2 );
                     $newContactPoint->save();
+                }
+            }
+            //&& $request->organization_id[$key] != null
+            if ($request->has('organization_id') ) {
+                foreach ($request->organization_id as $key => $organization_id) {
+
+                    if ($organization_id != null) {
+                        $newPractitioner = new Practitioner();
+                        $newPractitioner->active = 1;
+                        $newPractitioner->user_id = $newPatient->id;
+                        $newPractitioner->organization_id = $request->organization_id[$key];
+                        $newPractitioner->specialty_id = $request->specialty_id[$key];
+                        $newPractitioner->save();
+                    }
+                }
+            }
+
+            if ($request->has('congregation_id')) {
+                foreach ($request->congregation_id as $key => $congregation_id) {
+                    $newCongregationUser = new CongregationUser();
+                    $newCongregationUser->user_id = $newPatient->id;
+                    $newCongregationUser->congregation_id = $congregation_id;
+
+                    if ($congregation_id == 10) {
+                        $newCongregationUser->other = $request->congregation_other;
+                    }
+
+                    $newCongregationUser->save();
                 }
             }
 
@@ -193,7 +231,11 @@ class PatientController extends Controller
         $regions = Region::all();
         $congregations = Congregation::all();
         $identifierTypes = CodConIdentifierType::all();
-        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations'));
+        $organizations = Organization::all();
+        $specialties = Specialty::all();
+        $patientCongregationIds = $patient->congregations->pluck('id')->toArray();
+        $congregationOther = ($patient->congregationUsers()->where('congregation_id', 10)->first()) ?  $patient->congregationUsers()->where('congregation_id', 10)->first()->other : '';
+        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'specialties', 'patientCongregationIds', 'congregationOther'));
     }
 
     /**
@@ -334,7 +376,49 @@ class PatientController extends Controller
                 }
             }
 
+            //PRACTITIONER
+            $storedPractitionerIds = $patient->practitioners->pluck('id')->toArray();
+            if ($request->has('organization_id')) {
+               // dd($storedPractitionerIds);
+                //forearch para actualizar/agregar practitioners
+                foreach ($request->organization_id as $key => $organization_id) {
+                    if ($request->practitioner_id[$key] == null) {
+                        $newPractitioner = new Practitioner();
+                        $newPractitioner->active = 1;
+                        $newPractitioner->user_id = $patient->id;
+                        $newPractitioner->organization_id = $request->organization_id[$key];
+                        $newPractitioner->specialty_id = $request->specialty_id[$key];
+                        $newPractitioner->save();
+                    } elseif (in_array($request->practioner_id[$key], $storedPractitionerIds)) {
+
+                        $practitioner = Practitioner::find($request->practitioner_id[$key]);
+                        $practitioner->active = 1;
+                        $practitioner->user_id = $patient->id;
+                        $practitioner->organization_id = $request->organization_id[$key];
+                        $practitioner->specialty_id = $request->specialty_id[$key];
+                        $practitioner->save();
+                    }
+                }
+                //foreach para eliminar practitioners
+                foreach ($storedPractitionerIds as $key => $storedPractitionerId) {
+                    if (!in_array($storedPractitionerId, $request->practitioner_id)) {
+                        $practitioner = Practitioner::find($storedPractitionerId);
+                        $practitioner->delete();
+                    }
+                }
+            }
+
+            //CONGREGATIONS
+            $patient->congregations()->sync($request->congregation_id);
+
             $patient->save();
+
+            $otherCongregation = $patient->congregationUsers()->where('congregation_id', 10);
+            if ($otherCongregation->count() > 0) {
+                $otherCongregation->update(['other' => $request->congregation_other,
+                ]);
+            }
+
             Db::commit();
         } catch (\Throwable $th) {
             DB::rollBack();

@@ -23,13 +23,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
-        // 'dv',
         'sex',
         'gender',
         'birthday',
         'deceased_datetime',
         'cod_con_marital_id',
-        'congregation_id',
         'nationality_id',
         'claveunica',
         'fhir_id',
@@ -63,6 +61,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Practitioner::class, 'user_id');
     }
+
+    public function congregations()
+    {
+        return $this->belongsToMany(Congregation::class, 'congregation_users')->withTimestamps();
+    }
+
+    public function congregationUsers()
+    {
+        return $this->hasMany(CongregationUser::class, 'user_id');
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -339,12 +348,14 @@ class User extends Authenticatable
         return $array;
     }
 
-    // public function usersPatients() {
-    //     return $this->hasMany(Fq\UserPatient::class, 'contact_user_id');
-    // }
 
     public function usersPatients()
     {
         return $this->hasMany(Fq\UserPatient::class, 'contact_user_id');
+    }
+
+    public function teleconsultationSurveys()
+    {
+        return $this->hasMany(Surveys\TeleconsultationSurvey::class, 'user_id');
     }
 }
