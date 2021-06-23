@@ -98,7 +98,7 @@ class ContactUserController extends Controller
             $userPatient->patient_id = $user->id;
 
             $userPatient->save();
-            session()->flash('success', 'El paciene fue asignado exitosamente.');
+            session()->flash('success', 'El paciente fue asignado exitosamente.');
             return redirect()->route('fq.contact_user.create');
         }
     }
