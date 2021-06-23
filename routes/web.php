@@ -354,6 +354,10 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 //    Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
 //});
 
+Route::prefix('test')->name('test.')->group(function(){
+    Route::view('/livesearch', 'test.livesearch')->name('livesearch');
+});
+
 Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
     Route::get('/find-user',[MedicalLicenceController::class,'findUserForm'])->name('find-user-form');
     Route::post('/find-user',[MedicalLicenceController::class,'findUser'])->name('find-user');
