@@ -45,7 +45,7 @@
                 <fieldset class=" form-group col-md-1">
                     <label for="for_id_dv">Predeterminado</label>
                     <div class="form-check form-check-inline">
-                        <input type="radio"  name="actually[]" class="form-check-input"   {{ ( ( isset($contactPoints[$value])   && isset($contactPoints[$value]["actually"]) && $contactPoints[$value]["actually"] == 1 )? "checked" : "" )}} >
+                        <input type="radio"  value="1" name="contact_actually[]" class="form-check-input"   {{ ( ( isset($contactPoints[$value])   && isset($contactPoints[$value]["actually"]) && $contactPoints[$value]["actually"] == 1 )? "checked" : "" )}} >
                     </div>
                 </fieldset>
 
