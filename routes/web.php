@@ -125,10 +125,6 @@ Route::prefix('fq')->as('fq.')->group(function(){
         Route::get('/addPatient/{contactUser}', [ContactUserController::class, 'addPatient'])->name('addPatient')->middleware('auth');
         Route::get('/storeAddPatient/{contactUser}/{user}', [ContactUserController::class, 'storeAddPatient'])->name('storeAddPatient')->middleware('auth');
     });
-    // Route::prefix('patient')->name('patient.')->group(function(){
-    //     Route::get('/', [FqPatientController::class, 'index'])->name('index');
-    //     Route::get('/create', [FqPatientController::class, 'create'])->name('create');
-    // });
     Route::prefix('request')->name('request.')->middleware('auth')->group(function(){
         Route::get('/', [FqRequestController::class, 'index'])->name('index')
             ->middleware(['permission:Fq: answer request dispensing|Fq: admin']);

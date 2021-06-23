@@ -73,9 +73,14 @@ class FqRequestController extends Controller
      */
     public function create()
     {
-        $ext_medicines = ExtMedicine::all();
-        $contactUsers = ContactUser::where('user_id', Auth::user()->id)->get();
-        return view('fq.request.create', compact('contactUsers', 'ext_medicines'));
+        if(App\Models\Fq\ContactUser::getAmIContact() > 0){
+            $ext_medicines = ExtMedicine::all();
+            $contactUsers = ContactUser::where('user_id', Auth::user()->id)->get();
+            return view('fq.request.create', compact('contactUsers', 'ext_medicines'));
+        }
+        else {
+            return redirect()->route('fq.request.own_index');
+        }
     }
 
     /**
