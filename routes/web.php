@@ -108,7 +108,8 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/appointment', [AppointmentController::class, 'index'])->name('appointment');
     Route::view('/reallocate', 'some.reallocate')->name('reallocate');
-    Route::view('/agenda', 'some.agenda')->name('agenda');
+    // Route::view('/agenda', 'some.agenda')->name('agenda');
+    Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
     Route::view('/reallocation_pending', 'some.reallocation_pending')->name('reallocationPending');
     Route::post('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
     Route::match(['get', 'post'],'/open_tprogrammer', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
@@ -352,6 +353,10 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 //    Route::view('/agenda', 'agenda')->name('agenda');
 //    Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
 //});
+
+Route::prefix('test')->name('test.')->group(function(){
+    Route::view('/livesearch', 'test.livesearch')->name('livesearch');
+});
 
 Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
     Route::get('/find-user',[MedicalLicenceController::class,'findUserForm'])->name('find-user-form');

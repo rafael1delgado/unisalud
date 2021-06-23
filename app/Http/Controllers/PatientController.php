@@ -130,14 +130,17 @@ class PatientController extends Controller
                 }
             }
             //&& $request->organization_id[$key] != null
-            if ($request->has('organization_id')) {
+            if ($request->has('organization_id') ) {
                 foreach ($request->organization_id as $key => $organization_id) {
-                    $newPractitioner = new Practitioner();
-                    $newPractitioner->active = 1;
-                    $newPractitioner->user_id = $newPatient->id;
-                    $newPractitioner->organization_id = $request->organization_id[$key];
-                    $newPractitioner->specialty_id = $request->specialty_id[$key];
-                    $newPractitioner->save();
+
+                    if ($organization_id != null) {
+                        $newPractitioner = new Practitioner();
+                        $newPractitioner->active = 1;
+                        $newPractitioner->user_id = $newPatient->id;
+                        $newPractitioner->organization_id = $request->organization_id[$key];
+                        $newPractitioner->specialty_id = $request->specialty_id[$key];
+                        $newPractitioner->save();
+                    }
                 }
             }
 
@@ -372,6 +375,7 @@ class PatientController extends Controller
             //PRACTITIONER
             $storedPractitionerIds = $patient->practitioners->pluck('id')->toArray();
             if ($request->has('organization_id')) {
+               // dd($storedPractitionerIds);
                 //forearch para actualizar/agregar practitioners
                 foreach ($request->organization_id as $key => $organization_id) {
                     if ($request->practitioner_id[$key] == null) {
@@ -382,6 +386,7 @@ class PatientController extends Controller
                         $newPractitioner->specialty_id = $request->specialty_id[$key];
                         $newPractitioner->save();
                     } elseif (in_array($request->practioner_id[$key], $storedPractitionerIds)) {
+                    
                         $practitioner = Practitioner::find($request->practitioner_id[$key]);
                         $practitioner->active = 1;
                         $practitioner->user_id = $patient->id;
