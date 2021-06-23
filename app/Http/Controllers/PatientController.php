@@ -115,6 +115,7 @@ class PatientController extends Controller
                     $newAddress->commune_id = $request->district[$key];
                     $newAddress->region_id = $request->state[$key];
                     $newAddress->country_id = $request->country[$key];
+                    $newAddress->actually = ( ( isset($request->actually[$key]) && $request->actually[$key] == 1 ) ? 1:2 );
                     $newAddress->save();
                 }
             }
@@ -126,6 +127,7 @@ class PatientController extends Controller
                     $newContactPoint->user_id = $newPatient->id;
                     $newContactPoint->value = $request->contact_value[$key];
                     $newContactPoint->use = $request->contact_use[$key];
+                    $newContactPoint->actually = ( (isset($request->contact_actually[$key]) && $request->contact_actually[$key] == 1) ? 1:2 );
                     $newContactPoint->save();
                 }
             }
