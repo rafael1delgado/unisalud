@@ -116,13 +116,13 @@
                   @if($theoricalProgramming->subactivity)
                     // si es que ya tiene apertura, se deja en rojo
                     @if($theoricalProgramming->appointments->count() == 0)
-                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}} ({{$theoricalProgramming->performance}})',
+                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}}',
                         start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
                         color:'#85C1E9'
                       },
                       // F7DC6F
                     @else
-                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}} ({{$theoricalProgramming->performance}})',
+                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}}',
                         start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
                         color:'#FF0000'
                       },
@@ -130,12 +130,12 @@
                   @else
                     // si es que ya tiene apertura, se deja en rojo
                     @if($theoricalProgramming->appointments->count() == 0)
-                      { title: '{{$theoricalProgramming->activity->activity_name}} ({{$theoricalProgramming->performance}})',
+                      { title: '{{$theoricalProgramming->activity->activity_name}}',
                         start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
                         color:'#85C1E9'
                       },
                     @else
-                      { title: '{{$theoricalProgramming->activity->activity_name}} ({{$theoricalProgramming->performance}})',
+                      { title: '{{$theoricalProgramming->activity->activity_name}}',
                         start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
                         color:'#FF0000'
                       },
