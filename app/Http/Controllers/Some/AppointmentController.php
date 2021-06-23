@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\MedicalProgrammer\TheoreticalProgramming;
 use App\Models\Some\Appointment;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class AppointmentController extends Controller
 {
@@ -16,7 +20,11 @@ class AppointmentController extends Controller
         return view('some.appointment');
     }
 
-//    public function openAgenda()
+    /**
+     * Descompone las programaciones en appointments
+     * @param Request $request
+     * @return Application|Factory|View
+     */
     public function openAgenda(Request $request)
     {
         $start_date = $request->from;
@@ -25,8 +33,11 @@ class AppointmentController extends Controller
         $theoreticalProgrammings = TheoreticalProgramming::query()
             ->whereDate('start_date', '>=', $start_date)
             ->whereDate('end_date', '<=', $end_date)
+            ->whereNotNull('performance')
+            ->where('user_id',$request->user_id)
             ->get();
 
+        // $appointments = new Collection();
         foreach ($theoreticalProgrammings as $theoreticalProgramming) {
             $startDateTheoretical = Carbon::parse($theoreticalProgramming->start_date);
             $endDateTheoretical = Carbon::parse($theoreticalProgramming->end_date);
@@ -34,42 +45,51 @@ class AppointmentController extends Controller
 
             if ($theoreticalProgramming->subactivity) {
                 $period = 60 / $theoreticalProgramming->subactivity->performance;
-            }else{
+            } else {
                 $period = 60 / $theoreticalProgramming->performance;
             }
-
             $qntAppointments = $diffMinutesTheoretical / $period;
 
+            $lastDate = $startDateTheoretical->copy();
             for ($i = 0; $i < $qntAppointments; $i++) {
                 $newAppointment = new Appointment;
-                if ($i === 0) {
-                    $newAppointment->start = $theoreticalProgramming->start_date;
-                } else {
-                    $newAppointment->start = $startDateTheoretical->addMinutes($period);
-                }
+                $newAppointment->start = $lastDate->copy();
+                $newAppointment->end = $lastDate->addMinutes($period);
                 $newAppointment->status = 'proposed';
                 $newAppointment->mp_theoretical_programming_id = $theoreticalProgramming->id;
                 $newAppointment->save();
+                // $appointments->push($newAppointment);
             }
         }
 
-        return view('some.agenda');
+        // $appointments = Appointment::all();
+        return redirect()->route('some.agenda', ['user_id'=>$request->user_id]);
+        // return view('some.agenda', compact('start_date', 'end_date', 'appointments'));
     }
 
-    public function openTProgrammerView(Request $request){
-      $theoreticalProgrammings = null;
+    public function agenda(Request $request){
+      $user_id = $request->get('user_id');
+      $appointments = Appointment::whereHas('theoreticalProgramming', function ($query) use ($user_id) {
+                                      return $query->where('user_id',$user_id);
+                                   })->get();
+      return view('some.agenda', compact('appointments'));
+    }
 
-      if($request){
-        if ($request->user_id != null) {
-          // $monday = Carbon::parse($request->date)->startOfWeek();
-          // $sunday = Carbon::parse($request->date)->endOfWeek();
-          $theoreticalProgrammings = TheoreticalProgramming::where('user_id',$request->user_id)
-                                                           // ->whereBetween('start_date',[$monday,$sunday])
-                                                           ->get();
-                                                           // dd($request->user_id, $theoreticalProgrammings);
+    public function openTProgrammerView(Request $request)
+    {
+        $theoreticalProgrammings = null;
+
+        if ($request) {
+            if ($request->user_id != null) {
+                // $monday = Carbon::parse($request->date)->startOfWeek();
+                // $sunday = Carbon::parse($request->date)->endOfWeek();
+                $theoreticalProgrammings = TheoreticalProgramming::where('user_id', $request->user_id)
+                    // ->whereBetween('start_date',[$monday,$sunday])
+                    ->get();
+                // dd($request->user_id, $theoreticalProgrammings);
+            }
         }
-      }
 
-      return view('some.open_tprogrammer',compact('request','theoreticalProgrammings'));
+        return view('some.open_tprogrammer', compact('request', 'theoreticalProgrammings'));
     }
 }

@@ -19,17 +19,13 @@ class CreatePractitionersTable extends Migration
             $table->boolean('active')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('organization_id')->nullable();
-//            $table->enum('sex', ['female', 'male', 'other', 'unknown'])->nullable();
-//            $table->date('birthDate')->nullable();
-
-
-
-            $table->timestamps();
-
+            $table->unsignedInteger('specialty_id')->nullable();
+//            $table->foreignId('specialty_id')->nullable();
             $table->foreign('practitioner_id')->references('id')->on('practitioners');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('organization_id')->references('id')->on('organizations');
-
+            $table->foreign('specialty_id')->references('id')->on('mp_specialties');
+            $table->timestamps();
         });
     }
 

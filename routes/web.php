@@ -93,6 +93,7 @@ Route::prefix('profile')->name('profile.')->middleware('auth')->group(function()
 Route::prefix('user')->name('user.')->middleware('auth')->group(function(){
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
     Route::put('/{user}', [UserController::class, 'update'])->name('update');
+    Route::get('/search_by_name', [UserController::class, 'searchByName'])->name('search_by_name');
 });
 Route::prefix('patient')->name('patient.')->middleware('auth')->group(function(){
     Route::get('/', [PatientController::class, 'index'])->name('index');
@@ -107,27 +108,24 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/appointment', [AppointmentController::class, 'index'])->name('appointment');
     Route::view('/reallocate', 'some.reallocate')->name('reallocate');
-    Route::view('/agenda', 'some.agenda')->name('agenda');
+    // Route::view('/agenda', 'some.agenda')->name('agenda');
+    Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
     Route::view('/reallocation_pending', 'some.reallocation_pending')->name('reallocationPending');
     Route::post('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
     Route::match(['get', 'post'],'/open_tprogrammer', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
 });
 
-Route::prefix('fq')->as('fq.')->middleware('auth')->group(function(){
+Route::prefix('fq')->as('fq.')->group(function(){
     Route::get('/', [CysticFibrosisRequest::class, 'index'])->name('index');
-    Route::get('/home', [CysticFibrosisRequest::class, 'home'])->name('home');
+    Route::get('/home', [CysticFibrosisRequest::class, 'home'])->name('home')->middleware('auth');
     Route::prefix('contact_user')->name('contact_user.')->middleware(['permission:Fq: admin'])->group(function(){
-        Route::get('/', [ContactUserController::class, 'index'])->name('index');
-        Route::get('/create', [ContactUserController::class, 'create'])->name('create');
-        Route::get('/store/{user}', [ContactUserController::class, 'store'])->name('store');
-        Route::get('/addPatient/{contactUser}', [ContactUserController::class, 'addPatient'])->name('addPatient');
-        Route::get('/storeAddPatient/{contactUser}/{user}', [ContactUserController::class, 'storeAddPatient'])->name('storeAddPatient');
+        Route::get('/', [ContactUserController::class, 'index'])->name('index')->middleware('auth');
+        Route::get('/create', [ContactUserController::class, 'create'])->name('create')->middleware('auth');
+        Route::get('/store/{user}', [ContactUserController::class, 'store'])->name('store')->middleware('auth');
+        Route::get('/addPatient/{contactUser}', [ContactUserController::class, 'addPatient'])->name('addPatient')->middleware('auth');
+        Route::get('/storeAddPatient/{contactUser}/{user}', [ContactUserController::class, 'storeAddPatient'])->name('storeAddPatient')->middleware('auth');
     });
-    // Route::prefix('patient')->name('patient.')->group(function(){
-    //     Route::get('/', [FqPatientController::class, 'index'])->name('index');
-    //     Route::get('/create', [FqPatientController::class, 'create'])->name('create');
-    // });
-    Route::prefix('request')->name('request.')->group(function(){
+    Route::prefix('request')->name('request.')->middleware('auth')->group(function(){
         Route::get('/', [FqRequestController::class, 'index'])->name('index')
             ->middleware(['permission:Fq: answer request dispensing|Fq: admin']);
         Route::get('/own_index', [FqRequestController::class, 'own_index'])->name('own_index');
@@ -351,6 +349,10 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 //    Route::view('/agenda', 'agenda')->name('agenda');
 //    Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
 //});
+
+Route::prefix('test')->name('test.')->group(function(){
+    Route::view('/livesearch', 'test.livesearch')->name('livesearch');
+});
 
 Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
     Route::get('/find-user',[MedicalLicenceController::class,'findUserForm'])->name('find-user-form');

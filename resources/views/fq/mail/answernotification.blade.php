@@ -11,7 +11,7 @@
     @if($fqRequest->name == 'specialty hours' && $fqRequest->attention == 'teleconsultation')
 
         <p>Por medio de este correo, se informa citación vía telemedicina para el día {{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}
-            con el {{ $fqRequest->practitioner_id }}, vía zoom. Para ingresar a tu consulta debes
+            con el profesional {{ $fqRequest->practitioner->user->officialFullName }}, vía zoom. Para ingresar a tu consulta debes
             ingresar al siguiente enlace: <a href="{{ $fqRequest->link }}">{{ $fqRequest->link }}</a></p>
 
         <br>
@@ -29,9 +29,10 @@
         <!-- <p>Si presentas algún inconveniente en la conexión, favor escribe a mail <strong>fq.iquique@redsalud.gob.cl</strong></p> -->
         <br>
 
-        <p><strong>Equipo Telemedicina</p>
-        <p><strong>Hospital Dr Ernesto Torres</p>
-        <p><strong>Servicio de Salud Iquique</p>
+        <p><strong>Equipo Telemedicina<br>
+           <strong>Hospital Dr Ernesto Torres<br>
+           <strong>Servicio de Salud Iquique
+        </p>
 
     @endif
 
@@ -41,7 +42,7 @@
 
         <ul>
             <li><strong>Día y Hora</strong>: {{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</li>
-            <li><strong>Nombre Medico</strong>: {{-- Dr. Juan Perez --}}</li>
+            <li><strong>Profesional</strong>: {{ $fqRequest->practitioner->user->officialFullName }}</li>
             <hr>
             <li><strong>Paciente</strong>: {{ $fqRequest->patient->officialFullName }}</li>
             <li><strong>Rut</strong>: {{ $fqRequest->patient->IdentifierRun->value }}-{{ $fqRequest->patient->IdentifierRun->dv }}</li>

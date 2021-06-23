@@ -31,6 +31,8 @@ class UserSeeder extends Seeder
         if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
         $user->save();
 
+        $user->givePermissionTo(Permission::all());
+
         $humanName = new HumanName();
         $humanName->use = 'official';
         $humanName->text = 'usuario';
