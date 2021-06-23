@@ -33,9 +33,11 @@ class AppointmentController extends Controller
         $theoreticalProgrammings = TheoreticalProgramming::query()
             ->whereDate('start_date', '>=', $start_date)
             ->whereDate('end_date', '<=', $end_date)
+            ->whereNotNull('performance')
+            ->where('user_id',$request->user_id)
             ->get();
 
-        $appointments = new Collection();
+        // $appointments = new Collection();
         foreach ($theoreticalProgrammings as $theoreticalProgramming) {
             $startDateTheoretical = Carbon::parse($theoreticalProgramming->start_date);
             $endDateTheoretical = Carbon::parse($theoreticalProgramming->end_date);
@@ -56,11 +58,21 @@ class AppointmentController extends Controller
                 $newAppointment->status = 'proposed';
                 $newAppointment->mp_theoretical_programming_id = $theoreticalProgramming->id;
                 $newAppointment->save();
-                $appointments->push($newAppointment);
+                // $appointments->push($newAppointment);
             }
         }
 
-        return view('some.agenda', compact('start_date', 'end_date', 'appointments'));
+        // $appointments = Appointment::all();
+        return redirect()->route('some.agenda', ['user_id'=>$request->user_id]);
+        // return view('some.agenda', compact('start_date', 'end_date', 'appointments'));
+    }
+
+    public function agenda(Request $request){
+      $user_id = $request->get('user_id');
+      $appointments = Appointment::whereHas('theoreticalProgramming', function ($query) use ($user_id) {
+                                      return $query->where('user_id',$user_id);
+                                   })->get();
+      return view('some.agenda', compact('appointments'));
     }
 
     public function openTProgrammerView(Request $request)

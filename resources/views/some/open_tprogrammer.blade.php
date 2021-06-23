@@ -28,6 +28,19 @@
 
 @if($theoreticalProgrammings)
 <h4>{{$theoreticalProgrammings->first()->user->OfficialFullName}}</h4>
+
+<div class="table-responsive">
+  <table class="table table-responsive">
+    <tr>
+      <td>
+        <span data-feather="square" style="color:#85C1E9"></span> No aperturados
+      </td>
+      <td>
+        <span data-feather="square" style="color:#FF0000"></span> Aperturados
+      </td>
+    </tr>
+  </table>
+</div>
 @endif
 
 <form method="POST" class="form-horizontal" action="{{ route('some.openAgenda') }}">
@@ -56,7 +69,7 @@
 
   <div class="form-group col-md-2">
     <label for="inputEmail4">&nbsp;</label>
-    <button type="submit" class="btn btn-success form-control">Aperturar</button>
+    <button type="submit" class="btn btn-success form-control" onclick="return confirm('Las actividades que no tengan un rendimiento asignado no se podrán aperturar ¿Desea continuar?');">Aperturar</button>
   </div>
 
 </div>
@@ -101,15 +114,32 @@
                 @foreach($theoreticalProgrammings as $theoricalProgramming)
 
                   @if($theoricalProgramming->subactivity)
-                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}}',
-                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                        color:'#F7DC6F'
-                      },
-                  @else
-                      { title: '{{$theoricalProgramming->activity->activity_name}}',
+                    // si es que ya tiene apertura, se deja en rojo
+                    @if($theoricalProgramming->appointments->count() == 0)
+                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}} ({{$theoricalProgramming->performance}})',
                         start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
                         color:'#85C1E9'
                       },
+                      // F7DC6F
+                    @else
+                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}} ({{$theoricalProgramming->performance}})',
+                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
+                        color:'#FF0000'
+                      },
+                    @endif
+                  @else
+                    // si es que ya tiene apertura, se deja en rojo
+                    @if($theoricalProgramming->appointments->count() == 0)
+                      { title: '{{$theoricalProgramming->activity->activity_name}} ({{$theoricalProgramming->performance}})',
+                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
+                        color:'#85C1E9'
+                      },
+                    @else
+                      { title: '{{$theoricalProgramming->activity->activity_name}} ({{$theoricalProgramming->performance}})',
+                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
+                        color:'#FF0000'
+                      },
+                    @endif
                   @endif
 
                 @endforeach
