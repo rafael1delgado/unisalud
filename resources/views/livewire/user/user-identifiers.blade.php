@@ -9,7 +9,7 @@
             <div class="form-row">
                 <fieldset class="form-group col-md-4">
                     <label for="for_id_type">Tipo de identificación</label>
-                    <select name="id_type[]" class="form-control" wire:model='identifiers.{{$value}}.id_type' required>
+                    <select name="id_type[]" class="form-control" wire:model='identifiers.{{$value}}.id_type' wire:change="setReadonlyDv({{$value}})" required>
                         @foreach($identifierTypes as $identifierType)
                         <option value="{{ $identifierType->id }}">{{ $identifierType->text }}</option>
                         @endforeach
@@ -18,14 +18,16 @@
 
                 <fieldset class="form-group col-md-4">
                     <label for="for_id_value">Número</label>
-                    <input type="text" class="form-control" name="id_value[]" wire:model='identifiers.{{$value}}.value' required
+                    <input type="text" class="form-control" name="id_value[]" wire:model='identifiers.{{$value}}.value' wire:change="setDv({{$value}})" required
                         {{-- value=" {{substr(str_shuffle('1234567890'), 0, 8)}} " --}}
                         >
                 </fieldset>
 
                 <fieldset class=" form-group col-md-1">
                     <label for="for_id_dv">DV</label>
-                    <input type="text" class="form-control" name="id_dv[]" wire:model='identifiers.{{$value}}.dv' 
+                    <input type="text" class="form-control" name="id_dv[]"
+                          wire:model='identifiers.{{$value}}.dv'
+                        {{$readonlyDv[$value]}}
                         {{-- value="{{substr(str_shuffle('1234567890k'), 0, 1)}}" --}}>
                 </fieldset>
 
@@ -40,7 +42,7 @@
                     </select>
                 </fieldset>
 
-               
+
 
             </div>
 
