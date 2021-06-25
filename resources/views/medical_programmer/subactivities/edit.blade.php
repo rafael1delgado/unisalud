@@ -45,7 +45,7 @@
 
         <fieldset class="form-group col-4">
           <label for="for_sub_activity_description">Descripción</label>
-          <input type="text" class="form-control" id="for_sub_activity_description" placeholder="" name="sub_activity_description" required value="{{$subactivity->sub_activity_description}}">
+          <input type="text" class="form-control" id="for_sub_activity_description" placeholder="" name="sub_activity_description" value="{{$subactivity->sub_activity_description}}">
         </fieldset>
 
         <fieldset class="form-group col">
