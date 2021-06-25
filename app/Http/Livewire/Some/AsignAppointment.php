@@ -27,6 +27,7 @@ class AsignAppointment extends Component
     public $practitioner_id;
     public $appointments_from;
     public $appointments_to;
+    public $dv;
 
     protected $listeners = ['userSelected' => 'setUser',
     ];
@@ -44,7 +45,15 @@ class AsignAppointment extends Component
             ->get();
 
 //        dd($this->appointmentsHistory);
+    }
 
+    public function setDv()
+    {
+        $run = intval($this->run);
+        $s = 1;
+        for ($m = 0; $run != 0; $run /= 10)
+            $s = ($s + $run % 10 * (9 - $m++ % 6)) % 11;
+        $this->dv = chr($s ? $s + 47 : 75);
     }
 
     public function setUser($userId)
