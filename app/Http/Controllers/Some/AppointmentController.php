@@ -35,6 +35,7 @@ class AppointmentController extends Controller
             ->whereDate('end_date', '<=', $end_date)
             ->whereNotNull('performance')
             ->where('user_id',$request->user_id)
+            ->whereDoesntHave('appointments')
             ->get();
 
         // $appointments = new Collection();

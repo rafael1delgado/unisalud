@@ -59,11 +59,16 @@ class FqRequestController extends Controller
 
     public function own_index()
     {
-        $my_reqs = FqRequest::where('contact_user_id', Auth::user()->id)
-            ->latest()
-            ->get();
+        if(ContactUser::getAmIContact() > 0){
+            $my_reqs = FqRequest::where('contact_user_id', Auth::user()->id)
+                ->latest()
+                ->get();
 
-        return view('fq.request.own_index', compact('my_reqs'));
+            return view('fq.request.own_index', compact('my_reqs'));
+        }
+        else{
+            return redirect()->route('fq.home');
+        }
     }
 
     /**
@@ -73,9 +78,14 @@ class FqRequestController extends Controller
      */
     public function create()
     {
-        $ext_medicines = ExtMedicine::all();
-        $contactUsers = ContactUser::where('user_id', Auth::user()->id)->get();
-        return view('fq.request.create', compact('contactUsers', 'ext_medicines'));
+        if(ContactUser::getAmIContact() > 0){
+            $ext_medicines = ExtMedicine::all();
+            $contactUsers = ContactUser::where('user_id', Auth::user()->id)->get();
+            return view('fq.request.create', compact('contactUsers', 'ext_medicines'));
+        }
+        else {
+            return redirect()->route('fq.home');
+        }
     }
 
     /**
