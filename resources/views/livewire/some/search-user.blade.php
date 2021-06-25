@@ -1,5 +1,5 @@
-<div class="modal fade" id="searchUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     aria-hidden="true" wire:ignore.self>
+<div wire:ignore.self class="modal fade" id="searchUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true" >
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -50,7 +50,7 @@
                                         <td>{{($user) ? $user->officialFullAddress : ''}}</td>
                                         <td>{{($user) ? $user->officialPhone : ''}}</td>
                                         <td>{{($user && $user->officialEmail) ? $user->officialEmail : ''}}</td>
-                                        <td><button type="button" class="btn-primary btn-sm" wire:click="selectUser({{$user->id}})"> <i class="fas fa-check"></i> </button></td>
+                                        <td><button type="button" class="btn-primary btn-sm" wire:click="selectUser({{$user->id}})" data-dismiss="modal"> <i class="fas fa-check"></i> </button></td>
                                     </tr>
                                 @endforeach
                             @endif

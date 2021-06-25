@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class CongregationUser extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['other',
+    ];
+
 }
