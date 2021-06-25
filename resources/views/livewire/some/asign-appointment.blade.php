@@ -3,7 +3,8 @@
 
         <div class="form-group col-md-4">
             <label for="inputrut">RUT</label>
-            <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run" wire:change="setDv()"  >
+            <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run"
+                   wire:change="setDv()">
         </div>
         <div class="form-group col-md-1">
             <label for="inputdv">Dv</label>
@@ -82,6 +83,7 @@
                     <tr>
                         <th scope="col">HISTORIAL DE CITAS MÉDICAS</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </thead>
                     <tbody>
 
@@ -90,6 +92,14 @@
                             <tr>
                                 <th scope="row">{{$appointmentHistory->start}}</th>
                                 <td>{{$appointmentHistory->theoreticalProgramming->specialty->specialty_name}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-danger"
+                                            wire:click="cancelAppointment({{$appointmentHistory->id}})"
+                                            {{ ($appointmentHistory->status == 'cancelled' ? 'disabled' : '' ) }}
+{{--                                            {{ ($appointmentHistory->status == 'cancelled' ? 'tittle = "Cita cancelada"' : 'tittle = "Cancelar cita") }}--}}
+                                    >
+                                        <i class="fas fa-ban"></i></button>
+                                </td>
                             </tr>
                         @endforeach
                     @endif
@@ -298,11 +308,11 @@
         </table>
     </div>
 
-   @livewire('some.search-user')
+    @livewire('some.search-user')
 
     <hr class="mt-3">
 
-{{--    @livewireScripts--}}
+    {{--    @livewireScripts--}}
 
     <script>
         // window.livewire.on('userSelected', () => {

@@ -40,11 +40,7 @@ class AsignAppointment extends Component
             $this->user = User::getUsersByName($this->name)->first();
         }
 
-        $this->appointmentsHistory = Appointment::query()
-            ->where('user_id', $this->user->id)
-            ->get();
-
-//        dd($this->appointmentsHistory);
+        $this->getAppointmentsHistory();
     }
 
     public function setDv()
@@ -88,7 +84,7 @@ class AsignAppointment extends Component
             return $q->where('specialty_id', $this->specialty_id);
         });
         $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
-            return $q->whereHas('theoreticalProgramming', function ($q) use($userPractitioner) {
+            return $q->whereHas('theoreticalProgramming', function ($q) use ($userPractitioner) {
                 return $q->where('user_id', $userPractitioner->id);
             });
         });
@@ -152,6 +148,23 @@ class AsignAppointment extends Component
 //                ->has('practitioners')
 //                ->get();
         }
+    }
+
+    public function cancelAppointment($appointmentId)
+    {
+        $appointment = Appointment::find($appointmentId);
+        $appointment->status = 'cancelled';
+        $appointment->save();
+
+        $this->getAppointmentsHistory();
+    }
+
+
+    private function getAppointmentsHistory()
+    {
+        $this->appointmentsHistory = Appointment::query()
+            ->where('user_id', $this->user->id)
+            ->get();
     }
 
     public function render()
