@@ -62,7 +62,7 @@ class FqRequestController extends Controller
         if(ContactUser::getAmIContact() > 0){
             $my_reqs = FqRequest::where('contact_user_id', Auth::user()->id)
                 ->latest()
-                ->get();
+                ->paginate(15);
 
             return view('fq.request.own_index', compact('my_reqs'));
         }
