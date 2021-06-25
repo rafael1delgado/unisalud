@@ -304,9 +304,14 @@
 {{--    @livewireScripts--}}
 
     <script>
-        Livewire.on('userSelected', () => {
-            $("#searchUserModal").modal('hide');
-        })
+        // window.livewire.on('userSelected', () => {
+        //     // console.log('cierra modal');
+        //     $('#searchUserModal').modal('hide');
+        // })
+        // window.addEventListener('closeModal', event => {
+        //     console.log('cierra modal por browser event');
+        //     $("#searchUserModal").modal('hide');
+        // })
     </script>
 </div>
 
