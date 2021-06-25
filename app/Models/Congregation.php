@@ -11,4 +11,9 @@ class Congregation extends Model
     protected $fillable = [
         'id','name'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'congregation_users');
+    }
 }

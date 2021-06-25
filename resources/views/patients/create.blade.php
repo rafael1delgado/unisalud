@@ -5,9 +5,9 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Crear nuevo paciente</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
-            </div>
+{{--            <div class="btn-group mr-2">--}}
+{{--                <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>--}}
+{{--            </div>--}}
         </div>
     </div>
 
@@ -15,14 +15,14 @@
         @csrf
         @method('POST')
 
-        <div class="form-row">
-            <fieldset class="form-group col-md-4">
-                <label for="for_id_type">Tipo de paciente</label>
-                <select name="id_patient_type" id="for_id_patient_type" class="form-control">
-                    <option value="PN">Normal</option>
-                </select>
-            </fieldset>
-        </div>
+{{--        <div class="form-row">--}}
+{{--            <fieldset class="form-group col-md-4">--}}
+{{--                <label for="for_id_type">Tipo de paciente</label>--}}
+{{--                <select name="id_patient_type" id="for_id_patient_type" class="form-control">--}}
+{{--                    <option value="PN">Normal</option>--}}
+{{--                </select>--}}
+{{--            </fieldset>--}}
+{{--        </div>--}}
 
         @livewire('user.user-identifiers', compact('identifierTypes'))
 
@@ -198,13 +198,6 @@
     <script src='{{asset("js/jquery.rut.chileno.js")}}'></script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
-            //obtiene digito verificador
-            $('input[name=run]').keyup(function (e) {
-                var str = $("#for_run").val();
-                $('#for_dv').val($.rut.dv(str));
-            });
-
-            // $('#otro_etnia').hide();
             $('#for_congregation_id').change(function () {
                 var fieldsetName = $(this).val();
                 // console.log(fieldsetName);
@@ -217,21 +210,7 @@
                     $('#for_congregation_other').attr("required", false);
                     $('#for_congregation_other').attr("disabled", true);
                 }
-
-                // switch(this.value){
-                //     case "10":
-                //      //   $('#for_other_specialty').attr("disabled", false);
-                //      $('#otro_etnia').show();
-                //         break;
-                //
-                //     default:
-                //     $('#otro_etnia').show();
-                //         $('#otro_etnia').attr("disabled", true);
-                //         document.getElementById('#otro_etnia').value = '';
-                //         break;
-                // }
             });
-
         });
     </script>
     <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>

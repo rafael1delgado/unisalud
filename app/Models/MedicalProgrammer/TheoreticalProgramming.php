@@ -64,6 +64,11 @@ class TheoreticalProgramming extends Model implements Auditable
         return $this->belongsTo('App\Models\MedicalProgrammer\Profession');
     }
 
+    public function appointments()
+    {
+        return $this->hasMany('App\Models\Some\Appointment','mp_theoretical_programming_id');
+    }
+
     // public function user()
     // {
     //     return $this->belongsTo('App\User');
