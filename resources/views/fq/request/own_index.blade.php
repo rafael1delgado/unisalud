@@ -13,8 +13,8 @@
         <thead class="text-center">
             <tr>
                 <th></th>
-                <th>Fecha</th>
-                <th>Estado</th>
+                <th style="width: 10%">Fecha de Solicitud</th>
+                <th style="width: 8%">Estado</th>
                 <th>Motivo de Solicitud</th>
                 <th>Especialidad</th>
                 <th>Observación</th>
@@ -64,6 +64,8 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $my_reqs->links('pagination::bootstrap-4') }}
 </div>
 
 <hr>
