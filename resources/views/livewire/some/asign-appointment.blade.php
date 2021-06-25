@@ -3,11 +3,11 @@
 
         <div class="form-group col-md-4">
             <label for="inputrut">RUT</label>
-            <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run">
+            <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run" wire:change="setDv()"  >
         </div>
         <div class="form-group col-md-1">
             <label for="inputdv">Dv</label>
-            <input type="text" class="form-control" placeholder="Dv">
+            <input type="text" class="form-control" placeholder="Dv" wire:model="dv" readonly>
         </div>
 
         {{--        <div class="form-group col-md-4">--}}
@@ -15,15 +15,16 @@
         {{--            <input type="text" class="form-control" placeholder="Ingrese Nombre" wire:model.lazy="name">--}}
         {{--        </div>--}}
 
+        <div class="form-group col-md-2">
+            <label for="inputEmail4">&nbsp;</label>
+            <button type="button" class="btn btn-primary form-control" wire:click="searchUser()">Buscar</button>
+        </div>
+
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" data-toggle="modal"
                     data-target="#searchUserModal">...
             </button>
-        </div>
-        <div class="form-group col-md-2">
-            <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="searchUser()">Buscar</button>
         </div>
     </div>
 
@@ -264,8 +265,8 @@
             <thead class="table-info">
             <tr>
                 <th scope="col">Profesional</th>
-                <th scope="col">Especialidad</th>
-                <th scope="col">Subespecialidad</th>
+                <th scope="col">Actividad</th>
+                <th scope="col">Subactividad</th>
                 <th scope="col">Hora</th>
                 {{--                <th scope="col">Cupo</th>--}}
                 {{--                <th scope="col">Sobre Cupo</th>--}}
