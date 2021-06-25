@@ -16,7 +16,7 @@
         @method('POST')
 
         <div class="form-row">
-            <fieldset class="form-group col-2">
+            <fieldset class="form-group col-md-4">
                 <label for="for_id_type">Tipo de paciente</label>
                 <select name="id_patient_type" id="for_id_patient_type" class="form-control">
                     <option value="PN">Normal</option>
@@ -155,7 +155,7 @@
                 </div>
             
         </div>
-
+        </div>
 
         <div class="border-bottom mt-3 mb-3"></div>
 
@@ -205,7 +205,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary mb-3">Guardar</button>
 
     </form>
 @endsection
