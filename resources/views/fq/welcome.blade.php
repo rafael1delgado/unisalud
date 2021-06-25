@@ -73,7 +73,9 @@
 
     <div class="container">
         <div class="card-deck mb-3 text-center">
+            <div class="col-md-3">
 
+            </div>
             <div class="card shadow-sm">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">Ingresa</h4>
@@ -81,7 +83,10 @@
                 <div class="card-body">
 
                     <ul class="list-unstyled mt-3 mb-4">
-                        <p>Texto sobre el portal de FQ..</p>
+                        <p>Bienvenido al portal de Salud de la Región de Tarapacá.
+                          Acá encontrarás la información que esté disponible para ti
+                          y la podrás consultar en línea utilizando tu clave única del estado,
+                          haciendo click en el botón de abajo.</p>
 
                     </ul>
                     <div class="row justify-content-center">
@@ -94,6 +99,9 @@
                     <!--./ fin botón-->
                     </div>
                 </div>
+            </div>
+            <div class="col-md-3">
+
             </div>
         </div>
 

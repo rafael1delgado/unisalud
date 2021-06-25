@@ -62,6 +62,16 @@ class User extends Authenticatable
         return $this->hasMany(Practitioner::class, 'user_id');
     }
 
+    public function congregations()
+    {
+        return $this->belongsToMany(Congregation::class, 'congregation_users')->withTimestamps();
+    }
+
+    public function congregationUsers()
+    {
+        return $this->hasMany(CongregationUser::class, 'user_id');
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -153,9 +163,13 @@ class User extends Authenticatable
     //ContactPoints
     public function getOfficialPhoneAttribute()
     {
-        return $this->contactPoints()
-            ->where('system', 'phone')
-            ->first('value')->value;
+        if ($this->contactPoints()->where('system', 'phone')->count() > 0) {
+            return $this->contactPoints()
+                ->where('system', 'phone')
+                ->first('value')->value;
+        }
+        else
+            return '';
     }
 
     public function getOfficialEmailAttribute()
@@ -169,9 +183,13 @@ class User extends Authenticatable
     //Addresses
     public function getOfficialFullAddressAttribute()
     {
-        $address = $this->addresses()
-            ->first(['text', 'line', 'apartment']);
-        return "$address->text $address->line $address->apartment";
+
+        if ($this->addresses()->count() > 0) {
+            $address = $this->addresses()
+                ->first(['text', 'line', 'apartment']);
+            return "$address->text $address->line $address->apartment";
+        }else
+            return '';
 
     }
 
