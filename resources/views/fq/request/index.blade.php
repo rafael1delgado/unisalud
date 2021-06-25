@@ -13,7 +13,7 @@
         <thead class="text-center">
             <tr>
                 <th></th>
-                <th style="width: 10%">Fecha</th>
+                <th style="width: 10%">Fecha de Solicitud</th>
                 <th style="width: 8%">Estado</th>
                 <th>Motivo de Solicitud</th>
                 <th>Especialidad</th>
@@ -75,7 +75,7 @@
         <thead class="text-center">
             <tr>
                 <th></th>
-                <th style="width: 10%">Fecha</th>
+                <th style="width: 10%">Fecha de Solicitud</th>
                 <th style="width: 8%">Estado</th>
                 <th>Motivo de Solicitud</th>
                 <th>Especialidad</th>
@@ -122,6 +122,8 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $reqs->links('pagination::bootstrap-4') }}
 </div>
 
 @endsection

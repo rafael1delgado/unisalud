@@ -2,13 +2,15 @@
 
 @section('content')
 
+<link href="{{ asset('css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css"/>
+
 <h3 class="mb-3">Nueva Subactividad</h3>
 
 <form method="POST" class="form-horizontal" action="{{ route('medical_programmer.subactivities.store') }}">
   @csrf
   @method('POST')
 
-    @livewire('medical_programmer.specialty-activities',compact('specialties','activities'))
+    @livewire('medical_programmer.specialty-activities-selection',compact('specialties','activities'))
 
     <div class="row">
         <fieldset class="form-group col-3">
@@ -23,7 +25,7 @@
 
         <fieldset class="form-group col-4">
           <label for="for_sub_activity_description">Descripción</label>
-          <input type="text" class="form-control" id="for_sub_activity_description" placeholder="" name="sub_activity_description" required>
+          <input type="text" class="form-control" id="for_sub_activity_description" placeholder="" name="sub_activity_description">
         </fieldset>
 
         <fieldset class="form-group col">
@@ -39,5 +41,7 @@
 @endsection
 
 @section('custom_js')
+
+<script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
 
 @endsection

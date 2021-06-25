@@ -172,9 +172,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                          @foreach($fqRequest->fq_medicines as $key => $fq_medicine)
+                          @foreach($fqRequest->fq_medicines as $fq_medicine)
                             <tr>
-                              <td>{{ $key+1 }}</td>
+                              <td style="width: 3%"><i class="fas fa-list"></i></td>
                               <td>{{ $fq_medicine->medicine->name }}</td>
                             </tr>
                           @endforeach
@@ -218,7 +218,7 @@
                 <div class="card">
                     <div class="card-body">
                         <i class="fas fa-clock"></i>
-                        Usuario sin encuesta de habilitantes técnicos registrada.
+                        Usuario sin encuesta de habilitantes técnicas registrada.
                     </div>
                 </div>
             @endif
@@ -272,7 +272,8 @@
 
                         <fieldset class="form-group col-sm-3">
                             <label for="for_place">Lugar</label>
-                            <input type="text" class="form-control" name="place" id="for_place_{{$fqRequest->id}}">
+                            <input type="text" class="form-control" name="place" id="for_place_{{$fqRequest->id}}"
+                              @if($fqRequest->name != 'specialty hours') disabled @endif>
                         </fieldset>
                     </div>
 
