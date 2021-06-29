@@ -15,7 +15,6 @@
         @csrf
         @method('POST')
 
-=======
 {{--        <div class="form-row">--}}
 {{--            <fieldset class="form-group col-2">--}}
 {{--                <label for="for_id_type">Tipo de paciente</label>--}}
