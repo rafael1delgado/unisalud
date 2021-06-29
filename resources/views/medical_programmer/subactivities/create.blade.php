@@ -15,7 +15,7 @@
     <div class="row">
         <fieldset class="form-group col-3">
           <label for="for_sub_activity_abbreviated">Abreviado</label>
-          <input type="text" class="form-control" id="for_sub_activity_abbreviated" placeholder="" name="sub_activity_abbreviated" required>
+          <input type="text" class="form-control" id="for_sub_activity_abbreviated" placeholder="" name="sub_activity_abbreviated">
         </fieldset>
 
         <fieldset class="form-group col-3">
@@ -30,7 +30,7 @@
 
         <fieldset class="form-group col">
           <label for="for_performance">Rendimiento</label>
-          <input type="text" class="form-control" id="for_performance" placeholder="" name="performance" required>
+          <input type="text" class="form-control" id="for_performance" placeholder="" name="performance">
         </fieldset>
     </div>
 
