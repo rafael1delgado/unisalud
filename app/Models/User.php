@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Some\Appointment;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -70,6 +71,11 @@ class User extends Authenticatable
     public function congregationUsers()
     {
         return $this->hasMany(CongregationUser::class, 'user_id');
+    }
+
+    public function appointments()
+    {
+        return $this->morphToMany(Appointment::class, 'appointable');
     }
 
 

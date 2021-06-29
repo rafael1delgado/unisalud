@@ -2,6 +2,8 @@
 
 namespace App\Models\Some;
 
+use App\Models\Practitioner;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +14,16 @@ class Appointment extends Model
     public function theoreticalProgramming()
     {
         return $this->belongsTo('App\Models\MedicalProgrammer\TheoreticalProgramming', 'mp_theoretical_programming_id');
+    }
+
+    public function users()
+    {
+        return $this->morphedByMany(User::class, 'appointable');
+    }
+
+    public function practitioners()
+    {
+        return $this->morphedByMany(Practitioner::class, 'appointable');
     }
 
 }
