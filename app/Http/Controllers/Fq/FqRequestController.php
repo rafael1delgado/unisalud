@@ -43,6 +43,7 @@ class FqRequestController extends Controller
         }
 
         if (Auth::user()->can('Fq: answer request dispensing')) {
+            $practitioners = Practitioner::where('active', 1)->get();
             $pending_reqs = FqRequest::where('status', 'pending')
                 ->whereIn('name', ['dispensing'])
                 ->latest()
@@ -53,7 +54,7 @@ class FqRequestController extends Controller
                 ->latest()
                 ->paginate(15);
 
-            return view('fq.request.index', compact('pending_reqs', 'reqs'));
+            return view('fq.request.index', compact('pending_reqs', 'reqs', 'practitioners'));
         }
     }
 

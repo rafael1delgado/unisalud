@@ -27,6 +27,7 @@ class AsignAppointment extends Component
     public $practitioner_id;
     public $appointments_from;
     public $appointments_to;
+    public $dv;
 
     protected $listeners = ['userSelected' => 'setUser',
     ];
@@ -39,12 +40,16 @@ class AsignAppointment extends Component
             $this->user = User::getUsersByName($this->name)->first();
         }
 
-        $this->appointmentsHistory = Appointment::query()
-            ->where('user_id', $this->user->id)
-            ->get();
+        $this->getAppointmentsHistory();
+    }
 
-//        dd($this->appointmentsHistory);
-
+    public function setDv()
+    {
+        $run = intval($this->run);
+        $s = 1;
+        for ($m = 0; $run != 0; $run /= 10)
+            $s = ($s + $run % 10 * (9 - $m++ % 6)) % 11;
+        $this->dv = chr($s ? $s + 47 : 75);
     }
 
     public function setUser($userId)
@@ -79,7 +84,7 @@ class AsignAppointment extends Component
             return $q->where('specialty_id', $this->specialty_id);
         });
         $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
-            return $q->whereHas('theoreticalProgramming', function ($q) use($userPractitioner) {
+            return $q->whereHas('theoreticalProgramming', function ($q) use ($userPractitioner) {
                 return $q->where('user_id', $userPractitioner->id);
             });
         });
@@ -143,6 +148,23 @@ class AsignAppointment extends Component
 //                ->has('practitioners')
 //                ->get();
         }
+    }
+
+    public function cancelAppointment($appointmentId)
+    {
+        $appointment = Appointment::find($appointmentId);
+        $appointment->status = 'cancelled';
+        $appointment->save();
+
+        $this->getAppointmentsHistory();
+    }
+
+
+    private function getAppointmentsHistory()
+    {
+        $this->appointmentsHistory = Appointment::query()
+            ->where('user_id', $this->user->id)
+            ->get();
     }
 
     public function render()

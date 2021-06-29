@@ -15,15 +15,6 @@
         @csrf
         @method('POST')
 
-<<<<<<< HEAD
-        <div class="form-row">
-            <fieldset class="form-group col-md-4">
-                <label for="for_id_type">Tipo de paciente</label>
-                <select name="id_patient_type" id="for_id_patient_type" class="form-control">
-                    <option value="PN">Normal</option>
-                </select>
-            </fieldset>
-        </div>
 =======
 {{--        <div class="form-row">--}}
 {{--            <fieldset class="form-group col-2">--}}
@@ -33,7 +24,6 @@
 {{--                </select>--}}
 {{--            </fieldset>--}}
 {{--        </div>--}}
->>>>>>> 83e81faf0a4ef45fb80ce50ac159852fbdf46713
 
         @livewire('user.user-identifiers', compact('identifierTypes', 'patient'))
 
