@@ -36,7 +36,7 @@
                 <div class="form-row">
                     <fieldset class="form-group col-md-6">
                         <label for="for_name">Nombres</label>
-                        <input type="text" class="form-control" name="text" id="for_name" required
+                        <input type="text" class="form-control" name="text" id="for_name" required value="{{ old('text') }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                     </fieldset>
 
