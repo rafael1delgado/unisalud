@@ -64,7 +64,10 @@ class AppointmentController extends Controller
         }
 
         // $appointments = Appointment::all();
-        return redirect()->route('some.agenda', ['user_id'=>$request->user_id]);
+        return redirect()->route('some.agenda', ['type'=>$request->type,
+                                                 'specialty_id'=>$request->specialty_id,
+                                                 'profession_id'=>$request->profession_id,
+                                                 'user_id'=>$request->user_id]);
         // return view('some.agenda', compact('start_date', 'end_date', 'appointments'));
     }
 
@@ -73,7 +76,7 @@ class AppointmentController extends Controller
       $appointments = Appointment::whereHas('theoreticalProgramming', function ($query) use ($user_id) {
                                       return $query->where('user_id',$user_id);
                                    })->get();
-      return view('some.agenda', compact('appointments'));
+      return view('some.agenda', compact('appointments','request'));
     }
 
     public function openTProgrammerView(Request $request)

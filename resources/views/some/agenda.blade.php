@@ -41,7 +41,10 @@
     <div class="form-row">
 
       <div class="form-group col-md-9">
-        @livewire('medical_programmer.select-med-prog-employee')
+        @livewire('medical_programmer.select-med-prog-employee',['type'         => $request->type,
+                                                                 'specialty_id' => $request->specialty_id,
+                                                                 'profession_id'=> $request->profession_id,
+                                                                 'user_id'      => $request->user_id])
       </div>
 
       <div class="form-group col-md-3">
