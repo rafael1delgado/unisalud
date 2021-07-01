@@ -18,6 +18,11 @@ class appointable extends Model
         'appointment_id',
         'appointable_id',
         'appointable_type',
+        'type',
+        'required',
+        'status',
+        'period_from',
+        'period_to',
     ];
 
 }

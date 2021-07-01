@@ -41,10 +41,8 @@ class AsignAppointment extends Component
         }
 
         if ($this->user) {
-            $this->appointments = $this->user->appointments;
+            $this->appointmentsHistory = $this->user->appointments;
         }
-
-//        $this->getAppointmentsHistory();
     }
 
     public function setDv()
@@ -71,27 +69,35 @@ class AsignAppointment extends Component
         }
 
         $query = Appointment::query();
+
         $query->when($this->appointments_from === null && $this->appointments_to === null, function ($q) {
             return $q->whereDate('start', '>=', Carbon::now()->toDateString());
         });
+
         $query->when($this->appointments_from != null && $this->appointments_to != null, function ($q) {
             return $q->whereDate('start', '>=', $this->appointments_from)
                 ->whereDate('start', '<=', $this->appointments_to);
         });
+
         $query->when($this->appointments_from === null && $this->appointments_to != null, function ($q) {
             return $q->whereDate('start', '<=', $this->appointments_to);
         });
+
         $query->when($this->appointments_from != null && $this->appointments_to === null, function ($q) {
             return $q->whereDate('start', '<=', $this->appointments_from);
         });
+
         $query->whereHas('theoreticalProgramming', function ($q) {
             return $q->where('specialty_id', $this->specialty_id);
         });
+
         $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
             return $q->whereHas('theoreticalProgramming', function ($q) use ($userPractitioner) {
                 return $q->where('user_id', $userPractitioner->id);
             });
         });
+
+        $query->where('status', 'proposed');
 
         $this->appointments = $query->get();
 
@@ -99,26 +105,21 @@ class AsignAppointment extends Component
 
     public function asignAppointment()
     {
-
         if (count($this->selectedAppointments) > 0) {
-            $selectedAppointments = Appointment::whereIn('id', [$this->selectedAppointments])->get();
+            $selectedAppointments = Appointment::whereIn('id', [$this->selectedAppointments]);
 
-            foreach ($selectedAppointments as $selectedAppointment) {
-                $selectedAppointment->users()->save($this->user);
-                $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id));
+            foreach ($selectedAppointments->get() as $selectedAppointment) {
+                $selectedAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+                $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
             }
+
+            $selectedAppointments->update(
+                ['status' => 'booked']
+            );
 
             session()->flash('success', 'Cita asignada');
             return redirect()->route('some.appointment');
         }
-
-//        $selectedAppointments = Appointment::whereIn('id', [$this->selectedAppointments]);
-//        $selectedAppointments->update(['user_id' => $this->user->id,
-//                'practitioner_id' => $this->practitioner_id,
-//                'status' => 'booked']
-//        );
-//        session()->flash('success', 'Cita asignada');
-//        return redirect()->route('some.appointment');
     }
 
     public function getPractitioners()
@@ -138,19 +139,6 @@ class AsignAppointment extends Component
 
             $this->practitioners = Practitioner::where('specialty_id', $this->specialty_id)
                 ->get();
-
-//            $this->practitioners = Practitioner::whereHas('user', function ($query) {
-//                return $query->whereHas('userSpecialties', function ($query) {
-//                    return $query->where('specialty_id', $this->specialty_id);
-//                });
-//            })
-
-
-//            $this->practitioners = User::whereHas('userSpecialties', function ($query) {
-//                return $query->where('specialty_id', $this->specialty_id);
-//            })
-//                ->has('practitioners')
-//                ->get();
         }
 
         if ($this->profession_id != null) {
@@ -159,41 +147,25 @@ class AsignAppointment extends Component
                 return $query->whereHas('userProfessions', function ($query) {
                     return $query->where('profession_id', $this->profession_id);
                 });
-            })
-                ->get();
-
-//            $this->practitioners = User::whereHas('userProfessions', function ($query) {
-//                return $query->where('profession_id', $this->profession_id);
-//            })
-//                ->has('practitioners')
-//                ->get();
+            })->get();
         }
     }
 
     public function cancelAppointment($appointmentId)
     {
         $appointment = Appointment::find($appointmentId);
+
         $appointment->status = 'cancelled';
         $appointment->save();
 
         if ($this->user) {
+            $this->user->refresh();
             $this->appointmentsHistory = $this->user->appointments;
         }
-
-//        $this->getAppointmentsHistory();
     }
-
-
-//    private function getAppointmentsHistory()
-//    {
-//        $this->appointmentsHistory = Appointment::query()
-//            ->where('user_id', $this->user->id)
-//            ->get();
-//    }
 
     public function render()
     {
-
         return view('livewire.some.asign-appointment');
     }
 }

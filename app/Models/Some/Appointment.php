@@ -18,12 +18,12 @@ class Appointment extends Model
 
     public function users()
     {
-        return $this->morphedByMany(User::class, 'appointable');
+        return $this->morphedByMany(User::class, 'appointable')->withTimestamps()->withPivot('type', 'required', 'status', 'period_from', 'period_to');
     }
 
     public function practitioners()
     {
-        return $this->morphedByMany(Practitioner::class, 'appointable');
+        return $this->morphedByMany(Practitioner::class, 'appointable')->withTimestamps()->withPivot('type', 'required', 'status', 'period_from', 'period_to');
     }
 
 }

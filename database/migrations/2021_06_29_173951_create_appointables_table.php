@@ -32,9 +32,9 @@ class CreateAppointablesTable extends Migration
             $table->string('appointable_type');
             $table->string('type')->nullable();
             $table->enum('required', ['required', 'optional', 'information-only',
-            ]);
+            ])->nullable();
             $table->enum('status', ['accepted', 'declined', 'tentative', 'needs-action',
-            ]);
+            ])->nullable();
             $table->dateTime('period_from')->nullable();
             $table->dateTime('period_to')->nullable();
 
