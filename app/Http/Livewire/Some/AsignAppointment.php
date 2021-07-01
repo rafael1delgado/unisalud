@@ -155,6 +155,23 @@ class AsignAppointment extends Component
     {
         $appointment = Appointment::find($appointmentId);
 
+        $duplicateAppointment = $appointment->replicate();
+        $duplicateAppointment->status = 'proposed';
+        $duplicateAppointment->save();
+
+        $ids = $appointment->users()->allRelatedIds();
+        foreach ($ids as $id) {
+            $appointment->users()->updateExistingPivot( $id, ['status' => 'declined',
+            ]);
+        }
+
+        $ids = $appointment->practitioners()->allRelatedIds();
+        foreach ($ids as $id) {
+            $appointment->practitioners()->updateExistingPivot($id, ['status' => 'declined',
+            ]);
+        }
+
+
         $appointment->status = 'cancelled';
         $appointment->save();
 
