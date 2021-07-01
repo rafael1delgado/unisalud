@@ -281,7 +281,7 @@
                             <input class="form-check-input " type="checkbox" value="{{$appointment->id}}"
                                    name="selectedAppointments[{{$key}}]" wire:model="selectedAppointments" required>
                             <label class="form-check-label"
-                                   for="invalidCheck2">{{$appointment->theoreticalProgramming->User->officialFullName}}</label>
+                                   for="invalidCheck2">{{$appointment->theoreticalProgramming->user->officialFullName}}</label>
                         </td>
 
                         <td>{{$appointment->theoreticalProgramming->activity->activity_name}}</td>

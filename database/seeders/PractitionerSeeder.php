@@ -16,7 +16,7 @@ class PractitionerSeeder extends Seeder
     public function run()
     {
         Practitioner::Create(['active' => 1,
-            'user_id' => 343,
+            'user_id' => 1,
             'organization_id' => 1,
             'specialty_id' => 51
             ]);

@@ -19,6 +19,7 @@ class CreateAppointablesTable extends Migration
             $table->dropForeign(['practitioner_id']);
 //            ]);
         });
+
         Schema::table('appointments', function (Blueprint $table) {
             $table->dropColumn('user_id');
             $table->dropColumn('practitioner_id');
@@ -29,6 +30,14 @@ class CreateAppointablesTable extends Migration
             $table->foreignId('appointment_id');
             $table->integer('appointable_id');
             $table->string('appointable_type');
+            $table->string('type')->nullable();
+            $table->enum('required', ['required', 'optional', 'information-only',
+            ]);
+            $table->enum('status', ['accepted', 'declined', 'tentative', 'needs-action',
+            ]);
+            $table->dateTime('period_from')->nullable();
+            $table->dateTime('period_to')->nullable();
+
             $table->timestamps();
 
             $table->foreign('appointment_id')->references('id')->on('appointments');
