@@ -41,7 +41,7 @@ class AsignAppointment extends Component
         }
 
         if ($this->user) {
-            $this->appointmentsHistory = $this->user->appointments;
+            $this->appointmentsHistory = $this->user->appointments()->withTrashed()->get();
         }
     }
 
@@ -171,13 +171,14 @@ class AsignAppointment extends Component
             ]);
         }
 
-
         $appointment->status = 'cancelled';
+        $appointment->delete();
         $appointment->save();
 
         if ($this->user) {
             $this->user->refresh();
-            $this->appointmentsHistory = $this->user->appointments;
+            $this->appointmentsHistory = $this->user->appointments()->withTrashed()->get();
+
         }
     }
 
