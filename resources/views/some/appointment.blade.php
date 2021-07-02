@@ -6,11 +6,7 @@
 
 <form>
     @livewire('some.asign-appointment')
-
-
-
 </form>
-
 
 @endsection
 
