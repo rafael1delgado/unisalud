@@ -99,6 +99,8 @@ class AsignAppointment extends Component
 
         $query->where('status', 'proposed');
 
+        $query->orderBy('start');
+
         $this->appointments = $query->get();
 
     }
