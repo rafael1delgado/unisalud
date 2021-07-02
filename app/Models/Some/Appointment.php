@@ -13,6 +13,8 @@ class Appointment extends Model
     use HasFactory;
     use SoftDeletes;
 
+    // protected $fillable = ['start','end'];
+
     public function theoreticalProgramming()
     {
         return $this->belongsTo('App\Models\MedicalProgrammer\TheoreticalProgramming', 'mp_theoretical_programming_id');
@@ -32,5 +34,8 @@ class Appointment extends Model
     {
       return $this->hasMany('App\Models\appointable','appointment_id');
     }
+
+    protected $dates = ['start','end'];
+    protected $table = 'appointments';
 
 }

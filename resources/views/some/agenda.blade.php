@@ -91,6 +91,7 @@
                 @foreach($appointments as $appointment)
                   @if($appointment->status == "booked")
                     {
+                    id: '{{$appointment->id}}',
                     title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
                     start: '{{$appointment->start}}',
                     end: '{{$appointment->end}}',
@@ -98,6 +99,7 @@
                     },
                   @else
                     {
+                    id: '{{$appointment->id}}',
                     title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
                     start: '{{$appointment->start}}',
                     end: '{{$appointment->end}}'
@@ -113,7 +115,12 @@
 
 
 
-            ]
+            ],
+
+            eventClick: function(info) {
+              let id = info.event.id;
+              window.open('appointment_detail/'+id,"_self");
+            }
         });
 
         calendar.render();

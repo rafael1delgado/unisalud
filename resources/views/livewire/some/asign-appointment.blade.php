@@ -95,12 +95,15 @@
                                 <th scope="row">{{$appointmentHistory->start}}</th>
                                 <td>{{$appointmentHistory->theoreticalProgramming->specialty->specialty_name}}</td>
                                 <td>
+                                    <a href="{{ route('some.appointment_detail',$appointmentHistory->id) }}"
+                                      class="btn btn-sm btn-outline-secondary">
+                                      <span class="fas fa-eye" aria-hidden="true"></span>
+                                    </a>
                                     <button type="button" class="btn btn-sm btn-danger"
                                             onclick="return confirm('¿Desea cancelar la cita?') || event.stopImmediatePropagation();"
                                             wire:click="cancelAppointment({{$appointmentHistory->id}})"
-                                        {{ ($appointmentHistory->status == 'cancelled' ? 'disabled' : '' ) }}
-                                    >
-                                        <i class="fas fa-ban"></i></button>
+                                            {{ ($appointmentHistory->status == 'cancelled' ? 'disabled' : '' ) }}><i class="fas fa-ban"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -327,5 +330,3 @@
         // })
     </script>
 </div>
-
-

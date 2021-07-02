@@ -103,4 +103,9 @@ class AppointmentController extends Controller
 
         return view('some.open_tprogrammer', compact('request', 'theoreticalProgrammings'));
     }
+
+    public function appointment_detail($id){
+      $appointment = Appointment::find($id);
+      return view('some.appointment_detail', compact('appointment'));
+    }
 }
