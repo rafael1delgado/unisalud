@@ -89,11 +89,20 @@
             events: [
               //control 14  de junio
                 @foreach($appointments as $appointment)
-                  {
-                  title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
-                  start: '{{$appointment->start}}',
-                  end: '{{$appointment->end}}'
-                  },
+                  @if($appointment->status == "booked")
+                    {
+                    title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
+                    start: '{{$appointment->start}}',
+                    end: '{{$appointment->end}}',
+                    color: 'gray',
+                    },
+                  @else
+                    {
+                    title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
+                    start: '{{$appointment->start}}',
+                    end: '{{$appointment->end}}'
+                    },
+                  @endif
                 @endforeach
                 // {
                 // title: 'Almuerzo',

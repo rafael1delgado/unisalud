@@ -28,4 +28,9 @@ class Appointment extends Model
         return $this->morphedByMany(Practitioner::class, 'appointable')->withTimestamps()->withPivot('type', 'required', 'status', 'period_from', 'period_to');
     }
 
+    public function appointables()
+    {
+      return $this->hasMany('App\Models\appointable','appointment_id');
+    }
+
 }

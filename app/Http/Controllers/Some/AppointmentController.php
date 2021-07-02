@@ -77,6 +77,12 @@ class AppointmentController extends Controller
       $appointments = Appointment::whereHas('theoreticalProgramming', function ($query) use ($user_id) {
                                       return $query->where('user_id',$user_id);
                                    })->get();
+
+      // foreach ($appointments as $key => $appointment) {
+      //   if ($appointment->status == "booked") {
+      //       dd($appointment->appointables);
+      //   }
+      // }
       return view('some.agenda', compact('appointments','request'));
     }
 
