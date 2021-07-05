@@ -14,7 +14,7 @@ class AddProfessionIdToPractitionersTable extends Migration
     public function up()
     {
         Schema::table('practitioners', function (Blueprint $table) {
-            $table->foreignId('profession_id')->after('specialty_id')->nullable();
+            $table->unsignedInteger('profession_id')->after('specialty_id')->nullable();
             $table->foreign('profession_id')->references('id')->on('mp_professions');
         });
     }
