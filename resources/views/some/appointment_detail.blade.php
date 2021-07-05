@@ -5,7 +5,7 @@
 <h3 class="mb-3">Detalle de la cita</h3>
 
 <div class="row">
-    <fieldset class="form-group col-3">
+    <fieldset class="form-group col-1">
         <label for="for_contract_id">Id</label>
         <input type="text" class="form-control" value="{{$appointment->id}}" readonly >
     </fieldset>
@@ -70,6 +70,27 @@
   <h4>Sin información</h4>
 
 @endif
+
+<div class="row">
+    <fieldset class="form-group col-8">
+        <label></label>
+    </fieldset>
+
+    <fieldset class="form-group col">
+        <form method="GET" id="form" class="form-horizontal" action="{{ route('some.agenda') }}">
+          @if($appointment->practitioners->first()->specialty_id != null)
+            <input type="hidden" name="type" value="Médico">
+          @else
+            <input type="hidden" name="type" value="No médico">
+          @endif
+          <input type="hidden" name="specialty_id" value="{{$appointment->practitioners->first()->specialty_id}}">
+          <input type="hidden" name="profession_id" value="">
+          <input type="hidden" name="user_id" value="{{$appointment->practitioners->first()->user_id}}">
+          <label for="for_sub_activity_id"></label>
+          <button type="submit" class="form-control"><i class="fas fa-angle-double-left"></i> Volver</button>
+        </form>
+    </fieldset>
+</div>
 
 @endsection
 

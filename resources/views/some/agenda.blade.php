@@ -92,7 +92,7 @@
                   @if($appointment->status == "booked")
                     {
                     id: '{{$appointment->id}}',
-                    title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
+                    title: '{{$appointment->theoreticalProgramming->activity->activity_name}} <br> {{$appointment->users->first()->OfficialFullName}}',
                     start: '{{$appointment->start}}',
                     end: '{{$appointment->end}}',
                     color: 'gray',
