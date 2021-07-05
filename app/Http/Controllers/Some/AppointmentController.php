@@ -58,13 +58,17 @@ class AppointmentController extends Controller
                 $newAppointment->end = $lastDate->addMinutes($period);
                 $newAppointment->status = 'proposed';
                 $newAppointment->mp_theoretical_programming_id = $theoreticalProgramming->id;
+                $newAppointment->created = now();
                 $newAppointment->save();
                 // $appointments->push($newAppointment);
             }
         }
 
         // $appointments = Appointment::all();
-        return redirect()->route('some.agenda', ['user_id'=>$request->user_id]);
+        return redirect()->route('some.agenda', ['type'=>$request->type,
+                                                 'specialty_id'=>$request->specialty_id,
+                                                 'profession_id'=>$request->profession_id,
+                                                 'user_id'=>$request->user_id]);
         // return view('some.agenda', compact('start_date', 'end_date', 'appointments'));
     }
 
@@ -73,7 +77,13 @@ class AppointmentController extends Controller
       $appointments = Appointment::whereHas('theoreticalProgramming', function ($query) use ($user_id) {
                                       return $query->where('user_id',$user_id);
                                    })->get();
-      return view('some.agenda', compact('appointments'));
+
+      // foreach ($appointments as $key => $appointment) {
+      //   if ($appointment->status == "booked") {
+      //       dd($appointment->appointables);
+      //   }
+      // }
+      return view('some.agenda', compact('appointments','request'));
     }
 
     public function openTProgrammerView(Request $request)
@@ -92,5 +102,10 @@ class AppointmentController extends Controller
         }
 
         return view('some.open_tprogrammer', compact('request', 'theoreticalProgrammings'));
+    }
+
+    public function appointment_detail($id){
+      $appointment = Appointment::find($id);
+      return view('some.appointment_detail', compact('appointment'));
     }
 }

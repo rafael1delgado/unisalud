@@ -35,7 +35,7 @@
     <div class="row">
         <fieldset class="form-group col-3">
           <label for="for_sub_activity_abbreviated">Abreviado</label>
-          <input type="text" class="form-control" id="for_sub_activity_abbreviated" placeholder="" name="sub_activity_abbreviated" required value="{{$subactivity->sub_activity_abbreviated}}">
+          <input type="text" class="form-control" id="for_sub_activity_abbreviated" placeholder="" name="sub_activity_abbreviated" value="{{$subactivity->sub_activity_abbreviated}}">
         </fieldset>
 
         <fieldset class="form-group col-3">
@@ -45,12 +45,12 @@
 
         <fieldset class="form-group col-4">
           <label for="for_sub_activity_description">Descripción</label>
-          <input type="text" class="form-control" id="for_sub_activity_description" placeholder="" name="sub_activity_description" required value="{{$subactivity->sub_activity_description}}">
+          <input type="text" class="form-control" id="for_sub_activity_description" placeholder="" name="sub_activity_description" value="{{$subactivity->sub_activity_description}}">
         </fieldset>
 
         <fieldset class="form-group col">
           <label for="for_performance">Rendimiento</label>
-          <input type="text" class="form-control" id="for_performance" placeholder="" name="performance" required value="{{$subactivity->performance}}">
+          <input type="text" class="form-control" id="for_performance" placeholder="" name="performance" value="{{$subactivity->performance}}">
         </fieldset>
     </div>
 

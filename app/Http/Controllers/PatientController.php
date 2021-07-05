@@ -63,6 +63,22 @@ class PatientController extends Controller
      */
     public function store(Request $request, $save = null)
     {
+
+//        dd($request);
+
+        if ($request->has('id_type')) {
+            foreach ($request->id_type as $key => $id_type) {
+                $algo = Identifier::query()
+                    ->where('use', $request->id_use[$key])
+                    ->where('cod_con_identifier_type_id', $request->id_type[$key])
+                    ->where('value', $request->id_value[$key]);
+                if ($algo->count() > 0) {
+                    session()->flash('warning', 'Se ha ingresando un identificador repetido.');
+                    return redirect()->back()->withInput();
+                }
+            }
+        }
+
         //Busca los pacientes que ya esten ingresados con los datos de request
         $matchingPatients = $this->getMatchingPatients($request);
         if ($matchingPatients->count() === 0 || $save == true) {
@@ -115,7 +131,7 @@ class PatientController extends Controller
                     $newAddress->commune_id = $request->district[$key];
                     $newAddress->region_id = $request->state[$key];
                     $newAddress->country_id = $request->country[$key];
-                    $newAddress->actually = ( ( isset($request->actually[$key]) && $request->actually[$key] == 1 ) ? 1:2 );
+                    $newAddress->actually = ((isset($request->actually[$key]) && $request->actually[$key] == 1) ? 1 : 2);
                     $newAddress->save();
                 }
             }
@@ -127,12 +143,12 @@ class PatientController extends Controller
                     $newContactPoint->user_id = $newPatient->id;
                     $newContactPoint->value = $request->contact_value[$key];
                     $newContactPoint->use = $request->contact_use[$key];
-                    $newContactPoint->actually = ( (isset($request->contact_actually[$key]) && $request->contact_actually[$key] == 1) ? 1:2 );
+                    $newContactPoint->actually = ((isset($request->contact_actually[$key]) && $request->contact_actually[$key] == 1) ? 1 : 2);
                     $newContactPoint->save();
                 }
             }
             //&& $request->organization_id[$key] != null
-            if ($request->has('organization_id') ) {
+            if ($request->has('organization_id')) {
                 foreach ($request->organization_id as $key => $organization_id) {
 
                     if ($organization_id != null) {
@@ -219,7 +235,7 @@ class PatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Application|Factory|View
      */
     public function edit($id)
@@ -234,7 +250,7 @@ class PatientController extends Controller
         $organizations = Organization::all();
         $specialties = Specialty::all();
         $patientCongregationIds = $patient->congregations->pluck('id')->toArray();
-        $congregationOther = ($patient->congregationUsers()->where('congregation_id', 10)->first()) ?  $patient->congregationUsers()->where('congregation_id', 10)->first()->other : '';
+        $congregationOther = ($patient->congregationUsers()->where('congregation_id', 10)->first()) ? $patient->congregationUsers()->where('congregation_id', 10)->first()->other : '';
         return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'specialties', 'patientCongregationIds', 'congregationOther'));
     }
 
@@ -242,7 +258,7 @@ class PatientController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -379,7 +395,7 @@ class PatientController extends Controller
             //PRACTITIONER
             $storedPractitionerIds = $patient->practitioners->pluck('id')->toArray();
             if ($request->has('organization_id')) {
-               // dd($storedPractitionerIds);
+                // dd($storedPractitionerIds);
                 //forearch para actualizar/agregar practitioners
                 foreach ($request->organization_id as $key => $organization_id) {
                     if ($request->practitioner_id[$key] == null) {
@@ -432,7 +448,7 @@ class PatientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

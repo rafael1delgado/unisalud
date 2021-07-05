@@ -27,6 +27,7 @@ class AsignAppointment extends Component
     public $practitioner_id;
     public $appointments_from;
     public $appointments_to;
+    public $dv;
 
     protected $listeners = ['userSelected' => 'setUser',
     ];
@@ -39,12 +40,18 @@ class AsignAppointment extends Component
             $this->user = User::getUsersByName($this->name)->first();
         }
 
-        $this->appointmentsHistory = Appointment::query()
-            ->where('user_id', $this->user->id)
-            ->get();
+        if ($this->user) {
+            $this->appointmentsHistory = $this->user->appointments()->withTrashed()->get();
+        }
+    }
 
-//        dd($this->appointmentsHistory);
-
+    public function setDv()
+    {
+        $run = intval($this->run);
+        $s = 1;
+        for ($m = 0; $run != 0; $run /= 10)
+            $s = ($s + $run % 10 * (9 - $m++ % 6)) % 11;
+        $this->dv = chr($s ? $s + 47 : 75);
     }
 
     public function setUser($userId)
@@ -62,27 +69,37 @@ class AsignAppointment extends Component
         }
 
         $query = Appointment::query();
+
         $query->when($this->appointments_from === null && $this->appointments_to === null, function ($q) {
             return $q->whereDate('start', '>=', Carbon::now()->toDateString());
         });
+
         $query->when($this->appointments_from != null && $this->appointments_to != null, function ($q) {
             return $q->whereDate('start', '>=', $this->appointments_from)
                 ->whereDate('start', '<=', $this->appointments_to);
         });
+
         $query->when($this->appointments_from === null && $this->appointments_to != null, function ($q) {
             return $q->whereDate('start', '<=', $this->appointments_to);
         });
+
         $query->when($this->appointments_from != null && $this->appointments_to === null, function ($q) {
             return $q->whereDate('start', '<=', $this->appointments_from);
         });
+
         $query->whereHas('theoreticalProgramming', function ($q) {
             return $q->where('specialty_id', $this->specialty_id);
         });
+
         $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
-            return $q->whereHas('theoreticalProgramming', function ($q) use($userPractitioner) {
+            return $q->whereHas('theoreticalProgramming', function ($q) use ($userPractitioner) {
                 return $q->where('user_id', $userPractitioner->id);
             });
         });
+
+        $query->where('status', 'proposed');
+
+        $query->orderBy('start');
 
         $this->appointments = $query->get();
 
@@ -90,13 +107,21 @@ class AsignAppointment extends Component
 
     public function asignAppointment()
     {
-        $selectedAppointments = Appointment::whereIn('id', [$this->selectedAppointments]);
-        $selectedAppointments->update(['user_id' => $this->user->id,
-                'practitioner_id' => $this->practitioner_id,
-                'status' => 'booked']
-        );
-        session()->flash('success', 'Cita asignada');
-        return redirect()->route('some.appointment');
+        if (count($this->selectedAppointments) > 0) {
+            $selectedAppointments = Appointment::whereIn('id', [$this->selectedAppointments]);
+
+            foreach ($selectedAppointments->get() as $selectedAppointment) {
+                $selectedAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+                $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
+            }
+
+            $selectedAppointments->update(
+                ['status' => 'booked']
+            );
+
+            session()->flash('success', 'Cita asignada');
+            return redirect()->route('some.appointment');
+        }
     }
 
     public function getPractitioners()
@@ -114,18 +139,8 @@ class AsignAppointment extends Component
         $this->practitioners = null;
         if ($this->specialty_id != null) {
 
-            $this->practitioners = Practitioner::whereHas('user', function ($query) {
-                return $query->whereHas('userSpecialties', function ($query) {
-                    return $query->where('specialty_id', $this->specialty_id);
-                });
-            })
+            $this->practitioners = Practitioner::where('specialty_id', $this->specialty_id)
                 ->get();
-
-//            $this->practitioners = User::whereHas('userSpecialties', function ($query) {
-//                return $query->where('specialty_id', $this->specialty_id);
-//            })
-//                ->has('practitioners')
-//                ->get();
         }
 
         if ($this->profession_id != null) {
@@ -134,20 +149,43 @@ class AsignAppointment extends Component
                 return $query->whereHas('userProfessions', function ($query) {
                     return $query->where('profession_id', $this->profession_id);
                 });
-            })
-                ->get();
+            })->get();
+        }
+    }
 
-//            $this->practitioners = User::whereHas('userProfessions', function ($query) {
-//                return $query->where('profession_id', $this->profession_id);
-//            })
-//                ->has('practitioners')
-//                ->get();
+    public function cancelAppointment($appointmentId)
+    {
+        $appointment = Appointment::find($appointmentId);
+
+        $duplicateAppointment = $appointment->replicate();
+        $duplicateAppointment->status = 'proposed';
+        $duplicateAppointment->save();
+
+        $ids = $appointment->users()->allRelatedIds();
+        foreach ($ids as $id) {
+            $appointment->users()->updateExistingPivot( $id, ['status' => 'declined',
+            ]);
+        }
+
+        $ids = $appointment->practitioners()->allRelatedIds();
+        foreach ($ids as $id) {
+            $appointment->practitioners()->updateExistingPivot($id, ['status' => 'declined',
+            ]);
+        }
+
+        $appointment->status = 'cancelled';
+        $appointment->delete();
+        $appointment->save();
+
+        if ($this->user) {
+            $this->user->refresh();
+            $this->appointmentsHistory = $this->user->appointments()->withTrashed()->get();
+
         }
     }
 
     public function render()
     {
-
         return view('livewire.some.asign-appointment');
     }
 }

@@ -3,11 +3,13 @@
 
         <div class="form-group col-md-4">
             <label for="inputrut">RUT</label>
-            <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run">
+            <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run"
+                   wire:change="setDv()">
+
         </div>
         <div class="form-group col-md-1">
             <label for="inputdv">Dv</label>
-            <input type="text" class="form-control" placeholder="Dv">
+            <input type="text" class="form-control" placeholder="Dv" wire:model="dv" readonly>
         </div>
 
         {{--        <div class="form-group col-md-4">--}}
@@ -15,15 +17,16 @@
         {{--            <input type="text" class="form-control" placeholder="Ingrese Nombre" wire:model.lazy="name">--}}
         {{--        </div>--}}
 
+        <div class="form-group col-md-2">
+            <label for="inputEmail4">&nbsp;</label>
+            <button type="button" class="btn btn-primary form-control" wire:click="searchUser()">Buscar</button>
+        </div>
+
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" data-toggle="modal"
                     data-target="#searchUserModal">...
             </button>
-        </div>
-        <div class="form-group col-md-2">
-            <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="searchUser()">Buscar</button>
         </div>
     </div>
 
@@ -81,6 +84,7 @@
                     <tr>
                         <th scope="col">HISTORIAL DE CITAS MÉDICAS</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </thead>
                     <tbody>
 
@@ -89,6 +93,17 @@
                             <tr>
                                 <th scope="row">{{$appointmentHistory->start}}</th>
                                 <td>{{$appointmentHistory->theoreticalProgramming->specialty->specialty_name}}</td>
+                                <td>
+                                    <a href="{{ route('some.appointment_detail',$appointmentHistory->id) }}"
+                                      class="btn btn-sm btn-outline-secondary">
+                                      <span class="fas fa-eye" aria-hidden="true"></span>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('¿Desea cancelar la cita?') || event.stopImmediatePropagation();"
+                                            wire:click="cancelAppointment({{$appointmentHistory->id}})"
+                                            {{ ($appointmentHistory->status == 'cancelled' ? 'disabled' : '' ) }}><i class="fas fa-ban"></i>
+                                    </button>
+                                </td>
                             </tr>
                         @endforeach
                     @endif
@@ -264,8 +279,8 @@
             <thead class="table-info">
             <tr>
                 <th scope="col">Profesional</th>
-                <th scope="col">Especialidad</th>
-                <th scope="col">Subespecialidad</th>
+                <th scope="col">Actividad</th>
+                <th scope="col">Subactividad</th>
                 <th scope="col">Hora</th>
                 {{--                <th scope="col">Cupo</th>--}}
                 {{--                <th scope="col">Sobre Cupo</th>--}}
@@ -281,7 +296,7 @@
                             <input class="form-check-input " type="checkbox" value="{{$appointment->id}}"
                                    name="selectedAppointments[{{$key}}]" wire:model="selectedAppointments" required>
                             <label class="form-check-label"
-                                   for="invalidCheck2">{{$appointment->theoreticalProgramming->User->officialFullName}}</label>
+                                   for="invalidCheck2">{{$appointment->theoreticalProgramming->user->officialFullName}}</label>
                         </td>
 
                         <td>{{$appointment->theoreticalProgramming->activity->activity_name}}</td>
@@ -297,11 +312,11 @@
         </table>
     </div>
 
-   @livewire('some.search-user')
+    @livewire('some.search-user')
 
     <hr class="mt-3">
 
-{{--    @livewireScripts--}}
+    {{--    @livewireScripts--}}
 
     <script>
         // window.livewire.on('userSelected', () => {
@@ -314,5 +329,3 @@
         // })
     </script>
 </div>
-
-

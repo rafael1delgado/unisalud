@@ -9,17 +9,21 @@ use App\Models\User;
 
 class SelectMedProgEmployee extends Component
 {
+    // public $request;
     public $type;
     public $specialties;
     public $professions;
     public $specialty_id;
     public $profession_id;
     public $users;
+    public $user_id;
 
     public function render()
     {
         $this->specialties = null;
         $this->professions = null;
+        $this->users = null;
+        
         if ($this->type != null) {
           if ($this->type == "Médico") {
             $this->specialties = Specialty::orderBy('specialty_name','ASC')->get();

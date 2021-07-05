@@ -30,7 +30,7 @@
         <br>
 
         <p><strong>Equipo Telemedicina<br>
-           <strong>Hospital Dr Ernesto Torres<br>
+           <strong>Hospital Dr. Ernesto Torres G.<br>
            <strong>Servicio de Salud Iquique
         </p>
 
@@ -58,7 +58,40 @@
         </ul>
     @endif
 
-    @if($fqRequest->name == 'dispensing' || $fqRequest->name =='home hospitalization')
+    @if($fqRequest->name == 'dispensing')
+
+    <p>Por medio de este correo, se informa que su receta está siendo preparada
+      por personal de farmacia central, nos pondremos en contacto con usted para
+      coordinar la entrega sus medicamentos en domicilio.</p>
+
+    <ul>
+        <li><strong>Fecha / Hora estimada entrega</strong>: {{ $fqRequest->date_confirm->format('d-m-Y H:i:s') }}</li>
+        <li><strong>Observación sobre entrega</strong>: {{ $fqRequest->observation_request }}</li>
+    </ul>
+
+    <br>
+
+    <p>Recomendaciones:</p>
+
+    <ul>
+        <li>Recuerde administrar los medicamentos según las pautas indicadas por
+            el médico en su receta.</li>
+        <li>Procure almacenar sus medicamentos e insumos en lugares frescos y secos.</li>
+        <li>En caso de presentar alguna reacción adversa por el uso de sus medicamentos
+          o dispositivos médicos, recuerde informar inmediatamente a un profesional de la salud.</li>
+        <li>Recuerde solicitar su próxima receta con anticipación para gestionar oportunamente.</li>
+    </ul>
+
+    <br>
+
+    <p><strong>Equipo de Farmacia <br>
+       <strong>Hospital Dr. Ernesto Torres T.<br>
+       <strong>Servicio de Salud Iquique
+    </p>
+
+    @endif
+
+    @if($fqRequest->name =='home hospitalization')
     <p>Por medio de este mail, se informa respuesta a su solicitud de <strong>{{ $fqRequest->NameValue }}</strong>:</p>
 
     <ul>

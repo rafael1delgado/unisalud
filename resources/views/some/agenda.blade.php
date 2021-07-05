@@ -41,7 +41,10 @@
     <div class="form-row">
 
       <div class="form-group col-md-9">
-        @livewire('medical_programmer.select-med-prog-employee')
+        @livewire('medical_programmer.select-med-prog-employee',['type'         => $request->type,
+                                                                 'specialty_id' => $request->specialty_id,
+                                                                 'profession_id'=> $request->profession_id,
+                                                                 'user_id'      => $request->user_id])
       </div>
 
       <div class="form-group col-md-3">
@@ -86,11 +89,22 @@
             events: [
               //control 14  de junio
                 @foreach($appointments as $appointment)
-                  {
-                  title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
-                  start: '{{$appointment->start}}',
-                  end: '{{$appointment->end}}'
-                  },
+                  @if($appointment->status == "booked")
+                    {
+                    id: '{{$appointment->id}}',
+                    title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
+                    start: '{{$appointment->start}}',
+                    end: '{{$appointment->end}}',
+                    color: 'gray',
+                    },
+                  @else
+                    {
+                    id: '{{$appointment->id}}',
+                    title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
+                    start: '{{$appointment->start}}',
+                    end: '{{$appointment->end}}'
+                    },
+                  @endif
                 @endforeach
                 // {
                 // title: 'Almuerzo',
@@ -101,7 +115,12 @@
 
 
 
-            ]
+            ],
+
+            eventClick: function(info) {
+              let id = info.event.id;
+              window.open('appointment_detail/'+id,"_self");
+            }
         });
 
         calendar.render();
