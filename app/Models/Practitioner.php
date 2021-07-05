@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\MedicalProgrammer\Profession;
 use App\Models\MedicalProgrammer\Specialty;
 use App\Models\Some\Appointment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,6 +32,16 @@ class Practitioner extends Model
     public function specialty()
     {
         return $this->belongsTo(Specialty::class, 'specialty_id');
+    }
+
+    public function profession()
+    {
+        return $this->belongsTo(Profession::class, 'profession_id');
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class, 'organization_id');
     }
 
     public function appointments()
