@@ -4,8 +4,7 @@
         <div class="form-group col-md-4">
             <label for="inputrut">RUT</label>
             <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run"
-                   wire:change="setDv()"
-            >
+                   wire:change="setDv()">
 
         </div>
         <div class="form-group col-md-1">
