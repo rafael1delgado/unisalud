@@ -60,11 +60,11 @@
 
         <div class="form-group col-md-2">
             <label for="inputEmail4">Fecha </label>
-            <input type="date" class="form-control" id="inputEmail4" placeholder="Ingrese Fecha">
+            <input type="date" class="form-control" id="inputEmail4" placeholder="Ingrese Fecha" wire:model.lazy="selectedDateFrom">
         </div>
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control">Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="getAppointments()" >Buscar</button>
         </div>
 
     </div>

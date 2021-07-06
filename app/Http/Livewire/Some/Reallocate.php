@@ -19,6 +19,7 @@ class Reallocate extends Component
     public $specialty_id;
     public $profession_id;
     public $practitioner_id;
+    public $selectedDateFrom;
 
     public function getPractitioners()
     {
@@ -51,7 +52,6 @@ class Reallocate extends Component
 
     public function getAppointments()
     {
-
         $userPractitioner = null;
         if ($this->practitioner_id) {
             $userPractitioner = Practitioner::find($this->practitioner_id)->user;
@@ -59,21 +59,8 @@ class Reallocate extends Component
 
         $query = Appointment::query();
 
-        $query->when($this->appointments_from === null && $this->appointments_to === null, function ($q) {
+        $query->when($this->selectedDateFrom != null, function ($q) {
             return $q->whereDate('start', '>=', Carbon::now()->toDateString());
-        });
-
-        $query->when($this->appointments_from != null && $this->appointments_to != null, function ($q) {
-            return $q->whereDate('start', '>=', $this->appointments_from)
-                ->whereDate('start', '<=', $this->appointments_to);
-        });
-
-        $query->when($this->appointments_from === null && $this->appointments_to != null, function ($q) {
-            return $q->whereDate('start', '<=', $this->appointments_to);
-        });
-
-        $query->when($this->appointments_from != null && $this->appointments_to === null, function ($q) {
-            return $q->whereDate('start', '<=', $this->appointments_from);
         });
 
         $query->whereHas('theoreticalProgramming', function ($q) {
@@ -91,6 +78,9 @@ class Reallocate extends Component
         $query->orderBy('start');
 
         $this->appointments = $query->get();
+
+//        dd($this->appointments);
+
     }
 
     public function render()

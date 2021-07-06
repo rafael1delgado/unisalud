@@ -33,7 +33,7 @@
 
                 <fieldset class="form-group col-2">
                     <label for="for_street_name">Calle</label>
-                    <input type="text" class="form-control" name="street_name[]"
+                    <input type="text" class="form-control" name="street_name[]" value="{{old('street_name.1')}}"
                         wire:model='addresses.{{$value}}.street_name'
                         {{--                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}"--}}>
                 </fieldset>

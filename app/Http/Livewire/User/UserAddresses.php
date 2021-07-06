@@ -66,6 +66,21 @@ class UserAddresses extends Component
                 $this->addresses[$value]['actually'] = $this->patient->addresses->slice($key, 1)->first()->actually;
             }
         }
+
+//        dd(old('street_name.0'));
+
+//        dd($this->inputs);
+
+//        foreach (old('street_name') as $addressValue) {
+//
+//        }
+
+        if (old('street_name.0')) {
+            foreach ($this->inputs as $key => $value) {
+                $this->addresses[$value]['street_name'] = old('street_name.'.$key);
+            }
+        }
+
     }
     public function setActuallyAddress($index){
         // $index);

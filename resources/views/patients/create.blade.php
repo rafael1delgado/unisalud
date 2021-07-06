@@ -89,7 +89,7 @@
                         <select name="nationality_id" id="for_nationality_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($countries as $country)
-                                <option value="{{ $country->id }}" >{{ $country->name }}</option>
+                                <option value="{{ $country->id }}" {{(old('nationality_id') == $country->id) ? 'selected' : ''}} >{{ $country->name }}</option>
                             @endforeach
                         </select>
                     </fieldset>
