@@ -45,6 +45,14 @@ class UserContactPoints extends Component
                 $this->contactPoints[$value]['actually'] = $this->patient->contactPoints->slice($key, 1)->first()->actually;
             }
         }
+    
+        if (old('contact_value')) {
+            foreach ($this->inputs as $key => $value) {
+               // $this->contactPoints[$value]['system'] = old('system.'.$key);
+               // $this->contactPoints[$value]['use'] = old('use.'.$key);
+                $this->contactPoints[$value]['value'] = old('contact_value.'.$key);
+            }
+        }
     }
     public function setActuallyContact($index){
             // foreach ($this->inputs as $key => $value) {

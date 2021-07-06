@@ -77,7 +77,15 @@ class UserAddresses extends Component
 
         if (old('street_name.0')) {
             foreach ($this->inputs as $key => $value) {
+                $this->addresses[$value]['address_use'] = old('address_use.'.$key);
                 $this->addresses[$value]['street_name'] = old('street_name.'.$key);
+                $this->addresses[$value]['line'] = old('line.'.$key);
+                $this->addresses[$value]['address_apartment'] = old('address_apartment.'.$key);
+                $this->addresses[$value]['suburb'] =  old('suburb.'.$key);
+                $this->addresses[$value]['commune'] = old('commune.'.$key);
+                $this->addresses[$value]['state'] = old('state.'.$key);
+                $this->addresses[$value]['city'] = old('city.'.$key);
+                $this->addresses[$value]['country'] = old('country.'.$key);
             }
         }
 

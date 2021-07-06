@@ -108,7 +108,7 @@
                     {{--                <div id="otro_etnia">--}}
                     <fieldset class="form-group col-md-4">
                         <label for="for_congregation_other">Otro Pueblo Originario</label>
-                        <input type="text" class="form-control" name="congregation_other" id="for_congregation_other"
+                        <input type="text" class="form-control" name="congregation_other" id="for_congregation_other" value="{{ old('congregation_other') }}"
                                disabled>
                     </fieldset>
                     {{--                </div>--}}
@@ -120,7 +120,7 @@
                         <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($maritalStatus as $status)
-                                <option value="{{ $status->id }}">{{ $status->text }}</option>
+                                <option value="{{ $status->id }}" {{(old('cod_con_marital_id') == $status->id) ? 'selected' : ''}}>{{ $status->text }}</option>
                             @endforeach
                         </select>
                     </fieldset>
