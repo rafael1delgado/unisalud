@@ -20,6 +20,9 @@ class Reallocate extends Component
     public $profession_id;
     public $practitioner_id;
     public $selectedDateFrom;
+    public $selectedPractitioner;
+    public $appointments;
+
 
     public function getPractitioners()
     {
@@ -48,13 +51,15 @@ class Reallocate extends Component
                 });
             })->get();
         }
+
+
     }
 
     public function getAppointments()
     {
-        $userPractitioner = null;
         if ($this->practitioner_id) {
-            $userPractitioner = Practitioner::find($this->practitioner_id)->user;
+            $this->selectedPractitioner = Practitioner::find($this->practitioner_id)->user;
+//            dd($this->selectedPractitioner);
         }
 
         $query = Appointment::query();
@@ -67,13 +72,13 @@ class Reallocate extends Component
             return $q->where('specialty_id', $this->specialty_id);
         });
 
-        $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
-            return $q->whereHas('theoreticalProgramming', function ($q) use ($userPractitioner) {
-                return $q->where('user_id', $userPractitioner->id);
+        $query->when($this->selectedPractitioner != null, function ($q)  {
+            return $q->whereHas('theoreticalProgramming', function ($q)  {
+                return $q->where('user_id', $this->selectedPractitioner->id);
             });
         });
 
-        $query->where('status', 'proposed');
+        $query->where('status', 'booked');
 
         $query->orderBy('start');
 
@@ -81,10 +86,13 @@ class Reallocate extends Component
 
 //        dd($this->appointments);
 
+//        $this->selectedPractitioner = Practitioner::find($this->practitioner_id);
+
     }
 
     public function render()
     {
+
         return view('livewire.some.reallocate');
     }
 }

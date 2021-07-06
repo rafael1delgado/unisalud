@@ -60,11 +60,12 @@
 
         <div class="form-group col-md-2">
             <label for="inputEmail4">Fecha </label>
-            <input type="date" class="form-control" id="inputEmail4" placeholder="Ingrese Fecha" wire:model.lazy="selectedDateFrom">
+            <input type="date" class="form-control" id="inputEmail4" placeholder="Ingrese Fecha"
+                   wire:model.lazy="selectedDateFrom">
         </div>
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="getAppointments()" >Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="getAppointments()">Buscar</button>
         </div>
 
     </div>
@@ -73,62 +74,35 @@
         <table class="table table-sm table-hover">
             <thead>
             <tr class="table-info">
-                <th scope="col">Dr JORGE MIRANDA</th>
+                <th scope="col">{{ ($selectedPractitioner) ? $selectedPractitioner->officialFullName : ''}}</th>
                 <th scope="col">HORA</th>
                 <th scope="col">USUARIO</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr>
-                <th scope="row"></th>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">08:00</label>
-                </td>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">Cristian Carpio</label>
 
-                </td>
 
-            </tr>
-            <tr>
-                <th scope="row"></th>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">09:00</label>
-                </td>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">Alvaro Galleguillos</label>
-                </td>
+            @if($appointments && $appointments->count() > 0)
+                @foreach($appointments as $appointment)
 
-            </tr>
-            <tr>
-                <th scope="row"></th>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">10:00</label>
-                </td>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">Mariano Carrasco</label>
-                </td>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>
+                            <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
+                            <label class="form-check-label" for="invalidCheck2">{{$appointment->start}}</label>
+                        </td>
+                        <td>
+                            <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
+                            <label class="form-check-label"
+                                   for="invalidCheck2">{{$appointment->users->first()->officialFullName}}</label>
 
-            </tr>
-            <tr>
-                <th scope="row"></th>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">11:00</label>
-                </td>
-                <td>
-                    <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">Maria Perez</label>
-                </td>
+                        </td>
 
-            </tr>
+                    </tr>
+                @endforeach
+            @endif
+
             </tbody>
         </table>
     </div>
@@ -166,7 +140,7 @@
         <!--CHECK-->
         <div class="form-group col-md-2 mt-5 ml-4">
 
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" >
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Proxima</label>
         </div>
         <!--CHECK-->
@@ -200,8 +174,6 @@
 
     </div>
     <!-- fin anterior,siguiente,traspasar-->
-
-
 
 
     <!--tabla agenda-->
@@ -257,7 +229,7 @@
                 <th scope="col">ESPECIALIDAD</th>
                 <th scope="col"></th>
                 <th scope="col-md-1"></th>
-                <th scope="col" >CUPOS</th>
+                <th scope="col">CUPOS</th>
                 <th scope="col">SOBRE CUPO</th>
                 <th scope="col">ESTADO</th>
             </tr>
