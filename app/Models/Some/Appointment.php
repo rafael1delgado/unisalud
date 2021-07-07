@@ -32,7 +32,12 @@ class Appointment extends Model
 
     public function appointables()
     {
-      return $this->hasMany('App\Models\appointable','appointment_id');
+      return $this->hasMany('App\Models\Appointable','appointment_id');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Models\CodConAppointmentType', 'cod_con_appointment_type_id');
     }
 
     protected $dates = ['start','end'];

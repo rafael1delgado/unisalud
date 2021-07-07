@@ -59,6 +59,7 @@ class AppointmentController extends Controller
                 $newAppointment->status = 'proposed';
                 $newAppointment->mp_theoretical_programming_id = $theoreticalProgramming->id;
                 $newAppointment->created = now();
+                $newAppointment->cod_con_appointment_type_id = 4;
                 $newAppointment->save();
                 // $appointments->push($newAppointment);
             }
