@@ -126,7 +126,7 @@
                     </select>
                 </div>
 
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     @if($specialties != null)
                         <label for="for_specialty_id">Especialidad</label>
                         <select id="for_specialty_id" name="specialty_id" class="form-control" wire:model.lazy="specialty_id"
@@ -173,6 +173,15 @@
                     </select>
                 </div>
 
+                <div class="form-group col-md-2">
+                    <label for="for_location">Lugar</label>
+                    <select id="for_location" name="location" class="form-control" >
+                        <option selected></option> 
+                        <option>Pasillo Amarillo</option>
+                        <option>Pasillo Rojo</option>
+                        <option>Pasillo Azul</option>
+                    </select>
+                </div>
 
                 <div class="form-group col-md-2">
                     <label for="inputEmail4">Desde</label>
@@ -186,7 +195,7 @@
                         wire:model.lazy="appointments_to">
                 </div>
 
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-1">
                     <label for="inputEmail4">&nbsp;</label>
                     <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()">Buscar</button>
                 </div>
