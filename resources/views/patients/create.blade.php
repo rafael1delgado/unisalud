@@ -34,7 +34,7 @@
 
                 <input type="hidden" name='human_name_use' value='official'>
                 <div class="form-row">
-                    <fieldset class="form-group col-md-6">
+                    <fieldset class="form-group col-md-4">
                         <label for="for_name">Nombres</label>
                         <input type="text" class="form-control" name="text" id="for_name" required value="{{ old('text') }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
@@ -51,6 +51,12 @@
                         <input type="text" class="form-control" name="mothers_family" id="for_mothers_family" required value="{{ old('mothers_family') }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                     </fieldset>
+
+                    <fieldset class="form-group col-md-2">
+                        <label for="for_social_name">Nombre Social</label>
+                        <input type="text" class="form-control" name="social_name" id="social_name" required value="">
+                            
+                    </fieldset>
                 </div>
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
@@ -60,7 +66,7 @@
                             --}}>
                     </fieldset>
 
-                    <fieldset class="form-group col-md-4">
+                    <fieldset class="form-group col-md-2">
                         <label for="for_sex">Sexo</label>
                         <select name="sex" id="for_sex" class="form-control" required>
                             <option value=""></option>
@@ -71,7 +77,7 @@
                         </select>
                     </fieldset>
 
-                    <fieldset class="form-group col-md-4">
+                    <fieldset class="form-group col-md-3">
                         <label for="for_gender">Identidad de Género</label>
                         <select name="gender" id="for_gender" class="form-control" required>
                             <option value=""></option>
@@ -81,8 +87,28 @@
                             <option value="transgender-male" {{old('sex') === 'transgender-male'? 'selected' : ''}}>Masculino Trans "MT"</option>
                         </select>
                     </fieldset>
-
+                    <fieldset class="form-group col-md-3">
+                        <label for="for_cod_con_marital_id">Estado Civil</label>
+                        <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
+                            <option value=""></option>
+                            @foreach($maritalStatus as $status)
+                                <option value="{{ $status->id }}" {{(old('cod_con_marital_id') == $status->id) ? 'selected' : ''}}>{{ $status->text }}</option>
+                            @endforeach
+                        </select>
+                    </fieldset>
                 </div>
+
+                    <div class="form-row">
+                        {{--        <fieldset class="form-group col-2">--}}
+                        {{--            <label for="for_prevision">Previsión</label>--}}
+                        {{--            <select name="prevision" id="for_prevision" class="form-control">--}}
+                        {{--                @foreach($previciones as $previcion)--}}
+                        {{--                    <option value="{{ $previcion['code'] }}">{{ $previcion['display'] }}</option>
+                        --}}
+                        {{--                @endforeach--}}
+                        {{--            </select>--}}
+                        {{--        </fieldset>--}}
+                 </div>
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
                         <label for="for_nationality_id">Nacionalidad</label>
@@ -114,27 +140,7 @@
                     {{--                </div>--}}
                 </div>
 
-                <div class="form-row">
-                    <fieldset class="form-group col-md-4">
-                        <label for="for_cod_con_marital_id">Estado Civil</label>
-                        <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
-                            <option value=""></option>
-                            @foreach($maritalStatus as $status)
-                                <option value="{{ $status->id }}" {{(old('cod_con_marital_id') == $status->id) ? 'selected' : ''}}>{{ $status->text }}</option>
-                            @endforeach
-                        </select>
-                    </fieldset>
-
-                    {{--        <fieldset class="form-group col-2">--}}
-                    {{--            <label for="for_prevision">Previsión</label>--}}
-                    {{--            <select name="prevision" id="for_prevision" class="form-control">--}}
-                    {{--                @foreach($previciones as $previcion)--}}
-                    {{--                    <option value="{{ $previcion['code'] }}">{{ $previcion['display'] }}</option>
-                    --}}
-                    {{--                @endforeach--}}
-                    {{--            </select>--}}
-                    {{--        </fieldset>--}}
-                </div>
+               
             </div>
         </div>
 
