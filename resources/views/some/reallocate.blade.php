@@ -108,7 +108,7 @@
         <div class="form-group col-md-10">
     	</div>
 		<div class="form-group col-md-2">
-			<button type="button" class="btn btn-danger form-control">BLOQUEAR</button>
+			<button type="button" class="btn btn-danger form-control">SUSPENDER</button>
 		</div>
 	</div>  
 	
