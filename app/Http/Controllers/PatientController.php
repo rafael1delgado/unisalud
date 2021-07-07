@@ -64,15 +64,15 @@ class PatientController extends Controller
     public function store(Request $request, $save = null)
     {
 
-//        dd($request);
+        //dd($request);
 
         if ($request->has('id_type')) {
             foreach ($request->id_type as $key => $id_type) {
-                $algo = Identifier::query()
+                $repeated = Identifier::query()
                     ->where('use', $request->id_use[$key])
                     ->where('cod_con_identifier_type_id', $request->id_type[$key])
                     ->where('value', $request->id_value[$key]);
-                if ($algo->count() > 0) {
+                if ($repeated->count() > 0) {
                     session()->flash('warning', 'Se ha ingresando un identificador repetido.');
                     return redirect()->back()->withInput();
                 }
@@ -264,7 +264,7 @@ class PatientController extends Controller
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
-
+//test
         try {
             // dd($request);
             $patient = User::find($id);

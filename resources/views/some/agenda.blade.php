@@ -89,11 +89,22 @@
             events: [
               //control 14  de junio
                 @foreach($appointments as $appointment)
-                  {
-                  title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
-                  start: '{{$appointment->start}}',
-                  end: '{{$appointment->end}}'
-                  },
+                  @if($appointment->status == "booked")
+                    {
+                    id: '{{$appointment->id}}',
+                    title: '{{$appointment->theoreticalProgramming->activity->activity_name}} <br> {{$appointment->users->first()->OfficialFullName}}',
+                    start: '{{$appointment->start}}',
+                    end: '{{$appointment->end}}',
+                    color: 'gray',
+                    },
+                  @else
+                    {
+                    id: '{{$appointment->id}}',
+                    title: '{{$appointment->theoreticalProgramming->activity->activity_name}}',
+                    start: '{{$appointment->start}}',
+                    end: '{{$appointment->end}}'
+                    },
+                  @endif
                 @endforeach
                 // {
                 // title: 'Almuerzo',
@@ -104,7 +115,12 @@
 
 
 
-            ]
+            ],
+
+            eventClick: function(info) {
+              let id = info.event.id;
+              window.open('appointment_detail/'+id,"_self");
+            }
         });
 
         calendar.render();

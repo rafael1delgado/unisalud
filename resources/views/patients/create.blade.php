@@ -42,20 +42,20 @@
 
                     <fieldset class="form-group col-md-3">
                         <label for="for_fathers_family">Apellido Paterno</label>
-                        <input type="text" class="form-control" name="fathers_family" id="for_fathers_family" required
+                        <input type="text" class="form-control" name="fathers_family" id="for_fathers_family" required value="{{ old('fathers_family') }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                     </fieldset>
 
                     <fieldset class="form-group col-md-3">
                         <label for="for_mothers_family">Apellido Materno</label>
-                        <input type="text" class="form-control" name="mothers_family" id="for_mothers_family" required
+                        <input type="text" class="form-control" name="mothers_family" id="for_mothers_family" required value="{{ old('mothers_family') }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                     </fieldset>
                 </div>
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
                         <label for="for_birthday">Fecha de nacimiento</label>
-                        <input type="date" class="form-control" name="birthday" required
+                        <input type="date" class="form-control" name="birthday" required value="{{ old('birthday') }}"
                             {{-- id="for_birthday" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}"
                             --}}>
                     </fieldset>
@@ -64,10 +64,10 @@
                         <label for="for_sex">Sexo</label>
                         <select name="sex" id="for_sex" class="form-control" required>
                             <option value=""></option>
-                            <option value="male">Masculino</option>
-                            <option value="female">Femenino</option>
-                            <option value="unknown">Desconocido</option>
-                            <option value="other">Otro</option>
+                            <option value="male" {{old('sex') === 'male'? 'selected' : ''}}>Masculino</option>
+                            <option value="female" {{old('sex') === 'female'? 'selected' : ''}}>Femenino</option>
+                            <option value="unknown"{{old('sex') === 'unknown'? 'selected' : ''}}>Desconocido</option>
+                            <option value="other"{{old('sex') === 'other'? 'selected' : ''}}>Otro</option>
                         </select>
                     </fieldset>
 
@@ -75,10 +75,10 @@
                         <label for="for_gender">Identidad de Género</label>
                         <select name="gender" id="for_gender" class="form-control" required>
                             <option value=""></option>
-                            <option value="male">Masculino</option>
-                            <option value="female">Femenino</option>
-                            <option value="transgender-female">Femenino Trans "FT"</option>
-                            <option value="transgender-male">Masculino Trans "MT"</option>
+                            <option value="male" {{old('sex') === 'male'? 'selected' : ''}}>Masculino</option>
+                            <option value="female" {{old('sex') === 'female'? 'selected' : ''}}>Femenino</option>
+                            <option value="transgender-female" {{old('sex') === 'transgender-female'? 'selected' : ''}}>Femenino Trans "FT"</option>
+                            <option value="transgender-male" {{old('sex') === 'transgender-male'? 'selected' : ''}}>Masculino Trans "MT"</option>
                         </select>
                     </fieldset>
 
@@ -89,7 +89,7 @@
                         <select name="nationality_id" id="for_nationality_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($countries as $country)
-                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                <option value="{{ $country->id }}" {{(old('nationality_id') == $country->id) ? 'selected' : ''}} >{{ $country->name }}</option>
                             @endforeach
                         </select>
                     </fieldset>
@@ -108,7 +108,7 @@
                     {{--                <div id="otro_etnia">--}}
                     <fieldset class="form-group col-md-4">
                         <label for="for_congregation_other">Otro Pueblo Originario</label>
-                        <input type="text" class="form-control" name="congregation_other" id="for_congregation_other"
+                        <input type="text" class="form-control" name="congregation_other" id="for_congregation_other" value="{{ old('congregation_other') }}"
                                disabled>
                     </fieldset>
                     {{--                </div>--}}
@@ -120,7 +120,7 @@
                         <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($maritalStatus as $status)
-                                <option value="{{ $status->id }}">{{ $status->text }}</option>
+                                <option value="{{ $status->id }}" {{(old('cod_con_marital_id') == $status->id) ? 'selected' : ''}}>{{ $status->text }}</option>
                             @endforeach
                         </select>
                     </fieldset>

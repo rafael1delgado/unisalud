@@ -6,10 +6,14 @@ use App\Models\Practitioner;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointment extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+    // protected $fillable = ['start','end'];
 
     public function theoreticalProgramming()
     {
@@ -25,5 +29,13 @@ class Appointment extends Model
     {
         return $this->morphedByMany(Practitioner::class, 'appointable')->withTimestamps()->withPivot('type', 'required', 'status', 'period_from', 'period_to');
     }
+
+    public function appointables()
+    {
+      return $this->hasMany('App\Models\appointable','appointment_id');
+    }
+
+    protected $dates = ['start','end'];
+    protected $table = 'appointments';
 
 }

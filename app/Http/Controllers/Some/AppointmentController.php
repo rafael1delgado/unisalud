@@ -58,6 +58,7 @@ class AppointmentController extends Controller
                 $newAppointment->end = $lastDate->addMinutes($period);
                 $newAppointment->status = 'proposed';
                 $newAppointment->mp_theoretical_programming_id = $theoreticalProgramming->id;
+                $newAppointment->created = now();
                 $newAppointment->save();
                 // $appointments->push($newAppointment);
             }
@@ -76,6 +77,12 @@ class AppointmentController extends Controller
       $appointments = Appointment::whereHas('theoreticalProgramming', function ($query) use ($user_id) {
                                       return $query->where('user_id',$user_id);
                                    })->get();
+
+      // foreach ($appointments as $key => $appointment) {
+      //   if ($appointment->status == "booked") {
+      //       dd($appointment->appointables);
+      //   }
+      // }
       return view('some.agenda', compact('appointments','request'));
     }
 
@@ -95,5 +102,10 @@ class AppointmentController extends Controller
         }
 
         return view('some.open_tprogrammer', compact('request', 'theoreticalProgrammings'));
+    }
+
+    public function appointment_detail($id){
+      $appointment = Appointment::find($id);
+      return view('some.appointment_detail', compact('appointment'));
     }
 }

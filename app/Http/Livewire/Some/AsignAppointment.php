@@ -41,7 +41,7 @@ class AsignAppointment extends Component
         }
 
         if ($this->user) {
-            $this->appointmentsHistory = $this->user->appointments;
+            $this->appointmentsHistory = $this->user->appointments()->withTrashed()->get();
         }
     }
 
@@ -99,6 +99,8 @@ class AsignAppointment extends Component
 
         $query->where('status', 'proposed');
 
+        $query->orderBy('start');
+
         $this->appointments = $query->get();
 
     }
@@ -155,12 +157,30 @@ class AsignAppointment extends Component
     {
         $appointment = Appointment::find($appointmentId);
 
+        $duplicateAppointment = $appointment->replicate();
+        $duplicateAppointment->status = 'proposed';
+        $duplicateAppointment->save();
+
+        $ids = $appointment->users()->allRelatedIds();
+        foreach ($ids as $id) {
+            $appointment->users()->updateExistingPivot( $id, ['status' => 'declined',
+            ]);
+        }
+
+        $ids = $appointment->practitioners()->allRelatedIds();
+        foreach ($ids as $id) {
+            $appointment->practitioners()->updateExistingPivot($id, ['status' => 'declined',
+            ]);
+        }
+
         $appointment->status = 'cancelled';
+        $appointment->delete();
         $appointment->save();
 
         if ($this->user) {
             $this->user->refresh();
-            $this->appointmentsHistory = $this->user->appointments;
+            $this->appointmentsHistory = $this->user->appointments()->withTrashed()->get();
+
         }
     }
 
