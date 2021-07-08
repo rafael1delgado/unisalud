@@ -100,7 +100,7 @@
                                 data-live-search="true" multiple="" data-size="10" title="Seleccione..." multiple
                                 data-actions-box="true">
                             @foreach($congregations as $congregation)
-                                <option value="{{ $congregation->id }}">{{ $congregation->name}}</option>
+                                <option value="{{ $congregation->id }}" {{(old('congregation_id.0') == $congregation->id) ? 'selected' : ''}}>{{ $congregation->name}}</option>
                             @endforeach
                         </select>
                     </fieldset>

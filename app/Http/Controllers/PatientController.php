@@ -64,7 +64,8 @@ class PatientController extends Controller
     public function store(Request $request, $save = null)
     {
 
-        //dd($request);
+        
+    //dd($request);
 
         if ($request->has('id_type')) {
             foreach ($request->id_type as $key => $id_type) {

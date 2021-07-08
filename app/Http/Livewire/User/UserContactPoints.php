@@ -48,8 +48,8 @@ class UserContactPoints extends Component
     
         if (old('contact_value')) {
             foreach ($this->inputs as $key => $value) {
-               // $this->contactPoints[$value]['system'] = old('system.'.$key);
-               // $this->contactPoints[$value]['use'] = old('use.'.$key);
+                $this->contactPoints[$value]['system'] = old('contact_system.'.$key);
+                $this->contactPoints[$value]['use'] = old('contact_use.'.$key);
                 $this->contactPoints[$value]['value'] = old('contact_value.'.$key);
             }
         }
