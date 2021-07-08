@@ -3,7 +3,7 @@
         <fieldset class="form-group col-3">
             <label for="for_searchf"></label>
             <input type="text" class="form-control" id="for_searchf"
-            wire:model.debounce.300ms="searchf" placeholder="Buscar por nombre">
+            wire:model.debounce.300ms="searchf" placeholder="Buscar por nombre" autocomplete="off">
         </fieldset>
     </div>
 
@@ -28,7 +28,9 @@
                     <td>{{ $patient->birthday ?? ''}}</td>
                     <td>{{ $patient->gender ?? ''}}</td>
                 </tr>
-            @endforeach
-        </tbody>
+            @endforeach            
+        </tbody>        
     </table>
+    {{ $patients->links() }}
 </div>
+

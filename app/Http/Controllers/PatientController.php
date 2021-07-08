@@ -37,7 +37,7 @@ class PatientController extends Controller
      * @return Application|Factory|View
      */
     public function index()
-    {
+    {        
         return view('patients.index');
     }
 
