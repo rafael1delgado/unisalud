@@ -116,109 +116,137 @@
     </div>
 
 
-    <hr class="mt-3 mb-3">
-    <div class="form-row">
 
-        <div class="form-group col-md-5">
+    <div class="form-row">
+            <div class="form-group col-md-1">
+                    <label for="for_type">Tipo</label>
+                    <select id="for_type" name="type" class="form-control" wire:model.lazy="type" required
+                            wire:change="getPractitioners()">
+                        <option></option>
+                        <option>Médico</option>
+                        <option>No médico</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-2">
+                    @if($specialties != null)
+                        <label for="for_specialty_id">Especialidad</label>
+                        <select id="for_specialty_id" name="specialty_id" class="form-control" wire:model.lazy="specialty_id"
+                                wire:change="getPractitioners()"
+                                required>
+                            <option></option>
+                            @foreach($specialties as $specialty)
+                                <option value="{{$specialty->id}}">{{$specialty->specialty_name}}</option>
+                            @endforeach
+                        </select>
+                    @endif
+
+                    @if($professions != null)
+                        <label for="for_profession_id">Profesión</label>
+                        <select id="for_profession_id" name="profession_id" class="form-control" wire:model.lazy="profession_id"
+                                wire:change="getPractitioners"
+                                required>
+                            <option></option>
+                            @foreach($professions as $profession)
+                                <option value="{{$profession->id}}">{{$profession->profession_name}}</option>
+                            @endforeach
+                        </select>
+                    @endif
+
+                    @if($specialties == null && $professions == null)
+                        <label for="for_profession_id">&nbsp;</label>
+                        <select class="form-control">
+                            <option></option>
+                        </select>
+                    @endif
+
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="for_practitioner_id">Funcionario</label>
+                    <select id="for_practitioner_id" name="practitioner_id" class="form-control"
+                            wire:model.lazy="practitioner_id" required>
+                        <option></option>
+                        @if($practitioners != null)
+                            @foreach($practitioners as $practitioner)
+                                <option value="{{$practitioner->id}}">{{$practitioner->user->OfficialFullName}}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="for_location">Lugar</label>
+                    <select id="for_location" name="location" class="form-control" >
+                        <option selected></option> 
+                        <option>Pasillo Amarillo</option>
+                        <option>Pasillo Rojo</option>
+                        <option>Pasillo Azul</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="inputEmail4">Desde</label>
+                    <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha inicio"
+                        wire:model.lazy="appointments_from">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="inputEmail4">Hasta</label>
+                    <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha fin"
+                        wire:model.lazy="appointments_to">
+                </div>
+
+                <div class="form-group col-md-1">
+                    <label for="inputEmail4">&nbsp;</label>
+                    <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()">Buscar</button>
+                </div>
+                <fieldset class="form-group col-4">
+                    <label></label>
+                    <div class="form-group mt-1 ml-4">
+                        {{--                <input class="form-check-input" type="checkbox" id="gridCheck">--}}
+                        {{--                <label class="form-check-label" for="gridCheck">--}}
+                        {{--                    Proxima Fecha Disponible--}}
+                        {{--                </label>--}}
+                    </div>
+                </fieldset>
+
+    </div>
+
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
             <label for="inputEmail4">Prevision</label>
-            <select id="inputState" class="form-control">
-                <option selected>Fonasa</option>
-                <option>Isapre</option>
-            </select>
+            <div class="input-group mb-3">
+                        <select id="inputState" class="form-control col-md-6">
+                            <option selected>Prevision</option>
+                            <option>Fonasa</option>
+                            <option>Isapre</option>
+                        </select>
+                            <select id="inputState" class="form-control col-md-3">
+                                <option selected>Tramo</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                            </select>
+                    <button class="btn btn-primary col-md-3" type="button" id="button-addon1">Fonasa</button>
+            </div>
         </div>
-        <div class="form-group col-md-5">
-            <label for="inputEmail4">Tramo</label>
-            <select id="inputState" class="form-control">
-                <option selected>A</option>
-                <option>B</option>
-                <option>C</option>
-                <option>D</option>
-            </select>
-        </div>
-        <div class="form-group col-md-2">
-            <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control">Fonasa</button>
-        </div>
-
-    </div>
-
-    <div class="form-row">
-
-        <div class="form-group col-md-4">
-            <label for="for_type">Tipo</label>
-            <select id="for_type" name="type" class="form-control" wire:model.lazy="type" required
-                    wire:change="getPractitioners()">
-                <option></option>
-                <option>Médico</option>
-                <option>No médico</option>
-            </select>
-        </div>
-
-        <div class="form-group col-md-4">
-            @if($specialties != null)
-                <label for="for_specialty_id">Especialidad</label>
-                <select id="for_specialty_id" name="specialty_id" class="form-control" wire:model.lazy="specialty_id"
-                        wire:change="getPractitioners()"
-                        required>
-                    <option></option>
-                    @foreach($specialties as $specialty)
-                        <option value="{{$specialty->id}}">{{$specialty->specialty_name}}</option>
-                    @endforeach
-                </select>
-            @endif
-
-            @if($professions != null)
-                <label for="for_profession_id">Profesión</label>
-                <select id="for_profession_id" name="profession_id" class="form-control" wire:model.lazy="profession_id"
-                        wire:change="getPractitioners"
-                        required>
-                    <option></option>
-                    @foreach($professions as $profession)
-                        <option value="{{$profession->id}}">{{$profession->profession_name}}</option>
-                    @endforeach
-                </select>
-            @endif
-
-            @if($specialties == null && $professions == null)
-                <label for="for_profession_id">&nbsp;</label>
-                <select class="form-control">
-                    <option></option>
-                </select>
-            @endif
-
-        </div>
-
-        <div class="form-group col-md-4">
-            <label for="for_practitioner_id">Funcionario</label>
-            <select id="for_practitioner_id" name="practitioner_id" class="form-control"
-                    wire:model.lazy="practitioner_id" required>
-                <option></option>
-                @if($practitioners != null)
-                    @foreach($practitioners as $practitioner)
-                        <option value="{{$practitioner->id}}">{{$practitioner->user->OfficialFullName}}</option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
-
-
-    </div>
-
-    <div class="form-row">
 
         <div class="form-group col-md-1">
             <label for="imputBool">Codigo</label>
             <input type="bool" class="form-control" id="inputBool" placeholder="">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-2">
             <label for="imputBool">Prestación</label>
             <input type="bool" class="form-control" id="inputBool" placeholder="">
         </div>
-        <div class="form-group col-md-2">
-            <label for="imputNumeric">Número de Interconsulta</label>
+        <div class="form-group col-md-1">
+            <label for="imputNumeric">N° Interconsulta</label>
             <input type="numeric" class="form-control" id="inputNumeric" placeholder="">
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-2">
             <label for="inputDate">Fecha de Interconsulta</label>
             <input type="date" class="form-control" id="inputDate" placeholder="Fecha de interconsulta">
         </div>
@@ -233,37 +261,7 @@
         </div>
     </div>
 
-    <div class="form-row">
-
-        <fieldset class="form-group col-4">
-            <label></label>
-            <div class="form-group mt-1 ml-4">
-                {{--                <input class="form-check-input" type="checkbox" id="gridCheck">--}}
-                {{--                <label class="form-check-label" for="gridCheck">--}}
-                {{--                    Proxima Fecha Disponible--}}
-                {{--                </label>--}}
-            </div>
-        </fieldset>
-
-
-        <div class="form-group col-md-3">
-            <label for="inputEmail4">Desde</label>
-            <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha inicio"
-                   wire:model.lazy="appointments_from">
-        </div>
-
-        <div class="form-group col-md-3">
-            <label for="inputEmail4">Hasta</label>
-            <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha fin"
-                   wire:model.lazy="appointments_to">
-        </div>
-
-        <div class="form-group col-md-2">
-            <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()">Buscar</button>
-        </div>
-
-    </div>
+    
     <!--opcion asignar-->
 
     <div class="form-row ">

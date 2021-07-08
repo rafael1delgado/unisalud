@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CodConAppointmentType;
 use App\Models\Organization;
 use Illuminate\Database\Seeder;
 
@@ -52,6 +53,7 @@ class DatabaseSeeder extends Seeder
             //PractitionerSeeder::class,
             ExtMedicineSeeder::class,
             OrganizationSeeder::class,
+            CodConAppointmentTypesSeeder::class,
         ]);
     }
 }
