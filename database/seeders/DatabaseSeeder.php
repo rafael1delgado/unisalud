@@ -54,6 +54,7 @@ class DatabaseSeeder extends Seeder
             ExtMedicineSeeder::class,
             OrganizationSeeder::class,
             CodConAppointmentTypesSeeder::class,
+            LocationSeeder::class,
         ]);
     }
 }

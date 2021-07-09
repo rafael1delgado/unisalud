@@ -91,7 +91,7 @@
                     @if($appointmentsHistory)
                         @foreach($appointmentsHistory as $appointmentHistory)
                             <tr>
-                                <th scope="row">{{$appointmentHistory->start}}</th>
+                                <th scope="row">{{$appointmentHistory->start . (($appointmentHistory->type->text == 'OVERBOOKING') ? ' (SC)' : '') }}</th>
                                 <td>{{$appointmentHistory->theoreticalProgramming->specialty->specialty_name}}</td>
                                 <td>
                                     <a href="{{ route('some.appointment_detail',$appointmentHistory->id) }}"
@@ -179,9 +179,11 @@
             <label for="for_location">Lugar</label>
             <select id="for_location" name="location" class="form-control">
                 <option selected></option>
-                <option>Pasillo Amarillo</option>
-                <option>Pasillo Rojo</option>
-                <option>Pasillo Azul</option>
+                @if($locations != null)
+                    @foreach($locations as $location)
+                        <option value="{{$location->id}}"> {{$location->alias}} </option>
+                    @endforeach
+                @endif
             </select>
         </div>
 

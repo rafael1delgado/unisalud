@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Some;
 
+use App\Models\Location;
 use App\Models\MedicalProgrammer\Profession;
 use App\Models\MedicalProgrammer\Specialty;
 use App\Models\Practitioner;
@@ -29,9 +30,13 @@ class AsignAppointment extends Component
     public $appointments_from;
     public $appointments_to;
     public $dv;
+    public $locations;
 
     protected $listeners = ['userSelected' => 'setUser',
     ];
+    /**
+     * @var Location[]|\Illuminate\Database\Eloquent\Collection|mixed
+     */
 
     public function searchUser()
     {
@@ -170,6 +175,8 @@ class AsignAppointment extends Component
                 });
             })->get();
         }
+
+        $this->locations = Location::all();
     }
 
     public function cancelAppointment($appointmentId)
