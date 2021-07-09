@@ -20,12 +20,23 @@
                         </select>
                     </fieldset>
 
+                    <fieldset class="form-group col-md-4">
+                        <label for="for_profession_id">Organización</label>
+                        <select name="profession_id[]" class="form-control"
+                                wire:model='practitioners.{{$value}}.profession_id'
+                                >
+                            <option value=""></option>
+                            @foreach($professions as $profession)
+                                <option value="{{ $profession->id }}">{{ $profession->profession_name }}</option>
+                            @endforeach
+                        </select>
+                    </fieldset>
+
                     <fieldset class="form-group col-md-3">
                         <label for="for_specialty_id">Especialidad</label>
                         <select name="specialty_id[]" class="form-control"
                                 wire:model='practitioners.{{$value}}.specialty_id'
                                 >
-
                             <option value=""></option>
                             @foreach($specialties as $specialty)
                                 <option value="{{ $specialty->id }}">{{ $specialty->specialty_name}}</option>

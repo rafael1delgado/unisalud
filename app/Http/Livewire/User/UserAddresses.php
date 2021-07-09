@@ -61,7 +61,6 @@ class UserAddresses extends Component
                 $this->addresses[$value]['suburb'] = $this->patient->addresses->slice($key, 1)->first()->suburb;
                 $this->addresses[$value]['commune'] = $this->patient->addresses->slice($key, 1)->first()->commune_id;
                 $this->addresses[$value]['state'] = $this->patient->addresses->slice($key, 1)->first()->region_id;
-                $this->addresses[$value]['district'] = $this->patient->addresses->slice($key, 1)->first()->region_id;
                 $this->addresses[$value]['city'] = $this->patient->addresses->slice($key, 1)->first()->city;
                 $this->addresses[$value]['country'] = $this->patient->addresses->slice($key, 1)->first()->country_id;
                 $this->addresses[$value]['actually'] = $this->patient->addresses->slice($key, 1)->first()->actually;

@@ -188,7 +188,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-practitioners', compact('organizations', 'specialties'))
+        @livewire('user.user-practitioners', compact('organizations', 'professions', 'specialties'))
 
         <div class="border-bottom mt-3 mb-3"></div>
 
