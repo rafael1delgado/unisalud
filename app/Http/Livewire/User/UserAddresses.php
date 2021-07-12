@@ -82,8 +82,8 @@ class UserAddresses extends Component
                 $this->addresses[$value]['line'] = old('line.'.$key);
                 $this->addresses[$value]['address_apartment'] = old('address_apartment.'.$key);
                 $this->addresses[$value]['suburb'] =  old('suburb.'.$key);
-                $this->addresses[$value]['commune'] = old('commune.'.$key);
                 $this->addresses[$value]['state'] = old('state.'.$key);
+                $this->addresses[$value]['commune'] = old('commune.'.$key);
                 $this->addresses[$value]['city'] = old('city.'.$key);
                 $this->addresses[$value]['country'] = old('country.'.$key);
             }

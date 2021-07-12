@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Some;
 
+use App\Models\Location;
 use App\Models\MedicalProgrammer\Profession;
 use App\Models\MedicalProgrammer\Specialty;
 use App\Models\Practitioner;
@@ -18,6 +19,7 @@ class AsignAppointment extends Component
     public $appointments;
     public $appointmentsHistory;
     public $selectedAppointments = [];
+    public $selectedOverbookingAppointments = [];
     public $profession_id;
     public $type;
     public $specialty_id;
@@ -28,9 +30,14 @@ class AsignAppointment extends Component
     public $appointments_from;
     public $appointments_to;
     public $dv;
+    public $locations;
+    public $selectedLocation;
 
     protected $listeners = ['userSelected' => 'setUser',
     ];
+    /**
+     * @var Location[]|\Illuminate\Database\Eloquent\Collection|mixed
+     */
 
     public function searchUser()
     {
@@ -97,7 +104,7 @@ class AsignAppointment extends Component
             });
         });
 
-        $query->where('status', 'proposed');
+        $query->where('status', 'proposed')->orWhere('status', 'booked');
 
         $query->orderBy('start');
 
@@ -113,6 +120,7 @@ class AsignAppointment extends Component
             foreach ($selectedAppointments->get() as $selectedAppointment) {
                 $selectedAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
                 $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
+                $selectedAppointment->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
             }
 
             $selectedAppointments->update(
@@ -120,8 +128,27 @@ class AsignAppointment extends Component
             );
 
             session()->flash('success', 'Cita asignada');
-            return redirect()->route('some.appointment');
         }
+
+        if (count($this->selectedOverbookingAppointments) > 0) {
+            $selectedOverbookingAppointments = Appointment::whereIn('id', [$this->selectedOverbookingAppointments])->get();
+
+            foreach ($selectedOverbookingAppointments as $selectedOverbookingAppointment) {
+                $duplicateSelectedOverbookingAppointment = $selectedOverbookingAppointment->replicate();
+                $duplicateSelectedOverbookingAppointment->cod_con_appointment_type_id = 6;
+                $duplicateSelectedOverbookingAppointment->status = 'booked';
+                $duplicateSelectedOverbookingAppointment->save();
+
+                $duplicateSelectedOverbookingAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+                $duplicateSelectedOverbookingAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
+                $duplicateSelectedOverbookingAppointment->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+
+            }
+
+            session()->flash('success', 'Cita de sobrecupo asignada');
+        }
+
+        return redirect()->route('some.appointment');
     }
 
     public function getPractitioners()
@@ -151,6 +178,8 @@ class AsignAppointment extends Component
                 });
             })->get();
         }
+
+        $this->locations = Location::all();
     }
 
     public function cancelAppointment($appointmentId)

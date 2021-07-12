@@ -14,6 +14,7 @@ use App\Models\HumanName;
 use App\Models\Identifier;
 use App\Models\MedicalProgrammer\Specialty;
 use App\Models\Organization;
+use App\Models\MedicalProgrammer\Profession;
 use App\Models\Practitioner;
 use App\Models\Region;
 use App\Models\User;
@@ -37,7 +38,7 @@ class PatientController extends Controller
      * @return Application|Factory|View
      */
     public function index()
-    {
+    {        
         return view('patients.index');
     }
 
@@ -49,8 +50,9 @@ class PatientController extends Controller
         $congregations = Congregation::all();
         $identifierTypes = CodConIdentifierType::all();
         $organizations = Organization::all();
+        $professions = Profession::all();
         $specialties = Specialty::all();
-        return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations', 'organizations', 'specialties'));
+        return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations', 'professions', 'organizations', 'specialties'));
     }
 
 
@@ -64,7 +66,8 @@ class PatientController extends Controller
     public function store(Request $request, $save = null)
     {
 
-        //dd($request);
+        
+    //dd($request);
 
         if ($request->has('id_type')) {
             foreach ($request->id_type as $key => $id_type) {
@@ -156,6 +159,7 @@ class PatientController extends Controller
                         $newPractitioner->active = 1;
                         $newPractitioner->user_id = $newPatient->id;
                         $newPractitioner->organization_id = $request->organization_id[$key];
+                        $newPractitioner->profession_id = $request->profession_id[$key];
                         $newPractitioner->specialty_id = $request->specialty_id[$key];
                         $newPractitioner->save();
                     }

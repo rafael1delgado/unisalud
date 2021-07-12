@@ -55,7 +55,7 @@
                     <fieldset class="form-group col-md-2">
                         <label for="for_social_name">Nombre Social</label>
                         <input type="text" class="form-control" name="social_name" id="social_name" required value="">
-                            
+
                     </fieldset>
                 </div>
                 <div class="form-row">
@@ -126,7 +126,7 @@
                                 data-live-search="true" multiple="" data-size="10" title="Seleccione..." multiple
                                 data-actions-box="true">
                             @foreach($congregations as $congregation)
-                                <option value="{{ $congregation->id }}">{{ $congregation->name}}</option>
+                                <option value="{{ $congregation->id }}" {{(old('congregation_id.0') == $congregation->id) ? 'selected' : ''}}>{{ $congregation->name}}</option>
                             @endforeach
                         </select>
                     </fieldset>
@@ -140,7 +140,7 @@
                     {{--                </div>--}}
                 </div>
 
-               
+
             </div>
         </div>
 
@@ -188,7 +188,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-practitioners', compact('organizations', 'specialties'))
+        @livewire('user.user-practitioners', compact('organizations', 'professions', 'specialties'))
 
         <div class="border-bottom mt-3 mb-3"></div>
 

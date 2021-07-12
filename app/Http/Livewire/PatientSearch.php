@@ -6,10 +6,14 @@ use App\Models\User;
 use Livewire\Component;
 use App\Traits\GoogleToken;
 use Illuminate\Support\Facades\Http;
+use Livewire\WithPagination;
 
 class PatientSearch extends Component
 {
     use GoogleToken;
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
 
     public $searchf = null;
 
@@ -27,9 +31,11 @@ class PatientSearch extends Component
 
         $patients = User::query()
             ->whereHas('humanNames', function ($query) {
-                $query->where('text', 'like', "%$this->searchf");
+                $query->where('text', 'like', "%$this->searchf%")
+                ->orwhere('fathers_family', 'like', "%$this->searchf%")
+                ->orwhere('mothers_family', 'like', "%$this->searchf%");
             })
-            ->get();
+            ->paginate(200);
 
         return view('livewire.patient-search', ['patients' => $patients]);
     }
