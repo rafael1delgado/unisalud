@@ -272,6 +272,14 @@
             <label for="inputAsignar">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" wire:click="asignAppointment()">Asignar</button>
         </div>
+
+        <div class="form-group col-md-2">
+            <select id="for_observation_id" name="observation_id">
+                <option value="1">Debe presentarse 15 mins antes.</option>
+                <option value="2">Debe .</option>
+            </select>
+        </div>
+
     </div>
     <!-- fin opcion asignar-->
     <!--inicio tabla profesionales-->
