@@ -11,6 +11,27 @@
     </fieldset>
 
     <fieldset class="form-group col">
+        <label for="for_contract_id">Estado</label>
+        <input type="text" class="form-control" value="{{$appointment->status_text()}}" readonly >
+    </fieldset>
+
+    <fieldset class="form-group col">
+        <label for="for_contract_id">Tipo</label>
+        <input type="text" class="form-control" value="{{$appointment->appointment_type_text()}}" readonly
+        @if($appointment->status == "booked")
+          @if($appointment->cod_con_appointment_type_id == 4)
+            style="background-color: gray;color: white;"
+          @else
+            style="background-color: green;color: white;"
+          @endif
+        @else
+          style="background-color: #519DF4;
+          color: white;"
+        @endif
+        >
+    </fieldset>
+
+    <fieldset class="form-group col">
         <label for="for_contract_id">Fecha de inicio</label>
         <input type="text" class="form-control" value="{{$appointment->start->format('d-m-Y H:i')}}" readonly >
     </fieldset>
@@ -63,6 +84,27 @@
 
   </div>
 
+  <div class="row">
+      <fieldset class="form-group col-8">
+          <label></label>
+      </fieldset>
+
+      <fieldset class="form-group col">
+          <form method="GET" id="form" class="form-horizontal" action="{{ route('some.agenda') }}">
+            @if($appointment->practitioners->first()->specialty_id != null)
+              <input type="hidden" name="type" value="Médico">
+            @else
+              <input type="hidden" name="type" value="No médico">
+            @endif
+            <input type="hidden" name="specialty_id" value="{{$appointment->practitioners->first()->specialty_id}}">
+            <input type="hidden" name="profession_id" value="">
+            <input type="hidden" name="user_id" value="{{$appointment->practitioners->first()->user_id}}">
+            <label for="for_sub_activity_id"></label>
+            <button type="submit" class="form-control"><i class="fas fa-angle-double-left"></i> Volver</button>
+          </form>
+      </fieldset>
+  </div>
+
 @else
 
   <hr>
@@ -70,27 +112,6 @@
   <h4>Sin información</h4>
 
 @endif
-
-<div class="row">
-    <fieldset class="form-group col-8">
-        <label></label>
-    </fieldset>
-
-    <fieldset class="form-group col">
-        <form method="GET" id="form" class="form-horizontal" action="{{ route('some.agenda') }}">
-          @if($appointment->practitioners->first()->specialty_id != null)
-            <input type="hidden" name="type" value="Médico">
-          @else
-            <input type="hidden" name="type" value="No médico">
-          @endif
-          <input type="hidden" name="specialty_id" value="{{$appointment->practitioners->first()->specialty_id}}">
-          <input type="hidden" name="profession_id" value="">
-          <input type="hidden" name="user_id" value="{{$appointment->practitioners->first()->user_id}}">
-          <label for="for_sub_activity_id"></label>
-          <button type="submit" class="form-control"><i class="fas fa-angle-double-left"></i> Volver</button>
-        </form>
-    </fieldset>
-</div>
 
 @endsection
 

@@ -16,6 +16,63 @@ class Appointment extends Model
 
     // protected $fillable = ['start','end'];
 
+    public function appointment_type_text()
+    {
+      if ($this->cod_con_appointment_type_id == 1) {
+        return "Chequeo";
+      }
+      if ($this->cod_con_appointment_type_id == 2) {
+        return "Emergencia";
+      }
+      if ($this->cod_con_appointment_type_id == 3) {
+        return "Seguimiento";
+      }
+      if ($this->cod_con_appointment_type_id == 4) {
+        return "Rutina";
+      }
+      if ($this->cod_con_appointment_type_id == 5) {
+        return "Ingreso";
+      }
+      if ($this->cod_con_appointment_type_id == 6) {
+        return "Sobrecupo";
+      }
+    }
+
+    public function status_text()
+    {
+      if ($this->status == "proposed") {
+        return "Propuesto";
+      }
+      if ($this->status == "pending") {
+        return "Pendiente";
+      }
+      if ($this->status == "booked") {
+        return "Agendado";
+      }
+      if ($this->status == "arrived") {
+        return "Llegado";
+      }
+      if ($this->status == "fulfilled") {
+        return "Cumplido";
+      }
+      if ($this->status == "cancelled") {
+        return "Cancelado";
+      }
+      if ($this->status == "noshow") {
+        return "No presentado";
+      }
+      if ($this->status == "entered-in-error") {
+        return "Ingresado por error";
+      }
+      if ($this->status == "checked-in") {
+        return "Registrado";
+      }
+      if ($this->status == "waitlist") {
+        return "Lista de espera";
+      }
+    }
+
+
     public function theoreticalProgramming()
     {
         return $this->belongsTo('App\Models\MedicalProgrammer\TheoreticalProgramming', 'mp_theoretical_programming_id');

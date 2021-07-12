@@ -92,10 +92,18 @@
                   @if($appointment->status == "booked")
                     {
                     id: '{{$appointment->id}}',
-                    title: '{{$appointment->theoreticalProgramming->activity->activity_name}} <br> {{$appointment->users->first()->OfficialFullName}}',
+                    @if($appointment->cod_con_appointment_type_id == 4)
+                      title: '{{$appointment->theoreticalProgramming->activity->activity_name}} <br> {{$appointment->users->first()->OfficialFullName}}',
+                    @else
+                      title: '{{$appointment->theoreticalProgramming->activity->activity_name}} <br> {{$appointment->users->first()->OfficialFullName}} (SC)',
+                    @endif
                     start: '{{$appointment->start}}',
                     end: '{{$appointment->end}}',
-                    color: 'gray',
+                    @if($appointment->cod_con_appointment_type_id == 4)
+                      color: 'gray',
+                    @else
+                      color: 'green',
+                    @endif
                     },
                   @else
                     {
