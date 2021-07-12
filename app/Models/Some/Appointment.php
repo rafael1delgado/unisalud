@@ -2,6 +2,7 @@
 
 namespace App\Models\Some;
 
+use App\Models\Location;
 use App\Models\Practitioner;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,6 +29,11 @@ class Appointment extends Model
     public function practitioners()
     {
         return $this->morphedByMany(Practitioner::class, 'appointable')->withTimestamps()->withPivot('type', 'required', 'status', 'period_from', 'period_to');
+    }
+
+    public function locations()
+    {
+        return $this->morphedByMany(Location::class, 'appointable')->withTimestamps()->withPivot('type', 'required', 'status', 'period_from', 'period_to');
     }
 
     public function appointables()
