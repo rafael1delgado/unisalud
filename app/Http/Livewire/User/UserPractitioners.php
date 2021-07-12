@@ -11,6 +11,7 @@ class UserPractitioners extends Component
     public $patient;
     public $practitioners = [];
     public $organizations;
+    public $professions;
     public $specialties;
 
     public function add($i)
@@ -42,6 +43,7 @@ class UserPractitioners extends Component
                 $this->practitioners[$value]['id'] = $this->patient->practitioners->slice($key, 1)->first()->id;
                 $this->practitioners[$value]['active'] = $this->patient->practitioners->slice($key, 1)->first()->active;
                 $this->practitioners[$value]['organization_id'] = $this->patient->practitioners->slice($key, 1)->first()->organization_id;
+                $this->practitioners[$value]['profession_id'] = $this->patient->practitioners->slice($key, 1)->first()->profession_id;
                 $this->practitioners[$value]['specialty_id'] = $this->patient->practitioners->slice($key, 1)->first()->specialty_id;
             }
         }
