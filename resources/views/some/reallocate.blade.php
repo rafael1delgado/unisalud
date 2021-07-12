@@ -7,7 +7,6 @@
 
 <form>
 
-<<<<<<< HEAD
     <div class="form-row mt-3">
         
         <div class="form-group col-md-4">
@@ -270,9 +269,6 @@
 	</table>
     </div>
 
-=======
-@livewire('some.reallocate')
->>>>>>> f765701c39fbcc5b15de039f66f244d3b90f80c9
 
 </form>
 
