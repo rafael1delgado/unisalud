@@ -252,10 +252,11 @@ class PatientController extends Controller
         $congregations = Congregation::all();
         $identifierTypes = CodConIdentifierType::all();
         $organizations = Organization::all();
+        $professions = Profession::all();
         $specialties = Specialty::all();
         $patientCongregationIds = $patient->congregations->pluck('id')->toArray();
         $congregationOther = ($patient->congregationUsers()->where('congregation_id', 10)->first()) ? $patient->congregationUsers()->where('congregation_id', 10)->first()->other : '';
-        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'specialties', 'patientCongregationIds', 'congregationOther'));
+        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'professions', 'specialties', 'patientCongregationIds', 'congregationOther'));
     }
 
     /**
