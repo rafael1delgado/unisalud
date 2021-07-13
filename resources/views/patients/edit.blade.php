@@ -202,7 +202,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-practitioners', compact('organizations', 'specialties', 'patient', 'professions'))
+        @livewire('user.user-practitioners', compact('organizations', 'professions', 'specialties', 'patient'))
 
         <div class="border-bottom mt-3 mb-3"></div>
 

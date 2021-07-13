@@ -21,7 +21,7 @@
                     </fieldset>
 
                     <fieldset class="form-group col-md-4">
-                        <label for="for_profession_id">Organización</label>
+                        <label for="for_profession_id">Profesión</label>
                         <select name="profession_id[]" class="form-control"
                                 wire:model='practitioners.{{$value}}.profession_id'
                                 >

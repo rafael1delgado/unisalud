@@ -57,12 +57,14 @@ class MedicalLicenceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user) 
     {
+        
         $medicalLicence=new MedicalLicence($request->all());
+        dd($medicalLicence);
         $medicalLicence->save();
 
-        return redirect()->route ('medical_licence.create');
+        return redirect()->route ('medical_licence.create', $user);
     }
 
     /**

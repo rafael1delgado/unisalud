@@ -38,7 +38,7 @@ class PatientController extends Controller
      * @return Application|Factory|View
      */
     public function index()
-    {
+    {        
         return view('patients.index');
     }
 
@@ -66,7 +66,7 @@ class PatientController extends Controller
     public function store(Request $request, $save = null)
     {
 
-
+        
     //dd($request);
 
         if ($request->has('id_type')) {
@@ -252,11 +252,11 @@ class PatientController extends Controller
         $congregations = Congregation::all();
         $identifierTypes = CodConIdentifierType::all();
         $organizations = Organization::all();
-        $specialties = Specialty::all();
         $professions = Profession::all();
+        $specialties = Specialty::all();
         $patientCongregationIds = $patient->congregations->pluck('id')->toArray();
         $congregationOther = ($patient->congregationUsers()->where('congregation_id', 10)->first()) ? $patient->congregationUsers()->where('congregation_id', 10)->first()->other : '';
-        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'specialties', 'patientCongregationIds', 'congregationOther', 'professions'));
+        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'professions', 'specialties', 'patientCongregationIds', 'congregationOther'));
     }
 
     /**

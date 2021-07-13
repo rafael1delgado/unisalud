@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<form method="post" action="{{route('medical_licence.store')}}">
+<form method="post" action="{{route('medical_licence.store', $user)}}">
 @csrf
 <div class="form-row">
     <div class="form-group col-md-5">
@@ -102,6 +102,7 @@
     <table class="table table-sm">
         <thead>
             <t>
+                <th>Usuario</th>
                 <th>Fecha inicio reposo</th>
                 <th>N° de días</th>
                 <th>Tipo de licencia</th>
@@ -113,6 +114,7 @@
         <tbody>
             @foreach($medicalLicences as $ml)
             <tr>
+                <td>{{ $ml->usuario}}</td>
                 <td>{{ $ml->fecha_inicio_reposo}}</td>
                 <td>{{ $ml->n_dias}}</td>
                 <td>{{ $ml->tipo_licencia}}</td>
