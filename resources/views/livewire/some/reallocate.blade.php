@@ -3,8 +3,8 @@
 
         <div class="form-group col-md-3">
             <label for="for_type">Tipo</label>
-            <select id="for_type" name="type" class="form-control" wire:model.lazy="type" required
-                    wire:change="getPractitioners()">
+            <select id="for_type" name="type" class="form-control" wire:model.lazy="typeFrom" required
+                    wire:change="getPractitionersFrom()">
                 <option></option>
                 <option>Médico</option>
                 <option>No médico</option>
@@ -12,31 +12,33 @@
         </div>
 
         <div class="form-group col-md-3">
-            @if($specialties != null)
+            @if($specialtiesFrom != null)
                 <label for="for_specialty_id">Especialidad</label>
-                <select id="for_specialty_id" name="specialty_id" class="form-control" wire:model.lazy="specialty_id"
-                        wire:change="getPractitioners()"
+                <select id="for_specialty_id" name="specialty_id" class="form-control"
+                        wire:model.lazy="selectedSpecialtyIdFrom"
+                        wire:change="getPractitionersFrom()"
                         required>
                     <option></option>
-                    @foreach($specialties as $specialty)
+                    @foreach($specialtiesFrom as $specialty)
                         <option value="{{$specialty->id}}">{{$specialty->specialty_name}}</option>
                     @endforeach
                 </select>
             @endif
 
-            @if($professions != null)
+            @if($professionsFrom != null)
                 <label for="for_profession_id">Profesión</label>
-                <select id="for_profession_id" name="profession_id" class="form-control" wire:model.lazy="profession_id"
-                        wire:change="getPractitioners"
+                <select id="for_profession_id" name="profession_id" class="form-control"
+                        wire:model.lazy="selectedProfessionIdFrom"
+                        wire:change="getPractitionersFrom()"
                         required>
                     <option></option>
-                    @foreach($professions as $profession)
+                    @foreach($professionsFrom as $profession)
                         <option value="{{$profession->id}}">{{$profession->profession_name}}</option>
                     @endforeach
                 </select>
             @endif
 
-            @if($specialties == null && $professions == null)
+            @if($specialtiesFrom == null && $professionsFrom == null)
                 <label for="for_profession_id">&nbsp;</label>
                 <select class="form-control">
                     <option></option>
@@ -48,10 +50,10 @@
         <div class="form-group col-md-3">
             <label for="for_practitioner_id">Funcionario</label>
             <select id="for_practitioner_id" name="practitioner_id" class="form-control"
-                    wire:model.lazy="practitioner_id" required>
+                    wire:model.lazy="selectedPractitionerIdFrom" required>
                 <option></option>
-                @if($practitioners != null)
-                    @foreach($practitioners as $practitioner)
+                @if($practitionersFrom != null)
+                    @foreach($practitionersFrom as $practitioner)
                         <option value="{{$practitioner->id}}">{{$practitioner->user->OfficialFullName}}</option>
                     @endforeach
                 @endif
@@ -74,7 +76,7 @@
         <table class="table table-sm table-hover">
             <thead>
             <tr class="table-info">
-                <th scope="col">{{ ($selectedPractitioner) ? $selectedPractitioner->officialFullName : ''}}</th>
+                <th scope="col">{{ ($selectedPractitionerFrom) ? $selectedPractitionerFrom->officialFullName : ''}}</th>
                 <th scope="col">HORA</th>
                 <th scope="col">USUARIO</th>
             </tr>
@@ -119,22 +121,62 @@
     <div class="form-row">
 
         <div class="form-group col-md-3">
-            <label for="inputEmail4">Especialidad</label>
-            <select id="inputState" class="form-control">
-                <option selected>Traumatología</option>
-                <option>Cardiología</option>
-                <option>Ginecología</option>
-                <option>Neurología</option>
-
+            <label for="">Tipo</label>
+            <select id="for_type" name="type_to" class="form-control" wire:model.lazy="typeTo" required
+                    wire:change="getPractitionersTo()">
+                <option></option>
+                <option>Médico</option>
+                <option>No médico</option>
             </select>
         </div>
+
         <div class="form-group col-md-3">
-            <label for="inputEmail4">Funcionario</label>
-            <select id="inputState" class="form-control">
-                <option selected>Macarena Lopez</option>
-                <option>Daniel Suarez</option>
-                <option>Jorge Miranda</option>
-                <option>Maria Isabel Araya</option>
+            @if($specialtiesTo != null)
+                <label for="for_specialty_id">Especialidad</label>
+                <select id="for_specialty_id" name="specialty_id" class="form-control"
+                        wire:model.lazy="selectedSpecialtyIdTo"
+                        wire:change="getPractitionersTo()"
+                        required>
+                    <option></option>
+                    @foreach($specialtiesTo as $specialty)
+                        <option value="{{$specialty->id}}">{{$specialty->specialty_name}}</option>
+                    @endforeach
+                </select>
+            @endif
+
+
+            @if($professionsTo != null)
+                <label for="for_profession_id">Profesión</label>
+                <select id="for_profession_id" name="profession_id" class="form-control"
+                        wire:model.lazy="selectedProfessionIdTo"
+                        wire:change="getPractitionersTo()"
+                        required>
+                    <option></option>
+                    @foreach($professionsTo as $profession)
+                        <option value="{{$profession->id}}">{{$profession->profession_name}}</option>
+                    @endforeach
+                </select>
+            @endif
+
+
+            @if($specialtiesTo == null && $professionsTo == null)
+                <label for="for_profession_id">&nbsp;</label>
+                <select class="form-control">
+                    <option></option>
+                </select>
+            @endif
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="for_practitioner_id">Funcionario</label>
+            <select id="for_practitioner_id" name="practitioner_id" class="form-control"
+                    wire:model.lazy="selectedPractitionerIdTo" required>
+                <option></option>
+                @if($practitionersTo != null)
+                    @foreach($practitionersTo as $practitioner)
+                        <option value="{{$practitioner->id}}">{{$practitioner->user->OfficialFullName}}</option>
+                    @endforeach
+                @endif
             </select>
         </div>
         <!--CHECK-->

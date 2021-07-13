@@ -12,53 +12,92 @@ use Livewire\Component;
 class Reallocate extends Component
 {
 
-    public $specialties;
-    public $professions;
-    public $practitioners;
-    public $type;
-    public $specialty_id;
-    public $profession_id;
-    public $practitioner_id;
+    public $specialtiesFrom;
+    public $professionsFrom;
+    public $practitionersFrom;
+    public $typeFrom;
+    public $selectedSpecialtyIdFrom;
+    public $selectedProfessionIdFrom;
+    public $selectedPractitionerIdFrom;
     public $selectedDateFrom;
-    public $selectedPractitioner;
+    public $selectedPractitionerFrom;
+
+    public $specialtiesTo;
+    public $professionsTo;
+    public $practitionersTo;
+    public $typeTo;
+    public $selectedSpecialtyIdTo;
+    public $selectedProfessionIdTo;
+    public $selectedPractitionerIdTo;
+    public $selectedDateTo;
+    public $selectedPractitionerTo;
     public $appointments;
 
 
-    public function getPractitioners()
+    public function getPractitionersFrom()
     {
-        $this->specialties = null;
-        $this->professions = null;
-        if ($this->type != null) {
-            if ($this->type == "Médico") {
-                $this->specialties = Specialty::orderBy('specialty_name', 'ASC')->get();
+        $this->specialtiesFrom = null;
+        $this->professionsFrom = null;
+        if ($this->typeFrom != null) {
+            if ($this->typeFrom == "Médico") {
+                $this->specialtiesFrom = Specialty::orderBy('specialty_name', 'ASC')->get();
             } else {
-                $this->professions = Profession::orderBy('profession_name', 'ASC')->get();
+                $this->professionsFrom = Profession::orderBy('profession_name', 'ASC')->get();
             }
         }
 
-        $this->practitioners = null;
-        if ($this->specialty_id != null) {
+        $this->practitionersFrom = null;
+        if ($this->selectedSpecialtyIdFrom != null) {
 
-            $this->practitioners = Practitioner::where('specialty_id', $this->specialty_id)
+            $this->practitionersFrom = Practitioner::where('specialty_id', $this->selectedSpecialtyIdFrom)
                 ->get();
         }
 
-        if ($this->profession_id != null) {
+        if ($this->selectedProfessionIdFrom != null) {
 
-            $this->practitioners = Practitioner::whereHas('user', function ($query) {
+            $this->practitionersFrom = Practitioner::whereHas('user', function ($query) {
                 return $query->whereHas('userProfessions', function ($query) {
-                    return $query->where('profession_id', $this->profession_id);
+                    return $query->where('profession_id', $this->selectedProfessionIdFrom);
                 });
             })->get();
         }
-
-
     }
+
+
+    public function getPractitionersTo()
+    {
+        $this->specialtiesTo = null;
+        $this->professionsTo = null;
+        if ($this->typeTo != null) {
+            if ($this->typeTo == "Médico") {
+                $this->specialtiesTo = Specialty::orderBy('specialty_name', 'ASC')->get();
+            } else {
+                $this->professionsTo = Profession::orderBy('profession_name', 'ASC')->get();
+            }
+        }
+
+        $this->practitionersTo = null;
+        if ($this->selectedSpecialtyIdTo != null) {
+
+            $this->practitionersTo = Practitioner::where('specialty_id', $this->selectedSpecialtyIdTo)
+                ->get();
+        }
+
+        if ($this->selectedProfessionIdTo != null) {
+
+            $this->practitionersTo = Practitioner::whereHas('user', function ($query) {
+                return $query->whereHas('userProfessions', function ($query) {
+                    return $query->where('profession_id', $this->selectedProfessionIdTo);
+                });
+            })->get();
+        }
+    }
+
 
     public function getAppointments()
     {
-        if ($this->practitioner_id) {
-            $this->selectedPractitioner = Practitioner::find($this->practitioner_id)->user;
+        if ($this->selectedPractitionerIdFrom) {
+            $this->selectedPractitionerFrom = Practitioner::find($this->selectedPractitionerIdFrom)->user;
 //            dd($this->selectedPractitioner);
         }
 
@@ -69,12 +108,12 @@ class Reallocate extends Component
         });
 
         $query->whereHas('theoreticalProgramming', function ($q) {
-            return $q->where('specialty_id', $this->specialty_id);
+            return $q->where('specialty_id', $this->selectedSpecialtyIdFrom);
         });
 
-        $query->when($this->selectedPractitioner != null, function ($q)  {
+        $query->when($this->selectedPractitionerFrom != null, function ($q)  {
             return $q->whereHas('theoreticalProgramming', function ($q)  {
-                return $q->where('user_id', $this->selectedPractitioner->id);
+                return $q->where('user_id', $this->selectedPractitionerFrom->id);
             });
         });
 
