@@ -32,9 +32,11 @@ class AsignAppointment extends Component
     public $dv;
     public $locations;
     public $selectedLocation;
+    public $patientInstruction;
 
     protected $listeners = ['userSelected' => 'setUser',
     ];
+
     /**
      * @var Location[]|\Illuminate\Database\Eloquent\Collection|mixed
      */
@@ -124,7 +126,10 @@ class AsignAppointment extends Component
             }
 
             $selectedAppointments->update(
-                ['status' => 'booked']
+                ['status' => 'booked',
+                 'patient_instruction' => $this->patientInstruction,
+                ]
+
             );
 
             session()->flash('success', 'Cita asignada');
@@ -137,6 +142,7 @@ class AsignAppointment extends Component
                 $duplicateSelectedOverbookingAppointment = $selectedOverbookingAppointment->replicate();
                 $duplicateSelectedOverbookingAppointment->cod_con_appointment_type_id = 6;
                 $duplicateSelectedOverbookingAppointment->status = 'booked';
+                $duplicateSelectedOverbookingAppointment->patient_instruction = $this->patientInstruction;
                 $duplicateSelectedOverbookingAppointment->save();
 
                 $duplicateSelectedOverbookingAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
@@ -192,7 +198,7 @@ class AsignAppointment extends Component
 
         $ids = $appointment->users()->allRelatedIds();
         foreach ($ids as $id) {
-            $appointment->users()->updateExistingPivot( $id, ['status' => 'declined',
+            $appointment->users()->updateExistingPivot($id, ['status' => 'declined',
             ]);
         }
 

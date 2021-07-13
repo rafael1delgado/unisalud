@@ -274,10 +274,17 @@
         </div>
 
         <div class="form-group col-md-2">
-            <select id="for_observation_id" name="observation_id">
-                <option value="1">Debe presentarse 15 mins antes.</option>
-                <option value="2">Debe .</option>
+            <label for="for_observation_id">Instrucción para paciente</label>
+            <select id="for_observation_id" name="observation_id" class="form-control" onchange="setPatientObservation(this)" >
+                <option value=""></option>
+                <option value="Debe presentarse 15 mins antes.">Debe presentarse 15 mins antes.</option>
+                <option value="Debe presentar hora médica.">Debe presentar hora médica.</option>
             </select>
+        </div>
+
+        <div class="form-group col-md-8">
+            <label for="for_patient_instruction">Instrucción para paciente</label>
+            <textarea class="form-control" name="patient_instruction" id="for_patient_instruction" cols="10" rows="3" wire:model="patientInstruction"></textarea>
         </div>
 
     </div>
@@ -347,6 +354,13 @@
     {{--    @livewireScripts--}}
 
     <script>
+
+        function setPatientObservation(select) {
+            var textArea = document.getElementById('for_patient_instruction');
+            textArea.value = textArea.value + ' ' + select.value;
+            textArea.dispatchEvent(new Event('input'));
+        }
+
         // window.livewire.on('userSelected', () => {
         //     // console.log('cierra modal');
         //     $('#searchUserModal').modal('hide');
