@@ -32,7 +32,7 @@ class Reallocate extends Component
     public $selectedDateTo;
     public $selectedPractitionerTo;
     public $appointments;
-
+    public $appointmentsTo;
     public $selectedAppointmentsFrom = [];
 
 
@@ -138,11 +138,31 @@ class Reallocate extends Component
                 $this->selectedProfessionIdTo = $this->selectedProfessionIdFrom;
             }
         }
+    }
 
+    public function getAppointmentsTo()
+    {
+        $query = Appointment::query();
 
-//        dd($this->appointments);
+        $query->when($this->selectedDateTo != null, function ($q) {
+            return $q->whereDate('start', '>=', Carbon::now()->toDateString());
+        });
 
-//        $this->selectedPractitioner = Practitioner::find($this->practitioner_id);
+        $query->whereHas('theoreticalProgramming', function ($q) {
+            return $q->where('specialty_id', $this->selectedSpecialtyIdTo);
+        });
+
+        $query->when($this->selectedPractitionerFrom != null, function ($q)  {
+            return $q->whereHas('theoreticalProgramming', function ($q)  {
+                return $q->where('user_id', $this->selectedPractitionerTo->id);
+            });
+        });
+
+        $query->where('status', 'proposed');
+
+        $query->orderBy('start');
+
+        $this->appointmentsTo = $query->get();
 
     }
 

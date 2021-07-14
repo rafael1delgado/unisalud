@@ -190,7 +190,7 @@
         </div>
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control">Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="getAppointmentsTo()">Buscar</button>
         </div>
 
         <!--CHECK-->
