@@ -33,6 +33,10 @@ class Reallocate extends Component
     public $selectedPractitionerTo;
     public $appointments;
 
+    public $selectedAppointmentsFrom = [];
+
+
+
 
     public function getPractitionersFrom()
     {
@@ -94,7 +98,7 @@ class Reallocate extends Component
     }
 
 
-    public function getAppointments()
+    public function getAppointmentsFrom()
     {
         if ($this->selectedPractitionerIdFrom) {
             $this->selectedPractitionerFrom = Practitioner::find($this->selectedPractitionerIdFrom)->user;
@@ -122,6 +126,19 @@ class Reallocate extends Component
         $query->orderBy('start');
 
         $this->appointments = $query->get();
+
+        //Selecciona la misma especialidad el mismo tipo y especialidad debajo
+        if ($this->typeFrom != null) {
+            $this->typeTo = $this->typeFrom;
+            if ($this->typeFrom == "Médico") {
+                $this->specialtiesTo = Specialty::orderBy('specialty_name', 'ASC')->get();
+                $this->selectedSpecialtyIdTo = $this->selectedSpecialtyIdFrom;
+            } else {
+                $this->professionsTo = Profession::orderBy('profession_name', 'ASC')->get();
+                $this->selectedProfessionIdTo = $this->selectedProfessionIdFrom;
+            }
+        }
+
 
 //        dd($this->appointments);
 

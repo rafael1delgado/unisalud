@@ -67,7 +67,7 @@
         </div>
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="getAppointments()">Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="getAppointmentsFrom()">Buscar</button>
         </div>
 
     </div>
@@ -77,7 +77,6 @@
             <thead>
             <tr class="table-info">
                 <th scope="col">{{ ($selectedPractitionerFrom) ? $selectedPractitionerFrom->officialFullName : ''}}</th>
-                <th scope="col">HORA</th>
                 <th scope="col">USUARIO</th>
             </tr>
             </thead>
@@ -86,18 +85,23 @@
 
 
             @if($appointments && $appointments->count() > 0)
-                @foreach($appointments as $appointment)
+                @foreach($appointments as $key => $appointment)
 
                     <tr>
-                        <th scope="row"></th>
+                        {{--                        <th scope="row"></th>--}}
                         <td>
-                            <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                            <label class="form-check-label" for="invalidCheck2">{{$appointment->start}}</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox"
+                                       value="{{$appointment->id}}"
+                                       wire:model.defer="selectedAppointmentsFrom"
+                                       id="for_selected_appointments_from[{{$key}}]"/>
+
+                                <label class="label"
+                                       for="for_selected_appointments_from[{{$key}}]">{{$appointment->start}}</label>
+                            </div>
                         </td>
                         <td>
-                            <input class="form-check-input " type="checkbox" value="" id="invalidCheck2" required>
-                            <label class="form-check-label"
-                                   for="invalidCheck2">{{$appointment->users->first()->officialFullName}}</label>
+                            {{$appointment->users->first()->officialFullName}}
 
                         </td>
 
@@ -179,13 +183,6 @@
                 @endif
             </select>
         </div>
-        <!--CHECK-->
-        <div class="form-group col-md-2 mt-5 ml-4">
-
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Proxima</label>
-        </div>
-        <!--CHECK-->
 
         <div class="form-group col-md-2">
             <label for="inputEmail4">Fecha </label>
@@ -195,6 +192,14 @@
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control">Buscar</button>
         </div>
+
+        <!--CHECK-->
+        <div class="form-group col-md-1 mt-1 ml-4">
+
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Proxima</label>
+        </div>
+        <!--CHECK-->
     </div>
     <!--anterior,siguiente,traspasar-->
     <div class="form-row">
