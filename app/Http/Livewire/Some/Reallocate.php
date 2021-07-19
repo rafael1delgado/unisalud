@@ -35,9 +35,6 @@ class Reallocate extends Component
     public $appointmentsTo;
     public $selectedAppointmentsFrom = [];
 
-
-
-
     public function getPractitionersFrom()
     {
         $this->specialtiesFrom = null;
@@ -101,8 +98,7 @@ class Reallocate extends Component
     public function getAppointmentsFrom()
     {
         if ($this->selectedPractitionerIdFrom) {
-            $this->selectedPractitionerFrom = Practitioner::find($this->selectedPractitionerIdFrom)->user;
-//            dd($this->selectedPractitioner);
+            $this->selectedPractitionerFrom = Practitioner::find($this->selectedPractitionerIdFrom);
         }
 
         $query = Appointment::query();
@@ -117,7 +113,7 @@ class Reallocate extends Component
 
         $query->when($this->selectedPractitionerFrom != null, function ($q)  {
             return $q->whereHas('theoreticalProgramming', function ($q)  {
-                return $q->where('user_id', $this->selectedPractitionerFrom->id);
+                return $q->where('user_id', $this->selectedPractitionerFrom->user->id);
             });
         });
 
@@ -138,10 +134,16 @@ class Reallocate extends Component
                 $this->selectedProfessionIdTo = $this->selectedProfessionIdFrom;
             }
         }
+
+        $this->getAppointmentsTo();
     }
 
     public function getAppointmentsTo()
     {
+        if ($this->selectedPractitionerIdTo) {
+            $this->selectedPractitionerTo = Practitioner::find($this->selectedPractitionerIdTo);
+        }
+
         $query = Appointment::query();
 
         $query->when($this->selectedDateTo != null, function ($q) {
@@ -152,9 +154,9 @@ class Reallocate extends Component
             return $q->where('specialty_id', $this->selectedSpecialtyIdTo);
         });
 
-        $query->when($this->selectedPractitionerFrom != null, function ($q)  {
+        $query->when($this->selectedPractitionerTo != null, function ($q)  {
             return $q->whereHas('theoreticalProgramming', function ($q)  {
-                return $q->where('user_id', $this->selectedPractitionerTo->id);
+                return $q->where('user_id', $this->selectedPractitionerTo->user->id);
             });
         });
 
@@ -163,7 +165,6 @@ class Reallocate extends Component
         $query->orderBy('start');
 
         $this->appointmentsTo = $query->get();
-
     }
 
     public function render()
