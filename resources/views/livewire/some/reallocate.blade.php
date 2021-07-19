@@ -265,7 +265,7 @@
         <div class="form-group col-md-6">
         </div>
         <div class="form-group col-md-2">
-            <button type="button" class="btn btn-primary form-control">TRASPASAR</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="reallocate()">TRASPASAR</button>
         </div>
 
 
@@ -299,7 +299,7 @@
                                 <input class="form-check-input " type="checkbox"
                                        value="{{$appointmentTo->id}}"
                                        name="selectedappointmentsTo[{{$key}}]"
-                                       wire:model.defer="selectedappointmentsTo"
+                                       wire:model.defer="selectedAppointmentsTo"
                                        id="for_selected_appointmentsTo[{{$key}}]"
                                     {{$appointmentTo->status == 'booked' ? 'disabled' : ''}}>
                             </div>

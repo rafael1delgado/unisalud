@@ -34,6 +34,7 @@ class Reallocate extends Component
     public $appointments;
     public $appointmentsTo;
     public $selectedAppointmentsFrom = [];
+    public $selectedAppointmentsTo = [];
 
     public function getPractitionersFrom()
     {
@@ -111,8 +112,8 @@ class Reallocate extends Component
             return $q->where('specialty_id', $this->selectedSpecialtyIdFrom);
         });
 
-        $query->when($this->selectedPractitionerFrom != null, function ($q)  {
-            return $q->whereHas('theoreticalProgramming', function ($q)  {
+        $query->when($this->selectedPractitionerFrom != null, function ($q) {
+            return $q->whereHas('theoreticalProgramming', function ($q) {
                 return $q->where('user_id', $this->selectedPractitionerFrom->user->id);
             });
         });
@@ -154,8 +155,8 @@ class Reallocate extends Component
             return $q->where('specialty_id', $this->selectedSpecialtyIdTo);
         });
 
-        $query->when($this->selectedPractitionerTo != null, function ($q)  {
-            return $q->whereHas('theoreticalProgramming', function ($q)  {
+        $query->when($this->selectedPractitionerTo != null, function ($q) {
+            return $q->whereHas('theoreticalProgramming', function ($q) {
                 return $q->where('user_id', $this->selectedPractitionerTo->user->id);
             });
         });
@@ -165,6 +166,26 @@ class Reallocate extends Component
         $query->orderBy('start');
 
         $this->appointmentsTo = $query->get();
+    }
+
+    public function reallocate()
+    {
+
+//        dump($this->selectedAppointmentsTo);
+//        dd($this->selectedAppointmentsFrom);
+
+        // $this->selectedappointmentsFrom dejar en estado traspasado, duplicados dejar en'proposed'
+
+
+        //dejar booked
+        foreach ($this->selectedAppointmentsTo->get() as $selectedAppointment) {
+            $selectedAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+            $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
+            $selectedAppointment->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+            $selectedAppointment->status = 'booked';
+        }
+
+
     }
 
     public function render()
