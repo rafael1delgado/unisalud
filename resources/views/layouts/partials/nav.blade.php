@@ -89,14 +89,16 @@
     <li class="nav-item">
         <a class="nav-link" href="{{route('some.reallocationPending') }}"><span data-feather="list"></span>Pendiente de reasignación</a>
     </li>
-    <!-- LOCATIONS -->
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="{{route('some.reallocationPending') }}"><span data-feather="list"></span>Pendiente de reasignación</a>
-    </li> -->
     <li class="nav-item">
         <a class="nav-link {{ active('some.locations.index') }}" href="{{ route('some.locations.index') }}">
         <span data-feather="chevrons-right"></span>
         Locaciones
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('some.observations.index') }}" href="{{ route('some.observations.index') }}">
+        <span data-feather="chevrons-right"></span>
+        Observaciones
         </a>
     </li>
 </ul>

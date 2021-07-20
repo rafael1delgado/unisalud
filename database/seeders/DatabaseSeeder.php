@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             CommuneSeeder::class,
             CongregationSeeder::class,
             UserSeeder::class,
+            ObservationSeeder::class,
             // PractitionerSeeder::class,
 
 

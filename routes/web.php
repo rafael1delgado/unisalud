@@ -12,7 +12,7 @@ use App\Http\Controllers\Parameter\PermissionController;
 use App\Http\Controllers\Profile\ProfileController;
 
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\Profile\ObservationController;
+use App\Http\Controllers\Some\ObservationController;
 
 use App\Http\Controllers\PatientController;
 
@@ -123,6 +123,16 @@ Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
       Route::put('/{location}', [LocationController::class, 'update'])->name('update');
       Route::delete('/{location}', [LocationController::class, 'destroy'])->name('destroy');
       Route::get('/{location}/edit', [LocationController::class, 'edit'])->name('edit');
+    });
+
+    Route::prefix('observations')->name('observations.')->group(function(){
+      Route::get('/', [ObservationController::class, 'index'])->name('index');
+      Route::post('/', [ObservationController::class, 'store'])->name('store');
+      Route::get('/create', [ObservationController::class, 'create'])->name('create');
+      Route::get('/{observation}', [ObservationController::class, 'show'])->name('show');
+      Route::put('/{observation}', [ObservationController::class, 'update'])->name('update');
+      Route::delete('/{observation}', [ObservationController::class, 'destroy'])->name('destroy');
+      Route::get('/{observation}/edit', [ObservationController::class, 'edit'])->name('edit');
     });
 });
 

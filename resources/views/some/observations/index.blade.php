@@ -2,38 +2,32 @@
 
 @section('content')
 
-<h3 class="mb-3">Listado de Locaciones</h3>
+<h3 class="mb-3">Listado de Observaciones</h3>
 
-<a class="btn btn-primary mb-3" href="{{ route('some.locations.create') }}">
-    <i class="fas fa-plus"></i> Agregar nueva Locación
+<a class="btn btn-primary mb-3" href="{{ route('some.observations.create') }}">
+    <i class="fas fa-plus"></i> Agregar nueva Observación
 </a>
 
 <table class="table table-sm table-borderer">
     <thead>
         <tr>
             <th>Id</th>
-            <th>Estado</th>
-            <th>Nombre Locación</th>
-            <th>Alias</th>
             <th>Descripción</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach( $locations as $Location )
+        @foreach( $observations as $observation )
         <tr>
-            <td>{{ $Location->id }}</td>
-            <td>{{ $Location->status }}</td>
-            <td>{{ $Location->name }}</td>
-            <td>{{ $Location->alias }}</td>
-            <td>{{ $Location->description }}</td>
+            <td>{{ $observation->id }}</td>
+            <td>{{ $observation->description }}</td>
             <td>
-      				<a href="{{ route('some.locations.edit', $Location) }}"
+      				<a href="{{ route('some.observations.edit', $observation) }}"
       					class="btn btn-sm btn-outline-secondary">
       					<span class="fas fa-edit" aria-hidden="true"></span>
       				</a>
-      				<form method="POST" action="{{ route('some.locations.destroy', $Location) }}" class="d-inline">
-      					@csrf
+      				<form method="POST" action="{{ route('some.observations.destroy', $observation) }}" class="d-inline">
+                      @csrf
       					@method('DELETE')
       					<button type="submit" class="btn btn-outline-secondary btn-sm" onclick="return confirm('¿Está seguro de eliminar la información?');">
       						<span class="fas fa-trash-alt" aria-hidden="true"></span>
