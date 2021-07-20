@@ -147,7 +147,7 @@ class AsignAppointment extends Component
 
                 $duplicateSelectedOverbookingAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
                 $duplicateSelectedOverbookingAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
-                $duplicateSelectedOverbookingAppointment->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+//                $duplicateSelectedOverbookingAppointment->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
 
             }
 

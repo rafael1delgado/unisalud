@@ -99,7 +99,7 @@
                                 <input class="form-check-input " type="checkbox"
                                        value="{{$appointment->id}}"
                                        name="selectedAppointments[{{$key}}]"
-                                       wire:model.defer="selectedAppointmentsFrom"
+                                       wire:model.defer="selectedAppointmentIdsFrom"
                                        id="for_selected_appointments_from[{{$key}}]"
                                 >
                             </div>
@@ -299,7 +299,7 @@
                                 <input class="form-check-input " type="checkbox"
                                        value="{{$appointmentTo->id}}"
                                        name="selectedappointmentsTo[{{$key}}]"
-                                       wire:model.defer="selectedAppointmentsTo"
+                                       wire:model.defer="selectedAppointmentIdsTo"
                                        id="for_selected_appointmentsTo[{{$key}}]"
                                     {{$appointmentTo->status == 'booked' ? 'disabled' : ''}}>
                             </div>

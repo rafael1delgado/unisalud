@@ -33,8 +33,8 @@ class Reallocate extends Component
     public $selectedPractitionerTo;
     public $appointments;
     public $appointmentsTo;
-    public $selectedAppointmentsFrom = [];
-    public $selectedAppointmentsTo = [];
+    public $selectedAppointmentIdsFrom = [];
+    public $selectedAppointmentIdsTo = [];
 
     public function getPractitionersFrom()
     {
@@ -170,21 +170,45 @@ class Reallocate extends Component
 
     public function reallocate()
     {
-
-//        dump($this->selectedAppointmentsTo);
-//        dd($this->selectedAppointmentsFrom);
-
+//        dump($this->selectedAppointmentIdsTo);
+//        dd($this->selectedAppointmentIdsFrom);
         // $this->selectedappointmentsFrom dejar en estado traspasado, duplicados dejar en'proposed'
 
+        $selectedAppointmentsFrom = Appointment::find($this->selectedAppointmentIdsFrom);
+        $selectedAppointmentsTo = Appointment::find($this->selectedAppointmentIdsTo);
+
+//        dd($selectedAppointmentsTo);
 
         //dejar booked
-        foreach ($this->selectedAppointmentsTo->get() as $selectedAppointment) {
-            $selectedAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
-            $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
-            $selectedAppointment->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
-            $selectedAppointment->status = 'booked';
+        foreach ($selectedAppointmentsTo as $key => $selectedAppointmentTo) {
+            $selectedAppointmentTo->users()->save($selectedAppointmentsFrom[$key]->users->first(), ['required' => $selectedAppointmentsFrom[$key]->users->first()->pivot->required, 'status' => $selectedAppointmentsFrom[$key]->users->first()->pivot->status]);
+            $selectedAppointmentTo->practitioners()->save($this->selectedPractitionerTo, ['required' => 'required', 'status' => 'accepted']);
+//            $selectedAppointmentTo->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+            $selectedAppointmentTo->status = 'booked';
+            $selectedAppointmentTo->save();
         }
 
+        foreach ($selectedAppointmentsFrom as $selectedAppointmentFrom) {
+            $duplicateSelectedAppointmentFrom = $selectedAppointmentFrom->replicate();
+            $duplicateSelectedAppointmentFrom->status = 'proposed';
+            $duplicateSelectedAppointmentFrom->save();
+
+            $ids = $selectedAppointmentFrom->users()->allRelatedIds();
+            foreach ($ids as $id) {
+                $selectedAppointmentFrom->users()->updateExistingPivot($id, ['status' => 'declined',
+                ]);
+            }
+
+            $ids = $selectedAppointmentFrom->practitioners()->allRelatedIds();
+            foreach ($ids as $id) {
+                $selectedAppointmentFrom->practitioners()->updateExistingPivot($id, ['status' => 'declined',
+                ]);
+            }
+
+            $selectedAppointmentFrom->status = 'cancelled';
+            $selectedAppointmentFrom->delete();
+            $selectedAppointmentFrom->save();
+        }
 
     }
 
