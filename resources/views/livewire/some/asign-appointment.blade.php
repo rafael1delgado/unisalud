@@ -178,7 +178,7 @@
         <div class="form-group col-md-2">
             <label for="for_location">Lugar</label>
             <select id="for_location" name="location" class="form-control"
-            wire:model.lazy="selectedLocation">
+            wire:model.lazy="selectedLocationId">
                 <option selected></option>
                 @if($locations != null)
                     @foreach($locations as $location)

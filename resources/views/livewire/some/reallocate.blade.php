@@ -106,7 +106,7 @@
                         </td>
                         <td>
                             <label class="label"
-                            for="for_selected_appointments_from[{{$key}}]">{{$appointment->theoreticalProgramming->user->officialFullName}}</label>
+                                   for="for_selected_appointments_from[{{$key}}]">{{$appointment->theoreticalProgramming->user->officialFullName}}</label>
                         </td>
 
                         <td>{{$appointment->theoreticalProgramming->activity->activity_name}}</td>
@@ -232,6 +232,10 @@
                     @endforeach
                 @endif
             </select>
+
+            @error('selectedPractitionerIdTo')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="form-group col-md-2">

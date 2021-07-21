@@ -170,16 +170,18 @@ class Reallocate extends Component
 
     public function reallocate()
     {
-//        dump($this->selectedAppointmentIdsTo);
-//        dd($this->selectedAppointmentIdsFrom);
-        // $this->selectedappointmentsFrom dejar en estado traspasado, duplicados dejar en'proposed'
+        $this->validate(
+            [
+                'selectedPractitionerIdTo' => 'required'
+            ],
+            [
+                'selectedPractitionerIdTo.required' => 'Debe seleccionar un funcionario.'
+            ]
+        );
 
         $selectedAppointmentsFrom = Appointment::find($this->selectedAppointmentIdsFrom);
         $selectedAppointmentsTo = Appointment::find($this->selectedAppointmentIdsTo);
 
-//        dd($selectedAppointmentsTo);
-
-        //dejar booked
         foreach ($selectedAppointmentsTo as $key => $selectedAppointmentTo) {
             $selectedAppointmentTo->users()->save($selectedAppointmentsFrom[$key]->users->first(), ['required' => $selectedAppointmentsFrom[$key]->users->first()->pivot->required, 'status' => $selectedAppointmentsFrom[$key]->users->first()->pivot->status]);
             $selectedAppointmentTo->practitioners()->save($this->selectedPractitionerTo, ['required' => 'required', 'status' => 'accepted']);
