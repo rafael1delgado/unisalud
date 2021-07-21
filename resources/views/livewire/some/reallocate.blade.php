@@ -1,4 +1,5 @@
 <div>
+{{--    @include('layouts.partials.flash_message')--}}
     <div class="form-row mt-3">
 
         <div class="form-group col-md-3">

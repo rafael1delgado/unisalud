@@ -130,13 +130,20 @@ class Reallocate extends Component
             if ($this->typeFrom == "Médico") {
                 $this->specialtiesTo = Specialty::orderBy('specialty_name', 'ASC')->get();
                 $this->selectedSpecialtyIdTo = $this->selectedSpecialtyIdFrom;
+                $this->practitionersTo = Practitioner::where('specialty_id', $this->selectedSpecialtyIdTo)
+                    ->get();
             } else {
                 $this->professionsTo = Profession::orderBy('profession_name', 'ASC')->get();
                 $this->selectedProfessionIdTo = $this->selectedProfessionIdFrom;
+                $this->practitionersTo = Practitioner::whereHas('user', function ($query) {
+                    return $query->whereHas('userProfessions', function ($query) {
+                        return $query->where('profession_id', $this->selectedProfessionIdTo);
+                    });
+                })->get();
             }
         }
 
-        $this->getAppointmentsTo();
+//        $this->getAppointmentsTo();
     }
 
     public function getAppointmentsTo()
@@ -212,6 +219,8 @@ class Reallocate extends Component
             $selectedAppointmentFrom->save();
         }
 
+        session()->flash('success', 'Citas actualizadas.');
+        return redirect()->route('some.reallocate');
     }
 
     public function render()
