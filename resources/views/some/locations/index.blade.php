@@ -20,20 +20,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach( $locations as $Location )
+        @foreach( $locations as $location )
         <tr>
-            <td>{{ $Location->id ?? ''}}</td>
-            <td>{{ $Location->status ?? ''}}</td>
-            <td>{{ $Location->name ?? ''}}</td>
-            <td>{{ $Location->alias ?? ''}}</td>
-            <td>{{ $Location->description ?? ''}}</td>
-            <td>{{ $Location->organization->name ?? ''}}</td>
+            <td>{{ $location->id ?? ''}}</td>
+            <td>{{ $location->status ?? ''}}</td>
+            <td>{{ $location->name ?? ''}}</td>
+            <td>{{ $location->alias ?? ''}}</td>
+            <td>{{ $location->description ?? ''}}</td>
+            <td>{{ $location->organization->name ?? ''}}</td>
             <td>
-      				<a href="{{ route('some.locations.edit', $Location) }}"
+      				<a href="{{ route('some.locations.edit', $location) }}"
       					class="btn btn-sm btn-outline-secondary">
       					<span class="fas fa-edit" aria-hidden="true"></span>
       				</a>
-      				<form method="POST" action="{{ route('some.locations.destroy', $Location) }}" class="d-inline">
+      				<form method="POST" action="{{ route('some.locations.destroy', $location) }}" class="d-inline">
       					@csrf
       					@method('DELETE')
       					<button type="submit" class="btn btn-outline-secondary btn-sm" onclick="return confirm('¿Está seguro de eliminar la información?');">

@@ -6,16 +6,16 @@
 
 <form method="POST" class="form-horizontal" action="{{ route('some.locations.update', $location) }}">
     @csrf
-    @method('POST')
+    @method('PUT')
 
     <div class="row">
     <fieldset class="form-group col">
         <label for="for_status">Estado</label>
         <select id="for_status" name="status" class="form-control" required>
                 <option></option>
-                <option value="active" {{old('status') === 'active'? 'selected' : ''}}>Activo</option>
-                <option value="suspended" {{old('status') === 'suspended'? 'selected' : ''}}>Suspendido</option>
-                <option value="inactive" {{old('status') === 'inactive'? 'selected' : ''}}>Inactivo</option>
+                <option value="active" {{$location->status === $location->status ? 'selected' : '' }}>Activo</option>
+                <option value="suspended" {{$location->status === $location->status ? 'selected' : '' }}>Suspendido</option>
+                <option value="inactive" {{$location->status === $location->status ? 'selected' : '' }}>Inactivo</option>
             </select> 
         </fieldset>           
 
@@ -42,7 +42,7 @@
             <option value=""></option>
             @foreach($organization as $organization)
 
-                <option value="{{ $organization->id }}" {{$organization->id === $organization->organization_id ? 'selected' : '' }}>{{ $organization->name }}</option>
+                <option value="{{ $organization->id }}" {{$organization->organization_id === $organization->organization_id ? 'selected' : '' }}>{{ $organization->name }}</option>
             @endforeach
             </select>
         </fieldset>
