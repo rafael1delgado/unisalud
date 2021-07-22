@@ -82,6 +82,7 @@
             <tr>
                 <th scope="col">Sel.</th>
                 <th scope="col">Profesional</th>
+                <th scope="col">Paciente</th>
                 <th scope="col">Actividad</th>
                 <th scope="col">Subactividad</th>
                 <th scope="col">Hora</th>
@@ -108,6 +109,11 @@
                         <td>
                             <label class="label"
                                    for="for_selected_appointments_from[{{$key}}]">{{$appointment->theoreticalProgramming->user->officialFullName}}</label>
+                        </td>
+
+                        <td>
+                            <label class="label"
+                                   for="for_selected_appointments_from[{{$key}}]">{{$appointment->users->first()->officialFullName}}</label>
                         </td>
 
                         <td>{{$appointment->theoreticalProgramming->activity->activity_name}}</td>
