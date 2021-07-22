@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Some;
 
 use App\Models\Location;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +18,10 @@ class LocationController extends Controller
     public function index()
     {
       $locations = Location::all();
+
       return view('some.locations.index', compact('locations'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -27,7 +30,10 @@ class LocationController extends Controller
      */
     public function create()
     {
-        return view('some.locations.create');
+        $locations = Location::all();
+        $organization = Organization::all();
+        return view('some.locations.create', compact('organization', 'locations'));
+
     }
 
     /**
@@ -52,7 +58,7 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
         //
     }
@@ -63,9 +69,11 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Location $location)
+    public function edit()
     {
-        return view('some.locations.edit', compact('location'));
+      $organization = Organization::all();
+      $location = Location::all();
+        return view('some.locations.edit', compact('organization', 'location'));
     }
 
     /**
@@ -91,10 +99,13 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function destroy(Location $location)
     {
       $location->delete();
       session()->flash('success', 'La locacion ha sido eliminada');
       return redirect()->route('some.locations.index');
     }
+
+
 }

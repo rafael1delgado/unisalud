@@ -16,17 +16,18 @@
             <th>Nombre Locación</th>
             <th>Alias</th>
             <th>Descripción</th>
-            <th></th>
+            <th>Organización</th>
         </tr>
     </thead>
     <tbody>
         @foreach( $locations as $Location )
         <tr>
-            <td>{{ $Location->id }}</td>
-            <td>{{ $Location->status }}</td>
-            <td>{{ $Location->name }}</td>
-            <td>{{ $Location->alias }}</td>
-            <td>{{ $Location->description }}</td>
+            <td>{{ $Location->id ?? ''}}</td>
+            <td>{{ $Location->status ?? ''}}</td>
+            <td>{{ $Location->name ?? ''}}</td>
+            <td>{{ $Location->alias ?? ''}}</td>
+            <td>{{ $Location->description ?? ''}}</td>
+            <td>{{ $Location->organization->name ?? ''}}</td>
             <td>
       				<a href="{{ route('some.locations.edit', $Location) }}"
       					class="btn btn-sm btn-outline-secondary">

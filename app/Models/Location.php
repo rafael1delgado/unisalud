@@ -15,7 +15,7 @@ class Location extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'id', 'description'
+        'id', 'status', 'name', 'alias', 'description', 'organization_id'
         //, 'user_id'
     ];
 
@@ -23,4 +23,13 @@ class Location extends Model
     {
         return $this->morphToMany(Appointment::class, 'appointable');
     }
+
+    public function organization(){
+        return $this->belongsTo('App\Models\Organization', 'organization_id');
+    }
+
+    protected $table = 'locations';
+    
+    
+
 }
