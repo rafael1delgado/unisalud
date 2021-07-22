@@ -35,6 +35,8 @@ class Reallocate extends Component
     public $appointmentsTo;
     public $selectedAppointmentIdsFrom = [];
     public $selectedAppointmentIdsTo = [];
+    public $selectedAppointmentIdsFromCant;
+    public $selectedAppointmentIdsToCant;
 
     public function getPractitionersFrom()
     {
@@ -148,6 +150,15 @@ class Reallocate extends Component
 
     public function getAppointmentsTo()
     {
+        $this->validate(
+            [
+                'selectedPractitionerIdTo' => 'required'
+            ],
+            [
+                'selectedPractitionerIdTo.required' => 'Debe seleccionar un funcionario.'
+            ]
+        );
+
         if ($this->selectedPractitionerIdTo) {
             $this->selectedPractitionerTo = Practitioner::find($this->selectedPractitionerIdTo);
         }
@@ -177,12 +188,17 @@ class Reallocate extends Component
 
     public function reallocate()
     {
+        $this->selectedAppointmentIdsFromCant = count($this->selectedAppointmentIdsFrom);
+        $this->selectedAppointmentIdsToCant = count($this->selectedAppointmentIdsTo);
+
         $this->validate(
             [
-                'selectedPractitionerIdTo' => 'required'
+                'selectedPractitionerIdTo' => 'required',
+                'selectedAppointmentIdsFromCant' => 'same:selectedAppointmentIdsToCant'
             ],
             [
-                'selectedPractitionerIdTo.required' => 'Debe seleccionar un funcionario.'
+                'selectedPractitionerIdTo.required' => 'Debe seleccionar un funcionario.',
+                'selectedAppointmentIdsFromCant.same' => 'Se debe seleccionar el mismo número de citas en el origen y en el destino'
             ]
         );
 

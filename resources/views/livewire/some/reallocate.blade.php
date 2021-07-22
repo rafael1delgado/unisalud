@@ -277,6 +277,9 @@
         </div>
         <div class="form-group col-md-2">
             <button type="button" class="btn btn-primary form-control" wire:click="reallocate()">TRASPASAR</button>
+            @error('selectedAppointmentIdsFromCant')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
 
