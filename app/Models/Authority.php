@@ -55,7 +55,7 @@ class Authority extends Model
         $ous = OrganizationalUnit::All();
         $authorities = array();
         foreach($ous as $ou) {
-            $authority = Authority::with('user','organizationalUnit')
+            $authority = Authority::with('organizationalUnit')
                 ->where('organizational_unit_id', $ou->id)
                 // ->where('type', $type)
                 ->when(is_array($type), function ($q) use ($type) {
