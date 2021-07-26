@@ -60,6 +60,10 @@
                     @endforeach
                 @endif
             </select>
+
+            @error('selectedPractitionerIdFrom')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="form-group col-md-2">
@@ -75,6 +79,10 @@
 
     </div>
     <!--tabla doctor-->
+
+    @error('selectedAppointmentIdsFrom')
+    <span class="text-danger">{{ $message }}</span>
+    @enderror
 
     <div class="table-responsive">
         <table class="table table-sm table-hover">
@@ -93,7 +101,6 @@
             </thead>
             <tbody>
             @if($appointments)
-
                 @foreach($appointments as $key => $appointment)
                     <tr>
                         <td>
@@ -280,6 +287,8 @@
             @error('selectedAppointmentIdsFromCant')
             <span class="text-danger">{{ $message }}</span>
             @enderror
+
+
         </div>
 
 
@@ -287,7 +296,10 @@
     <!-- fin anterior,siguiente,traspasar-->
 
 
-    <!--tabla agenda-->
+    @error('selectedAppointmentIdsTo')
+    <span class="text-danger">{{ $message }}</span>
+    @enderror
+<!--tabla agenda-->
     <div class="table-responsive">
         <table class="table table-sm table-hover">
             <thead class="table-info">
@@ -304,6 +316,8 @@
             </tr>
             </thead>
             <tbody>
+
+
             @if($appointmentsTo)
 
                 @foreach($appointmentsTo as $key => $appointmentTo)

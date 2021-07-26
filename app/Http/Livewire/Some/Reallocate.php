@@ -100,6 +100,15 @@ class Reallocate extends Component
 
     public function getAppointmentsFrom()
     {
+        $this->validate(
+            [
+                'selectedPractitionerIdFrom' => 'required',
+            ],
+            [
+                'selectedPractitionerIdFrom.required' => 'Debe seleccionar un funcionario.',
+            ]
+        );
+
         if ($this->selectedPractitionerIdFrom) {
             $this->selectedPractitionerFrom = Practitioner::find($this->selectedPractitionerIdFrom);
         }
@@ -191,14 +200,20 @@ class Reallocate extends Component
         $this->selectedAppointmentIdsFromCant = count($this->selectedAppointmentIdsFrom);
         $this->selectedAppointmentIdsToCant = count($this->selectedAppointmentIdsTo);
 
+//        dd($this->selectedAppointmentIdsFromCant, $this->selectedAppointmentIdsToCant);
+
         $this->validate(
             [
                 'selectedPractitionerIdTo' => 'required',
-                'selectedAppointmentIdsFromCant' => 'same:selectedAppointmentIdsToCant'
+                'selectedAppointmentIdsFromCant' => 'same:selectedAppointmentIdsToCant',
+                'selectedAppointmentIdsFrom' => 'required',
+                'selectedAppointmentIdsTo' => 'required'
             ],
             [
                 'selectedPractitionerIdTo.required' => 'Debe seleccionar un funcionario.',
-                'selectedAppointmentIdsFromCant.same' => 'Se debe seleccionar el mismo número de citas en el origen y en el destino'
+                'selectedAppointmentIdsFromCant.same' => 'Se debe seleccionar el mismo número de citas en el origen y en el destino.',
+                'selectedAppointmentIdsTo.required' => 'Se debe seleccionar citas de destino.',
+                'selectedAppointmentIdsFrom.required' => 'Se debe seleccionar citas de origen.',
             ]
         );
 
@@ -237,6 +252,11 @@ class Reallocate extends Component
 
         session()->flash('success', 'Citas actualizadas.');
         return redirect()->route('some.reallocate');
+    }
+
+    public function suspend()
+    {
+
     }
 
     public function render()
