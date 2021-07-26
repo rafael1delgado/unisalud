@@ -30,6 +30,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('patientInstruction')->nullable();
             $table->foreignId('mp_theoretical_programming_id')->nullable();
             // tiene un periodo pero 0..*
+            $table->foreignId('observation_id')->nullable();
             $table->timestamps();
 
             $table->foreign('appointment_id')->references('id')->on('appointments');
@@ -38,6 +39,8 @@ class CreateAppointmentsTable extends Migration
             $table->foreign('cod_con_cancel_reason_id')->references('id')->on('cod_con_cancelation_reasons');
             $table->foreign('cod_con_appointment_type_id')->references('id')->on('cod_con_appointment_types');
             $table->foreign('mp_theoretical_programming_id')->references('id')->on('mp_theoretical_programming');
+            $table->foreign('observation_id')->references('id')->on('observations');
+
         });
     }
 

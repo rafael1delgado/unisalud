@@ -32,7 +32,11 @@ class Reallocate extends Component
     public $selectedDateTo;
     public $selectedPractitionerTo;
     public $appointments;
-
+    public $appointmentsTo;
+    public $selectedAppointmentIdsFrom = [];
+    public $selectedAppointmentIdsTo = [];
+    public $selectedAppointmentIdsFromCant;
+    public $selectedAppointmentIdsToCant;
 
     public function getPractitionersFrom()
     {
@@ -94,11 +98,19 @@ class Reallocate extends Component
     }
 
 
-    public function getAppointments()
+    public function getAppointmentsFrom()
     {
+        $this->validate(
+            [
+                'selectedPractitionerIdFrom' => 'required',
+            ],
+            [
+                'selectedPractitionerIdFrom.required' => 'Debe seleccionar un funcionario.',
+            ]
+        );
+
         if ($this->selectedPractitionerIdFrom) {
-            $this->selectedPractitionerFrom = Practitioner::find($this->selectedPractitionerIdFrom)->user;
-//            dd($this->selectedPractitioner);
+            $this->selectedPractitionerFrom = Practitioner::find($this->selectedPractitionerIdFrom);
         }
 
         $query = Appointment::query();
@@ -111,9 +123,9 @@ class Reallocate extends Component
             return $q->where('specialty_id', $this->selectedSpecialtyIdFrom);
         });
 
-        $query->when($this->selectedPractitionerFrom != null, function ($q)  {
-            return $q->whereHas('theoreticalProgramming', function ($q)  {
-                return $q->where('user_id', $this->selectedPractitionerFrom->id);
+        $query->when($this->selectedPractitionerFrom != null, function ($q) {
+            return $q->whereHas('theoreticalProgramming', function ($q) {
+                return $q->where('user_id', $this->selectedPractitionerFrom->user->id);
             });
         });
 
@@ -123,9 +135,127 @@ class Reallocate extends Component
 
         $this->appointments = $query->get();
 
-//        dd($this->appointments);
+        //Selecciona la misma especialidad el mismo tipo y especialidad debajo
+        if ($this->typeFrom != null) {
+            $this->typeTo = $this->typeFrom;
+            if ($this->typeFrom == "Médico") {
+                $this->specialtiesTo = Specialty::orderBy('specialty_name', 'ASC')->get();
+                $this->selectedSpecialtyIdTo = $this->selectedSpecialtyIdFrom;
+                $this->practitionersTo = Practitioner::where('specialty_id', $this->selectedSpecialtyIdTo)
+                    ->get();
+            } else {
+                $this->professionsTo = Profession::orderBy('profession_name', 'ASC')->get();
+                $this->selectedProfessionIdTo = $this->selectedProfessionIdFrom;
+                $this->practitionersTo = Practitioner::whereHas('user', function ($query) {
+                    return $query->whereHas('userProfessions', function ($query) {
+                        return $query->where('profession_id', $this->selectedProfessionIdTo);
+                    });
+                })->get();
+            }
+        }
 
-//        $this->selectedPractitioner = Practitioner::find($this->practitioner_id);
+//        $this->getAppointmentsTo();
+    }
+
+    public function getAppointmentsTo()
+    {
+        $this->validate(
+            [
+                'selectedPractitionerIdTo' => 'required'
+            ],
+            [
+                'selectedPractitionerIdTo.required' => 'Debe seleccionar un funcionario.'
+            ]
+        );
+
+        if ($this->selectedPractitionerIdTo) {
+            $this->selectedPractitionerTo = Practitioner::find($this->selectedPractitionerIdTo);
+        }
+
+        $query = Appointment::query();
+
+        $query->when($this->selectedDateTo != null, function ($q) {
+            return $q->whereDate('start', '>=', Carbon::now()->toDateString());
+        });
+
+        $query->whereHas('theoreticalProgramming', function ($q) {
+            return $q->where('specialty_id', $this->selectedSpecialtyIdTo);
+        });
+
+        $query->when($this->selectedPractitionerTo != null, function ($q) {
+            return $q->whereHas('theoreticalProgramming', function ($q) {
+                return $q->where('user_id', $this->selectedPractitionerTo->user->id);
+            });
+        });
+
+        $query->where('status', 'proposed');
+
+        $query->orderBy('start');
+
+        $this->appointmentsTo = $query->get();
+    }
+
+    public function reallocate()
+    {
+        $this->selectedAppointmentIdsFromCant = count($this->selectedAppointmentIdsFrom);
+        $this->selectedAppointmentIdsToCant = count($this->selectedAppointmentIdsTo);
+
+//        dd($this->selectedAppointmentIdsFromCant, $this->selectedAppointmentIdsToCant);
+
+        $this->validate(
+            [
+                'selectedPractitionerIdTo' => 'required',
+                'selectedAppointmentIdsFromCant' => 'same:selectedAppointmentIdsToCant',
+                'selectedAppointmentIdsFrom' => 'required',
+                'selectedAppointmentIdsTo' => 'required'
+            ],
+            [
+                'selectedPractitionerIdTo.required' => 'Debe seleccionar un funcionario.',
+                'selectedAppointmentIdsFromCant.same' => 'Se debe seleccionar el mismo número de citas en el origen y en el destino.',
+                'selectedAppointmentIdsTo.required' => 'Se debe seleccionar citas de destino.',
+                'selectedAppointmentIdsFrom.required' => 'Se debe seleccionar citas de origen.',
+            ]
+        );
+
+        $selectedAppointmentsFrom = Appointment::find($this->selectedAppointmentIdsFrom);
+        $selectedAppointmentsTo = Appointment::find($this->selectedAppointmentIdsTo);
+
+        foreach ($selectedAppointmentsTo as $key => $selectedAppointmentTo) {
+            $selectedAppointmentTo->users()->save($selectedAppointmentsFrom[$key]->users->first(), ['required' => $selectedAppointmentsFrom[$key]->users->first()->pivot->required, 'status' => $selectedAppointmentsFrom[$key]->users->first()->pivot->status]);
+            $selectedAppointmentTo->practitioners()->save($this->selectedPractitionerTo, ['required' => 'required', 'status' => 'accepted']);
+//            $selectedAppointmentTo->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+            $selectedAppointmentTo->status = 'booked';
+            $selectedAppointmentTo->save();
+        }
+
+        foreach ($selectedAppointmentsFrom as $selectedAppointmentFrom) {
+            $duplicateSelectedAppointmentFrom = $selectedAppointmentFrom->replicate();
+            $duplicateSelectedAppointmentFrom->status = 'proposed';
+            $duplicateSelectedAppointmentFrom->save();
+
+            $ids = $selectedAppointmentFrom->users()->allRelatedIds();
+            foreach ($ids as $id) {
+                $selectedAppointmentFrom->users()->updateExistingPivot($id, ['status' => 'declined',
+                ]);
+            }
+
+            $ids = $selectedAppointmentFrom->practitioners()->allRelatedIds();
+            foreach ($ids as $id) {
+                $selectedAppointmentFrom->practitioners()->updateExistingPivot($id, ['status' => 'declined',
+                ]);
+            }
+
+            $selectedAppointmentFrom->status = 'cancelled';
+            $selectedAppointmentFrom->delete();
+            $selectedAppointmentFrom->save();
+        }
+
+        session()->flash('success', 'Citas actualizadas.');
+        return redirect()->route('some.reallocate');
+    }
+
+    public function suspend()
+    {
 
     }
 

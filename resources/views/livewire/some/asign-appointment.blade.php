@@ -162,7 +162,7 @@
 
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-4">
             <label for="for_practitioner_id">Funcionario</label>
             <select id="for_practitioner_id" name="practitioner_id" class="form-control"
                     wire:model.lazy="practitioner_id" required>
@@ -175,18 +175,6 @@
             </select>
         </div>
 
-        <div class="form-group col-md-2">
-            <label for="for_location">Lugar</label>
-            <select id="for_location" name="location" class="form-control"
-            wire:model.lazy="selectedLocation">
-                <option selected></option>
-                @if($locations != null)
-                    @foreach($locations as $location)
-                        <option value="{{$location->id}}"> {{$location->alias}} </option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
 
         <div class="form-group col-md-2">
             <label for="inputEmail4">Desde</label>
@@ -274,6 +262,19 @@
         </div>
 
         <div class="form-group col-md-2">
+            <label for="for_location">Lugar</label>
+            <select id="for_location" name="location" class="form-control"
+                    wire:model.lazy="selectedLocationId">
+                <option selected></option>
+                @if($locations != null)
+                    @foreach($locations as $location)
+                        <option value="{{$location->id}}"> {{$location->alias}} </option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
+
+        <div class="form-group col-md-2">
             <label for="for_observation_id">Instrucción para paciente</label>
             <select id="for_observation_id" name="observation_id" class="form-control" onchange="setPatientObservation(this)" >
                 <option value=""></option>
@@ -282,7 +283,7 @@
             </select>
         </div>
 
-        <div class="form-group col-md-8">
+        <div class="form-group col-md-6">
             <label for="for_patient_instruction">Instrucción para paciente</label>
             <textarea class="form-control" name="patient_instruction" id="for_patient_instruction" cols="10" rows="3" wire:model="patientInstruction"></textarea>
         </div>

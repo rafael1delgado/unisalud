@@ -31,7 +31,7 @@ class AsignAppointment extends Component
     public $appointments_to;
     public $dv;
     public $locations;
-    public $selectedLocation;
+    public $selectedLocationId;
     public $patientInstruction;
 
     protected $listeners = ['userSelected' => 'setUser',
@@ -122,12 +122,14 @@ class AsignAppointment extends Component
             foreach ($selectedAppointments->get() as $selectedAppointment) {
                 $selectedAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
                 $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
-                $selectedAppointment->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+                if ($this->selectedLocationId) {
+                    $selectedAppointment->locations()->save(Location::find($this->selectedLocationId), ['required' => 'required', 'status' => 'accepted']);
+                }
             }
 
             $selectedAppointments->update(
                 ['status' => 'booked',
-                 'patient_instruction' => $this->patientInstruction,
+                    'patient_instruction' => $this->patientInstruction,
                 ]
 
             );
@@ -147,7 +149,10 @@ class AsignAppointment extends Component
 
                 $duplicateSelectedOverbookingAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
                 $duplicateSelectedOverbookingAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
-                $duplicateSelectedOverbookingAppointment->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+
+                if ($this->selectedLocationId) {
+                    $duplicateSelectedOverbookingAppointment->locations()->save(Location::find($this->selectedLocationId), ['required' => 'required', 'status' => 'accepted']);
+                }
 
             }
 
