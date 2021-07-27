@@ -38,6 +38,9 @@ use App\Http\Controllers\MedicalProgrammer\ProfessionController;
 use App\Http\Controllers\MedicalProgrammer\CutOffDateController;
 use App\Http\Controllers\MedicalProgrammer\CloneController;
 use App\Http\Controllers\MedicalProgrammer\ReportController;
+use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalController;
+use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalDetailController;
+use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalSignatureFlowController;
 
 
 use App\Http\Controllers\MedicalLicenceController;
@@ -235,6 +238,7 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
     Route::get('event_detail/{rut}/{activity_id}/{contract_id}/{specialty_id}/{profession_id}/{start_date}/{end_date}/{year}', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
     Route::post('deleteMyEventId/{id}', [TheoreticalProgrammingController::class, 'deleteMyEventId'])->name('deleteMyEventId');
+    Route::get('proposal_programmer', [TheoreticalProgrammingController::class, 'proposal_programmer'])->name('proposal_programmer');
 
     // Route::get('event_detail/{info}', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
     // Route::post('event_detail', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
@@ -361,6 +365,26 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::get('reportminsal', [ReportController::class, 'export'])->name('reportminsal');
     Route::get('reportcut', [ReportController::class, 'exportcut'])->name('reportcut');
   });
+
+  Route::prefix('programming_proposal')->name('programming_proposal.')->group(function(){
+    Route::get('/', [ProgrammingProposalController::class, 'index'])->name('index');
+    Route::post('/', [ProgrammingProposalController::class, 'store'])->name('store');
+    Route::get('/create', [ProgrammingProposalController::class, 'create'])->name('create');
+    Route::get('/{programmingProposal}', [ProgrammingProposalController::class, 'show'])->name('show');
+    Route::put('/{programmingProposal}', [ProgrammingProposalController::class, 'update'])->name('update');
+    Route::delete('/{programmingProposal}', [ProgrammingProposalController::class, 'destroy'])->name('destroy');
+    Route::get('/{programmingProposal}/edit', [ProgrammingProposalController::class, 'edit'])->name('edit');
+
+    Route::put('/{programmingProposal}', [ProgrammingProposalController::class, 'store_confirmation'])->name('store_confirmation');
+
+    Route::prefix('details')->name('details.')->group(function(){
+      Route::get('/create/{programmingProposal}', [ProgrammingProposalDetailController::class, 'create'])->name('create');
+      Route::post('/', [ProgrammingProposalDetailController::class, 'store'])->name('store');
+      Route::delete('/{programmingProposalDetail}', [ProgrammingProposalDetailController::class, 'destroy'])->name('destroy');
+    });
+  });
+
+
 
 
 });

@@ -140,14 +140,28 @@
 <ul class="nav flex-column">
 
     <!-- programador de pabellones -->
-    @canany(['Mp: programador pabellon'])
+    <!-- @canany(['Mp: programador pabellon'])
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.operating_room_programming.index') }}" href="{{ route('medical_programmer.operating_room_programming.index') }}">
         <span data-feather="chevrons-right"></span>
         Programador de pabellones<span class="sr-only">(current)</span>
         </a>
     </li>
-    @endcanany
+    @endcanany -->
+
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="{{ route('medical_programmer.theoretical_programming.proposal_programmer','tipo=1') }}">
+        <span data-feather="chevrons-right"></span>
+        Propuestas de programación<span class="sr-only">(current)</span>
+        </a>
+    </li> -->
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('medical_programmer.programming_proposal.index') }}">
+        <span data-feather="chevrons-right"></span>
+        Propuestas de programación<span class="sr-only">(current)</span>
+        </a>
+    </li>
 
     <!-- programador teorico -->
     @canany(['Mp: programacion teorica'])
