@@ -7,7 +7,7 @@
             <input type="hidden" name='identifier_id[]' wire:model='identifiers.{{$value}}.id'>
 
             <div class="form-row">
-                <fieldset class="form-group col-md-4">
+                <fieldset class="form-group col-md-2">
                     <label for="for_id_type">Tipo de identificación</label>
                     <select name="id_type[]" class="form-control" wire:model='identifiers.{{$value}}.id_type' wire:change="setReadonlyDv({{$value}})" required>
                         @foreach($identifierTypes as $identifierType)
@@ -42,6 +42,16 @@
                     </select>
                 </fieldset>
 
+
+                @if($patient)
+                    <fieldset class=" form-group col-md-2">
+                        <label for="for_created_at">Fecha creación</label>
+                        @if( array_key_exists('created_at', $identifiers[$value]))
+                            <input type="text" class="form-control" name="created_at[]" readonly
+                                   value="{{$identifiers[$value]['created_at']}}">
+                            @endif
+                    </fieldset>
+                @endif
 
 
             </div>

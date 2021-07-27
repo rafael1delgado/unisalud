@@ -73,6 +73,7 @@ class UserIdentifiers extends Component
                 $this->identifiers[$value]['system'] = $this->patient->identifiers->slice($key, 1)->first()->system;
                 $this->identifiers[$value]['value'] = $this->patient->identifiers->slice($key, 1)->first()->value;
                 $this->identifiers[$value]['dv'] = $this->patient->identifiers->slice($key, 1)->first()->dv;
+                $this->identifiers[$value]['created_at'] = $this->patient->identifiers->slice($key, 1)->first()->created_at;
             }
         }
     }
