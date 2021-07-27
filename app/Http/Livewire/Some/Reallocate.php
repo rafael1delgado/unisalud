@@ -261,6 +261,27 @@ class Reallocate extends Component
             $selectedAppointmentFrom->status = 'waitlist';
             $selectedAppointmentFrom->save();
         }
+
+        $ids = $selectedAppointmentFrom->users()->allRelatedIds();
+        foreach ($ids as $id) {
+            $selectedAppointmentFrom->users()->updateExistingPivot($id, ['status' => 'declined',
+            ]);
+        }
+
+        $ids = $selectedAppointmentFrom->practitioners()->allRelatedIds();
+        foreach ($ids as $id) {
+            $selectedAppointmentFrom->practitioners()->updateExistingPivot($id, ['status' => 'declined',
+            ]);
+        }
+
+        $ids = $selectedAppointmentFrom->locations()->allRelatedIds();
+        foreach ($ids as $id) {
+            $selectedAppointmentFrom->locations()->updateExistingPivot($id, ['status' => 'declined',
+            ]);
+        }
+
+        session()->flash('success', 'Citas suspendidas.');
+        return redirect()->route('some.reallocate');
     }
 
     public function render()
