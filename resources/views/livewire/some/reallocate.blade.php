@@ -94,8 +94,6 @@
                 <th scope="col">Actividad</th>
                 <th scope="col">Subactividad</th>
                 <th scope="col">Hora</th>
-                {{--                <th scope="col">Cupo</th>--}}
-                {{--                <th scope="col">Sobre Cupo</th>--}}
                 <th scope="col">Estado</th>
             </tr>
             </thead>
@@ -136,46 +134,6 @@
         </table>
     </div>
 
-{{--    <div class="table-responsive">--}}
-{{--        <table class="table table-sm table-hover">--}}
-{{--            <thead>--}}
-{{--            <tr class="table-info">--}}
-{{--                <th scope="col">{{ ($selectedPractitionerFrom) ? $selectedPractitionerFrom->officialFullName : ''}}</th>--}}
-{{--                <th scope="col">USUARIO</th>--}}
-{{--            </tr>--}}
-{{--            </thead>--}}
-
-{{--            <tbody>--}}
-
-
-{{--            @if($appointments && $appointments->count() > 0)--}}
-{{--                @foreach($appointments as $key => $appointment)--}}
-
-{{--                    <tr>--}}
-{{--                        --}}{{--                        <th scope="row"></th>--}}
-{{--                        <td>--}}
-{{--                            <div class="form-check">--}}
-{{--                                <input class="form-check-input" type="checkbox"--}}
-{{--                                       value="{{$appointment->id}}"--}}
-{{--                                       wire:model.defer="selectedAppointmentsFrom"--}}
-{{--                                       id="for_selected_appointments_from[{{$key}}]"/>--}}
-
-{{--                                <label class="label"--}}
-{{--                                       for="for_selected_appointments_from[{{$key}}]">{{$appointment->start}}</label>--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                        <td>--}}
-{{--                            {{$appointment->users->first()->officialFullName}}--}}
-
-{{--                        </td>--}}
-
-{{--                    </tr>--}}
-{{--                @endforeach--}}
-{{--            @endif--}}
-
-{{--            </tbody>--}}
-{{--        </table>--}}
-{{--    </div>--}}
 <!--fin tabla doctor-->
     <div class="form-row">
 
@@ -360,97 +318,4 @@
     </div>
 
 
-    {{--    <div class="table-responsive">--}}
-
-    {{--        <table class="table table-sm table-hover">--}}
-    {{--            <thead>--}}
-    {{--            <tr class="table-info">--}}
-    {{--                <th scope="col">JUEVES 27 DE MAYO</th>--}}
-    {{--                <th scope="col">ESPECIALIDAD</th>--}}
-    {{--                <th scope="col"></th>--}}
-    {{--                <th scope="col"></th>--}}
-    {{--                <th scope="col">CUPOS</th>--}}
-    {{--                <th scope="col">SOBRE CUPO</th>--}}
-    {{--                <th scope="col">ESTADO</th>--}}
-    {{--            </tr>--}}
-    {{--            </thead>--}}
-
-    {{--            <tbody>--}}
-    {{--            <tr>--}}
-    {{--                <th scope="row">Dra Macarena Lopez</th>--}}
-    {{--                <td>Neurología</td>--}}
-    {{--                <td>--}}
-    {{--                    <label class="form-check-label" for="invalidCheck2">8:00</label>--}}
-    {{--                </td>--}}
-    {{--                <td>--}}
-    {{--                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>--}}
-    {{--                </td>--}}
-    {{--                <td>2</td>--}}
-    {{--                <td>1</td>--}}
-    {{--                <td>DISPONIBLE</td>--}}
-
-
-    {{--            </tr>--}}
-    {{--            <tr>--}}
-    {{--                <th scope="row">Dr. Daniel Suarez</th>--}}
-    {{--                <td>Neurología</td>--}}
-    {{--                <td></td>--}}
-    {{--                <td>--}}
-    {{--                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>--}}
-    {{--                    <label class="form-check-label" for="invalidCheck2"></label>--}}
-
-    {{--                </td>--}}
-    {{--                <td>3</td>--}}
-
-    {{--                <td>0</td>--}}
-    {{--                <td>DISPONIBLE</td>--}}
-
-    {{--            </tr>--}}
-    {{--            <thead>--}}
-    {{--            <tr class="table-info">--}}
-    {{--                <th scope="col">VIERNES 28 DE MAYO</th>--}}
-    {{--                <th scope="col">ESPECIALIDAD</th>--}}
-    {{--                <th scope="col"></th>--}}
-    {{--                <th scope="col-md-1"></th>--}}
-    {{--                <th scope="col">CUPOS</th>--}}
-    {{--                <th scope="col">SOBRE CUPO</th>--}}
-    {{--                <th scope="col">ESTADO</th>--}}
-    {{--            </tr>--}}
-    {{--            </thead>--}}
-
-    {{--            <tbody>--}}
-    {{--            <tr>--}}
-    {{--                <th scope="row">Dr. Jorge Lopez</th>--}}
-    {{--                <td>Neurología</td>--}}
-    {{--                <td>--}}
-    {{--                    <label class="form-check-label" for="invalidCheck2">9:00</label>--}}
-
-    {{--                </td>--}}
-    {{--                <td>--}}
-    {{--                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>--}}
-    {{--                </td>--}}
-    {{--                <td>3</td>--}}
-    {{--                <td>1</td>--}}
-    {{--                <td>DISPONIBLE</td>--}}
-
-
-    {{--            </tr>--}}
-    {{--            <tr>--}}
-    {{--                <th scope="row">Dr. Daniel Suarez</th>--}}
-    {{--                <td>Neurología</td>--}}
-    {{--                <td></td>--}}
-    {{--                <td>--}}
-    {{--                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>--}}
-    {{--                    <label class="form-check-label" for="invalidCheck2"></label>--}}
-
-    {{--                </td>--}}
-    {{--                <td>3</td>--}}
-    {{--                <td>0</td>--}}
-    {{--                <td>DISPONIBLE</td>--}}
-
-    {{--            </tr>--}}
-
-    {{--            </tbody>--}}
-    {{--        </table>--}}
-    {{--    </div>--}}
 </div>
