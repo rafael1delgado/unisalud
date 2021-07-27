@@ -54,7 +54,7 @@
 
                     <fieldset class="form-group col-md-2">
                         <label for="for_social_name">Nombre Social</label>
-                        <input type="text" class="form-control" name="social_name" id="social_name" required value="">
+                        <input type="text" class="form-control" name="social_name" id="social_name" value="">
 
                     </fieldset>
                 </div>

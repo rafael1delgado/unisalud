@@ -182,7 +182,7 @@
         <div class="form-group col-md-10">
         </div>
         <div class="form-group col-md-2">
-            <button type="button" class="btn btn-danger form-control">SUSPENDER</button>
+            <button type="button" class="btn btn-danger form-control" wire:click="suspend()">SUSPENDER</button>
         </div>
     </div>
 

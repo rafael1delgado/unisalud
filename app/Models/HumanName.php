@@ -24,4 +24,9 @@ class HumanName extends Model
         'period_id',
     ];
 
+    public function getfullNameAttribute()
+    {
+        return "{$this->text} {$this->fathers_family} {$this->mothers_family}";
+    }
+
 }

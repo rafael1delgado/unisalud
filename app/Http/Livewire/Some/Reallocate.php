@@ -256,7 +256,11 @@ class Reallocate extends Component
 
     public function suspend()
     {
-
+        $selectedAppointmentsFrom = Appointment::find($this->selectedAppointmentIdsFrom);
+        foreach ($selectedAppointmentsFrom as $selectedAppointmentFrom) {
+            $selectedAppointmentFrom->status = 'waitlist';
+            $selectedAppointmentFrom->save();
+        }
     }
 
     public function render()
