@@ -11,7 +11,7 @@ class Observation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'description'
+        'id', 'status', 'cod_con_obs_categories_id', 'type', 'description'
         //, 'user_id'
     ];
     public function appointments()
