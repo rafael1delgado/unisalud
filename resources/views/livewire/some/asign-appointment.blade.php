@@ -205,52 +205,52 @@
     </div>
 
 
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            <label for="inputEmail4">Prevision</label>
-            <div class="input-group mb-3">
-                <select id="inputState" class="form-control col-md-6">
-                    <option selected>Prevision</option>
-                    <option>Fonasa</option>
-                    <option>Isapre</option>
-                </select>
-                <select id="inputState" class="form-control col-md-3">
-                    <option selected>Tramo</option>
-                    <option>A</option>
-                    <option>B</option>
-                    <option>C</option>
-                    <option>D</option>
-                </select>
-                <button class="btn btn-primary col-md-3" type="button" id="button-addon1">Fonasa</button>
-            </div>
-        </div>
+{{--    <div class="form-row">--}}
+{{--        <div class="form-group col-md-4">--}}
+{{--            <label for="inputEmail4">Previsión</label>--}}
+{{--            <div class="input-group mb-3">--}}
+{{--                <select id="inputState" class="form-control col-md-6">--}}
+{{--                    <option selected>Prevision</option>--}}
+{{--                    <option>Fonasa</option>--}}
+{{--                    <option>Isapre</option>--}}
+{{--                </select>--}}
+{{--                <select id="inputState" class="form-control col-md-3">--}}
+{{--                    <option selected>Tramo</option>--}}
+{{--                    <option>A</option>--}}
+{{--                    <option>B</option>--}}
+{{--                    <option>C</option>--}}
+{{--                    <option>D</option>--}}
+{{--                </select>--}}
+{{--                <button class="btn btn-primary col-md-3" type="button" id="button-addon1">Fonasa</button>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
-        <div class="form-group col-md-1">
-            <label for="imputBool">Codigo</label>
-            <input type="bool" class="form-control" id="inputBool" placeholder="">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="imputBool">Prestación</label>
-            <input type="bool" class="form-control" id="inputBool" placeholder="">
-        </div>
-        <div class="form-group col-md-1">
-            <label for="imputNumeric">N° Interconsulta</label>
-            <input type="numeric" class="form-control" id="inputNumeric" placeholder="">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="inputDate">Fecha de Interconsulta</label>
-            <input type="date" class="form-control" id="inputDate" placeholder="Fecha de interconsulta">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="inputEmail4">Procedencia</label>
-            <select id="inputState" class="form-control">
-                <option selected>Cesfam Videla</option>
-                <option>Cesfam Aguirre</option>
-                <option>Cesfam Guzmán</option>
-                <option>Cesfam Sur</option>
-            </select>
-        </div>
-    </div>
+{{--        <div class="form-group col-md-1">--}}
+{{--            <label for="imputBool">Codigo</label>--}}
+{{--            <input type="bool" class="form-control" id="inputBool" placeholder="">--}}
+{{--        </div>--}}
+{{--        <div class="form-group col-md-2">--}}
+{{--            <label for="imputBool">Prestación</label>--}}
+{{--            <input type="bool" class="form-control" id="inputBool" placeholder="">--}}
+{{--        </div>--}}
+{{--        <div class="form-group col-md-1">--}}
+{{--            <label for="imputNumeric">N° Interconsulta</label>--}}
+{{--            <input type="numeric" class="form-control" id="inputNumeric" placeholder="">--}}
+{{--        </div>--}}
+{{--        <div class="form-group col-md-2">--}}
+{{--            <label for="inputDate">Fecha de Interconsulta</label>--}}
+{{--            <input type="date" class="form-control" id="inputDate" placeholder="Fecha de interconsulta">--}}
+{{--        </div>--}}
+{{--        <div class="form-group col-md-2">--}}
+{{--            <label for="inputEmail4">Procedencia</label>--}}
+{{--            <select id="inputState" class="form-control">--}}
+{{--                <option selected>Cesfam Videla</option>--}}
+{{--                <option>Cesfam Aguirre</option>--}}
+{{--                <option>Cesfam Guzmán</option>--}}
+{{--                <option>Cesfam Sur</option>--}}
+{{--            </select>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 
     <!--opcion asignar-->
