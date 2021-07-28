@@ -19,6 +19,7 @@ class CreateObservationsTable extends Migration
             $table->enum('status', ['registered', 'preliminar', 'final', 'amended', 'corrected', 'cancelled', 'entered-in-error', 'unknown',
             ])->nullable();
             //cod con categorie
+            $table->enum('type', ['doctor', 'patient'])->nullable();
             $table->string('description')->nullable();
 
             $table->timestamps();
