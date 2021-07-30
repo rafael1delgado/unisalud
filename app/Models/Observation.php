@@ -19,4 +19,8 @@ class Observation extends Model
         return $this->morphToMany(Appointment::class, 'appointable');
     }
 
+    public function obsCategory(){
+        return $this->belongsTo('App\Models\CodConObservationCategory', 'cod_con_obs_categories_id');
+    }
+    protected $table = 'observations';
 }
