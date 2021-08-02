@@ -12,15 +12,21 @@
     <thead>
         <tr>
             <th>Id</th>
+            <th>Estado</th>
+            <th>Tipo</th>
             <th>Descripción</th>
-            <th></th>
+            <th>Categoría</th>
         </tr>
     </thead>
     <tbody>
-        @foreach( $observations as $observation )
+        @foreach( $observation as $observation )
         <tr>
-            <td>{{ $observation->id }}</td>
-            <td>{{ $observation->description }}</td>
+            <td>{{ $observation->id ?? ''}}</td>
+            <td>{{ $observation->status ?? '' }}</td>
+            <td>{{ $observation->type ?? ''}}</td>
+            <td>{{ $observation->description ?? ''}}</td>
+            <td>{{ $observation->obsCategory->text ?? ''}}</td>
+
             <td>
       				<a href="{{ route('some.observations.edit', $observation) }}"
       					class="btn btn-sm btn-outline-secondary">

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Some;
 
 use App\Models\Observation;
+use App\Models\CodConObservationCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Database\Seeders\CodConObservationCategorySeeder;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -17,8 +19,8 @@ class ObservationController extends Controller
      */
     public function index()
     {
-      $observations = Observation::all();
-      return view('some.observations.index', compact('observations'));
+      $observation = Observation::all();
+      return view('some.observations.index', compact('observation'));
     }
 
     /**
@@ -28,7 +30,8 @@ class ObservationController extends Controller
      */
     public function create()
     {
-        return view('some.observations.create');
+      $obsCategory = CodConObservationCategory::all();
+      return view('some.observations.create', compact('obsCategory'));
     }
 
     /**
@@ -66,7 +69,8 @@ class ObservationController extends Controller
      */
     public function edit(Observation $observation)
     {
-        return view('some.observations.edit', compact('observation'));
+      $obsCategory = CodConObservationCategory::all();
+      return view('some.observations.edit', compact('observation', 'obsCategory'));
     }
 
     /**

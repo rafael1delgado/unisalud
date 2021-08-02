@@ -19,11 +19,13 @@ class CreateObservationsTable extends Migration
             $table->enum('status', ['registered', 'preliminar', 'final', 'amended', 'corrected', 'cancelled', 'entered-in-error', 'unknown',
             ])->nullable();
             //cod con categorie
+            $table->foreignId('cod_con_obs_categories_id')->nullable();
             $table->enum('type', ['doctor', 'patient'])->nullable();
             $table->string('description')->nullable();
 
             $table->timestamps();
             $table->foreign('observation_id')->references('id')->on('observations');
+            $table->foreign('cod_con_obs_categories_id')->references('id')->on('cod_con_observation_categories');
 
         });
     }
