@@ -5,7 +5,7 @@
 @section('content')
 
 <form>
-    @livewire('some.asign-appointment')
+    @livewire('some.asign-appointment', ['appointmentId' => $appointmentId])
 </form>
 
 @endsection

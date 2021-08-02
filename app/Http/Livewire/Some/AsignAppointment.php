@@ -33,6 +33,7 @@ class AsignAppointment extends Component
     public $locations;
     public $selectedLocationId;
     public $patientInstruction;
+    public $appointmentId;
 
     protected $listeners = ['userSelected' => 'setUser',
     ];

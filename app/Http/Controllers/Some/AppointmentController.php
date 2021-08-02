@@ -15,9 +15,9 @@ use Illuminate\Support\Collection;
 
 class AppointmentController extends Controller
 {
-    public function index()
+    public function index($appointmentId)
     {
-        return view('some.appointment');
+        return view('some.appointment', compact('appointmentId'));
     }
 
     /**

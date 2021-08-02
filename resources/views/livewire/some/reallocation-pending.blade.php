@@ -22,8 +22,10 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"
-                                    data-whatever="@getbootstrap"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="btn btn-sm btn-primary"><i class="fas fa-edit" title="Citar" wire:click='appoint({{$appointment->id}})'></i></button>
+
+                            {{-- <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                    data-whatever="@getbootstrap"><i class="fas fa-edit"></i></button> --}}
                         </td>
                     </tr>
                 @endforeach
@@ -34,7 +36,7 @@
     </div>
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -112,5 +114,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>

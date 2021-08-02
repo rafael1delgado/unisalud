@@ -44,6 +44,9 @@ use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalSignatureFlowContr
 
 
 use App\Http\Controllers\MedicalLicenceController;
+use App\Http\Livewire\Some\Reallocate;
+use App\Http\Livewire\Some\ReallocationPending;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -109,11 +112,11 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 });
 
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
-    Route::get('/appointment', [AppointmentController::class, 'index'])->name('appointment');
-    Route::view('/reallocate', 'some.reallocate')->name('reallocate');
+    Route::get('/appointment/{appointmentId?}', [AppointmentController::class, 'index'])->name('appointment');
+    Route::get('/reallocate', Reallocate::class)->name('reallocate');
     // Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
-    Route::view('/reallocation_pending', 'some.reallocation_pending')->name('reallocationPending');
+    Route::get('/reallocation_pending', ReallocationPending::class)->name('reallocationPending');
     Route::post('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
     Route::match(['get', 'post'],'/open_tprogrammer', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
     Route::get('appointment_detail/{id}', [AppointmentController::class, 'appointment_detail'])->name('appointment_detail');

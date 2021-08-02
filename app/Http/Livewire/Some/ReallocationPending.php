@@ -16,6 +16,11 @@ class ReallocationPending extends Component
             ->get();
     }
 
+    public function appoint($appointmentId){
+        // dd($appointmentId);
+        return redirect()->route('some.appointment', compact('appointmentId'));
+    }
+
     public function render()
     {
         return view('livewire.some.reallocation-pending');
