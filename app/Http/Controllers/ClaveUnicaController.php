@@ -47,7 +47,7 @@ class ClaveUnicaController extends Controller
         }
 
         /* Validar que el state sea el mismo que le enviamos nosotros */
-        if($state == csrf_token()) { 
+        //if($state == csrf_token()) { 
             $url_base       = "https://accounts.claveunica.gob.cl/openid/token/";
             $client_id      = env("CLAVEUNICA_CLIENT_ID");
             $client_secret  = env("CLAVEUNICA_SECRET_ID");
@@ -63,7 +63,10 @@ class ClaveUnicaController extends Controller
             ]);
 
             return $this->getUserInfo(json_decode($response)->access_token, $redirect);
-        }
+        //}
+        // else {
+        //     echo 'El state: '.$state.' enviado por clave única es distinto al local:'.csrf_token();
+        // }
     }
 
     public function getUserInfo($access_token, $redirect = null) {
