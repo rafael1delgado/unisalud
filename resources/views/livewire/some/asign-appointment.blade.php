@@ -1,7 +1,6 @@
 <div>
     <div class="form-row mt-3">
 
-        {{$appointmentId}}
         <div class="form-group col-md-4">
             <label for="inputrut">RUT</label>
             <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run"
@@ -282,12 +281,12 @@
                 <option value="Debe presentarse 15 mins antes.">Debe presentarse 15 mins antes.</option>
                 <option value="Debe presentar hora médica.">Debe presentar hora médica.</option>
             </select>
-            <!-- <select name="observation_id" id="for_observation_id" class="form-control" required>
+            {{-- <select name="observation_id" id="for_observation_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($observation as $type)
                                 <option value="{{ $type->id }}" {{(old('observation_id') == $type->id) ? 'selected' : ''}}>{{ $type->text }}</option>
                             @endforeach
-                        </select> -->
+                        </select>  --}}
         </div>
 
         <div class="form-group col-md-6">

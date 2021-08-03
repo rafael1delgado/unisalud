@@ -38,6 +38,18 @@ class AsignAppointment extends Component
     protected $listeners = ['userSelected' => 'setUser',
     ];
 
+    public function mount($appointmentId = null){
+        if($appointmentId){
+
+            $appointment = Appointment::find($appointmentId);
+            $user = $appointment->users()->first();
+
+            $this->run = $user->identifierRun->value;
+            $this->setDv();
+            $this->searchUser();
+        }
+    }
+
     /**
      * @var Location[]|\Illuminate\Database\Eloquent\Collection|mixed
      */

@@ -44,8 +44,10 @@ use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalSignatureFlowContr
 
 
 use App\Http\Controllers\MedicalLicenceController;
+use App\Http\Livewire\Some\AsignAppointment;
 use App\Http\Livewire\Some\Reallocate;
 use App\Http\Livewire\Some\ReallocationPending;
+use App\Models\Some\Appointment;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,7 +114,7 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 });
 
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
-    Route::get('/appointment/{appointmentId?}', [AppointmentController::class, 'index'])->name('appointment');
+    Route::get('/appointment/{appointmentId?}', AsignAppointment::class)->name('appointment');
     Route::get('/reallocate', Reallocate::class)->name('reallocate');
     // Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
