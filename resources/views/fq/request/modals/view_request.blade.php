@@ -253,7 +253,7 @@
                               @if($fqRequest->name != 'specialty hours') disabled @else required @endif>
                                 <option value="">Seleccione...</option>
                                 @foreach($practitioners as $practitioner)
-                                <option value="{{ $practitioner->id }}">{{ $practitioner->user->officialFullName }} - {{ $practitioner->specialty->specialty_name }}</option>
+                                <option value="{{ $practitioner->id }}">{{ $practitioner->user->officialFullName }} - {{ $practitioner->specialty ? $practitioner->specialty->specialty_name:''  }}</option>
                                 @endforeach
                             </select>
                         </fieldset>
