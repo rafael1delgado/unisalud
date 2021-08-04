@@ -110,7 +110,8 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::get('/{patient}', [PatientController::class, 'show'])->name('show');
     Route::post('/{patient}', [PatientController::class, 'update'])->name('update');
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
-    Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
+    // Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
+    Route::match(['get', 'post'], '/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
 
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){

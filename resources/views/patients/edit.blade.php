@@ -262,6 +262,12 @@
 
 
     </form>
+
+    @can('Administrator')
+        @include('partials.audit', ['audits' => $patient->audits] )
+    @endcan
+
+
 @endsection
 @section('custom_js')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}">
