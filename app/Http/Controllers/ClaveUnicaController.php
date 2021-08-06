@@ -22,23 +22,23 @@ class ClaveUnicaController extends Controller
             /claveunica/redirect/{ruta.a.redirigir} 
             NO PUEDE TENER "/" la ruta.a.redirigir 
         */
-        $state          = csrf_token().$redirect;
-        $scope          = 'openid run name';
+        $state      = csrf_token().$redirect;
+        $scope      = 'openid run name';
 
-        $params       = '?client_id='.$client_id.
-                        '&redirect_uri='.$redirect_uri.
-                        '&scope='.$scope.
-                        '&response_type=code'.
-                        '&state='.$state;
+        $params     = '?client_id='.$client_id.
+                      '&redirect_uri='.$redirect_uri.
+                      '&scope='.$scope.
+                      '&response_type=code'.
+                      '&state='.$state;
 
         return redirect()->to($url_base.$params)->send();
     }
 
     public function callback(Request $request) {
         /* Segundo Paso: enviar credenciales de clave única */
-        $code   = $request->input('code');
-        $state  = $request->input('state');
-        $redirect = null;
+        $code       = $request->input('code');
+        $state      = $request->input('state');
+        $redirect   = null;
 
         /* Si incluye redirect, el state es más largo que 40 */
         if(strlen($state) > 40) {
@@ -54,12 +54,12 @@ class ClaveUnicaController extends Controller
             $redirect_uri   = urlencode(env("CLAVEUNICA_CALLBACK"));
 
             $response = Http::asForm()->post($url_base, [
-                'client_id' => $client_id,
+                'client_id'     => $client_id,
                 'client_secret' => $client_secret,
-                'redirect_uri' => $redirect_uri,
-                'grant_type' => 'authorization_code',
-                'code' => $code,
-                'state' => $state,
+                'redirect_uri'  => $redirect_uri,
+                'grant_type'    => 'authorization_code',
+                'code'          => $code,
+                'state'         => $state,
             ]);
 
             return $this->getUserInfo(json_decode($response)->access_token, $redirect);
@@ -137,7 +137,7 @@ class ClaveUnicaController extends Controller
         return redirect()->route($route);
         
             
-        /*
+        /* CU Entrega los datos del usuario en este formato
         [RolUnico] => stdClass Object
             (
                 [DV] => 4
