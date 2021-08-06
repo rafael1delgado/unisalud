@@ -165,7 +165,13 @@ class User extends Authenticatable implements Auditable
         }
 
         return $queryUser;
+    }
 
+    public static function getUsersByIdentifier($searchText)
+    {
+        return User::whereHas('identifiers', function($query) use($searchText) {
+            return $query->where('value', $searchText);
+        });
     }
 
     //ContactPoints
