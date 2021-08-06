@@ -65,6 +65,15 @@ class AsignAppointment extends Component
         if ($this->user) {
             $this->appointmentsHistory = $this->user->appointments()->withTrashed()->get();
         }
+
+
+        $this->validate([
+            'user' => 'required'
+        ],
+        [
+            'user.required' => 'No existe paciente.'
+        ]);
+
     }
 
     public function setDv()
@@ -124,6 +133,14 @@ class AsignAppointment extends Component
         $query->orderBy('start');
 
         $this->appointments = $query->get();
+
+        $this->validate([
+            'appointments' => 'required'
+        ],
+        [
+            'appointments.required' => 'No se encuentran citas.'
+        ]
+        );
 
     }
 

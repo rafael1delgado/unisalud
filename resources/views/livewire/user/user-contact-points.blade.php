@@ -52,7 +52,7 @@
                 @if($key != 0)
                 <fieldset class="form-group offset-5 col-1">
                     <label for=""></label>
-                    <button class="btn btn-danger btn-block" wire:click.prevent="remove({{$key}})">Remover
+                    <button class="btn btn-danger btn-block" wire:click.prevent="remove({{$key}})"> <i class="fa fa-minus" aria-hidden="true"></i> Remover
                     </button>
                 </fieldset>
                 @endif
@@ -64,6 +64,6 @@
     @endforeach
 
     <div class="form-row">
-        <button type="button" class="btn btn-primary" wire:click.prevent="add({{$i}})">Agregar otro contacto</button>
+        <button type="button" class="btn btn-primary" wire:click.prevent="add({{$i}})"> <i class="fa fa-plus" aria-hidden="true"></i> Agregar otro contacto</button>
     </div>
 </div>

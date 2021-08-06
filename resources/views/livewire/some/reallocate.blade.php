@@ -73,7 +73,7 @@
         </div>
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="getAppointmentsFrom()">Buscar
+            <button type="button" class="btn btn-primary form-control" wire:click="getAppointmentsFrom()"> <i class="fa fa-search"></i> Buscar
             </button>
         </div>
 
@@ -140,7 +140,7 @@
         <div class="form-group col-md-10">
         </div>
         <div class="form-group col-md-2">
-            <button type="button" class="btn btn-danger form-control" wire:click="suspend()">SUSPENDER</button>
+            <button type="button" class="btn btn-danger form-control" wire:click="suspend()"> <i class="fas fa-pause"></i> SUSPENDER</button>
         </div>
     </div>
 
@@ -216,7 +216,7 @@
         </div>
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="getAppointmentsTo()">Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="getAppointmentsTo()"> <i class="fa fa-search"></i> Buscar</button>
         </div>
 
         <!--CHECK-->
@@ -241,9 +241,9 @@
         <div class="form-group col-md-6">
         </div>
         <div class="form-group col-md-2">
-            <button type="button" class="btn btn-primary form-control" wire:click="reallocate()">TRASPASAR</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="reallocate()"> <i class="fas fa-angle-double-down"></i>  TRASPASAR</button>
             @error('selectedAppointmentIdsFromCant')
-            <span class="text-danger">{{ $message }}</span>
+                <span class="text-danger">{{ $message }}</span>
             @enderror
 
 

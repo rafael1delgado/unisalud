@@ -20,7 +20,7 @@
 
   <div class="form-group col-md-3">
     <label for="inputEmail4">&nbsp;</label>
-    <button type="submit" class="btn btn-primary form-control">Buscar</button>
+    <button type="submit" class="btn btn-primary form-control"> <i class="fa fa-search"></i> Buscar</button>
   </div>
 
 </div>
@@ -75,7 +75,7 @@
 
   <div class="form-group col-md-2">
     <label for="inputEmail4">&nbsp;</label>
-    <button type="submit" class="btn btn-success form-control" onclick="return confirm('Las actividades que no tengan un rendimiento asignado no se podrán aperturar ¿Desea continuar?');">Aperturar</button>
+    <button type="submit" class="btn btn-success form-control" onclick="return confirm('Las actividades que no tengan un rendimiento asignado no se podrán aperturar ¿Desea continuar?');"> <i class="fa fa-folder-open"></i> Aperturar</button>
   </div>
 
 </div>
