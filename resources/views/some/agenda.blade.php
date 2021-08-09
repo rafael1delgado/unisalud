@@ -49,7 +49,7 @@
 
       <div class="form-group col-md-3">
         <label for="inputEmail4">&nbsp;</label>
-        <button type="submit" class="btn btn-primary form-control">Buscar</button>
+        <button type="submit" class="btn btn-primary form-control"> <i class="fa fa-search"></i> Buscar</button>
       </div>
 
     </div>

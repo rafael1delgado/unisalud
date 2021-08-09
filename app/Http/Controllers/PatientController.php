@@ -269,7 +269,6 @@ class PatientController extends Controller
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
-//test
         try {
             // dd($request);
             $patient = User::find($id);

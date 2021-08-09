@@ -1,7 +1,6 @@
 <div>
     <div class="form-row mt-3">
 
-        {{$appointmentId}}
         <div class="form-group col-md-4">
             <label for="inputrut">RUT</label>
             <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run"
@@ -20,16 +19,19 @@
 
         <div class="form-group col-md-2">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="searchUser()">Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="searchUser()"> <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
         </div>
 
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" data-toggle="modal"
-                    data-target="#searchUserModal">...
+                    data-target="#searchUserModal" title="Búsqueda avanzada" >...
             </button>
         </div>
     </div>
+    @error('user')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
 
     <div class="form-row mt-3">
         <div class="form-group col-md-6">
@@ -191,8 +193,9 @@
 
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()">Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()"> <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
         </div>
+            
         <fieldset class="form-group col-4">
             <label></label>
             <div class="form-group mt-1 ml-4">
@@ -259,7 +262,7 @@
     <div class="form-row ">
         <div class="form-group col-md-2">
             <label for="inputAsignar">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="asignAppointment()">Asignar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="asignAppointment()"> <i class="fas fa-save    "></i> Asignar</button>
         </div>
 
         <div class="form-group col-md-2">
@@ -282,12 +285,12 @@
                 <option value="Debe presentarse 15 mins antes.">Debe presentarse 15 mins antes.</option>
                 <option value="Debe presentar hora médica.">Debe presentar hora médica.</option>
             </select>
-            <!-- <select name="observation_id" id="for_observation_id" class="form-control" required>
+            {{-- <select name="observation_id" id="for_observation_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($observation as $type)
                                 <option value="{{ $type->id }}" {{(old('observation_id') == $type->id) ? 'selected' : ''}}>{{ $type->text }}</option>
                             @endforeach
-                        </select> -->
+                        </select>  --}}
         </div>
 
         <div class="form-group col-md-6">
@@ -298,6 +301,9 @@
     </div>
     <!-- fin opcion asignar-->
     <!--inicio tabla profesionales-->
+    @error('appointments')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
     <div class="table-responsive">
         <table class="table table-sm table-hover">
             <thead class="table-info">

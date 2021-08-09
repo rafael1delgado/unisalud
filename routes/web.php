@@ -44,8 +44,10 @@ use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalSignatureFlowContr
 
 
 use App\Http\Controllers\MedicalLicenceController;
+use App\Http\Livewire\Some\AsignAppointment;
 use App\Http\Livewire\Some\Reallocate;
 use App\Http\Livewire\Some\ReallocationPending;
+use App\Models\Some\Appointment;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,11 +110,12 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::get('/{patient}', [PatientController::class, 'show'])->name('show');
     Route::post('/{patient}', [PatientController::class, 'update'])->name('update');
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
-    Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
+    // Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
+    Route::match(['get', 'post'], '/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
 
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
-    Route::get('/appointment/{appointmentId?}', [AppointmentController::class, 'index'])->name('appointment');
+    Route::get('/appointment/{appointmentId?}', AsignAppointment::class)->name('appointment');
     Route::get('/reallocate', Reallocate::class)->name('reallocate');
     // Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
@@ -404,6 +407,7 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
 Route::prefix('test')->name('test.')->group(function(){
     Route::view('/livesearch', 'test.livesearch')->name('livesearch');
+    Route::view('/fonasa', 'test.fonasa');
 });
 
 Route::prefix('medical-licence')->name('medical_licence.')->group(function(){

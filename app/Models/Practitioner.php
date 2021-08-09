@@ -7,10 +7,15 @@ use App\Models\MedicalProgrammer\Specialty;
 use App\Models\Some\Appointment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Practitioner extends Model
+class Practitioner extends Model implements Auditable
 {
     use HasFactory;
+    use SoftDeletes;
+    use \OwenIt\Auditing\Auditable;
+    
 
     /**
      * The attributes that are mass assignable.

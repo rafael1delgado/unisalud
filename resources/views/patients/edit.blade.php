@@ -215,7 +215,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        <button type="submit" class="btn btn-primary mb-3">Guardar</button>
+        <button type="submit" class="btn btn-primary mb-3"> <i class="fas fa-save"></i> Guardar</button>
 
 
         <div  class="modal fade" id="showNameHistory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -262,6 +262,12 @@
 
 
     </form>
+
+    @can('Administrator')
+        @include('partials.audit', ['audits' => $patient->audits] )
+    @endcan
+
+
 @endsection
 @section('custom_js')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}">
