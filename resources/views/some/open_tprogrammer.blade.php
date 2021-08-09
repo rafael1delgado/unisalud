@@ -29,8 +29,8 @@
 
 <hr>
 
-@if($theoreticalProgrammings)
-<h4>{{$theoreticalProgrammings->first()->user->OfficialFullName}}</h4>
+@if($programmingProposal)
+<h4>{{$programmingProposal->user->OfficialFullName}}</h4>
 
 <div class="table-responsive">
   <table class="table table-responsive">
@@ -56,11 +56,11 @@
     <label for="inputEmail4">&nbsp;</label>
   </div>
 
-  @if($theoreticalProgrammings)
+  @if($programmingProposal)
   <input type="hidden" name="type" value="{{$request->type}}">
   <input type="hidden" name="specialty_id" value="{{$request->specialty_id}}">
   <input type="hidden" name="profession_id" value="{{$request->profession_id}}">
-  <input type="hidden" name="user_id" value="{{$theoreticalProgrammings->first()->user_id}}">
+  <input type="hidden" name="user_id" value="{{$programmingProposal->user_id}}">
   @endif
 
   <div class="form-group col-md-2">
@@ -115,41 +115,23 @@
             },
 
             events: [
-              //control 14  de junio
-              @if($theoreticalProgrammings)
-                @foreach($theoreticalProgrammings as $theoricalProgramming)
 
-                  @if($theoricalProgramming->subactivity)
-                    // si es que ya tiene apertura, se deja en rojo
-                    @if($theoricalProgramming->appointments->count() == 0)
-                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}}',
-                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                        color:'#85C1E9'
-                      },
-                      // F7DC6F
-                    @else
-                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}}',
-                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                        color:'#FF0000'
-                      },
-                    @endif
-                  @else
-                    // si es que ya tiene apertura, se deja en rojo
-                    @if($theoricalProgramming->appointments->count() == 0)
-                      { title: '{{$theoricalProgramming->activity->activity_name}}',
-                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                        color:'#85C1E9'
-                      },
-                    @else
-                      { title: '{{$theoricalProgramming->activity->activity_name}}',
-                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                        color:'#FF0000'
-                      },
-                    @endif
-                  @endif
-
-                @endforeach
-              @endif
+              // propuesta
+              @foreach($programmed_days as $programmed_day)
+                @if($programmed_day['data']->subactivity)
+                  {
+                  title: '{{$programmed_day['data']->subactivity->sub_activity_name}}',
+                  start: '{{$programmed_day['start_date']}}',
+                  end: '{{$programmed_day['end_date']}}'
+                  },
+                @else
+                  {
+                  title: '{{$programmed_day['data']->activity->activity_name}}',
+                  start: '{{$programmed_day['start_date']}}',
+                  end: '{{$programmed_day['end_date']}}'
+                  },
+                @endif
+              @endforeach
 
 
 

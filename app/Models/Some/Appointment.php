@@ -73,9 +73,14 @@ class Appointment extends Model
     }
 
 
-    public function theoreticalProgramming()
+    // public function theoreticalProgramming()
+    // {
+    //     return $this->belongsTo('App\Models\MedicalProgrammer\TheoreticalProgramming', 'mp_theoretical_programming_id');
+    // }
+
+    public function programmingProposalDetail()
     {
-        return $this->belongsTo('App\Models\MedicalProgrammer\TheoreticalProgramming', 'mp_theoretical_programming_id');
+        return $this->belongsTo('App\Models\MedicalProgrammer\ProgrammingProposalDetail','mp_prog_prop_detail_id');
     }
 
     public function users()
