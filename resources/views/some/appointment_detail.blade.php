@@ -63,26 +63,30 @@
 
   <hr>
 
-  <h4>Paciente</h4>
+  @if($appointment->users->count() > 0)
 
-  <div class="row">
+    <h4>Paciente</h4>
 
-      <fieldset class="form-group col-3">
-          <label for="for_contract_id">Rut</label>
-          <input type="text" class="form-control" value="{{$appointment->users->first()->IdentifierRun->value}}" readonly >
-      </fieldset>
+    <div class="row">
 
-      <fieldset class="form-group col-1">
-          <label for="for_contract_id">Rut</label>
-          <input type="text" class="form-control" value="{{$appointment->users->first()->IdentifierRun->dv}}" readonly >
-      </fieldset>
+        <fieldset class="form-group col-3">
+            <label for="for_contract_id">Rut</label>
+            <input type="text" class="form-control" value="{{$appointment->users->first()->IdentifierRun->value}}" readonly >
+        </fieldset>
 
-      <fieldset class="form-group col">
-          <label for="for_contract_id">Nombre</label>
-          <input type="text" class="form-control" value="{{$appointment->users->first()->OfficialFullName}}" readonly >
-      </fieldset>
+        <fieldset class="form-group col-1">
+            <label for="for_contract_id">Rut</label>
+            <input type="text" class="form-control" value="{{$appointment->users->first()->IdentifierRun->dv}}" readonly >
+        </fieldset>
 
-  </div>
+        <fieldset class="form-group col">
+            <label for="for_contract_id">Nombre</label>
+            <input type="text" class="form-control" value="{{$appointment->users->first()->OfficialFullName}}" readonly >
+        </fieldset>
+
+    </div>
+
+  @endif
 
   <div class="row">
       <fieldset class="form-group col-8">

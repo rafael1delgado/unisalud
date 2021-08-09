@@ -305,7 +305,7 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::get('/{motherActivity}/edit', [MotherActivityController::class, 'edit'])->name('edit');
   });
 
-  
+
 
   Route::prefix('services')->name('services.')->group(function(){
     Route::get('/', [ServiceController::class, 'index'])->name('index');
@@ -373,6 +373,8 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
   });
 
   Route::prefix('programming_proposal')->name('programming_proposal.')->group(function(){
+    Route::get('/programming_by_practioner', [ProgrammingProposalController::class, 'programming_by_practioner'])->name('programming_by_practioner');
+    
     Route::get('/', [ProgrammingProposalController::class, 'index'])->name('index');
     Route::post('/', [ProgrammingProposalController::class, 'store'])->name('store');
     Route::get('/create', [ProgrammingProposalController::class, 'create'])->name('create');

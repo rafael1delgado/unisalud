@@ -78,7 +78,7 @@
        @foreach($programmingProposal->details as $detail)
         <tr>
           <td>{{$detail->activity->activity_name}}</td>
-          <td>{{$detail->subactivity->sub_activity_name}}</td>
+          <td>@if($detail->subactivity){{$detail->subactivity->sub_activity_name}}@endif</td>
           <td>{{$detail->getDayAttribbute()}}</td>
           <td>{{$detail->start_hour}}</td>
           <td>{{$detail->end_hour}}</td>
@@ -107,7 +107,7 @@
             <span data-feather="square" style="color:#3757E9"></span> Propuesto
           </td>
           <td>
-            <span data-feather="square" style="color:#85C1E9"></span> Teórico
+            <span data-feather="square" style="color:#85C1E9"></span> Anterior
           </td>
         </tr>
       </table>
@@ -139,28 +139,40 @@
             locale: 'es',
             events: [
 
-              // teórico
-              @foreach($theoreticalProgrammings as $theoreticalProgramming)
-                @if($theoreticalProgramming->subactivity)
-                    { id: '{{$theoreticalProgramming->activity_id}}', title: '{{$theoreticalProgramming->subactivity->sub_activity_name}}',
-                      start: '{{$theoreticalProgramming->start_date}}', end: '{{$theoreticalProgramming->end_date}}',
-                      description: 'teorico', color:'#85C1E9'
-                    },
+              // última propuesta aceptada
+              @foreach($last_programmed_days as $programmed_day)
+                @if($programmed_day['data']->subactivity)
+                  {
+                  title: '{{$programmed_day['data']->subactivity->sub_activity_name}}',
+                  start: '{{$programmed_day['start_date']}}',
+                  end: '{{$programmed_day['end_date']}}',
+                  color: '#85C1E9'
+                  },
                 @else
-                    { id: '{{$theoreticalProgramming->activity_id}}', title: '{{$theoreticalProgramming->activity->activity_name}}',
-                      start: '{{$theoreticalProgramming->start_date}}', end: '{{$theoreticalProgramming->end_date}}',
-                      description: 'teorico', color:'#85C1E9'
-                    },
+                  {
+                  title: '{{$programmed_day['data']->activity->activity_name}}',
+                  start: '{{$programmed_day['start_date']}}',
+                  end: '{{$programmed_day['end_date']}}',
+                  color: '#85C1E9'
+                  },
                 @endif
               @endforeach
 
               // propuesta
               @foreach($programmed_days as $programmed_day)
-              {
-              title: '{{$programmed_day['data']->subactivity->sub_activity_name}}',
-              start: '{{$programmed_day['start_date']}}',
-              end: '{{$programmed_day['end_date']}}'
-              },
+                @if($programmed_day['data']->subactivity)
+                  {
+                  title: '{{$programmed_day['data']->subactivity->sub_activity_name}}',
+                  start: '{{$programmed_day['start_date']}}',
+                  end: '{{$programmed_day['end_date']}}'
+                  },
+                @else
+                  {
+                  title: '{{$programmed_day['data']->activity->activity_name}}',
+                  start: '{{$programmed_day['start_date']}}',
+                  end: '{{$programmed_day['end_date']}}'
+                  },
+                @endif
               @endforeach
 
             ],

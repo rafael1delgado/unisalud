@@ -130,6 +130,7 @@
 
 @endcan
 
+@canany(['Mp: user'])
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Programador médico</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
@@ -163,8 +164,15 @@
         </a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('medical_programmer.programming_proposal.programming_by_practioner') }}">
+        <span data-feather="chevrons-right"></span>
+        Programaciones<span class="sr-only">(current)</span>
+        </a>
+    </li>
+
     <!-- programador teorico -->
-    @canany(['Mp: programacion teorica'])
+    <!-- @canany(['Mp: programacion teorica'])
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.theoretical_programming.index') }}">
         <span data-feather="chevrons-right"></span>
@@ -190,10 +198,10 @@
       </li>
       @endcanany
     </ul>
-    @endcanany
+    @endcanany -->
 
     <!-- programador real -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link">
         <span data-feather="chevrons-right"></span>
         Programador Real<span class="sr-only">(current)</span>
@@ -212,7 +220,7 @@
           Box's<span class="sr-only">(current)</span>
           </a>
       </li>
-    </ul>
+    </ul> -->
 
     <!-- mantenedores -->
     @canany(['Mp: mantenedores'])
@@ -314,6 +322,7 @@
     @endcanany
 
 </ul>
+@endcanany
 
 <ul class="nav flex-column">
     <li class="nav-item border-top">

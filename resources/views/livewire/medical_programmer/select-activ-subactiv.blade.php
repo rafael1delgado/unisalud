@@ -15,7 +15,7 @@
 
     <fieldset class="form-group col col-md">
         <label for="">Sub-actividades</label>
-        <select class="form-control" name="sub_activity_id" required>
+        <select class="form-control" name="sub_activity_id">
           <option value=""></option>
            @if($subactivities != null)
              @foreach($subactivities as $subactivity)

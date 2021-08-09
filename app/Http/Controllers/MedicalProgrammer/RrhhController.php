@@ -32,7 +32,7 @@ class RrhhController extends Controller
     public function index()
     {
         // $rrhh = Rrhh::orderBy('name','ASC')->get();
-        $rrhh = User::orderBy('id','ASC')->paginate(50);
+        $rrhh = User::permission('Mp: user')->orderBy('id','ASC')->paginate(50);
         return view('medical_programmer.rrhh.index', compact('rrhh'));
     }
 
@@ -89,6 +89,7 @@ class RrhhController extends Controller
           $newHumanName = new HumanName($request->all());
           $newHumanName->use = "official";
           $newHumanName->user_id = $newPatient->id;
+          $newPatient->syncPermissions('Mp: user');
           $newHumanName->save();
 
           $newIdentifier = new Identifier($request->all());
@@ -99,10 +100,12 @@ class RrhhController extends Controller
 
 
 
-
-          $user->syncPermissions(
+          $newPatient->syncPermissions(
               is_array($request->input('permissions')) ? $request->input('permissions') : array()
           );
+
+          $newPatient->syncPermissions('Mp: user');
+          $newHumanName->save();
 
           //asigna especialidades
           if($request->input('specialties')!=null){
@@ -112,7 +115,7 @@ class RrhhController extends Controller
 
                 $userSpecialty = new UserSpecialty();
                 $userSpecialty->specialty_id = $value;
-                $userSpecialty->user_id = $user->id;
+                $userSpecialty->user_id = $newPatient->id;
                 if ($value == $request->principal_specialty) {
                   $userSpecialty->principal = 1;
                 }else{

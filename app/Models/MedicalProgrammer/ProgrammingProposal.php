@@ -48,19 +48,31 @@ class ProgrammingProposal extends Model implements Auditable
 
     public function employeeCanModify()
     {
-      // si tiene permisos de administración, se permite todo.
-      if (Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica') || Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de Servicio')) {
-        return 1;
+      //si la solicitud ya fue confirmada, no se deja modificar a nadie
+      if ($this->status == "Confirmado") {
+        return 0;
       }
       else
       {
-        if ($this->signatureFlows->last()->status == "Solicitud confirmada" || $this->signatureFlows->last()->status == "Solicitud rechazada") {
-          return 0;
-        }else{
-          return 1;
+        // si tiene permisos de administración, se permite todo.
+        if (Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica') || Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de Servicio')) {
+          // si solicitud solo está creada, no se deja confirmar a visadores
+          if ($this->signatureFlows->last()->status == "Solicitud creada") {
+            return 0;
+          }else{
+            return 1;
+          }
+        }
+        else
+        {
+          //si es que al solicitud ya fue confirmada, no se deja modificar a funcionario
+          if ($this->signatureFlows->last()->status != "Solicitud creada") {
+            return 0;
+          }else{
+            return 1;
+          }
         }
       }
-
     }
 
     /**

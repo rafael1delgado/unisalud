@@ -10,7 +10,9 @@ use Carbon\Carbon;
 use App\Models\MedicalProgrammer\ProgrammingProposal;
 use App\Models\MedicalProgrammer\ProgrammingProposalDetail;
 use App\Models\MedicalProgrammer\ProgrammingProposalSignatureFlow;
-use App\Models\MedicalProgrammer\TheoreticalProgramming;
+// use App\Models\MedicalProgrammer\TheoreticalProgramming;
+
+use App\Models\User;
 
 class ProgrammingProposalController extends Controller
 {
@@ -85,6 +87,17 @@ class ProgrammingProposalController extends Controller
 
       if ($request->has('accept_button')) {
         $programmingProposalSignatureFlow->status = "Solicitud confirmada";
+
+        if (Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica')) {
+          $programmingProposal->status = "Confirmado";
+          $programmingProposal->save();
+        }elseif(Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de Servicio')){
+          $programmingProposal->status = "En proceso";
+          $programmingProposal->save();
+        }else{
+          $programmingProposal->status = "En proceso";
+          $programmingProposal->save();
+        }
       }
       else{
         $programmingProposalSignatureFlow->status = "Solicitud rechazada";
@@ -145,20 +158,47 @@ class ProgrammingProposalController extends Controller
           $start_date->addDays(1);
         }
 
+        $total_hours = 0;
+        foreach ($programmingProposal->details as $key => $detail) {
+          $total_hours += Carbon::parse($detail->end_hour)->diffInMinutes(Carbon::parse($detail->start_hour))/60;
+        }
+
         //obtiene teoricos para mostrar en jcalendar
 
-        $theoreticalProgrammings = TheoreticalProgramming::where('user_id',$programmingProposal->user_id)
-                                                         ->where('contract_id',$programmingProposal->contract_id)
-                                                         ->where('specialty_id',$programmingProposal->specialty_id)
-                                                         ->whereBetween('start_date',[$programmingProposal->start_date,$programmingProposal->end_date])
-                                                         ->get();
+        // $theoreticalProgrammings = TheoreticalProgramming::where('user_id',$programmingProposal->user_id)
+        //                                                  ->where('contract_id',$programmingProposal->contract_id)
+        //                                                  ->where('specialty_id',$programmingProposal->specialty_id)
+        //                                                  ->whereBetween('start_date',[$programmingProposal->start_date,$programmingProposal->end_date])
+        //                                                  ->get();
 
-       $total_hours = 0;
-       foreach ($programmingProposal->details as $key => $detail) {
-         $total_hours += Carbon::parse($detail->end_hour)->diffInMinutes(Carbon::parse($detail->start_hour))/60;
+        // obtiene posibles programaciones anteriores para comparación
+        $last_programmingProposal = ProgrammingProposal::where('user_id',$programmingProposal->user_id)
+                                                       ->where('contract_id',$programmingProposal->contract_id)
+                                                       ->where('specialty_id',$programmingProposal->specialty_id)
+                                                       ->where('id','<',$programmingProposal->id)
+                                                       ->where('status', 'Confirmado')
+                                                       ->latest()->first();
+
+       $last_programmed_days = [];
+       if ($last_programmingProposal != null) {
+         $start_date = $last_programmingProposal->start_date;
+         $end_date = $last_programmingProposal->end_date;
+         $count = 0;
+
+         while ($start_date <= $end_date) {
+           $dayOfWeek = $start_date->dayOfWeek;
+
+           foreach ($last_programmingProposal->details->where('day',$dayOfWeek) as $key => $detail) {
+             $last_programmed_days[$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
+             $last_programmed_days[$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
+             $last_programmed_days[$count]['data'] = $detail;
+             $count+=1;
+           }
+           $start_date->addDays(1);
+         }
        }
 
-        return view('medical_programmer.programming_proposals.edit', compact('programmingProposal','programmed_days','theoreticalProgrammings','total_hours'));
+        return view('medical_programmer.programming_proposals.edit', compact('programmingProposal','last_programmed_days','programmed_days','total_hours'));
     }
 
     /**
@@ -182,5 +222,46 @@ class ProgrammingProposalController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function programming_by_practioner(Request $request)
+    {
+      $user_id = $request->get('user_id');
+      $user = User::find($user_id);
+      $programmingProposals = ProgrammingProposal::where('id',0)->get();
+      if ($user != null) {
+
+        $now = Carbon::now();
+        $programmingProposals = ProgrammingProposal::where('user_id',$request->user_id)
+                                                  // ->where('contract_id',$programmingProposal->contract_id)
+                                                  ->where('specialty_id',$request->specialty_id)
+                                                  ->where('status', 'Confirmado')
+                                                  ->whereYear('request_date',$now->format('Y'))
+                                                  ->get();
+
+
+        foreach ($programmingProposals as $key => $programmingProposal) {
+          $array = array();
+          foreach ($programmingProposal->details as $key => $detail) {
+            if($detail->subactivity) {
+              $array[$detail->activity->activity_name . " - " . $detail->subactivity->sub_activity_name] = 0;
+            }else{
+              $array[$detail->activity->activity_name] = 0;
+            }
+          }
+          foreach ($programmingProposal->details as $key => $detail) {
+            if($detail->subactivity) {
+              $array[$detail->activity->activity_name . " - " . $detail->subactivity->sub_activity_name] += Carbon::parse($detail->end_hour)->diffInMinutes(Carbon::parse($detail->start_hour))/60;
+            }else{
+              $array[$detail->activity->activity_name] += Carbon::parse($detail->end_hour)->diffInMinutes(Carbon::parse($detail->start_hour))/60;
+            }
+          }
+          $programmingProposal->array = $array;
+        }
+
+        // dd($programmingProposals->first()->details);
+      }
+
+      return view('some.programming_by_practioner',compact('request','programmingProposals'));
     }
 }

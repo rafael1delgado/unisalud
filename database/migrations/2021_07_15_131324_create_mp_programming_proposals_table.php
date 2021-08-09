@@ -54,7 +54,7 @@ class CreateMpProgrammingProposalsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('programming_proposal_id');
             $table->unsignedInteger('activity_id');
-            $table->unsignedBigInteger('sub_activity_id');
+            $table->unsignedBigInteger('sub_activity_id')->nullable();
             $table->integer('day');
             $table->string('start_hour');
             $table->string('end_hour');
@@ -62,18 +62,6 @@ class CreateMpProgrammingProposalsTable extends Migration
             $table->foreign('programming_proposal_id','mp_prog_prop_det_prog_prop_id_foreign')->references('id')->on('mp_programming_proposals');
             $table->foreign('activity_id')->references('id')->on('mp_activities');
             $table->foreign('sub_activity_id')->references('id')->on('mp_sub_activities');
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-        Schema::create('mp_programming_proposals_administrative_permits', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('programming_proposal_id');
-            $table->string('type', 100); //creador, visador, firmante
-            $table->datetime('start_date');
-            $table->datetime('end_date');
-
-            $table->foreign('programming_proposal_id','mp_prog_prop_adm_permits_prog_prop_id_foreign')->references('id')->on('mp_programming_proposals');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -86,7 +74,6 @@ class CreateMpProgrammingProposalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mp_programming_proposals_administrative_permits');
         Schema::dropIfExists('mp_programming_proposals_detail');
         Schema::dropIfExists('mp_programming_proposals_signature_flow');
         Schema::dropIfExists('mp_programming_proposals');

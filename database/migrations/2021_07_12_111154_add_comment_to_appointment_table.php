@@ -14,7 +14,7 @@ class AddCommentToAppointmentTable extends Migration
     public function up()
     {
         Schema::table('appointments', function (Blueprint $table) {
-            $table->renameColumn('"patientInstruction"', '"patient_instruction"');
+            // $table->renameColumn('"patientInstruction"', '"patient_instruction"');
             $table->string('comment')->after('created')->nullable();
         });
     }
@@ -27,7 +27,7 @@ class AddCommentToAppointmentTable extends Migration
     public function down()
     {
         Schema::table('appointments', function (Blueprint $table) {
-            $table->renameColumn('"patient_instruction"', '"patientInstruction"');
+            // $table->renameColumn('"patient_instruction"', '"patientInstruction"');
             $table->dropColumn('comment');
         });
     }
