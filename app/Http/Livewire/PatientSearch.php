@@ -8,6 +8,8 @@ use App\Traits\GoogleToken;
 use Illuminate\Support\Facades\Http;
 use Livewire\WithPagination;
 
+use Illuminate\Support\Facades\Auth;
+
 class PatientSearch extends Component
 {
     use GoogleToken;
@@ -34,6 +36,10 @@ class PatientSearch extends Component
                 $query->where('text', 'like', "%$this->searchf%")
                 ->orwhere('fathers_family', 'like', "%$this->searchf%")
                 ->orwhere('mothers_family', 'like', "%$this->searchf%");
+            })
+            //cuando sea usuario del programador, solo trae usuarios que sean del programador
+            ->when(Auth::user()->hasPermissionTo('Mp: user creator'), function ($query) {
+                $query->permission('Mp: user');
             })
             ->paginate(200);
 

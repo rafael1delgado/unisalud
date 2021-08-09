@@ -231,13 +231,13 @@
         </a>
     </li>
 
-    <ul class="pl-4 nav flex-column">
+    <!-- <ul class="pl-4 nav flex-column">
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
         <span data-feather="chevrons-right"></span>
         RRHH
         </a>
-    </li>
+    </li> -->
 
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.contracts.index') }}" href="{{ route('medical_programmer.contracts.index') }}">

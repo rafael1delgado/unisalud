@@ -215,6 +215,22 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
+        <div class="card mb-3">
+            <div class="card-body">
+                <!-- <h5 class="card-title">Permisos</h5> -->
+                <div class="form-row">
+                    <fieldset class="form-group col-md">
+                        <label for="for_name">Permisos</label>
+                        <select class="form-control selectpicker" name="permissions[]" multiple>
+                            @foreach($permissions as $permission)
+                                <option value="{{ $permission->name }}" {{ ($patient->hasPermissionTo($permission->name))?'selected':'' }}>{{ $permission->name }}</option>
+                            @endforeach
+                        </select>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary mb-3"> <i class="fas fa-save"></i> Guardar</button>
 
 
