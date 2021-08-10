@@ -26,7 +26,7 @@ class Practitioner extends Model implements Auditable
         'active',
         'gender',
         'birthdate',
-
+        'job_title'
     ];
 
     public function user()
