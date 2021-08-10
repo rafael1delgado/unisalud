@@ -115,10 +115,10 @@ class PatientController extends Controller
                 is_array($request->input('permissions')) ? $request->input('permissions') : array()
             );
 
-            //siempre que usuario logeado sea de programador, se asigna el permiso de programador
-            if (Auth::user()->hasPermissionTo('Mp: user creator')) {
-              $newPatient->syncPermissions('Mp: user');
-            }
+            // //siempre que usuario logeado sea de programador, se asigna el permiso de programador
+            // if (Auth::user()->hasPermissionTo('Mp: user creator')) {
+            //   $newPatient->syncPermissions('Mp: user');
+            // }
 
             if ($request->has('id_type')) {
                 foreach ($request->id_type as $key => $id_type) {
