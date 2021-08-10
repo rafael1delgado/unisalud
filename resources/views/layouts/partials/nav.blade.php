@@ -19,7 +19,7 @@
     </li>
 </ul>
 
-@canany(['Developer', 'Administrador', 'Mp: user creator'])
+@canany(['Developer', 'Administrator', 'Mp: user creator'])
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Pacientes</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
@@ -33,7 +33,7 @@
         Ver todos<span class="sr-only">(current)</span>
         </a>
     </li>
-    @canany(['Administrador', 'Mp: user creator'])
+    @canany(['Administrator', 'Mp: user creator'])
     <li class="nav-item">
         <a class="nav-link {{ active('patient.create') }}" href="{{ route('patient.create') }}">
         <span data-feather="plus-circle"></span>
