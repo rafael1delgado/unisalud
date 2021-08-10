@@ -254,7 +254,7 @@ class AsignAppointment extends Component
 
         $ids = $appointment->practitioners()->allRelatedIds();
         foreach ($ids as $id) {
-            $appointment->practitioners()->updateExistingPivot($id, ['status' => 'declined',
+            $appointment->practitioners()->updateExistingPivot($id, ['status' => 'tentative',
             ]);
         }
 

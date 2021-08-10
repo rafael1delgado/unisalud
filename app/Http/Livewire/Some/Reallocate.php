@@ -223,8 +223,8 @@ class Reallocate extends Component
         foreach ($selectedAppointmentsTo as $key => $selectedAppointmentTo) {
             $selectedAppointmentTo->users()->save($selectedAppointmentsFrom[$key]->users->first(), ['required' => $selectedAppointmentsFrom[$key]->users->first()->pivot->required, 'status' => $selectedAppointmentsFrom[$key]->users->first()->pivot->status]);
             $selectedAppointmentTo->practitioners()->save($this->selectedPractitionerTo, ['required' => 'required', 'status' => 'accepted']);
-//            $selectedAppointmentTo->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
             $selectedAppointmentTo->status = 'booked';
+            $selectedAppointmentTo->appointment_id = $selectedAppointmentsFrom->id;
             $selectedAppointmentTo->save();
         }
 
