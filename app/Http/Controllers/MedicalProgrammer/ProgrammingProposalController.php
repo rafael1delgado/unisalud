@@ -32,9 +32,9 @@ class ProgrammingProposalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('medical_programmer.programming_proposals.create');
+        return view('medical_programmer.programming_proposals.create',compact('request'));
     }
 
     /**
@@ -46,6 +46,7 @@ class ProgrammingProposalController extends Controller
     public function store(Request $request)
     {
       $programmingProposal = new ProgrammingProposal($request->All());
+      $programmingProposal->type = $request->proposal_type;
       $programmingProposal->request_date = Carbon::now();
       $programmingProposal->status = "Creado";
       $programmingProposal->save();
@@ -219,9 +220,11 @@ class ProgrammingProposalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ProgrammingProposal $programmingProposal)
     {
-        //
+        $programmingProposal->delete();
+        session()->flash('success', 'Se ha eliminado la información.');
+        return redirect()->route('medical_programmer.programming_proposal.index');
     }
 
     public function programming_by_practioner(Request $request)

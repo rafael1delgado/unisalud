@@ -11,7 +11,7 @@
 <div class="row">
   <fieldset class="form-group col col-md-4">
       <label for="for_id_deis">Tipo</label>
-      <select class="form-control" name="type">
+      <select class="form-control" name="proposal_type">
         <option value=""></option>
         <option value="Nuevo horario">Nuevo horario</option>
         <option value="Reasignación">Reasignación</option>
@@ -38,7 +38,13 @@
   </fieldset>
 </div> -->
 
-@livewire('medical_programmer.select-user-cont-spec', ['selected_id' => 'user_id'])
+<!-- @livewire('medical_programmer.select-user-cont-spec', ['selected_id' => 'user_id']) -->
+
+@livewire('medical_programmer.select-med-prog-employee',['type'         => $request->type,
+                                                         'specialty_id' => $request->specialty_id,
+                                                         'profession_id'=> $request->profession_id,
+                                                         'user_id'      => $request->user_id,
+                                                         'contract_enable' => 1])
 
 <div class="row">
   <fieldset class="form-group col col-md">

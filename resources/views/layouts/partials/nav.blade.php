@@ -231,8 +231,8 @@
         </a>
     </li>
 
-    <!-- <ul class="pl-4 nav flex-column">
-    <li class="nav-item">
+    <ul class="pl-4 nav flex-column">
+    <!--<li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
         <span data-feather="chevrons-right"></span>
         RRHH
@@ -297,12 +297,12 @@
         </a>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.cutoffdates.index') }}" href="{{ route('medical_programmer.cutoffdates.index') }}">
         <span data-feather="chevrons-right"></span>
         Fechas de corte
         </a>
-    </li>
+    </li> -->
 
     <!-- <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.unscheduled_programming.index') }}" href="{{ route('medical_programmer.unscheduled_programming.index') }}">
@@ -311,12 +311,12 @@
         </a>
     </li> -->
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.clone.index') }}" href="{{ route('medical_programmer.clone.index') }}">
         <span data-feather="chevrons-right"></span>
         Clonar
         </a>
-    </li>
+    </li> -->
 
     </ul>
     @endcanany

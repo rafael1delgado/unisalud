@@ -84,6 +84,8 @@ class SelectUserContSpec extends Component
     {
         if ($this->user != null) {
           $this->contracts = Contract::where('user_id',$this->user->id)->get();
+
+          // dd($this->user->practitioners);
           $this->userSpecialties = UserSpecialty::where('user_id',$this->user->id)->get();
         }
 
