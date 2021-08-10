@@ -95,7 +95,10 @@
                         @foreach($appointmentsHistory as $appointmentHistory)
                             <tr>
                                 <th scope="row">{{$appointmentHistory->start . (($appointmentHistory->type->text == 'OVERBOOKING') ? ' (SC)' : '') }}</th>
-                                <td>{{$appointmentHistory->theoreticalProgramming->specialty->specialty_name}}</td>
+
+                                @if($appointmentHistory->programmingProposalDetail->programmingProposal->specialty) <td>{{$appointmentHistory->programmingProposalDetail->programmingProposal->specialty->specialty_name}}</td> @endif
+                                @if($appointmentHistory->programmingProposalDetail->programmingProposal->profession) <td>{{$appointmentHistory->programmingProposalDetail->programmingProposal->profession->profession_name}}</td> @endif
+
                                 <td>
                                     <a href="{{ route('some.appointment_detail',$appointmentHistory->id) }}"
                                        class="btn btn-sm btn-outline-secondary">
@@ -195,7 +198,7 @@
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()"> <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
         </div>
-            
+
         <fieldset class="form-group col-4">
             <label></label>
             <div class="form-group mt-1 ml-4">
@@ -343,13 +346,14 @@
                             </div>
                         </td>
                         <td>
-{{--                            {{$appointment->theoreticalProgramming->user->officialFullName}}--}}
+
+{{--                            {{$appointment->programmingProposalDetail->programmingProposal->user->officialFullName}}--}}
                                                         <label class="label"
-                                                               for="for_selected_appointments[{{$key}}]">{{$appointment->theoreticalProgramming->user->officialFullName}}</label>
+                                                               for="for_selected_appointments[{{$key}}]">{{$appointment->programmingProposalDetail->programmingProposal->user->officialFullName}}</label>
                         </td>
 
-                        <td>{{$appointment->theoreticalProgramming->activity->activity_name}}</td>
-                        <td>{{($appointment->theoreticalProgramming->subactivity) ? $appointment->theoreticalProgramming->subactivity->sub_activity_name : ''}}</td>
+                        <td>{{$appointment->programmingProposalDetail->activity->activity_name}}</td>
+                        <td>{{($appointment->programmingProposalDetail->subactivity) ? $appointment->programmingProposalDetail->subactivity->sub_activity_name : ''}}</td>
                         <td>{{$appointment->start}}</td>
                         {{--                        <td>3</td>--}}
                         {{--                        <td>2</td>--}}

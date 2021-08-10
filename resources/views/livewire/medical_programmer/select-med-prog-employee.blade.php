@@ -1,6 +1,6 @@
 <div class="form-row">
 
-      <div class="form-group col-md-3">
+      <div class="form-group col-md">
           <label for="for_type">Tipo</label>
           <select id="for_type" name="type" class="form-control" wire:model.lazy="type" required>
               <option></option>
@@ -9,7 +9,7 @@
           </select>
       </div>
 
-      <div class="form-group col-md-3">
+      <div class="form-group col-md">
         @if($specialties != null)
               <label for="for_specialty_id">Especialidad</label>
               <select id="for_specialty_id" name="specialty_id" class="form-control" wire:model.lazy="specialty_id" required>
@@ -39,7 +39,7 @@
 
       </div>
 
-      <div class="form-group col-md-3">
+      <div class="form-group col-md">
           <label for="for_user_id">Funcionario</label>
           <select id="for_user_id" name="user_id" class="form-control" wire:model.lazy="user_id" required>
               <option></option>
@@ -51,8 +51,9 @@
           </select>
       </div>
 
-      <div class="form-group col-md-3">
-          <label for="for_contract_id">Contracto</label>
+      @if($contract_enable)
+      <div class="form-group col-md">
+          <label for="for_contract_id">Contrato</label>
           <select id="for_contract_id" name="contract_id" class="form-control" required>
               <option></option>
               @if($contracts != null)
@@ -62,5 +63,6 @@
               @endif
           </select>
       </div>
+      @endif
 
 </div>

@@ -118,12 +118,27 @@ class AsignAppointment extends Component
             return $q->whereDate('start', '<=', $this->appointments_from);
         });
 
-        $query->whereHas('theoreticalProgramming', function ($q) {
-            return $q->where('specialty_id', $this->specialty_id);
+        // $query->whereHas('theoreticalProgramming', function ($q) {
+        //     return $q->where('specialty_id', $this->specialty_id);
+        // });
+
+        $query->whereHas('practitioners', function ($q) {
+            return $q->when($this->specialty_id != null, function ($query) {
+                      $query->where('specialty_id',$this->specialty_id);
+                  })
+                  ->when($this->profession_id != null, function ($query) {
+                      $query->where('profession_id',$this->profession_id);
+                  });
         });
 
+        // $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
+        //     return $q->whereHas('theoreticalProgramming', function ($q) use ($userPractitioner) {
+        //         return $q->where('user_id', $userPractitioner->id);
+        //     });
+        // });
+
         $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
-            return $q->whereHas('theoreticalProgramming', function ($q) use ($userPractitioner) {
+            return $q->whereHas('practitioners', function ($q) use ($userPractitioner) {
                 return $q->where('user_id', $userPractitioner->id);
             });
         });
@@ -151,7 +166,7 @@ class AsignAppointment extends Component
 
             foreach ($selectedAppointments->get() as $selectedAppointment) {
                 $selectedAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
-                $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
+                // $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
                 if ($this->selectedLocationId) {
                     $selectedAppointment->locations()->save(Location::find($this->selectedLocationId), ['required' => 'required', 'status' => 'accepted']);
                 }
@@ -178,7 +193,7 @@ class AsignAppointment extends Component
                 $duplicateSelectedOverbookingAppointment->save();
 
                 $duplicateSelectedOverbookingAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
-                $duplicateSelectedOverbookingAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
+                // $duplicateSelectedOverbookingAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
 
                 if ($this->selectedLocationId) {
                     $duplicateSelectedOverbookingAppointment->locations()->save(Location::find($this->selectedLocationId), ['required' => 'required', 'status' => 'accepted']);

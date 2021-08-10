@@ -35,7 +35,12 @@ class AppointmentController extends Controller
 
         $programmingProposal = ProgrammingProposal::where('user_id',$request->user_id)
                                                   // ->where('contract_id',$programmingProposal->contract_id)
-                                                  ->where('specialty_id',$request->specialty_id)
+                                                  ->when($request->specialty_id != null, function ($query) use ($request) {
+                                                      $query->where('specialty_id',$request->specialty_id);
+                                                  })
+                                                  ->when($request->profession_id != null, function ($query) use ($request) {
+                                                      $query->where('profession_id',$request->profession_id);
+                                                  })
                                                   // ->where('id','<',$programmingProposal->id)
                                                   ->where('status', 'Confirmado')
                                                   ->latest()
@@ -51,11 +56,12 @@ class AppointmentController extends Controller
             $dayOfWeek = $start_date->dayOfWeek;
 
             foreach ($programmingProposal->details->where('day',$dayOfWeek) as $key => $detail) {
-              $programmed_days[$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
-              $programmed_days[$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
-              $programmed_days[$count]['data'] = $detail;
-
-              $count+=1;
+              if ($detail->activity->performance != 0) {
+                $programmed_days[$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
+                $programmed_days[$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
+                $programmed_days[$count]['data'] = $detail;
+                $count+=1;
+              }
             }
             $start_date->addDays(1);
           }
@@ -127,10 +133,14 @@ class AppointmentController extends Controller
 
         if ($request) {
             if ($request->user_id != null) {
-
                 $programmingProposal = ProgrammingProposal::where('user_id',$request->user_id)
                                                           // ->where('contract_id',$programmingProposal->contract_id)
-                                                          ->where('specialty_id',$request->specialty_id)
+                                                          ->when($request->specialty_id != null, function ($query) use ($request) {
+                                                              $query->where('specialty_id',$request->specialty_id);
+                                                          })
+                                                          ->when($request->profession_id != null, function ($query) use ($request) {
+                                                              $query->where('profession_id',$request->profession_id);
+                                                          })
                                                           ->where('status', 'Confirmado')
                                                           ->latest()
                                                           ->first();
@@ -145,10 +155,12 @@ class AppointmentController extends Controller
                   $dayOfWeek = $start_date->dayOfWeek;
 
                   foreach ($programmingProposal->details->where('day',$dayOfWeek) as $key => $detail) {
-                    $programmed_days[$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
-                    $programmed_days[$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
-                    $programmed_days[$count]['data'] = $detail;
-                    $count+=1;
+                    if ($detail->activity->performance != 0) {
+                      $programmed_days[$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
+                      $programmed_days[$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
+                      $programmed_days[$count]['data'] = $detail;
+                      $count+=1;
+                    }
                   }
                   $start_date->addDays(1);
                 }

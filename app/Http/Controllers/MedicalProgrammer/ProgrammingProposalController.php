@@ -159,6 +159,8 @@ class ProgrammingProposalController extends Controller
           $start_date->addDays(1);
         }
 
+        // dd($programmed_days);
+
         $total_hours = 0;
         foreach ($programmingProposal->details as $key => $detail) {
           $total_hours += Carbon::parse($detail->end_hour)->diffInMinutes(Carbon::parse($detail->start_hour))/60;
