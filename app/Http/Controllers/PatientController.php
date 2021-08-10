@@ -18,6 +18,7 @@ use App\Models\MedicalProgrammer\Profession;
 use App\Models\Practitioner;
 use App\Models\Region;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
