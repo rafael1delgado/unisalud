@@ -57,6 +57,11 @@ class ProgrammingProposalDetail extends Model implements Auditable
       }
     }
 
+    public function appointments()
+    {
+      return $this->hasMany('App\Models\Some\Appointment','mp_prog_prop_detail_id');
+    }
+
     /**
      * The attributes that should be mutated to dates.
      *

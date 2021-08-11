@@ -29,8 +29,8 @@
 
 <hr>
 
-@if($programmingProposal)
-<h4>{{$programmingProposal->user->OfficialFullName}}</h4>
+@if($programmingProposals)
+<h4>{{$programmingProposals->first()->user->OfficialFullName}}</h4>
 
 <div class="table-responsive">
   <table class="table table-responsive">
@@ -56,11 +56,11 @@
     <label for="inputEmail4">&nbsp;</label>
   </div>
 
-  @if($programmingProposal)
+  @if($programmingProposals)
   <input type="hidden" name="type" value="{{$request->type}}">
   <input type="hidden" name="specialty_id" value="{{$request->specialty_id}}">
   <input type="hidden" name="profession_id" value="{{$request->profession_id}}">
-  <input type="hidden" name="user_id" value="{{$programmingProposal->user_id}}">
+  <input type="hidden" name="user_id" value="{{$programmingProposals->first()->user_id}}">
   @endif
 
   <div class="form-group col-md-2">
@@ -122,13 +122,15 @@
                   {
                   title: '{{$programmed_day['data']->subactivity->sub_activity_name}}',
                   start: '{{$programmed_day['start_date']}}',
-                  end: '{{$programmed_day['end_date']}}'
+                  end: '{{$programmed_day['end_date']}}',
+                  color: '#{{$programmed_day['color']}}'
                   },
                 @else
                   {
                   title: '{{$programmed_day['data']->activity->activity_name}}',
                   start: '{{$programmed_day['start_date']}}',
-                  end: '{{$programmed_day['end_date']}}'
+                  end: '{{$programmed_day['end_date']}}',
+                  color: '#{{$programmed_day['color']}}'
                   },
                 @endif
               @endforeach

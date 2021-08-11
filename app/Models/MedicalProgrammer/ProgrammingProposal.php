@@ -54,10 +54,10 @@ class ProgrammingProposal extends Model implements Auditable
       }
       else
       {
-        // si tiene permisos de administración, se permite todo.
+        // si tiene permisos de supervición
         if (Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica') || Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de Servicio')) {
           // si solicitud solo está creada, no se deja confirmar a visadores
-          if ($this->signatureFlows->last()->status == "Solicitud creada") {
+          if ($this->signatureFlows->last()->status == "Solicitud creada" && $this->signatureFlows->last()->type == "Funcionario") {
             return 0;
           }else{
             return 1;
@@ -65,7 +65,7 @@ class ProgrammingProposal extends Model implements Auditable
         }
         else
         {
-          //si es que al solicitud ya fue confirmada, no se deja modificar a funcionario
+          //si es que solicitud ya fue confirmada, no se deja modificar a funcionario
           if ($this->signatureFlows->last()->status != "Solicitud creada") {
             return 0;
           }else{
