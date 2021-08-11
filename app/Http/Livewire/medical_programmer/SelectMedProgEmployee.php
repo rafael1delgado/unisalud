@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\MedicalProgrammer\Specialty;
 use App\Models\MedicalProgrammer\Profession;
 use App\Models\MedicalProgrammer\Contract;
+use App\Models\Practitioner;
 use App\Models\User;
 
 class SelectMedProgEmployee extends Component
@@ -38,15 +39,17 @@ class SelectMedProgEmployee extends Component
         }
 
         if ($this->specialty_id != null) {
-          $this->users = User::whereHas('userSpecialties', function ($query)  {
-                                  return $query->where('specialty_id',$this->specialty_id);
-                               })->get();
+          // $this->users = User::whereHas('userSpecialties', function ($query)  {
+          //                         return $query->where('specialty_id',$this->specialty_id);
+          //                      })->get();
+          $this->users = Practitioner::where('specialty_id',$this->specialty_id)->get()->pluck('user');
         }
 
         if ($this->profession_id != null) {
-          $this->users = User::whereHas('userProfessions', function ($query)  {
-                                  return $query->where('profession_id',$this->profession_id);
-                               })->get();
+          // $this->users = User::whereHas('userProfessions', function ($query)  {
+          //                         return $query->where('profession_id',$this->profession_id);
+          //                      })->get();
+          $this->users = Practitioner::where('profession_id',$this->profession_id)->get()->pluck('user');
         }
 
         if ($this->contract_enable != null) {
