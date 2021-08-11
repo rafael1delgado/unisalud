@@ -357,7 +357,7 @@
                         <td>{{$appointment->start}}</td>
                         {{--                        <td>3</td>--}}
                         {{--                        <td>2</td>--}}
-                        <td>{{$appointment->status}}</td>
+                        <td>{{$appointment->status_text() }} @if($appointment->cod_con_appointment_type_id == 6) (SC) @endif </td>
                     </tr>
                 @endforeach
             @endif

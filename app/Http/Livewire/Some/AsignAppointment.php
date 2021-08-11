@@ -166,7 +166,7 @@ class AsignAppointment extends Component
 
             foreach ($selectedAppointments->get() as $selectedAppointment) {
                 $selectedAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
-                // $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
+                $selectedAppointment->practitioners()->updateExistingPivot($this->practitioner_id, ['required' => 'required', 'status' => 'accepted']);
                 if ($this->selectedLocationId) {
                     $selectedAppointment->locations()->save(Location::find($this->selectedLocationId), ['required' => 'required', 'status' => 'accepted']);
                 }
@@ -193,7 +193,7 @@ class AsignAppointment extends Component
                 $duplicateSelectedOverbookingAppointment->save();
 
                 $duplicateSelectedOverbookingAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
-                // $duplicateSelectedOverbookingAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
+                $duplicateSelectedOverbookingAppointment->practitioners()->updateExistingPivot($this->practitioner_id, ['required' => 'required', 'status' => 'accepted']);
 
                 if ($this->selectedLocationId) {
                     $duplicateSelectedOverbookingAppointment->locations()->save(Location::find($this->selectedLocationId), ['required' => 'required', 'status' => 'accepted']);
@@ -254,7 +254,7 @@ class AsignAppointment extends Component
 
         $ids = $appointment->practitioners()->allRelatedIds();
         foreach ($ids as $id) {
-            $appointment->practitioners()->updateExistingPivot($id, ['status' => 'declined',
+            $appointment->practitioners()->updateExistingPivot($id, ['status' => 'tentative',
             ]);
         }
 
