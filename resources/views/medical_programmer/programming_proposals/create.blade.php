@@ -14,8 +14,8 @@
       <select class="form-control" name="proposal_type">
         <option value=""></option>
         <option value="Nuevo horario">Nuevo horario</option>
-        <option value="Reasignación">Reasignación</option>
-        <option value="Reasignación">Permisos administrativos</option>
+        <option value="Reprogramación">Reprogramación</option>
+        <!-- <option value="Reasignación">Permisos administrativos</option> -->
         <option value="Eliminación">Eliminación</option>
       </select>
   </fieldset>
