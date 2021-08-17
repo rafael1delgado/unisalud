@@ -421,12 +421,19 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
 
 
 //rutas samu
-Route::prefix('samu')->name('samu.')->group(function () {
-    Route::prefix('mobile')->name('mobile.')->group(function () {
+  Route::prefix('samu')->name('samu.')->group(function () {
+      Route::prefix('mobile')->name('mobile.')->group(function () {
       Route::view('/', 'samu.mobile.index')->name('index');
       Route::view('/create', 'samu.mobile.create')->name('create');
       Route::view('/edit', 'samu.mobile.edit')->name('edit');
     });
 
+    Route::prefix('crew')->name('crew.')->group(function () {
+      Route::view('/', 'samu.crew.index')->name('index');
+      Route::view('/create', 'samu.crew.create')->name('create');
+      Route::view('/edit', 'samu.crew.edit')->name('edit');
+    });
+
   });
-//fin rutas samu
+
+  //fin rutas samu
