@@ -165,8 +165,15 @@
       </li>
     @endcanany
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="{{ route('medical_programmer.programming_proposal.programming_by_practioner') }}">
+        <span data-feather="chevrons-right"></span>
+        Programaciones por funcionario<span class="sr-only">(current)</span>
+        </a>
+    </li> -->
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('medical_programmer.programming_proposal.consolidated_programmings') }}">
         <span data-feather="chevrons-right"></span>
         Programaciones<span class="sr-only">(current)</span>
         </a>
