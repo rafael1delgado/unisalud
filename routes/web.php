@@ -429,10 +429,16 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
       Route::view('/edit', 'samu.mobile.edit')->name('edit');
     });
 
-    Route::prefix('crew')->name('crew.')->group(function () {
+      Route::prefix('crew')->name('crew.')->group(function () {
       Route::view('/', 'samu.crew.index')->name('index');
       Route::view('/create', 'samu.crew.create')->name('create');
       Route::view('/edit', 'samu.crew.edit')->name('edit');
+    });
+
+      Route::prefix('regulatory_center')->name('regulatory-center.')->group(function () {
+      Route::view('/', 'samu.rc.index')->name('index');
+      Route::view('/create', 'samu.rc.create')->name('create');
+      Route::view('/edit', 'samu.rc.edit')->name('edit');
     });
 
   });
