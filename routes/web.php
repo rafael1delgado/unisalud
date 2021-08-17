@@ -12,14 +12,14 @@ use App\Http\Controllers\Parameter\PermissionController;
 use App\Http\Controllers\Profile\ProfileController;
 
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\Profile\ObservationController;
+use App\Http\Controllers\Some\ObservationController;
 
 use App\Http\Controllers\PatientController;
 
 use App\Http\Controllers\Fq\CysticFibrosisRequest;
 use App\Http\Controllers\Fq\ContactUserController;
 use App\Http\Controllers\Fq\FqRequestController;
-
+use App\Http\Controllers\Some\LocationController;
 use App\Http\Controllers\Surveys\TeleconsultationSurveyController;
 
 use App\Http\Controllers\MedicalProgrammer\OperatingRoomProgrammingController;
@@ -38,9 +38,17 @@ use App\Http\Controllers\MedicalProgrammer\ProfessionController;
 use App\Http\Controllers\MedicalProgrammer\CutOffDateController;
 use App\Http\Controllers\MedicalProgrammer\CloneController;
 use App\Http\Controllers\MedicalProgrammer\ReportController;
+use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalController;
+use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalDetailController;
+use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalSignatureFlowController;
 
 
 use App\Http\Controllers\MedicalLicenceController;
+use App\Http\Livewire\Some\AsignAppointment;
+use App\Http\Livewire\Some\Reallocate;
+use App\Http\Livewire\Some\ReallocationPending;
+use App\Models\Some\Appointment;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -102,18 +110,39 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::get('/{patient}', [PatientController::class, 'show'])->name('show');
     Route::post('/{patient}', [PatientController::class, 'update'])->name('update');
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
-    Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
+    // Route::get('/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
+    Route::match(['get', 'post'], '/{patient}/edit', [PatientController::class, 'edit'])->name('edit');
 });
 
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
-    Route::get('/appointment', [AppointmentController::class, 'index'])->name('appointment');
-    Route::view('/reallocate', 'some.reallocate')->name('reallocate');
+    Route::get('/appointment/{appointmentId?}', AsignAppointment::class)->name('appointment');
+    Route::get('/reallocate', Reallocate::class)->name('reallocate');
     // Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
-    Route::view('/reallocation_pending', 'some.reallocation_pending')->name('reallocationPending');
+    Route::get('/reallocation_pending', ReallocationPending::class)->name('reallocationPending');
     Route::post('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
     Route::match(['get', 'post'],'/open_tprogrammer', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
     Route::get('appointment_detail/{id}', [AppointmentController::class, 'appointment_detail'])->name('appointment_detail');
+
+    Route::prefix('locations')->name('locations.')->group(function(){
+      Route::get('/', [LocationController::class, 'index'])->name('index');
+      Route::post('/', [LocationController::class, 'store'])->name('store');
+      Route::get('/create', [LocationController::class, 'create'])->name('create');
+      Route::get('/{location}', [LocationController::class, 'show'])->name('show');
+      Route::put('/{location}', [LocationController::class, 'update'])->name('update');
+      Route::delete('/{location}', [LocationController::class, 'destroy'])->name('destroy');
+      Route::get('/{location}/edit', [LocationController::class, 'edit'])->name('edit');
+    });
+
+    Route::prefix('observations')->name('observations.')->group(function(){
+      Route::get('/', [ObservationController::class, 'index'])->name('index');
+      Route::post('/', [ObservationController::class, 'store'])->name('store');
+      Route::get('/create', [ObservationController::class, 'create'])->name('create');
+      Route::get('/{observation}', [ObservationController::class, 'show'])->name('show');
+      Route::put('/{observation}', [ObservationController::class, 'update'])->name('update');
+      Route::delete('/{observation}', [ObservationController::class, 'destroy'])->name('destroy');
+      Route::get('/{observation}/edit', [ObservationController::class, 'edit'])->name('edit');
+    });
 });
 
 Route::prefix('fq')->as('fq.')->group(function(){
@@ -215,6 +244,7 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
     Route::get('event_detail/{rut}/{activity_id}/{contract_id}/{specialty_id}/{profession_id}/{start_date}/{end_date}/{year}', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
     Route::post('deleteMyEventId/{id}', [TheoreticalProgrammingController::class, 'deleteMyEventId'])->name('deleteMyEventId');
+    Route::get('proposal_programmer', [TheoreticalProgrammingController::class, 'proposal_programmer'])->name('proposal_programmer');
 
     // Route::get('event_detail/{info}', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
     // Route::post('event_detail', [TheoreticalProgrammingController::class, 'event_detail'])->name('event_detail');
@@ -274,6 +304,8 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::delete('/{motherActivity}', [MotherActivityController::class, 'destroy'])->name('destroy');
     Route::get('/{motherActivity}/edit', [MotherActivityController::class, 'edit'])->name('edit');
   });
+
+
 
   Route::prefix('services')->name('services.')->group(function(){
     Route::get('/', [ServiceController::class, 'index'])->name('index');
@@ -340,6 +372,28 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::get('reportcut', [ReportController::class, 'exportcut'])->name('reportcut');
   });
 
+  Route::prefix('programming_proposal')->name('programming_proposal.')->group(function(){
+    Route::get('/programming_by_practioner', [ProgrammingProposalController::class, 'programming_by_practioner'])->name('programming_by_practioner');
+    
+    Route::get('/', [ProgrammingProposalController::class, 'index'])->name('index');
+    Route::post('/', [ProgrammingProposalController::class, 'store'])->name('store');
+    Route::get('/create', [ProgrammingProposalController::class, 'create'])->name('create');
+    Route::get('/{programmingProposal}', [ProgrammingProposalController::class, 'show'])->name('show');
+    Route::put('/{programmingProposal}', [ProgrammingProposalController::class, 'update'])->name('update');
+    Route::delete('/{programmingProposal}', [ProgrammingProposalController::class, 'destroy'])->name('destroy');
+    Route::get('/{programmingProposal}/edit', [ProgrammingProposalController::class, 'edit'])->name('edit');
+
+    Route::put('/{programmingProposal}', [ProgrammingProposalController::class, 'store_confirmation'])->name('store_confirmation');
+
+    Route::prefix('details')->name('details.')->group(function(){
+      Route::get('/create/{programmingProposal}', [ProgrammingProposalDetailController::class, 'create'])->name('create');
+      Route::post('/', [ProgrammingProposalDetailController::class, 'store'])->name('store');
+      Route::delete('/{programmingProposalDetail}', [ProgrammingProposalDetailController::class, 'destroy'])->name('destroy');
+    });
+  });
+
+
+
 
 });
 
@@ -353,6 +407,7 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
 Route::prefix('test')->name('test.')->group(function(){
     Route::view('/livesearch', 'test.livesearch')->name('livesearch');
+    Route::view('/fonasa', 'test.fonasa');
 });
 
 Route::prefix('medical-licence')->name('medical_licence.')->group(function(){

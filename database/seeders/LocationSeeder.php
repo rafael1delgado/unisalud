@@ -14,7 +14,7 @@ class LocationSeeder extends Seeder
      */
     public function run()
     {
-        Location::Create(['status' => 'active',
+        Location::Create(['status' => 'inactive',
             'name' => 'Pasillo Verde',
             'alias' => 'Pasillo Verde',
             'description' => 'Pasillo Verde Hospital',

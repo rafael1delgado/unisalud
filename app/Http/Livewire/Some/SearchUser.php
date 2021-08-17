@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class SearchUser extends Component
 {
-    public $name;
+    public $searchText;
     public $users;
     public $selectedUser;
 
@@ -17,9 +17,13 @@ class SearchUser extends Component
 //        $this->users = null;
 //    }
 
-    public function searchByName()
+    public function search()
     {
-        $this->users = User::getUsersByName($this->name)->get();
+        $usersByName = User::getUsersByName($this->searchText)->get();
+        $usersByIdentifier = User::getUsersByIdentifier($this->searchText)->get();
+
+        $allUsers = $usersByName->merge($usersByIdentifier);
+        $this->users = $allUsers;
     }
 
     public function selectUser($userId)

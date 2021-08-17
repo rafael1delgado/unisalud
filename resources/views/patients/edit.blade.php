@@ -33,7 +33,7 @@
                 <h5 class="card-title">Datos Personales</h5>
                 <input type="hidden" name='human_name_use' value='official'>
                 <div class="form-row">
-                    <fieldset class="form-group col-md-6">
+                    <fieldset class="form-group col-md-5">
                         <label for="for_name">Nombres</label>
                         <input type="text" class="form-control" name="text"
                                id="for_name" required
@@ -53,6 +53,15 @@
                                id="for_mothers_family" required
                                value="{{ $patient->actualOfficialHumanName->mothers_family }}">
                     </fieldset>
+
+                    @if($patient->humanNames->count() > 1)
+                        <fieldset class="form-group col-md-1">
+                            <label for="">&nbsp;</label>
+                            <button type="button" class="btn btn-primary form btn-block" data-toggle="modal"
+                                    data-target="#showNameHistory"> <i class="fas fa-clock"></i> </button>
+                        </fieldset>
+                    @endif
+
                 </div>
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
@@ -202,13 +211,79 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-practitioners', compact('organizations', 'specialties', 'patient'))
+        @livewire('user.user-practitioners', compact('organizations', 'professions', 'specialties', 'patient'))
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        <button type="submit" class="btn btn-primary mb-3">Guardar</button>
+        <div class="card mb-3">
+            <div class="card-body">
+                <!-- <h5 class="card-title">Permisos</h5> -->
+                <div class="form-row">
+                    <fieldset class="form-group col-md">
+                        <label for="for_name">Permisos</label>
+                        <select class="form-control selectpicker" name="permissions[]" multiple>
+                            @foreach($permissions as $permission)
+                                <option value="{{ $permission->name }}" {{ ($patient->hasPermissionTo($permission->name))?'selected':'' }}>{{ $permission->name }}</option>
+                            @endforeach
+                        </select>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-3"> <i class="fas fa-save"></i> Guardar</button>
+
+
+        <div  class="modal fade" id="showNameHistory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true" >
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Hitorial de nombres</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover">
+                                    <thead class="table-info">
+                                    <tr>
+                                        <th scope="col">Nombre:</th>
+                                        <th scope="col">Fecha vigencia:</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($patient->humanNames as $humanName)
+                                            <tr>
+                                                <td>{{$humanName->fullName}}</td>
+                                                <td>{{$humanName->created_at}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </form>
+
+    @can('Administrator')
+        @include('partials.audit', ['audits' => $patient->audits] )
+    @endcan
+
+
 @endsection
 @section('custom_js')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}">

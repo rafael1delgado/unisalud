@@ -13,11 +13,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
+use App\Models\MedicalProgrammer\ProgrammingProposal;
+use App\Models\User;
+
 class AppointmentController extends Controller
 {
-    public function index()
+    public function index($appointmentId)
     {
-        return view('some.appointment');
+        return view('some.appointment', compact('appointmentId'));
     }
 
     /**
@@ -27,86 +30,214 @@ class AppointmentController extends Controller
      */
     public function openAgenda(Request $request)
     {
-        $start_date = $request->from;
-        $end_date = $request->to;
+        $request_start_date = Carbon::parse($request->from);
+        $request_end_date = Carbon::parse($request->to);
 
-        $theoreticalProgrammings = TheoreticalProgramming::query()
-            ->whereDate('start_date', '>=', $start_date)
-            ->whereDate('end_date', '<=', $end_date)
-            ->whereNotNull('performance')
-            ->where('user_id',$request->user_id)
-            ->whereDoesntHave('appointments')
-            ->get();
+        $now = Carbon::now();
+        $programmingProposals = ProgrammingProposal::where('user_id',$request->user_id)
+                                                  // ->where('contract_id',$programmingProposal->contract_id)
+                                                  ->when($request->specialty_id != null, function ($query) use ($request) {
+                                                      $query->where('specialty_id',$request->specialty_id);
+                                                  })
+                                                  ->when($request->profession_id != null, function ($query) use ($request) {
+                                                      $query->where('profession_id',$request->profession_id);
+                                                  })
+                                                  // ->where('id','<',$programmingProposal->id)
+                                                  // ->whereBetween('start_date',[$request_start_date,$request_end_date])
+                                                  // ->whereBetween('end_date',[$request_start_date,$request_end_date])
+                                                  ->whereYear('request_date',$now->format('Y'))
+                                                  ->where('status', 'Confirmado')
+                                                  // ->latest()
+                                                  // ->first();
+                                                  ->orderBy('request_date','ASC') //debe ir así, para que deje los primeros ingresados al principio, y aspi se puedan ordenar correctamente y no se pisen
+                                                  ->get();
+
+                                                  // dd($programmingProposals);
+
+        // obtiene todos los horarios para cita
+        $programmed_days = [];
+        $count = 0;
+        foreach ($programmingProposals as $key => $programmingProposal) {
+          if ($programmingProposal != null) {
+
+            $start_date = $programmingProposal->start_date;
+            $end_date = $programmingProposal->end_date;
+
+            // se eliminan antiguos del array (periodos anteriores del ciclo) que se encuentren between de nueva iteración
+            foreach ($programmed_days as $key2 => $programmed_day) {
+              if (Carbon::parse($programmed_day['start_date'])->between($start_date, $end_date)) {
+                unset($programmed_days[$key2]);
+              }
+            }
+
+            //se obtienen los del periodo actual
+            while ($start_date <= $end_date) {
+              $dayOfWeek = $start_date->dayOfWeek;
+
+              foreach ($programmingProposal->details->where('day',$dayOfWeek) as $key3 => $detail) {
+                //no se consideran los que no tengan performance
+                if ($detail->activity->performance != 0) {
+
+                  $start = Carbon::parse($start_date->format('Y-m-d') . " " . $detail->start_hour);
+                  // print_r($detail->appointments->where('start',$start)->count());
+                  //no se consideran los que ya están aperturados
+                  if ($detail->appointments->where('start',$start)->count() == 0) {
+                    $programmed_days[$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
+                    $programmed_days[$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
+                    $programmed_days[$count]['data'] = $detail;
+                    $count+=1;
+                  }
+
+                }
+              }
+              $start_date->addDays(1);
+            }
+          }
+        }
+
+
+        //se eliminan los que no corresponden
+        foreach ($programmed_days as $key => $programmed_day) {
+          // dd($programmed_day);
+          $start_date = Carbon::parse($programmed_day['start_date']);
+          $end_date = Carbon::parse($programmed_day['end_date']);
+
+          //se dejan solo los que esten en el rango de fechas del request
+          if (!$start_date->isBetween($request_start_date,$request_end_date)) {
+            unset($programmed_days[$key]);
+          }
+        }
+
+        // dd($programmed_days);
 
         // $appointments = new Collection();
-        foreach ($theoreticalProgrammings as $theoreticalProgramming) {
-            $startDateTheoretical = Carbon::parse($theoreticalProgramming->start_date);
-            $endDateTheoretical = Carbon::parse($theoreticalProgramming->end_date);
+        foreach ($programmed_days as $programmed_day) {
+            $startDateTheoretical = Carbon::parse($programmed_day['start_date']);
+            $endDateTheoretical = Carbon::parse($programmed_day['end_date']);
             $diffMinutesTheoretical = $endDateTheoretical->diffInMinutes($startDateTheoretical);
 
-            if ($theoreticalProgramming->subactivity) {
-                $period = 60 / $theoreticalProgramming->subactivity->performance;
+            if ($programmed_day['data']->subactivity) {
+                $period = 60 / $programmed_day['data']->subactivity->performance;
             } else {
-                $period = 60 / $theoreticalProgramming->performance;
+                $period = 60 / $programmed_day['data']->activity->performance;
             }
             $qntAppointments = $diffMinutesTheoretical / $period;
 
             $lastDate = $startDateTheoretical->copy();
             for ($i = 0; $i < $qntAppointments; $i++) {
+                //se crea nueva cita
                 $newAppointment = new Appointment;
                 $newAppointment->start = $lastDate->copy();
                 $newAppointment->end = $lastDate->addMinutes($period);
                 $newAppointment->status = 'proposed';
-                $newAppointment->mp_theoretical_programming_id = $theoreticalProgramming->id;
+                // $newAppointment->mp_theoretical_programming_id = $theoreticalProgramming->id;
+                $newAppointment->mp_prog_prop_detail_id = $programmed_day['data']->id;
                 $newAppointment->created = now();
                 $newAppointment->cod_con_appointment_type_id = 4;
                 $newAppointment->save();
-                // $appointments->push($newAppointment);
+
+                //asociar en tabla appointables
+                $user = User::find($request->user_id);
+                $practitioner = $user->practitioners()->where('organization_id',4)->where('specialty_id',$request->specialty_id)->first();
+                $newAppointment->practitioners()->save($practitioner, ['required' => 'required', 'status' => 'tentative']);
             }
         }
 
-        // $appointments = Appointment::all();
         return redirect()->route('some.agenda', ['type'=>$request->type,
                                                  'specialty_id'=>$request->specialty_id,
                                                  'profession_id'=>$request->profession_id,
                                                  'user_id'=>$request->user_id]);
-        // return view('some.agenda', compact('start_date', 'end_date', 'appointments'));
     }
 
     public function agenda(Request $request){
       $user_id = $request->get('user_id');
-      $appointments = Appointment::whereHas('theoreticalProgramming', function ($query) use ($user_id) {
-                                      return $query->where('user_id',$user_id);
-                                   })->get();
+      $appointments = Appointment::where('id',0)->get();
+      $user = User::find($user_id);
+      if ($user != null) {
+        if ($user->practitioners()->count() > 0) {
+          $practitioner = $user->practitioners()->where('organization_id',4)
+                                                ->where('specialty_id',$request->specialty_id)
+                                                ->first();
 
-      // foreach ($appointments as $key => $appointment) {
-      //   if ($appointment->status == "booked") {
-      //       dd($appointment->appointables);
-      //   }
-      // }
+          $appointments = $practitioner->appointments()->get();
+        }
+      }
+
       return view('some.agenda', compact('appointments','request'));
     }
 
     public function openTProgrammerView(Request $request)
     {
         $theoreticalProgrammings = null;
+        $programmingProposals = null;
+        $programmed_days = [];
 
         if ($request) {
             if ($request->user_id != null) {
-                // $monday = Carbon::parse($request->date)->startOfWeek();
-                // $sunday = Carbon::parse($request->date)->endOfWeek();
-                $theoreticalProgrammings = TheoreticalProgramming::where('user_id', $request->user_id)
-                    // ->whereBetween('start_date',[$monday,$sunday])
-                    ->get();
-                // dd($request->user_id, $theoreticalProgrammings);
+
+                $now = Carbon::now();
+                $programmingProposals = ProgrammingProposal::where('user_id',$request->user_id)
+                                                          // ->where('contract_id',$programmingProposal->contract_id)
+                                                          ->when($request->specialty_id != null, function ($query) use ($request) {
+                                                              $query->where('specialty_id',$request->specialty_id);
+                                                          })
+                                                          ->when($request->profession_id != null, function ($query) use ($request) {
+                                                              $query->where('profession_id',$request->profession_id);
+                                                          })
+                                                          ->whereYear('request_date',$now->format('Y'))
+                                                          ->where('status', 'Confirmado')
+                                                          // ->latest()
+                                                          // ->first();
+                                                          ->orderBy('request_date','ASC') //debe ir así, para que deje los primeros ingresados al principio, y aspi se puedan ordenar correctamente y no se pisen
+                                                          ->get();
+
+
+                // separa onthefly los días que se mostraran en fullcalendar
+                $programmed_days = [];
+                $count = 0;
+                foreach ($programmingProposals as $key => $programmingProposal) {
+                  // ciclo para obtener fechas
+                  $start_date = $programmingProposal->start_date;
+                  $end_date = $programmingProposal->end_date;
+
+                  // se eliminan antiguos del array (periodos anteriores del ciclo) que se encuentren between de nueva iteración
+                  foreach ($programmed_days as $key => $programmed_day) {
+                    if (Carbon::parse($programmed_day['start_date'])->between($start_date, $end_date)) {
+                      unset($programmed_days[$key]);
+                    }
+                  }
+
+                  //se obtienen los del periodo actual
+                  while ($start_date <= $end_date) {
+                    $dayOfWeek = $start_date->dayOfWeek;
+                    foreach ($programmingProposal->details->where('day',$dayOfWeek) as $key2 => $detail) {
+                      //que tengan performance
+                      if ($detail->activity->performance != 0) {
+                        $programmed_days[$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
+                        $programmed_days[$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
+                        $programmed_days[$count]['data'] = $detail;
+                        // verifia si está aperturado o no
+                        $start = Carbon::parse($start_date->format('Y-m-d') . " " . $detail->start_hour);
+                        if ($detail->appointments->where('start',$start)->count() > 0) {
+                          $programmed_days[$count]['color'] = "FF0000";
+                        }else{
+                          $programmed_days[$count]['color'] = "85C1E9";
+                        }
+                        $count+=1;
+                      }
+                    }
+                    $start_date->addDays(1);
+                  }
+                }
             }
         }
 
-        return view('some.open_tprogrammer', compact('request', 'theoreticalProgrammings'));
+        return view('some.open_tprogrammer', compact('request', 'programmingProposals','programmed_days'));
     }
 
     public function appointment_detail($id){
       $appointment = Appointment::find($id);
+      // dd($appointment);
       return view('some.appointment_detail', compact('appointment'));
     }
 }

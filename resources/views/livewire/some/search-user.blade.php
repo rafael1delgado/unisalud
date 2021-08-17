@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Flujo Firmas</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Búsqueda de pacientes</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,13 +13,13 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="form-group col-md-10">
-                        <label for="inputnombre">Nombre</label>
-                        <input type="text" class="form-control" placeholder="Ingrese Nombre" wire:model.lazy="name">
+                        <label for="inputnombre">&nbsp;</label>
+                        <input type="text" class="form-control" placeholder="Nombre o identificador" wire:model.lazy="searchText">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="inputEmail4">&nbsp;</label>
-                        <button type="button" class="btn btn-primary form-control" wire:click="searchByName()">Buscar
+                        <button type="button" class="btn btn-primary form-control" wire:click="search()"> <i class="fa fa-search"></i> Buscar
                         </button>
                     </div>
                 </div>

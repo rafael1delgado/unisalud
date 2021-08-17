@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
     use HasFactory, Notifiable, HasRoles;
+    use \OwenIt\Auditing\Auditable;
+    
 
     protected $primaryKey = 'id';
 
@@ -163,7 +165,13 @@ class User extends Authenticatable
         }
 
         return $queryUser;
+    }
 
+    public static function getUsersByIdentifier($searchText)
+    {
+        return User::whereHas('identifiers', function($query) use($searchText) {
+            return $query->where('value', $searchText);
+        });
     }
 
     //ContactPoints

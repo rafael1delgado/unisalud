@@ -19,16 +19,19 @@
 
         <div class="form-group col-md-2">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="searchUser()">Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="searchUser()"> <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
         </div>
 
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" data-toggle="modal"
-                    data-target="#searchUserModal">...
+                    data-target="#searchUserModal" title="Búsqueda avanzada" >...
             </button>
         </div>
     </div>
+    @error('user')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
 
     <div class="form-row mt-3">
         <div class="form-group col-md-6">
@@ -92,7 +95,10 @@
                         @foreach($appointmentsHistory as $appointmentHistory)
                             <tr>
                                 <th scope="row">{{$appointmentHistory->start . (($appointmentHistory->type->text == 'OVERBOOKING') ? ' (SC)' : '') }}</th>
-                                <td>{{$appointmentHistory->theoreticalProgramming->specialty->specialty_name}}</td>
+
+                                @if($appointmentHistory->programmingProposalDetail->programmingProposal->specialty) <td>{{$appointmentHistory->programmingProposalDetail->programmingProposal->specialty->specialty_name}}</td> @endif
+                                @if($appointmentHistory->programmingProposalDetail->programmingProposal->profession) <td>{{$appointmentHistory->programmingProposalDetail->programmingProposal->profession->profession_name}}</td> @endif
+
                                 <td>
                                     <a href="{{ route('some.appointment_detail',$appointmentHistory->id) }}"
                                        class="btn btn-sm btn-outline-secondary">
@@ -162,7 +168,7 @@
 
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-4">
             <label for="for_practitioner_id">Funcionario</label>
             <select id="for_practitioner_id" name="practitioner_id" class="form-control"
                     wire:model.lazy="practitioner_id" required>
@@ -175,18 +181,6 @@
             </select>
         </div>
 
-        <div class="form-group col-md-2">
-            <label for="for_location">Lugar</label>
-            <select id="for_location" name="location" class="form-control"
-            wire:model.lazy="selectedLocation">
-                <option selected></option>
-                @if($locations != null)
-                    @foreach($locations as $location)
-                        <option value="{{$location->id}}"> {{$location->alias}} </option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
 
         <div class="form-group col-md-2">
             <label for="inputEmail4">Desde</label>
@@ -202,8 +196,9 @@
 
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()">Buscar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()"> <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
         </div>
+
         <fieldset class="form-group col-4">
             <label></label>
             <div class="form-group mt-1 ml-4">
@@ -217,52 +212,52 @@
     </div>
 
 
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            <label for="inputEmail4">Prevision</label>
-            <div class="input-group mb-3">
-                <select id="inputState" class="form-control col-md-6">
-                    <option selected>Prevision</option>
-                    <option>Fonasa</option>
-                    <option>Isapre</option>
-                </select>
-                <select id="inputState" class="form-control col-md-3">
-                    <option selected>Tramo</option>
-                    <option>A</option>
-                    <option>B</option>
-                    <option>C</option>
-                    <option>D</option>
-                </select>
-                <button class="btn btn-primary col-md-3" type="button" id="button-addon1">Fonasa</button>
-            </div>
-        </div>
+{{--    <div class="form-row">--}}
+{{--        <div class="form-group col-md-4">--}}
+{{--            <label for="inputEmail4">Previsión</label>--}}
+{{--            <div class="input-group mb-3">--}}
+{{--                <select id="inputState" class="form-control col-md-6">--}}
+{{--                    <option selected>Prevision</option>--}}
+{{--                    <option>Fonasa</option>--}}
+{{--                    <option>Isapre</option>--}}
+{{--                </select>--}}
+{{--                <select id="inputState" class="form-control col-md-3">--}}
+{{--                    <option selected>Tramo</option>--}}
+{{--                    <option>A</option>--}}
+{{--                    <option>B</option>--}}
+{{--                    <option>C</option>--}}
+{{--                    <option>D</option>--}}
+{{--                </select>--}}
+{{--                <button class="btn btn-primary col-md-3" type="button" id="button-addon1">Fonasa</button>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
-        <div class="form-group col-md-1">
-            <label for="imputBool">Codigo</label>
-            <input type="bool" class="form-control" id="inputBool" placeholder="">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="imputBool">Prestación</label>
-            <input type="bool" class="form-control" id="inputBool" placeholder="">
-        </div>
-        <div class="form-group col-md-1">
-            <label for="imputNumeric">N° Interconsulta</label>
-            <input type="numeric" class="form-control" id="inputNumeric" placeholder="">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="inputDate">Fecha de Interconsulta</label>
-            <input type="date" class="form-control" id="inputDate" placeholder="Fecha de interconsulta">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="inputEmail4">Procedencia</label>
-            <select id="inputState" class="form-control">
-                <option selected>Cesfam Videla</option>
-                <option>Cesfam Aguirre</option>
-                <option>Cesfam Guzmán</option>
-                <option>Cesfam Sur</option>
-            </select>
-        </div>
-    </div>
+{{--        <div class="form-group col-md-1">--}}
+{{--            <label for="imputBool">Codigo</label>--}}
+{{--            <input type="bool" class="form-control" id="inputBool" placeholder="">--}}
+{{--        </div>--}}
+{{--        <div class="form-group col-md-2">--}}
+{{--            <label for="imputBool">Prestación</label>--}}
+{{--            <input type="bool" class="form-control" id="inputBool" placeholder="">--}}
+{{--        </div>--}}
+{{--        <div class="form-group col-md-1">--}}
+{{--            <label for="imputNumeric">N° Interconsulta</label>--}}
+{{--            <input type="numeric" class="form-control" id="inputNumeric" placeholder="">--}}
+{{--        </div>--}}
+{{--        <div class="form-group col-md-2">--}}
+{{--            <label for="inputDate">Fecha de Interconsulta</label>--}}
+{{--            <input type="date" class="form-control" id="inputDate" placeholder="Fecha de interconsulta">--}}
+{{--        </div>--}}
+{{--        <div class="form-group col-md-2">--}}
+{{--            <label for="inputEmail4">Procedencia</label>--}}
+{{--            <select id="inputState" class="form-control">--}}
+{{--                <option selected>Cesfam Videla</option>--}}
+{{--                <option>Cesfam Aguirre</option>--}}
+{{--                <option>Cesfam Guzmán</option>--}}
+{{--                <option>Cesfam Sur</option>--}}
+{{--            </select>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 
     <!--opcion asignar-->
@@ -270,19 +265,48 @@
     <div class="form-row ">
         <div class="form-group col-md-2">
             <label for="inputAsignar">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="asignAppointment()">Asignar</button>
+            <button type="button" class="btn btn-primary form-control" wire:click="asignAppointment()"> <i class="fas fa-save    "></i> Asignar</button>
         </div>
 
         <div class="form-group col-md-2">
-            <select id="for_observation_id" name="observation_id">
-                <option value="1">Debe presentarse 15 mins antes.</option>
-                <option value="2">Debe .</option>
+            <label for="for_location">Lugar</label>
+            <select id="for_location" name="location" class="form-control"
+                    wire:model.lazy="selectedLocationId">
+                <option selected></option>
+                @if($locations != null)
+                    @foreach($locations as $location)
+                        <option value="{{$location->id}}"> {{$location->alias}} </option>
+                    @endforeach
+                @endif
             </select>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="for_observation_id">Instrucción para paciente</label>
+            <select id="for_observation_id" name="observation_id" class="form-control" onchange="setPatientObservation(this)" >
+                <option value=""></option>
+                <option value="Debe presentarse 15 mins antes.">Debe presentarse 15 mins antes.</option>
+                <option value="Debe presentar hora médica.">Debe presentar hora médica.</option>
+            </select>
+            {{-- <select name="observation_id" id="for_observation_id" class="form-control" required>
+                            <option value=""></option>
+                            @foreach($observation as $type)
+                                <option value="{{ $type->id }}" {{(old('observation_id') == $type->id) ? 'selected' : ''}}>{{ $type->text }}</option>
+                            @endforeach
+                        </select>  --}}
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="for_patient_instruction">Instrucción para paciente</label>
+            <textarea class="form-control" name="patient_instruction" id="for_patient_instruction" cols="10" rows="3" wire:model="patientInstruction"></textarea>
         </div>
 
     </div>
     <!-- fin opcion asignar-->
     <!--inicio tabla profesionales-->
+    @error('appointments')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
     <div class="table-responsive">
         <table class="table table-sm table-hover">
             <thead class="table-info">
@@ -322,17 +346,18 @@
                             </div>
                         </td>
                         <td>
-{{--                            {{$appointment->theoreticalProgramming->user->officialFullName}}--}}
+
+{{--                            {{$appointment->programmingProposalDetail->programmingProposal->user->officialFullName}}--}}
                                                         <label class="label"
-                                                               for="for_selected_appointments[{{$key}}]">{{$appointment->theoreticalProgramming->user->officialFullName}}</label>
+                                                               for="for_selected_appointments[{{$key}}]">{{$appointment->programmingProposalDetail->programmingProposal->user->officialFullName}}</label>
                         </td>
 
-                        <td>{{$appointment->theoreticalProgramming->activity->activity_name}}</td>
-                        <td>{{($appointment->theoreticalProgramming->subactivity) ? $appointment->theoreticalProgramming->subactivity->sub_activity_name : ''}}</td>
+                        <td>{{$appointment->programmingProposalDetail->activity->activity_name}}</td>
+                        <td>{{($appointment->programmingProposalDetail->subactivity) ? $appointment->programmingProposalDetail->subactivity->sub_activity_name : ''}}</td>
                         <td>{{$appointment->start}}</td>
                         {{--                        <td>3</td>--}}
                         {{--                        <td>2</td>--}}
-                        <td>{{$appointment->status}}</td>
+                        <td>{{$appointment->status_text() }} @if($appointment->cod_con_appointment_type_id == 6) (SC) @endif </td>
                     </tr>
                 @endforeach
             @endif
@@ -347,6 +372,13 @@
     {{--    @livewireScripts--}}
 
     <script>
+
+        function setPatientObservation(select) {
+            var textArea = document.getElementById('for_patient_instruction');
+            textArea.value = textArea.value + ' ' + select.value;
+            textArea.dispatchEvent(new Event('input'));
+        }
+
         // window.livewire.on('userSelected', () => {
         //     // console.log('cierra modal');
         //     $('#searchUserModal').modal('hide');

@@ -82,9 +82,8 @@
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                     @include('layouts.partials.errors')
                     @include('layouts.partials.flash_message')
-{{--                    {{ $slot }}--}}
                     <hr>
-                    @yield('content')
+                    @yield('content') @if( isset($slot) ) {{ $slot }} @endif
                 </main>
             </div>
         </div>

@@ -20,7 +20,7 @@
 
   <div class="form-group col-md-3">
     <label for="inputEmail4">&nbsp;</label>
-    <button type="submit" class="btn btn-primary form-control">Buscar</button>
+    <button type="submit" class="btn btn-primary form-control"> <i class="fa fa-search"></i> Buscar</button>
   </div>
 
 </div>
@@ -29,8 +29,8 @@
 
 <hr>
 
-@if($theoreticalProgrammings)
-<h4>{{$theoreticalProgrammings->first()->user->OfficialFullName}}</h4>
+@if($programmingProposals)
+<h4>{{$programmingProposals->first()->user->OfficialFullName}}</h4>
 
 <div class="table-responsive">
   <table class="table table-responsive">
@@ -56,11 +56,11 @@
     <label for="inputEmail4">&nbsp;</label>
   </div>
 
-  @if($theoreticalProgrammings)
+  @if($programmingProposals)
   <input type="hidden" name="type" value="{{$request->type}}">
   <input type="hidden" name="specialty_id" value="{{$request->specialty_id}}">
   <input type="hidden" name="profession_id" value="{{$request->profession_id}}">
-  <input type="hidden" name="user_id" value="{{$theoreticalProgrammings->first()->user_id}}">
+  <input type="hidden" name="user_id" value="{{$programmingProposals->first()->user_id}}">
   @endif
 
   <div class="form-group col-md-2">
@@ -75,7 +75,7 @@
 
   <div class="form-group col-md-2">
     <label for="inputEmail4">&nbsp;</label>
-    <button type="submit" class="btn btn-success form-control" onclick="return confirm('Las actividades que no tengan un rendimiento asignado no se podrán aperturar ¿Desea continuar?');">Aperturar</button>
+    <button type="submit" class="btn btn-success form-control" onclick="return confirm('Las actividades que no tengan un rendimiento asignado no se podrán aperturar ¿Desea continuar?');"> <i class="fa fa-folder-open"></i> Aperturar</button>
   </div>
 
 </div>
@@ -115,41 +115,25 @@
             },
 
             events: [
-              //control 14  de junio
-              @if($theoreticalProgrammings)
-                @foreach($theoreticalProgrammings as $theoricalProgramming)
 
-                  @if($theoricalProgramming->subactivity)
-                    // si es que ya tiene apertura, se deja en rojo
-                    @if($theoricalProgramming->appointments->count() == 0)
-                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}}',
-                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                        color:'#85C1E9'
-                      },
-                      // F7DC6F
-                    @else
-                      { title: '{{$theoricalProgramming->subactivity->sub_activity_name}}',
-                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                        color:'#FF0000'
-                      },
-                    @endif
-                  @else
-                    // si es que ya tiene apertura, se deja en rojo
-                    @if($theoricalProgramming->appointments->count() == 0)
-                      { title: '{{$theoricalProgramming->activity->activity_name}}',
-                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                        color:'#85C1E9'
-                      },
-                    @else
-                      { title: '{{$theoricalProgramming->activity->activity_name}}',
-                        start: '{{$theoricalProgramming->start_date}}', end: '{{$theoricalProgramming->end_date}}',
-                        color:'#FF0000'
-                      },
-                    @endif
-                  @endif
-
-                @endforeach
-              @endif
+              // propuesta
+              @foreach($programmed_days as $programmed_day)
+                @if($programmed_day['data']->subactivity)
+                  {
+                  title: '{{$programmed_day['data']->subactivity->sub_activity_name}}',
+                  start: '{{$programmed_day['start_date']}}',
+                  end: '{{$programmed_day['end_date']}}',
+                  color: '#{{$programmed_day['color']}}'
+                  },
+                @else
+                  {
+                  title: '{{$programmed_day['data']->activity->activity_name}}',
+                  start: '{{$programmed_day['start_date']}}',
+                  end: '{{$programmed_day['end_date']}}',
+                  color: '#{{$programmed_day['color']}}'
+                  },
+                @endif
+              @endforeach
 
 
 

@@ -26,6 +26,8 @@ class CreateIdentifiersTable extends Migration
             $table->foreignId('practitioner_id')->nullable();
             $table->foreignId('organization_id')->nullable();
             $table->foreignId('appointment_id')->nullable();
+            $table->foreignId('location_id')->nullable();
+            $table->foreignId('observation_id')->nullable();
 
             $table->timestamps();
 
@@ -35,6 +37,9 @@ class CreateIdentifiersTable extends Migration
             $table->foreign('practitioner_id')->references('id')->on('practitioners');
             $table->foreign('organization_id')->references('id')->on('organizations');
             $table->foreign('appointment_id')->references('id')->on('appointments');
+            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('observation_id')->references('id')->on('observations');
+
 
         });
     }

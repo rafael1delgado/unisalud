@@ -18,6 +18,8 @@ use App\Models\MedicalProgrammer\Profession;
 use App\Models\Practitioner;
 use App\Models\Region;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -38,12 +40,13 @@ class PatientController extends Controller
      * @return Application|Factory|View
      */
     public function index()
-    {        
+    {
         return view('patients.index');
     }
 
     public function create()
     {
+        $permissions = Permission::OrderBy('name')->get();
         $maritalStatus = CodConMarital::all();
         $countries = Country::all();
         $regions = Region::all();
@@ -52,7 +55,7 @@ class PatientController extends Controller
         $organizations = Organization::all();
         $professions = Profession::all();
         $specialties = Specialty::all();
-        return view('patients.create', compact('maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations', 'professions', 'organizations', 'specialties'));
+        return view('patients.create', compact('permissions', 'maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations', 'professions', 'organizations', 'specialties'));
     }
 
 
@@ -66,7 +69,7 @@ class PatientController extends Controller
     public function store(Request $request, $save = null)
     {
 
-        
+
     //dd($request);
 
         if ($request->has('id_type')) {
@@ -107,6 +110,15 @@ class PatientController extends Controller
             $newHumanName->use = $request->human_name_use;
             $newHumanName->user_id = $newPatient->id;
             $newHumanName->save();
+
+            $newPatient->syncPermissions(
+                is_array($request->input('permissions')) ? $request->input('permissions') : array()
+            );
+
+            // //siempre que usuario logeado sea de programador, se asigna el permiso de programador
+            // if (Auth::user()->hasPermissionTo('Mp: user creator')) {
+            //   $newPatient->syncPermissions('Mp: user');
+            // }
 
             if ($request->has('id_type')) {
                 foreach ($request->id_type as $key => $id_type) {
@@ -244,6 +256,7 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
+        $permissions = Permission::OrderBy('name')->get();
         $patient = User::find($id);
         $maritalStatus = CodConMarital::all();
         $countries = Country::all();
@@ -252,10 +265,11 @@ class PatientController extends Controller
         $congregations = Congregation::all();
         $identifierTypes = CodConIdentifierType::all();
         $organizations = Organization::all();
+        $professions = Profession::all();
         $specialties = Specialty::all();
         $patientCongregationIds = $patient->congregations->pluck('id')->toArray();
         $congregationOther = ($patient->congregationUsers()->where('congregation_id', 10)->first()) ? $patient->congregationUsers()->where('congregation_id', 10)->first()->other : '';
-        return view('patients.edit', compact('patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'specialties', 'patientCongregationIds', 'congregationOther'));
+        return view('patients.edit', compact('permissions', 'patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'professions', 'specialties', 'patientCongregationIds', 'congregationOther'));
     }
 
     /**
@@ -268,11 +282,14 @@ class PatientController extends Controller
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
-//test
         try {
             // dd($request);
             $patient = User::find($id);
             $patient->fill($request->all());
+
+            $patient->syncPermissions(
+                is_array($request->input('permissions')) ? $request->input('permissions') : array()
+            );
 
             //HUMAN NAMES
             $actualOfficialHumanName = $patient->actualOfficialHumanName;

@@ -19,7 +19,7 @@
     </li>
 </ul>
 
-{{--@can('Developer')--}}
+@canany(['Developer', 'Administrator', 'Mp: user creator'])
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Pacientes</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
@@ -33,14 +33,14 @@
         Ver todos<span class="sr-only">(current)</span>
         </a>
     </li>
-    @can('Administrator')
+    @canany(['Administrator', 'Mp: user creator'])
     <li class="nav-item">
         <a class="nav-link {{ active('patient.create') }}" href="{{ route('patient.create') }}">
         <span data-feather="plus-circle"></span>
         Ingresar nuevo
         </a>
     </li>
-    @endcan
+    @endcanany
     {{-- @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
         <li class="nav-item">
             <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.create') }}">
@@ -60,10 +60,10 @@
     @endif --}}
 
 </ul>
-{{--@endcan--}}
+@endcanany
 
 
-@can('Administrator')
+@can('Some: user')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>SOME</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
@@ -89,6 +89,18 @@
     <li class="nav-item">
         <a class="nav-link" href="{{route('some.reallocationPending') }}"><span data-feather="list"></span>Pendiente de reasignación</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('some.locations.index') }}" href="{{ route('some.locations.index') }}">
+        <span data-feather="chevrons-right"></span>
+        Locaciones
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('some.observations.index') }}" href="{{ route('some.observations.index') }}">
+        <span data-feather="chevrons-right"></span>
+        Observaciones
+        </a>
+    </li>
 </ul>
 @endcan
 
@@ -113,11 +125,9 @@
         </a>
     </li>
 </ul>
-
-
-
 @endcan
 
+@canany(['Mp: user'])
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Programador médico</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
@@ -128,17 +138,42 @@
 <ul class="nav flex-column">
 
     <!-- programador de pabellones -->
-    @canany(['Mp: programador pabellon'])
+    <!-- @canany(['Mp: programador pabellon'])
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.operating_room_programming.index') }}" href="{{ route('medical_programmer.operating_room_programming.index') }}">
         <span data-feather="chevrons-right"></span>
         Programador de pabellones<span class="sr-only">(current)</span>
         </a>
     </li>
+    @endcanany -->
+
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="{{ route('medical_programmer.theoretical_programming.proposal_programmer','tipo=1') }}">
+        <span data-feather="chevrons-right"></span>
+        Propuestas de programación<span class="sr-only">(current)</span>
+        </a>
+    </li> -->
+
+
+
+    @canany(['Mp: programador'])
+      <li class="nav-item">
+          <a class="nav-link" href="{{ route('medical_programmer.programming_proposal.index') }}">
+          <span data-feather="chevrons-right"></span>
+          Propuestas de programación<span class="sr-only">(current)</span>
+          </a>
+      </li>
     @endcanany
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('medical_programmer.programming_proposal.programming_by_practioner') }}">
+        <span data-feather="chevrons-right"></span>
+        Programaciones<span class="sr-only">(current)</span>
+        </a>
+    </li>
+
     <!-- programador teorico -->
-    @canany(['Mp: programacion teorica'])
+    <!-- @canany(['Mp: programacion teorica'])
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.theoretical_programming.index') }}">
         <span data-feather="chevrons-right"></span>
@@ -164,10 +199,10 @@
       </li>
       @endcanany
     </ul>
-    @endcanany
+    @endcanany -->
 
     <!-- programador real -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link">
         <span data-feather="chevrons-right"></span>
         Programador Real<span class="sr-only">(current)</span>
@@ -186,7 +221,7 @@
           Box's<span class="sr-only">(current)</span>
           </a>
       </li>
-    </ul>
+    </ul> -->
 
     <!-- mantenedores -->
     @canany(['Mp: mantenedores'])
@@ -198,12 +233,12 @@
     </li>
 
     <ul class="pl-4 nav flex-column">
-    <li class="nav-item">
+    <!--<li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
         <span data-feather="chevrons-right"></span>
         RRHH
         </a>
-    </li>
+    </li> -->
 
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.contracts.index') }}" href="{{ route('medical_programmer.contracts.index') }}">
@@ -263,12 +298,12 @@
         </a>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.cutoffdates.index') }}" href="{{ route('medical_programmer.cutoffdates.index') }}">
         <span data-feather="chevrons-right"></span>
         Fechas de corte
         </a>
-    </li>
+    </li> -->
 
     <!-- <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.unscheduled_programming.index') }}" href="{{ route('medical_programmer.unscheduled_programming.index') }}">
@@ -277,17 +312,18 @@
         </a>
     </li> -->
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.clone.index') }}" href="{{ route('medical_programmer.clone.index') }}">
         <span data-feather="chevrons-right"></span>
         Clonar
         </a>
-    </li>
+    </li> -->
 
     </ul>
     @endcanany
 
 </ul>
+@endcanany
 
 <ul class="nav flex-column">
     <li class="nav-item border-top">

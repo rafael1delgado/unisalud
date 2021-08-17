@@ -31,10 +31,25 @@ class AsignAppointment extends Component
     public $appointments_to;
     public $dv;
     public $locations;
-    public $selectedLocation;
+    public $selectedLocationId;
+    public $patientInstruction;
+    public $appointmentId;
 
     protected $listeners = ['userSelected' => 'setUser',
     ];
+
+    public function mount($appointmentId = null){
+        if($appointmentId){
+
+            $appointment = Appointment::find($appointmentId);
+            $user = $appointment->users()->first();
+
+            $this->run = $user->identifierRun->value;
+            $this->setDv();
+            $this->searchUser();
+        }
+    }
+
     /**
      * @var Location[]|\Illuminate\Database\Eloquent\Collection|mixed
      */
@@ -50,6 +65,15 @@ class AsignAppointment extends Component
         if ($this->user) {
             $this->appointmentsHistory = $this->user->appointments()->withTrashed()->get();
         }
+
+
+        $this->validate([
+            'user' => 'required'
+        ],
+        [
+            'user.required' => 'No existe paciente.'
+        ]);
+
     }
 
     public function setDv()
@@ -94,12 +118,27 @@ class AsignAppointment extends Component
             return $q->whereDate('start', '<=', $this->appointments_from);
         });
 
-        $query->whereHas('theoreticalProgramming', function ($q) {
-            return $q->where('specialty_id', $this->specialty_id);
+        // $query->whereHas('theoreticalProgramming', function ($q) {
+        //     return $q->where('specialty_id', $this->specialty_id);
+        // });
+
+        $query->whereHas('practitioners', function ($q) {
+            return $q->when($this->specialty_id != null, function ($query) {
+                      $query->where('specialty_id',$this->specialty_id);
+                  })
+                  ->when($this->profession_id != null, function ($query) {
+                      $query->where('profession_id',$this->profession_id);
+                  });
         });
 
+        // $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
+        //     return $q->whereHas('theoreticalProgramming', function ($q) use ($userPractitioner) {
+        //         return $q->where('user_id', $userPractitioner->id);
+        //     });
+        // });
+
         $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
-            return $q->whereHas('theoreticalProgramming', function ($q) use ($userPractitioner) {
+            return $q->whereHas('practitioners', function ($q) use ($userPractitioner) {
                 return $q->where('user_id', $userPractitioner->id);
             });
         });
@@ -110,6 +149,14 @@ class AsignAppointment extends Component
 
         $this->appointments = $query->get();
 
+        $this->validate([
+            'appointments' => 'required'
+        ],
+        [
+            'appointments.required' => 'No se encuentran citas.'
+        ]
+        );
+
     }
 
     public function asignAppointment()
@@ -119,12 +166,17 @@ class AsignAppointment extends Component
 
             foreach ($selectedAppointments->get() as $selectedAppointment) {
                 $selectedAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
-                $selectedAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
-                $selectedAppointment->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+                $selectedAppointment->practitioners()->updateExistingPivot($this->practitioner_id, ['required' => 'required', 'status' => 'accepted']);
+                if ($this->selectedLocationId) {
+                    $selectedAppointment->locations()->save(Location::find($this->selectedLocationId), ['required' => 'required', 'status' => 'accepted']);
+                }
             }
 
             $selectedAppointments->update(
-                ['status' => 'booked']
+                ['status' => 'booked',
+                    'patient_instruction' => $this->patientInstruction,
+                ]
+
             );
 
             session()->flash('success', 'Cita asignada');
@@ -137,11 +189,15 @@ class AsignAppointment extends Component
                 $duplicateSelectedOverbookingAppointment = $selectedOverbookingAppointment->replicate();
                 $duplicateSelectedOverbookingAppointment->cod_con_appointment_type_id = 6;
                 $duplicateSelectedOverbookingAppointment->status = 'booked';
+                $duplicateSelectedOverbookingAppointment->patient_instruction = $this->patientInstruction;
                 $duplicateSelectedOverbookingAppointment->save();
 
                 $duplicateSelectedOverbookingAppointment->users()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
-                $duplicateSelectedOverbookingAppointment->practitioners()->save(Practitioner::find($this->practitioner_id), ['required' => 'required', 'status' => 'accepted']);
-                $duplicateSelectedOverbookingAppointment->locations()->save($this->user, ['required' => 'required', 'status' => 'accepted']);
+                $duplicateSelectedOverbookingAppointment->practitioners()->updateExistingPivot($this->practitioner_id, ['required' => 'required', 'status' => 'accepted']);
+
+                if ($this->selectedLocationId) {
+                    $duplicateSelectedOverbookingAppointment->locations()->save(Location::find($this->selectedLocationId), ['required' => 'required', 'status' => 'accepted']);
+                }
 
             }
 
@@ -192,13 +248,13 @@ class AsignAppointment extends Component
 
         $ids = $appointment->users()->allRelatedIds();
         foreach ($ids as $id) {
-            $appointment->users()->updateExistingPivot( $id, ['status' => 'declined',
+            $appointment->users()->updateExistingPivot($id, ['status' => 'declined',
             ]);
         }
 
         $ids = $appointment->practitioners()->allRelatedIds();
         foreach ($ids as $id) {
-            $appointment->practitioners()->updateExistingPivot($id, ['status' => 'declined',
+            $appointment->practitioners()->updateExistingPivot($id, ['status' => 'tentative',
             ]);
         }
 

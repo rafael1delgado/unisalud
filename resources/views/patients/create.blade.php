@@ -5,9 +5,6 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Crear nuevo paciente</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-{{--            <div class="btn-group mr-2">--}}
-{{--                <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>--}}
-{{--            </div>--}}
         </div>
     </div>
 
@@ -54,7 +51,7 @@
 
                     <fieldset class="form-group col-md-2">
                         <label for="for_social_name">Nombre Social</label>
-                        <input type="text" class="form-control" name="social_name" id="social_name" required value="">
+                        <input type="text" class="form-control" name="social_name" id="social_name" value="">
 
                     </fieldset>
                 </div>
@@ -192,7 +189,23 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        <button type="submit" class="btn btn-primary mb-3">Guardar</button>
+        <div class="card mb-3">
+            <div class="card-body">
+                <!-- <h5 class="card-title">Permisos</h5> -->
+                <div class="form-row">
+                    <fieldset class="form-group col-md">
+                        <label for="for_name">Permisos</label>
+                        <select class="form-control selectpicker" name="permissions[]" multiple>
+                            @foreach($permissions as $permission)
+                                <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                            @endforeach
+                        </select>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-3"> <i class="fas fa-save"></i> Guardar</button>
 
 
     </form>
@@ -223,4 +236,3 @@
     <script src="{{ asset('js/defaults-es_CL.min.js') }}"></script>
 
 @endsection
-
