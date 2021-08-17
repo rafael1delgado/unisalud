@@ -374,7 +374,8 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
   Route::prefix('programming_proposal')->name('programming_proposal.')->group(function(){
     Route::get('/programming_by_practioner', [ProgrammingProposalController::class, 'programming_by_practioner'])->name('programming_by_practioner');
-    
+    Route::get('/consolidated_programmings', [ProgrammingProposalController::class, 'consolidated_programmings'])->name('consolidated_programmings');
+
     Route::get('/', [ProgrammingProposalController::class, 'index'])->name('index');
     Route::post('/', [ProgrammingProposalController::class, 'store'])->name('store');
     Route::get('/create', [ProgrammingProposalController::class, 'create'])->name('create');
