@@ -417,3 +417,17 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
     Route::get('/create/{user}',[MedicalLicenceController::class,'create'])->name('create');
     Route::post('/{user}',[MedicalLicenceController::class,'store'])->name('store');
 });
+
+
+
+
+//rutas samu
+Route::prefix('samu')->name('samu.')->group(function () {
+    Route::prefix('mobile')->name('mobile.')->group(function () {
+      Route::view('/', 'samu.mobile.index')->name('index');
+      Route::view('/create', 'samu.mobile.create')->name('create');
+      Route::view('/edit', 'samu.mobile.edit')->name('edit');
+    });
+
+  });
+//fin rutas samu
