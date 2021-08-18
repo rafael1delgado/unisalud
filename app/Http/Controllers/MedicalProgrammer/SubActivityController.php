@@ -97,8 +97,11 @@ class SubActivityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Subactivity $subactivity)
     {
-        //
+        $subactivity->delete();
+
+        session()->flash('success', 'La subactividad ha sido eliminada.');
+        return redirect()->route('medical_programmer.subactivities.index');
     }
 }
