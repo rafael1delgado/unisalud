@@ -388,4 +388,9 @@
         //     $("#searchUserModal").modal('hide');
         // })
     </script>
+
+    <div wire:loading>
+        Cargando...
+    </div>
+    
 </div>
