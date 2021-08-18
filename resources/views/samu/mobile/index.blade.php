@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+@include('nav')
 
 <h3 class="mb-3"><i class="fas fa-ambulance"></i> Listado de Moviles</h3>
 
