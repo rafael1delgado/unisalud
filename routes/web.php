@@ -441,6 +441,18 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
       Route::view('/edit', 'samu.rc.edit')->name('edit');
     });
 
+      Route::prefix('cclave')->name('cclave.')->group(function () {
+      Route::view('/', 'samu.cclave.index')->name('index');
+      Route::view('/create', 'samu.cclave.create')->name('create');
+      Route::view('/edit', 'samu.cclave.edit')->name('edit');
+    });
+
+      Route::prefix('cmovil')->name('cmovil.')->group(function () {
+      Route::view('/', 'samu.cmovil.index')->name('index');
+      Route::view('/create', 'samu.cmovil.create')->name('create');
+      Route::view('/edit', 'samu.cmovil.edit')->name('edit');
+    });
+
   });
 
   //fin rutas samu
