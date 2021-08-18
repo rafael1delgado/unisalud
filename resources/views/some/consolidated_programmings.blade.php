@@ -46,6 +46,15 @@
                   <td>{{$key4}}</td>
                   <td>{{$activities['hours']}}</td>
                   <td>{{$activities['performance']}}</td>
+
+                  @if($activities['performance'] != null)
+                    <td>{{($activities['hours'] * $activities['performance']) }}</td>
+                    <td>{{($activities['hours'] * $activities['performance']) * 7}}</td>
+                    <td>{{($activities['hours'] * $activities['performance']) * 7 * 4}}</td>
+                    <td>{{($activities['hours'] * $activities['performance']) * 7 * 4 * 52}}</td>
+                  @else
+
+                  @endif
               </tr>
             @endforeach
           @endforeach
