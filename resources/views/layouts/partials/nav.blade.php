@@ -230,16 +230,40 @@
       </li>
     </ul> -->
 
-    <!-- mantenedores -->
-    @canany(['Mp: mantenedores'])
+    <!-- ausencias -->
+    @can('Administrator')
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>Ausentismos</span>
+    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+    <span data-feather="plus-circle"></span>
+    </a>
+</h6>
+<ul class="nav flex-column">
     <li class="nav-item">
-        <a class="nav-link">
+        <a class="nav-link {{ active('absences.create') }}" href="{{ route('absences.create') }}">
         <span data-feather="chevrons-right"></span>
-        Mantenedores<span class="sr-only">(current)</span>
+        Registrar nueva ausencia<span class="sr-only">(en desarrollo)</span>
         </a>
     </li>
+    {{--<li class="nav-item">
+        <a class="nav-link {{ active('user.edit') }}" href="{{ route('user.edit',auth()->id()) }}">
+        <span data-feather="unlock"></span>
+        Mis permisos
+        </a>
+    </li>--}}
+</ul>
+@endcan
 
-    <ul class="pl-4 nav flex-column">
+    <!-- mantenedores -->
+    @canany(['Mp: mantenedores'])
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>Mantenedores</span>
+    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+    <span data-feather="plus-circle"></span>
+    </a>
+</h6>
+
+    <ul class="nav flex-column">
     <!--<li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
         <span data-feather="chevrons-right"></span>

@@ -48,6 +48,7 @@ use App\Http\Livewire\Some\AsignAppointment;
 use App\Http\Livewire\Some\Reallocate;
 use App\Http\Livewire\Some\ReallocationPending;
 use App\Models\Some\Appointment;
+use App\Http\Controllers\AbsenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -462,3 +463,7 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
   });
 
   //fin rutas samu
+
+  Route::resource('absences', AbsenceController::class)->only([
+    'create', 'store'
+  ]);
