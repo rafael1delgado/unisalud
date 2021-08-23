@@ -453,8 +453,10 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
       Route::view('/edit', 'samu.cmovil.edit')->name('edit');
     });
 
-    Route::prefix('callcenter')->name('callcenter.')->group(function () {
-      Route::view('/', 'samu.callcenter')->name('index');
+   
+    Route::prefix('call')->name('call.')->group(function () {
+      Route::view('/', 'samu.call.index')->name('index');
+      Route::view('/edit', 'samu.call.edit')->name('edit');
     });
 
   });
