@@ -126,12 +126,12 @@ class User extends Authenticatable implements Auditable
 
     public function getOfficialFathersFamilyAttribute()
     {
-        return "{$this->actualOfficialHumanName->first()->fathers_family}";
+        return "{$this->actualOfficialHumanName->fathers_family}";
     }
 
     public function getOfficialMothersFamilyAttribute()
     {
-        return "{$this->actualOfficialHumanName->first()->mothers_family}";
+        return "{$this->actualOfficialHumanName->mothers_family}";
     }
 
 

@@ -20,8 +20,8 @@ class Absence extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'health_insurance', 'social_insurance', 'legal_quality', 'staff', 'res_number', 'res_date', 'start_date', 'end_date',
-        'total_days', 'period_days', 'license_cost', 'type', 'balance_days_not_replaced'
+        'user_id', 'contract_id', 'practitioner_id', 'health_insurance', 'social_insurance', 'legal_quality', 'staff', 'res_number', 'res_date', 
+        'start_date', 'end_date', 'total_days', 'period_days', 'license_cost', 'type', 'balance_days_not_replaced'
     ];
 
     public function user()
