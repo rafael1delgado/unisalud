@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+@include('nav')
 
 <h3 class="mb-3"><i class="fas fa-phone-volume"></i> Centro de Llamadas</h3>
 <!--inicio-->
@@ -309,7 +309,22 @@
            </div>
 
             <hr>
-
+            
+            <div class="row mb-4">
+                <div class="col-12 col-md-3">
+                    <form method="GET" class="form-horizontal" action="">
+                        <div class="input-group mb-sm-0">
+                            <input class="form-control" type="text" name="search" autocomplete="off" id="for_search"
+                                style="text-transform: uppercase;"
+                                placeholder="QTC" value="" required>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr>
             <div class="table-responsive col-md-12">
                     <table class="table table-sm table-bordered table-striped small">
                         <thead>
@@ -342,7 +357,7 @@
                                 <td>Daniel Guerrero</td>
                                 <td>Av. salvador allende 222</td>
                                 <td> +56945522328</td>
-                                <th class=" bg-secondary text-center"> <a class="text-white " href="#"><b>Seguimiento</b></a></th>
+                                <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
                             <tr>
                                 <td>2222</td>
@@ -352,7 +367,7 @@
                                 <td>Sofia Perez</td>
                                 <td>Calle amunategui 155</td>
                                 <td> +569002328</td>
-                                <th class=" bg-success text-center"> <a class="text-white " href="#"><b>Seguimiento</b></a></th>
+                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
                             <tr>
                                 <td>233</td>
@@ -362,7 +377,7 @@
                                 <td>Amanda Castro</td>
                                 <td>Pedro prado 1000</td>
                                 <td>+56978788555</td>
-                                <th class=" bg-secondary text-center"> <a class="text-white " href="#"><b>Seguimiento</b></a></th>
+                                <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
 
                             <tr>
@@ -373,7 +388,7 @@
                                 <td>mirtha Lopez</td>
                                 <td>Calle 2 S/N</td>
                                 <td>+56325255663</td>
-                                <th class=" bg-success text-center"> <a class="text-white " href="#"><b>Seguimiento</b></a></th>
+                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
                             <tr>
                                 <td>4000</td>
@@ -383,7 +398,7 @@
                                 <td>Camilo zeballos</td>
                                 <td>Calle soto mayor 255</td>
                                 <td> +5663636265</td>
-                                <th class=" bg-secondary text-center"> <a class="text-white " href="#"><b>Seguimiento</b></a></th>
+                                <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
                             <tr>
                                 <td>5000</td>
@@ -393,7 +408,7 @@
                                 <td>Jose Armando Aguilar</td>
                                 <td>Calle Algarrobo 200</td>
                                 <td>+56922252556</td>
-                                <th class=" bg-success text-center"> <a class="text-white " href="#"><b>Seguimiento</b></a></th>
+                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
                             <tr>
                                 <td>5522</td>
@@ -403,7 +418,7 @@
                                 <td>Daniela Molina</td>
                                 <td>Autopísta Humberstone</td>
                                 <td>+56920000114</td>
-                                <th class=" bg-secondary text-center"> <a class="text-white " href="#"><b>Seguimiento</b></a></th>
+                                <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
                             <tr>
                                 <td>6223</td>
@@ -413,85 +428,15 @@
                                 <td>Dr. Alex Orozco</td>
                                 <td>Barros Arana 5333</td>
                                 <td>+56923366363</td>
-                                <th class=" bg-success text-center"> <a class="text-white " href="#"><b>Seguimiento</b></a></th>
+                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>    
                         </tbody>
                     </table>
 
                 </div>
                 <!-- fin de registro de llamadas-->
-            <hr>
-            <!-- seguimiento-->
-            <h3> Seguimiento</h3>
-            <div class="row mb-4">
-                <div class="col-12 col-md-3">
-                    <form method="GET" class="form-horizontal" action="">
-                        <div class="input-group mb-sm-0">
-                            <input class="form-control" type="text" name="search" autocomplete="off" id="for_search"
-                                style="text-transform: uppercase;"
-                                placeholder="QTC" value="" required>
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-             </div>
-            <div class="form-row">
-                        <fieldset class="form-group  col-md-1">
-                            <label for="for_run">Clave</label>
-                            <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="text" class="form-control" name="clave" value="">
-                        </fieldset>
-                        <fieldset class="form-group  col-md-1">
-                            <label for="for_run">Clave de Retorno</label>
-                            <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="text" class="form-control" name="claver" value="">
-                        </fieldset>
-                        <fieldset class="form-group  col-md-2">
-                            <label for="for_movil">Movil</label>
-                                <select class="form-control" name="recepcion" id="recepcion">
-                                    <option>Seleccione Movil </option>
-                                    <option value="1" >Movil 2</option>
-                                    <option value="2" >Movil 5</option>
-                                    <option value="3" >Movil 12</option>
-                                    <option value="4" >Movil 6</option>
-                                    <option value="5" >Movil 4</option>
-                                    <option value="6" >Movil 11</option>
-                                 
-                                </select>
-                        </fieldset>
-                        <fieldset class="form-group  col-md-1">
-                            <label for="for_run">Tipo de Traslado </label>
-                            <select class="form-control" name="recepcion" id="recepcion">
-                                    <option>Seleccione </option>
-                                    <option value="1" >T1</option>
-                                    <option value="2" >T2</option>
-                                    <option value="3" >NM</option>
-                                    <option value="4" >Otro</option>
-                            </select>
-                        </fieldset>
-                        <fieldset class="form-group  col-md-2">
-                            <label for="for_run">Hora Salida </label>
-                            <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="time" class="form-control" name="hora_salida" value="">
-                        </fieldset>
-                        <fieldset class="form-group  col-md-2">
-                            <label for="for_run">Hora Salida Movil </label>
-                            <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="time" class="form-control" name="hora_salida_movil" value="">
-                        </fieldset>
-                        <fieldset class="form-group  col-md-2">
-                            <label for="for_run">Llegada Movil Lugar </label>
-                            <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="time" class="form-control" name="hora_llegadamovil" value="">
-                        </fieldset>
-                        <fieldset class="form-group col-md-1">
-                            <label for="for_run"><br /> <br /><br /></label>
-                            <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
-                        </fieldset>
-           </div>
-            <!-- fin de seguimeinto-->
+        
+          
 
     </div>
 </div>
