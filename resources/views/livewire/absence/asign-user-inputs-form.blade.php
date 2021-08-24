@@ -10,6 +10,12 @@
             <label for="inputdv">Dv</label>
             <input type="text" class="form-control" placeholder="Dv" wire:model="dv" name="dv" readonly>
         </div>
+        <div class="form-group col-md-1">
+            <label for="inputEmail4">&nbsp;</label>
+            <button type="button" class="btn btn-primary form-control" data-toggle="modal"
+                    data-target="#searchUserModal" title="Búsqueda avanzada" >...
+            </button>
+        </div>
         <div class="form-group col">
             <label for="inputdv">&nbsp;</label>
             <div>@error('user')<span class="text-danger">{{ $message }}</span>@enderror</div>
@@ -121,4 +127,6 @@
             </select>
         </fieldset>
     </div>
+
+    @livewire('some.search-user')
 </div>
