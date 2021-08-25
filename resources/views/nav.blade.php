@@ -1,5 +1,9 @@
 <ul class="nav nav-tabs mb-3">
-
+    <li class="nav-item">
+        <a class="nav-link
+        @if(request()->route()->view == 'pacientes') active @endif"
+        href=" {{ route('samu.shift.index') }}">Turno</a>
+    </li>
     <li class="nav-item">
         <a class="nav-link
         @if(request()->route()->view == 'pacientes') active @endif"
