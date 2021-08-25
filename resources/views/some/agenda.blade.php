@@ -57,7 +57,7 @@
 </form>
 <!--  fin form especialidad, funcionario, fecha,buscar-->
 
-<html lang='en'>
+<!-- <html lang='en'>
   <head>
     <meta charset='utf-8' />
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css' rel='stylesheet' />
@@ -72,9 +72,9 @@
             firstDay: 1,
 
             slotMinTime: "08:00:00",
-
             slotDuration: "00:15:00",
             slotMaxTime: "17:30:00",
+
             timeFormat: 'HH:mm',
             locale: 'es',
             slotLabelFormat:
@@ -86,9 +86,12 @@
               meridiem: 'short'
             },
 
-            events: [
+            editable: true,
+            selectable: true,
+            eventLimit: true, // allow "more" link when too many events
+            displayEventEnd: true,
 
-              //control 14  de junio
+            events: [
                 @foreach($appointments as $appointment)
                   @if($appointment->status == "booked")
                     {
@@ -115,15 +118,6 @@
                     },
                   @endif
                 @endforeach
-                // {
-                // title: 'Almuerzo',
-                // start: '2021-06-18T12:00:00',
-                // end: '2021-06-18T12:45:00',
-                // color: 'gray',
-                // },
-
-
-
             ],
 
             eventClick: function(info) {
@@ -142,7 +136,14 @@
   <body>
     <div id='calendar'></div>
   </body>
-</html>
+</html> -->
+
+@livewire('jcalendar',['specialty_id' => $request->specialty_id,
+                       'profession_id'=> $request->profession_id,
+                       'user_id'      => $request->user_id])
+@livewireScripts
+@stack('scripts')
+
 @endsection
 
 @section('custom_js')

@@ -23,7 +23,8 @@
         "snapappointments/bootstrap-select": "^1.13",
         "spatie/laravel-permission": "^4.0",
         "superbalist/laravel-google-cloud-storage": "^2.2",
-        "twilio/sdk": "^6.24"
+        "twilio/sdk": "^6.24",
+        "ext-soap": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

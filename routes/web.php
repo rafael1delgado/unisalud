@@ -48,6 +48,7 @@ use App\Http\Livewire\Some\AsignAppointment;
 use App\Http\Livewire\Some\Reallocate;
 use App\Http\Livewire\Some\ReallocationPending;
 use App\Models\Some\Appointment;
+use App\Http\Controllers\AbsenceController;
 
 use App\Http\Controllers\RayenWs\SoapController;
 
@@ -376,7 +377,8 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
   Route::prefix('programming_proposal')->name('programming_proposal.')->group(function(){
     Route::get('/programming_by_practioner', [ProgrammingProposalController::class, 'programming_by_practioner'])->name('programming_by_practioner');
-    
+    Route::get('/consolidated_programmings', [ProgrammingProposalController::class, 'consolidated_programmings'])->name('consolidated_programmings');
+
     Route::get('/', [ProgrammingProposalController::class, 'index'])->name('index');
     Route::post('/', [ProgrammingProposalController::class, 'store'])->name('store');
     Route::get('/create', [ProgrammingProposalController::class, 'create'])->name('create');
@@ -445,3 +447,50 @@ Route::prefix('soap')->name('soap.')->group(function(){
 //         $rawPostData = file_get_contents("php://input");
 //         return \Response::make($server->service($rawPostData), 200, array('Content-Type' => 'text/xml; charset=ISO-8859-1'));
 // });
+
+
+//rutas samu
+  Route::prefix('samu')->name('samu.')->group(function () {
+      Route::prefix('mobile')->name('mobile.')->group(function () {
+      Route::view('/', 'samu.mobile.index')->name('index');
+      Route::view('/create', 'samu.mobile.create')->name('create');
+      Route::view('/edit', 'samu.mobile.edit')->name('edit');
+    });
+
+      Route::prefix('crew')->name('crew.')->group(function () {
+      Route::view('/', 'samu.crew.index')->name('index');
+      Route::view('/create', 'samu.crew.create')->name('create');
+      Route::view('/edit', 'samu.crew.edit')->name('edit');
+    });
+
+      Route::prefix('regulatory_center')->name('regulatory-center.')->group(function () {
+      Route::view('/', 'samu.rc.index')->name('index');
+      Route::view('/create', 'samu.rc.create')->name('create');
+      Route::view('/edit', 'samu.rc.edit')->name('edit');
+    });
+
+      Route::prefix('cclave')->name('cclave.')->group(function () {
+      Route::view('/', 'samu.cclave.index')->name('index');
+      Route::view('/create', 'samu.cclave.create')->name('create');
+      Route::view('/edit', 'samu.cclave.edit')->name('edit');
+    });
+
+      Route::prefix('cmovil')->name('cmovil.')->group(function () {
+      Route::view('/', 'samu.cmovil.index')->name('index');
+      Route::view('/create', 'samu.cmovil.create')->name('create');
+      Route::view('/edit', 'samu.cmovil.edit')->name('edit');
+    });
+
+   
+    Route::prefix('call')->name('call.')->group(function () {
+      Route::view('/', 'samu.call.index')->name('index');
+      Route::view('/edit', 'samu.call.edit')->name('edit');
+    });
+
+  });
+
+  //fin rutas samu
+
+  Route::resource('absences', AbsenceController::class)->only([
+    'create', 'store'
+  ]);
