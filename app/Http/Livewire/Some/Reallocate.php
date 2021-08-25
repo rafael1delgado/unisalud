@@ -255,7 +255,7 @@ class Reallocate extends Component
             $selectedAppointmentTo->users()->save($selectedAppointmentsFrom[$key]->users->first(), ['required' => $selectedAppointmentsFrom[$key]->users->first()->pivot->required, 'status' => $selectedAppointmentsFrom[$key]->users->first()->pivot->status]);
             $selectedAppointmentTo->practitioners()->save($this->selectedPractitionerTo, ['required' => 'required', 'status' => 'accepted']);
             $selectedAppointmentTo->status = 'booked';
-            $selectedAppointmentTo->appointment_id = $selectedAppointmentsFrom->id;
+            $selectedAppointmentTo->appointment_id = $selectedAppointmentsFrom[$key]->id;
             $selectedAppointmentTo->save();
         }
 
