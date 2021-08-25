@@ -421,33 +421,9 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
     Route::post('/{user}',[MedicalLicenceController::class,'store'])->name('store');
 });
 
-
 Route::prefix('soap')->name('soap.')->group(function(){
     Route::any('rayen', [SoapController::class, 'server'])->name('rayen');
-    // Route::any('rayen/BuscarSic', [SoapController::class, 'server'])->name('rayen.buscar-sic');
 });
-
-
-// Route::any('api', [SoapController::class, 'server']);
-
-// Route::any('api', function(){
-//         $server = new \nusoap_server();
-
-//         $server->configureWSDL('TestService', false, url('api'));
-
-//         $server->register('test',
-//             array('input' => 'xsd:string'),
-//             array('output' => 'xsd:string'),
-//         );
-
-//         function test($input){
-//             return $input;
-//         }
-
-//         $rawPostData = file_get_contents("php://input");
-//         return \Response::make($server->service($rawPostData), 200, array('Content-Type' => 'text/xml; charset=ISO-8859-1'));
-// });
-
 
 //rutas samu
   Route::prefix('samu')->name('samu.')->group(function () {

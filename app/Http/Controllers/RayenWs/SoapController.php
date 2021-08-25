@@ -165,23 +165,6 @@ class SoapController extends Controller
 
         $POST_DATA = file_get_contents("php://input");
         return \Response::make($server->service($POST_DATA), 200, array('Content-Type' => 'text/xml; charset=ISO-8859-1'));
-        // $server->service($POST_DATA);
-        // exit();
     }
 
-// public function server() {
-//         // require_once ('nusoap.php');
-//         $server = new \nusoap_server();
-
-//         $server->configureWSDL('TestService', false, url('api'));
-
-//         $server->register('test',
-//             array('input' => 'xsd:string'),
-//             array('output' => 'xsd:string'),
-//         );
-
-//         $rawPostData = file_get_contents("php://input");
-//         return \Response::make($server->service($rawPostData), 200, array('Content-Type' => 'text/xml; charset=ISO-8859-1'));
-//     }
-    
 }
