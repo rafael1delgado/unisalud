@@ -94,7 +94,9 @@
                     @if($appointmentsHistory)
                         @foreach($appointmentsHistory as $appointmentHistory)
                             <tr>
-                                <th scope="row">{{$appointmentHistory->start . (($appointmentHistory->type->text == 'OVERBOOKING') ? ' (SC)' : '') }}</th>
+                                <th scope="row">{{$appointmentHistory->start .
+                                 ($appointmentHistory->type->text == 'OVERBOOKING' ? ' (SC)' : '') .
+                                  ($appointmentHistory->status == 'waitlist' ? ' (LE)' : '')}}</th>
 
                                 @if($appointmentHistory->programmingProposalDetail->programmingProposal->specialty) <td>{{$appointmentHistory->programmingProposalDetail->programmingProposal->specialty->specialty_name}}</td> @endif
                                 @if($appointmentHistory->programmingProposalDetail->programmingProposal->profession) <td>{{$appointmentHistory->programmingProposalDetail->programmingProposal->profession->profession_name}}</td> @endif

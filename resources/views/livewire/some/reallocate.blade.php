@@ -113,7 +113,7 @@
                         </td>
                         <td>
                             <label class="label"
-                                   for="for_selected_appointments_from[{{$key}}]">{{$appointment->theoreticalProgramming->user->officialFullName}}</label>
+                                   for="for_selected_appointments_from[{{$key}}]">{{$appointment->practitioners->first()->user->officialFullName}}</label>
                         </td>
 
                         <td>
@@ -121,8 +121,8 @@
                                    for="for_selected_appointments_from[{{$key}}]">{{$appointment->users->first()->officialFullName}}</label>
                         </td>
 
-                        <td>{{$appointment->theoreticalProgramming->activity->activity_name}}</td>
-                        <td>{{($appointment->theoreticalProgramming->subactivity) ? $appointment->theoreticalProgramming->subactivity->sub_activity_name : ''}}</td>
+                        <td>{{$appointment->programmingProposalDetail->activity->activity_name}}</td>
+                        <td>{{($appointment->programmingProposalDetail->subactivity) ? $appointment->programmingProposalDetail->subactivity->sub_activity_name : ''}}</td>
                         <td>{{$appointment->start}}</td>
                         {{--                        <td>3</td>--}}
                         {{--                        <td>2</td>--}}
@@ -301,11 +301,11 @@
                         <td>
                             {{--                            {{$appointment->theoreticalProgramming->user->officialFullName}}--}}
                             <label class="label"
-                                   for="for_selected_appointmentsTo[{{$key}}]">{{$appointmentTo->theoreticalProgramming->user->officialFullName}}</label>
+                                   for="for_selected_appointmentsTo[{{$key}}]">{{$appointmentTo->practitioners->first()->user->officialFullName}}</label>
                         </td>
 
-                        <td>{{$appointmentTo->theoreticalProgramming->activity->activity_name}}</td>
-                        <td>{{($appointmentTo->theoreticalProgramming->subactivity) ? $appointmentTo->theoreticalProgramming->subactivity->sub_activity_name : ''}}</td>
+                        <td>{{$appointmentTo->programmingProposalDetail->activity->activity_name}}</td>
+                        <td>{{($appointmentTo->programmingProposalDetail->subactivity) ? $appointmentTo->programmingProposalDetail->subactivity->sub_activity_name : ''}}</td>
                         <td>{{$appointmentTo->start}}</td>
                         {{--                        <td>3</td>--}}
                         {{--                        <td>2</td>--}}

@@ -50,6 +50,8 @@ use App\Http\Livewire\Some\ReallocationPending;
 use App\Models\Some\Appointment;
 use App\Http\Controllers\AbsenceController;
 
+use App\Http\Controllers\RayenWs\SoapController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -419,8 +421,9 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
     Route::post('/{user}',[MedicalLicenceController::class,'store'])->name('store');
 });
 
-
-
+Route::prefix('soap')->name('soap.')->group(function(){
+    Route::any('rayen', [SoapController::class, 'server'])->name('rayen');
+});
 
 //rutas samu
   Route::prefix('samu')->name('samu.')->group(function () {
