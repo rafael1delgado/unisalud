@@ -119,12 +119,27 @@ class Reallocate extends Component
             return $q->whereDate('start', '>=', Carbon::now()->toDateString());
         });
 
-        $query->whereHas('theoreticalProgramming', function ($q) {
-            return $q->where('specialty_id', $this->selectedSpecialtyIdFrom);
+        // $query->whereHas('theoreticalProgramming', function ($q) {
+        //     return $q->where('specialty_id', $this->selectedSpecialtyIdFrom);
+        // });
+
+        $query->whereHas('practitioners', function ($q) {
+            return $q->when($this->selectedSpecialtyIdFrom != null, function ($query) {
+                      $query->where('specialty_id',$this->selectedSpecialtyIdFrom);
+                  })
+                  ->when($this->selectedProfessionIdFrom != null, function ($query) {
+                      $query->where('profession_id',$this->selectedProfessionIdFrom);
+                  });
         });
 
-        $query->when($this->selectedPractitionerFrom != null, function ($q) {
-            return $q->whereHas('theoreticalProgramming', function ($q) {
+        // $query->when($this->selectedPractitionerFrom != null, function ($q) {
+        //     return $q->whereHas('theoreticalProgramming', function ($q) {
+        //         return $q->where('user_id', $this->selectedPractitionerFrom->user->id);
+        //     });
+        // });
+
+        $query->when($this->selectedPractitionerIdFrom != null, function ($q){
+            return $q->whereHas('practitioners', function ($q){
                 return $q->where('user_id', $this->selectedPractitionerFrom->user->id);
             });
         });
@@ -133,6 +148,7 @@ class Reallocate extends Component
 
         $query->orderBy('start');
 
+        // dd($this->appointments);
         $this->appointments = $query->get();
 
         //Selecciona la misma especialidad el mismo tipo y especialidad debajo
@@ -178,12 +194,27 @@ class Reallocate extends Component
             return $q->whereDate('start', '>=', Carbon::now()->toDateString());
         });
 
-        $query->whereHas('theoreticalProgramming', function ($q) {
-            return $q->where('specialty_id', $this->selectedSpecialtyIdTo);
+        // $query->whereHas('theoreticalProgramming', function ($q) {
+        //     return $q->where('specialty_id', $this->selectedSpecialtyIdTo);
+        // });
+
+        $query->whereHas('practitioners', function ($q) {
+            return $q->when($this->selectedSpecialtyIdTo != null, function ($query) {
+                      $query->where('specialty_id',$this->selectedSpecialtyIdTo);
+                  })
+                  ->when($this->selectedProfessionIdTo != null, function ($query) {
+                      $query->where('profession_id',$this->selectedProfessionIdTo);
+                  });
         });
 
-        $query->when($this->selectedPractitionerTo != null, function ($q) {
-            return $q->whereHas('theoreticalProgramming', function ($q) {
+        // $query->when($this->selectedPractitionerTo != null, function ($q) {
+        //     return $q->whereHas('theoreticalProgramming', function ($q) {
+        //         return $q->where('user_id', $this->selectedPractitionerTo->user->id);
+        //     });
+        // });
+
+        $query->when($this->selectedPractitionerIdTo != null, function ($q){
+            return $q->whereHas('practitioners', function ($q){
                 return $q->where('user_id', $this->selectedPractitionerTo->user->id);
             });
         });
