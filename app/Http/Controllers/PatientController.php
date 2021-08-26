@@ -413,10 +413,10 @@ class PatientController extends Controller
                 }
             }
 
+
             //PRACTITIONER
             $storedPractitionerIds = $patient->practitioners->pluck('id')->toArray();
             if ($request->has('organization_id')) {
-                // dd($storedPractitionerIds);
                 //forearch para actualizar/agregar practitioners
                 foreach ($request->organization_id as $key => $organization_id) {
                     if ($request->practitioner_id[$key] == null) {
@@ -425,14 +425,15 @@ class PatientController extends Controller
                         $newPractitioner->user_id = $patient->id;
                         $newPractitioner->organization_id = $request->organization_id[$key];
                         $newPractitioner->specialty_id = $request->specialty_id[$key];
+                        $newPractitioner->profession_id = $request->profession_id[$key];
                         $newPractitioner->save();
-                    } elseif (in_array($request->practioner_id[$key], $storedPractitionerIds)) {
-
+                    } elseif (in_array($request->practitioner_id[$key], $storedPractitionerIds)) {
                         $practitioner = Practitioner::find($request->practitioner_id[$key]);
                         $practitioner->active = 1;
                         $practitioner->user_id = $patient->id;
                         $practitioner->organization_id = $request->organization_id[$key];
                         $practitioner->specialty_id = $request->specialty_id[$key];
+                        $practitioner->profession_id = $request->profession_id[$key];
                         $practitioner->save();
                     }
                 }
@@ -442,6 +443,13 @@ class PatientController extends Controller
                         $practitioner = Practitioner::find($storedPractitionerId);
                         $practitioner->delete();
                     }
+                }
+            }
+            else {
+                //Si no hay ninguno, elimina todo
+                foreach ($storedPractitionerIds as $key => $storedPractitionerId) {
+                        $practitioner = Practitioner::find($storedPractitionerId);
+                        $practitioner->delete();
                 }
             }
 
