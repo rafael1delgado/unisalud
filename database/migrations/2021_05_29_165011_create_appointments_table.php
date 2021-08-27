@@ -27,7 +27,7 @@ class CreateAppointmentsTable extends Migration
             $table->dateTime('start')->nullable(); /** time that starts the appointment */
             $table->dateTime('end')->nullable();
             $table->dateTime('created')->nullable(); /** time that the appointment was created */
-            $table->string('patientInstruction')->nullable();
+            $table->string('patient_instruction')->nullable();
             $table->foreignId('mp_theoretical_programming_id')->nullable();
             // tiene un periodo pero 0..*
             $table->foreignId('observation_id')->nullable();

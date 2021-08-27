@@ -13,17 +13,27 @@ function fdatetime($string) {
 
 //Funciones para WS SOAP Rayen
 function BuscarSic($request){
-    return array(
-        'VLmensaje' => 'Se encontro SIC: ' . $request['pcsNumSicGes'],
-    );
-}
+    $externalIncomingSic = ExternalIncomingSic::query()
+    ->where('pciNumSicGes', $request['pcsNumSicGes'])
+    ->where('pcsCodEstab', $request['pcsCodEstab'])
+    ->first();
 
+    if($externalIncomingSic){
+        return array(
+            'VLmensaje' => 'Se encontro SIC numSicGes: ' . $externalIncomingSic->pciNumSicGes . ' codEstab: ' . $externalIncomingSic->pcsCodEstab,
+        );
+    } 
+    else {
+        return array(
+            'VLmensaje' => 'No se encontro SIC con numSicGes: ' . $request['pcsNumSicGes'] . ' codEstab:' . $request['pcsCodEstab'],
+        );
+    }
+}
 
 function GuardarSic($request){
     $externalIncomingSic = new ExternalIncomingSic();
     $externalIncomingSic->fill($request);
     $externalIncomingSic->save();
-    
 
     return array(
         'indEstado' => 1,

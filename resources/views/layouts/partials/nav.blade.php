@@ -30,17 +30,17 @@
     <li class="nav-item">
         <a class="nav-link {{ active('patient.index') }}" href="{{ route('patient.index') }}">
         <span data-feather="users"></span>
-        Ver todos<span class="sr-only">(current)</span>
+        Buscar paciente<span class="sr-only">(current)</span>
         </a>
     </li>
-    @canany(['Administrator', 'Mp: user creator'])
+    {{--@canany(['Administrator', 'Mp: user creator'])
     <li class="nav-item">
         <a class="nav-link {{ active('patient.create') }}" href="{{ route('patient.create') }}">
         <span data-feather="plus-circle"></span>
         Ingresar nuevo
         </a>
     </li>
-    @endcanany
+    @endcanany--}}
     {{-- @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
         <li class="nav-item">
             <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.create') }}">
