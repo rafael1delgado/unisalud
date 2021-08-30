@@ -469,6 +469,12 @@ Route::prefix('soap')->name('soap.')->group(function(){
       Route::view('/edit', 'samu.shift.create')->name('edit');
     });
 
+    Route::prefix('novelties')->name('novelties.')->group(function () {
+      Route::view('/', 'samu.novelties.index')->name('index');
+      Route::view('/edit', 'samu.novelties.edit')->name('edit');
+      //Route::view('/edit', 'samu.novelties.create')->name('edit');
+    });
+
   });
 
   //fin rutas samu
