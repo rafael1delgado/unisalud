@@ -32,20 +32,20 @@
                 <input type="hidden" name='human_name_use' value='official'>
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
-                        <label for="for_name">Nombres</label>
+                        <label for="for_name">Nombres *</label>
                         <input type="text" class="form-control" name="text" id="for_name" required value="{{ old('text') }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                     </fieldset>
 
                     <fieldset class="form-group col-md-3">
-                        <label for="for_fathers_family">Apellido Paterno</label>
+                        <label for="for_fathers_family">Apellido Paterno *</label>
                         <input type="text" class="form-control" name="fathers_family" id="for_fathers_family" required value="{{ old('fathers_family') }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                     </fieldset>
 
                     <fieldset class="form-group col-md-3">
                         <label for="for_mothers_family">Apellido Materno</label>
-                        <input type="text" class="form-control" name="mothers_family" id="for_mothers_family" required value="{{ old('mothers_family') }}"
+                        <input type="text" class="form-control" name="mothers_family" id="for_mothers_family" value="{{ old('mothers_family') }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                     </fieldset>
 
@@ -57,14 +57,14 @@
                 </div>
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
-                        <label for="for_birthday">Fecha de nacimiento</label>
+                        <label for="for_birthday">Fecha de nacimiento *</label>
                         <input type="date" class="form-control" name="birthday" required value="{{ old('birthday') }}"
                             {{-- id="for_birthday" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}"
                             --}}>
                     </fieldset>
 
                     <fieldset class="form-group col-md-2">
-                        <label for="for_sex">Sexo</label>
+                        <label for="for_sex">Sexo *</label>
                         <select name="sex" id="for_sex" class="form-control" required>
                             <option value=""></option>
                             <option value="male" {{old('sex') === 'male'? 'selected' : ''}}>Masculino</option>
@@ -75,7 +75,7 @@
                     </fieldset>
 
                     <fieldset class="form-group col-md-3">
-                        <label for="for_gender">Identidad de Género</label>
+                        <label for="for_gender">Identidad de Género *</label>
                         <select name="gender" id="for_gender" class="form-control" required>
                             <option value=""></option>
                             <option value="male" {{old('sex') === 'male'? 'selected' : ''}}>Masculino</option>
@@ -85,7 +85,7 @@
                         </select>
                     </fieldset>
                     <fieldset class="form-group col-md-3">
-                        <label for="for_cod_con_marital_id">Estado Civil</label>
+                        <label for="for_cod_con_marital_id">Estado Civil *</label>
                         <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($maritalStatus as $status)
@@ -108,7 +108,7 @@
                  </div>
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
-                        <label for="for_nationality_id">Nacionalidad</label>
+                        <label for="for_nationality_id">Nacionalidad *</label>
                         <select name="nationality_id" id="for_nationality_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($countries as $country)
