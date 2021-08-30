@@ -5,11 +5,11 @@
 @include('nav')
 
 
-<h3 class="mb-3"><i class="fas fa-clipboard-list"></i> Listado Centro Regulador</h3>
+<h3 class="mb-3"><i class="fas fa-clipboard-list"></i> Listado de Turnos</h3>
 <div class="card mb-3">
 <div class="card-body">
 <div class="form-row">
-                <fieldset class="form-group  col-md-4">
+                <fieldset class="form-group  col-md-6">
                     <label for="for_run"><b>Fecha de registro</b> </label>
                     <input type="hidden" class="form-control" id="for_id" name="id" value="">
                     <input type="date" class="form-control" name="date" value="">
@@ -24,17 +24,14 @@
                     <input type="hidden" class="form-control"  name="hora" value="18:23">
                     <input type="time" class="form-control" name="hora" value="">
                 </fieldset>
-                <div class="col-12 col-md-2 mt-4">
-                            <a class="btn btn-success " href="{{ route('samu.regulatory-center.create') }}">
-                            <i class="fas fa-plus"></i> Agregar Centro Regulador
-                        </a>
-                </div>
+                <fieldset class="form-group  col-md-2 mt-1">
+                    <div class=" mt-4">
+                                <a class="btn btn-success " href="{{ route('samu.regulatory-center.create') }}">
+                                <i class="fas fa-plus"></i> Agregar Centro Regulador
+                            </a>
+                    </div>
+                </fieldset>
             
-                <div class="col-12 col-md-2 mt-4">
-                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalmoviles">
-                            <i class="fas fa-plus"></i> Agregar Moviles en turno
-                        </a>
-                </div>
  
         <div class="table-responsive col-md-12">
                     <table class="table table-sm table-bordered table-striped small">
