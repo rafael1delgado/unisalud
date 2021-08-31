@@ -7,7 +7,7 @@
             <input type="hidden" name='identifier_id[]' wire:model='identifiers.{{$key}}.id'>
             <div class="form-row">
                 <fieldset class="form-group col-md-2">
-                    <label for="for_id_type">Tipo de identificación</label>
+                    <label for="for_id_type">Tipo de identificación *</label>
                     <select name="id_type[]" class="form-control" wire:model='identifiers.{{$key}}.id_type'  required>
                         @foreach($identifierTypes as $identifierType)
                         <option value="{{ $identifierType->id }}">{{ $identifierType->text }}</option>
@@ -16,7 +16,7 @@
                 </fieldset>
 
                 <fieldset class="form-group col-md-4">
-                    <label for="for_id_value">Número</label>
+                    <label for="for_id_value">Número *</label>
                     <input type="text" class="form-control" name="id_value[]" wire:model.lazy='identifiers.{{$key}}.value' wire:change="setDv({{$key}})" required
                         >
                 </fieldset>
@@ -30,7 +30,7 @@
                 </fieldset>
 
                 <fieldset class="form-group col-md-3">
-                    <label for="for_id_use">Uso</label>
+                    <label for="for_id_use">Uso *</label>
                     <select name="id_use[]" class="form-control" wire:model='identifiers.{{$key}}.use' required>
                         <option value="official">Oficial</option>
                         <option value="temp">Temporal</option>
