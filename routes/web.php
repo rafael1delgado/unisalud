@@ -479,6 +479,14 @@ Route::prefix('soap')->name('soap.')->group(function(){
 
   //fin rutas samu
 
-  Route::resource('absences', AbsenceController::class)->only([
-    'create', 'store'
-  ]);
+  // Route::resource('absences', AbsenceController::class)->only([
+  //   'create', 'store'
+  // ]);
+
+  Route::prefix('absences')->name('absences.')->group(function () {
+    Route::get('/', [AbsenceController::class, 'index'])->name('index');
+    Route::get('/create', [AbsenceController::class, 'create'])->name('create');
+    Route::post('/', [AbsenceController::class, 'store'])->name('store');
+    Route::post('/import', [AbsenceController::class, 'import'])->name('import');
+    Route::delete('/{absence}', [AbsenceController::class, 'destroy'])->name('destroy');
+  });
