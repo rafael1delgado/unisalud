@@ -30,20 +30,25 @@
 <hr>
 
 @if($programmingProposals)
-<h4>{{$programmingProposals->first()->user->OfficialFullName}}</h4>
+  @if($programmingProposals->count() > 0)
+    <h4>{{$programmingProposals->first()->user->OfficialFullName}}</h4>
 
-<div class="table-responsive">
-  <table class="table table-responsive">
-    <tr>
-      <td>
-        <span data-feather="square" style="color:#85C1E9"></span> No aperturados
-      </td>
-      <td>
-        <span data-feather="square" style="color:#FF0000"></span> Aperturados
-      </td>
-    </tr>
-  </table>
-</div>
+    <div class="table-responsive">
+      <table class="table table-responsive">
+        <tr>
+          <td>
+            <span data-feather="square" style="color:#85C1E9"></span> No aperturados
+          </td>
+          <td>
+            <span data-feather="square" style="color:#ABEBC6"></span> Aperturados
+          </td>
+          <td>
+            <span data-feather="square" style="color:#F5B7B1"></span> Ausentismos
+          </td>
+        </tr>
+      </table>
+    </div>
+  @endif
 @endif
 
 <form method="POST" class="form-horizontal" action="{{ route('some.openAgenda') }}">
@@ -56,12 +61,14 @@
     <label for="inputEmail4">&nbsp;</label>
   </div>
 
-  @if($programmingProposals)
-  <input type="hidden" name="type" value="{{$request->type}}">
-  <input type="hidden" name="specialty_id" value="{{$request->specialty_id}}">
-  <input type="hidden" name="profession_id" value="{{$request->profession_id}}">
-  <input type="hidden" name="user_id" value="{{$programmingProposals->first()->user_id}}">
+@if($programmingProposals)
+  @if($programmingProposals->count() > 0)
+    <input type="hidden" name="type" value="{{$request->type}}">
+    <input type="hidden" name="specialty_id" value="{{$request->specialty_id}}">
+    <input type="hidden" name="profession_id" value="{{$request->profession_id}}">
+    <input type="hidden" name="user_id" value="{{$programmingProposals->first()->user_id}}">
   @endif
+@endif
 
   <div class="form-group col-md-2">
     <label for="inputEmail4">Desde</label>
@@ -135,7 +142,14 @@
                 @endif
               @endforeach
 
-
+              @foreach($absences as $absence)
+                {
+                title: '{{$absence->title}}',
+                start: '{{$absence->start}}',
+                end: '{{$absence->end}}',
+                color: '{{$absence->color}}'
+                },
+              @endforeach
 
 
             ]

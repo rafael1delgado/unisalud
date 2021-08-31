@@ -54,10 +54,15 @@
             },
             eventSources:[
                 {
-                    id: 1,
                     events: JSON.parse(@this.events),
+                },
+                {
+                    id: 0,
+                    events: JSON.parse(@this.absences),
                 }
-
+            ],
+            resources: [
+              // resource data...
             ],
             dateClick(info) {
                 @this.resetdata();
@@ -69,7 +74,9 @@
 
             eventClick: function(info) {
               let id = info.event.id;
-              window.open('appointment_detail/'+id,"_self");
+              if (id != 0) {
+                window.open('appointment_detail/'+id,"_self");
+              }          
             },
 
             eventResize: info => @this.eventResize(info.event, info.oldEvent),
