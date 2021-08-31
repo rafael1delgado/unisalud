@@ -240,17 +240,17 @@
 </h6>
 <ul class="nav flex-column">
     <li class="nav-item">
+        <a class="nav-link {{ active('absences.index') }}" href="{{ route('absences.index') }}">
+        <span data-feather="chevrons-right"></span>
+        Listar ausentismos<span class="sr-only">(en desarrollo)</span>
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link {{ active('absences.create') }}" href="{{ route('absences.create') }}">
         <span data-feather="chevrons-right"></span>
         Registrar nueva ausencia<span class="sr-only">(en desarrollo)</span>
         </a>
     </li>
-    {{--<li class="nav-item">
-        <a class="nav-link {{ active('user.edit') }}" href="{{ route('user.edit',auth()->id()) }}">
-        <span data-feather="unlock"></span>
-        Mis permisos
-        </a>
-    </li>--}}
 </ul>
 @endcan
 
