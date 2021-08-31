@@ -40,7 +40,7 @@
                             
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>27 DE AGOSTO DEL 2021</b></th>
                               <th colspan="2"><b>NOVEDADES</b></th>
                             </tr>
                         
@@ -65,7 +65,7 @@
 
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>27 DE AGOSTO DEL 2021</b></th>
                               <th colspan="2"><b>NOVEDADES</b></th>
                             </tr>
                         
@@ -131,7 +131,7 @@
                             </tr>
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>27 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
                               <th colspan="2"><b>NOVEDADES</b></th>
                             </tr>
                         

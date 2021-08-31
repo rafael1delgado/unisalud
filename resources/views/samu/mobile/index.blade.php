@@ -5,7 +5,7 @@
 @include('nav')
 
 
-<h3 class="mb-3"><i class="fas fa-ambulance"></i> Listado de Moviles</h3>
+<h3 class="mb-3"><i class="fas fa-ambulance"></i> Listado de Moviles - Tripulación</h3>
 <div class="card mb-3">
         <div class="card-body">
             <div class="form-row mb-3">
@@ -41,7 +41,7 @@
                             
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>27 DE AGOSTO DEL 2021</b></th>
                               <th colspan="6"><b>TRIPULACIÓN</b></th>
                             </tr>
                         
@@ -101,7 +101,7 @@
                             </tr>
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>26 DE AGOSTO DEL 2021</b></th>
                               <th colspan="6"><b>TRIPULACIÓN</b></th>
                             </tr>
                         
@@ -208,7 +208,7 @@
                             </tr>
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>24 DE AGOSTO DEL 2021</b></th>
                               <th colspan="6"><b>TRIPULACIÓN</b></th>
                             </tr>
                         
@@ -236,7 +236,7 @@
                             </tr>
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>23 DE AGOSTO DEL 2021</b></th>
                               <th colspan="6"><b>TRIPULACIÓN</b></th>
                             </tr>
                         

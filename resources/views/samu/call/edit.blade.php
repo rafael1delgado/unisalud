@@ -128,52 +128,52 @@
                         <fieldset class="form-group  col-md-2">
                             <label for="for_run">Frecuencia Cardiaca</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="text" class="form-control" name="ruta" value="">
+                            <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
                             <label for="for_run">Frecuencia Respiratoria </label>
                             <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="text" class="form-control" name="ruta" value="">
+                            <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
                             <label for="for_run">P/A</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="text" class="form-control" name="ruta" value="">
+                            <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
                             <label for="for_run">P/AM</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="text" class="form-control" name="ruta" value="">
+                            <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
                             <label for="for_run">Glasgow </label>
                             <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="int" class="form-control" name="ruta" value="">
+                            <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
                             <label for="for_run">% Saturacion Oxigeno </label>
                             <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="int" class="form-control" name="ruta" value="">
+                            <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
-                            <label for="for_run">% Saturacion Oxigeno/Apoyo</label>
+                            <label for="for_run">% Saturación Oxigeno/Apoyo</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="int" class="form-control" name="ruta" value="">
+                            <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
-                            <label for="for_run">HGT mg/dl/label>
+                            <label for="for_run">HGT mg/dl</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="int" class="form-control" name="ruta" value="">
+                            <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
                             <label for="for_run">Temperatura °C</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="int" class="form-control" name="ruta" value="">
+                            <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-6">
                             <label for="for_run">Tratamiento</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
-                            <input type="int" class="form-control" name="ruta" value="">
+                            <input type="text" class="form-control" name="ruta" value="">
                         </fieldset>
                         
                     
@@ -184,15 +184,6 @@
                         <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
                     </fieldset>
             </div>       
-        <h3 class="mb-3"><i class="fas fa-clipboard-list"></i> Agregar centro regulador</h3>
-
-        <div class="row mb-4">
-            <div class="col-12 col-md-2">
-                <a class="btn btn-success" href="{{ route('samu.regulatory-center.create') }}">
-                    <i class="fas fa-plus"></i> Agregar
-                </a>
-            </div>
-        </div>
 
 
 
