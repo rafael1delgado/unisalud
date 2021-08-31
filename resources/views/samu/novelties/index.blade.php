@@ -60,7 +60,7 @@
                                 <td>08:00</td>
                                 <td>22:00</td>
                                 <td>R12 Informa que movil 363 se va a taller </td>
-                                <td><a href="{{ route('samu.regulatory-center.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.novelties.edit') }}">Editar</a> </td>
                             </tr>
 
                             <tr class="text-center table-success">
@@ -83,7 +83,7 @@
                                 <td>22:00</td>
                                 <td>08:00</td>
                                 <td>Sin novedades</td>
-                                <td><a href="{{ route('samu.regulatory-center.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.novelties.edit') }}">Editar</a> </td>
                             </tr>
                             <tr class="text-center table-success">
                               
@@ -105,7 +105,7 @@
                                 <td>08:00</td>
                                 <td>22:00</td>
                                 <td>Sin novedades</td>
-                                <td><a href="{{ route('samu.regulatory-center.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.novelties.edit') }}">Editar</a> </td>
                             </tr>
                             <tr class="text-center table-success">
                               
@@ -127,7 +127,7 @@
                                 <td>22:00</td>
                                 <td>08:00</td>
                                 <td>Sin novedades</td>
-                                <td><a href="{{ route('samu.regulatory-center.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.novelties.edit') }}">Editar</a> </td>
                             </tr>
                             <tr class="text-center table-success">
                               
@@ -149,7 +149,7 @@
                                 <td>08:00</td>
                                 <td>22:00</td>
                                 <td>Se informa que Movil 922 queda reservado con traslado de paciente a las 09:30 </td>
-                                <td><a href="{{ route('samu.regulatory-center.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.novelties.edit') }}">Editar</a> </td>
                             </tr>
                         </tbody>
                     </table>
