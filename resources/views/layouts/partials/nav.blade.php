@@ -1,7 +1,7 @@
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Mi información</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-    <span data-feather="plus-circle"></span>
+        <span data-feather="plus-circle"></span>
     </a>
 </h6>
 <ul class="nav flex-column">
@@ -13,8 +13,8 @@
     </li> -->
     <li class="nav-item">
         <a class="nav-link {{ active(['profile.show', 'profile.edit']) }}" href="{{ route('profile.show') }}">
-        <span data-feather="user"></span>
-        Mi perfíl<span class="sr-only"></span>
+            <span data-feather="user"></span>
+            Mi perfíl<span class="sr-only"></span>
         </a>
     </li>
 </ul>
@@ -23,40 +23,40 @@
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Pacientes</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-    <span data-feather="plus-circle"></span>
+        <span data-feather="plus-circle"></span>
     </a>
 </h6>
 <ul class="nav flex-column">
     <li class="nav-item">
         <a class="nav-link {{ active('patient.index') }}" href="{{ route('patient.index') }}">
-        <span data-feather="users"></span>
-        Buscar paciente<span class="sr-only">(current)</span>
+            <span data-feather="users"></span>
+            Buscar paciente<span class="sr-only">(current)</span>
         </a>
     </li>
     {{--@canany(['Administrator', 'Mp: user creator'])
     <li class="nav-item">
         <a class="nav-link {{ active('patient.create') }}" href="{{ route('patient.create') }}">
-        <span data-feather="plus-circle"></span>
-        Ingresar nuevo
-        </a>
+    <span data-feather="plus-circle"></span>
+    Ingresar nuevo
+    </a>
     </li>
     @endcanany--}}
     {{-- @if(App\Models\Fq\ContactUser::getAmIContact() > 0)
         <li class="nav-item">
             <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.create') }}">
+    <span data-feather="plus-circle"></span>
+    Solicitudes Pacientes FQ
+    </a>
+    </li>
+    @else
+    @canany(['Fq: Answer request', 'Fq: Answer request medicines'])
+    <li class="nav-item">
+        <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.index') }}">
             <span data-feather="plus-circle"></span>
             Solicitudes Pacientes FQ
-            </a>
-        </li>
-    @else
-      @canany(['Fq: Answer request', 'Fq: Answer request medicines'])
-          <li class="nav-item">
-              <a class="nav-link {{ active('fq.request.create') }}" href="{{ route('fq.request.index') }}">
-              <span data-feather="plus-circle"></span>
-              Solicitudes Pacientes FQ
-              </a>
-          </li>
-      @endcanany
+        </a>
+    </li>
+    @endcanany
     @endif --}}
 
 </ul>
@@ -71,9 +71,9 @@
     </a>
 </h6>
 <ul class="nav flex-column">
-{{--    <li class="nav-item">--}}
-{{--        <a class="nav-link" href="{{ route('dummy.crear_usuario') }}"><span data-feather="user-plus"></span>Crear usuario</a>--}}
-{{--    </li>--}}
+    {{-- <li class="nav-item">--}}
+    {{-- <a class="nav-link" href="{{ route('dummy.crear_usuario') }}"><span data-feather="user-plus"></span>Crear usuario</a>--}}
+    {{-- </li>--}}
     <li class="nav-item">
         <a class="nav-link " href="{{ route('some.appointment') }}"><span data-feather="file-text"></span>Cita</a>
     </li>
@@ -97,14 +97,14 @@
     </li>
     <li class="nav-item">
         <a class="nav-link {{ active('some.locations.index') }}" href="{{ route('some.locations.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Locaciones
+            <span data-feather="chevrons-right"></span>
+            Locaciones
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link {{ active('some.observations.index') }}" href="{{ route('some.observations.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Observaciones
+            <span data-feather="chevrons-right"></span>
+            Observaciones
         </a>
     </li>
 </ul>
@@ -114,20 +114,20 @@
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Administrador</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-    <span data-feather="plus-circle"></span>
+        <span data-feather="plus-circle"></span>
     </a>
 </h6>
 <ul class="nav flex-column">
     <li class="nav-item">
         <a class="nav-link {{ active('parameter.permission.index') }}" href="{{ route('parameter.permission.index') }}">
-        <span data-feather="lock"></span>
-        Permisos<span class="sr-only">(current)</span>
+            <span data-feather="lock"></span>
+            Permisos<span class="sr-only">(current)</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link {{ active('user.edit') }}" href="{{ route('user.edit',auth()->id()) }}">
-        <span data-feather="unlock"></span>
-        Mis permisos
+            <span data-feather="unlock"></span>
+            Mis permisos
         </a>
     </li>
 </ul>
@@ -137,7 +137,7 @@
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Programador médico</span>
     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-    <span data-feather="plus-circle"></span>
+        <span data-feather="plus-circle"></span>
     </a>
 </h6>
 
@@ -163,12 +163,12 @@
 
 
     @canany(['Mp: programador'])
-      <li class="nav-item">
-          <a class="nav-link" href="{{ route('medical_programmer.programming_proposal.index') }}">
-          <span data-feather="chevrons-right"></span>
-          Propuestas de programación<span class="sr-only">(current)</span>
-          </a>
-      </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('medical_programmer.programming_proposal.index') }}">
+            <span data-feather="chevrons-right"></span>
+            Propuestas de programación<span class="sr-only">(current)</span>
+        </a>
+    </li>
     @endcanany
 
     <!-- <li class="nav-item">
@@ -180,8 +180,8 @@
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('medical_programmer.programming_proposal.consolidated_programmings') }}">
-        <span data-feather="chevrons-right"></span>
-        Programaciones<span class="sr-only">(current)</span>
+            <span data-feather="chevrons-right"></span>
+            Programaciones<span class="sr-only">(current)</span>
         </a>
     </li>
 
@@ -236,120 +236,153 @@
       </li>
     </ul> -->
 
+
+    <!-- Epi -->
+    @can('Administrator')
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+        <span>Epidemiología</span>
+        <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+        </a>
+    </h6>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link {{ active('epi.chagas.create') }}" href="{{ route('epi.chagas.create') }}">
+                <span data-feather="chevrons-right"></span>
+                Solicitud Examen Chagas<span class="sr-only">(en desarrollo)</span>
+            </a>
+        </li>
+        <!-- <li class="nav-item">
+        <a class="nav-link {{ active('epi.chagas.edit') }}" href="{{ route('epi.chagas.edit') }}">
+        <span data-feather="chevrons-right"></span>
+        Añadir datos adicionales<span class="sr-only">(en desarrollo)</span>
+        </a>
+    </li> -->
+        <li class="nav-item">
+            <a class="nav-link {{ active('epi.chagas.index') }}" href="{{ route('epi.chagas.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Listar Solicitudes Chagas<span class="sr-only">(en desarrollo)</span>
+            </a>
+        </li>
+    </ul>
+    @endcan
+
+
+
     <!-- ausencias -->
     @can('Administrator')
-<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
-    <span>Ausentismos</span>
-    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-    <span data-feather="plus-circle"></span>
-    </a>
-</h6>
-<ul class="nav flex-column">
-    <li class="nav-item">
-        <a class="nav-link {{ active('absences.index') }}" href="{{ route('absences.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Listar ausentismos<span class="sr-only">(en desarrollo)</span>
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+        <span>Ausentismos</span>
+        <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
         </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link {{ active('absences.create') }}" href="{{ route('absences.create') }}">
-        <span data-feather="chevrons-right"></span>
-        Registrar nueva ausencia<span class="sr-only">(en desarrollo)</span>
-        </a>
-    </li>
-</ul>
-@endcan
+    </h6>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link {{ active('absences.index') }}" href="{{ route('absences.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Listar ausentismos<span class="sr-only">(en desarrollo)</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ active('absences.create') }}" href="{{ route('absences.create') }}">
+                <span data-feather="chevrons-right"></span>
+                Registrar nueva ausencia<span class="sr-only">(en desarrollo)</span>
+            </a>
+        </li>
+    </ul>
+    @endcan
 
     <!-- mantenedores -->
     @canany(['Mp: mantenedores'])
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
-    <span>Mantenedores</span>
-    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-    <span data-feather="plus-circle"></span>
-    </a>
-</h6>
+        <span>Mantenedores</span>
+        <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+        </a>
+    </h6>
 
     <ul class="nav flex-column">
-    <!--<li class="nav-item">
+        <!--<li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
         <span data-feather="chevrons-right"></span>
         RRHH
         </a>
     </li> -->
 
-    <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.contracts.index') }}" href="{{ route('medical_programmer.contracts.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Contratos
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ active('medical_programmer.contracts.index') }}" href="{{ route('medical_programmer.contracts.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Contratos
+            </a>
+        </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.operating_rooms.index') }}" href="{{ route('medical_programmer.operating_rooms.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Pabellones
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ active('medical_programmer.operating_rooms.index') }}" href="{{ route('medical_programmer.operating_rooms.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Pabellones
+            </a>
+        </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.mother_activities.index') }}" href="{{ route('medical_programmer.mother_activities.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Actividades Madre
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ active('medical_programmer.mother_activities.index') }}" href="{{ route('medical_programmer.mother_activities.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Actividades Madre
+            </a>
+        </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.activities.index') }}" href="{{ route('medical_programmer.activities.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Actividades
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ active('medical_programmer.activities.index') }}" href="{{ route('medical_programmer.activities.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Actividades
+            </a>
+        </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.subactivities.index') }}" href="{{ route('medical_programmer.subactivities.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Sub-actividades
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ active('medical_programmer.subactivities.index') }}" href="{{ route('medical_programmer.subactivities.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Sub-actividades
+            </a>
+        </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.services.index') }}" href="{{ route('medical_programmer.services.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Servicios
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ active('medical_programmer.services.index') }}" href="{{ route('medical_programmer.services.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Servicios
+            </a>
+        </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.specialties.index') }}" href="{{ route('medical_programmer.specialties.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Especialidades
-        <!-- (Rdtos sugeridos) -->
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ active('medical_programmer.specialties.index') }}" href="{{ route('medical_programmer.specialties.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Especialidades
+                <!-- (Rdtos sugeridos) -->
+            </a>
+        </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.professions.index') }}" href="{{ route('medical_programmer.professions.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Profesiones
-        <!-- (Rdtos sugeridos) -->
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ active('medical_programmer.professions.index') }}" href="{{ route('medical_programmer.professions.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Profesiones
+                <!-- (Rdtos sugeridos) -->
+            </a>
+        </li>
 
-    <!-- <li class="nav-item">
+        <!-- <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.cutoffdates.index') }}" href="{{ route('medical_programmer.cutoffdates.index') }}">
         <span data-feather="chevrons-right"></span>
         Fechas de corte
         </a>
     </li> -->
 
-    <!-- <li class="nav-item">
+        <!-- <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.unscheduled_programming.index') }}" href="{{ route('medical_programmer.unscheduled_programming.index') }}">
         <span data-feather="chevrons-right"></span>
         Programación
         </a>
     </li> -->
 
-    <!-- <li class="nav-item">
+        <!-- <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.clone.index') }}" href="{{ route('medical_programmer.clone.index') }}">
         <span data-feather="chevrons-right"></span>
         Clonar
@@ -365,8 +398,8 @@
 <ul class="nav flex-column">
     <li class="nav-item border-top">
         <a class="nav-link" href="{{ route('claveunica.logout') }}">
-        <span data-feather="log-out"></span>
-        Cerrar sesión
+            <span data-feather="log-out"></span>
+            Cerrar sesión
         </a>
     </li>
 </ul>

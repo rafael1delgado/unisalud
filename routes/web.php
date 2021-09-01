@@ -494,3 +494,18 @@ Route::prefix('soap')->name('soap.')->group(function(){
     Route::post('/import', [AbsenceController::class, 'import'])->name('import');
     Route::delete('/{absence}', [AbsenceController::class, 'destroy'])->name('destroy');
   });
+
+
+    //Rutas Epi 
+
+    Route::prefix('epi')->name('epi.')->group(function () {
+      Route::prefix('chagas')->name('chagas.')->group(function () {
+        Route::view('/', 'epi.chagas.index')->name('index');
+        Route::view('/create', 'epi.chagas.create')->name('create');
+        Route::view('/edit', 'epi.chagas.edit')->name('edit');
+      });
+  
+    });
+  
+  
+    //fin rutas EPI
