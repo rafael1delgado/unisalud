@@ -93,6 +93,9 @@
         <a class="nav-link" href="{{route('some.appointedAvailable') }}"><span data-feather="list"></span>Citado/Disponible</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{route('some.openPending') }}"><span data-feather="calendar"></span>Pendiente apertura</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link {{ active('some.locations.index') }}" href="{{ route('some.locations.index') }}">
         <span data-feather="chevrons-right"></span>
         Locaciones
