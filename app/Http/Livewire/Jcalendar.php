@@ -5,12 +5,14 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 // use App\Models\Event;
 use App\Models\Some\Appointment;
+use App\Models\Absence;
 use App\Models\User;
 use Carbon\Carbon;
 
 class Jcalendar extends Component
 {
     public $events = '';
+    public $absences = '';
     public $title;
     public $dateStr;
 
@@ -28,6 +30,7 @@ class Jcalendar extends Component
         $specialty_id = $this->specialty_id;
         $profession_id = $this->profession_id;
         $events = Appointment::where('id',0)->get();
+        $absences = Absence::where('id',0)->get();
 
         // se obtienen appointments segun parametros enviados
         if ($user != null) {
@@ -43,6 +46,8 @@ class Jcalendar extends Component
 
             $events = $practitioner->appointments()->get();
           }
+
+          $absences = Absence::where('user_id',$user_id)->get();
         }
 
         // se asigna título a eventos
@@ -68,8 +73,19 @@ class Jcalendar extends Component
           }
         }
 
+        foreach ($absences as $key => $absence) {
+          // $absence->start = $absence->start_date;
+          // $absence->end = $absence->end_date;
+          $absence->start = $absence->start_date->format('Y-m-d') . " 00:00:00";
+          $absence->end = $absence->end_date->format('Y-m-d') . " 23:59:59";
+          $absence->title = $absence->type;
+          $absence->color = "#F5B7B1";
+          $absence->editable = false;
+        }
+
         // dd($events);
         $this->events = json_encode($events);
+        $this->absences = json_encode($absences);
         debug($this->events);
     }
 
