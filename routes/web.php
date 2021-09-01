@@ -47,6 +47,7 @@ use App\Http\Controllers\MedicalLicenceController;
 use App\Http\Livewire\Some\AsignAppointment;
 use App\Http\Livewire\Some\Reallocate;
 use App\Http\Livewire\Some\ReallocationPending;
+use App\Http\Livewire\Some\AppointedAvailable;
 use App\Models\Some\Appointment;
 use App\Http\Controllers\AbsenceController;
 
@@ -120,12 +121,13 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/appointment/{appointmentId?}', AsignAppointment::class)->name('appointment');
     Route::get('/reallocate', Reallocate::class)->name('reallocate');
-    // Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
     Route::get('/reallocation_pending', ReallocationPending::class)->name('reallocationPending');
     Route::post('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
     Route::match(['get', 'post'],'/open_tprogrammer', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
     Route::get('appointment_detail/{id}', [AppointmentController::class, 'appointment_detail'])->name('appointment_detail');
+    Route::get('/appointed_available', AppointedAvailable::class)->name('appointedAvailable');
+
 
     Route::prefix('locations')->name('locations.')->group(function(){
       Route::get('/', [LocationController::class, 'index'])->name('index');
