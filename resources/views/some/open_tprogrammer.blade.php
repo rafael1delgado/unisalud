@@ -40,11 +40,15 @@
             <span data-feather="square" style="color:#85C1E9"></span> No aperturados
           </td>
           <td>
-            <span data-feather="square" style="color:#ABEBC6"></span> Aperturados
+            <span data-feather="square" style="color:#58E995"></span> Aperturados
           </td>
           <td>
             <span data-feather="square" style="color:#F5B7B1"></span> Ausentismos
           </td>
+          <td>
+            <span data-feather="square" style="color:#EAEBAB"></span> Sin rendimiento
+          </td>
+
         </tr>
       </table>
     </div>
