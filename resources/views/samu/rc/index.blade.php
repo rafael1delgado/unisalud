@@ -27,7 +27,7 @@
                 <fieldset class="form-group  col-md-2 mt-1">
                     <div class=" mt-4">
                                 <a class="btn btn-success " href="{{ route('samu.regulatory-center.create') }}">
-                                <i class="fas fa-plus"></i> Agregar Centro Regulador
+                                <i class="fas fa-plus"></i> Agregar personal al Centro Regulador
                             </a>
                     </div>
                 </fieldset>
@@ -44,7 +44,7 @@
                             
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>27 DE AGOSTO DEL 2021</b></th>
                               <th colspan="6"><b>CENTRO REGULADOR</b></th>
                             </tr>
                         
@@ -66,7 +66,10 @@
                             <tr>
                                 <td>Largo</td>
                                 <td>08:00</td>
-                                <td>20:00</td>
+                                <td class="text-center" >    
+                                    <button type="button" 
+                                    class="btn  btn-danger btn-center" >Terminar Turno</button>
+                                </td>
                                 <td>Juan Catro</td>
                                 <td>Jossie Escobar</td>
                                 <td>Maria Hurtado</td>
@@ -105,7 +108,7 @@
 
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>27 DE AGOSTO DEL 2021</b></th>
                               <th colspan="6"><b>CENTRO REGULADOR</b></th>
                             </tr>
                             <tr>
@@ -235,7 +238,7 @@
                             </tr>
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>27 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
                               <th colspan="6"><b>CENTRO REGULADOR</b></th>
                             </tr>
                             <tr>
@@ -278,16 +281,13 @@
                             </tr>
                             <tr class="text-center table-success">
                               
-                              <th colspan="3"><b>27 DE AGOSTO DEL 2021</b></th>
+                              <th colspan="3"><b>25 DE AGOSTO DEL 2021</b></th>
                               <th colspan="6"><b>CENTRO REGULADOR</b></th>
                             </tr>
                             <tr>
                                 <td>Noche</td>
-                                <td>08:00</td>
-                                <td class="text-center" >    
-                                    <button type="button" 
-                                    class="btn  btn-danger btn-center" >Terminar Turno</button>
-                                </td>
+                                <td>20:00</td>
+                               <td>08:00</td>
                                 <td>Juan Castro</td>
                                 <td>Alex Orozco</td>
                                 <td>Maria Hurtado</td>

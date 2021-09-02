@@ -18,7 +18,7 @@ class AddProposalDetailIdToAppointmentsTable extends Migration
         // });
 
         Schema::table('appointments', function (Blueprint $table) {
-            $table->unsignedBigInteger('mp_prog_prop_detail_id')->after('patient_instruction')->nullable();
+            $table->unsignedBigInteger('mp_prog_prop_detail_id')->after('patientInstruction')->nullable();
             $table->foreign('mp_prog_prop_detail_id')->references('id')->on('mp_programming_proposals_detail');
         });
     }

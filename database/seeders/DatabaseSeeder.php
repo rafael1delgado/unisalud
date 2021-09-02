@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
         $this->call([
             PermissionSeeder::class,
             CodConIdentifiersTypesSeeder::class,
@@ -27,11 +26,7 @@ class DatabaseSeeder extends Seeder
             CongregationSeeder::class,
             UserSeeder::class,
             CodConObservationCategorySeeder::class,
-
             // PractitionerSeeder::class,
-
-
-
             // // HmRrhhTableSeeder::class,
             HmMotherActivityTableSeeder::class,
             HmActivityTypesTableSeeder::class,
@@ -48,10 +43,8 @@ class DatabaseSeeder extends Seeder
             // // HmUnscheduledProgrammingTableSeeder::class,
             HmUserSpecialtiesTableSeeder::class,
             HmUserProfessionsTableSeeder::class,
-
             // // HmTheoreticalProgrammingTableSeeder::class,
             // HmOperatingRoomProgrammingTableSeeder::class,
-
             //PractitionerSeeder::class,
             ExtMedicineSeeder::class,
             OrganizationSeeder::class,
