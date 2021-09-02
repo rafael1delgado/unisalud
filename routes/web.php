@@ -46,6 +46,7 @@ use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalSignatureFlowContr
 use App\Http\Controllers\MedicalLicenceController;
 use App\Http\Livewire\Some\AsignAppointment;
 use App\Http\Livewire\Some\Reallocate;
+use App\Http\Livewire\Some\Interconsultation;
 use App\Http\Livewire\Some\ReallocationPending;
 use App\Models\Some\Appointment;
 use App\Http\Controllers\AbsenceController;
@@ -119,6 +120,9 @@ Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/appointment/{appointmentId?}', AsignAppointment::class)->name('appointment');
     Route::get('/reallocate', Reallocate::class)->name('reallocate');
     // Route::view('/agenda', 'some.agenda')->name('agenda');
+    Route::get('/interconsultation', Interconsultation::class)->name('interconsultation');
+    //pollito
+    
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
     Route::get('/reallocation_pending', ReallocationPending::class)->name('reallocationPending');
     Route::post('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
@@ -399,13 +403,13 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
 });
 
-//Route::prefix('dummy')->name('dummy.')->group(function(){
+// Route::prefix('dummy')->name('dummy.')->group(function(){
 //    Route::view('/some', 'some')->name('some');
 //    Route::view('/crear_usuario', 'crear_usuario')->name('crear_usuario');
 //    Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
 //    Route::view('/agenda', 'agenda')->name('agenda');
 //    Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
-//});
+// });
 
 Route::prefix('test')->name('test.')->group(function(){
     Route::view('/livesearch', 'test.livesearch')->name('livesearch');
