@@ -18,7 +18,7 @@
                     <tr>
                         <td>{{$appointment->users->first()->officialFullName}}</td>
                         <td>{{$appointment->users->first()->identifierRun->value}}</td>
-                        <td>{{$appointment->theoreticalProgramming->specialty->specialty_name}}</td>
+                        <td>{{$appointment->practitioners->first()->specialty->specialty_name}}</td>
                         <td></td>
                         <td></td>
                         <td>

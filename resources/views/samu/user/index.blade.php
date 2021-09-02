@@ -4,7 +4,7 @@
 
 
 
-<h3 class="mb-3"><i class="fas fa-ambulance"></i> Lista de usuarios</h3>
+<h3 class="mb-3"><i class="fas fa-hospital-user"></i>Lista de usuarios</h3>
 
 <div class="row mb-4">
     <div class="col-12 col-md-6">

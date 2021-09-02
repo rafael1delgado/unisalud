@@ -12,7 +12,6 @@ use Livewire\Component;
 
 class AsignUserInputsForm extends Component
 {
-
     public $run;
     public $dv;
     public $user;
@@ -31,12 +30,28 @@ class AsignUserInputsForm extends Component
     public $practitioners = [];
     public $practitioner_id;
 
+    protected $listeners = ['userSelected' => 'setUser'];
+
     public function searchUser()
     {
         $this->reset(['dv', 'user', 'user_id', 'name', 'fathers_family', 'mothers_family', 'sex', 'age', 'months', 'contracts', 'contract_id', 'law', 'organizations', 'organization_id', 'practitioners', 'practitioner_id']);
         $this->user = User::getUserByRun($this->run);
         $this->validate(['user' => 'required'], ['user.required' => 'No existe usuario.']);
         $this->setDv();
+        $this->setUserInputs();
+    }
+
+    public function setDv()
+    {
+        $run = intval($this->run);
+        $s = 1;
+        for ($m = 0; $run != 0; $run /= 10)
+            $s = ($s + $run % 10 * (9 - $m++ % 6)) % 11;
+        $this->dv = chr($s ? $s + 47 : 75);
+    }
+
+    public function setUserInputs()
+    {
         $this->user_id = $this->user->id;
         $this->name = $this->user->officialName;
         $this->fathers_family = $this->user->officialFathersFamily;
@@ -53,13 +68,13 @@ class AsignUserInputsForm extends Component
         $this->practitioners = $this->organizations->count() > 0 ? Practitioner::where('user_id', $this->user_id)->where('organization_id', $this->organizations->first()->id)->get() : [];
     }
 
-    public function setDv()
+    public function setUser($userId)
     {
-        $run = intval($this->run);
-        $s = 1;
-        for ($m = 0; $run != 0; $run /= 10)
-            $s = ($s + $run % 10 * (9 - $m++ % 6)) % 11;
-        $this->dv = chr($s ? $s + 47 : 75);
+        $this->reset();
+        $this->user = User::find($userId);
+        $this->run = $this->user->identifierRun->value;
+        $this->setDv();
+        $this->setUserInputs();
     }
 
     public function updatedContractId($contract_id)

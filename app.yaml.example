@@ -47,5 +47,9 @@ env_variables:
   #SERVICE_ACCOUNT:
   GOOGLE_CLOUD_SERVICE_ACCOUNT: 
 
+  # CREDENCIALES SERVIDOR SOAP RAYEN
+  SOAP_USER: 
+  SOAP_PASSWORD: 
+
 beta_settings:
   cloud_sql_instances: ""

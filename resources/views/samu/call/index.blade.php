@@ -436,7 +436,10 @@
                 </div>
                 <!-- fin de registro de llamadas-->
         
-          
+          <!--estado de las personas en turno
+                novedades
+                ambulancias por turno
+                centro regulador por turno-->
 
     </div>
 </div>

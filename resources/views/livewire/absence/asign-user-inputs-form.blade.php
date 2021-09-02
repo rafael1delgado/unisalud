@@ -2,17 +2,20 @@
     <div class="row">
         <div class="form-group col-md-2">
             <label for="inputrut">RUT</label>
-            <input type="number" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run" name="run"
+            <input type="number" class="form-control @error('user') is-invalid @enderror" placeholder="Ingrese el rut" wire:model.lazy="run" name="run"
                    wire:change="searchUser()">
+            @error('user') <div class="invalid-feedback">{{ $message }}</div>@enderror
             <input type="hidden" name="user_id" wire:model="user_id">
         </div>
         <div class="form-group col-md-1">
             <label for="inputdv">Dv</label>
             <input type="text" class="form-control" placeholder="Dv" wire:model="dv" name="dv" readonly>
         </div>
-        <div class="form-group col">
-            <label for="inputdv">&nbsp;</label>
-            <div>@error('user')<span class="text-danger">{{ $message }}</span>@enderror</div>
+        <div class="form-group col-md-1">
+            <label for="inputEmail4">&nbsp;</label>
+            <button type="button" class="btn btn-primary form-control" data-toggle="modal"
+                    data-target="#searchUserModal" title="Búsqueda avanzada" ><i class="fa fa-search" aria-hidden="true"></i>
+            </button>
         </div>
     </div>
 
@@ -121,4 +124,6 @@
             </select>
         </fieldset>
     </div>
+
+    @livewire('some.search-user')
 </div>

@@ -48,8 +48,12 @@ use App\Http\Livewire\Some\AsignAppointment;
 use App\Http\Livewire\Some\Reallocate;
 use App\Http\Livewire\Some\Interconsultation;
 use App\Http\Livewire\Some\ReallocationPending;
+use App\Http\Livewire\Some\AppointedAvailable;
+use App\Http\Livewire\Some\OpenPending;
 use App\Models\Some\Appointment;
 use App\Http\Controllers\AbsenceController;
+
+use App\Http\Controllers\RayenWs\SoapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,15 +123,21 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/appointment/{appointmentId?}', AsignAppointment::class)->name('appointment');
     Route::get('/reallocate', Reallocate::class)->name('reallocate');
+<<<<<<< HEAD
     // Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::get('/interconsultation', Interconsultation::class)->name('interconsultation');
     //pollito
     
+=======
+>>>>>>> 0a70a5d4b572f3ff878efc902e1fa32af08a3a95
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
     Route::get('/reallocation_pending', ReallocationPending::class)->name('reallocationPending');
     Route::post('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
     Route::match(['get', 'post'],'/open_tprogrammer', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
     Route::get('appointment_detail/{id}', [AppointmentController::class, 'appointment_detail'])->name('appointment_detail');
+    Route::get('/appointed_available', AppointedAvailable::class)->name('appointedAvailable');
+    Route::get('/open_pending', OpenPending::class)->name('openPending');
+
 
     Route::prefix('locations')->name('locations.')->group(function(){
       Route::get('/', [LocationController::class, 'index'])->name('index');
@@ -423,8 +433,9 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
     Route::post('/{user}',[MedicalLicenceController::class,'store'])->name('store');
 });
 
-
-
+Route::prefix('soap')->name('soap.')->group(function(){
+    Route::any('rayen', [SoapController::class, 'server'])->name('rayen');
+});
 
 //rutas samu
   Route::prefix('samu')->name('samu.')->group(function () {
@@ -464,10 +475,45 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
       Route::view('/edit', 'samu.call.edit')->name('edit');
     });
 
+    Route::prefix('shift')->name('shift.')->group(function () {
+      Route::view('/', 'samu.shift.index')->name('index');
+      Route::view('/edit', 'samu.shift.edit')->name('edit');
+      Route::view('/edit', 'samu.shift.create')->name('edit');
+    });
+
+    Route::prefix('novelties')->name('novelties.')->group(function () {
+      Route::view('/', 'samu.novelties.index')->name('index');
+      Route::view('/edit', 'samu.novelties.edit')->name('edit');
+      //Route::view('/edit', 'samu.novelties.create')->name('edit');
+    });
+
   });
 
   //fin rutas samu
 
-  Route::resource('absences', AbsenceController::class)->only([
-    'create', 'store'
-  ]);
+  // Route::resource('absences', AbsenceController::class)->only([
+  //   'create', 'store'
+  // ]);
+
+  Route::prefix('absences')->name('absences.')->group(function () {
+    Route::get('/', [AbsenceController::class, 'index'])->name('index');
+    Route::get('/create', [AbsenceController::class, 'create'])->name('create');
+    Route::post('/', [AbsenceController::class, 'store'])->name('store');
+    Route::post('/import', [AbsenceController::class, 'import'])->name('import');
+    Route::delete('/{absence}', [AbsenceController::class, 'destroy'])->name('destroy');
+  });
+
+
+    //Rutas Epi 
+
+    Route::prefix('epi')->name('epi.')->group(function () {
+      Route::prefix('chagas')->name('chagas.')->group(function () {
+        Route::view('/', 'epi.chagas.index')->name('index');
+        Route::view('/create', 'epi.chagas.create')->name('create');
+        Route::view('/edit', 'epi.chagas.edit')->name('edit');
+      });
+  
+    });
+  
+  
+    //fin rutas EPI
