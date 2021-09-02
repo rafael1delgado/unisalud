@@ -27,7 +27,7 @@
                 <fieldset class="form-group  col-md-2 mt-1">
                     <div class=" mt-4">
                                 <a class="btn btn-success " href="{{ route('samu.regulatory-center.create') }}">
-                                <i class="fas fa-plus"></i> Agregar personal del Centro Regulador
+                                <i class="fas fa-plus"></i> Agregar personal al Centro Regulador
                             </a>
                     </div>
                 </fieldset>

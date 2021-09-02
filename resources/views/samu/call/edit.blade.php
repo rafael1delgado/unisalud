@@ -60,6 +60,8 @@
                                     <option>Seleccione </option>
                                     <option value="1" >T1</option>
                                     <option value="2" >T2</option>
+                                    <option value="3" >RU1</option>
+                                    <option value="3" >RU2</option>
                                     <option value="3" >NM</option>
                                     <option value="4" >Otro</option>
                             </select>
@@ -120,7 +122,57 @@
                         <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
                     </fieldset>
             </div>
-
+<!-- inicio evaluacion de paciente-->
+            <hr>
+            <h4>Evaluación de paciente</h4>
+            <div class="form-row">
+                <div class=" col-md-6">
+                <label for="for_run">Detalle de Recepción </label>
+                    <textarea class="form-control is-invalid" id="validationTextarea" placeholder="" required></textarea>
+                    <div class="invalid-feedback">
+                    Ingrese descripción
+                    </div>
+                </div>
+                <fieldset class="form-group  col-md-3">
+                            <label for="for_run">Est. Recepcion de paciente </label>
+                            <select class="form-control" name="recepcion" id="recepcion">
+                                    <option>Seleccione </option>
+                                    <option value="1" >Hospital Dr Ernesto Torres Galdames</option>
+                                    <option value="113">SAPU Cirujano Aguirre</option>
+                                                    <option value="115">SAPU Cirujano Guzmán</option>
+                                                    <option value="114">SAPU Cirujano Videla</option>
+                                                    <option value="119">SAPU El Boro</option>
+                                                    <option value="3281">SAPU Huara</option>
+                                                    <option value="117">SAPU Pedro Pulgar</option>
+                                                    <option value="116">SAPU Pozo Almonte</option>
+                                                    <option value="4009">SAR La Tortuga</option>
+                                                    <option value="118">SAR Sur de Iquique</option>
+                                                    <option value="4004">SEREMI DE SALUD</option>
+                                                    <option value="3836">Servicio Médico Legal Iquique</option>
+                                                    <option value="4003">SMA Servicios Medicos</option>
+                                                    <option value="3933">SUR Camiña</option>
+                                                    <option value="3930">SUR Cariquima</option>
+                                                    <option value="3928">SUR Chanavayita</option>
+                                                    <option value="3929">SUR Colchane</option>
+                                                    <option value="3932">SUR Pica</option>
+                                                    <option value="3931">SUR Tarapacá</option>
+                            </select>
+                        </fieldset>
+                        <fieldset class="form-group  col-md-3">
+                            <label for="for_run">Personal Recepcion del Pcte.</label>
+                            <input type="hidden" class="form-control"  name="hora" value="">
+                            <input type="time" class="form-control" name="hora_salida" value="">
+                        </fieldset>
+            
+                
+            </div>
+            <div class="form-row">
+                    <fieldset class="form-group col-md-2 mt-3">
+                        <label for="for_run"></label>
+                        <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
+                    </fieldset>
+            </div>
+          <!--fin evaluacion paciente-->
             <hr>
             <h4> Asignación Signos Vitales</h4>
 
@@ -136,22 +188,22 @@
                             <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
-                            <label for="for_run">P/A</label>
+                            <label for="for_run">Presión Arterial</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
                             <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
-                            <label for="for_run">P/AM</label>
+                            <label for="for_run">Presión Arterial Media</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
                             <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
-                            <label for="for_run">Glasgow </label>
+                            <label for="for_run">Glasgow</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
                             <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
-                            <label for="for_run">% Saturacion Oxigeno </label>
+                            <label for="for_run">% Saturacion Oxigeno Ambiental</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
                             <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
@@ -166,11 +218,16 @@
                             <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
                         <fieldset class="form-group  col-md-2">
+                            <label for="for_run">Llene Capilar</label>
+                            <input type="hidden" class="form-control"  name="hora" value="">
+                            <input type="number" class="form-control" name="ruta" value="">
+                        </fieldset>
+                        <fieldset class="form-group  col-md-2">
                             <label for="for_run">Temperatura °C</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
                             <input type="number" class="form-control" name="ruta" value="">
                         </fieldset>
-                        <fieldset class="form-group  col-md-6">
+                        <fieldset class="form-group  col-md-4">
                             <label for="for_run">Tratamiento</label>
                             <input type="hidden" class="form-control"  name="hora" value="">
                             <input type="text" class="form-control" name="ruta" value="">

@@ -13,7 +13,7 @@
    
 
             <div class="col-md-6">
-            <h3 class="mb-3"><i class="fas fa-key"></i> Editar Codificación de Calve</h3>
+            <h3 class="mb-3"><i class="fas fa-key"></i> Editar Codificación de Clave</h3>
             </div>
             <hr>
             <div class="form-row">

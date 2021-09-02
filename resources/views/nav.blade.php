@@ -24,7 +24,7 @@
     <li class="nav-item">
         <a class="nav-link
         @if(request()->route()->view == 'pacientes') active @endif"
-        href=" {{ route('samu.cclave.index') }}">Codificación de las Calves</a>
+        href=" {{ route('samu.cclave.index') }}">Codificación de las Claves</a>
     </li>
     
     <li class="nav-item">

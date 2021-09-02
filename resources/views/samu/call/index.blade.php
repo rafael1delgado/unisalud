@@ -108,6 +108,7 @@
                                     <th>Número</th>
                                     <th>Tipo</th>
                                     <th>Estado</th>
+                                    <th>Detalle</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -116,36 +117,42 @@
                                     <td>2</td>
                                     <td>Movil 2</td>
                                     <td>Activo</td>
+                                    <td></td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>14</td>
                                     <td>Movil 5</td>
                                     <td>Activo</td>
+                                    <td></td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>Movil 12</td>
                                     <td>Activo</td>
+                                    <td></td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>44</td>
                                     <td>Movil 6</td>
                                     <td>Activo</td>
+                                    <td></td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>10</td>
                                     <td>Movil 4 </td>
                                     <td>Activo</td>
+                                    <td></td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
                                     <td>Movil 11</td>
                                     <td>Inactivo</td>
+                                    <td>Movil con falla de correa</td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
                             </tbody>
@@ -265,12 +272,12 @@
                 <fieldset class="form-group  col-md-1">
                     <label for="for_run">Hora</label>
                     <input type="hidden" class="form-control"  name="hora" value="">
-                    <input type="time" class="form-control" name="time_call" value="">
+                    <input type="time" class="form-control" name="time_call" value="10:30">
                 </fieldset>
                 <fieldset class="form-group  col-md-2">
                     <label for="for_run">Recepcion de llamada</label>
                         <select class="form-control" name="recepcion" id="recepcion">
-                            <option>Seleccione </option>
+                            <option>Operador 1 </option>
                             <option value="1" >Operador 1</option>
                             <option value="2" >Operador 2</option>
                             <option value="3" >Operador 3</option>
@@ -283,7 +290,7 @@
                         </select>
                 </fieldset>
                 <fieldset class="form-group  col-md-2">
-                    <label for="for_run">Información telefonica </label>
+                    <label for="for_run">Motivo de solicitud </label>
                     <input type="hidden" class="form-control"  name="hora" value="">
                     <input type="text" class="form-control" name="hora" value="">
                 </fieldset>
