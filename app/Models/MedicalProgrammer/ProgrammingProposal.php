@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ProgrammingProposal extends Model implements Auditable
 {
@@ -46,6 +47,7 @@ class ProgrammingProposal extends Model implements Auditable
         return $this->belongsTo('App\Models\MedicalProgrammer\Profession');
     }
 
+
     public function employeeCanModify()
     {
       //si la solicitud ya fue confirmada, no se deja modificar a nadie
@@ -73,6 +75,82 @@ class ProgrammingProposal extends Model implements Auditable
           }
         }
       }
+    }
+
+    // public function scopeHasUnopenedDetailsBetween($query, $from, $to){
+    //     $notOpenedDetailIds = [];
+    //     foreach ($query->get() as $key => $programmingProposal) {
+    //         // Obtener rango de fechas a recorrer
+    //         $start_date = ($from > $programmingProposal->start_date) ? Carbon::parse($from) : $programmingProposal->start_date;
+    //         $end_date = ($to < $programmingProposal->end_date) ? Carbon::parse($to) : $programmingProposal->end_date;
+
+    //         // se eliminan antiguos del array (periodos anteriores del ciclo) que se encuentren between de nueva iteración
+    //         // foreach ($programmed_days as $key => $programmed_day) {
+    //         //     if (Carbon::parse($programmed_day['start_date'])->between($start_date, $end_date)) {
+    //         //         unset($programmed_days[$key]);
+    //         //     }
+    //         // }
+
+    //         // se obtienen los del periodo actual
+    //         while ($start_date <= $end_date) {
+    //             $dayOfWeek = $start_date->dayOfWeek;
+    //             foreach ($programmingProposal->details->where('day', $dayOfWeek) as $key2 => $detail) {
+    //                 //que tengan performance
+    //                 if ($detail->activity->performance != 0) {
+    //                     // verifica si está aperturado o no
+    //                     $start = Carbon::parse($start_date->format('Y-m-d') . " " . $detail->start_hour);
+    //                     if ($detail->appointments->where('start', $start)->count() == 0) {
+    //                         array_push($notOpenedDetailIds, $detail->id);
+    //                     }
+    //                 }
+    //             }
+    //             $start_date->addDays(1);
+    //         }
+    //     }
+
+    //      ProgrammingProposal::query()
+    //       ->whereHas('details', function($q) use($notOpenedDetailIds){
+    //         $q->whereIn('id', $notOpenedDetailIds);
+    //       });
+
+    //       // $programmingProposaldebug = ProgrammingProposal::query()
+    //       // ->whereHas('details', function($q) use($notOpenedDetailIds){
+    //       //   $q->whereIn('id', $notOpenedDetailIds);
+    //       // });
+
+    //       // \Debugbar::info($programmingProposaldebug->get());
+    // }
+
+    public function countUnopenedDetailsBetween($from, $to){
+        $count = 0;
+        // Obtener rango de fechas a recorrer
+        $start_date = ($from > $this->start_date) ? Carbon::parse($from) : $this->start_date;
+        $end_date = ($to < $this->end_date) ? Carbon::parse($to) : $this->end_date;
+
+        // se eliminan antiguos del array (periodos anteriores del ciclo) que se encuentren between de nueva iteración
+        // foreach ($programmed_days as $key => $programmed_day) {
+        //     if (Carbon::parse($programmed_day['start_date'])->between($start_date, $end_date)) {
+        //         unset($programmed_days[$key]);
+        //     }
+        // }
+
+        // se obtienen los del periodo actual
+        while ($start_date <= $end_date) {
+            $dayOfWeek = $start_date->dayOfWeek;
+            foreach ($this->details->where('day', $dayOfWeek) as $key2 => $detail) {
+                //que tengan performance
+                if ($detail->activity->performance != 0) {
+                    // verifica si está aperturado o no
+                    $start = Carbon::parse($start_date->format('Y-m-d') . " " . $detail->start_hour);
+                    if ($detail->appointments->where('start', $start)->count() == 0) {
+                      $count++;
+                    }
+                }
+            }
+            $start_date->addDays(1);
+        }
+
+        return $count;
     }
 
     /**

@@ -3,19 +3,17 @@
         <div class="form-row">
             <div class="form-group col-md-2">
                 <label for="inputEmail4">Desde</label>
-                <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha inicio"
-                    wire:model.lazy="appointments_from">
+                <input type="date" class="form-control" placeholder="Fecha inicio" wire:model="from" >
             </div>
 
             <div class="form-group col-md-2">
                 <label for="inputEmail4">Hasta</label>
-                <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha fin"
-                    wire:model.lazy="appointments_to">
+                <input type="date" class="form-control" placeholder="Fecha fin" wire:model="to">
             </div>
 
             <div class="form-group col-md-1">
                 <label for="inputEmail4">&nbsp;</label>
-                <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()"> <i
+                <button type="button" class="btn btn-primary form-control" wire:click='search()'> <i
                         class="fa fa-search" aria-hidden="true"></i> Buscar</button>
             </div>
         </div>
@@ -33,30 +31,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach($practitioners as $practitioner) --}}
+                    @foreach($programmingProposals as $programmingProposal)
                     <tr>
                         <td>
-                            16351236-k
-                            {{-- @foreach($contactUser->user->identifiers as $identifier)
-                            {{ $identifier->value }}-{{ $identifier->dv }}<br>
-                            @endforeach --}}
+                            @foreach($programmingProposal->user->identifiers as $identifier)
+                                {{ $identifier->value }}-{{ $identifier->dv }}<br>
+                            @endforeach
                         </td>
                         <td>
-                            Roberto Javier Carrillo Lioi
-                            {{-- {{ $contactUser->user->OfficialFullName }} --}}
-                        </td>
-                        <!-- <td></td> -->
-                        <td>
-                            Traumatólogo
+                            {{ $programmingProposal->user->OfficialFullName }}
                         </td>
                         <td>
-                            3
+                            {{-- agregar profesion --}}
+                            {{ $programmingProposal->specialty->specialty_name }}
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm"> <i class="fa fa-calendar"></i> </button>
+                            {{$programmingProposal->countUnopenedDetailsBetween($from, $to)}}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm" wire:click="open()"> <i
+                                    class="fa fa-calendar"></i> </button>
                         </td>
                     </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>
