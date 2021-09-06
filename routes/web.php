@@ -498,6 +498,7 @@ Route::prefix('soap')->name('soap.')->group(function(){
     Route::get('/', [AbsenceController::class, 'index'])->name('index');
     Route::get('/create', [AbsenceController::class, 'create'])->name('create');
     Route::post('/', [AbsenceController::class, 'store'])->name('store');
+    Route::get('/load', [AbsenceController::class, 'load'])->name('load');
     Route::post('/import', [AbsenceController::class, 'import'])->name('import');
     Route::delete('/{absence}', [AbsenceController::class, 'destroy'])->name('destroy');
   });
