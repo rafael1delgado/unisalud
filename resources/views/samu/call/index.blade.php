@@ -318,7 +318,7 @@
             <hr>
             
             <div class="row mb-4">
-                <div class="col-12 col-md-3">
+                <div class="col-md-3">
                     <form method="GET" class="form-horizontal" action="">
                         <div class="input-group mb-sm-0">
                             <input class="form-control" type="text" name="search" autocomplete="off" id="for_search"
@@ -330,8 +330,10 @@
                         </div>
                     </form>
                 </div>
+            
+
+                <hr>
             </div>
-            <hr>
             <div class="table-responsive col-md-12">
                     <table class="table table-sm table-bordered table-striped small">
                         <thead>
@@ -357,7 +359,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1111</td>
+                                <td class=" bg-danger">1111</td>
                                 <td>08:10</td>
                                 <td>operador 2</td>
                                 <td>DRA GOMEZ DR MENDEZ 6 TP TODO OPERATIVO </td>
@@ -366,15 +368,27 @@
                                 <td> +56945522328</td>
                                 <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
+                            <!--ot-->
                             <tr>
-                                <td>2222</td>
+                                <td >1101</td>
+                                <td>08:10</td>
+                                <td>operador 2</td>
+                                <td>DRA GOMEZ DR MENDEZ  </td>
+                                <td>Daniel Guerrero</td>
+                                <td>Av. salvador allende 222</td>
+                                <td> +56945522328</td>
+                                <th class=" bg-primary text-center"> <a class="text-white " href="{{ route('samu.call.otedit') }}"><b>Seguimiento</b></a></th>
+                            </tr>
+                               <!--fin ot-->
+                            <tr>
+                                <td class=" bg-danger">2222</td>
                                 <td>09:10</td>
                                 <td>operador 1, operador 4</td>
                                 <td>22 AÑOS  CON SOSPECHA DE AGRESION </td>
                                 <td>Sofia Perez</td>
                                 <td>Calle amunategui 155</td>
                                 <td> +569002328</td>
-                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
+                                <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
                             <tr>
                                 <td>233</td>
@@ -384,9 +398,9 @@
                                 <td>Amanda Castro</td>
                                 <td>Pedro prado 1000</td>
                                 <td>+56978788555</td>
-                                <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
+                                <th class=" bg-warning text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
-
+                            <!-- traslado-->
                             <tr>
                                 <td>3000</td>
                                 <td>12:45</td>
@@ -395,8 +409,9 @@
                                 <td>mirtha Lopez</td>
                                 <td>Calle 2 S/N</td>
                                 <td>+56325255663</td>
-                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
+                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.tedit') }}"><b>Seguimiento</b></a></th>
                             </tr>
+                            <!-- fin traslado-->
                             <tr>
                                 <td>4000</td>
                                 <td>14:03</td>
@@ -405,20 +420,22 @@
                                 <td>Camilo zeballos</td>
                                 <td>Calle soto mayor 255</td>
                                 <td> +5663636265</td>
-                                <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
+                                <th class=" bg-warning text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>
+                            <!--traslado-->
                             <tr>
-                                <td>5000</td>
+                                <td class="bg-danger">5000</td>
                                 <td>15:23</td>
                                 <td>operador 2</td>
                                 <td>FEMENINA DE 23 AÑOS POSIBLE DESCOMPENSACION</td>
                                 <td>Jose Armando Aguilar</td>
                                 <td>Calle Algarrobo 200</td>
                                 <td>+56922252556</td>
-                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
+                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.tedit') }}"><b>Seguimiento</b></a></th>
                             </tr>
+                            <!-- fin trasalado-->
                             <tr>
-                                <td>5522</td>
+                                <td class=" bg-danger">5522</td>
                                 <td>16:02</td>
                                 <td>Medico Regukador</td>
                                 <td>Triple colisión vehicular</td>
@@ -435,7 +452,7 @@
                                 <td>Dr. Alex Orozco</td>
                                 <td>Barros Arana 5333</td>
                                 <td>+56923366363</td>
-                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
+                                <th class=" bg-warning text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
                             </tr>    
                         </tbody>
                     </table>

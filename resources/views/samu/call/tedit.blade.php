@@ -12,7 +12,7 @@
     <div class="card-body">
 
         <!-- seguimiento-->
-        <h3><b> Seguimiento<b></h3>
+        <h3 class="text-success"><b> Seguimiento Traslado</b></h3>
             
             <div class="row mb-4">
                 <div class="col-12 col-md-3">

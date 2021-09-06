@@ -18,7 +18,7 @@
             <hr>
             <div class="form-row">
         
-                <fieldset class="form-group col-8 col-md-3">
+                <fieldset class="form-group col-8 col-md-2">
                     <label for="for_run">Número de Amb </label>
                     <input type="hidden" class="form-control" id="for_id" name="id" value="">
                     <input type="number" max="50000000" class="form-control" id="for_run" name="run" value="2">
@@ -47,13 +47,19 @@
                                 </select>
                 </fieldset>
                 
-                <fieldset class="form-group col-12 col-md-5">
+                <fieldset class="form-group col-12 col-md-2">
                     <label for="empresa">Estado</label>
                     <select class="form-control" name="region_id" id="regiones">
                         <option>Activo</option>
                                     <option value="1" >Activo</option>
                                     <option value="2" >Inactivo</option>
                                 </select>
+                </fieldset>
+
+                <fieldset class="form-group col-12 col-md-4">
+                    <label for="empresa">Detalle</label>
+                    <input type="hidden" class="form-control" id="for_id" name="id" value="">
+                    <input type="text"  class="form-control" id="for_run" name="run" value="Sin detalle">
                 </fieldset>
 
             </div>
@@ -96,9 +102,9 @@
                     <input type="Text" max="50000000" class="form-control" id="for_run" name="run" value="Carlos Fuentes">
                 </fieldset>
                 <fieldset class="form-group col-8 col-md-3">
-                    <label for="for_run">Medico </label>
+                    <label for="for_run">Observación</label>
                     <input type="hidden" class="form-control" id="for_id" name="id" value="">
-                    <input type="Text" max="50000000" class="form-control" id="for_run" name="run" value="Marta Sanchez">
+                    <input type="Text" max="50000000" class="form-control" id="for_run" name="run" value="Dra Marta Sanchez acompaña a emergencia">
                 </fieldset>
 
               

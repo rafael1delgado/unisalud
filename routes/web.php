@@ -470,6 +470,8 @@ Route::prefix('soap')->name('soap.')->group(function(){
     Route::prefix('call')->name('call.')->group(function () {
       Route::view('/', 'samu.call.index')->name('index');
       Route::view('/edit', 'samu.call.edit')->name('edit');
+      Route::view('/otedit', 'samu.call.otedit')->name('otedit');
+      Route::view('/tedit', 'samu.call.tedit')->name('tedit');
     });
 
     Route::prefix('shift')->name('shift.')->group(function () {
