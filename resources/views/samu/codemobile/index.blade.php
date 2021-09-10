@@ -20,7 +20,7 @@
         </form>
     </div>
     <div class="col-12 col-md-2">
-        <a class="btn btn-success" href="{{ route('samu.cmovil.create') }}">
+        <a class="btn btn-success" href="{{ route('samu.codemobile.create') }}">
             <i class="fas fa-plus"></i> Agregar
         </a>
     </div>
@@ -35,31 +35,13 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($codemobiles as $codemobile)
             <tr>
-                <td>Codigo 1</td>
-                <td>Nombre 1</td>
-                <td><a href="{{ route('samu.cmovil.edit') }}">Editar</a> </td>
+                <td>{{ $codemobile->mobile_code }}</td>
+                <td>{{ $codemobile->name_mobile_code }}</td>
+                <td><a href="#">Editar</a></td>
             </tr>
-            <tr>
-                <td>Codigo 2</td>
-                <td>Nombre 2</td>
-                <td><a href="{{ route('samu.cmovil.edit') }}">Editar</a> </td>
-            </tr>
-            <tr>
-                <td>Codigo 3</td>
-                <td>Nombre 3</td>
-                <td><a href="{{ route('samu.cmovil.edit') }}">Editar</a> </td>
-            </tr>
-            <tr>
-                <td>Codigo 4</td>
-                <td>Nombre 4</td>
-                <td><a href="{{ route('samu.cmovil.edit') }}">Editar</a> </td>
-            </tr>
-            <tr>
-                <td>Codigo 5</td>
-                <td>Nombre 5</td>
-                <td><a href="{{ route('samu.cmovil.edit') }}">Editar</a> </td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

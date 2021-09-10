@@ -54,6 +54,7 @@ use App\Models\Some\Appointment;
 use App\Http\Controllers\AbsenceController;
 
 use App\Http\Controllers\RayenWs\SoapController;
+use Spatie\Permission\Contracts\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -464,10 +465,12 @@ Route::prefix('soap')->name('soap.')->group(function(){
         
     });
 
-      Route::prefix('cmovil')->name('cmovil.')->group(function () {
-      Route::view('/', 'samu.cmovil.index')->name('index');
-      Route::view('/create', 'samu.cmovil.create')->name('create');
-      Route::view('/edit', 'samu.cmovil.edit')->name('edit');
+      Route::prefix('codemobile')->name('codemobile.')->group(function () {
+      
+      Route::get('/',[App\Http\Controllers\Samu\CodeMobileController::class, 'index'])->name('index');
+      Route::get('/create',[App\Http\Controllers\Samu\CodeMobileController::class, 'create'])->name('create');
+      Route::post('/store',[App\Http\Controllers\Samu\CodeMobileController::class, 'store'])->name('store');
+      // Route::get('/edit/{codeMobile}',[App\Http\Controllers\Samu\CodeMobileController::class, 'edit'])->name('edit');
     });
 
    
