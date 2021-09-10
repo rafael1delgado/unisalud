@@ -454,10 +454,14 @@ Route::prefix('soap')->name('soap.')->group(function(){
       Route::view('/edit', 'samu.rc.edit')->name('edit');
     });
 
-      Route::prefix('cclave')->name('cclave.')->group(function () {
-      Route::view('/', 'samu.cclave.index')->name('index');
-      Route::view('/create', 'samu.cclave.create')->name('create');
-      Route::view('/edit', 'samu.cclave.edit')->name('edit');
+      Route::prefix('codekey')->name('codekey.')->group(function () {
+        Route::get('/' , [App\Http\Controllers\Samu\CodeKeyController::class, 'index'])->name('index');
+        Route::get('/create' , [App\Http\Controllers\Samu\CodeKeyController::class, 'create'])->name('create');
+        Route::post('/store', [App\Http\Controllers\Samu\CodeKeyController::class, 'store'])->name('store');
+        Route::put('/update/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'update'])->name('update');
+        Route::get('/edit/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'edit'])->name('edit');
+        Route::delete('/{codeKey}', [App\Http\Controllers\Samu\CodeKeyController::class, 'destroy'])->name('destroy');
+        
     });
 
       Route::prefix('cmovil')->name('cmovil.')->group(function () {
@@ -488,6 +492,13 @@ Route::prefix('soap')->name('soap.')->group(function(){
 
   });
 
+  
+  Route::prefix('samuu')->name('samuu.')->group(function(){
+    
+    Route::get('/qtc' , [App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
+    Route::get('/qtckey' , [App\Http\Controllers\Samu\QtcKeyController::class, 'index'])->name('index');
+  });
+      
   //fin rutas samu
 
   // Route::resource('absences', AbsenceController::class)->only([

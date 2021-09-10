@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SamuCodeKeys extends Migration
+class CreateSamuCodeKeysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,13 @@ class SamuCodeKeys extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('samu_code_keys', function (Blueprint $table) {
+            $table->id();
+            $table->string('key_code')->unique();
+            $table->string('name_key_code');
+            $table->timestamps();
+            
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class SamuCodeKeys extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('samu_code_keys');
     }
 }
