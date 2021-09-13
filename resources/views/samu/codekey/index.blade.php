@@ -20,48 +20,56 @@
         </form>
     </div>
     <div class="col-12 col-md-2">
-        <a class="btn btn-success" href="{{ route('samu.cclave.create') }}">
+        <a class="btn btn-success" href="{{ route('samu.codekey.create') }}">
             <i class="fas fa-plus"></i> Agregar
         </a>
     </div>
 </div>
+
 <div class="table-responsive">
     <table class="table table-sm table-bordered table-striped small">
         <thead>
             <tr class="text-center table-info">
                 <th>Codigo</th>
                 <th>Nombre</th>
+                <th>Editar</th>
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
+            @foreach($codekeys as $codekey)
             <tr>
-                <td>Mhyhhhz</td>
-                <td>Nombre 1</td>
-                <td><a href="{{ route('samu.cclave.edit') }}">Editar</a> </td>
+                <td>{{ $codekey->key_code }}</td>
+                <td>{{ $codekey->name_key_code }}</td>
+                <td><a href="{{ route('samu.codekey.edit', $codekey) }}">Editar</a> </td>
+              
+                        <td class="text-center" >
+                        <form method="POST" action="{{ route('samu.codekey.destroy' , $codekey) }}">
+                        @csrf
+      			        @method('DELETE')
+                          <!--  <i class="fas fa-trash-alt fa-lg" type="submit" onclick="return confirm('¿Está seguro de eliminar la información?');"></i>
+-->                         <button type="submit" class="btn btn-default"> <i class="fas fa-trash-alt fa-lg"></i> </button>
+                      </form>
+
+                        </td>
+
             </tr>
-            <tr>
-                <td>Mnnnmmmmm</td>
-                <td>Nombre 2</td>
-                <td><a href="{{ route('samu.cclave.edit') }}">Editar</a> </td>
-            </tr>
-            <tr>
-                <td>NBBBBBJH</td>
-                <td>Nombre 3</td>
-                <td><a href="{{ route('samu.cclave.edit') }}">Editar</a> </td>
-            </tr>
-            <tr>
-                <td>NJJJHJz</td>
-                <td>Nombre 4</td>
-                <td><a href="{{ route('samu.cclave.edit') }}">Editar</a> </td>
-            </tr>
-            <tr>
-                <td>QAWSEDDD</td>
-                <td>Nombre 5</td>
-                <td><a href="{{ route('samu.cclave.edit') }}">Editar</a> </td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
 
+@endsection
+
+
+@section('custom_js')
+<script>
+
+$("document").ready(function(){
+    setTimeout(function(){
+       $("div.alert").remove();
+    }, 3000 ); // 3 secs
+
+});
+</script>
 @endsection

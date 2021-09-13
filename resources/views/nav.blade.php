@@ -24,13 +24,13 @@
     <li class="nav-item">
         <a class="nav-link
         @if(request()->route()->view == 'pacientes') active @endif"
-        href=" {{ route('samu.cclave.index') }}">Codificación de las Claves</a>
+        href=" {{ route('samu.codekey.index') }}">Codificación de las Claves</a>
     </li>
     
     <li class="nav-item">
         <a class="nav-link
         @if(request()->route()->view == 'pacientes') active @endif"
-        href=" {{ route('samu.cmovil.index') }}">Codificación de Movil</a>
+        href=" {{ route('samu.codemobile.index') }}">Codificación de Movil</a>
     </li>
 
 </ul>

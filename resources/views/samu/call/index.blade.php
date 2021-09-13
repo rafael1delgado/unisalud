@@ -107,7 +107,6 @@
                                 <tr class="text-center table-success">
                                     <th>Número</th>
                                     <th>Tipo</th>
-                                    <th>Estado</th>
                                     <th>Detalle</th>
                                     <th></th>
                                 </tr>
@@ -116,42 +115,36 @@
                                 <tr>
                                     <td>2</td>
                                     <td>Movil 2</td>
-                                    <td>Activo</td>
                                     <td></td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>14</td>
                                     <td>Movil 5</td>
-                                    <td>Activo</td>
                                     <td></td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>Movil 12</td>
-                                    <td>Activo</td>
                                     <td></td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
-                                <tr>
+                                <tr class="bg-danger text-white">
                                     <td>44</td>
                                     <td>Movil 6</td>
-                                    <td>Activo</td>
                                     <td></td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>10</td>
                                     <td>Movil 4 </td>
-                                    <td>Activo</td>
                                     <td></td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
-                                <tr>
+                                <tr class="bg-danger text-white">
                                     <td>5</td>
                                     <td>Movil 11</td>
-                                    <td>Inactivo</td>
                                     <td>Movil con falla de correa</td>
                                     <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
                                 </tr>
@@ -330,10 +323,12 @@
                         </div>
                     </form>
                 </div>
-            
-
-                <hr>
+                <fieldset class="form-group col-md-9">
+                    <label for="for_run"><br /> <br /><br /></label>
+                    <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
+                </fieldset>
             </div>
+            <hr>
             <div class="table-responsive col-md-12">
                     <table class="table table-sm table-bordered table-striped small">
                         <thead>

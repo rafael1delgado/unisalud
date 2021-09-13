@@ -35,31 +35,31 @@
                 @if($absences)
                     @forelse($absences as $absence)
                     <tr>
-                        <td>{{($absence && $absence->user) ? $absence->user->identifierRun->value : ''}}</td>
-                        <td>{{($absence && $absence->user) ? $absence->user->identifierRun->dv : ''}}</td>
-                        <td>{{($absence && $absence->user) ? $absence->user->officialFullName : '' }}</td>
-                        <td>{{($absence && $absence->contract) ? $absence->contract->law : '' }}</td>
-                        <td>{{($absence && $absence->user) ? \Carbon\Carbon::parse($absence->user->birthday)->diff($absence->updated_at)->format('%y') .' años' : ''}}</td>
-                        <td>{{($absence && $absence->user) ? \Carbon\Carbon::parse($absence->user->birthday)->diff($absence->updated_at)->format('%m') : ''}}
-                        <td>{{($absence) ? $absence->social_insurance : '' }}</td>
-                        <td>{{($absence) ? $absence->health_insurance : '' }}</td>
-                        <td>{{($absence && $absence->contract) ? $absence->contract->service->service_cod : ''}}</td>
-                        <td>{{($absence && $absence->contract) ? $absence->contract->service->service_name : ''}}</td>
-                        <td>{{($absence && $absence->user) ? $absence->user->sex : ''}}</td>
-                        <td>{{($absence && $absence->practitioner) ? $absence->practitioner->job_title : ''}}</td>
-                        <td>{{($absence) ? $absence->legal_quality : ''}}</td>
-                        <td>{{($absence) ? $absence->staff : ''}}</td>
-                        <td>{{($absence) ? $absence->res_number : ''}}</td>
-                        <td>{{($absence->res_date) ? $absence->res_date->format('d-m-Y') : ''}}</td>
-                        <td>{{($absence->start_date) ? $absence->start_date->format('d-m-Y') : ''}}</td>
-                        <td>{{($absence->end_date) ? $absence->end_date->format('d-m-Y') : ''}}</td>
-                        <td>{{($absence) ? $absence->total_days : ''}}</td>
-                        <td>{{($absence) ? $absence->period_days : ''}}</td>
-                        <td>{{($absence) ? $absence->license_cost : ''}}</td>
-                        <td>{{($absence) ? $absence->type : ''}}</td>
-                        <td>{{($absence && $absence->practitioner) ? $absence->practitioner->organization->sirh_code : ''}}</td>
-                        <td>{{($absence && $absence->practitioner) ? $absence->practitioner->organization->name : ''}}</td>
-                        <td>{{($absence) ? $absence->balance_days_not_replaced : ''}}</td>
+                        <td>{{$absence->user ? $absence->user->identifierRun->value : ''}}</td>
+                        <td>{{$absence->user ? $absence->user->identifierRun->dv : ''}}</td>
+                        <td>{{$absence->user ? $absence->user->officialFullName : '' }}</td>
+                        <td>{{$absence->contract ? $absence->contract->law : '' }}</td>
+                        <td>{{$absence->user ? \Carbon\Carbon::parse($absence->user->birthday)->diff($absence->updated_at)->format('%y') .' años' : ''}}</td>
+                        <td>{{$absence->user ? \Carbon\Carbon::parse($absence->user->birthday)->diff($absence->updated_at)->format('%m') : ''}}
+                        <td>{{$absence->social_insurance ?? '' }}</td>
+                        <td>{{$absence->health_insurance ?? '' }}</td>
+                        <td>{{$absence->contract && $absence->contract->service ? $absence->contract->service->service_cod : ''}}</td>
+                        <td>{{$absence->contract && $absence->contract->service ? $absence->contract->service->service_name : ''}}</td>
+                        <td>{{$absence->user  ? $absence->user->sex : ''}}</td>
+                        <td>{{$absence->practitioner  ? $absence->practitioner->job_title : ''}}</td>
+                        <td>{{$absence->legal_quality ?? ''}}</td>
+                        <td>{{$absence->staff ?? ''}}</td>
+                        <td>{{$absence->res_number ?? ''}}</td>
+                        <td>{{$absence->res_date ? $absence->res_date->format('d-m-Y') : ''}}</td>
+                        <td>{{$absence->start_date ? $absence->start_date->format('d-m-Y') : ''}}</td>
+                        <td>{{$absence->end_date ? $absence->end_date->format('d-m-Y') : ''}}</td>
+                        <td>{{$absence->total_days ?? ''}}</td>
+                        <td>{{$absence->period_days ?? ''}}</td>
+                        <td>{{$absence->license_cost ?? ''}}</td>
+                        <td>{{$absence->type ?? ''}}</td>
+                        <td>{{$absence->practitioner && $absence->practitioner->organization ? $absence->practitioner->organization->sirh_code : ''}}</td>
+                        <td>{{$absence->practitioner && $absence->practitioner->organization ? $absence->practitioner->organization->name : ''}}</td>
+                        <td>{{$absence->balance_days_not_replaced ?? ''}}</td>
                         <td>Titulares y Contratados</td>
                         <td><form method="POST" action="{{ route('absences.destroy', $absence) }}" class="d-inline">
 			            @csrf

@@ -8,25 +8,12 @@
 
 <h3 class="mb-3">Registrar nueva ausencia laboral</h3>
 
-{{--<form method="POST" class="form-horizontal" action="{{ route('absences.import') }}" enctype="multipart/form-data">
-    @csrf
-    @method('POST')
-    <div class="input-group">
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" name="file" accept=".xlsx, .xls, .csv" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-            <label class="custom-file-label" for="inputGroupFile04">Elegir archivo excel</label>
-        </div>
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Importar</button>
-        </div>
-    </div>
-</form>--}}
-
 <form method="POST" class="form-horizontal" action="{{ route('absences.store') }}">
     @csrf
     @method('POST')
 
     @livewire('absence.asign-user-inputs-form')
+
     <hr>
     <div class="row">
         <fieldset class="form-group col-md-4">

@@ -280,14 +280,20 @@
     <ul class="nav flex-column">
         <li class="nav-item">
             <a class="nav-link {{ active('absences.index') }}" href="{{ route('absences.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Listar ausentismos<span class="sr-only">(en desarrollo)</span>
+            <span data-feather="chevrons-right"></span>
+            Listar ausentismos<span class="sr-only"></span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ active('absences.create') }}" href="{{ route('absences.create') }}">
-                <span data-feather="chevrons-right"></span>
-                Registrar nueva ausencia<span class="sr-only">(en desarrollo)</span>
+            <span data-feather="chevrons-right"></span>
+            Registrar nueva ausencia<span class="sr-only"></span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ active('absences.load') }}" href="{{ route('absences.load') }}">
+            <span data-feather="chevrons-right"></span>
+            Importar ausencias<span class="sr-only"></span>
             </a>
         </li>
     </ul>
