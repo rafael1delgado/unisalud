@@ -125,7 +125,6 @@ Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/reallocate', Reallocate::class)->name('reallocate');
     // Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::get('/interconsultation', Interconsultation::class)->name('interconsultation');
-    //pollito
     
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
     Route::get('/reallocation_pending', ReallocationPending::class)->name('reallocationPending');
