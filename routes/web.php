@@ -126,7 +126,7 @@ Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/reallocate', Reallocate::class)->name('reallocate');
     // Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::get('/interconsultation', Interconsultation::class)->name('interconsultation');
-    
+
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
     Route::get('/reallocation_pending', ReallocationPending::class)->name('reallocationPending');
     Route::post('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
@@ -175,7 +175,7 @@ Route::prefix('fq')->as('fq.')->group(function(){
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
         Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')
             ->middleware(['permission:Fq: answer request dispensing|Fq: admin']);
-        Route::get('/view_file/{fqRequest}', [FqRequestController::class, 'view_file'])->name('view_file');
+        Route::get('/view_file/{requestFile}', [FqRequestController::class, 'view_file'])->name('view_file');
     });
 });
 
@@ -461,18 +461,18 @@ Route::prefix('soap')->name('soap.')->group(function(){
         Route::put('/update/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'update'])->name('update');
         Route::get('/edit/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'edit'])->name('edit');
         Route::delete('/{codeKey}', [App\Http\Controllers\Samu\CodeKeyController::class, 'destroy'])->name('destroy');
-        
+
     });
 
       Route::prefix('codemobile')->name('codemobile.')->group(function () {
-      
+
       Route::get('/',[App\Http\Controllers\Samu\CodeMobileController::class, 'index'])->name('index');
       Route::get('/create',[App\Http\Controllers\Samu\CodeMobileController::class, 'create'])->name('create');
       Route::post('/store',[App\Http\Controllers\Samu\CodeMobileController::class, 'store'])->name('store');
       // Route::get('/edit/{codeMobile}',[App\Http\Controllers\Samu\CodeMobileController::class, 'edit'])->name('edit');
     });
 
-   
+
     Route::prefix('call')->name('call.')->group(function () {
       Route::view('/', 'samu.call.index')->name('index');
       Route::view('/edit', 'samu.call.edit')->name('edit');
@@ -494,13 +494,13 @@ Route::prefix('soap')->name('soap.')->group(function(){
 
   });
 
-  
+
   Route::prefix('samuu')->name('samuu.')->group(function(){
-    
+
     Route::get('/qtc' , [App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
     Route::get('/qtckey' , [App\Http\Controllers\Samu\QtcKeyController::class, 'index'])->name('index');
   });
-      
+
   //fin rutas samu
 
   // Route::resource('absences', AbsenceController::class)->only([
@@ -517,7 +517,7 @@ Route::prefix('soap')->name('soap.')->group(function(){
   });
 
 
-    //Rutas Epi 
+    //Rutas Epi
 
     Route::prefix('epi')->name('epi.')->group(function () {
       Route::prefix('chagas')->name('chagas.')->group(function () {
@@ -525,8 +525,8 @@ Route::prefix('soap')->name('soap.')->group(function(){
         Route::view('/create', 'epi.chagas.create')->name('create');
         Route::view('/edit', 'epi.chagas.edit')->name('edit');
       });
-  
+
     });
-  
-  
+
+
     //fin rutas EPI

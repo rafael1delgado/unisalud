@@ -145,10 +145,11 @@
                         <option value="specialty hours">Horas de especialidad</option>
                         <option value="dispensing">Dispensación de receta</option>
                         <option value="home hospitalization">Contacto con hospitalización domiciliaria</option>
+                        <option value="exam request">Solicitud de exámenes</option>
                     </select>
                 </fieldset>
 
-                <fieldset class="form-group col-sm-4">
+                <fieldset class="form-group col-sm-3">
                     <label for="for_specialties">Especialidad</label>
                     <select name="specialties" id="for_specialties" class="form-control" required>
                         <option value="">Seleccione...</option>
@@ -160,7 +161,7 @@
                     </select>
                 </fieldset>
 
-                <fieldset class="form-group col-sm-4">
+                <fieldset class="form-group col-sm-2">
                     <label for="for_other_specialty">Especialidad</label>
                     <select name="other_specialty" id="for_other_specialty" class="form-control" required>
                         <option value="">Seleccione...</option>
@@ -169,20 +170,20 @@
                         <option value="enfermería">Enfermería</option>
                     </select>
                 </fieldset>
-            </div>
 
-            <div class="form-row" id="farm">
-                <fieldset class="form-group col-sm-4">
+                <fieldset class="form-group col-sm-3">
                     <div class="mb-3">
-                      <label for="for_prescription_file" class="form-label">Receta</label>
-                      <input class="form-control" type="file" name="prescription_file" id="for_prescription_file">
+                      <label for="for_file" class="form-label">Adjuntar documentos</label>
+                      <input class="form-control" type="file" name="file[]" multiple id="for_file">
                     </div>
                 </fieldset>
+            </div>
 
+            <div class="form-row" id="medicines">
                 <fieldset class="form-group col-sm-4">
                     <div class="mb-3">
                       <label for="for_medicines" class="form-label">Farmacos</label>
-                      <select name="medicines[]" id="for_medicines" class="form-control selectpicker" multiple>
+                      <select name="medicines[]" class="form-control selectpicker" multiple>
                           <option value="">Seleccione...</option>
                           @foreach($ext_medicines as $ext_medicine)
                             <option value="{{ $ext_medicine->id }}">{{ $ext_medicine->name }}</option>
@@ -215,37 +216,57 @@
 <script type="text/javascript">
     $('#for_specialties').attr("disabled", true);
     $('#for_other_specialty').attr("disabled", true);
-    $('#for_prescription_file').attr("disabled", true);
-    $('#farm').hide();
+    $('#for_file').attr("disabled", true);
+    $('#medicines').hide();
 
     jQuery('select[name=name]').change(function(){
         var fieldsetName = $(this).val();
         switch(this.value){
             case "specialty hours":
                 $('#for_specialties').attr("disabled", false);
-                $('#for_prescription_file').attr("disabled", true);
-                document.getElementById('for_prescription_file').value = '';
-                $('#farm').hide();
+                $('#medicines').hide();
+                $('#for_file').attr("disabled", true);
+                document.getElementById('for_file').value = '';
+
                 break;
 
             case "dispensing":
-                $('#for_prescription_file').attr("disabled", false);
-                $('#farm').show();
+                $('#for_file').attr("disabled", false);
+                $('#medicines').show();
                 $('#for_specialties').attr("disabled", true);
-                document.getElementById('for_specialties').value = '';
                 $('#for_other_specialty').attr("disabled", true);
+                document.getElementById('for_specialties').value = '';
                 document.getElementById('for_other_specialty').value = '';
+                break;
+
+            case "home hospitalization":
+                $('#for_file').attr("disabled", true);
+                $('#medicines').hide();
+                $('#for_specialties').attr("disabled", true);
+                $('#for_other_specialty').attr("disabled", true);
+                document.getElementById('for_specialties').value = '';
+                document.getElementById('for_other_specialty').value = '';
+                document.getElementById('for_file').value = '';
+                break;
+
+            case "exam request":
+                $('#for_file').attr("disabled", false);
+                $('#medicines').hide();
+                $('#for_specialties').attr("disabled", true);
+                $('#for_other_specialty').attr("disabled", true);
+                document.getElementById('for_specialties').value = '';
+                document.getElementById('for_other_specialty').value = '';
+                document.getElementById('for_file').value = '';
                 break;
 
             default:
                 $('#for_specialties').attr("disabled", true);
-                document.getElementById('for_specialties').value = '';
                 $('#for_other_specialty').attr("disabled", true);
+                $('#for_file').attr("disabled", true);
+                $('#medicines').hide();
+                document.getElementById('for_specialties').value = '';
                 document.getElementById('for_other_specialty').value = '';
-                $('#for_prescription_file').attr("disabled", true);
                 document.getElementById('for_prescription_file').value = '';
-                $('#farm').hide();
-
                 break;
         }
     });

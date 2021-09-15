@@ -60,6 +60,17 @@
 
         <div class="card">
             <div class="card-body">
+                <h6><i class="fas fa-paperclip"></i> Archivos adjuntos</h6>
+                @foreach($fqRequest->requestFiles as $key => $requestFile)
+                    <i class="far fa-file"></i> <a href="{{ route('fq.request.view_file', $requestFile) }}" target="_blank">{{ $key + 1 }} - Revisa aquí el archivo</a><br>
+                @endforeach
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <div class="card-body">
                 <h6><i class="fas fa-user"></i> Paciente</h6>
                 <div class="table-responsive">
                     <table class="table table-sm table-hover table-bordered table-nostriped">
