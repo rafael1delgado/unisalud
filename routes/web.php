@@ -382,6 +382,7 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::get('urgency', [OperatingRoomController::class, 'reportUrgency'])->name('urgency');
     Route::get('reportminsal', [ReportController::class, 'export'])->name('reportminsal');
     Route::get('reportcut', [ReportController::class, 'exportcut'])->name('reportcut');
+    Route::get('pendingPractitionersReport', [ReportController::class, 'pendingPractitionersReport'])->name('pendingPractitionersReport');
   });
 
   Route::prefix('programming_proposal')->name('programming_proposal.')->group(function(){
