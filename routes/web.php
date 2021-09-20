@@ -112,7 +112,7 @@ Route::prefix('user')->name('user.')->middleware('auth')->group(function(){
 });
 Route::prefix('patient')->name('patient.')->middleware('auth')->group(function(){
     Route::get('/', [PatientController::class, 'index'])->name('index');
-    Route::post('/store/{save?}', [PatientController::class, 'store'])->name('store');
+    Route::post('/', [PatientController::class, 'store'])->name('store');
     Route::get('/create', [PatientController::class, 'create'])->name('create');
     Route::get('/{patient}', [PatientController::class, 'show'])->name('show');
     Route::post('/{patient}', [PatientController::class, 'update'])->name('update');

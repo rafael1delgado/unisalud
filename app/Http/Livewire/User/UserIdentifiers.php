@@ -36,6 +36,18 @@ class UserIdentifiers extends Component
                 $this->identifiers[$key]['created_at'] = $this->patient->identifiers->slice($key, 1)->first()->created_at;
             }
         }
+
+        if(request()->session()->has('request_match')){
+            $match_identifiers = request()->session()->get('request_match');
+            for($i = 0; $i < count($match_identifiers['identifier_id']); $i++)
+                $this->identifiers[++$this->i] = [
+                    'id' => $match_identifiers['identifier_id'][$i],
+                    'use' => $match_identifiers['id_use'][$i],
+                    'id_type' => $match_identifiers['id_type'][$i],
+                    'value' => $match_identifiers['id_value'][$i],
+                    'dv' => $match_identifiers['id_dv'][$i]
+                ];
+        }
     }
 
     public function add()

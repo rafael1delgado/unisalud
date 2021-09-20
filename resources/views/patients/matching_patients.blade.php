@@ -38,30 +38,15 @@
             </td>
             <td>{{ $patient->birthday ?? ''}}</td>
             <td>{{ $patient->gender ?? ''}}</td>
-            <td><button type="button" class="btn btn-primary" title='Utilizar datos ingresados para editar' > <i class="fas fa-edit"></i></button></td>
+            <td><a href="{{ route('patient.edit', $patient->id)}}" class="btn btn-primary" title='Utilizar datos ingresados para editar' > <i class="fas fa-edit"></i></a></td>
         </tr>
         @endforeach
     </tbody>
 </table>
-
-@php
-    $save = true;
-@endphp
     
-<form method="POST" class="form-horizontal" action="{{ route('patient.store', $save) }}" enctype="multipart/form-data">
+<form method="POST" class="form-horizontal" action="{{ route('patient.store') }}" enctype="multipart/form-data">
     @csrf
     @method('POST')
-
-    @foreach ($request->all() as $key => $value)
-        @if (is_array($value))
-            @foreach($value as $v)
-                <input type="hidden" name="{{ $key }}[]" value="{{ $v }}">
-            @endforeach
-        @else
-            <input type="hidden" name="{{ $key }}" value='{{ $value }}'>
-        @endif
-    @endforeach
-
     <button class="btn btn-primary" type ="submit"> <i class="fas fa-save"></i> Guardar de todas formas</button>
 </form>
 
