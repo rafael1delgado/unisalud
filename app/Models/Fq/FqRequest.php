@@ -33,6 +33,10 @@ class FqRequest extends Model
         return $this->HasMany('\App\Models\Fq\FqMedicine', 'request_id');
     }
 
+    public function requestFiles() {
+        return $this->HasMany('\App\Models\Fq\RequestFile', 'request_id');
+    }
+
     public function practitioner()
     {
         return $this->belongsTo('\App\Models\Practitioner', 'practitioner_id');
@@ -46,11 +50,11 @@ class FqRequest extends Model
             case 'dispensing':
               return 'Dispensación de receta';
               break;
-            case 'exam order':
-              return 'Orden de exámenes';
-              break;
             case 'home hospitalization':
               return 'Contacto con hospitalización domiciliaria';
+              break;
+            case 'exam request':
+              return 'Solicitud de exámenes';
               break;
             default:
               return '';

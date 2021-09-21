@@ -46,8 +46,15 @@ use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalSignatureFlowContr
 use App\Http\Controllers\MedicalLicenceController;
 use App\Http\Livewire\Some\AsignAppointment;
 use App\Http\Livewire\Some\Reallocate;
+use App\Http\Livewire\Some\Interconsultation;
 use App\Http\Livewire\Some\ReallocationPending;
+use App\Http\Livewire\Some\AppointedAvailable;
+use App\Http\Livewire\Some\OpenPending;
 use App\Models\Some\Appointment;
+use App\Http\Controllers\AbsenceController;
+
+use App\Http\Controllers\RayenWs\SoapController;
+use Spatie\Permission\Contracts\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,7 +112,7 @@ Route::prefix('user')->name('user.')->middleware('auth')->group(function(){
 });
 Route::prefix('patient')->name('patient.')->middleware('auth')->group(function(){
     Route::get('/', [PatientController::class, 'index'])->name('index');
-    Route::post('/store/{save?}', [PatientController::class, 'store'])->name('store');
+    Route::post('/', [PatientController::class, 'store'])->name('store');
     Route::get('/create', [PatientController::class, 'create'])->name('create');
     Route::get('/{patient}', [PatientController::class, 'show'])->name('show');
     Route::post('/{patient}', [PatientController::class, 'update'])->name('update');
@@ -118,11 +125,16 @@ Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/appointment/{appointmentId?}', AsignAppointment::class)->name('appointment');
     Route::get('/reallocate', Reallocate::class)->name('reallocate');
     // Route::view('/agenda', 'some.agenda')->name('agenda');
+    Route::get('/interconsultation', Interconsultation::class)->name('interconsultation');
+
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
     Route::get('/reallocation_pending', ReallocationPending::class)->name('reallocationPending');
     Route::post('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
     Route::match(['get', 'post'],'/open_tprogrammer', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
     Route::get('appointment_detail/{id}', [AppointmentController::class, 'appointment_detail'])->name('appointment_detail');
+    Route::get('/appointed_available', AppointedAvailable::class)->name('appointedAvailable');
+    Route::get('/open_pending', OpenPending::class)->name('openPending');
+
 
     Route::prefix('locations')->name('locations.')->group(function(){
       Route::get('/', [LocationController::class, 'index'])->name('index');
@@ -163,7 +175,7 @@ Route::prefix('fq')->as('fq.')->group(function(){
         Route::post('/store/{contactUser}', [FqRequestController::class, 'store'])->name('store');
         Route::put('/{fqRequest}', [FqRequestController::class, 'update'])->name('update')
             ->middleware(['permission:Fq: answer request dispensing|Fq: admin']);
-        Route::get('/view_file/{fqRequest}', [FqRequestController::class, 'view_file'])->name('view_file');
+        Route::get('/view_file/{requestFile}', [FqRequestController::class, 'view_file'])->name('view_file');
     });
 });
 
@@ -370,6 +382,7 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
     Route::get('urgency', [OperatingRoomController::class, 'reportUrgency'])->name('urgency');
     Route::get('reportminsal', [ReportController::class, 'export'])->name('reportminsal');
     Route::get('reportcut', [ReportController::class, 'exportcut'])->name('reportcut');
+    Route::get('pendingPractitionersReport', [ReportController::class, 'pendingPractitionersReport'])->name('pendingPractitionersReport');
   });
 
   Route::prefix('programming_proposal')->name('programming_proposal.')->group(function(){
@@ -398,13 +411,13 @@ Route::prefix('medical_programmer')->name('medical_programmer.')->middleware('au
 
 });
 
-//Route::prefix('dummy')->name('dummy.')->group(function(){
+// Route::prefix('dummy')->name('dummy.')->group(function(){
 //    Route::view('/some', 'some')->name('some');
 //    Route::view('/crear_usuario', 'crear_usuario')->name('crear_usuario');
 //    Route::view('/traspaso_bloqueos', 'traspaso_bloqueos')->name('traspaso');
 //    Route::view('/agenda', 'agenda')->name('agenda');
 //    Route::view('/lista-espera', 'lista_espera')->name('lista_espera');
-//});
+// });
 
 Route::prefix('test')->name('test.')->group(function(){
     Route::view('/livesearch', 'test.livesearch')->name('livesearch');
@@ -418,8 +431,9 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
     Route::post('/{user}',[MedicalLicenceController::class,'store'])->name('store');
 });
 
-
-
+Route::prefix('soap')->name('soap.')->group(function(){
+    Route::any('rayen', [SoapController::class, 'server'])->name('rayen');
+});
 
 //rutas samu
   Route::prefix('samu')->name('samu.')->group(function () {
@@ -441,22 +455,87 @@ Route::prefix('medical-licence')->name('medical_licence.')->group(function(){
       Route::view('/edit', 'samu.rc.edit')->name('edit');
     });
 
-      Route::prefix('cclave')->name('cclave.')->group(function () {
-      Route::view('/', 'samu.cclave.index')->name('index');
-      Route::view('/create', 'samu.cclave.create')->name('create');
-      Route::view('/edit', 'samu.cclave.edit')->name('edit');
+      Route::prefix('codekey')->name('codekey.')->group(function () {
+        Route::get('/' , [App\Http\Controllers\Samu\CodeKeyController::class, 'index'])->name('index');
+        Route::get('/create' , [App\Http\Controllers\Samu\CodeKeyController::class, 'create'])->name('create');
+        Route::post('/store', [App\Http\Controllers\Samu\CodeKeyController::class, 'store'])->name('store');
+        Route::put('/update/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'update'])->name('update');
+        Route::get('/edit/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'edit'])->name('edit');
+        Route::delete('/{codeKey}', [App\Http\Controllers\Samu\CodeKeyController::class, 'destroy'])->name('destroy');
+
     });
 
-      Route::prefix('cmovil')->name('cmovil.')->group(function () {
-      Route::view('/', 'samu.cmovil.index')->name('index');
-      Route::view('/create', 'samu.cmovil.create')->name('create');
-      Route::view('/edit', 'samu.cmovil.edit')->name('edit');
+      Route::prefix('codemobile')->name('codemobile.')->group(function () {
+
+      Route::get('/',[App\Http\Controllers\Samu\CodeMobileController::class, 'index'])->name('index');
+      Route::get('/create',[App\Http\Controllers\Samu\CodeMobileController::class, 'create'])->name('create');
+      Route::post('/store',[App\Http\Controllers\Samu\CodeMobileController::class, 'store'])->name('store');
+      // Route::get('/edit/{codeMobile}',[App\Http\Controllers\Samu\CodeMobileController::class, 'edit'])->name('edit');
     });
 
-    Route::prefix('callcenter')->name('callcenter.')->group(function () {
-      Route::view('/', 'samu.callcenter')->name('index');
+   
+    Route::prefix('qtc')->name('qtc.')->group(function () {
+      Route::get('/',[App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
+      Route::get('/edit/{qtc}',[App\Http\Controllers\Samu\QtcController::class, 'edit'])->name('edit');
+      Route::post('/store',[App\Http\Controllers\Samu\QtcController::class, 'store'])->name('store');
+      Route::view('/otedit', 'samu.call.otedit')->name('otedit');
+      Route::view('/tedit', 'samu.call.tedit')->name('tedit');
+    });
+
+    Route::prefix('follow')->name('follow.')->group(function () {
+      Route::get('/',[App\Http\Controllers\Samu\FollowController::class, 'index'])->name('index');
+      Route::get('/create' , [App\Http\Controllers\Samu\FollowController::class, 'create'])->name('create');
+      Route::get('/edit',[App\Http\Controllers\Samu\FollowController::class, 'edit'])->name('edit');
+      Route::post('/store', [App\Http\Controllers\Samu\FollowController::class, 'store'])->name('store');
+    });
+
+    Route::prefix('shift')->name('shift.')->group(function () {
+      Route::view('/', 'samu.shift.index')->name('index');
+      Route::view('/edit', 'samu.shift.edit')->name('edit');
+      Route::view('/edit', 'samu.shift.create')->name('edit');
+    });
+
+    Route::prefix('novelties')->name('novelties.')->group(function () {
+      Route::view('/', 'samu.novelties.index')->name('index');
+      Route::view('/edit', 'samu.novelties.edit')->name('edit');
+      //Route::view('/edit', 'samu.novelties.create')->name('edit');
     });
 
   });
 
+
+  Route::prefix('samuu')->name('samuu.')->group(function(){
+
+    Route::get('/qtc' , [App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
+    Route::get('/qtckey' , [App\Http\Controllers\Samu\QtcKeyController::class, 'index'])->name('index');
+  });
+
   //fin rutas samu
+
+  // Route::resource('absences', AbsenceController::class)->only([
+  //   'create', 'store'
+  // ]);
+
+  Route::prefix('absences')->name('absences.')->group(function () {
+    Route::get('/', [AbsenceController::class, 'index'])->name('index');
+    Route::get('/create', [AbsenceController::class, 'create'])->name('create');
+    Route::post('/', [AbsenceController::class, 'store'])->name('store');
+    Route::get('/load', [AbsenceController::class, 'load'])->name('load');
+    Route::post('/import', [AbsenceController::class, 'import'])->name('import');
+    Route::delete('/{absence}', [AbsenceController::class, 'destroy'])->name('destroy');
+  });
+
+
+    //Rutas Epi
+
+    Route::prefix('epi')->name('epi.')->group(function () {
+      Route::prefix('chagas')->name('chagas.')->group(function () {
+        Route::view('/', 'epi.chagas.index')->name('index');
+        Route::view('/create', 'epi.chagas.create')->name('create');
+        Route::view('/edit', 'epi.chagas.edit')->name('edit');
+      });
+
+    });
+
+
+    //fin rutas EPI

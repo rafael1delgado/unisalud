@@ -25,6 +25,11 @@ class Organization extends Model
     {
         return $this->hasMany(Address::class, 'organization_id');
     }
+
+    public function practitioners()
+    {
+        return $this->hasMany(Practitioner::class, 'organization_id');
+    }
     
     //Addresses
     public function getOfficialFullAddressAttribute()

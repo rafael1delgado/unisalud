@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Some;
 use App\Http\Controllers\Controller;
 use App\Models\MedicalProgrammer\TheoreticalProgramming;
 use App\Models\Some\Appointment;
+use App\Models\Absence;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -54,6 +55,10 @@ class AppointmentController extends Controller
 
                                                   // dd($programmingProposals);
 
+        //se obtiene ausencias programadas
+        $absences = Absence::where('user_id',$request->user_id)->get();
+        // dd($absences);
+
         // obtiene todos los horarios para cita
         $programmed_days = [];
         $count = 0;
@@ -76,7 +81,7 @@ class AppointmentController extends Controller
 
               foreach ($programmingProposal->details->where('day',$dayOfWeek) as $key3 => $detail) {
                 //no se consideran los que no tengan performance
-                if ($detail->activity->performance != 0) {
+                if ($detail->activity->specialties->where('id',$request->specialty_id)->first()->pivot->performance != 0) {
 
                   $start = Carbon::parse($start_date->format('Y-m-d') . " " . $detail->start_hour);
                   // print_r($detail->appointments->where('start',$start)->count());
@@ -109,37 +114,66 @@ class AppointmentController extends Controller
         }
 
         // dd($programmed_days);
+        // dd($absences);
 
         // $appointments = new Collection();
         foreach ($programmed_days as $programmed_day) {
             $startDateTheoretical = Carbon::parse($programmed_day['start_date']);
             $endDateTheoretical = Carbon::parse($programmed_day['end_date']);
             $diffMinutesTheoretical = $endDateTheoretical->diffInMinutes($startDateTheoretical);
+            // dd($diffMinutesTheoretical);
 
             if ($programmed_day['data']->subactivity) {
                 $period = 60 / $programmed_day['data']->subactivity->performance;
             } else {
-                $period = 60 / $programmed_day['data']->activity->performance;
+                // $period = 60 / $programmed_day['data']->activity->performance;
+                $period = 60 / $programmed_day['data']->activity->specialties->where('id',$request->specialty_id)->first()->pivot->performance;
             }
             $qntAppointments = $diffMinutesTheoretical / $period;
+            // dd($qntAppointments);
 
             $lastDate = $startDateTheoretical->copy();
             for ($i = 0; $i < $qntAppointments; $i++) {
-                //se crea nueva cita
-                $newAppointment = new Appointment;
-                $newAppointment->start = $lastDate->copy();
-                $newAppointment->end = $lastDate->addMinutes($period);
-                $newAppointment->status = 'proposed';
-                // $newAppointment->mp_theoretical_programming_id = $theoreticalProgramming->id;
-                $newAppointment->mp_prog_prop_detail_id = $programmed_day['data']->id;
-                $newAppointment->created = now();
-                $newAppointment->cod_con_appointment_type_id = 4;
-                $newAppointment->save();
 
-                //asociar en tabla appointables
-                $user = User::find($request->user_id);
-                $practitioner = $user->practitioners()->where('organization_id',4)->where('specialty_id',$request->specialty_id)->first();
-                $newAppointment->practitioners()->save($practitioner, ['required' => 'required', 'status' => 'tentative']);
+                //si tiene ausencias, se realiza el ciclo
+                if ($absences->count() > 0) {
+                  foreach ($absences as $key => $absence) {
+                    // si no está entre ausencias, se ingresa
+                    if (!$lastDate->copy()->between($absence->start_date, $absence->end_date)) {
+                      //se crea nueva cita
+                      $newAppointment = new Appointment;
+                      $newAppointment->start = $lastDate->copy();
+                      $newAppointment->end = $lastDate->addMinutes($period);
+                      $newAppointment->status = 'proposed';
+                      $newAppointment->mp_prog_prop_detail_id = $programmed_day['data']->id;
+                      $newAppointment->created = now();
+                      $newAppointment->cod_con_appointment_type_id = 4;
+                      $newAppointment->save();
+
+                      //asociar en tabla appointables
+                      $user = User::find($request->user_id);
+                      $practitioner = $user->practitioners()->where('organization_id',4)->where('specialty_id',$request->specialty_id)->first();
+                      $newAppointment->practitioners()->save($practitioner, ['required' => 'required', 'status' => 'tentative']);
+                    }
+                  }
+                }
+                else{
+                  //se crea nueva cita
+                  $newAppointment = new Appointment;
+                  $newAppointment->start = $lastDate->copy();
+                  $newAppointment->end = $lastDate->addMinutes($period);
+                  $newAppointment->status = 'proposed';
+                  $newAppointment->mp_prog_prop_detail_id = $programmed_day['data']->id;
+                  $newAppointment->created = now();
+                  $newAppointment->cod_con_appointment_type_id = 4;
+                  $newAppointment->save();
+
+                  //asociar en tabla appointables
+                  $user = User::find($request->user_id);
+                  $practitioner = $user->practitioners()->where('organization_id',4)->where('specialty_id',$request->specialty_id)->first();
+                  $newAppointment->practitioners()->save($practitioner, ['required' => 'required', 'status' => 'tentative']);
+                }
+
             }
         }
 
@@ -171,6 +205,7 @@ class AppointmentController extends Controller
         $theoreticalProgrammings = null;
         $programmingProposals = null;
         $programmed_days = [];
+        $absences = Absence::where('id',0)->get();
 
         if ($request) {
             if ($request->user_id != null) {
@@ -191,6 +226,17 @@ class AppointmentController extends Controller
                                                           ->orderBy('request_date','ASC') //debe ir así, para que deje los primeros ingresados al principio, y aspi se puedan ordenar correctamente y no se pisen
                                                           ->get();
 
+                                                          // dd($programmingProposals);
+
+                $absences = Absence::where('user_id',$request->user_id)->get();
+
+                foreach ($absences as $key => $absence) {
+                  $absence->start = $absence->start_date->format('Y-m-d') . " 00:00:00";
+                  $absence->end = $absence->end_date->format('Y-m-d') . " 23:59:59";
+                  $absence->title = $absence->type;
+                  $absence->color = "#F5B7B1";
+                  $absence->editable = false;
+                }
 
                 // separa onthefly los días que se mostraran en fullcalendar
                 $programmed_days = [];
@@ -211,18 +257,28 @@ class AppointmentController extends Controller
                   while ($start_date <= $end_date) {
                     $dayOfWeek = $start_date->dayOfWeek;
                     foreach ($programmingProposal->details->where('day',$dayOfWeek) as $key2 => $detail) {
+
+                      // if ($detail->activity->performance != 0) {
                       //que tengan performance
-                      if ($detail->activity->performance != 0) {
+                      if ($detail->activity->specialties->where('id',$request->specialty_id)->first()->pivot->performance != 0) {
                         $programmed_days[$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
                         $programmed_days[$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
                         $programmed_days[$count]['data'] = $detail;
                         // verifia si está aperturado o no
                         $start = Carbon::parse($start_date->format('Y-m-d') . " " . $detail->start_hour);
                         if ($detail->appointments->where('start',$start)->count() > 0) {
-                          $programmed_days[$count]['color'] = "FF0000";
+                          $programmed_days[$count]['color'] = "58E995"; //aperturados
                         }else{
                           $programmed_days[$count]['color'] = "85C1E9";
                         }
+                        $count+=1;
+                      }
+                      else{
+                        //los que no tienen performance
+                        $programmed_days[$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
+                        $programmed_days[$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
+                        $programmed_days[$count]['data'] = $detail;
+                        $programmed_days[$count]['color'] = "EAEBAB";
                         $count+=1;
                       }
                     }
@@ -232,7 +288,7 @@ class AppointmentController extends Controller
             }
         }
 
-        return view('some.open_tprogrammer', compact('request', 'programmingProposals','programmed_days'));
+        return view('some.open_tprogrammer', compact('request', 'programmingProposals','programmed_days','absences'));
     }
 
     public function appointment_detail($id){

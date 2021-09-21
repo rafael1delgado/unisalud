@@ -9,7 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-soap": "*",
         "doctrine/dbal": "^3.1",
+        "econea/nusoap": "^0.9.11",
         "fideloper/proxy": "^4.4",
         "firebase/php-jwt": "^5.2",
         "fruitcake/laravel-cors": "^2.0",
@@ -18,15 +20,15 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "livewire/livewire": "^2.4",
+        "maatwebsite/excel": "^3.1",
         "owen-it/laravel-auditing": "^12.0",
         "snapappointments/bootstrap-select": "^1.13",
         "spatie/laravel-permission": "^4.0",
         "superbalist/laravel-google-cloud-storage": "^2.2",
-        "twilio/sdk": "^6.24",
-        "ext-soap": "*"
+        "twilio/sdk": "^6.24"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.5",
+        "barryvdh/laravel-debugbar": "^3.6",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",

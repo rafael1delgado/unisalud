@@ -15,7 +15,7 @@ class User extends Authenticatable implements Auditable
 {
     use HasFactory, Notifiable, HasRoles;
     use \OwenIt\Auditing\Auditable;
-    
+
 
     protected $primaryKey = 'id';
 
@@ -80,6 +80,11 @@ class User extends Authenticatable implements Auditable
         return $this->morphToMany(Appointment::class, 'appointable');
     }
 
+    public function programmingProposals()
+    {
+        return $this->hasMany(MedicalProgrammer\ProgrammingProposal::class, 'user_id');
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -126,12 +131,12 @@ class User extends Authenticatable implements Auditable
 
     public function getOfficialFathersFamilyAttribute()
     {
-        return "{$this->actualOfficialHumanName->first()->fathers_family}";
+        return "{$this->actualOfficialHumanName->fathers_family}";
     }
 
     public function getOfficialMothersFamilyAttribute()
     {
-        return "{$this->actualOfficialHumanName->first()->mothers_family}";
+        return "{$this->actualOfficialHumanName->mothers_family}";
     }
 
 

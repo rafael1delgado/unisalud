@@ -29,6 +29,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use App\Traits\GoogleToken;
+use Session;
 
 class PatientController extends Controller
 {
@@ -46,6 +47,7 @@ class PatientController extends Controller
 
     public function create()
     {
+        if(request()->session()->has('request_match')) request()->session()->forget('request_match');
         $permissions = Permission::OrderBy('name')->get();
         $maritalStatus = CodConMarital::all();
         $countries = Country::all();
@@ -66,7 +68,7 @@ class PatientController extends Controller
      * @return RedirectResponse
      * @throws \Exception
      */
-    public function store(Request $request, $save = null)
+    public function store(Request $request)
     {
 
 
@@ -85,20 +87,26 @@ class PatientController extends Controller
             }
         }
 
-        //Busca los pacientes que ya esten ingresados con los datos de request
-        $matchingPatients = $this->getMatchingPatients($request);
-        if ($matchingPatients->count() === 0 || $save == true) {
-            $this->savePatientData($request);
-        } else {
-            return view('patients.matching_patients', compact('matchingPatients', 'request'));
+        if($request->session()->has('request_match')){
+            $this->savePatientData(new Request($request->session()->get('request_match')));
+            $request->session()->forget('request_match');
+        }else{
+            //Busca los pacientes que ya esten ingresados con los datos de request
+            $matchingPatients = $this->getMatchingPatients($request);
+            if ($matchingPatients->count() === 0) {
+                $this->savePatientData($request);
+            } else {
+                $request->session()->put('request_match', $request->all());
+                return view('patients.matching_patients', compact('matchingPatients'));
+            }
         }
 
-        return redirect()->route('patient.index');
+        return redirect()->route('patient.index')->with('success', 'Se ha registrado al paciente satisfactoriamente');
     }
 
     public function savePatientData(Request $request)
     {
-//        dd($request);
+        // dd($request);
 
 
         DB::beginTransaction();
@@ -256,6 +264,7 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
+        // return session()->get('request_match');
         $permissions = Permission::OrderBy('name')->get();
         $patient = User::find($id);
         $maritalStatus = CodConMarital::all();
@@ -413,10 +422,10 @@ class PatientController extends Controller
                 }
             }
 
+
             //PRACTITIONER
             $storedPractitionerIds = $patient->practitioners->pluck('id')->toArray();
             if ($request->has('organization_id')) {
-                // dd($storedPractitionerIds);
                 //forearch para actualizar/agregar practitioners
                 foreach ($request->organization_id as $key => $organization_id) {
                     if ($request->practitioner_id[$key] == null) {
@@ -425,14 +434,15 @@ class PatientController extends Controller
                         $newPractitioner->user_id = $patient->id;
                         $newPractitioner->organization_id = $request->organization_id[$key];
                         $newPractitioner->specialty_id = $request->specialty_id[$key];
+                        $newPractitioner->profession_id = $request->profession_id[$key];
                         $newPractitioner->save();
-                    } elseif (in_array($request->practioner_id[$key], $storedPractitionerIds)) {
-
+                    } elseif (in_array($request->practitioner_id[$key], $storedPractitionerIds)) {
                         $practitioner = Practitioner::find($request->practitioner_id[$key]);
                         $practitioner->active = 1;
                         $practitioner->user_id = $patient->id;
                         $practitioner->organization_id = $request->organization_id[$key];
                         $practitioner->specialty_id = $request->specialty_id[$key];
+                        $practitioner->profession_id = $request->profession_id[$key];
                         $practitioner->save();
                     }
                 }
@@ -442,6 +452,13 @@ class PatientController extends Controller
                         $practitioner = Practitioner::find($storedPractitionerId);
                         $practitioner->delete();
                     }
+                }
+            }
+            else {
+                //Si no hay ninguno, elimina todo
+                foreach ($storedPractitionerIds as $key => $storedPractitionerId) {
+                        $practitioner = Practitioner::find($storedPractitionerId);
+                        $practitioner->delete();
                 }
             }
 
@@ -461,7 +478,7 @@ class PatientController extends Controller
             DB::rollBack();
             throw $th;
         }
-
+        if($request->session()->has('request_match')) $request->session()->forget('request_match');
         session()->flash('success', 'El paciente ' . $patient->officialFullName . ' ha sido actualizado.');
         return view('patients.show', compact('patient'));
     }
