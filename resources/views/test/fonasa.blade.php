@@ -2,7 +2,8 @@
 
 @section('content')
 
-Fonasa
+Entidad Fonasa:
+{{ env('FONASA_ENTIDAD') }}
 
 @php
 $usuario  = App\Models\WebService\Fonasa::find(15287582);

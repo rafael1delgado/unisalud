@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-soap": "*",
+        "ext-gd":"*",
         "doctrine/dbal": "^3.1",
         "econea/nusoap": "^0.9.11",
         "fideloper/proxy": "^4.4",
@@ -28,7 +29,7 @@
         "twilio/sdk": "^6.24"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.6",
+        "barryvdh/laravel-debugbar": "^3.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
