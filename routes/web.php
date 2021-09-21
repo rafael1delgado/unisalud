@@ -537,5 +537,10 @@ Route::prefix('soap')->name('soap.')->group(function(){
 
     });
 
-
     //fin rutas EPI
+
+      //Rutas control-attention
+      Route::prefix('vista')->name('vista.')->group(function () {
+      Route::view('/', 'vista.control')->name('index');
+      Route::view('/edit', 'vista.attention')->name('attention');
+      });
