@@ -84,7 +84,7 @@
         <a class="nav-link" href="{{route('some.open_tprogrammer') }}"><span data-feather="calendar"></span>Aperturar agenda</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('some.agenda') }}"><span data-feather="calendar"></span>Agenda</a>
+        <a class="nav-link" href="{{route('some.agenda') }}"><span data-feather="calendar"></span>Gestor de agenda</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('some.reallocationPending') }}"><span data-feather="list"></span>Pendiente de reasignación</a>
@@ -184,6 +184,17 @@
             Programaciones<span class="sr-only">(current)</span>
         </a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('medical_programmer.reports.pendingPractitionersReport') }}">
+            <span data-feather="chevrons-right"></span>
+            Reporte 1<span class="sr-only">(current)</span>
+        </a>
+    </li>
+
+
+</ul>
+@endcanany
 
     <!-- programador teorico -->
     <!-- @canany(['Mp: programacion teorica'])
@@ -397,9 +408,6 @@
 
     </ul>
     @endcanany
-
-</ul>
-@endcanany
 
 <ul class="nav flex-column">
     <li class="nav-item border-top">

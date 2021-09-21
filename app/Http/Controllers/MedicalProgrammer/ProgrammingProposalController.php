@@ -360,6 +360,6 @@ class ProgrammingProposalController extends Controller
               }
       }
 
-      return view('some.consolidated_programmings',compact('array_medic_programmings'));
+      return view('medical_programmer.management.reports.consolidated_programmings',compact('array_medic_programmings'));
     }
 }

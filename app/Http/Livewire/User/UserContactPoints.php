@@ -45,6 +45,19 @@ class UserContactPoints extends Component
                 $this->contactPoints[$value]['actually'] = $this->patient->contactPoints->slice($key, 1)->first()->actually;
             }
         }
+
+        if(request()->session()->has('request_match')){
+            $match_contactPoints = request()->session()->get('request_match');
+            for($i = 0; $i < count($match_contactPoints['contact_point_id']); $i++){
+                $this->contactPoints[++$this->i] = [
+                    'id' => $match_contactPoints['contact_point_id'][$i],
+                    'system' => $match_contactPoints['contact_system'][$i],
+                    'value' => $match_contactPoints['contact_value'][$i],
+                    'use' => $match_contactPoints['contact_use'][$i]
+                ];
+                array_push($this->inputs, $this->i);
+            }
+        }
     
         if (old('contact_value')) {
             foreach ($this->inputs as $key => $value) {

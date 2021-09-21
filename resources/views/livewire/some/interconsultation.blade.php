@@ -1,30 +1,45 @@
-
 <h3 class="mb-3">Interconsultas Externas</h3>
 
-    <div class="row">
-    <fieldset class="form-group col">
-        <label for="for_status">Especialidad</label>
-             <select id="for_status" name="status" class="form-control" required>   </select> 
-    </fieldset>   
-    <fieldset class="form-group col">
-        <label for="for_status">Solicitud</label>
-        <input type="date" class="form-control" id="for_status" wire:model.lazy="appointments_from">
-    </fieldset>    
-    
-    <button type="submit" class="btn btn-primary">Filtrar</button>
+<div class="form-row">
+    <div class="form-group col-md-4">
+    <label for="for_specialty_id">Especialidad</label>
+    @if($specialties != null)
+      <select name="specialty_id" id="for_specialty_id" class="form-control" wire:model.lazy="specialty_id">
+        <option></option>
+        @foreach ($specialties as $specialty)
+        <option value="{{$specialty->id}}">{{$specialty->specialty_name}}</option>
+        @endforeach
+      </select>
+      @endif
+      </div>
+
+      <div class="form-group col-md-2">
+            <label for="inputEmail4">Desde</label>
+            <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha inicio"
+                   wire:model.lazy="appointments_from">
+      </div>
+
+        <div class="form-group col-md-2">
+            <label for="inputEmail4">Hasta</label>
+            <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha fin"
+                   wire:model.lazy="appointments_to">
+        </div>  
+        <div class="form-group col-md-2">
+            <label for="for_type">Estado</label>
+            <select id="for_type" name="type" class="form-control" wire:model.lazy="type" required
+                    wire:change="getPractitioners()">
+                <option></option>
+                <option>Pendiente</option>
+                <option>Priorizadas</option>
+                <option>Citadas</option>
+                <option>Observadas</option>
+                <option>Rechazadas</option>
+
+            </select>
+        </div>  
+</div>    
 
     <div class="table-responsive">
-    <table class="table table-sm table-hover">
-            <thead class="table-info">
-            <tr>
-                <th scope="col">Pendientes</th>
-                <th scope="col">Priorizadas</th>
-                <th scope="col">Citadas</th>
-                <th scope="col">Observadas</th>
-                <th scope="col">Rechazadas</th>
-            </tr>
-            </thead>
-        </table>
         <table class="table table-sm table-hover">
             <thead class="table-info">
             <tr>

@@ -42,6 +42,18 @@
     </fieldset>
 </div>
 
+<div class="row">
+  <fieldset class="form-group col">
+      <label for="for_contract_id">Actividad</label>
+      <input type="text" class="form-control" value="{{$appointment->programmingProposalDetail->activity->activity_name}}" readonly >
+  </fieldset>
+
+  <fieldset class="form-group col">
+      <label for="for_contract_id">Sub-actividad</label>
+      <input type="text" class="form-control" value="{{$appointment->programmingProposalDetail->subactivity->sub_activity_name}}" readonly >
+  </fieldset>
+</div>
+
 @if($appointment->appointables->count() > 0)
 
   <hr>

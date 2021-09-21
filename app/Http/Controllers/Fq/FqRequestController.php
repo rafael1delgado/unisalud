@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fq;
 use App\Models\Fq\FqRequest;
 use App\Models\Fq\ContactUser;
 use App\Models\Fq\FqMedicine;
+use App\Models\Fq\RequestFile;
 use App\Models\User;
 use App\Models\Practitioner;
 use App\Models\ExtMedicine;
@@ -98,22 +99,29 @@ class FqRequestController extends Controller
     public function store(Request $request, ContactUser $contactUser)
     {
         $fqRequest = new FqRequest($request->All());
-
-        if($request->hasFile('prescription_file')){
-            //file
-            $now = Carbon::now()->format('Y_m_d_H_i_s');
-            $file_name = $now.'_cv_'.$contactUser->user_id.'_'.$request->patient_id;
-            $file = $request->file('prescription_file');
-            $fqRequest->prescription_file = $file->storeAs('/unisalud/fq/prescription/', $file_name.'.'.$file->extension(), 'gcs');
-        }
-
         $fqRequest->contact_user_id = $contactUser->user->id;
         $fqRequest->patient_id = $request->patient_id;
         $fqRequest->status = 'pending';
 
         $fqRequest->save();
 
-        if($fqRequest->name == 'dispensing'){
+        if($request->hasFile('file')){
+            //file
+            foreach ($request->file as $key => $file) {
+                $requestFile = new RequestFile();
+                $now = Carbon::now()->format('Y_m_d_H_i_s');
+                $requestFile->file_name = $now.'_disp_'.$fqRequest->id.'_'.$key;
+                if($fqRequest->name == 'dispensing'){
+                    $requestFile->file_path = $file->storeAs('/unisalud/fq/disp/', $requestFile->file_name.'.'.$file->extension(), 'gcs');
+                }
+                if($fqRequest->name == 'exam request'){
+                    $requestFile->file_path = $file->storeAs('/unisalud/fq/exam/', $requestFile->file_name.'.'.$file->extension(), 'gcs');
+                }
+                $requestFile->request_id = $fqRequest->id;
+                $requestFile->save();
+            }
+        }
+        if($fqRequest->name == 'dispensing' && $request->medicines){
             foreach ($request->medicines as $key => $medicine_name) {
                 $fq_medicine = new FqMedicine();
                 $fq_medicine->request_id = $fqRequest->id;
@@ -122,14 +130,12 @@ class FqRequestController extends Controller
             }
         }
 
-        // if (env('APP_ENV') == 'production') {
-            if($fqRequest->name == 'dispensing'){
-                Mail::to(explode(',', env('APP_FQ_REFERENCE_DISP')))->send(new NewNotification($fqRequest));
-            }
-            else{
-                Mail::to(explode(',', env('APP_FQ_REFERENCE')))->send(new NewNotification($fqRequest));
-            }
-        // // }
+        if($fqRequest->name == 'dispensing'){
+            Mail::to(explode(',', env('APP_FQ_REFERENCE_DISP')))->send(new NewNotification($fqRequest));
+        }
+        else{
+            Mail::to(explode(',', env('APP_FQ_REFERENCE')))->send(new NewNotification($fqRequest));
+        }
 
         session()->flash('success', 'Se ha creado la solicitud exitosamente');
         return redirect()->route('fq.request.own_index');
@@ -205,8 +211,8 @@ class FqRequestController extends Controller
         //
     }
 
-    public function view_file(FqRequest $fqRequest)
+    public function view_file(RequestFile $requestFile)
     {
-        return Storage::disk('gcs')->response($fqRequest->prescription_file);
+        return Storage::disk('gcs')->response($requestFile->file_path);
     }
 }

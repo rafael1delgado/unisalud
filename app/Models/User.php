@@ -15,7 +15,7 @@ class User extends Authenticatable implements Auditable
 {
     use HasFactory, Notifiable, HasRoles;
     use \OwenIt\Auditing\Auditable;
-    
+
 
     protected $primaryKey = 'id';
 
@@ -78,6 +78,11 @@ class User extends Authenticatable implements Auditable
     public function appointments()
     {
         return $this->morphToMany(Appointment::class, 'appointable');
+    }
+
+    public function programmingProposals()
+    {
+        return $this->hasMany(MedicalProgrammer\ProgrammingProposal::class, 'user_id');
     }
 
 
