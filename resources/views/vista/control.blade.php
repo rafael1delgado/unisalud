@@ -39,7 +39,7 @@
                 <td>+56945455252</td>
                 <td>Medicina General</td>
                 <td> 27-09-2021</td>
-                <td class="text-center"><button type="button" class="btn btn-warning "><a href="{{ route('vista.attention') }} ">Ver</a></button></td>
+                <td class="text-center"><button type="button" class="btn btn-success"><a href="{{ route('vista.attention') }}" class="text-light" >Ver</a></button></td>
                 <td class="text-center"><button type="button" class="btn btn-primary ">Citar</button></td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@
                 <td>+56923233336</td>
                 <td>Oftanmologia</td>
                 <td>29-09-2021</td>
-                <td class="text-center"><button type="button" class="btn btn-warning "><a href="{{ route('vista.attention') }} ">Ver</a></button></td>
+                <td class="text-center"><button type="button" class="btn btn-success"><a href="{{ route('vista.attention') }}" class="text-light" >Ver</a></button></td>
                 <td class="text-center"><button type="button" class="btn btn-primary ">Citar</button></td>
             </tr>
             <tr>
@@ -57,7 +57,7 @@
                 <td>+56956622636</td>
                 <td>Medicina General</td>
                 <td>15-10-2021</td>
-                <td class="text-center"><button type="button" class="btn btn-warning "><a href="{{ route('vista.attention') }} ">Ver</a></button></td>
+                <td class="text-center"><button type="button" class="btn btn-success"><a href="{{ route('vista.attention') }}" class="text-light" >Ver</a></button></td>
                 <td class="text-center"><button type="button" class="btn btn-primary ">Citar</button></td>
             </tr>
             <tr>
@@ -66,7 +66,7 @@
                 <td>+56925255656</td>
                 <td>Medicina Genereal </td>
                 <td>20-10-2021</td>
-                <td class="text-center"><button type="button" class="btn btn-warning "><a href="{{ route('vista.attention') }} ">Ver</a></button></td>
+                <td class="text-center"><button type="button" class="btn btn-success"><a href="{{ route('vista.attention') }}" class="text-light" >Ver</a></button></td>
                 <td class="text-center"><button type="button" class="btn btn-primary ">Citar</button></td>
             </tr>
             <tr>
@@ -75,7 +75,7 @@
                 <td>+5699999898</td>
                 <td>Medicina General</td>
                 <td>20-10-2021</td>
-                <td class="text-center"><button type="button" class="btn btn-warning "><a href="{{ route('vista.attention') }} ">Ver</a></button></td>
+                <td class="text-center"><button type="button" class="btn btn-success"><a href="{{ route('vista.attention') }}" class="text-light" >Ver</a></button></td>
                 <td class="text-center"><button type="button" class="btn btn-primary ">Citar</button></td>
             </tr>
             <tr>
@@ -84,7 +84,7 @@
                 <td>+56945455250</td>
                 <td>Dermatología</td>
                 <td>08-10-2021</td>
-                <td class="text-center"><button type="button" class="btn btn-warning "><a href="{{ route('vista.attention') }} ">Ver</a></button></td>
+                <td class="text-center"><button type="button" class="btn btn-success"><a href="{{ route('vista.attention') }}" class="text-light" >Ver</a></button></td>
                 <td class="text-center"><button type="button" class="btn btn-primary ">Citar</button></td>
             </tr>
             <tr>
@@ -93,7 +93,7 @@
                 <td>+56956566362</td>
                 <td>Traumatología</td>
                 <td>01-11-2021</td>
-                <td class="text-center"><button type="button" class="btn btn-warning "><a href="{{ route('vista.attention') }} ">Ver</a></button></td>
+                <td class="text-center"><button type="button" class="btn btn-success"><a href="{{ route('vista.attention') }}" class="text-light" >Ver</a></button></td>
                 <td class="text-center"><button type="button" class="btn btn-primary ">Citar</button></td>
             </tr>
             <tr>
@@ -102,7 +102,7 @@
                 <td>+56966332322</td>
                 <td>Medicina General</td>
                 <td>20-11-2021</td>
-                <td class="text-center"><button type="button" class="btn btn-warning "><a href="{{ route('vista.attention') }} ">Ver</a></button></td>
+                <td class="text-center"><button type="button" class="btn btn-success"><a href="{{ route('vista.attention') }}" class="text-light" >Ver</a></button></td>
                 <td class="text-center"><button type="button" class="btn btn-primary ">Citar</button></td>
             </tr>
             <tr>
@@ -111,7 +111,7 @@
                 <td>+56945455252</td>
                 <td>Medicina General</td>
                 <td>20-11-2021</td>
-                <td class="text-center"><button type="button" class="btn btn-warning "><a href="{{ route('vista.attention') }} ">Ver</a></button></td>
+                <td class="text-center"><button type="button" class="btn btn-success"><a href="{{ route('vista.attention') }}" class="text-light" >Ver</a></button></td>
                 <td class="text-center"><button type="button" class="btn btn-primary ">Citar</button></td>
             </tr>
             <tr>
@@ -120,7 +120,7 @@
                 <td>+56945455252</td>
                 <td>Medicina General</td>
                 <td>20-11-2021</td>
-                <td class="text-center"><button type="button" class="btn btn-warning "><a href="{{ route('vista.attention') }} ">Ver</a></button></td>
+                <td class="text-center"><button type="button" class="btn btn-success"><a href="{{ route('vista.attention') }}" class="text-light" >Ver</a></button></td>
                 <td class="text-center"><button type="button" class="btn btn-primary ">Citar</button></td>
             </tr>
             
