@@ -112,7 +112,7 @@ Route::prefix('user')->name('user.')->middleware('auth')->group(function(){
 });
 Route::prefix('patient')->name('patient.')->middleware('auth')->group(function(){
     Route::get('/', [PatientController::class, 'index'])->name('index');
-    Route::post('/store/{save?}', [PatientController::class, 'store'])->name('store');
+    Route::post('/', [PatientController::class, 'store'])->name('store');
     Route::get('/create', [PatientController::class, 'create'])->name('create');
     Route::get('/{patient}', [PatientController::class, 'show'])->name('show');
     Route::post('/{patient}', [PatientController::class, 'update'])->name('update');
@@ -473,12 +473,20 @@ Route::prefix('soap')->name('soap.')->group(function(){
       // Route::get('/edit/{codeMobile}',[App\Http\Controllers\Samu\CodeMobileController::class, 'edit'])->name('edit');
     });
 
-
-    Route::prefix('call')->name('call.')->group(function () {
-      Route::view('/', 'samu.call.index')->name('index');
-      Route::view('/edit', 'samu.call.edit')->name('edit');
+   
+    Route::prefix('qtc')->name('qtc.')->group(function () {
+      Route::get('/',[App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
+      Route::get('/edit/{qtc}',[App\Http\Controllers\Samu\QtcController::class, 'edit'])->name('edit');
+      Route::post('/store',[App\Http\Controllers\Samu\QtcController::class, 'store'])->name('store');
       Route::view('/otedit', 'samu.call.otedit')->name('otedit');
       Route::view('/tedit', 'samu.call.tedit')->name('tedit');
+    });
+
+    Route::prefix('follow')->name('follow.')->group(function () {
+      Route::get('/',[App\Http\Controllers\Samu\FollowController::class, 'index'])->name('index');
+      Route::get('/create' , [App\Http\Controllers\Samu\FollowController::class, 'create'])->name('create');
+      Route::get('/edit',[App\Http\Controllers\Samu\FollowController::class, 'edit'])->name('edit');
+      Route::post('/store', [App\Http\Controllers\Samu\FollowController::class, 'store'])->name('store');
     });
 
     Route::prefix('shift')->name('shift.')->group(function () {

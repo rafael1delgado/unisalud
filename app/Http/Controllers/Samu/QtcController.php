@@ -15,7 +15,9 @@ class QtcController extends Controller
      */
     public function index()
     {
-        return 'controlador QTC';
+        $qtcs=qtc::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
+        //return $qtcs; 
+       return view ('samu.qtc.index' , compact('qtcs'));
     }
 
     /**
@@ -25,7 +27,9 @@ class QtcController extends Controller
      */
     public function create()
     {
-        //
+        $qtc=qtc::all(); // guarda todos los datos de la tabla
+        //return $codekeys;
+        return view ('samu.codekey.index');
     }
 
     /**
@@ -36,7 +40,10 @@ class QtcController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+        qtc::create($request->all());
+        $request->session()->flash('success', 'blalalala.');
+        return redirect()->route('samu.qtc.index');
     }
 
     /**
@@ -58,7 +65,17 @@ class QtcController extends Controller
      */
     public function edit(Qtc $qtc)
     {
-        //
+      //  dd($qtc->follow);
+        switch (strtolower($qtc->class_qtc)) {
+            case 'emergencia':
+                return view ('samu.qtc.edit' , compact('qtc'));
+            case 'ot' :
+                return view ('samu.qtc.otedit' , compact('qtc'));
+            case 'traslado':
+                return view ('samu.qtc.tedit' , compact('qtc'));
+        }
+
+        //return view ('samu.qtc.edit' , compact('qtc'));
     }
 
     /**
@@ -70,7 +87,10 @@ class QtcController extends Controller
      */
     public function update(Request $request, Qtc $qtc)
     {
-        //
+        $qtc->fill($request->all());
+        $qtc->update();
+        session()->flash('success', ' Actualizado satisfactoriamente.');
+        return redirect()->route('samu.qtc.index');
     }
 
     /**

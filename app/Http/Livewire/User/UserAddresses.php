@@ -66,6 +66,25 @@ class UserAddresses extends Component
                 $this->addresses[$value]['actually'] = $this->patient->addresses->slice($key, 1)->first()->actually;
             }
         }
+        
+        if(request()->session()->has('request_match')){
+            $match_addresses = request()->session()->get('request_match');
+            for($i = 0; $i < count($match_addresses['address_id']); $i++){
+                $this->addresses[++$this->i] = [
+                    'id' => $match_addresses['address_id'][$i],
+                    'address_use' => $match_addresses['address_use'][$i],
+                    'street_name' => $match_addresses['street_name'][$i], 
+                    'line' => $match_addresses['line'][$i],
+                    'address_apartment' => $match_addresses['address_apartment'][$i],
+                    'suburb' => $match_addresses['suburb'][$i],
+                    'commune' => $match_addresses['district'][$i],
+                    'state' => $match_addresses['state'][$i],
+                    'city' => $match_addresses['city'][$i],
+                    'country' => $match_addresses['country'][$i]
+                ];
+                array_push($this->inputs, $this->i);
+            }
+        }
 
 //        dd(old('street_name.0'));
 

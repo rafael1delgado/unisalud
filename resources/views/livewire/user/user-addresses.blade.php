@@ -75,7 +75,7 @@
 
                 <fieldset class="form-group col-md-3">
                     <label for="for_district">Comuna *</label>
-                    <select name="district" class="form-control" wire:model='addresses.{{$value}}.commune' required>
+                    <select name="district[]" class="form-control" wire:model='addresses.{{$value}}.commune' required>
                         <option value=""></option>
 
                         @if ($communes)

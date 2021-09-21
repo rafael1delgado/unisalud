@@ -18,14 +18,12 @@
         <div class="form-row">
                 <fieldset class="form-group  col-md-2">
                     <label for="for_run"><b>Fecha de registro</b> </label>
-                    <input type="hidden" class="form-control" id="for_id" name="id" value="">
                     <input type="date" class="form-control" name="date" value="">
                 </fieldset>
                 <fieldset class="form-group  col-md-9">
                 </fieldset>
                 <fieldset class="form-group  col-md-1">
                     <label for="for_run"><i class="fas fa-clock"></i><b> Hora Actual</b> </label>
-                    <input type="hidden" class="form-control"  name="hora" value="18:23">
                     <input type="text" class="form-control" name="hora" value="18:23">
                 </fieldset>
         </div>  
@@ -116,37 +114,37 @@
                                     <td>2</td>
                                     <td>Movil 2</td>
                                     <td></td>
-                                    <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                    <td><a href="#">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>14</td>
                                     <td>Movil 5</td>
                                     <td></td>
-                                    <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                    <td><a href="#">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>Movil 12</td>
                                     <td></td>
-                                    <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                    <td><a href="#">Editar</a> </td>
                                 </tr>
                                 <tr class="bg-danger text-white">
                                     <td>44</td>
                                     <td>Movil 6</td>
                                     <td></td>
-                                    <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                    <td><a href="#">Editar</a> </td>
                                 </tr>
                                 <tr>
                                     <td>10</td>
                                     <td>Movil 4 </td>
                                     <td></td>
-                                    <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                    <td><a href="#">Editar</a> </td>
                                 </tr>
                                 <tr class="bg-danger text-white">
                                     <td>5</td>
                                     <td>Movil 11</td>
                                     <td>Movil con falla de correa</td>
-                                    <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                    <td><a href="#">Editar</a> </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -261,73 +259,64 @@
             <hr>
             <!-- registro de llamadas-->
             <h3> Datos de la llamada</h3>
-           <div class="form-row">
-                <fieldset class="form-group  col-md-1">
-                    <label for="for_run">Hora</label>
-                    <input type="hidden" class="form-control"  name="hora" value="">
-                    <input type="time" class="form-control" name="time_call" value="10:30">
-                </fieldset>
-                <fieldset class="form-group  col-md-2">
-                    <label for="for_run">Recepcion de llamada</label>
-                        <select class="form-control" name="recepcion" id="recepcion">
-                            <option>Operador 1 </option>
-                            <option value="1" >Operador 1</option>
-                            <option value="2" >Operador 2</option>
-                            <option value="3" >Operador 3</option>
-                            <option value="4" >Operador 4</option>
-                            <option value="5" >Operador 5</option>
-                            <option value="6" >Operador 6</option>
-                            <option value="7" >Jefe de turno</option>
-                            <option value="8" >Medico Regulador</option>
-                            <option value="9" >Enfermera Reguladora</option>
-                        </select>
-                </fieldset>
-                <fieldset class="form-group  col-md-2">
-                    <label for="for_run">Motivo de solicitud </label>
-                    <input type="hidden" class="form-control"  name="hora" value="">
-                    <input type="text" class="form-control" name="hora" value="">
-                </fieldset>
-                <fieldset class="form-group  col-md-2">
-                    <label for="for_run">Solicitante </label>
-                    <input type="hidden" class="form-control"  name="hora" value="">
-                    <input type="text" class="form-control" name="hora" value="">
-                </fieldset>
-                <fieldset class="form-group  col-md-2">
-                    <label for="for_run">Dirección </label>
-                    <input type="hidden" class="form-control"  name="hora" value="">
-                    <input type="text" class="form-control" name="hora" value="">
-                </fieldset>
-                <fieldset class="form-group  col-md-2">
-                    <label for="for_run">Teléfono </label>
-                    <input type="hidden" class="form-control"  name="hora" value="">
-                    <input type="text" class="form-control" name="hora" value="">
-                </fieldset>
-                <fieldset class="form-group col-md-1">
-                    <label for="for_run"><br /> <br /><br /></label>
-                    <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
-                </fieldset>
-           </div>
+            <form method="POST" action="{{ route('samu.qtc.store') }}">
+                @csrf
+                @method('POST')
+                <div class="form-row">
+                        <fieldset class="form-group  col-md-2">
+                            <label for="for_hour">Clase</label>
+                            <select class="form-control" name="class_qtc" id="class_qtc">
+                                    <option>Seleccionar </option>
+                                    <option value="emergencia" >Emergencia</option>
+                                    <option value="ot" >OT</option>
+                                    <option value="traslado" >Traslado</option>
+                                </select>
+                        </fieldset>
+                        <fieldset class="form-group  col-md-1">
+                            <label for="for_hour">Hora</label>
+                            <input type="time" class="form-control" name="hour" id="hour">
+                        </fieldset>
+                        <fieldset class="form-group  col-md-2">
+                            <label for="for_call_reception">Recep. de llamada</label>
+                                <select class="form-control" name="call_reception" id="call_reception">
+                                    <option>Operador 1 </option>
+                                    <option value="Operador 1" >Operador 1</option>
+                                    <option value="Operador 2" >Operador 2</option>
+                                    <option value="Operador 3" >Operador 3</option>
+                                    <option value="Operador 4" >Operador 4</option>
+                                    <option value="Operador 5" >Operador 5</option>
+                                    <option value="Operador 6" >Operador 6</option>
+                                    <option value="Jefe de turno" >Jefe de turno</option>
+                                    <option value="Medico Regulador" >Medico Regulador</option>
+                                    <option value="Enfermera Reguladora" >Enfermera Reguladora</option>
+                                </select>
+                        </fieldset>
+                        <fieldset class="form-group  col-md-3">
+                            <label for="for_telephone_information">Motivo de solicitud </label>
+                            <input type="text" class="form-control"  name="telephone_information">
+                        
+                        </fieldset>
+                        <fieldset class="form-group  col-md-1">
+                            <label for="for_applicant">Solicitante </label>
+                            <input type="text" class="form-control" name="applicant">
+                        </fieldset>
+                        <fieldset class="form-group  col-md-1">
+                            <label for="for_direction">Dirección </label>
+                            <input type="text" class="form-control" name="direction">
+                        </fieldset>
+                        <fieldset class="form-group  col-md-1">
+                            <label for="for_telephone">Teléfono </label>
+                            <input type="text" class="form-control" name="telephone">
+                        </fieldset>
+                        <fieldset class="form-group col-md-1">
+                            <label for="for_guardar_qtc"><br /> <br /><br /></label>
+                            <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
+                        </fieldset>
+                </div>
 
             <hr>
             
-            <div class="row mb-4">
-                <div class="col-md-3">
-                    <form method="GET" class="form-horizontal" action="">
-                        <div class="input-group mb-sm-0">
-                            <input class="form-control" type="text" name="search" autocomplete="off" id="for_search"
-                                style="text-transform: uppercase;"
-                                placeholder="QTC" value="" required>
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <fieldset class="form-group col-md-9">
-                    <label for="for_run"><br /> <br /><br /></label>
-                    <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
-                </fieldset>
-            </div>
+           
             <hr>
             <div class="table-responsive col-md-12">
                     <table class="table table-sm table-bordered table-striped small">
@@ -336,119 +325,39 @@
                         <tr class="text-center table-info">
                               
                               
-                              <th colspan="8"><b>Registro de llamadas</b></th>
+                              <th colspan="9"><b>Registro de llamadas</b></th>
                               
                           </tr>
                         
                             <tr class="text-center table-success">
                               
                                 <th>QTC</th>
+                                <th>Clase</th>
                                 <th>Hora</th>
                                 <th>Recepcion de llamada</th>
                                 <th>Información telefonica</th>
                                 <th>Solicitante</th>
                                 <th>Dirección</th>
                                 <th>Teléfono</th>
-                                <th></th>
+                                <th>Seguimiento</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($qtcs as $qtc)
                             <tr>
-                                <td class=" bg-danger">1111</td>
-                                <td>08:10</td>
-                                <td>operador 2</td>
-                                <td>DRA GOMEZ DR MENDEZ 6 TP TODO OPERATIVO </td>
-                                <td>Daniel Guerrero</td>
-                                <td>Av. salvador allende 222</td>
-                                <td> +56945522328</td>
-                                <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
+                                <td>{{ $qtc->id}}</td>
+                                <td>{{ $qtc->class_qtc }}</td>
+                                <td>{{ $qtc->hour}}</td>
+                                <td>{{ $qtc->call_reception}}</td>
+                                <td>{{ $qtc->telephone_information }}</td>
+                                <td>{{ $qtc->applicant }}</td>
+                                <td>{{ $qtc->direction }}</td>
+                                <td>{{ $qtc->telephone }}</td>
+                                <td><a href="{{ route('samu.qtc.edit', $qtc) }}">Seguimiento</a> </td>
+                            
+
                             </tr>
-                            <!--ot-->
-                            <tr>
-                                <td >1101</td>
-                                <td>08:10</td>
-                                <td>operador 2</td>
-                                <td>DRA GOMEZ DR MENDEZ  </td>
-                                <td>Daniel Guerrero</td>
-                                <td>Av. salvador allende 222</td>
-                                <td> +56945522328</td>
-                                <th class=" bg-primary text-center"> <a class="text-white " href="{{ route('samu.call.otedit') }}"><b>Seguimiento</b></a></th>
-                            </tr>
-                               <!--fin ot-->
-                            <tr>
-                                <td class=" bg-danger">2222</td>
-                                <td>09:10</td>
-                                <td>operador 1, operador 4</td>
-                                <td>22 AÑOS  CON SOSPECHA DE AGRESION </td>
-                                <td>Sofia Perez</td>
-                                <td>Calle amunategui 155</td>
-                                <td> +569002328</td>
-                                <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
-                            </tr>
-                            <tr>
-                                <td>233</td>
-                                <td>10:00</td>
-                                <td>operador 3</td>
-                                <td> Accidente Vehicular</td>
-                                <td>Amanda Castro</td>
-                                <td>Pedro prado 1000</td>
-                                <td>+56978788555</td>
-                                <th class=" bg-warning text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
-                            </tr>
-                            <!-- traslado-->
-                            <tr>
-                                <td>3000</td>
-                                <td>12:45</td>
-                                <td>operador 1</td>
-                                <td> FEMENINA 61 AÑOS DM TIPO II,  CAIDA </td>
-                                <td>mirtha Lopez</td>
-                                <td>Calle 2 S/N</td>
-                                <td>+56325255663</td>
-                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.tedit') }}"><b>Seguimiento</b></a></th>
-                            </tr>
-                            <!-- fin traslado-->
-                            <tr>
-                                <td>4000</td>
-                                <td>14:03</td>
-                                <td>Medico regulador</td>
-                                <td>Reportan a niño de 6 años con posible ACV </td>
-                                <td>Camilo zeballos</td>
-                                <td>Calle soto mayor 255</td>
-                                <td> +5663636265</td>
-                                <th class=" bg-warning text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
-                            </tr>
-                            <!--traslado-->
-                            <tr>
-                                <td class="bg-danger">5000</td>
-                                <td>15:23</td>
-                                <td>operador 2</td>
-                                <td>FEMENINA DE 23 AÑOS POSIBLE DESCOMPENSACION</td>
-                                <td>Jose Armando Aguilar</td>
-                                <td>Calle Algarrobo 200</td>
-                                <td>+56922252556</td>
-                                <th class=" bg-success text-center"> <a class="text-white " href="{{ route('samu.call.tedit') }}"><b>Seguimiento</b></a></th>
-                            </tr>
-                            <!-- fin trasalado-->
-                            <tr>
-                                <td class=" bg-danger">5522</td>
-                                <td>16:02</td>
-                                <td>Medico Regukador</td>
-                                <td>Triple colisión vehicular</td>
-                                <td>Daniela Molina</td>
-                                <td>Autopísta Humberstone</td>
-                                <td>+56920000114</td>
-                                <th class=" bg-secondary text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
-                            </tr>
-                            <tr>
-                                <td>6223</td>
-                                <td>20:30</td>
-                                <td>Operador 4</td>
-                                <td>Traslado de paciente SAR SUR a HETG</td>
-                                <td>Dr. Alex Orozco</td>
-                                <td>Barros Arana 5333</td>
-                                <td>+56923366363</td>
-                                <th class=" bg-warning text-center"> <a class="text-white " href="{{ route('samu.call.edit') }}"><b>Seguimiento</b></a></th>
-                            </tr>    
+                         @endforeach   
                         </tbody>
                     </table>
 

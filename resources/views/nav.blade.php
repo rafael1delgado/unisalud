@@ -12,7 +12,7 @@
 <li class="nav-item">
         <a class="nav-link
         @if(request()->route()->view == 'pacientes') active @endif"
-        href=" {{ route('samu.call.index') }}">Call Center</a>
+        href=" {{ route('samu.qtc.index') }}">Call Center</a>
     </li>
     
     <li class="nav-item">
