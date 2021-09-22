@@ -52,7 +52,7 @@
                         3/10
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm"> <i data-feather="file-text"></i> </button>
+                        <button type="button" class="btn btn-primary btn-sm" title="Citar"> <i data-feather="file-text"></i> </button>
                     </td>
                 </tr>
                 {{-- @endforeach --}}

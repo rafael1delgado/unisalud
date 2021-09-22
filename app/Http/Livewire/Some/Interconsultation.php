@@ -10,6 +10,7 @@ class Interconsultation extends Component
 {
     public $specialties;
     public $specialty_id;
+    public $interconsults;
     protected $fillable = [
         'specialty_id'
     ];
