@@ -14,7 +14,7 @@
             <div class="form-group col-md-1">
                 <label for="inputEmail4">&nbsp;</label>
                 <button type="button" class="btn btn-primary form-control" wire:click='search()'> <i
-                        class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+                        class="fa fa-search" aria-hidden="true" tittle="Aperturar"></i> Buscar</button>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
                             {{$programmingProposal->countUnopenedDetailsBetween($from, $to)}}
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm" wire:click="open()"> <i
+                            <button type="button" class="btn btn-primary btn-sm" wire:click="open({{$programmingProposal->id}})"> <i
                                     class="fa fa-calendar"></i> </button>
                         </td>
                     </tr>

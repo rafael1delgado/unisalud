@@ -130,7 +130,7 @@ Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/agenda', [AppointmentController::class, 'agenda'])->name('agenda');
     Route::get('/reallocation_pending', ReallocationPending::class)->name('reallocationPending');
     Route::post('/open_agenda', [AppointmentController::class, 'openAgenda'])->name('openAgenda');
-    Route::match(['get', 'post'],'/open_tprogrammer', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
+    Route::match(['get', 'post'],'/open_tprogrammer/{programmingProposal?}', [AppointmentController::class, 'openTProgrammerView'])->name('open_tprogrammer');
     Route::get('appointment_detail/{id}', [AppointmentController::class, 'appointment_detail'])->name('appointment_detail');
     Route::get('/appointed_available', AppointedAvailable::class)->name('appointedAvailable');
     Route::get('/open_pending', OpenPending::class)->name('openPending');

@@ -71,9 +71,9 @@ class OpenPending extends Component
         // \Debugbar::info($this->programmingProposals );
     }
 
-    public function open()
+    public function open($programmingProposalId)
     {
-        \Debugbar::info('aperturar');
+        return redirect()->route('some.open_tprogrammer', [$programmingProposalId]);
     }
 
     public function render()
