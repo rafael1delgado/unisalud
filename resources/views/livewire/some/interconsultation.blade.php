@@ -25,18 +25,18 @@
                    wire:model.lazy="appointments_to">
         </div>  
         <div class="form-group col-md-2">
-            <label for="for_type">Estado</label>
-            <select id="for_type" name="type" class="form-control" wire:model.lazy="type" required
-                    wire:change="getPractitioners()">
+            <label for="for_state">Estado</label>
+            <select id="state" name="for_state" class="form-control" wire:model.lazy="state">
                 <option></option>
-                <option>Pendiente</option>
-                <option>Priorizadas</option>
-                <option>Citadas</option>
-                <option>Observadas</option>
-                <option>Rechazadas</option>
+                <option value='pendiente'>Pendiente</option>
+                <option value='priorizadas'>Priorizadas</option>
+                <option value='citadas'>Citadas</option>
+                <option value='observadas'>Observadas</option>
+                <option value='rechazadas'>Rechazadas</option>
 
             </select>
         </div>  
+        <button type="submit" class="btn btn-primary">Buscar</button>
 </div>    
 
     <div class="table-responsive">
@@ -52,10 +52,36 @@
                 <th scope="col">Cupo</th>
                 <th scope="col">Sobre Cupo</th>
                 <th scope="col">Estado</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Paciente</th>
+                <th scope="col">Esepcialidad</th>
+                <th scope="col">Egresado</th>
+                <th scope="col">Origen</th>
+                <th scope="col">Ficha</th>
+                <th scope="col">RUN</th>
+                <th scope="col">Paciente</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Contacto</th>
+                <th scope="col">Pertinencia</th>
+                <th scope="col">Recibida</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- <table class="table table-sm table-hover">
+            <thead class="table-info">
+            <tr>
+                <th scope="col">Interconsulta</th>
+                <th scope="col">Solicitud</th>
             </tr>
             </thead>
         </table>
-    </div>
+    </div> -->
+
+        
 
 <!-- 
         <fieldset class="form-group col">

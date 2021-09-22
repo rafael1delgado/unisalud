@@ -12,7 +12,7 @@
     <div class="card-body">
 
         <!-- seguimiento-->
-        <h3><b> Seguimiento<b></h3>
+        <h3><b><b></h3>
             
             <h4> Asignación de seguimiento horario</h4>
             <form method="post" action="{{ route('samu.follow.store') }}">
@@ -113,35 +113,35 @@
                     <h4>Evaluación de paciente</h4>
                     <div class="form-row">
                         <div class=" col-md-6">
-                        <label for="for_run">Detalle de Recepción </label>
-                            <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
+                        <label for="for_reception_detail">Detalle de Recepción </label>
+                            <textarea class="form-control" id="reception_detail" name="reception_detail" placeholder="" required value="{{ ( $qtc->follow &&  $qtc->follow->reception_detail)? $qtc->follow->reception_detail : '' }}">></textarea>
                             <div class="invalid-feedback">
                             Ingrese descripción
                             </div>
                         </div>
                         <fieldset class="form-group  col-md-3">
-                                    <label for="for_run">Est. Recepcion de paciente </label>
-                                    <select class="form-control" name="recepcion" id="recepcion">
+                                    <label for="for_establishment">Est. Recepcion de paciente </label>
+                                    <select class="form-control" name="establishment" id="establishment">
+                                        
                                             <option>Seleccione </option>
-                                            <option value="1" >Hospital Dr Ernesto Torres Galdames</option>
-                                            <option value="113">SAPU Cirujano Aguirre</option>
-                                                            <option value="115">SAPU Cirujano Guzmán</option>
-                                                            <option value="114">SAPU Cirujano Videla</option>
-                                                            <option value="119">SAPU El Boro</option>
-                                                            <option value="3281">SAPU Huara</option>
-                                                            <option value="117">SAPU Pedro Pulgar</option>
-                                                            <option value="116">SAPU Pozo Almonte</option>
-                                                            <option value="4009">SAR La Tortuga</option>
-                                                            <option value="118">SAR Sur de Iquique</option>
-                                                            <option value="4004">SEREMI DE SALUD</option>
-                                                            <option value="3836">Servicio Médico Legal Iquique</option>
-                                                            <option value="4003">SMA Servicios Medicos</option>
-                                                            <option value="3933">SUR Camiña</option>
-                                                            <option value="3930">SUR Cariquima</option>
-                                                            <option value="3928">SUR Chanavayita</option>
-                                                            <option value="3929">SUR Colchane</option>
-                                                            <option value="3932">SUR Pica</option>
-                                                            <option value="3931">SUR Tarapacá</option>
+                                            <option value="Hospital Dr Ernesto Torres Galdames" {{ $qtc->follow->establishment === 'Hospital Dr Ernesto Torres Galdames' ? 'selected' : '' }} >Hospital Dr Ernesto Torres Galdames</option>
+                                            <option value="SAPU Cirujano Aguirre" {{ $qtc->follow->establishment === 'SAPU Cirujano Aguirre' ? 'selected' : '' }}>SAPU Cirujano Aguirre</option>
+                                            <option value="SAPU Cirujano Guzmán" {{ $qtc->follow->establishment === 'SAPU Cirujano Guzmán' ? 'selected' : '' }}>SAPU Cirujano Guzmán</option>
+                                            <option value="SAPU Cirujano Videla" {{ $qtc->follow->establishment === 'SAPU Cirujano Videla' ? 'selected' : '' }}>SAPU Cirujano Videla</option>
+                                            <option value="SAPU El Boro" {{ $qtc->follow->establishment === 'SAPU El Boro' ? 'selected' : '' }}>SAPU El Boro</option>
+                                            <option value="SAPU Huara" {{ $qtc->follow->establishment === 'SAPU Huara' ? 'selected' : '' }}>SAPU Huara</option>
+                                            <option value="SAPU Pedro Pulgar" {{ $qtc->follow->establishment === 'SAPU Pedro Pulgar' ? 'selected' : '' }}>SAPU Pedro Pulgar</option>
+                                            <option value="SAPU Pozo Almonte" {{ $qtc->follow->establishment === 'SAPU Pozo Almonte' ? 'selected' : '' }}>SAPU Pozo Almonte</option>
+                                            <option value="SAR La Tortuga" {{ $qtc->follow->establishment === 'SAR La Tortuga' ? 'selected' : '' }}>SAR La Tortuga</option>
+                                            <option value="SAR Sur de Iquique" {{ $qtc->follow->establishment === 'SAR Sur de Iquique' ? 'selected' : '' }}>SAR Sur de Iquique</option>
+                                            <option value="Servicio Médico Legal Iquique" {{ $qtc->follow->establishment === 'Servicio Médico Legal Iquique' ? 'selected' : '' }}>Servicio Médico Legal Iquique</option>
+                                            <option value="SMA Servicios Medicos" {{ $qtc->follow->establishment === 'SMA Servicios Medicos' ? 'selected' : '' }}>SMA Servicios Medicos</option>
+                                            <option value="SUR Camiña" {{ $qtc->follow->establishment === 'SUR Camiña' ? 'selected' : '' }}>SUR Camiña</option>
+                                            <option value="SUR Cariquima" {{ $qtc->follow->establishment === 'SUR Cariquima' ? 'selected' : '' }}>SUR Cariquima</option>
+                                            <option value="SUR Chanavayita" {{ $qtc->follow->establishment === 'SUR Chanavayita' ? 'selected' : '' }}>SUR Chanavayita</option>
+                                            <option value="SUR Colchane" {{ $qtc->follow->establishment === 'SUR Colchane' ? 'selected' : '' }}>SUR Colchane</option>
+                                            <option value="SUR Pica" {{ $qtc->follow->establishment === 'SUR Pica' ? 'selected' : '' }}>SUR Pica</option>
+                                            <option value="SUR Tarapacá" {{ $qtc->follow->establishment === 'SUR Tarapacá' ? 'selected' : '' }}>SUR Tarapacá</option>
                                     </select>
                                 </fieldset>
                                 <fieldset class="form-group  col-md-3">
