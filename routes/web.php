@@ -543,4 +543,5 @@ Route::prefix('soap')->name('soap.')->group(function(){
       Route::prefix('vista')->name('vista.')->group(function () {
       Route::view('/', 'vista.control')->name('index');
       Route::view('/edit', 'vista.attention')->name('attention');
+      Route::view('/relevant', 'vista.relevant')->name('relevant');
       });

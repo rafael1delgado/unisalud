@@ -62,11 +62,11 @@
                                     </fieldset>
                                     <fieldset class="form-group  col-md-2">
                                         <label for="for_mobile_arrival_place">Llegada Movil Lugar </label>
-                                        <input type="time" class="form-control" name="mobile_arrival_place" value="{{ ( $qtc->follow &&  $qtc->follow->mobile_arrival_place)? $qtc->follow->mobile_arrival_place : '' }}">>
+                                        <input type="time" class="form-control" name="mobile_arrival_place" value="{{ ( $qtc->follow &&  $qtc->follow->mobile_arrival_place)? $qtc->follow->mobile_arrival_place : '' }}">
                                     </fieldset>
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_route_ca">Ruta C.Asistencial </label>
-                                        <input type="time" class="form-control" name="route_ca" value="{{ ( $qtc->follow &&  $qtc->follow->route_ca)? $qtc->follow->route_ca : '' }}">>
+                                        <input type="time" class="form-control" name="route_ca" value="{{ ( $qtc->follow &&  $qtc->follow->route_ca)? $qtc->follow->route_ca : '' }}">
                                     </fieldset>
                     </div>
                     
@@ -114,7 +114,7 @@
                     <div class="form-row">
                         <div class=" col-md-6">
                         <label for="for_reception_detail">Detalle de Recepción </label>
-                            <textarea class="form-control" id="reception_detail" name="reception_detail" placeholder="" required value="{{ ( $qtc->follow &&  $qtc->follow->reception_detail)? $qtc->follow->reception_detail : '' }}">></textarea>
+                            <textarea class="form-control" id="reception_detail" name="reception_detail" placeholder="" required value="{{ ( $qtc->follow &&  $qtc->follow->reception_detail)? $qtc->follow->reception_detail : '' }}"></textarea>
                             <div class="invalid-feedback">
                             Ingrese descripción
                             </div>
@@ -145,9 +145,8 @@
                                     </select>
                                 </fieldset>
                                 <fieldset class="form-group  col-md-3">
-                                    <label for="for_run">Personal Recepcion del Pcte.</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
-                                    <input type="time" class="form-control" name="hora_salida" value="">
+                                    <label for="for_reception_person">Personal Recepcion del Pcte.</label>
+                                    <input type="text" class="form-control" name="reception_person" value="{{ ( $qtc->follow &&  $qtc->follow->reception_person)? $qtc->follow->reception_person : '' }}">
                                 </fieldset>
                     
                         
@@ -158,33 +157,30 @@
 
                     <div class="form-row">
                                 <fieldset class="form-group  col-md-2">
-                                    <label for="for_run">Frecuencia Cardiaca</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
-                                    <input type="number" class="form-control" name="ruta" value="">
+                                    <label for="for_fc">Frecuencia Cardiaca</label>
+                                    <input type="number" class="form-control" name="fc" value="{{ ( $qtc->follow &&  $qtc->fc)? $qtc->follow->fc : '' }}">
                                 </fieldset>
                                 <fieldset class="form-group  col-md-2">
                                     <label for="for_run">Frecuencia Respiratoria </label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
-                                    <input type="number" class="form-control" name="ruta" value="">
+                                    <input type="number" class="form-control" name="fr" value="{{ ( $qtc->follow &&  $qtc->fr)? $qtc->follow->fr : '' }}">
                                 </fieldset>
                                 <fieldset class="form-group  col-md-2">
                                     <label for="for_run">Presión Arterial</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
-                                    <input type="number" class="form-control" name="ruta" value="">
+                                    <input type="number" class="form-control" name="pa" value="{{ ( $qtc->follow &&  $qtc->pa)? $qtc->follow->pa : '' }}">
                                 </fieldset>
                                 <fieldset class="form-group  col-md-2">
                                     <label for="for_run">Presión Arterial Media</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
+                                
                                     <input type="number" class="form-control" name="ruta" value="">
                                 </fieldset>
                                 <fieldset class="form-group  col-md-2">
                                     <label for="for_run">Glasgow</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
+                                    
                                     <input type="number" class="form-control" name="ruta" value="">
                                 </fieldset>
                                 <fieldset class="form-group  col-md-2">
                                     <label for="for_run">% Saturacion Oxigeno Ambiental</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
+                                    
                                     <input type="number" class="form-control" name="ruta" value="">
                                 </fieldset>
                                 <fieldset class="form-group  col-md-2">

@@ -40,16 +40,17 @@
             <fieldset class="form-group  col-md-12">
                 <label for="for_specialty">Proximo Control </label>
                 <div class="input-group mb-3">
-                <button type="button" class="btn btn-success mr-2">En 7 Días</button>
-                <button type="button" class="btn btn-success mr-2">En 10 Días</button>
-                <button type="button" class="btn btn-success mr-2">En 15 Días</button>
-                <button type="button" class="btn btn-success mr-2">En 30 Días</button>
-                <button type="button" class="btn btn-success mr-2">En 60 Días</button>
-                <button type="button" class="btn btn-success mr-2">En 90 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 7 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 10 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 15 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 30 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 60 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 90 Días</button>
                 
-                       
                         <input type="date" class="form-control col-md-3" placeholder="" aria-label="Proxima consulta">
                         <button class="btn btn-success" type="button" id="button-add">Agregar Otra fecha</button>
+                    
+                
                 </div>
             </fieldset>
     
