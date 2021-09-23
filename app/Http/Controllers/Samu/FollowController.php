@@ -52,6 +52,35 @@ class FollowController extends Controller
 
     }
 
+    public function tstore(Request $request)
+    {
+        //Follow::create($request->all());
+
+
+        //devuelve user o lo crea
+        Follow::updateOrCreate(
+        ['qtc_id' => $request->qtc_id],
+        $request->All()
+      );
+      return redirect()->route('samu.qtc.index');
+
+    }
+
+    public function otstore(Request $request)
+    {
+        //Follow::create($request->all());
+
+
+        //devuelve user o lo crea
+        Follow::updateOrCreate(
+        ['qtc_id' => $request->qtc_id],
+        $request->All()
+      );
+      return redirect()->route('samu.qtc.index');
+
+    }
+
+
     /**
      * Display the specified resource.
      *
@@ -85,10 +114,23 @@ class FollowController extends Controller
      */
     public function update(Request $request, follow $follow)
     {
-        
-        
-        //return redirect()->route('samu.codekey.index');
+        //['qtc_id' => $request->qtc_id];
+        $follow->fill($request->all());
+        $follow->update();
+    
+        return redirect()->route('samu.qtc.index');
     }
+
+    public function tupdate(Request $request, follow $follow)
+    {
+        //['qtc_id' => $request->qtc_id];
+        $follow->fill($request->all());
+        $follow->update();
+    
+        return redirect()->route('samu.qtc.index');
+    }
+
+    
 
     /**
      * Remove the specified resource from storage.

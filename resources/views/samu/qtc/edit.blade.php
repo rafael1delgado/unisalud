@@ -10,7 +10,7 @@
 
 <div class="card mb-3">
     <div class="card-body">
-
+        
         <!-- seguimiento-->
         <h3><b><b></h3>
             
@@ -106,18 +106,15 @@
 
 <!-- inicio evaluacion de paciente-->
             <hr>
-            <form method="post" action="{{ route('samu.follow.store') }}">
+            <form method="post" action="{{ route('samu.follow.update', $qtc->follow) }}">
                 @csrf
-                @method('POST')
+                @method('PUT')
 
                     <h4>Evaluación de paciente</h4>
                     <div class="form-row">
                         <div class=" col-md-6">
-                        <label for="for_reception_detail">Detalle de Recepción </label>
-                            <textarea class="form-control" id="reception_detail" name="reception_detail" placeholder="" required value="{{ ( $qtc->follow &&  $qtc->follow->reception_detail)? $qtc->follow->reception_detail : '' }}"></textarea>
-                            <div class="invalid-feedback">
-                            Ingrese descripción
-                            </div>
+                        <label for="for_reception_detail">Detalle de Recepción </label>                                
+                        <textarea class="form-control" style="height: 100px" name="reception_detail">{{ ( $qtc->follow &&  $qtc->follow->reception_detail)? $qtc->follow->reception_detail : '' }}</textarea>
                         </div>
                         <fieldset class="form-group  col-md-3">
                                     <label for="for_establishment">Est. Recepcion de paciente </label>
@@ -151,80 +148,67 @@
                     
                         
                     </div>
-                <!--fin evaluacion paciente-->
-                    <hr>
-                    <h4> Asignación Signos Vitales</h4>
+                        <!--fin evaluacion paciente-->
+                            <hr>
+                            <h4> Asignación Signos Vitales</h4>
 
-                    <div class="form-row">
-                                <fieldset class="form-group  col-md-2">
-                                    <label for="for_fc">Frecuencia Cardiaca</label>
-                                    <input type="number" class="form-control" name="fc" value="{{ ( $qtc->follow &&  $qtc->fc)? $qtc->follow->fc : '' }}">
-                                </fieldset>
-                                <fieldset class="form-group  col-md-2">
-                                    <label for="for_run">Frecuencia Respiratoria </label>
-                                    <input type="number" class="form-control" name="fr" value="{{ ( $qtc->follow &&  $qtc->fr)? $qtc->follow->fr : '' }}">
-                                </fieldset>
-                                <fieldset class="form-group  col-md-2">
-                                    <label for="for_run">Presión Arterial</label>
-                                    <input type="number" class="form-control" name="pa" value="{{ ( $qtc->follow &&  $qtc->pa)? $qtc->follow->pa : '' }}">
-                                </fieldset>
-                                <fieldset class="form-group  col-md-2">
-                                    <label for="for_run">Presión Arterial Media</label>
-                                
-                                    <input type="number" class="form-control" name="ruta" value="">
-                                </fieldset>
-                                <fieldset class="form-group  col-md-2">
-                                    <label for="for_run">Glasgow</label>
-                                    
-                                    <input type="number" class="form-control" name="ruta" value="">
-                                </fieldset>
-                                <fieldset class="form-group  col-md-2">
-                                    <label for="for_run">% Saturacion Oxigeno Ambiental</label>
-                                    
-                                    <input type="number" class="form-control" name="ruta" value="">
-                                </fieldset>
-                                <fieldset class="form-group  col-md-2">
-                                    <label for="for_run">% Saturación Oxigeno/Apoyo</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
-                                    <input type="number" class="form-control" name="ruta" value="">
-                                </fieldset>
-                                <fieldset class="form-group  col-md-2">
-                                    <label for="for_run">HGT mg/dl</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
-                                    <input type="number" class="form-control" name="ruta" value="">
-                                </fieldset>
-                                <fieldset class="form-group  col-md-2">
-                                    <label for="for_run">Llene Capilar</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
-                                    <input type="number" class="form-control" name="ruta" value="">
-                                </fieldset>
-                                <fieldset class="form-group  col-md-2">
-                                    <label for="for_run">Temperatura °C</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
-                                    <input type="number" class="form-control" name="ruta" value="">
-                                </fieldset>
-                                <fieldset class="form-group  col-md-4">
-                                    <label for="for_run">Tratamiento</label>
-                                    <input type="hidden" class="form-control"  name="hora" value="">
-                                    <input type="text" class="form-control" name="ruta" value="">
-                                </fieldset>
-                                <div class=" col-md-12">
-                                    <label for="for_run">Observación </label>
-                                    <textarea class="form-control
-                                    " id="validationTextarea" placeholder="" required></textarea>
-                                    <div class="invalid-feedback">
-                                        Ingrese observación
-                                    </div>
-                                </div>
-                                
-                            
-                </div>
-                <div class="form-row mb-3">
-                            <fieldset class="form-group col-md-2 mt-3 ">
-                                <label for="for_run"></label>
-                                <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
-                            </fieldset>
-                    </div>       
+                            <div class="form-row">
+                                        <fieldset class="form-group  col-md-2">
+                                            <label for="for_fc">Frecuencia Cardiaca</label>
+                                            <input type="number" class="form-control" name="fc" value="{{ ( $qtc->follow &&  $qtc->follow->fc)? $qtc->follow->fc : '' }}">
+                                        </fieldset>
+                                        <fieldset class="form-group  col-md-2">
+                                            <label for="for_fr">Frecuencia Respiratoria </label>
+                                            <input type="number" class="form-control" name="fr" value="{{ ( $qtc->follow &&  $qtc->follow->fr)? $qtc->follow->fr : '' }}">
+                                        </fieldset>
+                                        <fieldset class="form-group  col-md-2">
+                                            <label for="for_pa">Presión Arterial</label>
+                                            <input type="number" class="form-control" name="pa" value="{{ ( $qtc->follow &&  $qtc->follow->pa)? $qtc->follow->pa : '' }}">
+                                        </fieldset>
+                                        <fieldset class="form-group  col-md-2">
+                                            <label for="for_pam">Presión Arterial Media</label>
+                                            <input type="number" class="form-control" name="pam" value="{{ ( $qtc->follow &&  $qtc->follow->pam)? $qtc->follow->pam : '' }}">
+                                        </fieldset>
+                                        <fieldset class="form-group  col-md-2">
+                                            <label for="for_gl">Glasgow</label>
+                                            <input type="number" class="form-control" name="gl" value="{{ ( $qtc->follow &&  $qtc->follow->gl)? $qtc->follow->gl : '' }}">
+                                        </fieldset>
+                                        <fieldset class="form-group  col-md-2">
+                                            <label for="for_soam">% Saturacion Oxigeno Ambiental</label>
+                                            <input type="number" class="form-control" name="soam" value="{{ ( $qtc->follow &&  $qtc->follow->soam)? $qtc->follow->soam : '' }}">
+                                        </fieldset>
+                                        <fieldset class="form-group  col-md-2">
+                                            <label for="for_soap">% Saturación Oxigeno/Apoyo</label>
+                                            <input type="number" class="form-control" name="soap" value="{{ ( $qtc->follow &&  $qtc->follow->soap)? $qtc->follow->soap : '' }}">
+                                        </fieldset>
+                                        <fieldset class="form-group  col-md-2">
+                                            <label for="for_hgt">HGT mg/dl</label>
+                                            <input type="number" class="form-control" name="hgt" value="{{ ( $qtc->follow &&  $qtc->follow->hgt)? $qtc->follow->soap : '' }}">
+                                        </fieldset>
+                                        <fieldset class="form-group  col-md-2">
+                                            <label for="for_fill_capillary">Llene Capilar</label>
+                                            <input type="number" class="form-control" name="fill_capillary" value="{{ ( $qtc->follow->follow &&  $qtc->fill_capillary)? $qtc->follow->fill_capillary : '' }}">
+                                        </fieldset>
+                                        <fieldset class="form-group  col-md-2">
+                                            <label for="for_t">Temperatura °C</label>
+                                            <input type="number" class="form-control" name="t" value="{{ ( $qtc->follow &&  $qtc->follow->t)? $qtc->follow->t : '' }}">
+                                        </fieldset>
+                                        <fieldset class="form-group  col-md-4">
+                                            <label for="for_treatment">Tratamiento</label>
+                                            <input type="text" class="form-control" name="treatment" value="{{ ( $qtc->follow &&  $qtc->follow->treatment)? $qtc->follow->treatment : '' }}">
+                                        </fieldset>
+                                        <div class=" col-md-12">
+                                            <label for="for_observation_sv">Observación </label>
+                                            <textarea class="form-control" style="height: 100px" name="observation_sv">{{ ( $qtc->follow &&  $qtc->follow->observation_sv)? $qtc->follow->observation_sv : '' }}</textarea>
+                                        </div>                   
+                        </div>
+                        <div class="form-row mb-3">
+                                    <fieldset class="form-group col-md-2 mt-3 ">
+                                        <label for="for_guardar"></label>
+                                        <input hidden name="qtc_id" value="{{$qtc->id}}"> 
+                                        <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
+                                    </fieldset>
+                            </div>       
 
             </form>
 

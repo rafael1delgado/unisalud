@@ -25,6 +25,6 @@ class Qtc extends Model
 
     public function follow()
     {
-        return $this->hasOne(Follow::class, 'qtc_id');
+        return $this->hasOne('\App\Models\Samu\Follow');
     }
 }

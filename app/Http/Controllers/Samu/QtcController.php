@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
+use App\Models\Samu\Follow;
 use App\Models\Samu\Qtc;
 use Illuminate\Http\Request;
 
@@ -40,9 +41,16 @@ class QtcController extends Controller
      */
     public function store(Request $request)
     {
-    
-        qtc::create($request->all());
-        $request->session()->flash('success', 'blalalala.');
+        //Guardar QTC
+        $qtc = new Qtc($request->All());
+        $qtc->save();
+
+        //Guardar Follow
+        $follow = new Follow();
+        $follow->qtc_id = $qtc->id;
+        $follow->save();
+  
+        $request->session()->flash('success', 'Se ha creado el nuevo QTC.');
         return redirect()->route('samu.qtc.index');
     }
 
@@ -65,18 +73,25 @@ class QtcController extends Controller
      */
     public function edit(Qtc $qtc)
     {
-      //  dd($qtc->follow);
-        switch (strtolower($qtc->class_qtc)) {
+        switch ($qtc->class_qtc) {
             case 'emergencia':
                 return view ('samu.qtc.edit' , compact('qtc'));
+                break;
             case 'ot' :
                 return view ('samu.qtc.otedit' , compact('qtc'));
+                break;
             case 'traslado':
                 return view ('samu.qtc.tedit' , compact('qtc'));
+                break;
+            default: 
+                return null;
+                break;
         }
 
         //return view ('samu.qtc.edit' , compact('qtc'));
     }
+
+ 
 
     /**
      * Update the specified resource in storage.
