@@ -55,7 +55,7 @@
                         {{$practitioner->appointments_available_count}}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm" title="Citar">  <i class="fa fa-calendar"></i> </button>
+                        <button type="button" class="btn btn-primary btn-sm" title="Citar" wire:click="appoint()">  <i class="fa fa-calendar"></i> </button>
                     </td>
                 </tr>
                 @endforeach

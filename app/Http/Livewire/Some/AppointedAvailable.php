@@ -65,7 +65,7 @@ class AppointedAvailable extends Component
     }
 
     public function appoint(){
-
+        return redirect()->route('some.appointment');
     }
 
     public function render()
