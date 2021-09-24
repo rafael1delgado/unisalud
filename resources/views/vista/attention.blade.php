@@ -48,8 +48,7 @@
                     <button type="button" class="btn btn-success mr-2">En 90 Días</button>
                 
                         <input type="date" class="form-control col-md-3" placeholder="" aria-label="Proxima consulta">
-                        <button class="btn btn-success" type="button" id="button-add">Agregar Otra fecha</button>
-                    
+                        <button class="btn btn-success" type="button" id="button-add">Agregar Otra fecha</button>       
                 
                 </div>
             </fieldset>

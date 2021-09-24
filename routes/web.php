@@ -478,8 +478,7 @@ Route::prefix('soap')->name('soap.')->group(function(){
       Route::get('/',[App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
       Route::get('/edit/{qtc}',[App\Http\Controllers\Samu\QtcController::class, 'edit'])->name('edit');
       Route::post('/store',[App\Http\Controllers\Samu\QtcController::class, 'store'])->name('store');
-      Route::view('/otedit', 'samu.call.otedit')->name('otedit');
-      Route::view('/tedit', 'samu.call.tedit')->name('tedit');
+   
     });
 
     Route::prefix('follow')->name('follow.')->group(function () {
@@ -487,6 +486,10 @@ Route::prefix('soap')->name('soap.')->group(function(){
       Route::get('/create' , [App\Http\Controllers\Samu\FollowController::class, 'create'])->name('create');
       Route::get('/edit',[App\Http\Controllers\Samu\FollowController::class, 'edit'])->name('edit');
       Route::post('/store', [App\Http\Controllers\Samu\FollowController::class, 'store'])->name('store');
+      Route::post('/otstore', [App\Http\Controllers\Samu\FollowController::class, 'otstore'])->name('otstore');
+      Route::post('/tstore', [App\Http\Controllers\Samu\FollowController::class, 'tstore'])->name('tstore');
+      Route::put('/tupdate/{follow}', [App\Http\Controllers\Samu\FollowController::class, 'tupdate'])->name('tupdate');
+      Route::put('/update/{follow}', [App\Http\Controllers\Samu\FollowController::class, 'update'])->name('update');
     });
 
     Route::prefix('shift')->name('shift.')->group(function () {

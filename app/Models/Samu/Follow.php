@@ -62,6 +62,6 @@ class Follow extends Model
 
     public function qtc()
     {
-        return $this->belongsTo(Qtc::class, 'qtc_id');
+        return $this->belongsTo('\App\Models\Samu\Qtc');
     }
 }

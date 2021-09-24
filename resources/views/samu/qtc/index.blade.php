@@ -353,8 +353,9 @@
                                 <td>{{ $qtc->applicant }}</td>
                                 <td>{{ $qtc->direction }}</td>
                                 <td>{{ $qtc->telephone }}</td>
+                                
                                 <td><a href="{{ route('samu.qtc.edit', $qtc) }}">Seguimiento</a> </td>
-                            
+                               
 
                             </tr>
                          @endforeach   
