@@ -10,7 +10,6 @@ use Carbon\Carbon;
 
 class OpenPending extends Component
 {
-
     public $programmingProposals = array();
     public $from;
     public $to;
