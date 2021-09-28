@@ -30,7 +30,36 @@
             </fieldset>  
         </div>
 
-        <!--campos añadidos-->
+        
+            <hr>
+        <div class="form-row">
+        <fieldset class="form-group  col-md-12">
+            <label for="for_return"><b>30-09-2021</b></label>
+                <button type="button" class="btn btn-info ">Paciente Atendido</button>
+            </fieldset>
+            <fieldset class="form-group  col-md-12">
+                <label for="for_specialty">Proximo Control </label>
+                <div class="input-group mb-3">
+                    <button type="button" class="btn btn-success mr-2">En 7 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 10 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 15 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 30 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 60 Días</button>
+                    <button type="button" class="btn btn-success mr-2">En 90 Días</button>
+                
+                        <input type="date" class="form-control col-md-3" placeholder="" aria-label="Proxima consulta">
+                        <button class="btn btn-success" type="button" id="button-add">Agregar Otra fecha</button>       
+                
+                </div>
+            </fieldset>
+    
+        </div>
+        <div class="card border-info mb-3">
+				<div class="card-header bg-info text-white">
+                    Derivar a otra Especialidad
+				</div>
+				<div class="card-body">
+                         <!--campos añadidos-->
         <div class="form-row">
                 <fieldset class="form-group  col-md-2">
                                     <label for="for_pcsIndMotivo">Motivo Derivación </label>
@@ -93,7 +122,7 @@
                 
             </div>
             <div class="form-row">
-                <fieldset class="form-group  col-md-4">
+                <fieldset class="form-group  col-md-2">
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Fundamentos Diagnostico</label>
                         <input class="form-control" type="file" id="pcsNomFundDiag">
@@ -110,7 +139,7 @@
                                     </select>
                                                     
                 </fieldset>
-                <fieldset class="form-group  col-md-6">
+                <fieldset class="form-group  col-md-3">
                 
                         <label for="for_pcsSubProblemAuge">Descripción de Examenes</label>
                             <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
@@ -120,57 +149,7 @@
                 
                 
                 </fieldset>
-            </div>
-            <!--fin campos añadidos-->
-
-
-
-
-
-
-
-
-            
-            <hr>
-        <div class="form-row">
-        <fieldset class="form-group  col-md-12">
-            <label for="for_return"><b>30-09-2021</b></label>
-                <button type="button" class="btn btn-info ">Paciente Atendido</button>
-            </fieldset>
-            <fieldset class="form-group  col-md-12">
-                <label for="for_specialty">Proximo Control </label>
-                <div class="input-group mb-3">
-                    <button type="button" class="btn btn-success mr-2">En 7 Días</button>
-                    <button type="button" class="btn btn-success mr-2">En 10 Días</button>
-                    <button type="button" class="btn btn-success mr-2">En 15 Días</button>
-                    <button type="button" class="btn btn-success mr-2">En 30 Días</button>
-                    <button type="button" class="btn btn-success mr-2">En 60 Días</button>
-                    <button type="button" class="btn btn-success mr-2">En 90 Días</button>
-                
-                        <input type="date" class="form-control col-md-3" placeholder="" aria-label="Proxima consulta">
-                        <button class="btn btn-success" type="button" id="button-add">Agregar Otra fecha</button>       
-                
-                </div>
-            </fieldset>
-    
-        </div>
-        <div class="card border-info mb-3">
-				<div class="card-header bg-info text-white">
-                    Derivar a otra Especialidad
-				</div>
-				<div class="card-body">
-                        <div class="form-row">
-                                <fieldset class="form-group  col-md-2 mt-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Otra Especialidad <a class="text-danger">(opcional)</a>
-                                        </label>
-                                    </div>
-                                </fieldset>
-                                
-
-                                <fieldset class="form-group  col-md-3">
+                <fieldset class="form-group  col-md-2">
                                     <label for="for_specialty">Especialidad </label>
                                     <select class="form-control" name=" specialty">
                                             <option>Selecione</option>
@@ -190,19 +169,25 @@
                                                     </select>
                                 </fieldset>
                             
-                                <fieldset class="form-group  col-md-5">
+                                <fieldset class="form-group  col-md-3">
                                         <label for="for_run">Observación </label>
                                         <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
                                             <div class="invalid-feedback">
                                                 Ingrese observación
                                             </div>                    
                                 </fieldset>
-                                <fieldset class="form-group col-md-2 mt-5">
-                                    <label for="for_save"></label>
-                                    <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
-                                </fieldset>
-                            
-                        </div>
+                                
+            <fieldset class="form-group col-md-2">
+               
+               <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
+            </fieldset>
+                    
+
+                               
+            </div>
+
+            <!--fin campos añadidos-->
+                        
                 </div>
             </div>
 
@@ -214,7 +199,7 @@
                             <a href="#" class="stretched-link text-info">RADIOGRAFIAS</a>
                     </fieldset>
             </div>
-             
+            
              
     
 
