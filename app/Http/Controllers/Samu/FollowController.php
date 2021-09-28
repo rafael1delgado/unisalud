@@ -40,43 +40,45 @@ class FollowController extends Controller
      */
     public function store(Request $request)
     {
-        //Follow::create($request->all());
-
-
+        
         //devuelve user o lo crea
         Follow::updateOrCreate(
         ['qtc_id' => $request->qtc_id],
         $request->All()
-      );
-      return redirect()->route('samu.qtc.index');
+         );
+        return redirect()->route('samu.qtc.index');
+        // if para cambiar estado
+        //if ($a > $b) {
+        //    echo "a es mayor que b";
+        //} elseif ($a == $b) {
+        //    echo "a es igual que b";
+        //} else {
+        //    echo "a es menor que b";
+        //}
 
     }
 
     public function tstore(Request $request)
     {
-        //Follow::create($request->all());
-
 
         //devuelve user o lo crea
         Follow::updateOrCreate(
         ['qtc_id' => $request->qtc_id],
         $request->All()
-      );
-      return redirect()->route('samu.qtc.index');
+        );
+        return redirect()->route('samu.qtc.index');
 
     }
 
     public function otstore(Request $request)
     {
-        //Follow::create($request->all());
-
-
+        
         //devuelve user o lo crea
         Follow::updateOrCreate(
         ['qtc_id' => $request->qtc_id],
         $request->All()
-      );
-      return redirect()->route('samu.qtc.index');
+        );
+        return redirect()->route('samu.qtc.index');
 
     }
 

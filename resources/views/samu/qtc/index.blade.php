@@ -16,19 +16,10 @@
     <div class="card-body">
    
         <div class="form-row">
-                <fieldset class="form-group  col-md-2">
-                    <label for="for_run"><b>Fecha de registro</b> </label>
-                    <input type="date" class="form-control" name="date" value="">
-                </fieldset>
-                <fieldset class="form-group  col-md-9">
-                </fieldset>
-                <fieldset class="form-group  col-md-1">
-                    <label for="for_run"><i class="fas fa-clock"></i><b> Hora Actual</b> </label>
-                    <input type="text" class="form-control" name="hora" value="18:23">
+                <fieldset class="form-group  col-md-10">
+                    <label for="for_run"><h4><i class="far fa-calendar-alt"></i> Fecha de registro: {{date('Y-m-d')}}</h4> </label>    
                 </fieldset>
         </div>  
-            <hr>
-            
             <div class="form-row">
                 <div class="col-12 col-md-4 mb-3">
                     <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalmoviles">
@@ -365,11 +356,6 @@
                 </div>
                 <!-- fin de registro de llamadas-->
         
-          <!--estado de las personas en turno
-                novedades
-                ambulancias por turno
-                centro regulador por turno-->
-
     </div>
 </div>
 
