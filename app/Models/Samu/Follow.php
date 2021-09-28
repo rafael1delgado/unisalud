@@ -4,10 +4,14 @@ namespace App\Models\Samu;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Follow extends Model
-{
+{   
     use HasFactory;
+    use SoftDeletes;
+
     protected $table="samu_follows";
 
     protected $fillable = [
