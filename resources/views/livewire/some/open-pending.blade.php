@@ -4,11 +4,17 @@
             <div class="form-group col-md-2">
                 <label for="inputEmail4">Desde</label>
                 <input type="date" class="form-control" placeholder="Fecha inicio" wire:model="from" >
+                @error('from')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="form-group col-md-2">
                 <label for="inputEmail4">Hasta</label>
                 <input type="date" class="form-control" placeholder="Fecha fin" wire:model="to">
+                @error('to')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="form-group col-md-1">
