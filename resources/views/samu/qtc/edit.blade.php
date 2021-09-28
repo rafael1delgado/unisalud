@@ -21,7 +21,11 @@
                         <div class="form-row">
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_key">Clave</label>
-                                        <input type="text" class="form-control" name="key" value="{{ ( $qtc->follow &&  $qtc->follow->key)? $qtc->follow->key : '' }}">
+                                        <select class="form-control" name="key">
+                                        @foreach($keys as $key)
+                                            <option value="{{ $qtc->follow->transfer_type === '$key' ? 'selected' : '' }}">{{$key->name_key_code}} </option>
+                                        @endforeach  
+                                       <!-- <input type="text" class="form-control" name="key" value="{{ ( $qtc->follow &&  $qtc->follow->key)? $qtc->follow->key : '' }}">-->
                                     </fieldset>
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_return">Clave de Retorno</label>

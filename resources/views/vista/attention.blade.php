@@ -16,21 +16,21 @@
     <h3 class="mb-3"><i class="fas fa-hospital-user"></i> ATENCIÓN</h3>
 
         <div class="form-row">
-         
-        <fieldset class="form-group  col-md-4">
-            <label for="for_run">RUT</label>
-            <input type="text" class="form-control" name="rut" value="10225368-k">
-        </fieldset>
-        <fieldset class="form-group  col-md-4">
-            <label for="for_run">Nombre</label>
-            <input type="text" class="form-control" name="name" value="Sofia Valencia">
-        </fieldset>
-        <fieldset class="form-group  col-md-4">
-            <label for="for_run">Teléfono</label>
-            <input type="text" class="form-control" name="phone" value="+56945455252">
-        </fieldset> 
+            <fieldset class="form-group  col-md-4">
+                <label for="for_run">RUT</label>
+                <input type="text" class="form-control" name="rut" value="10225368-k">
+            </fieldset>
+            <fieldset class="form-group  col-md-4">
+                <label for="for_run">Nombre</label>
+                <input type="text" class="form-control" name="name" value="Sofia Valencia">
+            </fieldset>
+            <fieldset class="form-group  col-md-4">
+                <label for="for_run">Teléfono</label>
+                <input type="text" class="form-control" name="phone" value="+56945455252">
+            </fieldset>  
         </div>
-            
+
+        
             <hr>
         <div class="form-row">
         <fieldset class="form-group  col-md-12">
@@ -59,16 +59,97 @@
                     Derivar a otra Especialidad
 				</div>
 				<div class="card-body">
-                        <div class="form-row">
-                                <fieldset class="form-group  col-md-2 mt-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Otra Especialidad <a class="text-danger">(opcional)</a>
-                                        </label>
-                                    </div>
-                                </fieldset>
-                                <fieldset class="form-group  col-md-3">
+                         <!--campos añadidos-->
+        <div class="form-row">
+                <fieldset class="form-group  col-md-2">
+                                    <label for="for_pcsIndMotivo">Motivo Derivación </label>
+                                    <select class="form-control" name="pcsIndMotivo">
+                                            <option>Selecione</option>
+                                                        <option value="1" >C:Confirmación diagnóstica</option>
+                                                        <option value="2" >E:Control Especialista </option>
+                                                        <option value="3" >S:Seguimiento </option>
+                                                        <option value="4" >T:Tratamiento</option>
+                                                        <option value="5" >O: Otro</option>
+
+                                    </select>
+                                                    
+                </fieldset>
+                <fieldset class="form-group  col-md-5">
+                                        <label for="for_run">Descripción Motivo Consulta</label>
+                                        <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Ingrese Motivo
+                                            </div>                    
+                </fieldset>
+                <fieldset class="form-group  col-md-5">
+                                        <label for="for_run">Hipótesis diagnostica</label>
+                                        <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Ingrese Hipotesis
+                                            </div>                    
+                </fieldset>    
+                
+            </div>
+            <div class="form-row">
+                <fieldset class="form-group  col-md-2">
+                                    <label for="for_pcsCodDiag">Codigo CIE-10</label>
+                                    <input type="text" class="form-control" name="pcsCodDiag" value="">
+                                                    
+                </fieldset>
+                <fieldset class="form-group  col-md-2">
+                                        <label for="for_pcsIndAuge">Ind. Auge</label>
+                                        <select class="form-control" name="pcsIndAuge">
+                                            <option>Selecione</option>
+                                                        <option value="1" >No</option>
+                                                        <option value="2" >Si </option>
+                                         </select>
+                                                        
+                </fieldset>
+                <fieldset class="form-group  col-md-4">
+                                        <label for="for_pcsNomProblemAugea">Descripción Auge</label>
+                                        <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Ingrese Descripción
+                                            </div>                    
+                </fieldset>
+                <fieldset class="form-group  col-md-4">
+                                        <label for="for_pcsSubProblemAuge">Subproblema Auge</label>
+                                        <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Ingrese Descripción
+                                            </div>                    
+                </fieldset>      
+                
+            </div>
+            <div class="form-row">
+                <fieldset class="form-group  col-md-2">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Fundamentos Diagnostico</label>
+                        <input class="form-control" type="file" id="pcsNomFundDiag">
+                    </div>
+                </fieldset> 
+                <fieldset class="form-group  col-md-2">
+                                    <label for="for_pcsIndUrgencia">Indicador Urgencia</label>
+                                    <select class="form-control" name="pcsIndUrgencia">
+                                            <option>Selecione</option>
+                                                        <option value="1" >PO:Baja Prioridad</option>
+                                                        <option value="2" >P1:Mediana Prioridad</option>
+                                                        <option value="3" >P2:Alta Prioridad</option>
+
+                                    </select>
+                                                    
+                </fieldset>
+                <fieldset class="form-group  col-md-3">
+                
+                        <label for="for_pcsSubProblemAuge">Descripción de Examenes</label>
+                            <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
+                                <div class="invalid-feedback">
+                                    Ingrese Descripción
+                                </div>
+                
+                
+                </fieldset>
+                <fieldset class="form-group  col-md-2">
                                     <label for="for_specialty">Especialidad </label>
                                     <select class="form-control" name=" specialty">
                                             <option>Selecione</option>
@@ -88,19 +169,25 @@
                                                     </select>
                                 </fieldset>
                             
-                                <fieldset class="form-group  col-md-5">
+                                <fieldset class="form-group  col-md-3">
                                         <label for="for_run">Observación </label>
                                         <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
                                             <div class="invalid-feedback">
                                                 Ingrese observación
                                             </div>                    
                                 </fieldset>
-                                <fieldset class="form-group col-md-2 mt-5">
-                                    <label for="for_save"></label>
-                                    <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
-                                </fieldset>
-                            
-                        </div>
+                                
+            <fieldset class="form-group col-md-2">
+               
+               <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
+            </fieldset>
+                    
+
+                               
+            </div>
+
+            <!--fin campos añadidos-->
+                        
                 </div>
             </div>
 
@@ -112,7 +199,7 @@
                             <a href="#" class="stretched-link text-info">RADIOGRAFIAS</a>
                     </fieldset>
             </div>
-             
+            
              
     
 
