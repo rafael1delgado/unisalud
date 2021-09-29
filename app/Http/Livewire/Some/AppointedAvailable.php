@@ -65,7 +65,9 @@ class AppointedAvailable extends Component
     }
 
     public function appoint($pendingPractitionerId){
-        return redirect()->route('some.appointment.pending_practitioner', compact('pendingPractitionerId'));
+        $from = $this->from;
+        $to = $this->to;
+        return redirect()->route('some.appointment.pending_practitioner', compact('pendingPractitionerId', 'from', 'to'));
     }
 
     public function render()

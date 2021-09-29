@@ -33,14 +33,14 @@ class AsignAppointment extends Component
     public $locations;
     public $selectedLocationId;
     public $patientInstruction;
-    public $appointmentId; //Viene por parámetro 
-    public $pendingPractitionerId; //Viene por parámetro
+    // public $appointmentId; //Viene por parámetro 
+    // public $pendingPractitionerId; //Viene por parámetro
 
     protected $listeners = [
         'userSelected' => 'setUser',
     ];
 
-    public function mount($appointmentId = null, $pendingPractitionerId = null)
+    public function mount($appointmentId = null, $pendingPractitionerId = null, $from = null, $to = null)
     {
         if ($appointmentId) {
             $appointment = Appointment::find($appointmentId);
@@ -53,16 +53,20 @@ class AsignAppointment extends Component
         if ($pendingPractitionerId) {
             $pendingPractitioner = Practitioner::find($pendingPractitionerId);
             // dd($practitioner);
-            if($pendingPractitioner->profession_id == 12){
+            if ($pendingPractitioner->profession_id == 12) {
                 $this->type = 'Médico';
                 $this->specialty_id = $pendingPractitioner->specialty_id;
-            }else {
+            } else {
                 $this->type = 'No médico';
                 $this->profession_id = $pendingPractitioner->profession_id;
             }
 
             $this->getPractitioners();
             $this->practitioner_id = $pendingPractitioner->id;
+            $this->appointments_from = $from;
+            $this->appointments_to = $to;
+
+            $this->searchAppointments();
         }
     }
 

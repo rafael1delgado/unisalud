@@ -123,7 +123,7 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/appointment/{appointmentId?}', AsignAppointment::class)->name('appointment');
-    Route::get('/appointment-pending-practitioner/{pendingPractitionerId}', AsignAppointment::class)->name('appointment.pending_practitioner');
+    Route::get('/appointment-pending-practitioner/{pendingPractitionerId}/{from}/{to}', AsignAppointment::class)->name('appointment.pending_practitioner');
     Route::get('/reallocate', Reallocate::class)->name('reallocate');
     // Route::view('/agenda', 'some.agenda')->name('agenda');
     Route::get('/interconsultation', Interconsultation::class)->name('interconsultation');
