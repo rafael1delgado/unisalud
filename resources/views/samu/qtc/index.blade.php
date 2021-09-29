@@ -16,19 +16,10 @@
     <div class="card-body">
    
         <div class="form-row">
-                <fieldset class="form-group  col-md-2">
-                    <label for="for_run"><b>Fecha de registro</b> </label>
-                    <input type="date" class="form-control" name="date" value="">
-                </fieldset>
-                <fieldset class="form-group  col-md-9">
-                </fieldset>
-                <fieldset class="form-group  col-md-1">
-                    <label for="for_run"><i class="fas fa-clock"></i><b> Hora Actual</b> </label>
-                    <input type="text" class="form-control" name="hora" value="18:23">
+                <fieldset class="form-group  col-md-10">
+                    <label for="for_run"><h4><i class="far fa-calendar-alt"></i> Fecha de registro: {{date('Y-m-d')}}</h4> </label>    
                 </fieldset>
         </div>  
-            <hr>
-            
             <div class="form-row">
                 <div class="col-12 col-md-4 mb-3">
                     <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalmoviles">
@@ -44,53 +35,29 @@
                         <h5 class="modal-title" id="exampleModalLabel">Moviles en turno</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                            <div class="form-row">
-                                    <fieldset class="form-group col-12 col-md-4">
-                                    <label for="empresa">Tipo</label>
-                                    <select class="form-control" name="mobile" id="mobile">
-                                        <option>Seleccione Tipo</option>
-                                                    <option value="1" >Movil 1</option>
-                                                    <option value="2" >Movil  2</option>
-                                                    <option value="3" >Movil  3</option>
-                                                    <option value="4" >Movil  4</option>
-                                                    <option value="5" >Movil  5</option>
-                                                    <option value="3" >Movil  6</option>
-                                                    <option value="4" >Movil  7</option>
-                                                    <option value="5" >Movil  8</option>
-                                                    <option value="1" >Movil 9</option>
-                                                    <option value="2" >Movil  10</option>
-                                                    <option value="3" >Movil  11</option>
-                                                    <option value="4" >Movil  12</option>
-                                                    <option value="5" >Movil  13</option>
-                                                    <option value="3" >Movil  14</option>
-                                                    <option value="4" >Movil  15</option>
-                                                    <option value="5" >Movil  16</option>
-                                                </select>
-                                    </fieldset>
+                        <form action="{{route('samu.codemobile.store')}}" method="post">
+                            @csrf
+                            @method('POST')
+                            <div class="modal-body">
+                                <div class="form-row">
+                                        <fieldset class="form-group col-12 col-md-4">
+                                            <label for="tipo">Codigo</label>
+                                            <select class="form-control" name="mobile_code" id="mobile_code">
+                                            @foreach($codemobiles as $codemobile)
+                                                <option value="{{ $codemobile->mobile_code === '$codemobile' ? 'selected' : '' }}">{{$codemobile->mobile_code}} </option>
+                                            @endforeach 
+                                            </select>
+                                        </fieldset>
 
-                                    <fieldset class="form-group  col-md-4">
-                                        <label for="for_run">Numero de Amb. </label>
-                                        <input type="hidden" class="form-control" id="for_id" name="id" value="">
-                                        <input type="text" class="form-control" name="date" value="12345">
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-4">
-                                        <label for="for_run">Estado </label>
-                                        <select class="form-control" name="region_id" id="regiones">
-                                                    <option>Seleccione Estado</option>
-                                                    <option value="1" >Activo</option>
-                                                    <option value="2" >Inactivo</option>
-                                        </select>
-                                        
-                                    </fieldset>
+                                </div>
                             </div>
-
+                       
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Guardar</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Guardar</button>
-                    </div>
-                    </div>
+                    </form>
                 </div>
                 </div>
                 <!-- fin modal operador-->
@@ -104,48 +71,20 @@
                             <thead>
                                 <tr class="text-center table-success">
                                     <th>Número</th>
-                                    <th>Tipo</th>
-                                    <th>Detalle</th>
-                                    <th></th>
+                                    <th>Código Móvil</th>
+                                    <th>Detalle Móvil</th>
+                                    <th>Editar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Movil 2</td>
-                                    <td></td>
-                                    <td><a href="#">Editar</a> </td>
-                                </tr>
-                                <tr>
-                                    <td>14</td>
-                                    <td>Movil 5</td>
-                                    <td></td>
-                                    <td><a href="#">Editar</a> </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Movil 12</td>
-                                    <td></td>
-                                    <td><a href="#">Editar</a> </td>
-                                </tr>
-                                <tr class="bg-danger text-white">
-                                    <td>44</td>
-                                    <td>Movil 6</td>
-                                    <td></td>
-                                    <td><a href="#">Editar</a> </td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Movil 4 </td>
-                                    <td></td>
-                                    <td><a href="#">Editar</a> </td>
-                                </tr>
-                                <tr class="bg-danger text-white">
-                                    <td>5</td>
-                                    <td>Movil 11</td>
-                                    <td>Movil con falla de correa</td>
-                                    <td><a href="#">Editar</a> </td>
-                                </tr>
+                                @foreach($codemobiles as $codemobile)
+                            <tr>
+                                <td>{{ $codemobile->id}}</td>
+                                <td>{{ $codemobile->mobile_code }}</td>
+                                <td>{{ $codemobile->name_mobile_code}}</td>
+                                <td><a href="{{ route('samu.codemobile.edit', $codemobile) }}">Editar</a> </td>
+                            </tr>
+                                @endforeach   
                             </tbody>
                         </table>
                 </div>
@@ -325,7 +264,7 @@
                         <tr class="text-center table-info">
                               
                               
-                              <th colspan="9"><b>Registro de llamadas</b></th>
+                              <th colspan="10"><b>Registro de llamadas</b></th>
                               
                           </tr>
                         
@@ -340,6 +279,7 @@
                                 <th>Dirección</th>
                                 <th>Teléfono</th>
                                 <th>Seguimiento</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -355,6 +295,13 @@
                                 <td>{{ $qtc->telephone }}</td>
                                 
                                 <td><a href="{{ route('samu.qtc.edit', $qtc) }}">Seguimiento</a> </td>
+                                <td class="text-center" >
+                                <form method="POST" action="{{ route('samu.qtc.destroy' , $qtc) }}">
+                                @csrf
+                                @method('DELETE')
+                               <button type="submit" class="btn btn-default"> <i class="fas fa-trash-alt fa-lg"></i> </button>
+                                </td>
+                            </form>
                                
 
                             </tr>
@@ -365,11 +312,6 @@
                 </div>
                 <!-- fin de registro de llamadas-->
         
-          <!--estado de las personas en turno
-                novedades
-                ambulancias por turno
-                centro regulador por turno-->
-
     </div>
 </div>
 

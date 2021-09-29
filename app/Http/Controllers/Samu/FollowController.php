@@ -40,43 +40,38 @@ class FollowController extends Controller
      */
     public function store(Request $request)
     {
-        //Follow::create($request->all());
-
-
+        
         //devuelve user o lo crea
         Follow::updateOrCreate(
         ['qtc_id' => $request->qtc_id],
         $request->All()
-      );
-      return redirect()->route('samu.qtc.index');
+         );
+        return redirect()->route('samu.qtc.index');
+        
 
     }
 
     public function tstore(Request $request)
     {
-        //Follow::create($request->all());
-
 
         //devuelve user o lo crea
         Follow::updateOrCreate(
         ['qtc_id' => $request->qtc_id],
         $request->All()
-      );
-      return redirect()->route('samu.qtc.index');
+        );
+        return redirect()->route('samu.qtc.index');
 
     }
 
     public function otstore(Request $request)
     {
-        //Follow::create($request->all());
-
-
+        
         //devuelve user o lo crea
         Follow::updateOrCreate(
         ['qtc_id' => $request->qtc_id],
         $request->All()
-      );
-      return redirect()->route('samu.qtc.index');
+        );
+        return redirect()->route('samu.qtc.index');
 
     }
 

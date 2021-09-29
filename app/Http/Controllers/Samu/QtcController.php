@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
 use App\Models\Samu\Follow;
+use App\Models\Samu\CodeKey;
 use App\Models\Samu\Qtc;
 use Illuminate\Http\Request;
+use App\Models\Samu\CodeMobile;
+
 
 class QtcController extends Controller
 {
@@ -16,9 +19,10 @@ class QtcController extends Controller
      */
     public function index()
     {
+        $codemobiles = CodeMobile::all();
         $qtcs=qtc::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
         //return $qtcs; 
-       return view ('samu.qtc.index' , compact('qtcs'));
+       return view ('samu.qtc.index' , compact('qtcs','codemobiles'));
     }
 
     /**
@@ -60,6 +64,12 @@ class QtcController extends Controller
      * @param  \App\Models\Samu\Qtc  $qtc
      * @return \Illuminate\Http\Response
      */
+    public function hora(Request $request)
+    {
+    $hora = new DateTime("now", new DateTimeZone('Santiago/Chile'));
+    return $hora->format('G');
+    }
+
     public function show(Qtc $qtc)
     {
         //
@@ -72,16 +82,20 @@ class QtcController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Qtc $qtc)
+    
     {
+        $keys=CodeKey::all();
+    
+        
         switch ($qtc->class_qtc) {
             case 'emergencia':
-                return view ('samu.qtc.edit' , compact('qtc'));
+                return view ('samu.qtc.edit' , compact('qtc','keys'));
                 break;
             case 'ot' :
                 return view ('samu.qtc.otedit' , compact('qtc'));
                 break;
             case 'traslado':
-                return view ('samu.qtc.tedit' , compact('qtc'));
+                return view ('samu.qtc.tedit' , compact('qtc','keys'));
                 break;
             default: 
                 return null;
@@ -116,6 +130,7 @@ class QtcController extends Controller
      */
     public function destroy(Qtc $qtc)
     {
-        //
+        $qtc->delete();
+        return redirect()->route('samu.qtc.index')->with('danger', ' Eliminado');
     }
 }
