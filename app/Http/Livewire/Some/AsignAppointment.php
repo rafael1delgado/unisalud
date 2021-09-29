@@ -33,20 +33,36 @@ class AsignAppointment extends Component
     public $locations;
     public $selectedLocationId;
     public $patientInstruction;
-    public $appointmentId;
+    public $appointmentId; //Viene por parámetro 
+    public $pendingPractitionerId; //Viene por parámetro
 
-    protected $listeners = ['userSelected' => 'setUser',
+    protected $listeners = [
+        'userSelected' => 'setUser',
     ];
 
-    public function mount($appointmentId = null){
-        if($appointmentId){
-
+    public function mount($appointmentId = null, $pendingPractitionerId = null)
+    {
+        if ($appointmentId) {
             $appointment = Appointment::find($appointmentId);
             $user = $appointment->users()->first();
 
             $this->run = $user->identifierRun->value;
             $this->setDv();
             $this->searchUser();
+        }
+        if ($pendingPractitionerId) {
+            $pendingPractitioner = Practitioner::find($pendingPractitionerId);
+            // dd($practitioner);
+            if($pendingPractitioner->profession_id == 12){
+                $this->type = 'Médico';
+                $this->specialty_id = $pendingPractitioner->specialty_id;
+            }else {
+                $this->type = 'No médico';
+                $this->profession_id = $pendingPractitioner->profession_id;
+            }
+
+            $this->getPractitioners();
+            $this->practitioner_id = $pendingPractitioner->id;
         }
     }
 
@@ -67,13 +83,14 @@ class AsignAppointment extends Component
         }
 
 
-        $this->validate([
-            'user' => 'required'
-        ],
-        [
-            'user.required' => 'No existe paciente.'
-        ]);
-
+        $this->validate(
+            [
+                'user' => 'required'
+            ],
+            [
+                'user.required' => 'No existe paciente.'
+            ]
+        );
     }
 
     public function setDv()
@@ -124,11 +141,11 @@ class AsignAppointment extends Component
 
         $query->whereHas('practitioners', function ($q) {
             return $q->when($this->specialty_id != null, function ($query) {
-                      $query->where('specialty_id',$this->specialty_id);
-                  })
-                  ->when($this->profession_id != null, function ($query) {
-                      $query->where('profession_id',$this->profession_id);
-                  });
+                $query->where('specialty_id', $this->specialty_id);
+            })
+                ->when($this->profession_id != null, function ($query) {
+                    $query->where('profession_id', $this->profession_id);
+                });
         });
 
         // $query->when($userPractitioner != null, function ($q) use ($userPractitioner) {
@@ -149,14 +166,14 @@ class AsignAppointment extends Component
 
         $this->appointments = $query->get();
 
-        $this->validate([
-            'appointments' => 'required'
-        ],
-        [
-            'appointments.required' => 'No se encuentran citas.'
-        ]
+        $this->validate(
+            [
+                'appointments' => 'required'
+            ],
+            [
+                'appointments.required' => 'No se encuentran citas.'
+            ]
         );
-
     }
 
     public function asignAppointment()
@@ -173,7 +190,8 @@ class AsignAppointment extends Component
             }
 
             $selectedAppointments->update(
-                ['status' => 'booked',
+                [
+                    'status' => 'booked',
                     'patient_instruction' => $this->patientInstruction,
                 ]
 
@@ -198,7 +216,6 @@ class AsignAppointment extends Component
                 if ($this->selectedLocationId) {
                     $duplicateSelectedOverbookingAppointment->locations()->save(Location::find($this->selectedLocationId), ['required' => 'required', 'status' => 'accepted']);
                 }
-
             }
 
             session()->flash('success', 'Cita de sobrecupo asignada');
@@ -248,13 +265,15 @@ class AsignAppointment extends Component
 
         $ids = $appointment->users()->allRelatedIds();
         foreach ($ids as $id) {
-            $appointment->users()->updateExistingPivot($id, ['status' => 'declined',
+            $appointment->users()->updateExistingPivot($id, [
+                'status' => 'declined',
             ]);
         }
 
         $ids = $appointment->practitioners()->allRelatedIds();
         foreach ($ids as $id) {
-            $appointment->practitioners()->updateExistingPivot($id, ['status' => 'tentative',
+            $appointment->practitioners()->updateExistingPivot($id, [
+                'status' => 'tentative',
             ]);
         }
 
@@ -265,7 +284,6 @@ class AsignAppointment extends Component
         if ($this->user) {
             $this->user->refresh();
             $this->appointmentsHistory = $this->user->appointments()->withTrashed()->get();
-
         }
     }
 

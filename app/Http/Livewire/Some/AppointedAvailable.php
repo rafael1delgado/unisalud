@@ -64,8 +64,8 @@ class AppointedAvailable extends Component
         \Debugbar::info($this->practitioners);
     }
 
-    public function appoint(){
-        return redirect()->route('some.appointment');
+    public function appoint($pendingPractitionerId){
+        return redirect()->route('some.appointment.pending_practitioner', compact('pendingPractitionerId'));
     }
 
     public function render()

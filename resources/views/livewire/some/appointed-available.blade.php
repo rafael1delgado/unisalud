@@ -1,4 +1,8 @@
 <div>
+
+<h3 class="mb-3">Citado / Disponible</h3>
+<hr/>
+
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="inputEmail4">Desde</label>
@@ -55,7 +59,7 @@
                         {{$practitioner->appointments_available_count}}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm" title="Citar" wire:click="appoint()">  <i class="fa fa-calendar"></i> </button>
+                        <button type="button" class="btn btn-primary btn-sm" title="Citar" wire:click="appoint({{$practitioner->id}})">  <i class="fa fa-calendar"></i> </button>
                     </td>
                 </tr>
                 @endforeach
