@@ -44,13 +44,13 @@
                     <tr>
                         <td>{{ $codekey->key_code }}</td>
                         <td>{{ $codekey->name_key_code }}</td>
-                        <td><a href="{{ route('samu.codekey.edit', $codekey) }}">Editar</a> </td>
+                        <td class="text-center"><a href="{{ route('samu.codekey.edit', $codekey) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button></a> </td>
                     
                                 <td class="text-center" >
                                 <form method="POST" action="{{ route('samu.codekey.destroy' , $codekey) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-default"> <i class="fas fa-trash-alt fa-lg"></i> </button>
+                                    <button type="button" class="btn btn-danger"> <i class="fas fa-trash-alt fa-lg"></button></i> </button>
                             </form>
 
                                 </td>

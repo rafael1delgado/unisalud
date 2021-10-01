@@ -90,7 +90,7 @@
                                 <td>{{ $codemobile->id}}</td>
                                 <td>{{ $codemobile->mobile_code }}</td>
                                 <td>{{ $codemobile->name_mobile_code}}</td>
-                                <td><a href="{{ route('samu.codemobile.edit', $codemobile) }}">Editar</a> </td>
+                                <td class="text-center"><a href="{{ route('samu.codemobile.edit', $codemobile) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button/a> </td>
                             </tr>
                                 @endforeach   
                             </tbody>
@@ -302,12 +302,12 @@
                                 <td>{{ $qtc->direction }}</td>
                                 <td>{{ $qtc->telephone }}</td>
                                 
-                                <td><a href="{{ route('samu.qtc.edit', $qtc) }}">Seguimiento</a> </td>
+                                <td class="text-center"><a href="{{ route('samu.qtc.edit', $qtc) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button</a> </td>
                                 <td class="text-center" >
                                 <form method="POST" action="{{ route('samu.qtc.destroy' , $qtc) }}">
                                 @csrf
                                 @method('DELETE')
-                               <button type="submit" class="btn btn-default"> <i class="fas fa-trash-alt fa-lg"></i> </button>
+                                <button type="button" class="btn btn-danger"> <i class="fas fa-trash-alt fa-lg"></i> </button>
                                 </td>
                             </form>
                                

@@ -13,7 +13,7 @@
         
         <!-- seguimiento-->
         <h3><b><b></h3>
-            
+        <h3 class="text-danger"><b> Seguimiento Emergencia</b></h3>
             <h4> Asignación de seguimiento horario</h4>
             <form method="post" action="{{ route('samu.follow.store') }}">
                 @csrf
