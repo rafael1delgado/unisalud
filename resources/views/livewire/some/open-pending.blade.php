@@ -1,4 +1,6 @@
 <div>
+    <h3 class="mb-3">Pendientes de apertura</h3>
+    <hr/>
     <div>
         <div class="form-row">
             <div class="form-group col-md-2">
