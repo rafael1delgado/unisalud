@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@include('nav')
+
 
 <style>
  .button1{
