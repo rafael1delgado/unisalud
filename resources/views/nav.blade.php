@@ -2,7 +2,7 @@
 <li class="nav-item">
         <a class="nav-link
         @if(request()->route()->view == 'pacientes') active @endif"
-        href=" {{ route('samu.regulatory-center.index') }}">Turno</a>
+        href=" {{ route('samu.shift.index') }}">Turno</a>
 </li>
 <li class="nav-item">
         <a class="nav-link

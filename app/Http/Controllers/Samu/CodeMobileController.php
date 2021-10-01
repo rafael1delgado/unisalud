@@ -64,7 +64,7 @@ class CodeMobileController extends Controller
      */
     public function edit(CodeMobile $codeMobile)
     {
-        //
+        return view('samu.codemobile.edit', compact('codeMobile'));
     }
 
     /**
@@ -76,7 +76,12 @@ class CodeMobileController extends Controller
      */
     public function update(Request $request, CodeMobile $codeMobile)
     {
-        //
+        $codeMobile->fill($request->all());
+        //$specialty->user_id = Auth::id();
+        $codeMobile->save();
+
+        session()->flash('info', 'La codificación de Móvil ha sido editada.');
+        return redirect()->route('samu.codemobile.index', compact('codeMobile'));
     }
 
     /**
@@ -87,6 +92,7 @@ class CodeMobileController extends Controller
      */
     public function destroy(CodeMobile $codeMobile)
     {
-        //
+        $codeMobile->delete();
+        return redirect()->route('samu.codemobile.index')->with('danger', 'Eliminado satisfactoriamente');
     }
 }

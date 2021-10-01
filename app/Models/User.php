@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Samu\Shift;
 use App\Models\Some\Appointment;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -80,6 +82,26 @@ class User extends Authenticatable implements Auditable
         return $this->morphToMany(Appointment::class, 'appointable');
     }
 
+    // public function manager_shifts(): HasMany
+    // {
+    //     return $this->hasMany(Shift::class, 'manager_shift');
+    // }
+
+    // public function doctor_shifts(): HasMany
+    // {
+    //     return $this->hasMany(Shift::class, 'regulatory_doctor');
+    // }
+
+    // public function nurse_shifts(): HasMany
+    // {
+    //     return $this->hasMany(Shift::class, 'regulatory_nurse');
+    // }
+
+    public function shifts(): BelongsToMany
+    {
+        // return $this->belongsToMany(Shift::class, 'samu_shift_user')->withTimestamps()->withPivot('job_type','deleted_at')->whereNull('deleted_at');
+        return $this->belongsToMany(Shift::class, 'samu_shift_user')->withTimestamps()->withPivot('job_type');
+    }
 
     /**
      * The attributes that should be hidden for arrays.

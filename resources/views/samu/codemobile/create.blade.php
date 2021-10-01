@@ -7,7 +7,7 @@
      margin-top:30px;
      }
 </style>
-<form action="{{route('samu.codemobile.store')}}" method="post">
+<form action="{{route('samu.codemobile.store')}}" method="post" autocomplete="off">
     @csrf
     @method('POST')
     <div class="card mb-3">

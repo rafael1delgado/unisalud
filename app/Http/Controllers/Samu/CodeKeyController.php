@@ -96,6 +96,6 @@ class CodeKeyController extends Controller
     public function destroy(CodeKey $codeKey)
     {
         $codeKey->delete();
-        return redirect()->route('samu.codekey.index')->with('danger', ' Eliminado satisfactoriamente');
+        return redirect()->route('samu.codekey.index')->with('danger', 'Eliminado satisfactoriamente');
     }
 }

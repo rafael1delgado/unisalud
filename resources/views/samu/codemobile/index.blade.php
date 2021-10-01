@@ -31,7 +31,7 @@
             <tr class="text-center table-info">
                 <th>Codigo</th>
                 <th>Nombre</th>
-                <th></th>
+                <th style="width:15%"></th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +39,14 @@
             <tr>
                 <td>{{ $codemobile->mobile_code }}</td>
                 <td>{{ $codemobile->name_mobile_code }}</td>
-                <td><a href="#">Editar</a></td>
+                <td class="d-flex align-items-center justify-content-center">
+                    <a href="{{ route('samu.codemobile.edit', $codemobile) }}"><button type="button " class="btn btn-sm btn-warning mx-1"><i class="fas fa-pencil-alt"></i></button></a>
+                    <form method="POST" action="{{ route('samu.codemobile.destroy' , $codemobile) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button " class="btn btn-sm btn-danger mx-1"><i class="fas fa-trash"></i></button>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>

@@ -43,16 +43,14 @@
                 <td>{{ $codekey->name_key_code }}</td>
                 <td><a href="{{ route('samu.codekey.edit', $codekey) }}">Editar</a> </td>
               
-                        <td class="text-center" >
-                        <form method="POST" action="{{ route('samu.codekey.destroy' , $codekey) }}">
+                <td class="text-center" >
+                    <form method="POST" action="{{ route('samu.codekey.destroy' , $codekey) }}">
                         @csrf
-      			        @method('DELETE')
-                          <!--  <i class="fas fa-trash-alt fa-lg" type="submit" onclick="return confirm('¿Está seguro de eliminar la información?');"></i>
--->                         <button type="submit" class="btn btn-default"> <i class="fas fa-trash-alt fa-lg"></i> </button>
-                      </form>
-
-                        </td>
-
+                        @method('DELETE')
+                        <!--  <i class="fas fa-trash-alt fa-lg" type="submit" onclick="return confirm('¿Está seguro de eliminar la información?');"></i>-->
+                        <button type="submit" class="btn btn-default"> <i class="fas fa-trash-alt fa-lg"></i> </button>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>
