@@ -17,7 +17,7 @@ class User extends Authenticatable implements Auditable
 {
     use HasFactory, Notifiable, HasRoles;
     use \OwenIt\Auditing\Auditable;
-    
+
 
     protected $primaryKey = 'id';
 
@@ -102,6 +102,11 @@ class User extends Authenticatable implements Auditable
         // return $this->belongsToMany(Shift::class, 'samu_shift_user')->withTimestamps()->withPivot('job_type','deleted_at')->whereNull('deleted_at');
         return $this->belongsToMany(Shift::class, 'samu_shift_user')->withTimestamps()->withPivot('job_type');
     }
+    public function programmingProposals()
+    {
+        return $this->hasMany(MedicalProgrammer\ProgrammingProposal::class, 'user_id');
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.

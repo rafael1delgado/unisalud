@@ -1,20 +1,30 @@
 <div>
+
+<h3 class="mb-3">Citado / Disponible</h3>
+<hr/>
+
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="inputEmail4">Desde</label>
             <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha inicio"
-                wire:model.lazy="appointments_from">
+                wire:model="from">
+                @error('from')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
         </div>
 
         <div class="form-group col-md-2">
             <label for="inputEmail4">Hasta</label>
             <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha fin"
-                wire:model.lazy="appointments_to">
+                wire:model="to">
+                @error('to')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
         </div>
 
         <div class="form-group col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()"> <i
+            <button type="button" class="btn btn-primary form-control" wire:click="search()"> <i
                     class="fa fa-search" aria-hidden="true"></i> Buscar</button>
         </div>
     </div>
@@ -32,30 +42,27 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach($practitioners as $practitioner) --}}
+                @foreach($practitioners as $practitioner)
                 <tr>
                     <td>
-                        16351236-k
-                        {{-- @foreach($contactUser->user->identifiers as $identifier)
-                            {{ $identifier->value }}-{{ $identifier->dv }}<br>
-                        @endforeach --}}
+                        @foreach($practitioner->user->identifiers as $identifier)
+                                {{ $identifier->value }}-{{ $identifier->dv }}<br>
+                            @endforeach
                     </td>
                     <td>
-                        Roberto Javier Carrillo Lioi
-                        {{-- {{ $contactUser->user->OfficialFullName }} --}}
-                    </td>
-                    <!-- <td></td> -->
-                    <td>
-                        Traumatólogo
+                        {{ $practitioner->user->OfficialFullName }}
                     </td>
                     <td>
-                        3/10
+                        {{ $practitioner->specialty->specialty_name }}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm"> <i data-feather="file-text"></i> </button>
+                        {{$practitioner->appointments_available_count}}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" title="Citar" wire:click="appoint({{$practitioner->id}})">  <i class="fa fa-calendar"></i> </button>
                     </td>
                 </tr>
-                {{-- @endforeach --}}
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -1,20 +1,28 @@
 <div>
+    <h3 class="mb-3">Pendientes de apertura</h3>
+    <hr/>
     <div>
         <div class="form-row">
             <div class="form-group col-md-2">
                 <label for="inputEmail4">Desde</label>
                 <input type="date" class="form-control" placeholder="Fecha inicio" wire:model="from" >
+                @error('from')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="form-group col-md-2">
                 <label for="inputEmail4">Hasta</label>
                 <input type="date" class="form-control" placeholder="Fecha fin" wire:model="to">
+                @error('to')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="form-group col-md-1">
                 <label for="inputEmail4">&nbsp;</label>
                 <button type="button" class="btn btn-primary form-control" wire:click='search()'> <i
-                        class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+                        class="fa fa-search" aria-hidden="true" tittle="Aperturar"></i> Buscar</button>
             </div>
         </div>
 
@@ -49,7 +57,7 @@
                             {{$programmingProposal->countUnopenedDetailsBetween($from, $to)}}
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm" wire:click="open()"> <i
+                            <button type="button" class="btn btn-primary btn-sm" wire:click="open({{$programmingProposal->id}})"> <i
                                     class="fa fa-calendar"></i> </button>
                         </td>
                     </tr>

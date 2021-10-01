@@ -200,12 +200,25 @@ class AppointmentController extends Controller
       return view('some.agenda', compact('appointments','request'));
     }
 
-    public function openTProgrammerView(Request $request)
+    public function openTProgrammerView(Request $request, ProgrammingProposal $programmingProposal = null)
     {
         $theoreticalProgrammings = null;
         $programmingProposals = null;
         $programmed_days = [];
         $absences = Absence::where('id',0)->get();
+
+        //ProgrammingProposal que viene desde la pantalla de Pendientes de Apertura.
+        if($programmingProposal != null){
+          $request->user_id = $programmingProposal->user_id;
+          $request->specialty_id = $programmingProposal->specialty_id;
+          $request->profession_id = $programmingProposal->profession_id;
+          if($request->specialty_id != null){
+            $request->type = 'Médico';
+          }
+          else {
+            $request->type = 'No médico';
+          }
+        }
 
         if ($request) {
             if ($request->user_id != null) {

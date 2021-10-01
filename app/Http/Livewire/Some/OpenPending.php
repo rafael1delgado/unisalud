@@ -10,13 +10,21 @@ use Carbon\Carbon;
 
 class OpenPending extends Component
 {
-
     public $programmingProposals = array();
     public $from;
     public $to;
 
     public function search()
-    {
+
+    { $this->validate([
+            'from' => 'required',
+            'to' => 'required'
+        ],
+        [
+            'from.required' => 'Debe seleccionar fecha desde.',
+            'to.required' => 'Debe seleccionar fecha hasta.'
+        ]
+        );
         $programmingProposals = ProgrammingProposal::query()
             ->where('status', 'Confirmado')
             ->where(function ($q) {
@@ -27,6 +35,10 @@ class OpenPending extends Component
                 ->orWhere(function ($q) {
                     $q->where('start_date', '<=', $this->to);
                     $q->where('end_date', '>=', $this->to);
+                })
+                ->orWhere(function($q){
+                    $q->whereDate('start_date', '>=', $this->from);
+                    $q->whereDate('end_date', '<=', $this->to);
                 });
             })
             // ->hasUnopenedDetailsBetween($this->from, $this->to)
@@ -71,9 +83,9 @@ class OpenPending extends Component
         // \Debugbar::info($this->programmingProposals );
     }
 
-    public function open()
+    public function open($programmingProposalId)
     {
-        \Debugbar::info('aperturar');
+        return redirect()->route('some.open_tprogrammer', [$programmingProposalId]);
     }
 
     public function render()
