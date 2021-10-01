@@ -41,14 +41,13 @@
                                     </fieldset>
                                     <fieldset class="form-group  col-md-2">
                                         <label for="for_mobile">Movil</label>
-                                            <select class="form-control" name="mobile" id="mobile">
-                                                <option value="">Seleccione Movil </option>
-                                                <option value="Movil 2" >Movil 2</option>
-                                                <option value="Movil 5" >Movil 5</option>
-                                                <option value="Movil 12" >Movil 12</option>
-                                                <option value="Movil 6" >Movil 6</option>
-                                                <option value="Movil 4" >Movil 4</option>
-                                                <option value="Movil 11" >Movil 11</option>
+
+                                            <select class="form-control" name="name_mobile_code" id="name_mobile_code">
+                                                <option>Seleccione </option>
+                                                <option value="1" >Movil 1</option>
+                                                <option value="2" >Movil  2</option>
+                                                <option value="3" >Movil  3</option>
+                                          
                                             
                                             </select>
                                     </fieldset>

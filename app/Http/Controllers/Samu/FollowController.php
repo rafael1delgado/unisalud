@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Samu;
 use App\Http\Controllers\Controller;
 use App\Models\Samu\Follow;
 use Illuminate\Http\Request;
-
+use App\Models\Samu\CodeMobile;
 
 
 class FollowController extends Controller
@@ -27,9 +27,9 @@ class FollowController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   //$codemobiles = CodeMobile::all();
         $follows=follow::all();  // guarda todos los datos de la tabla
-        return view ('samu.qtc.index' , compact('follow'));
+        return view ('samu.qtc.index' , compact('follows'));
     }
 
     /**
@@ -42,6 +42,7 @@ class FollowController extends Controller
     {
         
         //devuelve user o lo crea
+       
         Follow::updateOrCreate(
         ['qtc_id' => $request->qtc_id],
         $request->All()

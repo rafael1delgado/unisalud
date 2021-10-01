@@ -45,9 +45,11 @@ class QtcController extends Controller
      */
     public function store(Request $request)
     {
+        
         //Guardar QTC
         $qtc = new Qtc($request->All());
         $qtc->save();
+       
 
         //Guardar Follow
         $follow = new Follow();

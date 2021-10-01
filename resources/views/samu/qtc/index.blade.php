@@ -20,15 +20,15 @@
                     <label for="for_run"><h4><i class="far fa-calendar-alt"></i> Fecha de registro: {{date('Y-m-d')}}</h4> </label>    
                 </fieldset>
         </div>  
-            <div class="form-row">
+            <!--<div class="form-row">
                 <div class="col-12 col-md-4 mb-3">
                     <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalmoviles">
                         <i class="fas fa-plus"></i> Agregar Moviles en turno
                     </a>
                 </div>
-            </div>
+            </div>-->
                 <!--inicio modal operador-->
-            <div class="modal fade" id="modalmoviles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!--<div class="modal fade" id="modalmoviles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -48,6 +48,14 @@
                                             @endforeach 
                                             </select>
                                         </fieldset>
+                                        <fieldset class="form-group col-12 col-md-4">
+                                            <label for="tipo">Nombre Movil</label>
+                                            <select class="form-control" name="name_mobile_code" id="name_mobile_code">
+                                            @foreach($codemobiles as $codemobile)
+                                                <option value="{{ $codemobile->name_mobile_code === '$codemobile' ? 'selected' : '' }}">{{$codemobile->name_mobile_code}} </option>
+                                            @endforeach 
+                                            </select>
+                                        </fieldset>
 
                                 </div>
                             </div>
@@ -59,7 +67,7 @@
                     </div>
                     </form>
                 </div>
-                </div>
+                </div>-->
                 <!-- fin modal operador-->
             <div>
                 
@@ -254,7 +262,7 @@
                 </div>
 
             <hr>
-            
+            </form>
            
             <hr>
             <div class="table-responsive col-md-12">
