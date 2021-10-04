@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('nav')
 <style>
  .button1{
      margin-top:30px;

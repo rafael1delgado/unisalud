@@ -35,8 +35,8 @@
                     <tr class="text-center table-info">
                         <th>Codigo</th>
                         <th>Nombre</th>
-                        <th>Editar</th>
-                        <th></th>
+                        <th style="width:15%">Editar - Eliminar</th>
+        
                     </tr>
                 </thead>
                 <tbody >
@@ -44,16 +44,16 @@
                     <tr>
                         <td>{{ $codekey->key_code }}</td>
                         <td>{{ $codekey->name_key_code }}</td>
-                        <td class="text-center"><a href="{{ route('samu.codekey.edit', $codekey) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button></a> </td>
-                    
-                                <td class="text-center" >
+                        <td class="d-flex align-items-center justify-content-center">
+                            
+                                <a href="{{ route('samu.codekey.edit', $codekey) }}"><button type="button" class="btn btn-sm btn-warning mx-1"><i class="fas fa-edit"></i></button></a>
                                 <form method="POST" action="{{ route('samu.codekey.destroy' , $codekey) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" class="btn btn-danger"> <i class="fas fa-trash-alt fa-lg"></button></i> </button>
-                            </form>
-
-                                </td>
+                                     @csrf
+                                     @method('DELETE')
+                                     <button type="button" class="btn btn-sm btn-danger mx-1"> <i class="fas fa-trash-alt fa-lg"></i></button>
+                                     </form>
+                        </td>
+                     
 
                     </tr>
                     @endforeach

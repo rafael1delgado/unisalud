@@ -69,11 +69,16 @@
                 </div>
                 </div>-->
                 <!-- fin modal operador-->
-            <div>
-                
-     </div>
-
             <div class="form-row">
+                <div class="col-md-2 mb-3">
+                    <a class="btn btn-success" href="{{ route('samu.codemobile.create') }}">
+                         <i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Agregar Movil Turno
+                    </a>
+                </div>    
+            </div> 
+    
+            <div class="form-row">
+                
                 <div class="table-responsive col-md-4">
                     <table class="table table-sm table-bordered table-striped small">
                             <thead>
@@ -82,6 +87,7 @@
                                     <th>Código Móvil</th>
                                     <th>Detalle Móvil</th>
                                     <th>Editar</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -90,7 +96,14 @@
                                 <td>{{ $codemobile->id}}</td>
                                 <td>{{ $codemobile->mobile_code }}</td>
                                 <td>{{ $codemobile->name_mobile_code}}</td>
-                                <td class="text-center"><a href="{{ route('samu.codemobile.edit', $codemobile) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button/a> </td>
+                                <td class="text-center"><a href="{{ route('samu.codemobile.edit', $codemobile) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button/a> </td> 
+                                <td class="d-flex align-items-center justify-content-center">
+                                    <form method="POST" action="{{ route('samu.codemobile.destroy' , $codemobile) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button " class="btn btn-sm btn-danger mx-1"><i class="fas fa-trash-alt fa-lg"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                                 @endforeach   
                             </tbody>
