@@ -409,6 +409,22 @@
     </ul>
     @endcanany
 
+    <!--SAMU-->
+
+    <ul class="nav flex-column">
+
+        @canany(['SAMU: add code mobile'])
+            <li class="nav-item">
+                <a class="nav-link {{ active('samu.welcome') }}" href="{{ route('samu.welcome') }}">
+                <i class="fas fa-ambulance"></i> SAMU
+                </a>
+            </li>
+        @endcanany
+        
+</ul>
+<!--SAMU-->
+
+
 <ul class="nav flex-column">
     <li class="nav-item border-top">
         <a class="nav-link" href="{{ route('claveunica.logout') }}">
