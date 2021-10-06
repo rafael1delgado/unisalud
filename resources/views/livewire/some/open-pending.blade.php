@@ -35,7 +35,7 @@
                         <th scope="col" style="width: 20%">Nombre Completo</th>
                         <th scope="col">Especialidad</th>
                         <th scope="col">Aperturas pendientes</th>
-                        <th scope="col">Programar</th>
+                        <th scope="col">Aperturar</th>
                     </tr>
                 </thead>
                 <tbody>

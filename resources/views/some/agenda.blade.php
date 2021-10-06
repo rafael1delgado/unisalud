@@ -94,6 +94,8 @@
             events: [
                 @foreach($appointments as $appointment)
                   @if($appointment->status == "booked")
+                    @if($appointment->users->first())
+
                     {
                     id: '{{$appointment->id}}',
                     @if($appointment->cod_con_appointment_type_id == 4)
@@ -109,6 +111,7 @@
                       color: 'green',
                     @endif
                     },
+                    @endif
                   @else
                     {
                     id: '{{$appointment->id}}',

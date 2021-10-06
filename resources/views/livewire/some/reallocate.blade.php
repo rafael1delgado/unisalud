@@ -100,6 +100,7 @@
             <tbody>
             @if($appointments)
                 @foreach($appointments as $key => $appointment)
+                    @if($appointment->users->first())
                     <tr>
                         <td>
                             <div class="form-check">
@@ -119,6 +120,7 @@
                         <td>
                             <label class="label"
                                    for="for_selected_appointments_from[{{$key}}]">{{$appointment->users->first()->officialFullName}}</label>
+                        
                         </td>
 
                         <td>{{$appointment->programmingProposalDetail->activity->activity_name}}</td>
@@ -128,6 +130,8 @@
                         {{--                        <td>2</td>--}}
                         <td>{{$appointment->status}}</td>
                     </tr>
+
+                    @endif
                 @endforeach
             @endif
             </tbody>
