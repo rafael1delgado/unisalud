@@ -413,7 +413,7 @@
 
     <ul class="nav flex-column">
 
-        @canany(['SAMU: add code mobile'])
+        @canany(['SAMU: admin'])
             <li class="nav-item">
                 <a class="nav-link {{ active('samu.welcome') }}" href="{{ route('samu.welcome') }}">
                 <i class="fas fa-ambulance"></i> SAMU

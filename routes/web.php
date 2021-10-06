@@ -437,7 +437,7 @@ Route::prefix('soap')->name('soap.')->group(function(){
 });
 
 //rutas samu
-  Route::prefix('samu')->name('samu.')->group(function () {
+  Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
       Route::view('/welcome', 'samu.welcome')->name('welcome');
       Route::prefix('mobile')->name('mobile.')->group(function () {
       Route::view('/', 'samu.mobile.index')->name('index');
