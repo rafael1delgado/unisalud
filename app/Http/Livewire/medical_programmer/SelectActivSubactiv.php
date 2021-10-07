@@ -21,7 +21,8 @@ class SelectActivSubactiv extends Component
     public function render()
     {
         if ($this->activity_id != null) {
-          $this->subactivities = SubActivity::where('activity_id',$this->activity_id)->get();
+          $this->subactivities = SubActivity::where('activity_id',$this->activity_id)
+                                            ->where('specialty_id',$this->specialty_id)->get();
         }
         return view('livewire.medical_programmer.select-activ-subactiv');
     }
