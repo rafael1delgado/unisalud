@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
             OrganizationSeeder::class,
             CodConAppointmentTypesSeeder::class,
             LocationSeeder::class,
+            SicStatusesSeeder::class,
         ]);
     }
 }
