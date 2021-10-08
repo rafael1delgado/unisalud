@@ -60,6 +60,12 @@ class ProgrammingProposalController extends Controller
 
       if (Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica')) {
         $programmingProposalSignatureFlow->type = "Subdirección Médica";
+      }elseif(Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección DGCP')){
+        $programmingProposalSignatureFlow->type = "Subdirección DGCP";
+      }elseif(Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de CAE Médico')){
+        $programmingProposalSignatureFlow->type = "Jefatura CAE Médica";
+      }elseif(Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de CAE No médico')){
+        $programmingProposalSignatureFlow->type = "Jefatura CAE No médica";
       }elseif(Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de Servicio')){
         $programmingProposalSignatureFlow->type = "Jefe de Servicio";
       }else{
@@ -80,22 +86,22 @@ class ProgrammingProposalController extends Controller
      */
     public function store_confirmation(Request $request, ProgrammingProposal $programmingProposal)
     {
+      $last_position = $programmingProposal->signatureFlows->last()->sign_position;
+
       $programmingProposalSignatureFlow = new ProgrammingProposalSignatureFlow();
       $programmingProposalSignatureFlow->programming_proposal_id = $programmingProposal->id;
       $programmingProposalSignatureFlow->user_id = Auth::id();
-      $programmingProposalSignatureFlow->sign_position = 2;
+      $programmingProposalSignatureFlow->sign_position = $last_position + 1;
       $programmingProposalSignatureFlow->signature_date = Carbon::now();
 
       if ($request->has('accept_button')) {
         $programmingProposalSignatureFlow->status = "Solicitud confirmada";
 
-        if (Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica')) {
+        if (Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica') || Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección DGCP')) {
           $programmingProposal->status = "Confirmado";
           $programmingProposal->save();
-        }elseif(Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de Servicio')){
-          $programmingProposal->status = "En proceso";
-          $programmingProposal->save();
-        }else{
+        }
+        else{
           $programmingProposal->status = "En proceso";
           $programmingProposal->save();
         }
@@ -109,6 +115,12 @@ class ProgrammingProposalController extends Controller
 
       if (Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica')) {
         $programmingProposalSignatureFlow->type = "Subdirección Médica";
+      }elseif(Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección DGCP')){
+        $programmingProposalSignatureFlow->type = "Subdirección DGCP";
+      }elseif(Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de CAE Médico')){
+        $programmingProposalSignatureFlow->type = "Jefatura CAE Médica";
+      }elseif(Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de CAE No médico')){
+        $programmingProposalSignatureFlow->type = "Jefatura CAE No médica";
       }elseif(Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de Servicio')){
         $programmingProposalSignatureFlow->type = "Jefe de Servicio";
       }else{

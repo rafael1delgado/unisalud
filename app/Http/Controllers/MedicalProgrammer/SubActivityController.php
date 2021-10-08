@@ -16,10 +16,16 @@ class SubActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $subactivities = SubActivity::all();
-        return view('medical_programmer.subactivities.index', compact('subactivities'));
+        $specialties = Specialty::all();
+
+        $specialty_id = $request->get('specialty_id');
+        $subactivities = SubActivity::when($specialty_id != 0, function ($query) use ($specialty_id) {
+                                          $query->where('specialty_id', $specialty_id);
+                                      })->get();
+
+        return view('medical_programmer.subactivities.index', compact('request','subactivities','specialties'));
     }
 
     /**
