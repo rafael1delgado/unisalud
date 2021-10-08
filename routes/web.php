@@ -506,9 +506,11 @@ Route::prefix('soap')->name('soap.')->group(function(){
       Route::delete('/{shift}', [App\Http\Controllers\Samu\ShiftController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('novelties')->name('novelties.')->group(function () {
-      Route::view('/', 'samu.novelties.index')->name('index');
-      Route::view('/edit', 'samu.novelties.edit')->name('edit');
+    Route::prefix('noveltie')->name('noveltie.')->group(function () {
+      Route::get('/',[App\Http\Controllers\Samu\NoveltieController::class, 'index'])->name('index');
+      Route::post('/store', [App\Http\Controllers\Samu\NoveltieController::class, 'store'])->name('store');
+      Route::get('/edit/{noveltie}', [App\Http\Controllers\Samu\NoveltieController::class, 'edit'])->name('edit');
+      Route::put('/update/{noveltie}',[App\Http\Controllers\Samu\NoveltieController::class, 'update'])->name('update');
       //Route::view('/edit', 'samu.novelties.create')->name('edit');
     });
 

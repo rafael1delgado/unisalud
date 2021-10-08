@@ -68,6 +68,11 @@ class Shift extends Model
     public function users_dispatchers(): BelongsToMany{
         return $this->belongsToMany(User::class, 'samu_shift_user')->withTimestamps()->wherePivot('job_type', 'despachador');
     }
+
+    public function noveltie()
+    {
+        return $this->belongsTo('\App\Models\Samu\Noveltie');
+    }
 }
 
 
