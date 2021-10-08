@@ -41,7 +41,7 @@ class CreateExternalIncomingSicsTable extends Migration
             $table->integer('pciTelefono2')->nullable();
             $table->string('pcsCodEstabDer')->nullable();
             $table->string('pcsCodEspecDer')->nullable();
-            $table->integer('pciIndMotivo')->nullable();
+            $table->string('pciIndMotivo')->nullable();
             $table->string('pcsDetMotivoConsulta')->nullable();
             $table->string('pcsNomHipDiag')->nullable();
             $table->string('pcsCodDiag')->nullable();

@@ -3,7 +3,7 @@
   <fieldset class="form-group col">
     <label for="for_specialty_id">Especialidad</label>
     <div wire:ignore id="for-bootstrap-select-specialty-id">
-      <select name="specialty_id" id="for_specialty_id" class="form-control selectpicker" wire:model.lazy="specialty_id" data-live-search="true" data-size="5" data-container="#for-bootstrap-select-specialty-id">
+      <select name="specialty_id" id="for_specialty_id" class="form-control selectpicker" wire:model.lazy="specialty_id" data-live-search="true" data-size="5" data-container="#for-bootstrap-select-specialty-id" required>
         <option value=""></option>
         @foreach ($specialties as $key => $specialty)
         <option value="{{$specialty->id}}">{{$specialty->specialty_name}}</option>
@@ -15,7 +15,7 @@
   <fieldset class="form-group col">
     <label for="for_activity_id">Actividad</label>
     <!-- <div wire:ignore id="for-bootstrap-select-activity-id"> -->
-      <select name="activity_id" id="for_activity_id" class="form-control" wire:model.lazy="activity_id">
+      <select name="activity_id" id="for_activity_id" class="form-control" wire:model.lazy="activity_id" required>
         <option value=""></option>
         @if($activities != null)
         @foreach ($activities as $key => $activity)

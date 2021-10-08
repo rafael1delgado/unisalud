@@ -57,9 +57,16 @@ class ProgrammingProposal extends Model implements Auditable
       else
       {
         // si tiene permisos de supervición
-        if (Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica') || Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de Servicio')) {
+        if (
+            Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de Servicio') ||
+            Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de CAE Médico') ||
+            Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de CAE No médico') ||
+            Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica') ||
+            Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección DGCP')
+            ) {
           // si solicitud solo está creada, no se deja confirmar a visadores
-          if ($this->signatureFlows->last()->status == "Solicitud creada" && $this->signatureFlows->last()->type == "Funcionario") {
+          // if ($this->signatureFlows->last()->status == "Solicitud creada" && $this->signatureFlows->last()->type == "Funcionario") {
+          if ($this->signatureFlows->last()->status == "Solicitud creada" && $this->signatureFlows->last()->user_id == Auth::id()) {
             return 0;
           }else{
             return 1;

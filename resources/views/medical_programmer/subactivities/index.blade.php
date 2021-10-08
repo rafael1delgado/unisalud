@@ -4,6 +4,22 @@
 
 <h3 class="mb-3">Listado de Subactividades</h3>
 
+<form method="GET" class="form-horizontal" action="{{ route('medical_programmer.subactivities.index') }}">
+  <div class="input-group mb-3">
+      <div class="input-group-prepend">
+          <span class="input-group-text">Especialidad</span>
+      </div>
+      <select name="specialty_id" class="form-control" onchange="this.form.submit()">
+        <option value="0" {{ $request->get('specialty_id') == 0 ? 'selected' : '' }}>Todas</option>
+        @foreach($specialties as $specialty)
+          <option value="{{$specialty->id}}" {{ $request->get('specialty_id') == $specialty->id ? 'selected' : '' }}>{{$specialty->specialty_name}}</option>
+        @endforeach
+      </select>
+  </div>
+</form>
+
+<hr>
+
 <a class="btn btn-primary mb-3" href="{{ route('medical_programmer.subactivities.create') }}">
     <i class="fas fa-plus"></i> Agregar nueva
 </a>

@@ -1,6 +1,6 @@
 <div>
 
-<h3 class="mb-3">Citado / Disponible</h3>
+<h3 class="mb-3">Citas disponibles</h3>
 <hr/>
 
     <div class="form-row">
@@ -37,7 +37,7 @@
                     <th scope="col" style="width: 5%">Identificación</th>
                     <th scope="col" style="width: 20%">Nombre Completo</th>
                     <th scope="col">Especialidad</th>
-                    <th scope="col">Citado/Disponible</th>
+                    <th scope="col">Disponible</th>
                     <th scope="col">Citar</th>
                 </tr>
             </thead>
