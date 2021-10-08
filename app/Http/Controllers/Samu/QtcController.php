@@ -87,17 +87,20 @@ class QtcController extends Controller
     
     {
         $keys=CodeKey::all();
-    
-        
+     
+
         switch ($qtc->class_qtc) {
-            case 'emergencia':
+            case 'T1':
                 return view ('samu.qtc.edit' , compact('qtc','keys'));
                 break;
-            case 'ot' :
-                return view ('samu.qtc.otedit' , compact('qtc'));
-                break;
-            case 'traslado':
+            case 'T2' :
                 return view ('samu.qtc.tedit' , compact('qtc','keys'));
+                break;
+            case 'NM' :
+                    return view ('samu.qtc.edit' , compact('qtc','keys'));
+                    break;
+            case 'OT':
+                return view ('samu.qtc.otedit' , compact('qtc','keys'));
                 break;
             default: 
                 return null;

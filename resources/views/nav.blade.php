@@ -12,7 +12,7 @@
 <li class="nav-item">
         <a class="nav-link
         @if(request()->route()->view == 'novelties') active @endif"
-        href=" {{ route('samu.novelties.index') }}">Novedades</a>
+        href=" {{ route('samu.noveltie.index') }}">Novedades</a>
 </li>
 <li class="nav-item">
         <a class="nav-link

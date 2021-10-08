@@ -96,8 +96,9 @@
                                 <td>{{ $codemobile->id}}</td>
                                 <td>{{ $codemobile->mobile_code }}</td>
                                 <td>{{ $codemobile->name_mobile_code}}</td>
-                                <td class="text-center"><a href="{{ route('samu.codemobile.edit', $codemobile) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button/a> </td> 
-                                <td class="d-flex align-items-center justify-content-center">
+                                <td class="text-center">
+                                    <a href="{{ route('samu.codemobile.edit', $codemobile) }}"><button type="button" class="btn btn-sm btn-warning mx-1"><i class="fas fa-edit"></i></button/a> </td> 
+                                    <td class="d-flex align-items-center justify-content-center">
                                     <form method="POST" action="{{ route('samu.codemobile.destroy' , $codemobile) }}">
                                             @csrf
                                             @method('DELETE')
@@ -227,9 +228,10 @@
                             <label for="for_hour">Clase</label>
                             <select class="form-control" name="class_qtc" id="class_qtc">
                                     <option>Seleccionar </option>
-                                    <option value="emergencia" >Emergencia</option>
-                                    <option value="ot" >OT</option>
-                                    <option value="traslado" >Traslado</option>
+                                    <option value="T1" >T1</option>
+                                    <option value="T2" >T2</option>
+                                    <option value="NM" >NM</option>
+                                    <option value="OT" >OT</option>
                                 </select>
                         </fieldset>
                         <fieldset class="form-group  col-md-1">

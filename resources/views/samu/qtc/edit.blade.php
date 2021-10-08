@@ -44,11 +44,10 @@
                                     <fieldset class="form-group  col-md-2">
                                         <label for="for_mobile">Movil</label>
 
-                                            <select class="form-control" name="name_mobile_code" id="name_mobile_code">
-                                                <option>Seleccione </option>
-                                                <option value="1" >Movil 1</option>
-                                                <option value="2" >Movil  2</option>
-                                                <option value="3" >Movil  3</option>
+                                            <select class="form-control" name="mobile" id="mobile">
+                                                <option value="Movil 1" {{ $qtc->follow->mobile === 'Movil 1' ? 'selected' : '' }}>Movil 1</option>
+                                                <option value=" Movil 2"  {{ $qtc->follow->mobile === 'Movil 2' ? 'selected' : '' }} >Movil  2</option>
+                                                <option value="Movil 3"  {{ $qtc->follow->mobile === 'Movil 3' ? 'selected' : '' }} >Movil  3</option>
                                           
                                             
                                             </select>
@@ -59,10 +58,8 @@
                                                 
                                                 <option value="T1" {{ $qtc->follow->transfer_type === 'T1' ? 'selected' : '' }} >T1</option>
                                                 <option value="T2" {{ $qtc->follow->transfer_type === 'T2' ? 'selected' : '' }}  >T2</option>
-                                                <option value="RU1"{{ $qtc->follow->transfer_type === 'RU1' ? 'selected' : '' }} >RU1</option>
-                                                <option value="RU2" {{ $qtc->follow->transfer_type === 'RU2' ? 'selected' : '' }}  >RU2</option>
                                                 <option value="NM"{{ $qtc->follow->transfer_type === 'NM' ? 'selected' : '' }} >NM</option>
-                                                <option value="Otro"{{ $qtc->follow->transfer_type === 'Otro' ? 'selected' : '' }} >Otro</option>
+                                                <option value="OT"{{ $qtc->follow->transfer_type === 'OT' ? 'selected' : '' }} >OT</option>
                                         </select>
                                     </fieldset>
                                     <fieldset class="form-group  col-md-2">
