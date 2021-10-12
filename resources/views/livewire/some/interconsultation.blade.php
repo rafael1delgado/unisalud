@@ -34,7 +34,13 @@
             </select>
         </div>
         <fieldset class="form-group  col-md-4 mb-3">
-            <button class="btn btn-primary button"><i class="fas fa-search"></i>Buscar</button>
+            <button class="btn btn-primary button">
+                <i class="fas fa-search"></i> Buscar</button>
+
+            <div wire:loading>
+                <i class="fas fa-spinner fa-pulse"></i>
+            </div>
+
         </fieldset>
     </form>
 
@@ -68,8 +74,14 @@
                     <td>{{$sic->pcdFechNacPac->format('d-m-Y')}}</td>
                     <td>{{$sic->pcsCodEspecDer}}</td>
                     <td>{{$sic->pcsCodEspecDer}}</td>
-                    <td><a href="{{ route('vista.relevant') }}" class="btn btn-sm btn-outline-secondary"><span
-                                class="fas fa-edit" aria-hidden="true"></span></a></td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#pertinenceModal" title="Dar pertinencia"><i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+{{--                    <td><a href="{{ route('vista.relevant') }}" class="btn btn-sm btn-outline-secondary"><span--}}
+{{--                                class="fas fa-edit" aria-hidden="true"></span></a></td>--}}
                     <td class="text-center">
                         <button type="button" class="btn btn-primary "><i class="fas fa-file-alt"></i> Citar</button>
                     </td>
@@ -177,4 +189,5 @@
     </div>
 
 </div>
+@livewire('some.pertinence-modal')
 

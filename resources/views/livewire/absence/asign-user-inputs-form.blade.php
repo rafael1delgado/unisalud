@@ -125,5 +125,5 @@
         </fieldset>
     </div>
 
-    @livewire('some.search-user')
+    @livewire('some.search-user-modal')
 </div>
