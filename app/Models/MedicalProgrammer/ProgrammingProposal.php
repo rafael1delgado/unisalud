@@ -65,8 +65,8 @@ class ProgrammingProposal extends Model implements Auditable
             Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección DGCP')
             ) {
           // si solicitud solo está creada, no se deja confirmar a visadores
-          // if ($this->signatureFlows->last()->status == "Solicitud creada" && $this->signatureFlows->last()->type == "Funcionario") {
-          if ($this->signatureFlows->last()->status == "Solicitud creada" && $this->signatureFlows->last()->user_id == Auth::id()) {
+          if ($this->signatureFlows->last()->status == "Solicitud creada" && $this->signatureFlows->last()->type == "Funcionario") {
+          // if ($this->signatureFlows->last()->status == "Solicitud creada" && $this->signatureFlows->last()->user_id == Auth::id()) {
             return 0;
           }else{
             return 1;
