@@ -2,6 +2,7 @@
 
 namespace App\Models\Some;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,11 @@ class ExternalIncomingSic extends Model
         'pcsApePatTit', 'pcsApeMatTit', 'pcsSistemaPrevisional', 'pcsIndPrevis', 'pcdVencPrev', 'pciNumFonasa', 'pciRutIns', 'pciPrais',
         'pcsNombreSocial', 'pcsNombreTutor', 'pcsEmail', 'pcsNacionalidad', 'pcsEtnia', 'pcsEstadoCivil'
     ];
+
+    public function getAgeAttribute()
+    {
+        return $this->pcdFechNacPac->age;
+    }
 
     protected $dates = ['pcdFechaSolic', 'pcsFechaDigitacion', 'pcdFechNacPac', 'pcdVencPrev',
     ];

@@ -4,12 +4,11 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-{{--                <h5 class="modal-title" id="exampleModalLongTitle">Pertinencia</h5>--}}
+                {{--                <h5 class="modal-title" id="exampleModalLongTitle">Pertinencia</h5>--}}
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
 
             <div class="modal-body">
                 <div class="card mb-3">
@@ -17,14 +16,14 @@
                         <h3 class="mb-3"><i class="fas fa-exclamation-circle"></i> PERTINENCIAS</h3>
                         <div class="card border-success mb-3">
                             <div class="card-header bg-success text-white">
-                                N° INTERCONSULTA: 713
+                                N° INTERCONSULTA: {{$sic->id ?? ''}}
                             </div>
                             <div class="card-body">
                                 <ul>
-                                    <li>Nombre:Alvaro Lupa</li>
-                                    <li>Edad: 29 Años</li>
-                                    <li>Género: Maculino</li>
-                                    <li>Centro: Cesfam Cirujano Aguirre</li>
+                                    <li>Nombre: {{$sic->pcsNombrePac ?? ''}} </li>
+                                    <li>Edad: {{$sic->age ?? ''}} Años</li>
+                                    <li>Género: {{$sic->pcsIndSexoPac ?? ''}}</li>
+                                    <li>Centro: {{$sic->pcsCodEstab ?? ''}}</li>
                                 </ul>
                             </div>
                         </div>
