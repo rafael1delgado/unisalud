@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Some;
 use App\Models\User;
 use Livewire\Component;
 
-class SearchUser extends Component
+class SearchUserModal extends Component
 {
     public $searchText;
     public $users;
@@ -35,6 +35,6 @@ class SearchUser extends Component
 
     public function render()
     {
-        return view('livewire.some.search-user');
+        return view('livewire.some.search-user-modal');
     }
 }

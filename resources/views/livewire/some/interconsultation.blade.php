@@ -1,11 +1,11 @@
 <div>
     <h3 class="mb-3">Interconsultas Externas</h3>
 
-    <div class="form-row">
+    <form wire:submit.prevent="search" class="form-row">
         <div class="form-group col-md-4">
             <label for="for_specialty_id">Especialidad</label>
             @if($specialties != null)
-                <select name="specialty_id" id="for_specialty_id" class="form-control" wire:model.lazy="specialty_id">
+                <select name="specialty_id" id="for_specialty_id" class="form-control" wire:model.defer="selectedSpecialtyId">
                     <option></option>
                     @foreach ($specialties as $specialty)
                         <option value="{{$specialty->id}}">{{$specialty->specialty_name}}</option>
@@ -17,29 +17,32 @@
         <div class="form-group col-md-2">
             <label for="inputEmail4">Desde</label>
             <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha inicio"
-                   wire:model.lazy="appointments_from">
+                   wire:model.defer="dateFrom">
         </div>
 
         <div class="form-group col-md-2">
             <label for="inputEmail4">Hasta</label>
             <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha fin"
-                   wire:model.lazy="appointments_to">
+                   wire:model.defer="dateTo">
         </div>
         <div class="form-group col-md-2">
             <label for="for_state">Estado</label>
-            <select id="for_state" name="for_state" class="form-control" wire:model.lazy="state">
-                <option></option>
-                <option value='pendiente'>Pendiente</option>
-                <option value='priorizadas'>Priorizadas</option>
-                <option value='citadas'>Citadas</option>
-                <option value='observadas'>Observadas</option>
-                <option value='rechazadas'>Rechazadas</option>
+            <select id="for_state" name="for_state" class="form-control" wire:model.defer="selectedStatusId">
+                @foreach($statuses as $status)
+                    <option value='{{$status->id}}'>{{$status->name}}</option>
+                @endforeach
             </select>
         </div>
         <fieldset class="form-group  col-md-4 mb-3">
-            <button type="button" class="btn btn-primary button" wire:click="search"><i class="fas fa-search"></i>  Buscar</button>
+            <button class="btn btn-primary button">
+                <i class="fas fa-search"></i> Buscar</button>
+
+            <div wire:loading>
+                <i class="fas fa-spinner fa-pulse"></i>
+            </div>
+
         </fieldset>
-    </div>
+    </form>
 
     <div class="table-responsive">
         <table class="table table-sm table-hover">
@@ -71,8 +74,14 @@
                     <td>{{$sic->pcdFechNacPac->format('d-m-Y')}}</td>
                     <td>{{$sic->pcsCodEspecDer}}</td>
                     <td>{{$sic->pcsCodEspecDer}}</td>
-                    <td><a href="{{ route('vista.relevant') }}" class="btn btn-sm btn-outline-secondary"><span
-                                class="fas fa-edit" aria-hidden="true"></span></a></td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#pertinenceModal" title="Dar pertinencia"><i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+{{--                    <td><a href="{{ route('vista.relevant') }}" class="btn btn-sm btn-outline-secondary"><span--}}
+{{--                                class="fas fa-edit" aria-hidden="true"></span></a></td>--}}
                     <td class="text-center">
                         <button type="button" class="btn btn-primary "><i class="fas fa-file-alt"></i> Citar</button>
                     </td>
@@ -180,29 +189,5 @@
     </div>
 
 </div>
-
-<!-- <table class="table table-sm table-hover">
-        <thead class="table-info">
-        <tr>
-            <th scope="col">Interconsulta</th>
-            <th scope="col">Solicitud</th>
-        </tr>
-        </thead>
-    </table>
-</div> -->
-
-
-<!--
-        <fieldset class="form-group col">
-            <label for="for_name">Nombre Locación</label>
-            <input type="text" class="form-control" id="for_description" placeholder="" name="name" required>
-        </fieldset>
-
-        <fieldset class="form-group col">
-            <label for="for_alias">Alias</label>
-            <input type="text" class="form-control" id="for_description" placeholder="" name="alias" required>
-        </fieldset>
-    </div>
-
-    -->
+@livewire('some.pertinence-modal')
 

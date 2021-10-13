@@ -367,7 +367,7 @@
         </table>
     </div>
 
-    @livewire('some.search-user')
+    @livewire('some.search-user-modal')
 
     <hr class="mt-3">
 
@@ -394,5 +394,5 @@
     <div wire:loading>
         Cargando...
     </div>
-    
+
 </div>
