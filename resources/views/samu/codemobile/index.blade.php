@@ -8,11 +8,11 @@
 
 <div class="row mb-4">
     <div class="col-12 col-md-6">
-        <form method="GET" class="form-horizontal" action="">
+        <form method="GET" class="form-horizontal" action="{{ route('samu.codemobile.index') }}">
             <div class="input-group mb-sm-0">
-                <input class="form-control" type="text" name="search" autocomplete="off" id="for_search"
+                <input class="form-control" type="text" name="search_codemobile" autocomplete="off" id="for_search"
                     style="text-transform: uppercase;"
-                    placeholder="NOMBRE" value="" required>
+                    placeholder="Nombre Codigo" value="">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
                 </div>
