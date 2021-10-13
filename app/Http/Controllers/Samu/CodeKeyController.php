@@ -13,11 +13,18 @@ class CodeKeyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $codekeys=CodeKey::all(); // guarda todos los datos de la tabla
+        //busqueda de codigos de clave
+        $search_codekey=$request->get('search_codekey');       
+        $codekeys=CodeKey::when($search_codekey!=null, function ($query) use ($search_codekey){
+        $query->where('name_key_code','like','%'.$search_codekey.'%');
+        })->paginate(30);
+         
+     
+        //$codekeys=CodeKey::all(); // guarda todos los datos de la tabla
         //return $codekeys;  mostrar los datos de la bd
-        return view ('samu.codekey.index' , compact('codekeys'));
+        return view ('samu.codekey.index' , compact('codekeys','search_codekey'));
     }
     
 

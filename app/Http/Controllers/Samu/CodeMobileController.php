@@ -13,10 +13,20 @@ class CodeMobileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $codemobiles = CodeMobile::all();
-        return view('samu.codemobile.index', compact('codemobiles'));
+         //busqueda de codigos de clave
+        $search_codemobile=$request->get('search_codemobile');  
+       $codemobiles= CodeMobile::when($search_codemobile!=null, function ($query) use ($search_codemobile){
+         $query->where('name_mobile_code','like','%'.$search_codemobile.'%');
+         })->paginate(30);
+        return view ('samu.codemobile.index' , compact('codemobiles','search_codemobile')); 
+
+
+
+      /*   $codemobiles = CodeMobile::all();
+        return view('samu.codemobile.index', compact('codemobiles')); */
+
     }
 
     /**
