@@ -77,8 +77,11 @@
                 <div class="card-body">
                 |   <i class="fas fa-hospital-user"></i>
                     <ul class="list-unstyled mt-3 mb-4">
-                       
+
+
+                         
                         <p>Bienvenido al portal SAMU de la Región de Tarapacá.</p>
+                        <img class="mb-2" src="{{ asset('images/logo_samu.png') }}" alt="Logo Servicio de Salud Iquique">
 
                     </ul>
                     
