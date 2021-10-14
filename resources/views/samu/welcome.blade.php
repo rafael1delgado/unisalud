@@ -75,7 +75,6 @@
                     <h4 class="my-0 font-weight-normal">Ingresa</h4>
                 </div>
                 <div class="card-body">
-                |   <i class="fas fa-hospital-user"></i>
                     <ul class="list-unstyled mt-3 mb-4">
 
 
