@@ -75,11 +75,22 @@
                     <td>{{$sic->pcsCodEspecDer}}</td>
                     <td>{{$sic->pcsCodEspecDer}}</td>
 
+{{--                    <td>--}}
+{{--                        <button type="button" class="btn btn-primary" data-toggle="modal"--}}
+{{--                                data-target="#pertinenceModal" title="Dar pertinencia"><i class="fas fa-edit"></i>--}}
+{{--                        </button>--}}
+{{--                    </td>--}}
+
+
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#pertinenceModal" title="Dar pertinencia"><i class="fas fa-edit"></i>
-                        </button>
+                        <div wire:key="{{$sic->id }}">
+                            <a href class="btn btn-primary" title="Dar Pertinencia"
+                               wire:click.prevent="$emitTo('some.pertinence-modal', 'open', {{ $sic->id }})">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
                     </td>
+
 {{--                    <td><a href="{{ route('vista.relevant') }}" class="btn btn-sm btn-outline-secondary"><span--}}
 {{--                                class="fas fa-edit" aria-hidden="true"></span></a></td>--}}
                     <td class="text-center">
@@ -188,6 +199,11 @@
         </table>
     </div>
 
+    <script>
+        window.livewire.on('togglePertinenceModal', () => {
+            $('#pertinenceModal').modal('toggle');
+        })
+    </script>
 </div>
 @livewire('some.pertinence-modal')
 

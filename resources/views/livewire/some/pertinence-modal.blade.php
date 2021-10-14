@@ -4,64 +4,73 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-{{--                <h5 class="modal-title" id="exampleModalLongTitle">Pertinencia</h5>--}}
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-exclamation-circle"></i>
+                    PERTINENCIAS</h5>
+                <button type="button" class="close" aria-label="Close" wire:click="closeModal">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-
             <div class="modal-body">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h3 class="mb-3"><i class="fas fa-exclamation-circle"></i> PERTINENCIAS</h3>
+                        {{--                        <h3 class="mb-3"></h3>--}}
                         <div class="card border-success mb-3">
                             <div class="card-header bg-success text-white">
-                                N° INTERCONSULTA: 713
+                                N° INTERCONSULTA: {{$sic->id ?? ''}}
                             </div>
                             <div class="card-body">
                                 <ul>
-                                    <li>Nombre:Alvaro Lupa</li>
-                                    <li>Edad: 29 Años</li>
-                                    <li>Género: Maculino</li>
-                                    <li>Centro: Cesfam Cirujano Aguirre</li>
+                                    <li>Nombre: {{$sic->pcsNombrePac ?? ''}} </li>
+                                    <li>Edad: {{$sic->age ?? ''}} Años</li>
+                                    <li>Género: {{$sic->pcsIndSexoPac ?? ''}}</li>
+                                    <li>Centro: {{$sic->pcsCodEstab ?? ''}}</li>
+                                    <li>Motivo: {{$sic->pciIndMotivo ?? ''}}</li>
                                 </ul>
                             </div>
                         </div>
 
-                        <b>MOTIVO INTERCONSULTA</b>
-                        <li class="mb-3">Paciente presenta traumatismo en extremidad inferior derecha.</li>
-                        <div class="form-row">
+                        <form wire:submit.prevent="pertinence" class="form-row">
                             <fieldset class="form-group  col-md-12 mb-3">
-                                <label for="for_run"> <b>HIPOTESIS DIAGNOSTICA</b></label>
+                                <label for="hypothesis"> <b>HIPOTESIS DIAGNOSTICA</b></label>
                                 <textarea class="form-control" placeholder="Ingrese Hipotesis Diagnostica"
-                                          id="floatingTextarea2"
-                                          style="height: 100px"></textarea>
+                                          id="hypothesis"
+                                          style="height: 100px"
+                                          wire:model.defer="diagnosticHypothesis"
+                                ></textarea>
                             </fieldset>
                             <fieldset class="form-group  col-md-12 mb-3">
-                                <label for="for_run"> <b>OBSERVACIÓN DEL CENTRO DE ORIGEN</b></label>
+                                <label for="observation"> <b>OBSERVACIÓN DEL CENTRO DE ORIGEN</b></label>
                                 <textarea class="form-control" placeholder="Ingrese Observación del Centro de Salud"
-                                          id="floatingTextarea2" style="height: 100px"></textarea>
+                                          id="observation"
+                                          style="height: 100px"
+                                          wire:model.defer="observation"
+                                ></textarea>
                             </fieldset>
 
                             <fieldset class="form-group  col-md-4">
-                                <button type="button" class="btn btn-success mr-2">Pertinente</button>
+                                <button  class="btn btn-success mr-2" wire:click="$set('action', 'pertinent')" >Pertinente</button>
                             </fieldset>
                             <fieldset class="form-group  col-md-2">
-                                <button type="button" class="btn btn-danger mr-2 float-right">No pertinente</button>
+                                <button  class="btn btn-danger mr-2 float-right" wire:click="$set('action', 'nonPertinent')">No pertinente</button>
                             </fieldset>
                             <fieldset class="form-group  col-md-6">
-                                <label for="for_run"> <b>(Motivo)</b></label>
-                                <textarea class="form-control" placeholder="" id="floatingTextarea2"
-                                          style="height: 100px"></textarea>
+                                <label for="motive"> <b>(Motivo)</b></label>
+                                <textarea class="form-control" placeholder="" id="motive"
+                                          style="height: 100px"
+                                          wire:model.defer="motive"
+                                ></textarea>
                             </fieldset>
-                            <fieldset class="form-group  col-md-4 mb-3">
-                                <button type="submit" class="btn btn-primary button">Terminar</button>
-                            </fieldset>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" wire:click="closeModal">Cerrar
+                </button>
+            </div>
+
         </div>
     </div>
 </div>
