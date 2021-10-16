@@ -98,9 +98,38 @@
 
         <!-- programador -->
         <script src="{{ asset('js/jquery/jquery-3.4.1.min.js') }}"></script>
+        
         <script src="{{ asset('js/popper/popper.min.js') }}" ></script>
         <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+        
         @yield('custom_js')
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".collapse-menu").on("shown.bs.collapse", function () {
+                    localStorage.setItem("coll_" + this.id, true);
+                    $('#icon_'+this.id).replaceWith(feather.icons['minus-circle'].toSvg());
+                    console.log('SHOW ' + this.id);
+                });
+
+                $(".collapse-menu").on("hidden.bs.collapse", function () {
+                    localStorage.removeItem("coll_" + this.id);
+                    $('#icon_'+this.id).replaceWith(feather.icons['plus-circle'].toSvg());
+                    console.log('HIDE ' + this.id);
+                });
+                
+                $(".collapse-menu").each(function () {
+                    console.log('EACH ' + this.id);
+                    if (localStorage.getItem("coll_" + this.id) === "true") {
+                        $(this).collapse("show");
+                    }
+                    else {
+                        $(this).collapse("hide");
+                    }
+                });
+            });
+        </script>
 
     </body>
 </html>
