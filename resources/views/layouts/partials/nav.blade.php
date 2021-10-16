@@ -1,10 +1,11 @@
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Mi información</span>
-    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-        <span data-feather="plus-circle"></span>
+    <a class="d-flex align-items-center text-muted" data-bs-toggle="collapse" aria-expanded="false"
+        aria-label="Mi información" href="#my-info" aria-controls="my-info">
+        <span id="icon_my-info" data-feather="plus-circle"></span>
     </a>
 </h6>
-<ul class="nav flex-column">
+<ul class="nav flex-column collapse collapse-menu" id="my-info">
     <!-- <li class="nav-item">
         <a class="nav-link {{ active('profile.observation.index') }}" href="{{ route('profile.observation.index') }}">
         <span data-feather="user"></span>
@@ -19,14 +20,18 @@
     </li>
 </ul>
 
+
+
+
 @canany(['Developer', 'Administrator', 'Mp: user creator'])
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Pacientes</span>
-    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-        <span data-feather="plus-circle"></span>
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
+        aria-label="Pacientes" href="#patients" aria-controls="patients">
+        <span id="icon_patients" data-feather="plus-circle"></span>
     </a>
 </h6>
-<ul class="nav flex-column">
+<ul class="nav flex-column collapse collapse-menu" id="patients">
     <li class="nav-item">
         <a class="nav-link {{ active('patient.index') }}" href="{{ route('patient.index') }}">
             <span data-feather="users"></span>
@@ -63,19 +68,19 @@
 @endcanany
 
 
+
+
 @can('Some: user')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>SOME</span>
-    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-        <span data-feather="plus-circle"></span>
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
+        aria-label="SOME" href="#some" aria-controls="some">
+        <span id="icon_some" data-feather="plus-circle"></span>
     </a>
 </h6>
-<ul class="nav flex-column">
-    {{-- <li class="nav-item">--}}
-    {{-- <a class="nav-link" href="{{ route('dummy.crear_usuario') }}"><span data-feather="user-plus"></span>Crear usuario</a>--}}
-    {{-- </li>--}}
+<ul class="nav flex-column collapse collapse-menu" id="some">
     <li class="nav-item">
-        <a class="nav-link " href="{{ route('some.appointment') }}"><span data-feather="file-text"></span>Cita</a>
+        <a class="nav-link {{ active('some.appointment') }}" href="{{ route('some.appointment') }}"><span data-feather="file-text"></span>Cita</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('some.reallocate') }}"><span data-feather="repeat"></span>Reasignación/Reserva</a>
@@ -110,14 +115,18 @@
 </ul>
 @endcan
 
+
+
+
 @can('Administrator')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Administrador</span>
-    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-        <span data-feather="plus-circle"></span>
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
+        aria-label="Administrador" href="#administrador" aria-controls="administrador">
+        <span id="icon_administrador" data-feather="plus-circle"></span>
     </a>
 </h6>
-<ul class="nav flex-column">
+<ul class="nav flex-column collapse collapse-menu" id="administrador">
     <li class="nav-item">
         <a class="nav-link {{ active('parameter.permission.index') }}" href="{{ route('parameter.permission.index') }}">
             <span data-feather="lock"></span>
@@ -133,15 +142,19 @@
 </ul>
 @endcan
 
+
+
+
 @canany(['Mp: user'])
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Programador médico</span>
-    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-        <span data-feather="plus-circle"></span>
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
+        aria-label="Programador" href="#programmer" aria-controls="programmer">
+        <span id="icon_programmer" data-feather="plus-circle"></span>
     </a>
 </h6>
 
-<ul class="nav flex-column">
+<ul class="nav flex-column collapse collapse-menu" id="programmer">
 
     <!-- programador de pabellones -->
     <!-- @canany(['Mp: programador pabellon'])
@@ -248,179 +261,186 @@
     </ul> -->
 
 
-    <!-- Epi -->
-    @can('Administrator')
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
-        <span>Epidemiología</span>
-        <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
-        </a>
-    </h6>
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link {{ active('epi.chagas.create') }}" href="{{ route('epi.chagas.create') }}">
-                <span data-feather="chevrons-right"></span>
-                Solicitud Examen Chagas<span class="sr-only">(en desarrollo)</span>
-            </a>
-        </li>
-        <!-- <li class="nav-item">
-        <a class="nav-link {{ active('epi.chagas.edit') }}" href="{{ route('epi.chagas.edit') }}">
-        <span data-feather="chevrons-right"></span>
-        Añadir datos adicionales<span class="sr-only">(en desarrollo)</span>
-        </a>
+ <!-- mantenedores -->
+ @canany(['Mp: mantenedores'])
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>Mantenedores</span>
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
+        aria-label="Mantenedores del programador" href="#mp_settings" aria-controls="mp_settings">
+        <span id="icon_mp_settings" data-feather="plus-circle"></span>
+    </a>
+</h6>
+
+<ul class="nav flex-column collapse collapse-menu" id="mp_settings">
+    <!--<li class="nav-item">
+    <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
+    <span data-feather="chevrons-right"></span>
+    RRHH
+    </a>
     </li> -->
-        <li class="nav-item">
-            <a class="nav-link {{ active('epi.chagas.index') }}" href="{{ route('epi.chagas.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Listar Solicitudes Chagas<span class="sr-only">(en desarrollo)</span>
-            </a>
-        </li>
-    </ul>
-    @endcan
 
-
-
-    <!-- ausencias -->
-    @can('Administrator')
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
-        <span>Ausentismos</span>
-        <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
-        </a>
-    </h6>
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link {{ active('absences.index') }}" href="{{ route('absences.index') }}">
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.contracts.index') }}" href="{{ route('medical_programmer.contracts.index') }}">
             <span data-feather="chevrons-right"></span>
-            Listar ausentismos<span class="sr-only"></span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ active('absences.create') }}" href="{{ route('absences.create') }}">
+            Contratos
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.operating_rooms.index') }}" href="{{ route('medical_programmer.operating_rooms.index') }}">
             <span data-feather="chevrons-right"></span>
-            Registrar nueva ausencia<span class="sr-only"></span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ active('absences.load') }}" href="{{ route('absences.load') }}">
+            Pabellones
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.mother_activities.index') }}" href="{{ route('medical_programmer.mother_activities.index') }}">
             <span data-feather="chevrons-right"></span>
-            Importar ausencias<span class="sr-only"></span>
-            </a>
-        </li>
-    </ul>
-    @endcan
-
-    <!-- mantenedores -->
-    @canany(['Mp: mantenedores'])
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
-        <span>Mantenedores</span>
-        <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
+            Actividades Madre
         </a>
-    </h6>
+    </li>
 
-    <ul class="nav flex-column">
-        <!--<li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
-        <span data-feather="chevrons-right"></span>
-        RRHH
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.activities.index') }}" href="{{ route('medical_programmer.activities.index') }}">
+            <span data-feather="chevrons-right"></span>
+            Actividades
         </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.subactivities.index') }}" href="{{ route('medical_programmer.subactivities.index') }}">
+            <span data-feather="chevrons-right"></span>
+            Sub-actividades
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.services.index') }}" href="{{ route('medical_programmer.services.index') }}">
+            <span data-feather="chevrons-right"></span>
+            Servicios
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.specialties.index') }}" href="{{ route('medical_programmer.specialties.index') }}">
+            <span data-feather="chevrons-right"></span>
+            Especialidades
+            <!-- (Rdtos sugeridos) -->
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.professions.index') }}" href="{{ route('medical_programmer.professions.index') }}">
+            <span data-feather="chevrons-right"></span>
+            Profesiones
+            <!-- (Rdtos sugeridos) -->
+        </a>
+    </li>
+
+    <!-- <li class="nav-item">
+    <a class="nav-link {{ active('medical_programmer.cutoffdates.index') }}" href="{{ route('medical_programmer.cutoffdates.index') }}">
+    <span data-feather="chevrons-right"></span>
+    Fechas de corte
+    </a>
     </li> -->
 
-        <li class="nav-item">
-            <a class="nav-link {{ active('medical_programmer.contracts.index') }}" href="{{ route('medical_programmer.contracts.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Contratos
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link {{ active('medical_programmer.operating_rooms.index') }}" href="{{ route('medical_programmer.operating_rooms.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Pabellones
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link {{ active('medical_programmer.mother_activities.index') }}" href="{{ route('medical_programmer.mother_activities.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Actividades Madre
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link {{ active('medical_programmer.activities.index') }}" href="{{ route('medical_programmer.activities.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Actividades
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link {{ active('medical_programmer.subactivities.index') }}" href="{{ route('medical_programmer.subactivities.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Sub-actividades
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link {{ active('medical_programmer.services.index') }}" href="{{ route('medical_programmer.services.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Servicios
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link {{ active('medical_programmer.specialties.index') }}" href="{{ route('medical_programmer.specialties.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Especialidades
-                <!-- (Rdtos sugeridos) -->
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link {{ active('medical_programmer.professions.index') }}" href="{{ route('medical_programmer.professions.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Profesiones
-                <!-- (Rdtos sugeridos) -->
-            </a>
-        </li>
-
-        <!-- <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.cutoffdates.index') }}" href="{{ route('medical_programmer.cutoffdates.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Fechas de corte
-        </a>
+    <!-- <li class="nav-item">
+    <a class="nav-link {{ active('medical_programmer.unscheduled_programming.index') }}" href="{{ route('medical_programmer.unscheduled_programming.index') }}">
+    <span data-feather="chevrons-right"></span>
+    Programación
+    </a>
     </li> -->
 
-        <!-- <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.unscheduled_programming.index') }}" href="{{ route('medical_programmer.unscheduled_programming.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Programación
-        </a>
+    <!-- <li class="nav-item">
+    <a class="nav-link {{ active('medical_programmer.clone.index') }}" href="{{ route('medical_programmer.clone.index') }}">
+    <span data-feather="chevrons-right"></span>
+    Clonar
+    </a>
     </li> -->
 
-        <!-- <li class="nav-item">
-        <a class="nav-link {{ active('medical_programmer.clone.index') }}" href="{{ route('medical_programmer.clone.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Clonar
-        </a>
-    </li> -->
+</ul>
+@endcanany
 
-    </ul>
+
+
+<!-- Epi -->
+@can('Administrator')
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>Epidemiología</span>
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
+        aria-label="Epidemiología" href="#epidemiology" aria-controls="epidemiology">
+        <span id="icon_epidemiology" data-feather="plus-circle"></span>
+    </a>
+</h6>
+<ul class="nav flex-column collapse collapse-menu" id="epidemiology">
+    <li class="nav-item">
+        <a class="nav-link {{ active('epi.chagas.create') }}" href="{{ route('epi.chagas.create') }}">
+            <span data-feather="chevrons-right"></span>
+            Solicitud Examen Chagas<span class="sr-only">(en desarrollo)</span>
+        </a>
+    </li>
+    <!-- <li class="nav-item">
+    <a class="nav-link {{ active('epi.chagas.edit') }}" href="{{ route('epi.chagas.edit') }}">
+    <span data-feather="chevrons-right"></span>
+    Añadir datos adicionales<span class="sr-only">(en desarrollo)</span>
+    </a>
+</li> -->
+    <li class="nav-item">
+        <a class="nav-link {{ active('epi.chagas.index') }}" href="{{ route('epi.chagas.index') }}">
+            <span data-feather="chevrons-right"></span>
+            Listar Solicitudes Chagas<span class="sr-only">(en desarrollo)</span>
+        </a>
+    </li>
+</ul>
+@endcan
+
+
+
+<!-- ausencias -->
+@can('Administrator')
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>Ausentismos</span>
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
+        aria-label="Ausentismos" href="#absences" aria-controls="absences">
+        <span id="icon_absences" data-feather="plus-circle"></span>
+    </a>
+</h6>
+<ul class="nav flex-column collapse collapse-menu" id="absences">
+    <li class="nav-item">
+        <a class="nav-link {{ active('absences.index') }}" href="{{ route('absences.index') }}">
+        <span data-feather="chevrons-right"></span>
+        Listar ausentismos<span class="sr-only"></span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('absences.create') }}" href="{{ route('absences.create') }}">
+        <span data-feather="chevrons-right"></span>
+        Registrar nueva ausencia<span class="sr-only"></span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('absences.load') }}" href="{{ route('absences.load') }}">
+        <span data-feather="chevrons-right"></span>
+        Importar ausencias<span class="sr-only"></span>
+        </a>
+    </li>
+</ul>
+@endcan
+
+
+
+
+<!--SAMU-->
+<ul class="nav flex-column">
+
+    @canany(['SAMU: admin'])
+        <li class="nav-item">
+            <a class="nav-link {{ active('samu.welcome') }}" href="{{ route('samu.welcome') }}">
+            <i class="fas fa-ambulance"></i> SAMU
+            </a>
+        </li>
     @endcanany
-
-    <!--SAMU-->
-
-    <ul class="nav flex-column">
-
-        @canany(['SAMU: admin'])
-            <li class="nav-item">
-                <a class="nav-link {{ active('samu.welcome') }}" href="{{ route('samu.welcome') }}">
-                <i class="fas fa-ambulance"></i> SAMU
-                </a>
-            </li>
-        @endcanany
-        
+    
 </ul>
 <!--SAMU-->
 
@@ -433,14 +453,3 @@
         </a>
     </li>
 </ul>
-
-<!-- <p>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-target
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-  </div>
-</div> -->
