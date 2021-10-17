@@ -97,6 +97,7 @@
         </script>
 
         <!-- programador -->
+        <!-- TODO: @GermanZun /#27-->
         <script src="{{ asset('js/jquery/jquery-3.4.1.min.js') }}"></script>
         
         <script src="{{ asset('js/popper/popper.min.js') }}" ></script>
