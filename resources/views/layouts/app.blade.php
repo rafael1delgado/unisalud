@@ -97,12 +97,9 @@
         </script>
 
         <!-- programador -->
-        <!-- TODO: @GermanZun /#27-->
-        <script src="{{ asset('js/jquery/jquery-3.4.1.min.js') }}"></script>
-        
-        <script src="{{ asset('js/popper/popper.min.js') }}" ></script>
-        <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha512-ubuT8Z88WxezgSqf3RLuNi5lmjstiJcyezx34yIU2gAHonIi27Na7atqzUZCOoY4CExaoFumzOsFQ2Ch+I/HCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
         @yield('custom_js')
 
 
@@ -119,7 +116,7 @@
                     $('#icon_'+this.id).replaceWith(feather.icons['plus-circle'].toSvg());
                     console.log('HIDE ' + this.id);
                 });
-                
+
                 $(".collapse-menu").each(function () {
                     console.log('EACH ' + this.id);
                     if (localStorage.getItem("coll_" + this.id) === "true") {

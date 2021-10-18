@@ -43,6 +43,7 @@ class PertinenceModal extends Component
                 Sic::Create($newSic);
 
                 $this->sic->forceDelete();
+                $this->closeModal();
 
             }
             DB::commit();
