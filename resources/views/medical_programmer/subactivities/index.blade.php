@@ -27,7 +27,7 @@
 <table class="table table-sm table-borderer">
     <thead>
         <tr>
-            <th>Especialidad</th>
+            <th>Especialidad/Profesión</th>
             <th>Actividad</th>
             <th>SubActividad Abrev.</th>
             <th>SubActividad</th>
@@ -38,7 +38,9 @@
     <tbody>
         @foreach( $subactivities as $subactivity )
         <tr>
-            <td>@if($subactivity->specialty){{ $subactivity->specialty->specialty_name }}@endif</td>
+            <td>@if($subactivity->specialty){{ $subactivity->specialty->specialty_name }}@endif
+                @if($subactivity->profession){{ $subactivity->profession->profession_name }}@endif
+            </td>
             <td>@if($subactivity->activity){{ $subactivity->activity->activity_name }}@endif</td>
             <td>{{ $subactivity->sub_activity_abbreviated }}</td>
             <td>{{ $subactivity->sub_activity_name }}</td>

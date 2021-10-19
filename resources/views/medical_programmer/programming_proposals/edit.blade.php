@@ -32,10 +32,20 @@
       <input type="text" class="form-control" name="" value="{{$programmingProposal->contract->law}} - {{$programmingProposal->contract->weekly_hours}}hrs - {{$programmingProposal->contract->year}}" disabled>
   </fieldset>
 
-  <fieldset class="form-group col col-md">
-      <label for="for_id_deis">Especialidad</label>
-      <input type="text" class="form-control" name="" value="{{$programmingProposal->specialty->specialty_name}}" disabled>
-  </fieldset>
+  @if($programmingProposal->specialty)
+    <fieldset class="form-group col col-md">
+        <label for="for_id_deis">Especialidad</label>
+        <input type="text" class="form-control" name="" value="{{$programmingProposal->specialty->specialty_name}}" disabled>
+    </fieldset>
+  @endif
+
+  @if($programmingProposal->profession)
+    <fieldset class="form-group col col-md">
+        <label for="for_id_deis">Especialidad</label>
+        <input type="text" class="form-control" name="" value="{{$programmingProposal->profession->profession_name}}" disabled>
+    </fieldset>
+  @endif
+
 
 </div>
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MedicalProgrammer\SubActivity;
 use App\Models\MedicalProgrammer\Specialty;
+use App\Models\MedicalProgrammer\Profession;
 use App\Models\MedicalProgrammer\Activity;
 
 class SubActivityController extends Controller
@@ -19,13 +20,19 @@ class SubActivityController extends Controller
     public function index(Request $request)
     {
         $specialties = Specialty::all();
+        $professions = Profession::all();
 
         $specialty_id = $request->get('specialty_id');
+        $profession_id = $request->get('profession_id');
         $subactivities = SubActivity::when($specialty_id != 0, function ($query) use ($specialty_id) {
                                           $query->where('specialty_id', $specialty_id);
-                                      })->get();
+                                      })
+                                      ->when($profession_id != 0, function ($query) use ($profession_id) {
+                                                                        $query->where('profession_id', $profession_id);
+                                                                    })
+                                      ->get();
 
-        return view('medical_programmer.subactivities.index', compact('request','subactivities','specialties'));
+        return view('medical_programmer.subactivities.index', compact('request','subactivities','specialties','professions'));
     }
 
     /**
@@ -36,10 +43,11 @@ class SubActivityController extends Controller
     public function create()
     {
       $specialties = Specialty::orderBy('specialty_name','ASC')->get();
+      $professions = Profession::orderBy('profession_name','ASC')->get();
       // $activities = Activity::orderBy('activity_name','ASC')->get();
       $activities = null;
 
-      return view('medical_programmer.subactivities.create',compact('specialties','activities'));
+      return view('medical_programmer.subactivities.create',compact('specialties','professions','activities'));
     }
 
     /**
@@ -77,8 +85,9 @@ class SubActivityController extends Controller
     public function edit(Subactivity $subactivity)
     {
       $specialties = Specialty::orderBy('specialty_name','ASC')->get();
+      $professions = Profession::orderBy('profession_name','ASC')->get();
       $activities = Activity::orderBy('activity_name','ASC')->get();
-      return view('medical_programmer.subactivities.edit', compact('subactivity','specialties','activities'));
+      return view('medical_programmer.subactivities.edit', compact('subactivity','specialties','professions','activities'));
     }
 
     /**

@@ -13,16 +13,22 @@
     <div class="row">
         <fieldset class="form-group col-4">
             <label for="for_user_id">Id</label>
-            <input type="text" class="form-control" id="for_user_id" disabled>
+            <input type="text" class="form-control" id="for_user_label" disabled>
         </fieldset>
 
         <!-- <input type="hidden" class="form-control" id="for_user_id2" name="user_id"> -->
 
-        <fieldset class="form-group col-8">
+        <!-- <fieldset class="form-group col-8">
             <label for="for_user_id">Especialista</label>
             <input type="text" class="form-control" id="search" name="" value="">
             <input type="hidden" name="user_id" id="user_id" value="">
-        </fieldset>
+        </fieldset> -->
+
+        @livewire('medical_programmer.select-med-prog-employee',['type'         => $request->type,
+                                                                 'specialty_id' => $request->specialty_id,
+                                                                 'profession_id'=> $request->profession_id,
+                                                                 'user_id'      => $request->user_id,
+                                                                 'contract_enable' => 0])
     </div>
 
     <div class="row">
@@ -42,7 +48,7 @@
         </fieldset>
 
         <fieldset class="form-group col">
-            <label for="for_weekly_hours">Hrs.Semanales contratadas</label>
+            <label for="for_weekly_hours">Hrs.Semanales contratadas *</label>
             <input type="text" class="form-control" id="for_weekly_hours" placeholder="" name="weekly_hours" required>
         </fieldset>
 
@@ -163,24 +169,28 @@ $( "#rrhh" ).change(function() {
 
 <script>
 
-$('#search').autocomplete({
-   source: function(request, response){
-	 $.ajax({
-           url: "{{route('user.search_by_name')}}",
-           dataType: 'json',
-           async: false,
-           data: {
-             term: request.term
-           },
-           success: function(data){
-             response(data)
-	         }
-   });
- },
-  select: function(event, ui) {
-     $("#user_id").val(ui.item.id),
-     $("#for_user_id").val(ui.item.id)
-  }
+// $('#search').autocomplete({
+//    source: function(request, response){
+// 	 $.ajax({
+//            url: "{{route('user.search_by_name')}}",
+//            dataType: 'json',
+//            async: false,
+//            data: {
+//              term: request.term
+//            },
+//            success: function(data){
+//              response(data)
+// 	         }
+//    });
+//  },
+//   select: function(event, ui) {
+//      $("#for_user_id").val(ui.item.id),
+//      $("#for_user_label").val(ui.item.id)
+//   }
+// });
+
+$( "#for_user_id" ).change(function() {
+  $("#for_user_label").val($(this).val());
 });
 
 

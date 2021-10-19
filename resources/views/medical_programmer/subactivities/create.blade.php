@@ -10,7 +10,7 @@
   @csrf
   @method('POST')
 
-    @livewire('medical_programmer.specialty-activities-selection',compact('specialties','activities'))
+    @livewire('medical_programmer.specialty-activities-selection',compact('specialties','professions','activities'))
 
     <div class="row">
         <fieldset class="form-group col-3">

@@ -8,7 +8,8 @@
 @csrf
 @method('POST')
 
-@livewire('medical_programmer.select-activ-subactiv',['specialty_id' => $programmingProposal->specialty_id])
+@livewire('medical_programmer.select-activ-subactiv',['specialty_id' => $programmingProposal->specialty_id,
+                                                      'profession_id' => $programmingProposal->profession_id])
 
 <input type="hidden" name="programming_proposal_id" value="{{$programmingProposal->id}}">
 

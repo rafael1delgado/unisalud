@@ -38,7 +38,7 @@
   </fieldset>
 </div> -->
 
-<!-- @livewire('medical_programmer.select-user-cont-spec', ['selected_id' => 'user_id']) -->
+
 
 @livewire('medical_programmer.select-med-prog-employee',['type'         => $request->type,
                                                          'specialty_id' => $request->specialty_id,
