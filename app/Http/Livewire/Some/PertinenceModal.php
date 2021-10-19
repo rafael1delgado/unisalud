@@ -3,11 +3,13 @@
 namespace App\Http\Livewire\Some;
 
 use App\Models\Some\ExternalIncomingSic;
+use App\Models\Some\Sic;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class PertinenceModal extends Component
 {
-
     public $sic;
     public $diagnosticHypothesis;
     public $observation;
@@ -23,9 +25,32 @@ class PertinenceModal extends Component
         $this->emit('togglePertinenceModal');
     }
 
+    /**
+     * @throws Exception
+     */
     public function pertinence()
     {
-        \Debugbar::info($this->diagnosticHypothesis, $this->observation, $this->motive, $this->action);
+      DB::beginTransaction();
+
+        try {
+            if ($this->action == 'pertinent') {
+                $newSic = $this->sic->replicate([
+                    'sic_status_id'
+                ]);
+                $newSic->sic_status_id = 2; //Pertinente
+
+                $newSic = $newSic->toArray();
+                Sic::Create($newSic);
+
+                $this->sic->forceDelete();
+                $this->closeModal();
+
+            }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
     public function closeModal()
