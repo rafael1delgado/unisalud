@@ -438,12 +438,13 @@ Route::prefix('soap')->name('soap.')->group(function(){
 
 //rutas samu
   Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
-      Route::view('/welcome', 'samu.welcome')->name('welcome');
+      Route::view('/', 'samu.welcome')->name('welcome');
       Route::prefix('mobile')->name('mobile.')->group(function () {
-      Route::view('/', 'samu.mobile.index')->name('index');
-      Route::view('/create', 'samu.mobile.create')->name('create');
-      Route::view('/edit', 'samu.mobile.edit')->name('edit');
-    });
+        Route::get('/', [App\Http\Controllers\Samu\ShiftMobileController::class, 'index'])->name('index');
+        Route::get('/create' , [App\Http\Controllers\Samu\ShiftMobileController::class, 'create'])->name('create');
+        Route::post('/store', [App\Http\Controllers\Samu\ShiftMobileController::class, 'store'])->name('store');
+        Route::view('/edit', 'samu.mobile.edit')->name('edit');
+      });
 
       Route::prefix('crew')->name('crew.')->group(function () {
       Route::view('/', 'samu.crew.index')->name('index');

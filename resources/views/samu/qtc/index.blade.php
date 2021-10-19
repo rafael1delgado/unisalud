@@ -72,7 +72,7 @@
             <div class="form-row">
                 <div class="col-md-2 mb-3">
                     <a class="btn btn-success" href="{{ route('samu.codemobile.create') }}">
-                         <i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Agregar Movil Turno
+                         <i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i>  Agregar Movil Turno
                     </a>
                 </div>    
             </div> 
@@ -343,6 +343,7 @@
 @endsection
 
 @section('custom_js')
+<!--para que los popover solo duren 3 segundos-->
 <script>
 $(function () {
         $('[data-toggle="popover" ]').popover()

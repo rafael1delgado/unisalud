@@ -73,6 +73,11 @@ class Shift extends Model
     {
         return $this->belongsTo('\App\Models\Samu\Noveltie');
     }
+
+    public function ShiftMobiles()
+    {
+        return $this->belongsToMany('\App\Models\Samu\ShiftMobile','samu_shift_user')->withTimestamps()->wherePivot('id', 'detail','type');
+    }
 }
 
 
