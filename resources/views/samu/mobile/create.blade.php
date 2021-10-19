@@ -41,7 +41,7 @@
                         @endforeach
                     </select>
                 </fieldset>
-
+      
                 <fieldset class="form-group col-12 col-md-2">
                     <label for="empresa">Tipo</label>
                     <select class="form-control" name="type">
