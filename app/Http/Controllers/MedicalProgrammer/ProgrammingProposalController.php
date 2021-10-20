@@ -23,8 +23,17 @@ class ProgrammingProposalController extends Controller
      */
     public function index()
     {
+      if (Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de CAE Médico') ||
+          Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica')) {
+        $programmingProposals = ProgrammingProposal::whereNotNull('specialty_id')->orderBy('id','DESC')->get();
+      }elseif (Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de CAE No médico') ||
+               Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección DGCP')) {
+        $programmingProposals = ProgrammingProposal::whereNotNull('profession_id')->orderBy('id','DESC')->get();
+      }else{
         $programmingProposals = ProgrammingProposal::orderBy('id','DESC')->get();
-        return view('medical_programmer.programming_proposals.index',compact('programmingProposals'));
+      }
+
+      return view('medical_programmer.programming_proposals.index',compact('programmingProposals'));
     }
 
     /**
