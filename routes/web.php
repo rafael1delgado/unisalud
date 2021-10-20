@@ -53,8 +53,11 @@ use App\Http\Livewire\Some\OpenPending;
 use App\Models\Some\Appointment;
 use App\Http\Controllers\AbsenceController;
 
+use App\Http\Controllers\TestController;
+
 use App\Http\Controllers\RayenWs\SoapController;
 use Spatie\Permission\Contracts\Role;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -560,3 +563,5 @@ Route::prefix('soap')->name('soap.')->group(function(){
       Route::view('/relevant', 'vista.relevant')->name('relevant');
       Route::view('/control', 'vista.control')->name('control');
       });
+
+Route::get('/test/sendip',[TestController::class,'sendIp']);
