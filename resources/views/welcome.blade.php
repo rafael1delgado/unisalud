@@ -163,8 +163,7 @@
                     <ul class="list-unstyled text-small">
                         <li><a class="text-muted" href="https://i.saludiquique.cl/login">iOnline</a></li>
                         <li><a class="text-muted" href="http://intranet.saludiquique.cl">Intranet</a> </li>
-                        <li><a class="text-muted" href="https://www.gob.cl/plannacionaldecancer/">Siremx</a></li>
-
+                        <li><a class="text-muted" href="{{ route('login') }}">Login local</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-md">
