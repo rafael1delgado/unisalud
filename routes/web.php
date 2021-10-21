@@ -54,9 +54,11 @@ use App\Models\Some\Appointment;
 use App\Http\Controllers\AbsenceController;
 
 use App\Http\Controllers\RayenController;
+use App\Http\Controllers\TestController;
 
 use App\Http\Controllers\RayenWs\SoapController;
 use Spatie\Permission\Contracts\Role;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -543,7 +545,6 @@ Route::prefix('absences')->name('absences.')->group(function () {
 
 
 //Rutas Epi
-
 Route::prefix('epi')->name('epi.')->group(function () {
   Route::prefix('chagas')->name('chagas.')->group(function () {
     Route::view('/', 'epi.chagas.index')->name('index');
@@ -552,8 +553,8 @@ Route::prefix('epi')->name('epi.')->group(function () {
   });
 
 });
-
 //fin rutas EPI
+
 
 //Rutas control-attention
 Route::prefix('vista')->name('vista.')->group(function () {
@@ -563,4 +564,14 @@ Route::prefix('vista')->name('vista.')->group(function () {
   Route::view('/control', 'vista.control')->name('control');
 });
 
-Route::get('/test/rayen' , [RayenController::class, 'getUrgencyStatus'])->name('getUrgencyStatus');
+
+//Rutas control-attention
+Route::prefix('vista')->name('vista.')->group(function () {
+  Route::view('/', 'vista.control')->name('index');
+  Route::view('/edit', 'vista.attention')->name('attention');
+  Route::view('/relevant', 'vista.relevant')->name('relevant');
+  Route::view('/control', 'vista.control')->name('control');
+});
+
+Route::get('/test/rayen' ,[RayenController::class, 'getUrgencyStatus'])->name('getUrgencyStatus');
+Route::get('/test/sendip',[TestController::class,'sendIp']);
