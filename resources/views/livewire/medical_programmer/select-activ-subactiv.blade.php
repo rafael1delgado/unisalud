@@ -10,6 +10,12 @@
               <option value="{{$specialtyActivity->activity->id}}">{{$specialtyActivity->activity->activity_name}}</option>
              @endforeach
            @endif
+
+           @if($professionActivities != null)
+             @foreach($professionActivities as $professionActivity)
+               <option value="{{$professionActivity->activity->id}}">{{$professionActivity->activity->activity_name}}</option>
+              @endforeach
+            @endif
         </select>
     </fieldset>
 

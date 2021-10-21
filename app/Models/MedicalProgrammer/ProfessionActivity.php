@@ -15,6 +15,12 @@ class ProfessionActivity extends Model implements Auditable
     ];
 
     use SoftDeletes;
+
+    public function activity()
+    {
+        return $this->belongsTo('App\Models\MedicalProgrammer\Activity');
+    }
+    
     /**
      * The attributes that should be mutated to dates.
      *

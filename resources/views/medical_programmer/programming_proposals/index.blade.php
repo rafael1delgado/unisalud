@@ -16,7 +16,7 @@
             <th>Tipo</th>
             <th>Empleado</th>
             <th>Contrato</th>
-            <th>Especialidad</th>
+            <th>Especialidad/Profesión</th>
             <th>F.Inicio</th>
             <th>F.Término</th>
             <th>Estado</th>
@@ -31,7 +31,10 @@
           <td>{{$programmingProposal->type}}</td>
           <td>{{$programmingProposal->user->OfficialFullName}}</td>
           <td>{{$programmingProposal->contract->law}} - {{$programmingProposal->contract->weekly_hours}}hrs</td>
-          <td>{{$programmingProposal->specialty->specialty_name}}</td>
+          <td>
+            @if($programmingProposal->specialty){{$programmingProposal->specialty->specialty_name}}@endif
+            @if($programmingProposal->profession){{$programmingProposal->profession->profession_name}}@endif
+          </td>
           <td>{{$programmingProposal->start_date->format('d-m-Y')}}</td>
           <td>{{$programmingProposal->end_date->format('d-m-Y')}}</td>
           <td>{{$programmingProposal->status}}</td>

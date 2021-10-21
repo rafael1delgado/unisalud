@@ -15,4 +15,9 @@ class CodeMobile extends Model
         'name_mobile_code',
         'created_at'
     ];
+
+    public function ShiftsMobiles()
+    {
+        return $this->belongsToMany('\App\Models\Samu\ShiftMobile','samu_shift_user')->withTimestamps()->wherePivot('id', 'detail','type');
+    }
 }

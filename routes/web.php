@@ -53,8 +53,12 @@ use App\Http\Livewire\Some\OpenPending;
 use App\Models\Some\Appointment;
 use App\Http\Controllers\AbsenceController;
 
+use App\Http\Controllers\RayenController;
+use App\Http\Controllers\TestController;
+
 use App\Http\Controllers\RayenWs\SoapController;
 use Spatie\Permission\Contracts\Role;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -437,125 +441,137 @@ Route::prefix('soap')->name('soap.')->group(function(){
 });
 
 //rutas samu
-  Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
-      Route::view('/welcome', 'samu.welcome')->name('welcome');
-      Route::prefix('mobile')->name('mobile.')->group(function () {
-      Route::view('/', 'samu.mobile.index')->name('index');
-      Route::view('/create', 'samu.mobile.create')->name('create');
+Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
+    Route::view('/', 'samu.welcome')->name('welcome');
+    Route::prefix('mobile')->name('mobile.')->group(function () {
+      Route::get('/', [App\Http\Controllers\Samu\ShiftMobileController::class, 'index'])->name('index');
+      Route::get('/create' , [App\Http\Controllers\Samu\ShiftMobileController::class, 'create'])->name('create');
+      Route::post('/store', [App\Http\Controllers\Samu\ShiftMobileController::class, 'store'])->name('store');
       Route::view('/edit', 'samu.mobile.edit')->name('edit');
     });
 
-      Route::prefix('crew')->name('crew.')->group(function () {
-      Route::view('/', 'samu.crew.index')->name('index');
-      Route::view('/create', 'samu.crew.create')->name('create');
-      Route::view('/edit', 'samu.crew.edit')->name('edit');
-    });
-
-      Route::prefix('shift')->name('shift.')->group(function () {
-      Route::view('/', 'samu.shift.index')->name('index');
-      Route::view('/create', 'samu.shift.create')->name('create');
-      Route::view('/edit', 'samu.shift.edit')->name('edit');
-    });
-
-      Route::prefix('codekey')->name('codekey.')->group(function () {
-        Route::get('/' , [App\Http\Controllers\Samu\CodeKeyController::class, 'index'])->name('index');
-        Route::get('/create' , [App\Http\Controllers\Samu\CodeKeyController::class, 'create'])->name('create');
-        Route::post('/store', [App\Http\Controllers\Samu\CodeKeyController::class, 'store'])->name('store');
-        Route::put('/update/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'update'])->name('update');
-        Route::get('/edit/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'edit'])->name('edit');
-        Route::delete('/{codeKey}', [App\Http\Controllers\Samu\CodeKeyController::class, 'destroy'])->name('destroy');
-
-    });
-
-    Route::prefix('codemobile')->name('codemobile.')->group(function () {
-      Route::get('/',[App\Http\Controllers\Samu\CodeMobileController::class, 'index'])->name('index');
-      Route::get('/create',[App\Http\Controllers\Samu\CodeMobileController::class, 'create'])->name('create');
-      Route::post('/store',[App\Http\Controllers\Samu\CodeMobileController::class, 'store'])->name('store');
-      Route::get('/edit/{codeMobile}',[App\Http\Controllers\Samu\CodeMobileController::class, 'edit'])->name('edit');
-      Route::put('/{codeMobile}',[App\Http\Controllers\Samu\CodeMobileController::class, 'update'])->name('update');
-      Route::delete('/{codeMobile}', [App\Http\Controllers\Samu\CodeMobileController::class, 'destroy'])->name('destroy');
-    });
-
-   
-    Route::prefix('qtc')->name('qtc.')->group(function () {
-      Route::get('/',[App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
-      Route::get('/edit/{qtc}',[App\Http\Controllers\Samu\QtcController::class, 'edit'])->name('edit');
-      Route::post('/store',[App\Http\Controllers\Samu\QtcController::class, 'store'])->name('store');
-      Route::delete('/{qtc}', [App\Http\Controllers\Samu\QtcController::class, 'destroy'])->name('destroy');
-   
-    });
-
-    Route::prefix('follow')->name('follow.')->group(function () {
-      Route::get('/',[App\Http\Controllers\Samu\FollowController::class, 'index'])->name('index');
-      Route::get('/create' , [App\Http\Controllers\Samu\FollowController::class, 'create'])->name('create');
-      Route::get('/edit',[App\Http\Controllers\Samu\FollowController::class, 'edit'])->name('edit');
-      Route::post('/store', [App\Http\Controllers\Samu\FollowController::class, 'store'])->name('store');
-      Route::post('/otstore', [App\Http\Controllers\Samu\FollowController::class, 'otstore'])->name('otstore');
-      Route::post('/tstore', [App\Http\Controllers\Samu\FollowController::class, 'tstore'])->name('tstore');
-      Route::put('/tupdate/{follow}', [App\Http\Controllers\Samu\FollowController::class, 'tupdate'])->name('tupdate');
-      Route::put('/update/{follow}', [App\Http\Controllers\Samu\FollowController::class, 'update'])->name('update');
-    });
+    Route::prefix('crew')->name('crew.')->group(function () {
+    Route::view('/', 'samu.crew.index')->name('index');
+    Route::view('/create', 'samu.crew.create')->name('create');
+    Route::view('/edit', 'samu.crew.edit')->name('edit');
+  });
 
     Route::prefix('shift')->name('shift.')->group(function () {
-      // Route::view('/', 'samu.shift.index')->name('index');
-      Route::get('/',[App\Http\Controllers\Samu\ShiftController::class, 'index'])->name('index');
-      Route::get('/create',[App\Http\Controllers\Samu\ShiftController::class, 'create'])->name('create');
-      Route::post('/store',[App\Http\Controllers\Samu\ShiftController::class, 'store'])->name('store');
-      Route::get('/edit/{shift}',[App\Http\Controllers\Samu\ShiftController::class, 'edit'])->name('edit');
-      Route::put('/{shift}',[App\Http\Controllers\Samu\ShiftController::class, 'update'])->name('update');
-      Route::delete('/{shift}', [App\Http\Controllers\Samu\ShiftController::class, 'destroy'])->name('destroy');
-    });
+    Route::view('/', 'samu.shift.index')->name('index');
+    Route::view('/create', 'samu.shift.create')->name('create');
+    Route::view('/edit', 'samu.shift.edit')->name('edit');
+  });
 
-    Route::prefix('noveltie')->name('noveltie.')->group(function () {
-      Route::get('/',[App\Http\Controllers\Samu\NoveltieController::class, 'index'])->name('index');
-      Route::post('/store', [App\Http\Controllers\Samu\NoveltieController::class, 'store'])->name('store');
-      Route::get('/edit/{noveltie}', [App\Http\Controllers\Samu\NoveltieController::class, 'edit'])->name('edit');
-      Route::put('/update/{noveltie}',[App\Http\Controllers\Samu\NoveltieController::class, 'update'])->name('update');
-      //Route::view('/edit', 'samu.novelties.create')->name('edit');
-    });
+    Route::prefix('codekey')->name('codekey.')->group(function () {
+      Route::get('/' , [App\Http\Controllers\Samu\CodeKeyController::class, 'index'])->name('index');
+      Route::get('/create' , [App\Http\Controllers\Samu\CodeKeyController::class, 'create'])->name('create');
+      Route::post('/store', [App\Http\Controllers\Samu\CodeKeyController::class, 'store'])->name('store');
+      Route::put('/update/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'update'])->name('update');
+      Route::get('/edit/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'edit'])->name('edit');
+      Route::delete('/{codeKey}', [App\Http\Controllers\Samu\CodeKeyController::class, 'destroy'])->name('destroy');
 
   });
 
-
-  Route::prefix('samuu')->name('samuu.')->group(function(){
-
-    Route::get('/qtc' , [App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
-    Route::get('/qtckey' , [App\Http\Controllers\Samu\QtcKeyController::class, 'index'])->name('index');
+  Route::prefix('codemobile')->name('codemobile.')->group(function () {
+    Route::get('/',[App\Http\Controllers\Samu\CodeMobileController::class, 'index'])->name('index');
+    Route::get('/create',[App\Http\Controllers\Samu\CodeMobileController::class, 'create'])->name('create');
+    Route::post('/store',[App\Http\Controllers\Samu\CodeMobileController::class, 'store'])->name('store');
+    Route::get('/edit/{codeMobile}',[App\Http\Controllers\Samu\CodeMobileController::class, 'edit'])->name('edit');
+    Route::put('/{codeMobile}',[App\Http\Controllers\Samu\CodeMobileController::class, 'update'])->name('update');
+    Route::delete('/{codeMobile}', [App\Http\Controllers\Samu\CodeMobileController::class, 'destroy'])->name('destroy');
   });
 
-  //fin rutas samu
-
-  // Route::resource('absences', AbsenceController::class)->only([
-  //   'create', 'store'
-  // ]);
-
-  Route::prefix('absences')->name('absences.')->group(function () {
-    Route::get('/', [AbsenceController::class, 'index'])->name('index');
-    Route::get('/create', [AbsenceController::class, 'create'])->name('create');
-    Route::post('/', [AbsenceController::class, 'store'])->name('store');
-    Route::get('/load', [AbsenceController::class, 'load'])->name('load');
-    Route::post('/import', [AbsenceController::class, 'import'])->name('import');
-    Route::delete('/{absence}', [AbsenceController::class, 'destroy'])->name('destroy');
+  
+  Route::prefix('qtc')->name('qtc.')->group(function () {
+    Route::get('/',[App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
+    Route::get('/edit/{qtc}',[App\Http\Controllers\Samu\QtcController::class, 'edit'])->name('edit');
+    Route::post('/store',[App\Http\Controllers\Samu\QtcController::class, 'store'])->name('store');
+    Route::delete('/{qtc}', [App\Http\Controllers\Samu\QtcController::class, 'destroy'])->name('destroy');
+  
   });
 
+  Route::prefix('follow')->name('follow.')->group(function () {
+    Route::get('/',[App\Http\Controllers\Samu\FollowController::class, 'index'])->name('index');
+    Route::get('/create' , [App\Http\Controllers\Samu\FollowController::class, 'create'])->name('create');
+    Route::get('/edit',[App\Http\Controllers\Samu\FollowController::class, 'edit'])->name('edit');
+    Route::post('/store', [App\Http\Controllers\Samu\FollowController::class, 'store'])->name('store');
+    Route::post('/otstore', [App\Http\Controllers\Samu\FollowController::class, 'otstore'])->name('otstore');
+    Route::post('/tstore', [App\Http\Controllers\Samu\FollowController::class, 'tstore'])->name('tstore');
+    Route::put('/tupdate/{follow}', [App\Http\Controllers\Samu\FollowController::class, 'tupdate'])->name('tupdate');
+    Route::put('/update/{follow}', [App\Http\Controllers\Samu\FollowController::class, 'update'])->name('update');
+  });
 
-    //Rutas Epi
+  Route::prefix('shift')->name('shift.')->group(function () {
+    // Route::view('/', 'samu.shift.index')->name('index');
+    Route::get('/',[App\Http\Controllers\Samu\ShiftController::class, 'index'])->name('index');
+    Route::get('/create',[App\Http\Controllers\Samu\ShiftController::class, 'create'])->name('create');
+    Route::post('/store',[App\Http\Controllers\Samu\ShiftController::class, 'store'])->name('store');
+    Route::get('/edit/{shift}',[App\Http\Controllers\Samu\ShiftController::class, 'edit'])->name('edit');
+    Route::put('/{shift}',[App\Http\Controllers\Samu\ShiftController::class, 'update'])->name('update');
+    Route::delete('/{shift}', [App\Http\Controllers\Samu\ShiftController::class, 'destroy'])->name('destroy');
+  });
 
-    Route::prefix('epi')->name('epi.')->group(function () {
-      Route::prefix('chagas')->name('chagas.')->group(function () {
-        Route::view('/', 'epi.chagas.index')->name('index');
-        Route::view('/create', 'epi.chagas.create')->name('create');
-        Route::view('/edit', 'epi.chagas.edit')->name('edit');
-      });
+  Route::prefix('noveltie')->name('noveltie.')->group(function () {
+    Route::get('/',[App\Http\Controllers\Samu\NoveltieController::class, 'index'])->name('index');
+    Route::post('/store', [App\Http\Controllers\Samu\NoveltieController::class, 'store'])->name('store');
+    Route::get('/edit/{noveltie}', [App\Http\Controllers\Samu\NoveltieController::class, 'edit'])->name('edit');
+    Route::put('/update/{noveltie}',[App\Http\Controllers\Samu\NoveltieController::class, 'update'])->name('update');
+    //Route::view('/edit', 'samu.novelties.create')->name('edit');
+  });
 
-    });
+});
 
-    //fin rutas EPI
 
-      //Rutas control-attention
-      Route::prefix('vista')->name('vista.')->group(function () {
-      Route::view('/', 'vista.control')->name('index');
-      Route::view('/edit', 'vista.attention')->name('attention');
-      Route::view('/relevant', 'vista.relevant')->name('relevant');
-      Route::view('/control', 'vista.control')->name('control');
-      });
+Route::prefix('samuu')->name('samuu.')->group(function(){
+
+  Route::get('/qtc' , [App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
+  Route::get('/qtckey' , [App\Http\Controllers\Samu\QtcKeyController::class, 'index'])->name('index');
+});
+
+//fin rutas samu
+
+// Route::resource('absences', AbsenceController::class)->only([
+//   'create', 'store'
+// ]);
+
+Route::prefix('absences')->name('absences.')->group(function () {
+  Route::get('/', [AbsenceController::class, 'index'])->name('index');
+  Route::get('/create', [AbsenceController::class, 'create'])->name('create');
+  Route::post('/', [AbsenceController::class, 'store'])->name('store');
+  Route::get('/load', [AbsenceController::class, 'load'])->name('load');
+  Route::post('/import', [AbsenceController::class, 'import'])->name('import');
+  Route::delete('/{absence}', [AbsenceController::class, 'destroy'])->name('destroy');
+});
+
+
+//Rutas Epi
+Route::prefix('epi')->name('epi.')->group(function () {
+  Route::prefix('chagas')->name('chagas.')->group(function () {
+    Route::view('/', 'epi.chagas.index')->name('index');
+    Route::view('/create', 'epi.chagas.create')->name('create');
+    Route::view('/edit', 'epi.chagas.edit')->name('edit');
+  });
+
+});
+//fin rutas EPI
+
+
+//Rutas control-attention
+Route::prefix('vista')->name('vista.')->group(function () {
+  Route::view('/', 'vista.control')->name('index');
+  Route::view('/edit', 'vista.attention')->name('attention');
+  Route::view('/relevant', 'vista.relevant')->name('relevant');
+  Route::view('/control', 'vista.control')->name('control');
+});
+
+
+//Rutas control-attention
+Route::prefix('vista')->name('vista.')->group(function () {
+  Route::view('/', 'vista.control')->name('index');
+  Route::view('/edit', 'vista.attention')->name('attention');
+  Route::view('/relevant', 'vista.relevant')->name('relevant');
+  Route::view('/control', 'vista.control')->name('control');
+});
+
+Route::get('/test/rayen' ,[RayenController::class, 'getUrgencyStatus'])->name('getUrgencyStatus');
+Route::get('/test/sendip',[TestController::class,'sendIp']);

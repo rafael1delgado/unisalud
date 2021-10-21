@@ -10,15 +10,29 @@
 
     <div class="row">
 
-      <fieldset class="form-group col">
-        <label for="for_specialty_id">Especialidad</label>
-        <select name="specialty_id" id="law" class="form-control" disabled>
-          <option value=""></option>
-          @foreach ($specialties as $key => $specialty)
-          <option value="{{$specialty->id}}" {{ $specialty->id == $subactivity->specialty_id ? 'selected' : '' }}>{{$specialty->specialty_name}}</option>
-          @endforeach
-        </select>
-      </fieldset>
+      @if($subactivity->specialty)
+        <fieldset class="form-group col">
+          <label for="for_specialty_id">Especialidad</label>
+          <select name="specialty_id" id="law" class="form-control" disabled>
+            <option value=""></option>
+            @foreach ($specialties as $key => $specialty)
+            <option value="{{$specialty->id}}" {{ $specialty->id == $subactivity->specialty_id ? 'selected' : '' }}>{{$specialty->specialty_name}}</option>
+            @endforeach
+          </select>
+        </fieldset>
+      @endif
+
+      @if($subactivity->profession)
+        <fieldset class="form-group col">
+          <label for="for_profession_id">Profesión</label>
+          <select name="profession_id" id="law" class="form-control" disabled>
+            <option value=""></option>
+            @foreach ($professions as $key => $profession)
+            <option value="{{$profession->id}}" {{ $profession->id == $subactivity->profession_id ? 'selected' : '' }}>{{$profession->profession_name}}</option>
+            @endforeach
+          </select>
+        </fieldset>
+      @endif
 
       <fieldset class="form-group col">
         <label for="for_activity_id">Actividad</label>

@@ -33,12 +33,12 @@ class ContractController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
       // $rrhh = Rrhh::orderBy('name','ASC')->get();
       // $users = User::all();
       $services = Service::orderBy('service_name','ASC')->get();
-      return view('medical_programmer.contracts.create', compact('services'));
+      return view('medical_programmer.contracts.create', compact('services','request'));
     }
 
     /**

@@ -16,7 +16,7 @@ class SubActivity extends Model implements Auditable
    * @var array
    */
   protected $fillable = [
-      'id', 'specialty_id', 'activity_id', 'sub_activity_abbreviated', 'sub_activity_name', 'sub_activity_description', 'performance'
+      'id', 'specialty_id', 'profession_id','activity_id', 'sub_activity_abbreviated', 'sub_activity_name', 'sub_activity_description', 'performance'
   ];
 
   public function theoretialProgrammings()
@@ -27,6 +27,11 @@ class SubActivity extends Model implements Auditable
   public function specialty()
   {
       return $this->belongsTo('App\Models\MedicalProgrammer\Specialty');
+  }
+
+  public function profession()
+  {
+      return $this->belongsTo('App\Models\MedicalProgrammer\Profession');
   }
 
   public function activity()
