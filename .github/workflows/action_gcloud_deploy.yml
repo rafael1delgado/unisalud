@@ -4,18 +4,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt install git-crypt
-      - run: mkdir config
-      - run: echo "${{ secrets.CRYPT_KEY_CONFIG_REPO }}" > config/config-git-crypt.key
-      - run: git-crypt unlock config/config-git-crypt.key
       - uses: actions/checkout@v2
         with:
           repository: cl-ssi/config
           token: ${{ secrets.CONFIG_REPO_TOKEN }}
           path: config
+      - run: sudo apt install git-crypt
+      - run: echo "${{ secrets.CRYPT_KEY_CONFIG_REPO }}" > config/config-git-crypt.key
+      - run: git-crypt unlock config/config-git-crypt.key
       - run: |
           ls ${{ github.workspace }}
-
       - run: |
           ls ${{ github.workspace }}/config
 #      - uses: google-github-actions/deploy-appengine@v0.4.0
