@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: sudo apt install git-crypt
-      - run: cat ${{ secrets.CRYPT_KEY_CONFIG_REPO }} > config/config-git-crypt.key
+      - run: ${{ secrets.CRYPT_KEY_CONFIG_REPO }} > config/config-git-crypt.key
       - run: git-crypt unlock config/config-git-crypt.key
       - uses: actions/checkout@v2
         with:
