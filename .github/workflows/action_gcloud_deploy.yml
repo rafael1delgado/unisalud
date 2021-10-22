@@ -17,5 +17,6 @@ jobs:
         with:
           working_directory: unisalud
           deliverables: ../config/unisalud-test.yaml
+          credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
       - run: |
           ls ${{ github.workspace }}
