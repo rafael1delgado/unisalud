@@ -4,7 +4,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-#      - run: sudo apt install git-crypt
+      - run: sudo apt install git-crypt
+      - run: cat ${{ secrets.CRYPT_KEY_CONFIG_REPO }} > config/config-git-crypt.key
+      - run: git-crypt unlock config/config-git-crypt.key
       - uses: actions/checkout@v2
         with:
           repository: cl-ssi/config
@@ -12,6 +14,9 @@ jobs:
           path: config
       - run: |
           ls ${{ github.workspace }}
+
+      - run: |
+          ls ${{ github.workspace }}/config
 #      - uses: google-github-actions/deploy-appengine@v0.4.0
 #        with:
 #          deliverables: unisalud-test.yaml
