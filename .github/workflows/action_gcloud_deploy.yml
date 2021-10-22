@@ -11,7 +11,8 @@ jobs:
           path: config
       - run: sudo apt install git-crypt
       - run: echo "${{ secrets.CRYPT_KEY_CONFIG_REPO }}" > config-git-crypt.key
-      - run: cd config && git-crypt unlock ../config-git-crypt.key
+      - run: git-crypt migrate-key config-git-crypt.key config-git-crypt-updated.key
+      - run: cd config && git-crypt unlock ../config-git-crypt-updated.key
       - run: |
           ls ${{ github.workspace }}
       - run: |
