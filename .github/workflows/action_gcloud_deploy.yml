@@ -17,10 +17,11 @@ jobs:
         with:
           repository: cl-ssi/unisalud
           path: unisalud
-#      - uses: google-github-actions/deploy-appengine@v0.4.0
-#        with:
-#          working_directory: unisalud
-#          deliverables: ../config/unisalud-test.yaml
-#          credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+      - uses: google-github-actions/deploy-appengine@v0.4.0
+        with:
+          working_directory: unisalud
+          deliverables: ../config/unisalud-test.yaml
+          credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+      - run: curl "${{ steps.deploy.outputs.url }}"
       - run: |
           ls ${{ github.workspace }}/unisalud
