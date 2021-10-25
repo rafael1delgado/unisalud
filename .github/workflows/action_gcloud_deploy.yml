@@ -1,5 +1,5 @@
 name: Deploy to App Engine
-on: [ workflow_dispatch ]
+on: [ push ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -21,8 +21,7 @@ jobs:
       - uses: google-github-actions/deploy-appengine@v0.4.0
         with:
           working_directory: unisalud
-#          deliverables: ../config/unisalud-test.yaml
           credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
-#      - run: curl "${{ steps.deploy.outputs.url }}"
+      - run: curl "${{ steps.deploy.outputs.url }}"
       - run: |
           ls ${{ github.workspace }}/unisalud
