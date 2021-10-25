@@ -1,0 +1,22 @@
+name: Deploy to App Engine
+on: [ workflow_dispatch ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: cl-ssi/config
+          token: ${{ secrets.CONFIG_REPO_TOKEN }}
+          path: config
+      - run: sudo apt install git-crypt
+      - run: echo "${{ secrets.CRYPT_KEY_BASE64_CONFIG_REPO }}" | base64 -d > config-git-crypt.key
+      - run: cd config && git-crypt unlock ../config-git-crypt.key
+      - run: mkdir unisalud
+      - uses: google-github-actions/deploy-appengine@v0.4.0
+        with:
+          working_directory: unisalud
+          deliverables: ../config/unisalud-test.yaml
+          credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+      - run: |
+          ls ${{ github.workspace }}
