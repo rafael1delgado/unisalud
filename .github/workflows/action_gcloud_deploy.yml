@@ -22,6 +22,6 @@ jobs:
         with:
           working_directory: unisalud
           credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
-      - run: curl "${{ steps.deploy.outputs.url }}"
+#      - run: curl "${{ steps.deploy.outputs.url }}"
       - run: |
           ls ${{ github.workspace }}/unisalud
