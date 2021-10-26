@@ -43,27 +43,27 @@
                             <td class="text-center">{{ $shift->closing_time }}</td>
                             
                             <td class="text-center">
-                                <button class="btn btn-sm btn-primary" data-toggle="popover" data-placement="bottom" title="{{$str_jefe_turno}}"><i class="far fa-eye"></i></button>
+                                <button class="btn btn-sm btn-primary" data-toggle="popover" data-placement="bottom" title=""><i class="far fa-eye"></i></button>
                                 <button class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-primary" data-toggle="popover" data-placement="bottom" title="{{$str_medico_regulador}}"><i class="far fa-eye"></i></button>
+                                <button class="btn btn-sm btn-primary" data-toggle="popover" data-placement="bottom" title=""><i class="far fa-eye"></i></button>
                                 <button class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-primary" data-toggle="popover" data-placement="bottom" title="{{$str_enfermera_reguladora}}"><i class="far fa-eye"></i></button>
+                                <button class="btn btn-sm btn-primary" data-toggle="popover" data-placement="bottom" title=""><i class="far fa-eye"></i></button>
                                 <button class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-primary" data-toggle="popover" data-placement="bottom" title="{{$str_operadores}}"><i class="far fa-eye"></i></button>
+                                <button class="btn btn-sm btn-primary" data-toggle="popover" data-placement="bottom" title=""><i class="far fa-eye"></i></button>
                                 <button class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-primary" data-toggle="popover" data-placement="bottom" title="{{$str_despachadores}}"><i class="far fa-eye"></i></button>
+                                <button class="btn btn-sm btn-primary" data-toggle="popover" data-placement="bottom" title=""><i class="far fa-eye"></i></button>
                                 <button class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </td>
@@ -76,6 +76,11 @@
                                     @method('DELETE')
                                     <button type="button " class="btn btn-sm btn-danger mx-1"><i class="fas fa-trash-alt"></i></button>
                                 </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                @livewire('samu.shift-user', ['shift_id' => $shift->id])
                             </td>
                         </tr>
                         @endforeach
