@@ -16,6 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements Auditable
 {
     use HasFactory, Notifiable, HasRoles;
+    /* TODO: Revisar si es necesaro poner la ruta completa de Auditable */
     use \OwenIt\Auditing\Auditable;
 
 
