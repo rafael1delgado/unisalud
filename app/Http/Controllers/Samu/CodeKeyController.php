@@ -49,6 +49,10 @@ class CodeKeyController extends Controller
     public function store(Request $request)
 
     {
+        //validacion de datos
+        
+        //fin de validacion de datos
+        
         CodeKey::create($request->all());
         $request->session()->flash('success', 'Creado satisfactoriamente.');
         return redirect()->route('samu.codekey.index');
