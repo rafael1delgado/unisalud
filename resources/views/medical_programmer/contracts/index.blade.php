@@ -21,6 +21,14 @@
         <option value="2024" {{ $request->get('year') == "2024" ? 'selected' : '' }}>2024</option>
         <option value="2025" {{ $request->get('year') == "2025" ? 'selected' : '' }}>2025</option>
       </select>
+      <div class="input-group-prepend">
+          <span class="input-group-text">Rut</span>
+      </div>
+      <input type="number" class="form-control" name="rut" value="{{$request->get('rut')}}">
+      <div class="input-group-prepend">
+          <span class="input-group-text">Nombre</span>
+      </div>
+      <input type="text" class="form-control" name="name" value="{{$request->get('name')}}">
 
       <div class="input-group-append">
           <button type="submit" class="btn btn-primary" id="button"><i class="fas fa-search"></i> Buscar</button>

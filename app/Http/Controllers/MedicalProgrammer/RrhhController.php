@@ -240,28 +240,28 @@ class RrhhController extends Controller
             // $user = User::find($id);
             // $user->fill($request->all());
 
-            //HUMAN NAMES
-            $actualOfficialHumanName = $user->actualOfficialHumanName;
-
-            if (
-                $actualOfficialHumanName->text != $request->text ||
-                $actualOfficialHumanName->fathers_family != $request->fathers_family ||
-                $actualOfficialHumanName->mothers_family != $request->mothers_family
-            ) {
-                $newHumanName = new HumanName($request->all());
-                $newHumanName->use = "Official";
-                $newHumanName->user_id = $user->id;
-                $newHumanName->save();
-            }
-
-            // //asigna permisos
-            // $user->syncRoles(
-            //     is_array($request->input('roles')) ? $request->input('roles') : array()
+            // //HUMAN NAMES
+            // $actualOfficialHumanName = $user->actualOfficialHumanName;
+            //
+            // if (
+            //     $actualOfficialHumanName->text != $request->text ||
+            //     $actualOfficialHumanName->fathers_family != $request->fathers_family ||
+            //     $actualOfficialHumanName->mothers_family != $request->mothers_family
+            // ) {
+            //     $newHumanName = new HumanName($request->all());
+            //     $newHumanName->use = "Official";
+            //     $newHumanName->user_id = $user->id;
+            //     $newHumanName->save();
+            // }
+            //
+            // // //asigna permisos
+            // // $user->syncRoles(
+            // //     is_array($request->input('roles')) ? $request->input('roles') : array()
+            // // );
+            //
+            // $user->syncPermissions(
+            //     is_array($request->input('permissions')) ? $request->input('permissions') : array()
             // );
-
-            $user->syncPermissions(
-                is_array($request->input('permissions')) ? $request->input('permissions') : array()
-            );
 
             //asigna especialidades
             if($request->input('specialties')!=null){
@@ -331,20 +331,20 @@ class RrhhController extends Controller
             }
 
 
-            //asigna pabellones
-            if($request->input('operating_rooms')!=null){
-                foreach ($request->input('operating_rooms') as $key => $value) {
-                    $userOperatingRoom = UserOperatingRoom::where('operating_room_id',$value)
-                                                          ->where('user_id', $user->id)
-                                                         ->get();
-                    if ($userOperatingRoom->count() == 0) {
-                        $userOperatingRoom = new UserOperatingRoom();
-                        $userOperatingRoom->operating_room_id = $value;
-                        $userOperatingRoom->user_id = $user->id;
-                        $userOperatingRoom->save();
-                    }
-                }
-            }
+            // //asigna pabellones
+            // if($request->input('operating_rooms')!=null){
+            //     foreach ($request->input('operating_rooms') as $key => $value) {
+            //         $userOperatingRoom = UserOperatingRoom::where('operating_room_id',$value)
+            //                                               ->where('user_id', $user->id)
+            //                                              ->get();
+            //         if ($userOperatingRoom->count() == 0) {
+            //             $userOperatingRoom = new UserOperatingRoom();
+            //             $userOperatingRoom->operating_room_id = $value;
+            //             $userOperatingRoom->user_id = $user->id;
+            //             $userOperatingRoom->save();
+            //         }
+            //     }
+            // }
 
             $user->save();
             Db::commit();

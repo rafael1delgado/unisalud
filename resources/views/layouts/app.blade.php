@@ -32,7 +32,7 @@
             integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
             crossorigin="anonymous">
 
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 
         <!-- Bootstrap CSS -->
         <!--link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"-->
@@ -41,14 +41,14 @@
         <link href="{{ asset('css/ssi.css') }}" rel="stylesheet">
 
         <!-- Favicons -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
+        <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+        <link rel="manifest" href="/icon/site.webmanifest">
         @production
-        <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/icon/favicon.ico">
         @else
-        <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon-local.ico">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/icon/favicon-local.ico">
         @endproduction
 
         <!-- programador -->

@@ -1,17 +1,35 @@
-name: GitHub Actions Demo
-on: [push]
+name: Deploy to App Engine
+on:
+  push:
+    branches:
+      - main
 jobs:
-  Explore-GitHub-Actions:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - uses: actions/checkout@v2
+        with:
+          repository: cl-ssi/config
+          token: ${{ secrets.CONFIG_REPO_TOKEN }}
+          path: config
+      - run: sudo apt install git-crypt
+      - run: echo "${{ secrets.CRYPT_KEY_BASE64_CONFIG_REPO }}" | base64 -d > config-git-crypt.key
+      - run: cd config && git-crypt unlock ../config-git-crypt.key
+      - run: mkdir unisalud
+      - uses: actions/checkout@v2
+        with:
+          repository: cl-ssi/unisalud
+          path: unisalud
+      if: github.ref == 'refs/heads/test'
+      steps:
+        - run: mv config/unisalud-test.yaml unisalud/app.yaml
+#      if: github.ref == 'refs/heads/main'
+#      steps:
+#        - run: mv config/unisalud.yaml unisalud/app.yaml
+      - uses: google-github-actions/deploy-appengine@v0.4.0
+        with:
+          working_directory: unisalud
+          credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+#      - run: curl "${{ steps.deploy.outputs.url }}"
+      - run: |
+          ls ${{ github.workspace }}/unisalud

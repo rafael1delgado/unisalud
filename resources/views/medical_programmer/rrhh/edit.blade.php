@@ -8,7 +8,7 @@
   @csrf
   @method('PUT')
 
-    <div class="row">
+    <!-- <div class="row">
 
         <fieldset class="form-group col-8 col-md-2">
             <label for="for_id_deis">Id Deis</label>
@@ -82,9 +82,9 @@
       </fieldset>
     </div>
 
-    <hr>
+    <hr> -->
 
-    <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div class="col-sm">
             <h4>Permisos</h4>
@@ -97,7 +97,7 @@
       </div>
     </div>
 
-    <br />
+    <br /> -->
 
     <div class="container">
       <div class="row">
@@ -143,7 +143,7 @@
       </div>
     </div>
 
-    <br />
+    <!-- <br />
 
     <div class="container">
       <div class="row">
@@ -159,7 +159,7 @@
 
         </div>
       </div>
-    </div>
+    </div> -->
 
     <button type="submit" class="btn btn-primary">Guardar</button>
 
