@@ -195,6 +195,27 @@ class User extends Authenticatable implements Auditable
         return $queryUser;
     }
 
+    /**
+     * Retorna Usuarios según contenido en $searchText
+     * Busqueda realizada en: nombres, apellidos, rut.
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function getUsersBySearch($searchText){
+        $queryUser = User::query();
+        $arraySearch = explode(' ', $searchText);
+        foreach($arraySearch as $word){
+            $queryUser->whereHas('humanNames',  function($q) use($word){
+                $q->where('text', 'LIKE', '%' . $word . '%')
+                    ->orwhere('fathers_family', 'LIKE', '%' . $word . '%')
+                    ->orwhere('mothers_family', 'LIKE', '%' . $word . '%');
+            })
+            ->orwhereHas('identifiers', function ($q) use ($word) {
+                $q->where('value', 'LIKE', '%' . $word . '%');
+            });
+        }
+        return $queryUser;
+    }
+
     public static function getUsersByIdentifier($searchText)
     {
         return User::whereHas('identifiers', function($query) use($searchText) {
