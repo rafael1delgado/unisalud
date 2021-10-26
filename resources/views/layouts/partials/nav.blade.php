@@ -272,12 +272,12 @@
 </h6>
 
 <ul class="nav flex-column collapse collapse-menu" id="mp_settings">
-    <!--<li class="nav-item">
+    <li class="nav-item">
     <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
     <span data-feather="chevrons-right"></span>
     RRHH
     </a>
-    </li> -->
+    </li>
 
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.contracts.index') }}" href="{{ route('medical_programmer.contracts.index') }}">
@@ -440,7 +440,7 @@
             </a>
         </li>
     @endcanany
-    
+
 </ul>
 <!--SAMU-->
 
