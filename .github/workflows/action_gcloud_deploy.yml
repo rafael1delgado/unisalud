@@ -25,6 +25,7 @@ jobs:
         if: github.ref == 'refs/heads/test'
       - run: mv config/unisalud.yaml unisalud/app.yaml
         if: github.ref == 'refs/heads/main'
+      - run: cd unisalud && composer install
       - uses: google-github-actions/deploy-appengine@v0.4.0
         with:
           working_directory: unisalud
