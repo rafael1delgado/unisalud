@@ -21,17 +21,10 @@ jobs:
         with:
           repository: cl-ssi/unisalud
           path: unisalud
-#      if: github.ref == 'refs/heads/test'
-#      steps:
-#        - run: mv config/unisalud-test.yaml unisalud/app.yaml
-#      if: github.ref == 'refs/heads/main'
-#      steps:
-#        - run: mv config/unisalud.yaml unisalud/app.yaml
-        - run: mv config/unisalud-test.yaml unisalud/app.yaml
-        - uses: google-github-actions/deploy-appengine@v0.4.0
-          with:
-            working_directory: unisalud
-            credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
-        #      - run: curl "${{ steps.deploy.outputs.url }}"
-        - run: |
-            ls ${{ github.workspace }}/unisalud
+      - run: mv config/unisalud-test.yaml unisalud/app.yaml
+      - uses: google-github-actions/deploy-appengine@v0.4.0
+        with:
+          working_directory: unisalud
+          credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+      - run: |
+          ls ${{ github.workspace }}/unisalud
