@@ -18,13 +18,13 @@ class ShiftUser extends Component
     public $shift_id;
 
     protected $rules = [
-        'user_id' => 'required',
-        'job_type_id' => 'required',
+        'user_id'       => 'required',
+        'job_type_id'   => 'required',
     ];
 
     protected $messages = [
-        'user_id.required' => 'Debe selecionar un usuario',
-        'job_type_id.required' => 'Debe seleccionar una función',
+        'user_id.required'      => 'Debe selecionar un usuario',
+        'job_type_id.required'  => 'Debe seleccionar una función',
     ];
 
     public function store()
@@ -32,9 +32,9 @@ class ShiftUser extends Component
         $this->validate();
 
         $shift_user = ShiftUserModel::create([
-            'user_id' => $this->user_id,
-            'job_type_id' => $this->job_type_id,
-            'shift_id' => $this->shift_id
+            'user_id'       => $this->user_id,
+            'job_type_id'   => $this->job_type_id,
+            'shift_id'      => $this->shift_id
         ]);
     }
 
@@ -45,9 +45,9 @@ class ShiftUser extends Component
 
     public function render()
     {
-        $this->shift_users = ShiftUserModel::where('shift_id',$this->shift_id)->get();
-        $this->users = User::Permission('SAMU')->get();
-        $this->job_types = JobType::all();
+        $this->shift_users  = ShiftUserModel::where('shift_id',$this->shift_id)->get();
+        $this->users        = User::Permission('SAMU')->get();
+        $this->job_types    = JobType::all();
         return view('livewire.samu.shift-user');
     }
 }
