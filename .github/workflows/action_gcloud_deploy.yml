@@ -1,5 +1,7 @@
 name: Deploy to App Engine
-on: [ push ]
+on:
+  push:
+    branches: [ main, test ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -17,7 +19,10 @@ jobs:
         with:
           repository: cl-ssi/unisalud
           path: unisalud
-      - run: mv config/unisalud-test.yaml unisalud/app.yaml
+      if: contains(github.ref, "test")
+        - run: mv config/unisalud-test.yaml unisalud/app.yaml
+      if: contains(github.ref, "main")
+        - run: mv config/unisalud.yaml unisalud/app.yaml
       - uses: google-github-actions/deploy-appengine@v0.4.0
         with:
           working_directory: unisalud
