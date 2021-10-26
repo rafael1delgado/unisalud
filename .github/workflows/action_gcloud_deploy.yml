@@ -17,10 +17,10 @@ jobs:
       - run: echo "${{ secrets.CRYPT_KEY_BASE64_CONFIG_REPO }}" | base64 -d > config-git-crypt.key
       - run: cd config && git-crypt unlock ../config-git-crypt.key
       - run: mkdir unisalud
-      - uses: actions/checkout@v2
-        with:
-          repository: cl-ssi/unisalud
-          path: unisalud
+#      - uses: actions/checkout@v2
+#        with:
+#          repository: cl-ssi/unisalud
+#          path: unisalud
       if: github.ref == 'refs/heads/test'
         steps:
             - name: Copia yaml test a carpeta de trabajo
