@@ -44,7 +44,8 @@
         @livewire('medical_programmer.select-med-prog-employee',['type'         => $request->type,
                                                                  'specialty_id' => $request->specialty_id,
                                                                  'profession_id'=> $request->profession_id,
-                                                                 'user_id'      => $request->user_id])
+                                                                 'user_id'      => $request->user_id,
+                                                                 'required_enabled' => 0])
       </div>
 
       <div class="form-group col-md-3">
