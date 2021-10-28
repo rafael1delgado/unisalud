@@ -6,6 +6,17 @@
 
 
 <h3 class="mb-3"><i class="fas fa-ambulance"></i> Listado de Moviles - Tripulación</h3>
+
+@foreach($shifts as $shift)
+    <h2>Turno: {{ $shift->id }} - {{ $shift->type }} {{ $shift->opening_time }}</h2>
+    @foreach($shift->mobilesInService as $mobil)
+        <h4>Codigo: {{ $mobil->code }} - Nombre: {{ $mobil->name }} - Estado: {{ $mobil->status }} obs: {{ $mobil->pivot->observation }}</h4>
+        @livewire('samu.mobile-crew',['pivot' => $mobil->pivot])
+    @endforeach
+    <hr>
+@endforeach
+
+
 <div class="card mb-3">
         <div class="card-body">
             
