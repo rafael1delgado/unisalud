@@ -36,6 +36,8 @@ class ShiftUser extends Component
             'job_type_id'   => $this->job_type_id,
             'shift_id'      => $this->shift_id
         ]);
+
+        redirect()->to(route('samu.shift.index'));
     }
 
     public function delete(ShiftUserModel $shiftUser)
