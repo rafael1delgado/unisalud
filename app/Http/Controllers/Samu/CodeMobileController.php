@@ -15,11 +15,11 @@ class CodeMobileController extends Controller
      */
     public function index(Request $request)
     {
-         //busqueda de codigos de clave
+        //busqueda de codigos de clave
         $search_codemobile=$request->get('search_codemobile');  
-       $codemobiles= CodeMobile::when($search_codemobile!=null, function ($query) use ($search_codemobile){
-         $query->where('name_mobile_code','like','%'.$search_codemobile.'%');
-         })->paginate(30);
+        $codemobiles= CodeMobile::when($search_codemobile!=null, function ($query) use ($search_codemobile){
+            $query->where('name_mobile_code','like','%'.$search_codemobile.'%');
+        })->paginate(30);
         return view ('samu.codemobile.index' , compact('codemobiles','search_codemobile')); 
 
 

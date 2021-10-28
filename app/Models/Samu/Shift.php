@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Samu\Mobile;
+use App\Models\Samu\MobileInService;
 
 class Shift extends Model
 {
@@ -24,9 +26,6 @@ class Shift extends Model
         'date',
         'opening_time',
         'closing_time',
-        // 'manager_shift',
-        // 'regulatory_doctor',
-        // 'regulatory_nurse',
         'created_at'
     ];
 
@@ -39,10 +38,11 @@ class Shift extends Model
         return $this->belongsTo('\App\Models\Samu\Noveltie');
     }
 
-    public function ShiftMobiles()
+    public function mobilesInService()
     {
-        return $this->belongsToMany('\App\Models\Samu\ShiftMobile','samu_shift_user')->withTimestamps()->wherePivot('id', 'detail','type');
+        return $this->belongsToMany(Mobile::class,'samu_mobiles_in_service')
+                    ->using(MobileInService::class)
+                    ->withPivot('id','observation')
+                    ->withTimestamps();
     }
 }
-
-
