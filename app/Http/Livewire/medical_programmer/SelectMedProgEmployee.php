@@ -22,6 +22,7 @@ class SelectMedProgEmployee extends Component
 
     public $contract_enable;
     public $contracts;
+    public $required_enabled;
 
     public function render()
     {

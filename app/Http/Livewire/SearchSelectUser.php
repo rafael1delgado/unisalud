@@ -44,14 +44,14 @@ class SearchSelectUser extends Component
     {
         $this->resetx();
         $this->user = $user;
-        $this->selectedName = $user->fullName;
+        $this->selectedName = $user->officialFullName;
     }
 
     public function updatedQuery()
     {
         $this->users = User::getUsersBySearch($this->query)
-//            ->orderBy('text','Asc')
-            ->get();
+            ->get()
+            ->sortBy('actualOfficialHumanName.text');
 
         /** Más de 50 resultados  */
         if(count($this->users) >= 25)

@@ -8,6 +8,25 @@
     <i class="fas fa-plus"></i> Agregar nueva
 </a>
 
+<form method="GET" class="form-horizontal" action="{{ route('medical_programmer.programming_proposal.index') }}">
+  <div class="form-row">
+
+        <div class="form-group col-md">
+          @livewire('medical_programmer.select-med-prog-employee',['type'         => $request->type,
+                                                                   'specialty_id' => $request->specialty_id,
+                                                                   'profession_id'=> $request->profession_id,
+                                                                   'user_id'      => $request->user_id,
+                                                                   'contract_enable' => 0,
+                                                                   'required_enabled' => 0])
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="for_type">.</label>
+            <button type="submit" class="btn btn-primary form-control" id="button"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+  </div>
+</form>
+
 <table class="table table-sm table-borderer">
     <thead>
         <tr>
