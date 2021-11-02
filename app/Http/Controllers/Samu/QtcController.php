@@ -7,7 +7,7 @@ use App\Models\Samu\Follow;
 use App\Models\Samu\CodeKey;
 use App\Models\Samu\Qtc;
 use Illuminate\Http\Request;
-use App\Models\Samu\CodeMobile;
+use App\Models\Samu\Mobile;
 
 
 class QtcController extends Controller
@@ -19,10 +19,10 @@ class QtcController extends Controller
      */
     public function index()
     {
-        $codemobiles = CodeMobile::all();
+        $mobiles = Mobile::all();
         $qtcs=qtc::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
         //return $qtcs; 
-       return view ('samu.qtc.index' , compact('qtcs','codemobiles'));
+       return view ('samu.qtc.index' , compact('qtcs','mobiles'));
     }
 
     /**

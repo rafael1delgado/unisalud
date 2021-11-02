@@ -34,8 +34,8 @@
     
     <li class="nav-item">
         <a class="nav-link
-        @if(request()->route()->view == 'codemobile') active @endif"
-        href=" {{ route('samu.codemobile.index') }}"><i class="fas fa-lock"></i> Codificación de Movil</a>
+        @if(request()->route()->view == 'mobile') active @endif"
+        href=" {{ route('samu.mobile.index') }}"><i class="fas fa-lock"></i> Codificación de Movil</a>
     </li>
 
 </ul>

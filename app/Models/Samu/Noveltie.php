@@ -23,6 +23,6 @@ class Noveltie extends Model
 
     public function shift()
     {
-        return $this->BelongsTo('\App\Models\Samu\Shift');
+        return $this->BelongsTo('\App\Models\Samu\Shift', 'shift_id');
     }
 }

@@ -472,13 +472,22 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
   });
 
-  Route::prefix('codemobile')->name('codemobile.')->group(function () {
-    Route::get('/',[App\Http\Controllers\Samu\CodeMobileController::class, 'index'])->name('index');
-    Route::get('/create',[App\Http\Controllers\Samu\CodeMobileController::class, 'create'])->name('create');
-    Route::post('/store',[App\Http\Controllers\Samu\CodeMobileController::class, 'store'])->name('store');
-    Route::get('/edit/{codeMobile}',[App\Http\Controllers\Samu\CodeMobileController::class, 'edit'])->name('edit');
-    Route::put('/{codeMobile}',[App\Http\Controllers\Samu\CodeMobileController::class, 'update'])->name('update');
-    Route::delete('/{codeMobile}', [App\Http\Controllers\Samu\CodeMobileController::class, 'destroy'])->name('destroy');
+  Route::prefix('codemobileinservice')->name('codemobileinservice.')->group(function () {
+    Route::get('/',[App\Http\Controllers\Samu\MobileController::class, 'index'])->name('index');
+    Route::get('/create',[App\Http\Controllers\Samu\MobileController::class, 'create'])->name('create');
+    Route::post('/store',[App\Http\Controllers\Samu\MobileController::class, 'store'])->name('store');
+    Route::get('/edit/{mobile}',[App\Http\Controllers\Samu\MobileController::class, 'edit'])->name('edit');
+    Route::put('/{mobile}',[App\Http\Controllers\Samu\MobileController::class, 'update'])->name('update');
+    Route::delete('/{mobile}', [App\Http\Controllers\Samu\MobileController::class, 'destroy'])->name('destroy');
+  });
+
+  Route::prefix('mobile')->name('mobile.')->group(function () {
+    Route::get('/',[App\Http\Controllers\Samu\MobileController::class, 'index'])->name('index');
+    Route::get('/create',[App\Http\Controllers\Samu\MobileController::class, 'create'])->name('create');
+    Route::post('/store',[App\Http\Controllers\Samu\MobileController::class, 'store'])->name('store');
+    Route::get('/edit/{mobile}',[App\Http\Controllers\Samu\MobileController::class, 'edit'])->name('edit');
+    Route::put('/{mobile}',[App\Http\Controllers\Samu\MobileController::class, 'update'])->name('update');
+    Route::delete('/{mobile}', [App\Http\Controllers\Samu\MobileController::class, 'destroy'])->name('destroy');
   });
 
   

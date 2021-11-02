@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Samu;
 use App\Http\Controllers\Controller;
 use App\Models\Samu\Follow;
 use Illuminate\Http\Request;
-use App\Models\Samu\CodeMobile;
+use App\Models\Samu\Mobile;
 
 
 class FollowController extends Controller

@@ -45,7 +45,7 @@
                             </tr>
                             
                             <tr class="text-center table-success">
-                              <th colspan="3"><b>{{ $noveltie->shift->date }}</b></th>
+                              <th colspan="3"><b>{{ $noveltie->shift['date'] }}</b></th>
                               <th colspan="2"><b>NOVEDADES</b></th>
                             </tr>
                         
@@ -62,9 +62,9 @@
                         <tbody>
 
                             <tr>
-                                <td>{{ $noveltie->shift->type }}</td>
-                                <td>{{ $noveltie->shift->opening_time }}</td>
-                                <td>{{ $noveltie->shift->closing_time }}</td>
+                                <td>{{ $noveltie->shift['type'] }}</td>
+                                <td>{{ $noveltie->shift['opening_time'] }}</td>
+                                <td>{{ $noveltie->shift['closing_time']}}</td>
                          
                                 <td>{{$noveltie->detail?? ''}} </td>
                                 <td class="text-center">
