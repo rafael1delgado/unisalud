@@ -441,92 +441,102 @@ Route::prefix('soap')->name('soap.')->group(function(){
 });
 
 //rutas samu
+
+use App\Http\Controllers\Samu\ShiftController;
+use App\Http\Controllers\Samu\MobileInServiceController;
+
+use App\Http\Controllers\Samu\MobileController;
+
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
     Route::view('/', 'samu.welcome')->name('welcome');
+
+	Route::prefix('shift')->name('shift.')->group(function () {
+		// Route::view('/', 'samu.shift.index')->name('index');
+		Route::get('/',[ShiftController::class, 'index'])->name('index');
+		Route::get('/create',[ShiftController::class, 'create'])->name('create');
+		Route::post('/store',[ShiftController::class, 'store'])->name('store');
+		Route::get('/edit/{shift}',[ShiftController::class, 'edit'])->name('edit');
+		Route::put('/{shift}',[ShiftController::class, 'update'])->name('update');
+		Route::delete('/{shift}', [ShiftController::class, 'destroy'])->name('destroy');
+    });
+
+	Route::prefix('mobile-in-service')->name('mobileinservice.')->group(function () {
+		Route::get('/',[MobileInServiceController::class, 'index'])->name('index');
+		Route::get('/create',[MobileInServiceController::class, 'create'])->name('create');
+		Route::post('/store',[MobileInServiceController::class, 'store'])->name('store');
+		Route::get('/edit/{mobile}',[MobileInServiceController::class, 'edit'])->name('edit');
+		Route::put('/{mobile}',[MobileInServiceController::class, 'update'])->name('update');
+		Route::delete('/{mobile}', [MobileInServiceController::class, 'destroy'])->name('destroy');
+    });
+
     Route::prefix('mobile')->name('mobile.')->group(function () {
-      Route::get('/', [App\Http\Controllers\Samu\ShiftMobileController::class, 'index'])->name('index');
-      Route::get('/create' , [App\Http\Controllers\Samu\ShiftMobileController::class, 'create'])->name('create');
-      Route::post('/store', [App\Http\Controllers\Samu\ShiftMobileController::class, 'store'])->name('store');
-      Route::view('/edit', 'samu.mobile.edit')->name('edit');
+		Route::get('/', [App\Http\Controllers\Samu\ShiftMobileController::class, 'index'])->name('index');
+		Route::get('/create' , [App\Http\Controllers\Samu\ShiftMobileController::class, 'create'])->name('create');
+		Route::post('/store', [App\Http\Controllers\Samu\ShiftMobileController::class, 'store'])->name('store');
+		Route::view('/edit', 'samu.mobile.edit')->name('edit');
     });
 
     Route::prefix('crew')->name('crew.')->group(function () {
-    Route::view('/', 'samu.crew.index')->name('index');
-    Route::view('/create', 'samu.crew.create')->name('create');
-    Route::view('/edit', 'samu.crew.edit')->name('edit');
-  });
+		Route::view('/', 'samu.crew.index')->name('index');
+		Route::view('/create', 'samu.crew.create')->name('create');
+		Route::view('/edit', 'samu.crew.edit')->name('edit');
+    });
 
-    Route::prefix('shift')->name('shift.')->group(function () {
-    Route::view('/', 'samu.shift.index')->name('index');
-    Route::view('/create', 'samu.shift.create')->name('create');
-    Route::view('/edit', 'samu.shift.edit')->name('edit');
-  });
+    // Route::prefix('shift')->name('shift.')->group(function () {
+	// 	Route::view('/', 'samu.shift.index')->name('index');
+	// 	Route::view('/create', 'samu.shift.create')->name('create');
+	// 	Route::view('/edit', 'samu.shift.edit')->name('edit');
+    // });
 
     Route::prefix('codekey')->name('codekey.')->group(function () {
-      Route::get('/' , [App\Http\Controllers\Samu\CodeKeyController::class, 'index'])->name('index');
-      Route::get('/create' , [App\Http\Controllers\Samu\CodeKeyController::class, 'create'])->name('create');
-      Route::post('/store', [App\Http\Controllers\Samu\CodeKeyController::class, 'store'])->name('store');
-      Route::put('/update/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'update'])->name('update');
-      Route::get('/edit/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'edit'])->name('edit');
-      Route::delete('/{codeKey}', [App\Http\Controllers\Samu\CodeKeyController::class, 'destroy'])->name('destroy');
+		Route::get('/' , [App\Http\Controllers\Samu\CodeKeyController::class, 'index'])->name('index');
+		Route::get('/create' , [App\Http\Controllers\Samu\CodeKeyController::class, 'create'])->name('create');
+		Route::post('/store', [App\Http\Controllers\Samu\CodeKeyController::class, 'store'])->name('store');
+		Route::put('/update/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'update'])->name('update');
+		Route::get('/edit/{codeKey}' , [App\Http\Controllers\Samu\CodeKeyController::class, 'edit'])->name('edit');
+		Route::delete('/{codeKey}', [App\Http\Controllers\Samu\CodeKeyController::class, 'destroy'])->name('destroy');
+    });
 
-  });
 
-  Route::prefix('codemobileinservice')->name('codemobileinservice.')->group(function () {
-    Route::get('/',[App\Http\Controllers\Samu\MobileController::class, 'index'])->name('index');
-    Route::get('/create',[App\Http\Controllers\Samu\MobileController::class, 'create'])->name('create');
-    Route::post('/store',[App\Http\Controllers\Samu\MobileController::class, 'store'])->name('store');
-    Route::get('/edit/{mobile}',[App\Http\Controllers\Samu\MobileController::class, 'edit'])->name('edit');
-    Route::put('/{mobile}',[App\Http\Controllers\Samu\MobileController::class, 'update'])->name('update');
-    Route::delete('/{mobile}', [App\Http\Controllers\Samu\MobileController::class, 'destroy'])->name('destroy');
-  });
 
-  Route::prefix('mobile')->name('mobile.')->group(function () {
-    Route::get('/',[App\Http\Controllers\Samu\MobileController::class, 'index'])->name('index');
-    Route::get('/create',[App\Http\Controllers\Samu\MobileController::class, 'create'])->name('create');
-    Route::post('/store',[App\Http\Controllers\Samu\MobileController::class, 'store'])->name('store');
-    Route::get('/edit/{mobile}',[App\Http\Controllers\Samu\MobileController::class, 'edit'])->name('edit');
-    Route::put('/{mobile}',[App\Http\Controllers\Samu\MobileController::class, 'update'])->name('update');
-    Route::delete('/{mobile}', [App\Http\Controllers\Samu\MobileController::class, 'destroy'])->name('destroy');
-  });
+    Route::prefix('mobile')->name('mobile.')->group(function () {
+		Route::get('/',[App\Http\Controllers\Samu\MobileController::class, 'index'])->name('index');
+		Route::get('/create',[App\Http\Controllers\Samu\MobileController::class, 'create'])->name('create');
+		Route::post('/store',[App\Http\Controllers\Samu\MobileController::class, 'store'])->name('store');
+		Route::get('/edit/{mobile}',[App\Http\Controllers\Samu\MobileController::class, 'edit'])->name('edit');
+		Route::put('/{mobile}',[App\Http\Controllers\Samu\MobileController::class, 'update'])->name('update');
+		Route::delete('/{mobile}', [App\Http\Controllers\Samu\MobileController::class, 'destroy'])->name('destroy');
+    });
 
   
-  Route::prefix('qtc')->name('qtc.')->group(function () {
-    Route::get('/',[App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
-    Route::get('/edit/{qtc}',[App\Http\Controllers\Samu\QtcController::class, 'edit'])->name('edit');
-    Route::post('/store',[App\Http\Controllers\Samu\QtcController::class, 'store'])->name('store');
-    Route::delete('/{qtc}', [App\Http\Controllers\Samu\QtcController::class, 'destroy'])->name('destroy');
-  
-  });
+    Route::prefix('qtc')->name('qtc.')->group(function () {
+		Route::get('/',[App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
+		Route::get('/edit/{qtc}',[App\Http\Controllers\Samu\QtcController::class, 'edit'])->name('edit');
+		Route::post('/store',[App\Http\Controllers\Samu\QtcController::class, 'store'])->name('store');
+		Route::delete('/{qtc}', [App\Http\Controllers\Samu\QtcController::class, 'destroy'])->name('destroy');
+    
+    });
 
-  Route::prefix('follow')->name('follow.')->group(function () {
-    Route::get('/',[App\Http\Controllers\Samu\FollowController::class, 'index'])->name('index');
-    Route::get('/create' , [App\Http\Controllers\Samu\FollowController::class, 'create'])->name('create');
-    Route::get('/edit',[App\Http\Controllers\Samu\FollowController::class, 'edit'])->name('edit');
-    Route::post('/store', [App\Http\Controllers\Samu\FollowController::class, 'store'])->name('store');
-    Route::post('/otstore', [App\Http\Controllers\Samu\FollowController::class, 'otstore'])->name('otstore');
-    Route::post('/tstore', [App\Http\Controllers\Samu\FollowController::class, 'tstore'])->name('tstore');
-    Route::put('/tupdate/{follow}', [App\Http\Controllers\Samu\FollowController::class, 'tupdate'])->name('tupdate');
-    Route::put('/update/{follow}', [App\Http\Controllers\Samu\FollowController::class, 'update'])->name('update');
-  });
+    Route::prefix('follow')->name('follow.')->group(function () {
+		Route::get('/',[App\Http\Controllers\Samu\FollowController::class, 'index'])->name('index');
+		Route::get('/create' , [App\Http\Controllers\Samu\FollowController::class, 'create'])->name('create');
+		Route::get('/edit',[App\Http\Controllers\Samu\FollowController::class, 'edit'])->name('edit');
+		Route::post('/store', [App\Http\Controllers\Samu\FollowController::class, 'store'])->name('store');
+		Route::post('/otstore', [App\Http\Controllers\Samu\FollowController::class, 'otstore'])->name('otstore');
+		Route::post('/tstore', [App\Http\Controllers\Samu\FollowController::class, 'tstore'])->name('tstore');
+		Route::put('/tupdate/{follow}', [App\Http\Controllers\Samu\FollowController::class, 'tupdate'])->name('tupdate');
+		Route::put('/update/{follow}', [App\Http\Controllers\Samu\FollowController::class, 'update'])->name('update');
+    });
 
-  Route::prefix('shift')->name('shift.')->group(function () {
-    // Route::view('/', 'samu.shift.index')->name('index');
-    Route::get('/',[App\Http\Controllers\Samu\ShiftController::class, 'index'])->name('index');
-    Route::get('/create',[App\Http\Controllers\Samu\ShiftController::class, 'create'])->name('create');
-    Route::post('/store',[App\Http\Controllers\Samu\ShiftController::class, 'store'])->name('store');
-    Route::get('/edit/{shift}',[App\Http\Controllers\Samu\ShiftController::class, 'edit'])->name('edit');
-    Route::put('/{shift}',[App\Http\Controllers\Samu\ShiftController::class, 'update'])->name('update');
-    Route::delete('/{shift}', [App\Http\Controllers\Samu\ShiftController::class, 'destroy'])->name('destroy');
-  });
 
-  Route::prefix('noveltie')->name('noveltie.')->group(function () {
-    Route::get('/',[App\Http\Controllers\Samu\NoveltieController::class, 'index'])->name('index');
-    Route::post('/store', [App\Http\Controllers\Samu\NoveltieController::class, 'store'])->name('store');
-    Route::get('/edit/{noveltie}', [App\Http\Controllers\Samu\NoveltieController::class, 'edit'])->name('edit');
-    Route::put('/update/{noveltie}',[App\Http\Controllers\Samu\NoveltieController::class, 'update'])->name('update');
-    //Route::view('/edit', 'samu.novelties.create')->name('edit');
-  });
+
+    Route::prefix('noveltie')->name('noveltie.')->group(function () {
+		Route::get('/',[App\Http\Controllers\Samu\NoveltieController::class, 'index'])->name('index');
+		Route::post('/store', [App\Http\Controllers\Samu\NoveltieController::class, 'store'])->name('store');
+		Route::get('/edit/{noveltie}', [App\Http\Controllers\Samu\NoveltieController::class, 'edit'])->name('edit');
+		Route::put('/update/{noveltie}',[App\Http\Controllers\Samu\NoveltieController::class, 'update'])->name('update');
+		//Route::view('/edit', 'samu.novelties.create')->name('edit');
+    });
 
 });
 

@@ -36,30 +36,23 @@
                 <fieldset class="form-group col-8 col-md-3">
                     <label for="for_run">Movil </label>
                     <select class="form-control" name="mobile_id">
-                        @foreach($codemobiles as $codemobile)
-                            <option value="{{ $codemobile->id }}">{{$codemobile->name_mobile_code}}</option>
+                        @foreach($mobiles as $mobile)
+                            <option value="{{ $mobile->id }}">{{$mobile->name}}</option>
                         @endforeach
                     </select>
                 </fieldset>
       
                 <fieldset class="form-group col-12 col-md-2">
-                    <label for="empresa">Tipo</label>
+                    <label for="empresa">Estado del móvil</label>
                     <select class="form-control" name="type">
-
-                                
-                                <option value="M 1" {{ $shiftMobiles->first()->type === 'M 1' ? 'selected' : '' }}>M 1</option>
-                                <option value="M 2" {{ $shiftMobiles->first()->type === 'M 2' ? 'selected' : '' }}>M 2</option>
-                                <option value="M 3" {{ $shiftMobiles->first()->type === 'M 3' ? 'selected' : '' }}>M 3</option>
-                                <option value="Hibrido" {{ $shiftMobiles->first()->type === 'Hibrido' ? 'selected' : '' }}>Hibrido</option>
-                                <option value="RU 1" {{ $shiftMobiles->first()->type === 'RU 1' ? 'selected' : '' }}>RU 1</option>
-                                <option value="RU 2" {{ $shiftMobiles->first()->type === 'RU 2' ? 'selected' : '' }}>RU 2</option>
-                    
+                        <option value="1">Activo</option>
+                        <option value="o">Inactivo</option>
                     </select>
                 </fieldset>
                 
 
                 <fieldset class="form-group col-12 col-md-4">
-                    <label for="empresa">Detalle</label>
+                    <label for="empresa">Observación</label>
                     <textarea class="form-control" id="validationTextarea" name="detail" placeholder="" required></textarea>
                         <div class="invalid-feedback">
                                 Ingrese Observaciones

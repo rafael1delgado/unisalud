@@ -18,6 +18,7 @@ class CreateMobilesInServiceTable extends Migration
             $table->foreignId('shift_id')->constrained('samu_shift');
             $table->foreignId('mobile_id')->constrained('samu_mobiles');
             $table->text('observation')->nullable();
+            $table->boolean('status');
             $table->timestamps();
         });
     }

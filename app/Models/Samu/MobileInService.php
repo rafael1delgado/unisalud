@@ -20,7 +20,8 @@ class MobileInService extends Pivot
         'id',
         'shift_id',
         'mobile_id',
-        'observation'
+        'observation',
+        'status'
     ];
 
     public function shift()

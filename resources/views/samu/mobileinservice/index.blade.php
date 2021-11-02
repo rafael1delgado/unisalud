@@ -35,7 +35,7 @@
                     </div>
                         
                     <div class="col-12 col-md-4">
-                        <a class="btn btn-success" href="{{ route('samu.mobile.create') }}">
+                        <a class="btn btn-success" href="{{ route('samu.mobileinservice.create') }}">
                         <i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Agregar Moviles en turno
                         </a>
                     </div>
@@ -82,7 +82,7 @@
                                 <td>Sofia Valencia</td>
                                 <td>Carlos Fuentes</td>
                                 <td>Dra Marta Sanchez acompaña a emergencia</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr>
                                 <td>123</td>
@@ -93,7 +93,7 @@
                                 <td>Daniela Miranda</td>
                                 <td>Carlos Campos</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr>
                                 <td>6</td>
@@ -104,7 +104,7 @@
                                 <td>Carola Reyes</td>
                                 <td>Daniel Diaz</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr>
                                 <td>45</td>
@@ -115,7 +115,7 @@
                                 <td>Sofia Escudero</td>
                                 <td>Rodrigo Araya</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr class="text-center table-success">
                               
@@ -145,7 +145,7 @@
                                 <td>Juan Revollo</td>
                                 <td>Marta Sanchez</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr>
                                 <td>123</td>
@@ -156,7 +156,7 @@
                                 <td>Daniela Miranda</td>
                                 <td>Carlos Campos</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr>
                                 <td>6</td>
@@ -167,7 +167,7 @@
                                 <td>Carola Reyes</td>
                                 <td>Daniel Diaz</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr>
                                 <td>45</td>
@@ -178,7 +178,7 @@
                                 <td>Sofia Escudero</td>
                                 <td>Rodrigo Araya</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr class="text-center table-success">
                               
@@ -208,7 +208,7 @@
                                 <td>Victor Ureña</td>
                                 <td>Sofia Valencia</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr>
                                 <td>123</td>
@@ -219,7 +219,7 @@
                                 <td>Daniela Miranda</td>
                                 <td>Carlos Campos</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                          
                             <tr>
@@ -231,7 +231,7 @@
                                 <td>Sofia Escudero</td>
                                 <td>Rodrigo Araya</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr class="text-center table-success">
                               
@@ -261,7 +261,7 @@
                                 <td>Helen Arevalos</td>
                                 <td>Carlos Fuentes</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr class="text-center table-success">
                               
@@ -291,7 +291,7 @@
                                 <td>Victor Ureña</td>
                                 <td>Sofia Valencia</td>
                                 <td>Dra Najhely Cabrera asiste en emergencia</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr>
                                 <td>8</td>
@@ -302,7 +302,7 @@
                                 <td>Helen Arevalos</td>
                                 <td>Carlos Fuentes</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr>
                                 <td>10</td>
@@ -313,7 +313,7 @@
                                 <td>Andy Guzman</td>
                                 <td>Juan Pablo Cardenas</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
                             <tr>
                                 <td>45</td>
@@ -324,7 +324,7 @@
                                 <td>Sofia Escudero</td>
                                 <td>Rodrigo Araya</td>
                                 <td>Sin observación</td>
-                                <td><a href="{{ route('samu.mobile.edit') }}">Editar</a> </td>
+                                <td><a href="{{ route('samu.mobile.edit',1) }}">Editar</a> </td>
                             </tr>
 
                           

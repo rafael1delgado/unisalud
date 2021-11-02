@@ -19,5 +19,11 @@ class SamuJobTypeSeeder extends Seeder
         JobType::create(['name' => 'Enfermero Regulador']);
         JobType::create(['name' => 'Operador']);
         JobType::create(['name' => 'Despachador']);
+
+        JobType::create(['name' => 'Conductor']);
+        JobType::create(['name' => 'Paramédico']);
+        JobType::create(['name' => 'Reanimador']);
+        JobType::create(['name' => 'Médico']);
+        JobType::create(['name' => 'Enfermero']);
     }
 }
