@@ -44,7 +44,7 @@ class SearchSelectUser extends Component
     {
         $this->resetx();
         $this->user = $user;
-        $this->selectedName = $user->fullName;
+        $this->selectedName = $user->officialFullName;
     }
 
     public function updatedQuery()
