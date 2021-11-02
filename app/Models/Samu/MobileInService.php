@@ -10,7 +10,7 @@ use App\Models\Samu\MobileCrew;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use App\Models\User;
 
-class MobileInService extends Pivot
+class MobileInService extends Model
 {
     use HasFactory;
 
@@ -26,19 +26,28 @@ class MobileInService extends Pivot
 
     public function shift()
     {
-        return $this->BelongsTo(Shift::class);
+        return $this->belongsTo(Shift::class);
     }
 
     public function mobile()
     {
-        return $this->BelongsTo(Mobile::class);
+        return $this->belongsTo(Mobile::class);
     }
 
     public function crew()
     {
+        // $mobileCrews = MobileCrew::where('mobiles_in_service_id',$this->id)
+        //                 ->with('user')
+        //                 ->get();
+        // $users = collect();
+        // foreach($mobileCrews as $mc) {
+        //     $users->add($mc->user);
+        // }
+        // return $users;
         return $this->belongsToMany(User::class,'samu_mobile_crew','mobiles_in_service_id')
-                    //->using(MobileCrew::class)
-                    ->withPivot('job_type_id')
+                    //->join('amenity_master','amenity_icon_url','=','image_url')
+                    ->using(MobileCrew::class)
+                    ->withPivot('id','job_type_id')
                     ->withTimestamps();
     }
 }

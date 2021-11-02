@@ -4,19 +4,20 @@
 @include('nav')
 
 <style>
- .button1{
+    .button1{
      margin-top:30px;
-     }
+    }
 </style>
 
 <div class="card mb-3">
     <div class="card-body">
+    
+        <div class="col-md-6">
+            <h3 class="mb-3"><i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Asinga un móvil a un turno</h3>
+        </div>
         
-
-            <div class="col-md-6">
-                <h3 class="mb-3"><i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Agregar Nuevo Movil</h3>
-            </div>
-            <hr>
+        <hr>
+        
         <form method="POST" action="{{ route('samu.mobile.store') }}">
             @csrf
             @method('POST')
@@ -26,7 +27,7 @@
                     <label for="for_return">Turno</label>
                     <select class="form-control" name="shift_id">
                         @foreach($shifts as $shift)
-                        <!--de la varible que traigo el campo que quiero guaradar - lo que quiero mostrar del As del foreach-->
+                            <!--de la varible que traigo el campo que quiero guaradar - lo que quiero mostrar del As del foreach-->
                             <option value="{{ $shift->id }}">{{$shift->date}}  - {{$shift->type}} </option>
                         @endforeach          
                     </select> 

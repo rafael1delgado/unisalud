@@ -15,8 +15,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link
-        @if(request()->route()->view == 'novelties') active @endif"
+        <a class="nav-link {{ active('samu.noveltie.index') }}"
         href=" {{ route('samu.noveltie.index') }}"><i class="fas fa-book"></i> Novedades</a>
     </li>
 

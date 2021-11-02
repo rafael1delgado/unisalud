@@ -1,7 +1,8 @@
 <div>
     <h6>Tripulacion</h6>
     @foreach($pivot->crew as $tripulant)
-        <li>Nombre: {{ $tripulant->humanNames->last()->fullName }} Función: {{ $tripulant->pivot->job_type_id }}</li>
+        <li>Nombre: {{ $tripulant->humanNames->last()->fullName }} 
+            Función: {{ $tripulant->pivot->job_type_id }}</li>
     @endforeach
 
     <select wire:model='user_id' required="required">
