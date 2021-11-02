@@ -50,8 +50,8 @@ class SearchSelectUser extends Component
     public function updatedQuery()
     {
         $this->users = User::getUsersBySearch($this->query)
-//            ->orderBy('text','Asc')
-            ->get();
+            ->get()
+            ->sortBy('actualOfficialHumanName.text');
 
         /** Más de 50 resultados  */
         if(count($this->users) >= 25)
