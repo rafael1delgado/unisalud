@@ -28,7 +28,8 @@
                                                                  'specialty_id' => $request->specialty_id,
                                                                  'profession_id'=> $request->profession_id,
                                                                  'user_id'      => $request->user_id,
-                                                                 'contract_enable' => 0])
+                                                                 'contract_enable' => 0,
+                                                                 'required_enabled' => 1])
     </div>
 
     <div class="row">
