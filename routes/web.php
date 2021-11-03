@@ -464,9 +464,9 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/',[MobileInServiceController::class, 'index'])->name('index');
 		Route::get('/create',[MobileInServiceController::class, 'create'])->name('create');
 		Route::post('/store',[MobileInServiceController::class, 'store'])->name('store');
-		Route::get('/edit/{mobile}',[MobileInServiceController::class, 'edit'])->name('edit');
-		Route::put('/{mobile}',[MobileInServiceController::class, 'update'])->name('update');
-		Route::delete('/{mobile}', [MobileInServiceController::class, 'destroy'])->name('destroy');
+		Route::get('/edit/{mobileInService}',[MobileInServiceController::class, 'edit'])->name('edit');
+		Route::put('/{mobileInService}',[MobileInServiceController::class, 'update'])->name('update');
+		Route::delete('/{mobileInService}', [MobileInServiceController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('mobile')->name('mobile.')->group(function () {

@@ -38,7 +38,9 @@
                 <button class="btn btn-sm btn-danger mx-1" wire:click="delete({{ $su }})"><i class="fas fa-trash-alt"></i></button>
             </td>
         </tr>
+
         @endforeach
     </table>
+    <hr color="success"  >
     </div>
  

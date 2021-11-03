@@ -18,7 +18,7 @@
         
         <hr>
         
-        <form method="POST" action="{{ route('samu.mobile.store') }}">
+        <form method="POST" action="{{ route('samu.mobileinservice.store') }}">
             @csrf
             @method('POST')
          
@@ -46,12 +46,13 @@
                 <fieldset class="form-group col-12 col-md-2">
                     <label for="empresa">Tipo de  móvil</label>
                     <select class="form-control" name="type">
+                        <option value=""></option>
                         <option value="M1">M1</option>
                         <option value="M2">M2</option>
                         <option value="M3">M3</option>
                         <option value="Hibrido">Hibrido</option>
                         <option value="RU1">RU1</option>
-                        <option value="RU2">RU2</option>
+                        <option value="RU2" >RU2</option>
                     </select>
                 </fieldset>
 
@@ -59,7 +60,7 @@
 
                 <fieldset class="form-group col-12 col-md-5">
                     <label for="empresa">Observación</label>
-                    <textarea class="form-control" id="validationTextarea" name="detail" placeholder="" required></textarea>
+                    <textarea class="form-control" id="validationTextarea" name="observation" placeholder="" required></textarea>
                         <div class="invalid-feedback">
                                 Ingrese Observaciones
                         </div>

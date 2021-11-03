@@ -16,9 +16,9 @@
                 <h3 class="mb-3"><i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Agregar Nuevo Movil</h3>
             </div>
             <hr>
-        <form method="POST" action="{{ route('samu.mobile.store') }}">
+        <form method="POST" action="{{ route('samu.mobileinservice.update', $mobileInService) }}">
             @csrf
-            @method('POST')
+            @method('PUT')
          
             <div class="form-row">
                 <fieldset class="form-group  col-md-3">
@@ -44,20 +44,20 @@
                 <fieldset class="form-group col-12 col-md-2">
                     <label for="empresa">Tipo de  móvil</label>
                     <select class="form-control" name="type">
-                        <option value="M1" {{ $mobile->type === 'M1' ? 'selected' : '' }} >M1</option>
-                        <option value="M2" {{ $mobile->type ==='M2' ? 'selected' : ''}}>M2</option>
-                        <option value="M3" {{$mobile->type ==='M3' ? 'selected' : ''}}>M3</option>
-                        <option value="Hibrido" {{$mobile->type ==='Hibrido' ? 'selected': ''}}>Hibrido</option>
-                        <option value="RU1" {{$mobile->type === 'RU1' ? 'selected' : ''}}>RU1</option>
-                        <option value="RU2" {{mobile->type ==='RU2' ? 'selected' :''}}>RU2 </option>
+                        <option value="M1" {{ $mobileInService->type === 'M1' ? 'selected' : '' }}>M1</option>
+                        <option value="M2" {{ $mobileInService->type ==='M2' ? 'selected' : ''}}>M2</option>
+                        <option value="M3" {{ $mobileInService->type ==='M3' ? 'selected' : ''}}>M3</option>
+                        <option value="Hibrido" {{ $mobileInService->type ==='Hibrido' ? 'selected': ''}}>Hibrido</option>
+                        <option value="RU1" {{ $mobileInService->type === 'RU1' ? 'selected' : ''}}>RU1</option>
+                        <option value="RU2" {{ $mobileInService->type ==='RU2' ? 'selected' :''}}>RU2 </option>
                     </select>
                 </fieldset>
 
              
 
                 <fieldset class="form-group col-12 col-md-5">
-                    <label for="empresa">Observación</label>
-                    <textarea class="form-control" id="validationTextarea" name="detail" placeholder="" required></textarea>
+                    <label for="observation">Observación</label>
+                    <textarea class="form-control" id="validationTextarea" name="observation"  required>{{ $mobileInService->observation }}</textarea>
                         <div class="invalid-feedback">
                                 Ingrese Observaciones
                         </div>

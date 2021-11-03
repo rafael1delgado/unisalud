@@ -16,7 +16,8 @@ class ShiftController extends Controller
      */
     public function index()
     {
-        $shifts = Shift::all();
+        $shifts = Shift::orderBy('id','desc')->get();
+        
         // $users_shift = Shift::find(4)->users;
         // $jefe_turno = '';
         // $medico_regulador = '';
@@ -71,7 +72,9 @@ class ShiftController extends Controller
     public function create()
     {
         $users = User::all();
+        
         return view('samu.shift.create', compact('users'));
+       
     }
 
     /**

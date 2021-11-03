@@ -21,7 +21,8 @@ class MobileInService extends Model
         'shift_id',
         'mobile_id',
         'observation',
-        'status'
+        'status',
+        'type'
         
     ];
 

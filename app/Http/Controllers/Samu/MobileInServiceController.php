@@ -28,6 +28,7 @@ class MobileInServiceController extends Controller
      */
     public function create()
     {
+       
         $mobiles = Mobile::where('managed',true)->get();
         $shifts = Shift::latest()->get();
         return view('samu.mobileinservice.create', compact('mobiles','shifts'));
@@ -41,12 +42,13 @@ class MobileInServiceController extends Controller
      */
     public function store(Request $request)
     {
+       
         $mobileinservices=new mobileinservice($request->all());
         $mobileinservices->save();
     
 
         $mobileinservices = mobileinservice::all();
-        session()->flash('success', 'Se ha creado la codificación de móvil exitosamente');
+        session()->flash('success', 'Se ha añadido exitosamente');
         return redirect()->route ('samu.mobileinservice.index', compact('mobileinservices'));
     }
 
@@ -69,7 +71,9 @@ class MobileInServiceController extends Controller
      */
     public function edit(MobileInService $mobileInService)
     {
-        return view('samu.mobileinservice.edit', compact('mobileinservice'));
+        $mobiles = Mobile::where('managed',true)->get();
+        $shifts = Shift::latest()->get();
+        return view('samu.mobileinservice.edit', compact('mobiles','shifts','mobileInService'));
     
     }
 
@@ -81,12 +85,14 @@ class MobileInServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, MobileInService $mobileInService)
+
     {
+       
         $mobileInService->fill($request->all());
         $mobileInService->save();
 
         session()->flash('info', 'Movil editado.');
-        return redirect()->route('samu.mobileinservice.index', compact('mobileinservice'));
+        return redirect()->route('samu.mobileinservice.index', compact('mobileInService'));
     
         
     }
