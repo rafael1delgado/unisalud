@@ -20,96 +20,14 @@
                     <label for="for_run"><h4><i class="far fa-calendar-alt"></i> Fecha de registro: {{date('Y-m-d')}}</h4> </label>    
                 </fieldset>
         </div>  
-            <!--<div class="form-row">
+            <div class="form-row">
                 <div class="col-12 col-md-4 mb-3">
                     <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalmoviles">
                         <i class="fas fa-plus"></i> Agregar Moviles en turno
                     </a>
                 </div>
-            </div>-->
-                <!--inicio modal operador-->
-            <!--<div class="modal fade" id="modalmoviles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Moviles en turno</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                        <form action="{{route('samu.codemobile.store')}}" method="post">
-                            @csrf
-                            @method('POST')
-                            <div class="modal-body">
-                                <div class="form-row">
-                                        <fieldset class="form-group col-12 col-md-4">
-                                            <label for="tipo">Codigo</label>
-                                            <select class="form-control" name="mobile_code" id="mobile_code">
-                                            @foreach($codemobiles as $codemobile)
-                                                <option value="{{ $codemobile->mobile_code === '$codemobile' ? 'selected' : '' }}">{{$codemobile->mobile_code}} </option>
-                                            @endforeach 
-                                            </select>
-                                        </fieldset>
-                                        <fieldset class="form-group col-12 col-md-4">
-                                            <label for="tipo">Nombre Movil</label>
-                                            <select class="form-control" name="name_mobile_code" id="name_mobile_code">
-                                            @foreach($codemobiles as $codemobile)
-                                                <option value="{{ $codemobile->name_mobile_code === '$codemobile' ? 'selected' : '' }}">{{$codemobile->name_mobile_code}} </option>
-                                            @endforeach 
-                                            </select>
-                                        </fieldset>
-
-                                </div>
-                            </div>
-                       
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-                </div>-->
-                <!-- fin modal operador-->
-            <div class="form-row">
-                <div class="col-md-2 mb-3">
-                    <a class="btn btn-success" href="{{ route('samu.codemobile.create') }}">
-                         <i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i>  Agregar Movil Turno
-                    </a>
-                </div>    
-            </div> 
-    
-            <div class="form-row">
-                
-                <div class="table-responsive col-md-4">
-                    <table class="table table-sm table-bordered table-striped small">
-                            <thead>
-                                <tr class="text-center table-success">
-                                    <th>Número</th>
-                                    <th>Código Móvil</th>
-                                    <th>Detalle Móvil</th>
-                                    <th>Editar</th>
-                                    <th>Eliminar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($codemobiles as $codemobile)
-                            <tr>
-                                <td>{{ $codemobile->id}}</td>
-                                <td>{{ $codemobile->mobile_code }}</td>
-                                <td>{{ $codemobile->name_mobile_code}}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('samu.codemobile.edit', $codemobile) }}"><button type="button" class="btn btn-sm btn-warning mx-1"><i class="fas fa-edit"></i></button/a> </td> 
-                                    <td class="d-flex align-items-center justify-content-center">
-                                    <form method="POST" action="{{ route('samu.codemobile.destroy' , $codemobile) }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button " class="btn btn-sm btn-danger mx-1"><i class="fas fa-trash-alt fa-lg"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                                @endforeach   
-                            </tbody>
-                        </table>
-                </div>
+            </div>
+<!--aca va lo eliminado-->
 
                 <div class="table-responsive col-md-8">
                     <table class="table table-sm table-bordered table-striped small">

@@ -20,7 +20,8 @@ class Mobile extends Model
         'plate',
         'type',
         'description',
-        'status'
+        'status',
+        'managed'
     ];
 
 }
