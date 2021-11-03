@@ -47,6 +47,8 @@ class PertinenceModal extends Component
 
             }
             DB::commit();
+            $this->emit('refreshSicsList');
+
         } catch (Exception $e) {
             DB::rollBack();
             throw $e;

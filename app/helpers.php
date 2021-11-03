@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\some\ExternalIncomingSic;
+use App\Models\Some\ExternalIncomingSic;
 use \Carbon\Carbon;
 
 function active($route_name) { 

@@ -18,6 +18,8 @@ class Interconsultation extends Component
     public $selectedStatusId;
     public $sics = array();
 
+    protected $listeners = ['refreshSicsList' => 'search'];
+
     public function mount()
     {
         $this->specialties = Specialty::all();
