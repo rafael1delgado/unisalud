@@ -21,7 +21,7 @@ class CreateSicsTable extends Migration
             $table->string('hora_solic')->nullable();
             $table->date('fecha_digitacion')->nullable();
             $table->string('hora_digitacion')->nullable();
-            $table->string('cod_salud')->nullable();
+            $table->string('cod_ssalud')->nullable();
             $table->string('cod_estab')->nullable();
             $table->string('cod_espec')->nullable();
             $table->string('nombre_pac')->nullable();
