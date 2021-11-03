@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Samu\Mobile;
+use App\Models\Samu\Noveltie;
 use App\Models\Samu\MobileInService;
 
 class Shift extends Model
@@ -30,19 +31,23 @@ class Shift extends Model
     ];
 
     public function users(): BelongsToMany{
-        return $this->belongsToMany(User::class, 'samu_shift_user')->withTimestamps()->withPivot('job_type');
+        return $this->belongsToMany(User::class, 'samu_shift_user')
+                    ->withTimestamps()
+                    ->withPivot('job_type');
     }
 
-    public function noveltie()
+    public function novelitie()
     {
-        return $this->belongsTo('\App\Models\Samu\Noveltie');
+        return $this->belongsTo(Novelitie::class);
     }
 
     public function mobilesInService()
     {
-        return $this->belongsToMany(Mobile::class,'samu_mobiles_in_service')
-                    ->using(MobileInService::class)
-                    ->withPivot('id','observation')
-                    ->withTimestamps();
+        return $this->hasMany(MobileInService::class);
+
+        // return $this->belongsToMany(Mobile::class,'samu_mobiles_in_service')
+        //             ->using(MobileInService::class)
+        //             ->withPivot('id','observation')
+        //             ->withTimestamps();
     }
 }

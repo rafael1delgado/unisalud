@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Samu;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Samu\JobType;
+use App\Models\Samu\MobileInService;
 use App\Models\Samu\MobileCrew as MobileCrewModel;
 
 class MobileCrew extends Component
@@ -47,6 +48,7 @@ class MobileCrew extends Component
 
     public function render()
     {
+        //$this->pivot        = MobileInService::where('id',$this->pivot->id)->get();
         $this->users        = User::Permission('SAMU')->get();
         $this->job_types    = JobType::all();
         return view('livewire.samu.mobile-crew');
