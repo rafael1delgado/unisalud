@@ -41,7 +41,13 @@ class MobileInServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mobileinservices=new mobileinservice($request->all());
+        $mobileinservices->save();
+    
+
+        $mobileinservices = mobileinservice::all();
+        session()->flash('success', 'Se ha creado la codificación de móvil exitosamente');
+        return redirect()->route ('samu.mobileinservice.index', compact('mobileinservices'));
     }
 
     /**
@@ -63,7 +69,8 @@ class MobileInServiceController extends Controller
      */
     public function edit(MobileInService $mobileInService)
     {
-        //
+        return view('samu.mobileinservice.edit', compact('mobileinservice'));
+    
     }
 
     /**
@@ -75,7 +82,13 @@ class MobileInServiceController extends Controller
      */
     public function update(Request $request, MobileInService $mobileInService)
     {
-        //
+        $mobileInService->fill($request->all());
+        $mobileInService->save();
+
+        session()->flash('info', 'Movil editado.');
+        return redirect()->route('samu.mobileinservice.index', compact('mobileinservice'));
+    
+        
     }
 
     /**

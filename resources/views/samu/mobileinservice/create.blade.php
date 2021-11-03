@@ -17,7 +17,7 @@
                 <h3 class="mb-3"><i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Agregar Nuevo Movil</h3>
             </div>
             <hr>
-        <form method="POST" action="{{ route('samu.mobile.store') }}">
+        <form method="POST" action="{{ route('samu.mobileinservice.store') }}">
             @csrf
             @method('POST')
          
@@ -33,7 +33,7 @@
                                         
                 </fieldset>
         
-                <fieldset class="form-group col-8 col-md-3">
+                <fieldset class="form-group col-8 col-md-2">
                     <label for="for_run">Movil </label>
                     <select class="form-control" name="mobile_id">
                         @foreach($mobiles as $mobile)
@@ -43,15 +43,20 @@
                 </fieldset>
       
                 <fieldset class="form-group col-12 col-md-2">
-                    <label for="empresa">Estado del móvil</label>
+                    <label for="empresa">Tipo de  móvil</label>
                     <select class="form-control" name="type">
-                        <option value="1">Activo</option>
-                        <option value="o">Inactivo</option>
+                        <option value="M1">M1</option>
+                        <option value="M2">M2</option>
+                        <option value="M3">M3</option>
+                        <option value="Hibrido">Hibrido</option>
+                        <option value="RU1">RU1</option>
+                        <option value="RU2">RU2</option>
                     </select>
                 </fieldset>
-                
 
-                <fieldset class="form-group col-12 col-md-4">
+             
+
+                <fieldset class="form-group col-12 col-md-5">
                     <label for="empresa">Observación</label>
                     <textarea class="form-control" id="validationTextarea" name="detail" placeholder="" required></textarea>
                         <div class="invalid-feedback">
@@ -59,10 +64,7 @@
                         </div>
                 </fieldset>
 
-            </div>
-
-
-            <hr>
+    </div>
 
             <div class="form-row">
 

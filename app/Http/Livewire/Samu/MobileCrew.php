@@ -28,6 +28,7 @@ class MobileCrew extends Component
 
     public function store()
     {
+        debug('hola');
         $this->validate();
 
         $shift_user = MobileCrewModel::create([
@@ -35,6 +36,8 @@ class MobileCrew extends Component
             'user_id'               => $this->user_id,
             'job_type_id'           => $this->job_type_id
         ]);
+       
+        redirect()->to(route('samu.mobileinservice.index'));
     }
 
     public function delete(MobileCrewModel $mobileCrew)

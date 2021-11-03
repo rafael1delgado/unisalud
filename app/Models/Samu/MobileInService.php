@@ -22,6 +22,7 @@ class MobileInService extends Pivot
         'mobile_id',
         'observation',
         'status'
+        
     ];
 
     public function shift()
