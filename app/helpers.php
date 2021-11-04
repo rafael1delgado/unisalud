@@ -50,7 +50,7 @@ function GuardarSic($request){
     $externalIncomingSic->dig_ver_pac = $request['pcsDigVerPac'];
     $externalIncomingSic->num_documento = $request['pcsNumDocumento'];
     $externalIncomingSic->ind_sexo_pac = $request['pcsIndSexoPac'];
-    $externalIncomingSic->fecha_nac_pac = $request['pcdFechNacPac'];
+    $externalIncomingSic->fech_nac_pac = $request['pcdFechNacPac'];
     $externalIncomingSic->domicilio_pac = $request['pcsDomicilioPac'];
     $externalIncomingSic->tipo_via = $request['pcsTipoVia'];
     $externalIncomingSic->nombre_via = $request['pcsNombreVia'];
@@ -65,7 +65,7 @@ function GuardarSic($request){
     $externalIncomingSic->cod_diag = $request['pcsCodDiag'];
     $externalIncomingSic->ind_auge = $request['pcsIndAuge'];
     $externalIncomingSic->nom_problem_auge = $request['pcsNomProblemAuge'];
-    $externalIncomingSic->sub_problema_auge = $request['pcsSubProblemAuge'];
+    $externalIncomingSic->sub_problem_auge = $request['pcsSubProblemAuge'];
     $externalIncomingSic->nom_fund_diag = $request['pcsNomFundDiag'];
     $externalIncomingSic->nom_examen = $request['pcsNomExamen'];
     $externalIncomingSic->cod_rut_prof = $request['pciCodRutProf'];
