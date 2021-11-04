@@ -65,15 +65,15 @@
 
             @foreach($sics as $sic)
                 <tr>
-                    <td>{{$sic->pciNumSic}}</td>
-                    <td>{{$sic->pcdFechaSolic->format('d-m-Y')}}</td>
-                    <td>{{$sic->pciIndMotivo}}</td>
-                    <td>{{$sic->pcsIndUrgencia}}</td>
-                    <td>{{"$sic->pciRutPac-$sic->pcsDigVerPac"}}</td>
-                    <td>{{"$sic->pcsNombrePac $sic->pcsApellidoPat $sic->pcsApellidoMat"}}</td>
-                    <td>{{$sic->pcdFechNacPac->format('d-m-Y')}}</td>
-                    <td>{{$sic->pcsCodEspecDer}}</td>
-                    <td>{{$sic->pcsCodEspecDer}}</td>
+                    <td>{{$sic->num_sic}}</td>
+                    <td>{{$sic->fecha_solic->format('d-m-Y')}}</td>
+                    <td>{{$sic->ind_motivo}}</td>
+                    <td>{{$sic->ind_urgencia}}</td>
+                    <td>{{"$sic->rut_pac-$sic->dig_ver_pac"}}</td>
+                    <td>{{"$sic->nombre_pac $sic->apellido_pat $sic->apellido_mat"}}</td>
+                    <td>{{$sic->fech_nac_pac->format('d-m-Y')}}</td>
+                    <td>{{$sic->cod_espec_der}}</td>
+                    <td>{{$sic->cod_estab}}</td>
 
 {{--                    <td>--}}
 {{--                        <button type="button" class="btn btn-primary" data-toggle="modal"--}}
