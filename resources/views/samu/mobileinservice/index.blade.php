@@ -37,7 +37,7 @@
 
             <div class="table-responsive col-md-12 mb-3 ">
             @foreach($shifts as $shift)
-            @foreach($shift->mobilesInService as $mobil)
+            @foreach($shift->mobilesInService as $mis)
                     <table class="table table-sm table-bordered table-striped small">
                   
                   
@@ -50,15 +50,14 @@
                             
                             <tr class="text-center table-success">
                               
-                              <th colspan="5"><b>Turno: {{ $shift->id }} - {{ $shift->date }} {{ $shift->type }} {{ $shift->opening_time }}</b></th>
+                              <th colspan="4"><b>Turno: {{ $shift->id }} - {{ $shift->date }} {{ $shift->type }} {{ $shift->opening_time }}</b></th>
                             </tr>
                         
                             <tr class="text-center table-secondary">
                         
-                                <th>Código</th>
-                                <th>Nombre</th>
-                                <th>Placa</th>
+                                <th>Movil</th>
                                 <th>Tipo</th>
+                                <th>Observacion</th>
                                 <th>Editar</th>
 
                             </tr>
@@ -66,18 +65,24 @@
                         <tbody>
               
                             <tr>
-                                <td>{{ $mobil->code }}</td>
-                                <td>{{ $mobil->name }} </td>
-                                <td>{{ $mobil->type}} </td>                             
-                                <td class="bg-success text-center text-white">Activo</td>
-                                <td><a href="{{ route('samu.mobileinservice.edit',1) }}">Editar</a> </td>
-                                @livewire('samu.mobile-crew',['pivot' => $mobil->pivot])   
+                                <td>{{ $mis->mobile_id }}</td>
+                                <td>{{ $mis->type}} </td>
+                                <td>{{ $mis->observation}} </td>                             
+                                <td><a href="{{ route('samu.mobileinservice.edit',$mis) }}">Editar</a> </td>
+                                 
                             </tr>
-                            
+                            <tr>
+                            <td colspan="5">
+                            @livewire('samu.mobile-crew',['mobileInService' => $mis])   
+                            </td>
+                        </tr>
+
+
                         </tbody>
                      
                     
                     </table>
+                    <hr color="success"  >
                     @endforeach  
                     @endforeach
                 </div>

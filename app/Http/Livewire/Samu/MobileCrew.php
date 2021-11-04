@@ -12,7 +12,7 @@ class MobileCrew extends Component
 {
     //public $mobil;
     public $users;
-    public $pivot;
+    public $mobileInService;
 
     public $user_id;
     public $job_type_id;
@@ -29,11 +29,11 @@ class MobileCrew extends Component
 
     public function store()
     {
-        debug('hola');
+     
         $this->validate();
 
         $shift_user = MobileCrewModel::create([
-            'mobiles_in_service_id' => $this->pivot->id,
+            'mobiles_in_service_id' => $this->mobileInService->id,
             'user_id'               => $this->user_id,
             'job_type_id'           => $this->job_type_id
         ]);
