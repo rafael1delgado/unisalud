@@ -73,7 +73,8 @@ class CreateSicsTable extends Migration
             $table->string('email')->nullable();
             $table->string('nacionalidad')->nullable();
             $table->string('etnia')->nullable();
-            $table->string('estado_civil')->nullable();
+        
+            
             $table->foreignId('sic_status_id');
             $table->timestamps();
 

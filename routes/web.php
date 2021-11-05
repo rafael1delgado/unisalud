@@ -511,7 +511,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
   
     Route::prefix('qtc')->name('qtc.')->group(function () {
 		Route::get('/',[App\Http\Controllers\Samu\QtcController::class, 'index'])->name('index');
-		Route::get('/edit/{qtc}',[App\Http\Controllers\Samu\QtcController::class, 'edit'])->name('edit');
+		Route::get('/edit/{qtc}/{shift}',[App\Http\Controllers\Samu\QtcController::class, 'edit'])->name('edit');
 		Route::post('/store',[App\Http\Controllers\Samu\QtcController::class, 'store'])->name('store');
 		Route::delete('/{qtc}', [App\Http\Controllers\Samu\QtcController::class, 'destroy'])->name('destroy');
     

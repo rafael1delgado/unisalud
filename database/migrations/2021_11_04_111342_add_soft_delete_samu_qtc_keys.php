@@ -13,7 +13,7 @@ class AddSoftDeleteSamuQtcKeys extends Migration
      */
     public function up()
     {
-        Schema::table('qtc_keys', function (Blueprint $table) {
+        Schema::table('samu_qtc_keys', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
@@ -25,7 +25,7 @@ class AddSoftDeleteSamuQtcKeys extends Migration
      */
     public function down()
     {
-        Schema::table('qtc_keys', function (Blueprint $table) {
+        Schema::table('samu_qtc_keys', function (Blueprint $table) {
             $table->dropSoftDeletes();
          });
         

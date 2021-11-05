@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use Carbon\Carbon;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\Noveltie;
 use App\Models\Samu\MobileInService;
@@ -51,5 +52,13 @@ class Shift extends Model implements Auditable
         //             ->using(MobileInService::class)
         //             ->withPivot('id','observation')
         //             ->withTimestamps();
+    }
+
+    public static function todayShiftVerify()
+    {
+    
+        if( shift::where('date', now()->format('Y-m-d'))->first()) return true;
+        else return false;
+
     }
 }

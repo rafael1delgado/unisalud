@@ -7,22 +7,23 @@
     <li class="nav-item">
         <a class="nav-link {{ active('samu.shift.index') }}"
         href=" {{ route('samu.shift.index') }}"> <i class="fas fa-list"></i> Turno</a>
+       
     </li>
-
+    
     <li class="nav-item">
-        <a class="nav-link {{ active('samu.mobileinservice.index') }}"
+        <a class="nav-link {{ active('samu.mobileinservice.index') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
         href=" {{ route('samu.mobileinservice.index') }}"><i class="fas fa-ambulance"></i> Moviles en servicio</a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ active('samu.noveltie.index') }}"
-        href=" {{ route('samu.noveltie.index') }}"><i class="fas fa-book"></i> Novedades</a>
+    <a class="nav-link {{ active('samu.noveltie.index') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.noveltie.index') }}"><i class="fas fa-book"></i>Novedades</a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link
-        @if(request()->route()->view == 'qtc') active @endif"
-        href=" {{ route('samu.qtc.index') }}"><i class="fas fa-phone-volume"></i> Call Center</a>
+    <a class="nav-link {{ active('samu.qtc.index') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.qtc.index') }}"><i class="fas fa-phone-square"></i> Call Center</a>
+        
     </li>
 
     <li class="nav-item dropdown">

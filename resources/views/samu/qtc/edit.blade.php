@@ -17,6 +17,7 @@
         <h3><b><b></h3>
         <h3 class="text-danger"><b> Seguimiento Emergencia</b></h3>
             <h4> Asignación de seguimiento horario</h4>
+      
             <form method="post" action="{{ route('samu.follow.store') }}">
                 @csrf
                 @method('POST')
@@ -24,6 +25,7 @@
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_key">Clave</label>
                                         <select class="form-control" name="key">
+                                        <option value=""></option>
                                         @foreach($keys as $key)
                                             <option value="{{ $qtc->follow->key === '$key' ? 'selected' : '' }}">{{$key->key_code}}  - {{$key->name_key_code}} </option>
                                         
@@ -34,6 +36,7 @@
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_return">Clave de Retorno</label>
                                         <select class="form-control" name="key">
+                                        <option value=""></option>
                                         @foreach($keys as $key)
                                             <option value="{{ $qtc->follow->key_return === '$key' ? 'selected' : '' }}">{{$key->key_code}} - {{$key->name_key_code}} </option>
                                         
@@ -42,20 +45,25 @@
                                         
                                     </fieldset>
                                     <fieldset class="form-group  col-md-2">
-                                        <label for="for_mobile">Movil</label>
+                                        @if($shift)
+                                        <!--revisar foreach-->
+                                        <label for="for_mobile">Móvil  .i. {{ $qtc->follow->mobile->id }}</label>
 
                                             <select class="form-control" name="mobile" id="mobile">
-                                                <option value="Movil 1" {{ $qtc->follow->mobile === 'Movil 1' ? 'selected' : '' }}>Movil 1</option>
-                                                <option value=" Movil 2"  {{ $qtc->follow->mobile === 'Movil 2' ? 'selected' : '' }} >Movil  2</option>
-                                                <option value="Movil 3"  {{ $qtc->follow->mobile === 'Movil 3' ? 'selected' : '' }} >Movil  3</option>
-                                          
+                                                <option value=""></option>
+                                                @foreach($shift->mobilesInService as $mis)
+                                                <option value="{{ $mis->mobile->id === $qtc->follow->mobile->id ? 'selected' : '' }}">
+                                                    {{ $mis->mobile->name }} - {{ $mis->mobile->code}} {{ $mis->mobile->id }}
+                                                </option>
+                                                @endforeach  
                                             
                                             </select>
+                                            @endif
                                     </fieldset>
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_transfer_type">Tipo de Traslado </label>
                                         <select class="form-control" name="transfer_type" id="transfer_type">
-                                                
+                                                <option value=""></option>
                                                 <option value="T1" {{ $qtc->follow->transfer_type === 'T1' ? 'selected' : '' }} >T1</option>
                                                 <option value="T2" {{ $qtc->follow->transfer_type === 'T2' ? 'selected' : '' }}  >T2</option>
                                                 <option value="NM"{{ $qtc->follow->transfer_type === 'NM' ? 'selected' : '' }} >NM</option>

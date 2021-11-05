@@ -87,11 +87,11 @@
                     @endforeach
                 </div>
             </div>
-         
-
+        
             <hr>
         
         </div>
+     
 </div>
 
 

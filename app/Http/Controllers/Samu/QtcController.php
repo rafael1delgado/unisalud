@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Samu\Follow;
 use App\Models\Samu\CodeKey;
 use App\Models\Samu\Qtc;
+use App\Models\Samu\Shift;
 use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
 
@@ -19,10 +20,12 @@ class QtcController extends Controller
      */
     public function index()
     {
+        $shift = Shift::where('date', now()->format('Y-m-d'))->first(); //obtienes la variable shift
         $mobiles = Mobile::all();
         $qtcs=qtc::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
         //return $qtcs; 
-       return view ('samu.qtc.index' , compact('qtcs','mobiles'));
+        
+       return view ('samu.qtc.index' , compact('qtcs','mobiles', 'shift'));
     }
 
     /**
@@ -83,24 +86,24 @@ class QtcController extends Controller
      * @param  \App\Models\Samu\Qtc  $qtc
      * @return \Illuminate\Http\Response
      */
-    public function edit(Qtc $qtc)
+    public function edit(Qtc $qtc, Shift $shift)
     
     {
+        //$shift = Shift::where('date', now()->format('Y-m-d'))->first(); //obtienes la variable shift
         $keys=CodeKey::all();
      
-
         switch ($qtc->class_qtc) {
             case 'T1':
-                return view ('samu.qtc.edit' , compact('qtc','keys'));
+                return view ('samu.qtc.edit' , compact('qtc','keys','shift'));
                 break;
             case 'T2' :
-                return view ('samu.qtc.tedit' , compact('qtc','keys'));
+                return view ('samu.qtc.tedit' , compact('qtc','keys','shift'));
                 break;
             case 'NM' :
-                    return view ('samu.qtc.edit' , compact('qtc','keys'));
+                    return view ('samu.qtc.edit' , compact('qtc','keys','shift'));
                     break;
             case 'OT':
-                return view ('samu.qtc.otedit' , compact('qtc','keys'));
+                return view ('samu.qtc.otedit' , compact('qtc','keys','shift'));
                 break;
             default: 
                 return null;

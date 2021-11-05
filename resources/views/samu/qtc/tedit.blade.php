@@ -25,6 +25,7 @@
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_key">Clave</label>
                                         <select class="form-control" name="key">
+                                        <option value=""></option>
                                         @foreach($keys as $key)
                                             <option value="{{ $qtc->follow->key === '$key' ? 'selected' : '' }}">{{$key->name_key_code}} </option>
                                         
@@ -34,16 +35,19 @@
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_return">Clave de Retorno</label>
                                         <select class="form-control" name="key">
+                                        <option value=""></option>
                                         @foreach($keys as $key)
+                                            
                                             <option value="{{ $qtc->follow->key_return === '$key' ? 'selected' : '' }}">{{$key->name_key_code}} </option>
                                         
                                         @endforeach  
                                         </select>
                                     </fieldset>
                                     <fieldset class="form-group  col-md-2">
+                                    @if($shift)
                                         <label for="for_mobile">Movil</label>
                                             <select class="form-control" name="mobile" id="mobile">
-                                                <option value="">Seleccione Movil </option>
+                                                <option value=""> </option>
                                                 <option value="Movil 2" >Movil 2</option>
                                                 <option value="Movil 5" >Movil 5</option>
                                                 <option value="Movil 12" >Movil 12</option>
@@ -52,11 +56,12 @@
                                                 <option value="Movil 11" >Movil 11</option>
                                             
                                             </select>
+                                        @endif
                                     </fieldset>
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_transfer_type">Tipo de Traslado </label>
                                         <select class="form-control" name="transfer_type" id="transfer_type">
-                                                
+                                                <option value=""></option>
                                                 <option value="T1" {{ $qtc->follow->transfer_type === 'T1' ? 'selected' : '' }} >T1</option>
                                                 <option value="T2" {{ $qtc->follow->transfer_type === 'T2' ? 'selected' : '' }}  >T2</option>
                                                 <option value="RU1"{{ $qtc->follow->transfer_type === 'RU1' ? 'selected' : '' }} >RU1</option>
@@ -133,7 +138,7 @@
                                     <label for="for_establishment">Est. Recepcion de paciente </label>
                                     <select class="form-control" name="establishment" id="establishment">
                                         
-                                            <option>Seleccione </option>
+                                            <option value=""></option>
                                             <option value="Hospital Dr Ernesto Torres Galdames" {{ $qtc->follow->establishment === 'Hospital Dr Ernesto Torres Galdames' ? 'selected' : '' }} >Hospital Dr Ernesto Torres Galdames</option>
                                             <option value="SAPU Cirujano Aguirre" {{ $qtc->follow->establishment === 'SAPU Cirujano Aguirre' ? 'selected' : '' }}>SAPU Cirujano Aguirre</option>
                                             <option value="SAPU Cirujano Guzmán" {{ $qtc->follow->establishment === 'SAPU Cirujano Guzmán' ? 'selected' : '' }}>SAPU Cirujano Guzmán</option>

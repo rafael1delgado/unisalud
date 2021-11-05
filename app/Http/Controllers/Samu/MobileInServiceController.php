@@ -17,6 +17,7 @@ class MobileInServiceController extends Controller
      */
     public function index()
     {
+      
         $shifts = Shift::latest()->get();
         return view('samu.mobileinservice.index', compact('shifts'));
     }

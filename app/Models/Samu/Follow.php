@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Samu\Mobile;
 
 
 class Follow extends Model implements Auditable
@@ -22,7 +23,7 @@ class Follow extends Model implements Auditable
         'qtc_id',
         'key',
         'key_return',
-        'mobile',
+        'mobile_id',
         'transfer_type',
         'departure_time',
         'mobile_departure_time',
@@ -55,11 +56,6 @@ class Follow extends Model implements Auditable
         't',
         'treatment',
         'observation_sv',
-       
-
-
-
-
 
         'mobile_code',
         'name_mobile_code',
@@ -69,5 +65,9 @@ class Follow extends Model implements Auditable
     public function qtc()
     {
         return $this->belongsTo('\App\Models\Samu\Qtc');
+    }
+
+    public function mobile() {
+        return $this->belongsTo(Mobile::class);
     }
 }

@@ -17,7 +17,7 @@ class CreateSamuFollowsTable extends Migration
            //segumiento
             $table->id();
             //llave foranea
-            $table->foreignId('qtc_id')->nullable();
+            $table->foreignId('qtc_id');
             $table->string('key')->nullable();;
             $table->string('key_return')->nullable();
             $table->string('mobile')->nullable();

@@ -16,7 +16,9 @@ class ShiftController extends Controller
      */
     public function index()
     {
-        $shifts = Shift::orderBy('id','desc')->get();
+        $shifts = Shift::orderBy('id','desc')->paginate(2);
+        
+
         
         // $users_shift = Shift::find(4)->users;
         // $jefe_turno = '';
