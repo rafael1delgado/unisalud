@@ -20,7 +20,7 @@ class PertinenceModal extends Component
 
     public function loadPertinence($sicId)
     {
-//        \Debugbar::info($sicId);
+        //        \Debugbar::info($sicId);
         $this->sic = ExternalIncomingSic::find($sicId);
         $this->emit('togglePertinenceModal');
     }
@@ -30,25 +30,40 @@ class PertinenceModal extends Component
      */
     public function pertinence()
     {
-      DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             if ($this->action == 'pertinent') {
+
                 $newSic = $this->sic->replicate([
                     'sic_status_id'
                 ]);
                 $newSic->sic_status_id = 2; //Pertinente
-
                 $newSic = $newSic->toArray();
                 Sic::Create($newSic);
 
                 $this->sic->forceDelete();
                 $this->closeModal();
+            } elseif ($this->action == 'nonPertinent') {
+                $this->validate([
+                    'motive' => 'required'
+                ], [
+                    'motive.required' => 'Debe ingresar un motivo.'
+                ]);
 
+                $newSic = $this->sic->replicate([
+                    'sic_status_id'
+                ]);
+                $newSic->sic_status_id = 5; //Rechazada
+                $newSic = $newSic->toArray();
+                Sic::Create($newSic);
+
+                $this->sic->forceDelete();
+
+                $this->closeModal();
             }
             DB::commit();
             $this->emit('refreshSicsList');
-
         } catch (Exception $e) {
             DB::rollBack();
             throw $e;

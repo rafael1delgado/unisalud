@@ -25,7 +25,7 @@ class Sic extends Model
         return $this->belongsTo(SicStatus::class, 'sic_status_id');
     }
 
-    protected $dates = ['pcdFechaSolic', 'pcsFechaDigitacion', 'pcdFechNacPac', 'pcdVencPrev',
+    protected $dates = ['fecha_solic', 'fecha_digitacion', 'fech_nac_pac', 'venc_prev',
     ];
 
 }

@@ -16,6 +16,7 @@ class AddObservationsToSicsTable extends Migration
         Schema::table('sics', function (Blueprint $table) {
             $table->string('diagnostic_hipotesis')->after('estado_civil')->nullable();
             $table->string('origin_observation')->after('diagnostic_hipotesis')->nullable();
+            $table->string('rejected_observation')->after('origin_observation')->nullable();
         });
     }
 
@@ -28,7 +29,9 @@ class AddObservationsToSicsTable extends Migration
     {
         Schema::table('sics', function (Blueprint $table) {
             $table->dropColumn('diagnostic_hipotesis');
-            $table->dropColumn('origin_observatio');
+            $table->dropColumn('origin_observation');
+            $table->dropColumn('rejected_observation');
+            
         });
     }
 }

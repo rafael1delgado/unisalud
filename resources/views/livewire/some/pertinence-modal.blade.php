@@ -21,11 +21,11 @@
                             </div>
                             <div class="card-body">
                                 <ul>
-                                    <li>Nombre: {{$sic->pcsNombrePac ?? ''}} </li>
+                                    <li>Nombre: {{$sic->nombre_pac ?? ''}} </li>
                                     <li>Edad: {{$sic->age ?? ''}} Años</li>
-                                    <li>Género: {{$sic->pcsIndSexoPac ?? ''}}</li>
-                                    <li>Centro: {{$sic->pcsCodEstab ?? ''}}</li>
-                                    <li>Motivo: {{$sic->pciIndMotivo ?? ''}}</li>
+                                    <li>Género: {{$sic->ind_sexo_pac?? ''}}</li>
+                                    <li>Centro: {{$sic->cod_estab?? ''}}</li>
+                                    <li>Motivo: {{$sic->ind_motivo?? ''}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -61,6 +61,9 @@
                                           wire:model.defer="motive"
                                 ></textarea>
                             </fieldset>
+                            @error('motive')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </form>
                     </div>
                 </div>
