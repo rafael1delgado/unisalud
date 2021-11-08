@@ -56,4 +56,10 @@ class MobileInService extends Model implements Auditable
                     ->withPivot('id','job_type_id')
                     ->withTimestamps();
     }
+
+
+    public function follows(){
+        return $this->belongsToMany(Follow::class);
+                
+    }
 }

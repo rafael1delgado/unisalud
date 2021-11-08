@@ -24,25 +24,6 @@ class FollowMis extends Model
      'follows_id',
      'created_at'
      ];
-     public function mobileInService()
-    {
-         return $this->BelongsTo(MobileInService::class, 'samu_mobiles_in_service', 'mis_id');
-       
-    }
-    public function follow()
-    {
-        return $this->BelongsTo(Follow::class, 'follow_id');
-    }
-
-
-
-
-
-
-
-
-
-
 
 
 }
