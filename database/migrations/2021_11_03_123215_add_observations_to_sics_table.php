@@ -14,8 +14,8 @@ class AddObservationsToSicsTable extends Migration
     public function up()
     {
         Schema::table('sics', function (Blueprint $table) {
-            $table->string('diagnostic_hipotesis')->after('estado_civil')->nullable();
-            $table->string('origin_observation')->after('diagnostic_hipotesis')->nullable();
+            $table->string('diagnostic_hypothesis')->after('estado_civil')->nullable();
+            $table->string('origin_observation')->after('diagnostic_hypothesis')->nullable();
             $table->string('rejected_observation')->after('origin_observation')->nullable();
         });
     }
@@ -28,7 +28,7 @@ class AddObservationsToSicsTable extends Migration
     public function down()
     {
         Schema::table('sics', function (Blueprint $table) {
-            $table->dropColumn('diagnostic_hipotesis');
+            $table->dropColumn('diagnostic_hypothesis');
             $table->dropColumn('origin_observation');
             $table->dropColumn('rejected_observation');
             

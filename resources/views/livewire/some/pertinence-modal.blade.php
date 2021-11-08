@@ -40,11 +40,11 @@
                                 ></textarea>
                             </fieldset>
                             <fieldset class="form-group  col-md-12 mb-3">
-                                <label for="observation"> <b>OBSERVACIÓN DEL CENTRO DE ORIGEN</b></label>
+                                <label for="originObservation"> <b>OBSERVACIÓN DEL CENTRO DE ORIGEN</b></label>
                                 <textarea class="form-control" placeholder="Ingrese Observación del Centro de Salud"
-                                          id="observation"
+                                          id="originObservation"
                                           style="height: 100px"
-                                          wire:model.defer="observation"
+                                          wire:model.defer="originObservation"
                                 ></textarea>
                             </fieldset>
 
@@ -55,10 +55,10 @@
                                 <button  class="btn btn-danger mr-2 float-right" wire:click="$set('action', 'nonPertinent')">No pertinente</button>
                             </fieldset>
                             <fieldset class="form-group  col-md-6">
-                                <label for="motive"> <b>(Motivo)</b></label>
-                                <textarea class="form-control" placeholder="" id="motive"
+                                <label for="rejectedObservation"> <b>(Motivo)</b></label>
+                                <textarea class="form-control" placeholder="" id="rejectedObservation"
                                           style="height: 100px"
-                                          wire:model.defer="motive"
+                                          wire:model.defer="rejectedObservation"
                                 ></textarea>
                             </fieldset>
                             @error('motive')

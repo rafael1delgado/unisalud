@@ -12,9 +12,9 @@ class PertinenceModal extends Component
 {
     public $sic;
     public $diagnosticHypothesis;
-    public $observation;
+    public $originObservation;
     public $action;
-    public $motive;
+    public $rejectedObservation;
 
     protected $listeners = ['open' => 'loadPertinence'];
 
@@ -39,6 +39,8 @@ class PertinenceModal extends Component
                     'sic_status_id'
                 ]);
                 $newSic->sic_status_id = 2; //Pertinente
+                $newSic->diagnostic_hipotesis = $this->diagnosticHypothesis;
+                $newSic->origin_observation = $this->originObservation;
                 $newSic = $newSic->toArray();
                 Sic::Create($newSic);
 
@@ -46,15 +48,16 @@ class PertinenceModal extends Component
                 $this->closeModal();
             } elseif ($this->action == 'nonPertinent') {
                 $this->validate([
-                    'motive' => 'required'
+                    'rejectedObservation' => 'required'
                 ], [
-                    'motive.required' => 'Debe ingresar un motivo.'
+                    'rejectedObservation.required' => 'Debe ingresar un motivo.'
                 ]);
 
                 $newSic = $this->sic->replicate([
                     'sic_status_id'
                 ]);
                 $newSic->sic_status_id = 5; //Rechazada
+                $newSic->rejected_observation = $this->rejectedObservation;
                 $newSic = $newSic->toArray();
                 Sic::Create($newSic);
 
