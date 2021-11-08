@@ -73,7 +73,7 @@ class Follow extends Model implements Auditable
 
 
     public function mobilesInServices(){
-        return $this->belongsToMany(MobilesInService::class, 'samu_follow_mis');
+        return $this->belongsToMany(MobilesInService::class);
                 
     }
 }
