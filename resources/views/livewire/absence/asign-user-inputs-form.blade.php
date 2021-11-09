@@ -1,54 +1,55 @@
 <div>
     <div class="row">
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-4">
             <label for="inputrut">RUT</label>
             <input type="number" class="form-control @error('user') is-invalid @enderror" placeholder="Ingrese el rut" wire:model.lazy="run" name="run"
                    wire:change="searchUser()">
             @error('user') <div class="invalid-feedback">{{ $message }}</div>@enderror
             <input type="hidden" name="user_id" wire:model="user_id">
         </div>
-        <div class="form-group col-md-1">
-            <label for="inputdv">Dv</label>
-            <input type="text" class="form-control" placeholder="Dv" wire:model="dv" name="dv" readonly>
+        <div class="form-group col-3 col-md-1">
+            <label for="inputdv">DV</label>
+            <input type="text" class="form-control" placeholder="-" wire:model="dv" name="dv" readonly>
         </div>
-        <div class="form-group col-md-1">
+        <div class="form-group col-3 col-md-1">
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" data-toggle="modal"
-                    data-target="#searchUserModal" title="Búsqueda avanzada" ><i class="fa fa-search" aria-hidden="true"></i>
+                    data-target="#searchUserModal" title="Búsqueda avanzada" >
+                    <i class="fa fa-search" aria-hidden="true"></i>
             </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="form-group col-md-3">
+        <div class="form-group col-6 col-md-4">
             <label for="inputrut">Nombre</label>
             <input type="text" class="form-control" wire:model="name" readonly>
 
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-4">
             <label for="inputdv">Apellido paterno</label>
             <input type="text" class="form-control" wire:model="fathers_family" readonly>
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-4">
             <label for="inputdv">Apellido materno</label>
             <input type="text" class="form-control" wire:model="mothers_family" readonly>
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-4">
             <label for="inputdv">Género</label>
             <input type="text" class="form-control" wire:model="sex" readonly>
         </div>
-        <div class="form-group col-md-1">
+        <div class="form-group col-6 col-md-4">
             <label for="inputdv">Edad(años)</label>
             <input type="text" class="form-control" wire:model="age" readonly>
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-4">
             <label for="inputdv">Edad (meses)</label>
-            <input type="text" class="form-control w-50" wire:model="months" readonly>
+            <input type="text" class="form-control" wire:model="months" readonly>
         </div>
     </div>
 
     <div class="row">
-        <fieldset class="form-group col-md-3">
+        <fieldset class="form-group col-12 col-md-3">
             <label for="for_service">Unidad</label>
             <select wire:model="contract_id" name="contract_id" id="for_service" class="form-control" required>
               <!-- <option value="">--</option> -->
@@ -58,12 +59,12 @@
             </select>
         </fieldset>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-12 col-md-3">
             <label for="for_contract_law">Ley según contrato vigente</label>
             <input type="text" class="form-control" wire:model="law" readonly>
         </div>
 
-        <fieldset class="form-group col-4">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_organization_id">Establecimiento</label>
             <select name="organization_id" wire:model="organization_id" id="for_organization_id" class="form-control" required>
             <!-- <option value="">--</option> -->
@@ -73,7 +74,7 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-md-3">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_job_title">Cargo</label>
             <select wire:model.defer="practitioner_id" name="practitioner_id" id="for_job_title" class="form-control" required>
               <!-- <option value="">--</option> -->
@@ -85,7 +86,7 @@
     </div>
 
     <div class="row">
-        <fieldset class="form-group col-md-3">
+        <fieldset class="form-group col-12 col-md-3">
             <label for="for_contract_type">Tipo de contrato</label>
             <select name="contract_type" id="for_contract_type" class="form-control">
               <!-- <option value="">--</option> -->
@@ -93,7 +94,7 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-md-3">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_social_insurance">AFP</label>
             <select name="social_insurance" id="for_social_insurance" class="form-control">
               <option value="">--</option>
@@ -109,7 +110,7 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-md-3">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_health_insurance">Salud</label>
             <select name="health_insurance" id="for_health_insurance" class="form-control">
               <option value="">--</option>
