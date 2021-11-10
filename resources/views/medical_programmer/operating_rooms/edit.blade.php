@@ -11,22 +11,22 @@
   @method('PUT')
 
     <div class="row">
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_name">Nombre</label>
             <input type="text" class="form-control" id="for_name" name="name" required value="{{$operatingRoom->name}}">
         </fieldset>
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_description">Descripción</label>
             <input type="text" class="form-control" id="for_description" placeholder="Descripción del pabellón" name="description" value="{{$operatingRoom->description}}">
         </fieldset>
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_location">Ubicación</label>
             <input type="text" class="form-control" id="for_location" placeholder="(opcional)" name="location" value="{{$operatingRoom->location}}">
         </fieldset>
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_medic_box">Tipo</label>
             <select name="medic_box" id="for_medic_box" class="form-control">
               <option value="0" {{ $operatingRoom->medic_box == 0 ? 'selected' : '' }}>Pabellón</option>
@@ -34,17 +34,14 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col col-md-4">
             <label for="for_name">Color</label>
             <input class="form-control jscolor" id="color" name="color" required="" value="{{$operatingRoom->color}}" onchange="update(this.jscolor)">
         </fieldset>
-    </div>
 
-    <div class="row">
-
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-12 col-md-4">
             <label for="for_name">Especialidades</label><br>
-            <select class="selectpicker" name="specialties[]" multiple>
+            <select class="form-control" name="specialties[]">
                 @foreach ($specialties as $key => $specialty)
                   @if($operatingRoom->specialties != null)
                     <option value="{{$specialty->id}}" {{ ($operatingRoom->specialties->contains('id', $specialty->id))?'selected':'' }}>{{$specialty->specialty_name}}</option>
@@ -55,9 +52,9 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-12 col-md-4">
             <label for="for_name">Profesiones</label><br>
-            <select class="selectpicker" name="professions[]" multiple>
+            <select class="form-control" name="professions[]">
                 @foreach ($professions as $key => $profession)
                   @if($operatingRoom->professions != null)
                     <option value="{{$profession->id}}" {{ ($operatingRoom->professions->contains('id', $profession->id))?'selected':'' }}>{{$profession->profession_name}}</option>
@@ -69,7 +66,7 @@
         </fieldset>
     </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary mb-4">Guardar</button>
 
 </form>
 

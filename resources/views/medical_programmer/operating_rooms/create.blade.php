@@ -10,7 +10,7 @@
     @csrf
     @method('POST')
 
-    <div class="row">
+    <div class="form-row">
         <fieldset class="form-group col">
             <label for="for_name">Nombre</label>
             <input type="text" class="form-control" id="for_name" name="name" required>
@@ -28,7 +28,7 @@
 
     </div>
 
-    <div class="row">
+    <div class="form-row">
       <fieldset class="form-group col">
           <label for="for_medic_box">Tipo</label>
           <select name="medic_box" id="for_medic_box" class="form-control">

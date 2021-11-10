@@ -12,13 +12,13 @@
 
     <div class="form-row">
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-12">
             <label for="for_name">Nombre</label>
             <input type="text" class="form-control" id="for_name"
                 placeholder="nombre del permiso" name="name" required>
         </fieldset>
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-12">
             <label for="for_description">Descripción</label>
             <input type="text" class="form-control" id="for_description"
                 placeholder="Descripción del permiso" name="description">

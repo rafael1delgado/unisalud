@@ -15,7 +15,7 @@
     @livewire('absence.asign-user-inputs-form')
 
     <hr>
-    <div class="row">
+    <div class="form-row">
         <fieldset class="form-group col-12 col-md-5">
             <label for="for_type">Tipo de ausentismo</label>
             <select name="type" id="for_type" class="form-control">

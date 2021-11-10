@@ -8,13 +8,13 @@
   @csrf
   @method('POST')
 
-  <div class="row">
-    <fieldset class="form-group col-2">
+  <div class="form-row">
+    <fieldset class="form-group col-4 col-md-4">
       <label for="for_id_actividad">id_actividad</label>
       <input type="text" class="form-control" id="for_id_actividad" placeholder="" name="id_activity" required>
     </fieldset>
 
-    <fieldset class="form-group col">
+    <fieldset class="form-group col-8 col-md-4">
       <label for="for_activity_name">Actividad Madre</label>
       <select name="mother_activity_id" id="law" class="form-control">
         <option value="">--</option>
@@ -24,7 +24,7 @@
       </select>
     </fieldset>
 
-    <fieldset class="form-group col">
+    <fieldset class="form-group col-12 col-md-4">
       <label for="for_activity_type_id">Tipo de actividad</label>
       <select name="activity_type_id" id="for_activity_type_id" class="form-control activity" required>
         <option value="">Seleccionar Tipo de Actividad</option>
@@ -38,18 +38,18 @@
 
   </div>
 
-    <div class="row">
-        <fieldset class="form-group col">
+    <div class="form-row">
+        <fieldset class="form-group col-6 col-md-4">
           <label for="for_activity_name">Actividad</label>
           <input type="text" class="form-control" id="for_activity_name" placeholder="" name="activity_name" required>
         </fieldset>
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-4">
           <label for="for_description">Descripción</label>
           <input type="text" class="form-control" id="for_description" placeholder="" name="description" required>
         </fieldset>
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-4 col-md-1">
           <label for="for_performance">Rendimiento</label>
           <select name="performance" id="for_performance" class="form-control activity">
             <option value="1">R</option>
@@ -57,16 +57,19 @@
           </select>
         </fieldset>
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-4 col-md-1">
           <label for="for_performance">Programable</label>
           <select name="programmable" id="for_programmable" class="form-control activity">
             <option value="1">Sí</option>
             <option value="0">No</option>
           </select>
         </fieldset>
-    </div>
 
-  <button type="submit" class="btn btn-primary">Guardar</button>
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <button type="submit" class="form-control btn btn-primary">Guardar</button>
+        </div>
+    </div>
 
 </form>
 
