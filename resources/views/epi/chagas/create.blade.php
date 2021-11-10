@@ -9,7 +9,7 @@
     @csrf
     @method('POST')
     <div class="form-row">
-        <fieldset class="form-group col-10 col-md-2">
+        <fieldset class="form-group col-10 col-md-3">
             <label for="for_run">Run</label>
             <input type="hidden" class="form-control" id="for_id" name="id">
             <input type="number" max="50000000" class="form-control" id="for_run" name="run">
@@ -20,13 +20,13 @@
             <input type="text" class="form-control" id="for_dv" name="dv" readonly>
         </fieldset>
 
-        <fieldset class="form-group col-12 col-md-2">
+        <fieldset class="form-group col-12 col-md-3">
             <label for="for_other_identification">Otra identificación</label>
             <input type="text" class="form-control" id="for_other_identification"
                 placeholder="Extranjeros sin run" name="other_identification">
         </fieldset>
 
-        <fieldset class="form-group col-6 col-md-2">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_gender">Género</label>
             <select name="gender" id="for_gender" class="form-control genero">
                 <option value="male">Masculino</option>
@@ -36,7 +36,7 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-6 col-md-3">
+        <fieldset class="form-group col-6 col-md-2">
             <label for="for_birthday">Fecha Nacimiento</label>
             <input type="date" class="form-control" id="for_birthday"
                 name="birthday" required>
@@ -51,13 +51,13 @@
              style="text-transform: uppercase;" required>
         </fieldset>
 
-        <fieldset class="form-group col-12 col-md-3">
+        <fieldset class="form-group col-6 col-md-4">
             <label for="for_fathers_family">Apellido Paterno *</label>
             <input type="text" class="form-control" id="for_fathers_family"
                 name="fathers_family" style="text-transform: uppercase;" required>
         </fieldset>
 
-        <fieldset class="form-group col-12 col-md-3">
+        <fieldset class="form-group col-6 col-md-4">
             <label for="for_mothers_family">Apellido Materno</label>
             <input type="text" class="form-control" id="for_mothers_family"
                 name="mothers_family" style="text-transform: uppercase;">
@@ -73,7 +73,7 @@
         <fieldset class="form-group col-6 col-md-2">
             <label for="for_sample_at">Fecha Muestra</label>
             <input type="date" class="form-control" id="for_sample_at"
-                name="sample_at" required min="{{ date('Y-m-d', strtotime("-2 week")) }}" max="{{ date('Y-m-d') }}">
+                name="sample_at" required min="{{ date('Y-m-d', strtotime('-2 week')) }}" max="{{ date('Y-m-d') }}">
         </fieldset>
 
         <fieldset class="form-group col-6 col-md-3">
@@ -87,7 +87,7 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-6 col-md-3">
+        <fieldset class="form-group col-12 col-md-4">
             <label for="for_establishment_id">Establecimiento *</label>
             <select name="establishment_id" id="for_establishment_id" class="form-control" required>
                 
@@ -96,7 +96,7 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-6 col-md-3">
+        <fieldset class="form-group col-12 col-md-3">
             <label for="for_origin">Estab. Detalle (Opcional)</label>
             <select name="origin" id="for_origin" class="form-control">
                 <option value="">Seleccionar Detalle</option>
@@ -106,11 +106,17 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-4 col-md-1">
+        <fieldset class="form-group col-4 col-md-2">
             <label for="for_age">Edad</label>
             <input type="number" class="form-control" id="for_age" name="age">
         </fieldset>
 
+        <fieldset class="form-group col-8 col-md-3">
+            <label for="for_external_laboratory">Laboratorio externo</label>
+            <select name="external_laboratory" id="for_external_laboratory" class="form-control">
+                <option value=""></option>                
+            </select>
+        </fieldset>
 
     </div>
 
@@ -181,13 +187,6 @@
 
         @endcan
 
-        <fieldset class="form-group col-6 col-md-2">
-            <label for="for_external_laboratory">Laboratorio externo</label>
-            <select name="external_laboratory" id="for_external_laboratory" class="form-control">
-                <option value=""></option>                
-            </select>
-        </fieldset>
-
         @can('SuspectCase: tecnologo')
 
         <fieldset class="form-group col-12 col-md-3">
@@ -244,7 +243,7 @@
 
     <div class="form-row">
 
-        <fieldset class="form-group col-md-6">
+        <fieldset class="form-group col-6 col-md-6">
             <label for="for_observation">Observación</label>
             <input type="text" class="form-control" name="observation"
                 id="for_observation">
@@ -273,7 +272,7 @@
         </fieldset> -->
 
 
-        <fieldset class="form-group col-md-2">
+        <fieldset class="form-group col-6 col-md-6">
             <label for="for_epivigila">Epivigila</label>
             <input type="number" class="form-control" id="for_epivigila"
                 name="epivigila">
@@ -288,7 +287,7 @@
     <a class="btn btn-outline-secondary" href="#">
         Cancelar
     </a>
-</form>
+</form><br>
 
 @endsection
 

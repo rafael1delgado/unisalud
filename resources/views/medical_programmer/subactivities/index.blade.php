@@ -24,7 +24,7 @@
     <i class="fas fa-plus"></i> Agregar nueva
 </a>
 
-<table class="table table-sm table-borderer">
+<table class="table table-sm table-borderer table-responsive-xl">
     <thead>
         <tr>
             <th>Especialidad/Profesión</th>

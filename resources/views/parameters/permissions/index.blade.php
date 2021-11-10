@@ -4,9 +4,10 @@
 
 @section('content')
 
-<h3 class="mb-3">Permisos</h3>
-
-<a class="btn btn-primary mb-3" href="{{ route('parameter.permission.create') }}">Crear</a>
+<h2 class="mb-3">
+    Permisos
+    <a class="btn btn-primary btn-sm mb-1" href="{{ route('parameter.permission.create') }}">Crear</a>
+</h2>
 
 <table class="table table-sm">
     <thead>
