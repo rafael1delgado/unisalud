@@ -8,7 +8,7 @@
     </a>
 </h3>
 
-<table class="table table-sm table-borderer">
+<table class="table table-sm table-borderer table-responsive-xl">
     <thead>
         <tr>
             <th>Id</th>

@@ -25,7 +25,7 @@
   </div>
 </form>
 
-<table class="table table-sm table-borderer" id="tabla">
+<table class="table table-sm table-borderer table-responsive-xl" id="tabla">
     <thead>
         <tr>
             <th>id_actividad</th>

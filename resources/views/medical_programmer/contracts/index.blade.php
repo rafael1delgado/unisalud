@@ -9,7 +9,7 @@
 </h3>
 
 <form>
-    <div class="row">
+    <div class="form-row">
         <div class="form-group col-md-4 col-6">
             <label>Nombre</label>
             <input type="text" class="form-control" name="name" value="{{$request->get('name')}}">
