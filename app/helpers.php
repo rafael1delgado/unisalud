@@ -55,8 +55,8 @@ function GuardarSic($request){
     $externalIncomingSic->patient_street_type = $request['pcsTipoVia'];
     $externalIncomingSic->patient_street_name = $request['pcsNombreVia'];
     $externalIncomingSic->patient_commune_code = $request['pcsCodComunaPac'];
-    $externalIncomingSic->patient_phone_number_1 = $request['pciTelefono1'];
-    $externalIncomingSic->patient_phone_number_2 = $request['pciTelefono2'];
+    $externalIncomingSic->patient_phone_1 = $request['pciTelefono1'];
+    $externalIncomingSic->patient_phone_2 = $request['pciTelefono2'];
     $externalIncomingSic->derivation_establishment_code = $request['pcsCodEstabDer'];
     $externalIncomingSic->derivation_specialty_code = $request['pcsCodEspecDer'];
     $externalIncomingSic->motive_indicator = $request['pciIndMotivo'];
