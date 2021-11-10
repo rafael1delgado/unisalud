@@ -2834,9 +2834,6 @@ si no, solo nro. epivigila">
     <form method="POST" class="form-horizontal" action="https://i.saludiquique.cl/monitor/lab/suspect_cases/519034">
         <input type="hidden" name="_token" value="ePpUXDtmXbqBgRArshkX8lA1jKEhi3aNac3ClRvp">
         <input type="hidden" name="_method" value="DELETE">
-        <button type="submit" class="btn btn-danger float-right"
-            onclick="return confirm('¿Está seguro de eliminar esta sospecha?');">Eliminar
-        </button>
     </form>
     
     <form method="POST" id="derive_form" action="https://i.saludiquique.cl/monitor/lab/suspect_cases/derive">
