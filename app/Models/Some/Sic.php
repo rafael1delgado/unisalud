@@ -10,14 +10,14 @@ class Sic extends Model
     use HasFactory;
 
 
-    protected $fillable = ['num_sic', 'num_sic_ges', 'fecha_solic', 'hora_solic', 'fecha_digitacion', 'hora_digitacion',
-        'cod_ssalud', 'cod_estab', 'cod_espec', 'nombre_pac', 'apellido_pat', 'apellido_mat', 'tipo_documento', 'rut_pac',
-        'dig_ver_pac', 'num_documento', 'ind_sexo_pac', 'fech_nac_pac', 'domicilio_pac', 'tipo_via', 'tipo_via', 'cod_comuna_pac',
-        'telefono1', 'telefono1', 'cod_estab_der', 'cod_espec_der', 'ind_motivo', 'det_motivo_consulta', 'nom_hip_diag',
-        'cod_diag', 'ind_auge', 'nom_problem_auge', 'sub_problem_auge', 'nom_fund_diag', 'nom_examen', 'cod_rut_prof', 'dv_rut_prof',
-        'nombre_prof', 'ape_pat_prof', 'ape_mat_prof', 'titulo_prof', 'ind_urgencia', 'rut_titular', 'dig_ver_tit', 'nombre_tit',
-        'ape_pat_tit', 'ape_mat_tit', 'sistema_previsional', 'ind_previs', 'venc_prev', 'num_fonasa', 'rut_ins', 'prais',
-        'nombre_social', 'nombre_tutor', 'email', 'nacionalidad', 'etnia', 'estado_civil', 'sic_status_id'
+    protected $fillable = ['sic_number', 'sic_number_ges', 'request_date', 'request_time', 'entry_date', 'entry_time',
+        'health_service_code', 'establishment_code', 'specialty_code', 'patient_name', 'patient_fathers_family', 'patient_mothers_family', 'patient_document_type', 'patient_rut',
+        'patient_dv', 'patient_document_number', 'patient_sex_indicator', 'patient_birthday', 'patient_address', 'patient_street_type', 'patient_street_type', 'patient_comune_code',
+        'patient_phone_1', 'patient_phone_2', 'derivation_establishment_code', 'derivation_specialty_code', 'motive_indicator', 'motive_consultation_detail', 'diagnosis_hypothesis',
+        'diagnosis_code', 'auge_indicator', 'auge_problem', 'auge_subproblem', 'diagnosis_basis', 'exam_name', 'professional_rut', 'professional_dv',
+        'professional_name', 'professional_fathers_family', 'professional_mothers_family', 'professional_job_title', 'urgency_indicator', 'titular_rut', 'titular_dv', 'titular_name',
+        'titular_fathers_name', 'titular_mothers_name', 'pension_system', 'pension_system_categorization', 'pension_system_expiration', 'fonasa_number', 'certifying_institution_rut', 'prais',
+        'patient_social_name', 'tutor_name', 'patient_email', 'patient_nationality', 'patient_ethnicity', 'patient_marital_status', 'sic_status_id'
     ];
 
     public function status()
@@ -25,7 +25,7 @@ class Sic extends Model
         return $this->belongsTo(SicStatus::class, 'sic_status_id');
     }
 
-    protected $dates = ['fecha_solic', 'fecha_digitacion', 'fech_nac_pac', 'venc_prev',
+    protected $dates = ['request_date', 'entry_date', 'patient_birthday', 'pension_system_expiration',
     ];
 
 }

@@ -14,7 +14,7 @@ class AddObservationsToSicsTable extends Migration
     public function up()
     {
         Schema::table('sics', function (Blueprint $table) {
-            $table->string('diagnostic_hypothesis')->after('estado_civil')->nullable();
+            $table->string('diagnostic_hypothesis')->after('patient_marital_status')->nullable();
             $table->string('origin_observation')->after('diagnostic_hypothesis')->nullable();
             $table->string('rejected_observation')->after('origin_observation')->nullable();
         });

@@ -15,7 +15,7 @@ class CreateSamuQtcsTable extends Migration
     {
         Schema::create('samu_qtcs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('shift_id')->constrained('samu_shifts');
+            // $table->foreignId('shift_id')->constrained('samu_shifts');
             $table->string('class_qtc');
             $table->time('hour');
             $table->string('call_reception');
