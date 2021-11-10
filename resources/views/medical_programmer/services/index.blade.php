@@ -2,11 +2,10 @@
 
 @section('content')
 
-<h3 class="mb-3">Listado de Servicios
-    <a class="btn btn-primary mb-2" href="{{ route('medical_programmer.services.create') }}">
-        <i class="fas fa-plus"></i> Agregar nueva
-    </a>
-</h3>
+<h3 class="mb-3">Listado de Servicios</h3>
+<a class="btn btn-primary mb-2" href="{{ route('medical_programmer.services.create') }}">
+    <i class="fas fa-plus"></i> Agregar nueva
+</a>
 
 <table class="table table-sm table-borderer">
     <thead>
