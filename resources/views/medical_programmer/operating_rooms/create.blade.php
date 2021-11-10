@@ -41,11 +41,6 @@
           <label for="for_name">Color</label>
           <input class="form-control jscolor" name="color" value="ab2567" required="">
       </fieldset>
-
-        <fieldset class="form-group col">
-            <label for="for_name">Nombre</label>
-            <input type="text" class="form-control" id="for_name" name="name" required>
-        </fieldset>
     </div>
 
     <button type="submit" class="btn btn-primary">Guardar</button>
