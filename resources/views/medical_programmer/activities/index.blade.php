@@ -4,13 +4,13 @@
 
 <h3 class="mb-3">Listado de Actividades</h3>
 
-<a class="btn btn-primary mb-3" href="{{ route('medical_programmer.activities.create') }}">
+<a class="btn btn-primary mb-2" href="{{ route('medical_programmer.activities.create') }}">
     <i class="fas fa-plus"></i> Agregar nueva
 </a>
-
-<a class="btn btn-outline-info mb-3" onclick="exportTableToExcel('tabla', 'Hoja 1')">
+<a class="btn btn-outline-info mb-2" onclick="exportTableToExcel('tabla', 'Hoja 1')">
     <i class="fas fa-download"></i>
 </a>
+
 
 <form method="GET" class="form-horizontal" action="{{ route('medical_programmer.activities.index') }}">
   <div class="input-group mb-3">
@@ -25,7 +25,7 @@
   </div>
 </form>
 
-<table class="table table-sm table-borderer" id="tabla">
+<table class="table table-sm table-borderer table-responsive-xl" id="tabla">
     <thead>
         <tr>
             <th>id_actividad</th>

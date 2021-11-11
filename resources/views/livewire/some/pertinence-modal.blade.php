@@ -21,11 +21,11 @@
                             </div>
                             <div class="card-body">
                                 <ul>
-                                    <li>Nombre: {{$sic->nombre_pac ?? ''}} </li>
+                                    <li>Nombre: {{$sic->patient_name ?? ''}} </li>
                                     <li>Edad: {{$sic->age ?? ''}} Años</li>
-                                    <li>Género: {{$sic->ind_sexo_pac?? ''}}</li>
-                                    <li>Centro: {{$sic->cod_estab?? ''}}</li>
-                                    <li>Motivo: {{$sic->ind_motivo?? ''}}</li>
+                                    <li>Género: {{$sic->patient_sex_indicator?? ''}}</li>
+                                    <li>Centro: {{$sic->health_service_code?? ''}}</li>
+                                    <li>Motivo: {{$sic->motive_indicator?? ''}}</li>
                                 </ul>
                             </div>
                         </div>

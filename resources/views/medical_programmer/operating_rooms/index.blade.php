@@ -3,12 +3,11 @@
 @section('content')
 
 <h3 class="mb-3">Listado de pabellones</h3>
-
-<a class="btn btn-primary mb-3" href="{{ route('medical_programmer.operating_rooms.create') }}">
+<a class="btn btn-primary mb-2" href="{{ route('medical_programmer.operating_rooms.create') }}">
     <i class="fas fa-plus"></i> Agregar nuevo
 </a>
 
-<table class="table table-sm table-borderer">
+<table class="table table-sm table-borderer table-responsive-xl">
     <thead>
         <tr>
             <th>Id</th>

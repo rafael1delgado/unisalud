@@ -12,29 +12,29 @@
 
     @livewire('medical_programmer.specialty-activities-selection',compact('specialties','professions','activities'))
 
-    <div class="row">
-        <fieldset class="form-group col-3">
+    <div class="form-row">
+        <fieldset class="form-group col-6 col-md-3">
           <label for="for_sub_activity_abbreviated">Abreviado</label>
           <input type="text" class="form-control" id="for_sub_activity_abbreviated" placeholder="" name="sub_activity_abbreviated">
         </fieldset>
 
-        <fieldset class="form-group col-3">
+        <fieldset class="form-group col-6 col-md-3">
           <label for="for_sub_activity_name">Nombre</label>
           <input type="text" class="form-control" id="for_sub_activity_name" placeholder="" name="sub_activity_name" required>
         </fieldset>
 
-        <fieldset class="form-group col-4">
+        <fieldset class="form-group col-6 col-md-3">
           <label for="for_sub_activity_description">Descripción</label>
           <input type="text" class="form-control" id="for_sub_activity_description" placeholder="" name="sub_activity_description">
         </fieldset>
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-3">
           <label for="for_performance">Rendimiento</label>
           <input type="text" class="form-control" id="for_performance" placeholder="" name="performance">
         </fieldset>
     </div>
 
-  <button type="submit" class="btn btn-primary">Guardar</button>
+  <button type="submit" class="btn btn-primary mb-4">Guardar</button>
 
 </form>
 

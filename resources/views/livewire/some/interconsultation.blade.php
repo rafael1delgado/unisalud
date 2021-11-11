@@ -65,15 +65,15 @@
 
             @foreach($sics as $sic)
                 <tr>
-                    <td>{{$sic->num_sic}}</td>
-                    <td>{{$sic->fecha_solic->format('d-m-Y')}}</td>
-                    <td>{{$sic->ind_motivo}}</td>
-                    <td>{{$sic->ind_urgencia}}</td>
-                    <td>{{"$sic->rut_pac-$sic->dig_ver_pac"}}</td>
-                    <td>{{"$sic->nombre_pac $sic->apellido_pat $sic->apellido_mat"}}</td>
-                    <td>{{$sic->fech_nac_pac->format('d-m-Y')}}</td>
-                    <td>{{$sic->cod_espec_der}}</td>
-                    <td>{{$sic->cod_estab}}</td>
+                    <td>{{$sic->sic_number}}</td>
+                    <td>{{$sic->request_date->format('d-m-Y')}}</td>
+                    <td>{{$sic->motive_indicator}}</td>
+                    <td>{{$sic->urgency_indicator}}</td>
+                    <td>{{"$sic->patient_rut-$sic->patient_dv"}}</td>
+                    <td>{{"$sic->patient_name $sic->patient_fathers_family $sic->patient_mothers_family"}}</td>
+                    <td>{{$sic->patient_birthday->format('d-m-Y')}}</td>
+                    <td>{{$sic->derivation_specialty_code}}</td>
+                    <td>{{$sic->health_service_code}}</td>
 
 {{--                    <td>--}}
 {{--                        <button type="button" class="btn btn-primary" data-toggle="modal"--}}
