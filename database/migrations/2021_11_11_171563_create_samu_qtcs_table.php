@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSamuFollowsTable extends Migration
+class CreateSamuQtcsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateSamuFollowsTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_follows', function (Blueprint $table) {
+        Schema::create('samu_qtcs', function (Blueprint $table) {
            //segumiento
             $table->id();
+       
             //llave foranea
-            $table->foreignId('qtc_id');
+            $table->foreignId('call_id');
             $table->string('key')->nullable();;
             $table->string('key_return')->nullable();
-            $table->string('mobile')->nullable();
+            $table->foreignId('mobile')->nullable();
             $table->string('transfer_type')->nullable();
             $table->time('departure_time')->nullable();
             $table->time('mobile_departure_time')->nullable();
@@ -56,9 +57,12 @@ class CreateSamuFollowsTable extends Migration
             $table->integer('observation_sv')->nullable();
 
             //relacion llave foranea /nombre de la columna /nombre de la tabla
-            $table->foreign('qtc_id')->references('id')->on('samu_qtcs');
+            $table->foreign('call_id')->references('id')->on('samu_calls');
+            $table->foreign('mobile')->references('id')->on('samu_mobiles_in_service');
+
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -69,6 +73,6 @@ class CreateSamuFollowsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_follows');
+        Schema::dropIfExists('samu_qtcs');
     }
 }

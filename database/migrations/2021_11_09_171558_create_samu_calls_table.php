@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSamuQtcsTable extends Migration
+class CreateSamuCallsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSamuQtcsTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_qtcs', function (Blueprint $table) {
+        Schema::create('samu_calls', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('shift_id')->constrained('samu_shifts');
-            $table->string('class_qtc');
+           
+            $table->foreignId('shift_id')->constrained('samu_shift');
+            $table->string('class_call');
             $table->time('hour');
             $table->string('call_reception');
             $table->text('telephone_information')->nullable();
@@ -24,6 +25,7 @@ class CreateSamuQtcsTable extends Migration
             $table->string('direction')->nullable();
             $table->string('telephone')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,6 +36,6 @@ class CreateSamuQtcsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_qtcs');
+        Schema::dropIfExists('samu_calls');
     }
 }

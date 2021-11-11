@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSamuFollowMisTable extends Migration
+class CreateMobileCrewTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateSamuFollowMisTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_follow_mis', function (Blueprint $table) {
+        Schema::create('samu_mobile_crew', function (Blueprint $table) {
             $table->id();
-            //para referirse a un campo de una tabla como llave foranea en la tabla actual "constrained"
-            $table->foreignId('mobile_in_service_id')->constrained('samu_mobiles_in_service');
-            $table->foreignId('follow_id')->constrained('samu_follows');
-
-
             $table->softDeletes();
+            $table->foreignId('mobiles_in_service_id')->constrained('samu_mobiles_in_service');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('job_type_id')->constrained('samu_job_types');
+            
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateSamuFollowMisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_follow_mis');
+        Schema::dropIfExists('samu_mobile_crew');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMobileCrewTable extends Migration
+class CreateSamuOtTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateMobileCrewTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_mobile_crew', function (Blueprint $table) {
+        Schema::create('samu_ot', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mobiles_in_service_id')->constrained('samu_mobiles_in_service');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('job_type_id')->constrained('samu_job_types');
-            
+            $table->string('description');
+            $table->foreignId('call_id')->constrained('samu_calls');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
@@ -30,6 +30,6 @@ class CreateMobileCrewTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_mobile_crew');
+        Schema::dropIfExists('samu_ot');
     }
 }

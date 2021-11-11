@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSoftDeleteSamuQtcKeys extends Migration
+class CreateSamuCallShiftTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,14 @@ class AddSoftDeleteSamuQtcKeys extends Migration
      */
     public function up()
     {
-        Schema::table('samu_qtc_keys', function (Blueprint $table) {
+        Schema::create('samu_call_shift', function (Blueprint $table) {
+            $table->id();
+           
+            $table->foreignId('call_id')->constrained('samu_calls');
+            $table->foreignId('shift_id')->constrained('samu_shift');
+            $table->timestamps();
             $table->softDeletes();
+
         });
     }
 
@@ -25,9 +31,6 @@ class AddSoftDeleteSamuQtcKeys extends Migration
      */
     public function down()
     {
-        Schema::table('samu_qtc_keys', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-         });
-        
+        Schema::dropIfExists('samu_call_shift');
     }
 }

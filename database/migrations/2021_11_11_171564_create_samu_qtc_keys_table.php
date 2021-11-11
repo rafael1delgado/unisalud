@@ -15,11 +15,12 @@ class CreateSamuQtcKeysTable extends Migration
     {
         Schema::create('samu_qtc_keys', function (Blueprint $table) {
             $table->id();
+        
             $table->foreignId('id_qtc');
             $table->foreignId('key');
             $table->foreignId('return_key');
             $table->timestamps();
-
+            $table->softDeletes();
 
             $table->foreign('id_qtc')->references('id')->on('samu_qtcs');
             $table->foreign('key')->references('id')->on('samu_code_keys');

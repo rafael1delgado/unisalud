@@ -47,13 +47,13 @@
                                     <fieldset class="form-group  col-md-2">
                                         @if($shift)
                                         <!--revisar foreach-->
-                                        <label for="for_mobile">Móvil  .i. {{ $qtc->follow->mobile->id }}</label>
+                                        <label for="for_mobile">Móvil {{$qtc->follow->id}}</label>
 
                                             <select class="form-control" name="mobile" id="mobile">
                                                 <option value=""></option>
-                                                @foreach($shift->mobilesInService as $mis)
-                                                <option value="{{ $mis->mobile->id === $qtc->follow->mobile->id ? 'selected' : '' }}">
-                                                    {{ $mis->mobile->name }} - {{ $mis->mobile->code}} {{ $mis->mobile->id }}
+                                                @foreach($qtc->follow->mobilesInService as $mis)
+                                                <option value="{{ $qtc->follow->mobilesInService === $mis ? 'selected' : '' }}">
+                                                    {{ $mis->mobile->name }} - {{ $mis->mobile->code}}
                                                 </option>
                                                 @endforeach  
                                             

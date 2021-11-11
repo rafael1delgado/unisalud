@@ -15,12 +15,14 @@ class CreateSamuShiftUserTable extends Migration
     {
         Schema::create('samu_shift_user', function (Blueprint $table) {
             $table->id();
+           
             $table->string('job_type');
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreignId('shift_id');
             $table->foreign('shift_id')->references('id')->on('samu_shift');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

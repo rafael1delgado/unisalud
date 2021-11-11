@@ -15,9 +15,11 @@ class CreateSamuCodeKeysTable extends Migration
     {
         Schema::create('samu_code_keys', function (Blueprint $table) {
             $table->id();
+           
             $table->string('key_code')->unique();
             $table->string('name_key_code');
             $table->timestamps();
+            $table->softDeletes();
             
         });
     }

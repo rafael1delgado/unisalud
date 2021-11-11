@@ -23,7 +23,7 @@ class CreateSamuShiftMobileTable extends Migration
 
 
             $table->foreign('shift_id')->references('id')->on('samu_shift');
-            $table->foreign('mobile_id')->references('id')->on('samu_code_mobiles');
+            $table->foreign('mobile_id')->references('id')->on('samu_mobiles');
 
             $table->timestamps();
             $table->softDeletes();

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMobilesInServiceTable extends Migration
+class CreateSamuMobilesInServiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,7 @@ class CreateMobilesInServiceTable extends Migration
     {
         Schema::create('samu_mobiles_in_service', function (Blueprint $table) {
             $table->id();
+            $table->softDeletes();
             $table->foreignId('shift_id')->constrained('samu_shift');
             $table->foreignId('mobile_id')->constrained('samu_mobiles');
             $table->text('type')->nullable();
