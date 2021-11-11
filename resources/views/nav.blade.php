@@ -20,11 +20,7 @@
         href=" {{ route('samu.noveltie.index') }}"><i class="fas fa-book"></i>Novedades</a>
     </li>
 
-    <li class="nav-item">
-    <a class="nav-link {{ active('samu.qtc.index') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
-        href=" {{ route('samu.qtc.index') }}"><i class="fas fa-phone-square"></i> Call Center</a>
-        
-    </li>
+    
 
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
