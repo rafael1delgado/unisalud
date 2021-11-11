@@ -122,6 +122,7 @@
             <input type="text" class="form-control" id="for_unit_code" name="unit_code">
         </fieldset> -->
 
+        <!-- TODO: cambiar a algo no estático -->
         <fieldset class="form-group col-4 col-md-2">
             <label for="for_unit_code">Año contrato válido</label>
             <select name="year" id="for_year" class="form-control" required="">

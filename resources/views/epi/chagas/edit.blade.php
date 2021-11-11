@@ -2,8 +2,6 @@
 
 @section('content')
 
-<main class="py-4 container">
-
 <h3 class="mb-3">Editar sospecha 519034</h3>
 <a href="https://i.saludiquique.cl/monitor/lab/suspect_cases/519034/notificationFormSmall"
     class="btn btn-outline-primary">Caso pdf</a>
@@ -2925,9 +2923,6 @@ si no, solo nro. epivigila">
     </table>
 
     
-        
-    
-        </main>
 
 @endsection
 
