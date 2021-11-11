@@ -1,5 +1,5 @@
 <div>
-    <div class="row">
+    <div class="form-row">
         <div class="form-group col-6 col-md-4">
             <label for="inputrut">RUT</label>
             <input type="number" class="form-control @error('user') is-invalid @enderror" placeholder="Ingrese el rut" wire:model.lazy="run" name="run"
@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="form-row">
         <div class="form-group col-6 col-md-4">
             <label for="inputrut">Nombre</label>
             <input type="text" class="form-control" wire:model="name" readonly>
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="form-row">
         <fieldset class="form-group col-12 col-md-3">
             <label for="for_service">Unidad</label>
             <select wire:model="contract_id" name="contract_id" id="for_service" class="form-control" required>
@@ -85,7 +85,7 @@
         </fieldset>
     </div>
 
-    <div class="row">
+    <div class="form-row">
         <fieldset class="form-group col-12 col-md-3">
             <label for="for_contract_type">Tipo de contrato</label>
             <select name="contract_type" id="for_contract_type" class="form-control">

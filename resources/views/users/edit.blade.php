@@ -33,7 +33,7 @@
 				@endif
 			@endforeach
 			<hr>
-			<input type="submit" class="btn btn-primary" value="Guardar"><br><br>
+			<input type="submit" class="btn btn-primary mb-4" value="Guardar">
 		</div>
 
 	</div>

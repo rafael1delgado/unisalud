@@ -8,7 +8,7 @@
     <i class="fas fa-plus"></i> Agregar nuevo
 </a> -->
 
-<table class="table table-sm table-borderer">
+<table class="table table-sm table-borderer table-responsive-xl">
     <thead>
         <tr>
             <th>RUT</th>

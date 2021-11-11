@@ -2,24 +2,13 @@
 
 @section('content')
 
-<main class="py-4 container">
+<h3 class="mb-3">Editar sospecha 519034</h3>
+<a href="https://i.saludiquique.cl/monitor/lab/suspect_cases/519034/notificationFormSmall"
+    class="btn btn-outline-primary">Caso pdf</a>
 
-                                                                                                            
+<div class="form-row mt-3">
 
-                <div class="row">
-        <div class="col-4">
-            <h3 class="mb-3">Editar sospecha 519034</h3>
-        </div>
-        <div class="col-4"></div>
-        <div class="col-4">
-            <a href="https://i.saludiquique.cl/monitor/lab/suspect_cases/519034/notificationFormSmall" class="btn btn-outline-primary float-right">Caso pdf</a>
-        </div>
-    </div>
-
-
-        <div class="form-row">
-
-    <fieldset class="form-group col-8 col-md-2">
+    <fieldset class="form-group col-8 col-md-3">
         <label for="for_run">Run</label>
         <input type="text" class="form-control" readonly="" disabled="" value="22601558">
     </fieldset>
@@ -29,7 +18,7 @@
         <input type="text" class="form-control" readonly="" disabled="" value="2">
     </fieldset>
 
-    <fieldset class="form-group col-12 col-md-2">
+    <fieldset class="form-group col-12 col-md-3">
         <label for="for_other_identification">Otra identificación</label>
         <input type="text" class="form-control" placeholder="Extranjeros sin run" readonly="" disabled="" value="">
     </fieldset>
@@ -66,12 +55,12 @@
         <input type="text" class="form-control" readonly="" disabled="" value="ANA MARIA">
     </fieldset>
 
-    <fieldset class="form-group col-12 col-md-3">
+    <fieldset class="form-group col-6 col-md-4">
         <label for="for_fathers_family">Apellido Paterno</label>
         <input type="text" class="form-control" readonly="" disabled="" value="CHAPPE">
     </fieldset>
 
-    <fieldset class="form-group col-12 col-md-3">
+    <fieldset class="form-group col-6 col-md-4">
         <label for="for_mothers_family">Apellido Materno</label>
         <input type="text" class="form-control" readonly="" disabled="" value="VARGAS">
     </fieldset>
@@ -90,56 +79,44 @@
                         <select name="laboratory_id_derive" form="derive_form" id="for_laboratory_id_derive" class="form-control selectpicker" required="">
                             <option value="">Selec. Laboratorio</option>
                             <optgroup label="Internos">
-                                                                                                            <option selected="" value="1">HETG</option>
-                                                                                                                                                <option value="2">UNAP</option>
-                                                                                                                                                <option value="3">BIOCLINIC</option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option disabled="" value="9">ARAUCO</option>
-                                                                                                                                                                                                                    <option value="11">BIONET SSI</option>
-                                                                                                                                                                                                                    <option value="13">Blue Lab</option>
-                                                                                                                                                <option value="14">Playa Brava</option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option value="20">Natura Cell Arica</option>
-                                                                                                                                                <option value="21">Labocenter</option>
-                                                                                                </optgroup>
+                                <option selected="" value="1">HETG</option>
+                                <option value="2">UNAP</option>
+                                <option value="3">BIOCLINIC</option>
+                                <option disabled="" value="9">ARAUCO</option>
+                                <option value="11">BIONET SSI</option>
+                                <option value="13">Blue Lab</option>
+                                <option value="14">Playa Brava</option>
+                                <option value="20">Natura Cell Arica</option>
+                                <option value="21">Labocenter</option>
+                            </optgroup>
 
                             <optgroup label="Externos">
-                                                                                                                                                                                                                                                                                                                        <option value="4">Lucio Córdova</option>
-                                                                                                                                                <option value="5">CENTRO ONCOLOGICO DEL NORTE</option>
-                                                                                                                                                <option value="6">ISP</option>
-                                                                                                                                                <option value="7">BARNAFI KRAUSE</option>
-                                                                                                                                                <option value="8">BIOCLINIC</option>
-                                                                                                                                                                                                                    <option value="10">Lab. Univ. San Sebastian</option>
-                                                                                                                                                                                                                    <option value="12">TAAG GENETICS</option>
-                                                                                                                                                                                                                                                                                        <option value="15">UCN Antofagasta</option>
-                                                                                                                                                <option value="16">Hospital Calama</option>
-                                                                                                                                                <option value="17">Universidad de Atacama</option>
-                                                                                                                                                <option value="18">Hospital Antofagasta</option>
-                                                                                                                                                <option value="19">Hospital Arica</option>
-                                                                                                                                                                                                                                        </optgroup>
+                                <option value="4">Lucio Córdova</option>
+                                <option value="5">CENTRO ONCOLOGICO DEL NORTE</option>
+                                <option value="6">ISP</option>
+                                <option value="7">BARNAFI KRAUSE</option>
+                                <option value="8">BIOCLINIC</option>
+                                <option value="10">Lab. Univ. San Sebastian</option>
+                                <option value="12">TAAG GENETICS</option>
+                                <option value="15">UCN Antofagasta</option>
+                                <option value="16">Hospital Calama</option>
+                                <option value="17">Universidad de Atacama</option>
+                                <option value="18">Hospital Antofagasta</option>
+                                <option value="19">Hospital Arica</option>
+                            </optgroup>
                         </select>
 
                         <input type="hidden" form="derive_form" name="casos_seleccionados[]" value="519034">
 
                         {{--
-
                         <div class="input-group-append">
                             <button type="submit" form="derive_form" class="btn btn-primary float-right" title="Derivar"><svg class="svg-inline--fa fa-reply-all fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="reply-all" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M136.309 189.836L312.313 37.851C327.72 24.546 352 35.348 352 56.015v82.763c129.182 10.231 224 52.212 224 183.548 0 61.441-39.582 122.309-83.333 154.132-13.653 9.931-33.111-2.533-28.077-18.631 38.512-123.162-3.922-169.482-112.59-182.015v84.175c0 20.701-24.3 31.453-39.687 18.164L136.309 226.164c-11.071-9.561-11.086-26.753 0-36.328zm-128 36.328L184.313 378.15C199.7 391.439 224 380.687 224 359.986v-15.818l-108.606-93.785A55.96 55.96 0 0 1 96 207.998a55.953 55.953 0 0 1 19.393-42.38L224 71.832V56.015c0-20.667-24.28-31.469-39.687-18.164L8.309 189.836c-11.086 9.575-11.071 26.767 0 36.328z"></path></svg><!-- <i class="fas fa-reply-all"></i> --> Derivar</button>
                         </div>
-
                         --}}
+
                     </div>
                 </div>
-
-
-
                 <input type="hidden" name="laboratory_id" id="for_laboratory_id" value="1">
-
-
-
-
-
-
-
-
             </div>
         
         <div class="form-row">
@@ -2649,12 +2626,12 @@
 
             <div class="form-row">
 
-                <fieldset class="form-group col-6 col-md-3 alert-danger">
+                <fieldset class="form-group col-8 col-md-3 alert-danger">
                     <label for="for_pcr_sars_cov_2_at">Fecha Resultado Chagas</label>
                     <input type="datetime-local" class="form-control" id="for_pcr_sars_cov_2_at" name="pcr_sars_cov_2_at" value="" min="2021-08-04T01:53" max="2021-09-01T23:59:59">
                 </fieldset>
 
-                <fieldset class="form-group col-6 col-md-2 alert-danger">
+                <fieldset class="form-group col-4 col-md-3 alert-danger">
                     <label for="for_pcr_sars_cov_2">Estado</label>
                     <select name="pcr_sars_cov_2" id="for_pcr_sars_cov_2" class="form-control">
                         <option value="pending" selected="">
@@ -2675,26 +2652,7 @@
                     </select>
                 </fieldset>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <fieldset class="form-group col-12 col-md-3">
+                <fieldset class="form-group col-12 col-md-6">
                     <label for="for_file">Archivo</label>
                     <div class="custom-file">
                         <input type="file" name="forfile" class="custom-file-input" id="forfile" lang="es" accept="application/pdf">
@@ -2785,8 +2743,8 @@
                 <label for="for_status">Estado</label>
                 <p>
                     <strong>Ambulatorio</strong>
-                                            <a href="https://i.saludiquique.cl/monitor/patients/7295/edit"> Cambiar </a>
-                                    </p>
+                    <a href="https://i.saludiquique.cl/monitor/patients/7295/edit"> Cambiar </a>
+                </p>
             </fieldset>
 
         </div>
@@ -2825,12 +2783,17 @@ si no, solo nro. epivigila">
 
         <div class="form-row">
 
-            <fieldset class="form-group col-6 col-md-2">
+            <fieldset class="form-group col-6 col-md-4">
                 <label for="for_notification_at">Fecha de notificación</label>
                 <input type="date" class="form-control" name="notification_at" id="for_notification_at" value="">
             </fieldset>
 
-            <fieldset class="form-group col-6 col-md-3">
+            <fieldset class="form-group col-6 col-md-4">
+                <label for="for_discharged_at">Fecha de alta</label>
+                <input type="date" class="form-control" name="discharged_at" id="for_discharged_at" value="">
+            </fieldset>
+
+            <fieldset class="form-group col-12 col-md-4">
                 <label for="for_notification_mechanism">Mecanismo de Notificación</label>
                 <select name="notification_mechanism" id="for_notification_mechanism" class="form-control">
                     <option></option>
@@ -2854,11 +2817,6 @@ si no, solo nro. epivigila">
                     </option>
                 </select>
             </fieldset>
-
-            <fieldset class="form-group col-6 col-md-2">
-                <label for="for_discharged_at">Fecha de alta</label>
-                <input type="date" class="form-control" name="discharged_at" id="for_discharged_at" value="">
-            </fieldset>
         </div>
 
 
@@ -2870,19 +2828,20 @@ si no, solo nro. epivigila">
             Cancelar
         </a>
     </form>
-
-            <form method="POST" class="form-horizontal" action="https://i.saludiquique.cl/monitor/lab/suspect_cases/519034">
-            <input type="hidden" name="_token" value="ePpUXDtmXbqBgRArshkX8lA1jKEhi3aNac3ClRvp">            <input type="hidden" name="_method" value="DELETE">            <button type="submit" class="btn btn-danger float-right" onclick="return confirm('¿Está seguro de eliminar esta sospecha?');">Eliminar
-            </button>
-        </form>
+    
+    <form method="POST" class="form-horizontal" action="https://i.saludiquique.cl/monitor/lab/suspect_cases/519034">
+        <input type="hidden" name="_token" value="ePpUXDtmXbqBgRArshkX8lA1jKEhi3aNac3ClRvp">
+        <input type="hidden" name="_method" value="DELETE">
+    </form>
     
     <form method="POST" id="derive_form" action="https://i.saludiquique.cl/monitor/lab/suspect_cases/derive">
-        <input type="hidden" name="_token" value="ePpUXDtmXbqBgRArshkX8lA1jKEhi3aNac3ClRvp">        <input type="hidden" name="_method" value="POST">    </form>
-
+        <input type="hidden" name="_token" value="ePpUXDtmXbqBgRArshkX8lA1jKEhi3aNac3ClRvp">
+        <input type="hidden" name="_method" value="POST">
+    </form>
     
     <h4 class="mt-4">Otros Exámenes realizados</h4>
 
-    <table class="table table-sm table-bordered small mb-4 mt-4">
+    <table class="table table-sm table-responsive-xl table-bordered small mb-4 mt-4">
         <thead>
         <tr>
             <th>Id</th>
@@ -2964,9 +2923,6 @@ si no, solo nro. epivigila">
     </table>
 
     
-        
-    
-        </main>
 
 @endsection
 
