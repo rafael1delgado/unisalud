@@ -37,7 +37,7 @@
 
             <div class="table-responsive col-md-12 mb-3 ">
             @foreach($shifts as $shift)
-            @foreach($shift->mobilesInService as $mis)
+          
                     <table class="table table-sm table-bordered table-striped small">
                   
                   
@@ -52,7 +52,8 @@
                               
                               <th colspan="4"><b>Turno: {{ $shift->id }} - {{ $shift->date }} {{ $shift->type }} {{ $shift->opening_time }}</b></th>
                             </tr>
-                        
+                            @foreach($shift->mobilesInService as $mis)
+              
                             <tr class="text-center table-secondary">
                         
                                 <th>Movil</th>
@@ -62,8 +63,9 @@
 
                             </tr>
                         </thead>
+
                         <tbody>
-              
+                        
                             <tr>
                                 <td>{{ $mis->mobile_id }}</td>
                                 <td>{{ $mis->type}} </td>
@@ -77,13 +79,13 @@
                             </td>
                         </tr>
 
-
+                        @endforeach 
                         </tbody>
                      
                     
                     </table>
                     <hr color="success"  >
-                    @endforeach  
+               
                     @endforeach
                 </div>
             </div>

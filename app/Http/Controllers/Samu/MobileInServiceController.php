@@ -30,7 +30,8 @@ class MobileInServiceController extends Controller
     public function create()
     {
        
-        $mobiles = Mobile::where('managed',true)->get();
+        $mobiles = Mobile::all();
+
         $shifts = Shift::latest()->get();
         return view('samu.mobileinservice.create', compact('mobiles','shifts'));
     }

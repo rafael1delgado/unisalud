@@ -13,11 +13,11 @@ class Qtc extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
     use SoftDeletes;
-    protected $table="samu_qtcs";
+    protected $table="samu_calls";
 
     protected $fillable = [
         
-        'class_qtc',
+        'class_call',
         'hour',
         'call_reception',
         'telephone_information',

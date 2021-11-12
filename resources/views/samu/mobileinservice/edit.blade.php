@@ -39,6 +39,7 @@
                             <option value="{{ $mobile->id }}">{{$mobile->name}}</option>
                         @endforeach
                     </select>
+                   
                 </fieldset>
       
                 <fieldset class="form-group col-12 col-md-2">

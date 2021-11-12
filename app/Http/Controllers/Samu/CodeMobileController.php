@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
-use App\Models\Samu\CodeMobile;
+use App\Models\Samu\Mobile;
 use Illuminate\Http\Request;
 
-class CodeMobileController extends Controller
+class MobileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,10 @@ class CodeMobileController extends Controller
     {
         //busqueda de codigos de clave
         $search_codemobile=$request->get('search_codemobile');  
-        $codemobiles= CodeMobile::when($search_codemobile!=null, function ($query) use ($search_codemobile){
+        $mobiles= Mobile::when($search_codemobile!=null, function ($query) use ($search_codemobile){
             $query->where('name_mobile_code','like','%'.$search_codemobile.'%');
         })->paginate(30);
-        return view ('samu.codemobile.index' , compact('codemobiles','search_codemobile')); 
+        return view ('samu.mobile.index' , compact('mobiles','search_codemobile')); 
 
 
 
@@ -36,7 +36,7 @@ class CodeMobileController extends Controller
      */
     public function create()
     {
-        return view('samu.codemobile.create');
+        return view('samu.mobile.create');
     }
 
     /**
@@ -47,21 +47,21 @@ class CodeMobileController extends Controller
      */
     public function store(Request $request)
     {
-        $code_mobile=new CodeMobile($request->all());
-        $code_mobile->save();
+        $mobile=new Mobile($request->all());
+        $mobile->save();
 
-        $codemobiles = CodeMobile::all();
+        $mobiles = Mobile::all();
         session()->flash('success', 'Se ha creado la codificación de móvil exitosamente');
-        return redirect()->route ('samu.codemobile.index', compact('codemobiles'));
+        return redirect()->route ('samu.mobile.index', compact('mobiles'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Samu\CodeMobile  $codeMobile
+     * @param  \App\Models\Samu\Mobile  $codeMobile
      * @return \Illuminate\Http\Response
      */
-    public function show(CodeMobile $codeMobile)
+    public function show(Mobile $Mobile)
     {
         //
     }
@@ -69,40 +69,40 @@ class CodeMobileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Samu\CodeMobile  $codeMobile
+     * @param  \App\Models\Samu\Mobile  $codeMobile
      * @return \Illuminate\Http\Response
      */
-    public function edit(CodeMobile $codeMobile)
+    public function edit(Mobile $Mobile)
     {
-        return view('samu.codemobile.edit', compact('codeMobile'));
+        return view('samu.mobile.edit', compact('Mobile'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Samu\CodeMobile  $codeMobile
+     * @param  \App\Models\Samu\Mobile  $codeMobile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CodeMobile $codeMobile)
+    public function update(Request $request, Mobile $Mobile)
     {
-        $codeMobile->fill($request->all());
+        $Mobile->fill($request->all());
         //$specialty->user_id = Auth::id();
-        $codeMobile->save();
+        $Mobile->save();
 
         session()->flash('info', 'La codificación de Móvil ha sido editada.');
-        return redirect()->route('samu.codemobile.index', compact('codeMobile'));
+        return redirect()->route('samu.mobile.index', compact('Mobile'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Samu\CodeMobile  $codeMobile
+     * @param  \App\Models\Samu\Mobile  $codeMobile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CodeMobile $codeMobile)
+    public function destroy(Mobile $Mobile)
     {
-        $codeMobile->delete();
-        return redirect()->route('samu.codemobile.index')->with('danger', 'Eliminado satisfactoriamente');
+        $Mobile->delete();
+        return redirect()->route('samu.mobile.index')->with('danger', 'Eliminado satisfactoriamente');
     }
 }

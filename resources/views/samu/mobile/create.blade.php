@@ -19,7 +19,7 @@
             <hr>
             <div class="form-row">
                 <fieldset class="form-group col-8 col-md-4">
-                    <label for="for_mobile_code">Codigo .......... </label>
+                    <label for="for_mobile_code">Codigo</label>
                     <input type="Text" max="50000000" class="form-control" id="for_mobile_code" name="code" value="" required>
                 </fieldset>
     

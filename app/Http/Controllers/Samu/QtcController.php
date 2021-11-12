@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
-use App\Models\Samu\Follow;
-use App\Models\Samu\CodeKey;
 use App\Models\Samu\Qtc;
-use App\Models\Samu\Shift;
+use App\Models\Samu\Call;
 use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
 
@@ -20,12 +18,8 @@ class QtcController extends Controller
      */
     public function index()
     {
-        $shift = Shift::where('date', now()->format('Y-m-d'))->first(); //obtienes la variable shift
-        $mobiles = Mobile::all();
-        $qtcs=qtc::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
-        //return $qtcs; 
-        
-       return view ('samu.qtc.index' , compact('qtcs','mobiles', 'shift'));
+      
+
     }
 
     /**
@@ -34,10 +28,9 @@ class QtcController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $qtc=qtc::all(); // guarda todos los datos de la tabla
-        //return $codekeys;
-        return view ('samu.codekey.index');
+    {   //$codemobiles = CodeMobile::all();
+        $qtcs=qtc::all();  // guarda todos los datos de la tabla
+        return view ('samu.call.index' , compact('calls'));
     }
 
     /**
@@ -49,33 +42,52 @@ class QtcController extends Controller
     public function store(Request $request)
     {
         
-        //Guardar QTC
-        $qtc = new Qtc($request->All());
-        $qtc->save();
+        //devuelve user o lo crea
        
+        Qtc::updateOrCreate(
+        ['call_id' => $request->call_id],
+        $request->All()
+         );
+        return redirect()->route('samu.call.index');
+        
 
-        //Guardar Follow
-        $follow = new Follow();
-        $follow->qtc_id = $qtc->id;
-        $follow->save();
-  
-        $request->session()->flash('success', 'Se ha creado el nuevo QTC.');
-        return redirect()->route('samu.qtc.index');
     }
+
+    public function tstore(Request $request)
+    {
+
+        //devuelve user o lo crea
+        Qtc::updateOrCreate(
+        ['call_id' => $request->call_id],
+        $request->All()
+        );
+        return redirect()->route('samu.call.index');
+
+    }
+
+    public function otstore(Request $request)
+    {
+        
+        //devuelve user o lo crea
+        Call::updateOrCreate(
+        ['call_id' => $request->call_id],
+        $request->All()
+        );
+        return redirect()->route('samu.call.index');
+
+    }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Samu\Qtc  $qtc
+     * @param  \App\Models\Samu\Qtc $qtc
      * @return \Illuminate\Http\Response
      */
-    public function hora(Request $request)
-    {
-    $hora = new DateTime("now", new DateTimeZone('Santiago/Chile'));
-    return $hora->format('G');
-    }
 
-    public function show(Qtc $qtc)
+
+     
+    public function show(qtc $qtc)
     {
         //
     }
@@ -83,62 +95,48 @@ class QtcController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Samu\Qtc  $qtc
+     * @param  \App\Models\Samu\qtc  $follow
      * @return \Illuminate\Http\Response
      */
-    public function edit(Qtc $qtc, Shift $shift)
-    
+    public function edit(qtc $qtc)
     {
-        //$shift = Shift::where('date', now()->format('Y-m-d'))->first(); //obtienes la variable shift
-        $keys=CodeKey::all();
-     
-        switch ($qtc->class_qtc) {
-            case 'T1':
-                return view ('samu.qtc.edit' , compact('qtc','keys','shift'));
-                break;
-            case 'T2' :
-                return view ('samu.qtc.tedit' , compact('qtc','keys','shift'));
-                break;
-            case 'NM' :
-                    return view ('samu.qtc.edit' , compact('qtc','keys','shift'));
-                    break;
-            case 'OT':
-                return view ('samu.qtc.otedit' , compact('qtc','keys','shift'));
-                break;
-            default: 
-                return null;
-                break;
-        }
-
-        //return view ('samu.qtc.edit' , compact('qtc'));
     }
-
- 
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Samu\Qtc  $qtc
+     * @param  \App\Models\Samu\qtc  $follow
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Qtc $qtc)
+    public function update(Request $request, qtc $qtc)
     {
+        //['qtc_id' => $request->qtc_id];
         $qtc->fill($request->all());
         $qtc->update();
-        session()->flash('success', ' Actualizado satisfactoriamente.');
+    
+        return redirect()->route('samu.call.index');
+    }
+
+    public function tupdate(Request $request, qtc $qtc)
+    {
+        //['qtc_id' => $request->qtc_id];
+        $qtc->fill($request->all());
+        $qtc->update();
+    
         return redirect()->route('samu.qtc.index');
     }
+
+    
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Samu\Qtc  $qtc
+     * @param  \App\Models\Samu\qtc  $qtc
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Qtc $qtc)
+    public function destroy(qtc $qtc)
     {
-        $qtc->delete();
-        return redirect()->route('samu.qtc.index')->with('danger', ' Eliminado');
+        //
     }
 }
