@@ -23,13 +23,13 @@
             <!-- registro de llamadas-->
             <h3> Datos de la llamada</h3>
             
-            <form method="POST" action="{{ route('samu.qtc.store') }}">
+            <form method="POST" action="{{ route('samu.call.store') }}">
                 @csrf
                 @method('POST')
                 <div class="form-row">
                         <fieldset class="form-group  col-md-2">
                             <label for="for_hour">Clase</label>
-                            <select class="form-control" name="class_qtc" id="class_qtc">
+                            <select class="form-control" name="class_call" id="class_call">
                                     <option>Seleccionar </option>
                                     <option value="T1" >T1</option>
                                     <option value="T2" >T2</option>
@@ -74,7 +74,7 @@
                             <input type="text" class="form-control" name="telephone">
                         </fieldset>
                         <fieldset class="form-group col-md-1">
-                            <label for="for_guardar_qtc"><br /> <br /><br /></label>
+                            <label for="for_guardar_call"><br /> <br /><br /></label>
                             <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
                         </fieldset>
                 </div>
@@ -109,23 +109,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($qtcs as $qtc)
+                        @foreach($calls as $call)
                             <tr>
-                                <td>{{ $qtc->id}}</td>
-                                <td>{{ $qtc->class_qtc }}</td>
-                                <td>{{ $qtc->hour}}</td>
-                                <td>{{ $qtc->call_reception}}</td>
-                                <td>{{ $qtc->telephone_information }}</td>
-                                <td>{{ $qtc->applicant }}</td>
-                                <td>{{ $qtc->direction }}</td>
-                                <td>{{ $qtc->telephone }}</td>
+                                <td>{{ $call->id}}</td>
+                                <td>{{ $call->class_call }}</td>
+                                <td>{{ $call->hour}}</td>
+                                <td>{{ $call->call_reception}}</td>
+                                <td>{{ $call->telephone_information }}</td>
+                                <td>{{ $call->applicant }}</td>
+                                <td>{{ $call->direction }}</td>
+                                <td>{{ $call->telephone }}</td>
                                 
                               
-                                <td class="text-center"><a href="{{ route('samu.qtc.edit',[$qtc, $shift]) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button</a> </td>
+                                <td class="text-center"><a href="{{ route('samu.call.edit',[$call, $shift]) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button</a> </td>
                          
 
                                 <td class="text-center" >
-                                <form method="POST" action="{{ route('samu.qtc.destroy' , $qtc) }}">
+                                <form method="POST" action="{{ route('samu.call.destroy' , $call) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-danger"> <i class="fas fa-trash-alt fa-lg"></i> </button>

@@ -511,23 +511,23 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::delete('/{mobile}', 	[MobileController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('qtc')->name('qtc.')->group(function () {
+    Route::prefix('call')->name('call.')->group(function () {
 		Route::get('/',				[QtcController::class, 'index'])->name('index');
-		Route::get('/edit/{qtc}/{shift}',[QtcController::class, 'edit'])->name('edit');
+		Route::get('/edit/{call}/{shift}',[QtcController::class, 'edit'])->name('edit');
 		Route::post('/store',		[QtcController::class, 'store'])->name('store');
-		Route::delete('/{qtc}', 	[QtcController::class, 'destroy'])->name('destroy');
+		Route::delete('/{call}', 	[QtcController::class, 'destroy'])->name('destroy');
     
     });
 
-    Route::prefix('follow')->name('follow.')->group(function () {
-		Route::get('/', 			[FollowController::class, 'index'])->name('index');
-		Route::get('/create', 		[FollowController::class, 'create'])->name('create');
-		Route::get('/edit', 		[FollowController::class, 'edit'])->name('edit');
-		Route::post('/store', 		[FollowController::class, 'store'])->name('store');
-		Route::post('/otstore', 	[FollowController::class, 'otstore'])->name('otstore');
-		Route::post('/tstore', 		[FollowController::class, 'tstore'])->name('tstore');
-		Route::put('/tupdate/{follow}', [FollowController::class, 'tupdate'])->name('tupdate');
-		Route::put('/update/{follow}', [FollowController::class, 'update'])->name('update');
+    Route::prefix('qtc')->name('qtc.')->group(function () {
+		Route::get('/', 			[QtcController::class, 'index'])->name('index');
+		Route::get('/create', 		[QtcController::class, 'create'])->name('create');
+		Route::get('/edit', 		[QtcController::class, 'edit'])->name('edit');
+		Route::post('/store', 		[QtcController::class, 'store'])->name('store');
+		Route::post('/otstore', 	[QtcController::class, 'otstore'])->name('otstore');
+		Route::post('/tstore', 		[QtcController::class, 'tstore'])->name('tstore');
+		Route::put('/tupdate/{qtc}', [QtcController::class, 'tupdate'])->name('tupdate');
+		Route::put('/update/{qtc}', [QtcController::class, 'update'])->name('update');
     });
 
     Route::prefix('noveltie')->name('noveltie.')->group(function () {

@@ -20,6 +20,8 @@
         href=" {{ route('samu.noveltie.index') }}"><i class="fas fa-book"></i>Novedades</a>
     </li>
 
+ 
+
     
 
     <li class="nav-item dropdown">

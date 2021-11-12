@@ -47,7 +47,6 @@ class MobileController extends Controller
         //consultando si esta o no clickeado un checkbox
         $mobile->managed = $request->has('managed') ? true:false;
         $mobile->save();
-
         $mobiles = mobile::all();
         session()->flash('success', 'Se ha creado la codificación de móvil exitosamente');
         return redirect()->route ('samu.mobile.index', compact('mobiles'));
