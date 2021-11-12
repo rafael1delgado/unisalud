@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Samu\Mobile;
 
 
-class Follow extends Model implements Auditable
+class Qtc extends Model implements Auditable
 {   
     use \OwenIt\Auditing\Auditable;
     use HasFactory;

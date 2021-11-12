@@ -22,7 +22,7 @@ class CallController extends Controller
     {
         $shift = Shift::where('date', now()->format('Y-m-d'))->first(); //obtienes la variable shift
         $mobiles = Mobile::all();
-        $calls=Call::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
+        $calls=call::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
         //return $calls; 
         
        return view ('samu.call.index' , compact('calls','mobiles', 'shift'));
@@ -35,7 +35,7 @@ class CallController extends Controller
      */
     public function create()
     {
-        $call=Call::all(); // guarda todos los datos de la tabla
+        $call=call::all(); // guarda todos los datos de la tabla
         //return $codekeys;
         return view ('samu.codekey.index');
     }

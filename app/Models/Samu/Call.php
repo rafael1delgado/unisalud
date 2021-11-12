@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
 
-class Qtc extends Model implements Auditable
+class Call extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
