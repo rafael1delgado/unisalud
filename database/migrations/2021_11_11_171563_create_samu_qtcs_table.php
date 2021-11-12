@@ -18,10 +18,10 @@ class CreateSamuQtcsTable extends Migration
             $table->id();
        
             //llave foranea
-            $table->foreignId('call_id');
-            $table->string('key')->nullable();;
-            $table->string('key_return')->nullable();
-            $table->foreignId('mobile')->nullable();
+            $table->foreignId('call_id')->constrained('samu_calls');
+            $table->foreignId('key_id')->constrained('samu_keys');
+            $table->foreignId('return_key_id')->constrained('samu_keys');
+            $table->foreignId('mobile')->nullable()->constrained('samu_mobiles_in_service');
             $table->string('transfer_type')->nullable();
             $table->time('departure_time')->nullable();
             $table->time('mobile_departure_time')->nullable();
@@ -55,11 +55,6 @@ class CreateSamuQtcsTable extends Migration
             $table->integer('t')->nullable();
             $table->integer('treatment')->nullable();
             $table->integer('observation_sv')->nullable();
-
-            //relacion llave foranea /nombre de la columna /nombre de la tabla
-            $table->foreign('call_id')->references('id')->on('samu_calls');
-            $table->foreign('mobile')->references('id')->on('samu_mobiles_in_service');
-
 
             $table->timestamps();
             $table->softDeletes();

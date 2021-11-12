@@ -51,6 +51,10 @@ class DatabaseSeeder extends Seeder
             CodConAppointmentTypesSeeder::class,
             LocationSeeder::class,
             SicStatusesSeeder::class,
+
+            //SAMU
+            SamuJobTypeSeeder::class,
+            SamuKeySeeder::class,
         ]);
     }
 }

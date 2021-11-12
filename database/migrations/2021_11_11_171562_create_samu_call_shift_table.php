@@ -15,12 +15,10 @@ class CreateSamuCallShiftTable extends Migration
     {
         Schema::create('samu_call_shift', function (Blueprint $table) {
             $table->id();
-           
             $table->foreignId('call_id')->constrained('samu_calls');
-            $table->foreignId('shift_id')->constrained('samu_shift');
+            $table->foreignId('shift_id')->constrained('samu_shifts');
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

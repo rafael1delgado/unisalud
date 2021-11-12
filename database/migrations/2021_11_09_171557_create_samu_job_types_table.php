@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSamuCodeKeysTable extends Migration
+class CreateSamuJobTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateSamuCodeKeysTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_code_keys', function (Blueprint $table) {
+        Schema::create('samu_job_types', function (Blueprint $table) {
             $table->id();
-           
-            $table->string('key_code')->unique();
-            $table->string('name_key_code');
+            $table->string('name');
             $table->timestamps();
             $table->softDeletes();
-            
         });
     }
 
@@ -31,6 +28,6 @@ class CreateSamuCodeKeysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_code_keys');
+        Schema::dropIfExists('samu_job_types');
     }
 }

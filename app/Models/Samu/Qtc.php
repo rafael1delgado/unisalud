@@ -16,7 +16,6 @@ class Qtc extends Model implements Auditable
     protected $table="samu_qtcs";
 
     protected $fillable = [
-        
         'class_qtc',
         'hour',
         'call_reception',
@@ -24,12 +23,23 @@ class Qtc extends Model implements Auditable
         'applicant',
         'direction',
         'telephone',
-        'created_at'    
-
+        'key_id',
+        'return_key_id',
+        'created_at'
     ];
 
     public function follow()
     {
         return $this->hasOne('\App\Models\Samu\Follow');
+    }
+
+    public function key()
+    {
+       return $this->belongsTo(Key::class);
+    }
+
+    public function returnKey()
+    {
+       return $this->belongsTo(Key::class,'return_key_id');
     }
 }

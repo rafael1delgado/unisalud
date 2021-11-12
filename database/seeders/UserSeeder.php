@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
         $user->active = 1;
         $user->claveunica = 1;
         $user->birthday = now();
-        $user->gender = 'other';
+        $user->gender = 'female';
         $user->nationality_id = 41;
         if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
         $user->save();
@@ -35,9 +35,9 @@ class UserSeeder extends Seeder
 
         $humanName = new HumanName();
         $humanName->use = 'official';
-        $humanName->text = 'usuario';
-        $humanName->fathers_family = 'ficticio';
-        $humanName->mothers_family = 'araya';
+        $humanName->text = 'Angelina';
+        $humanName->fathers_family = 'Jolie';
+        $humanName->mothers_family = 'Voight';
         $humanName->user_id = $user->id;
         $humanName->save();
 
@@ -66,20 +66,147 @@ class UserSeeder extends Seeder
         $contactPoint = new ContactPoint();
         $contactPoint->system = 'email';
         $contactPoint->user_id = $user->id;
-        $contactPoint->value = 'e.mail@mail.com';
+        $contactPoint->value = 'angelina@mail.com';
         $contactPoint->use = 'home';
         $contactPoint->save();
 
         $address = new Address();
         $address->user_id = $user->id;
         $address->type = 'physical';
-        $address->text = 'pampa ilusion';
+        $address->text = 'Avenida Pampa Ilusion';
         $address->line = 1313;
-        $address->city = 'iquique';
+        $address->city = 'Iquique';
         $address->commune_id = 5;
         $address->region_id = 1;
         $address->country_id = 42;
         $address->save();
+
+
+
+
+        $user = new User();
+        $user->active = 1;
+        $user->claveunica = 1;
+        $user->birthday = now();
+        $user->gender = 'male';
+        $user->nationality_id = 41;
+        if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
+        $user->save();
+
+        $user->givePermissionTo(Permission::all());
+
+        $humanName = new HumanName();
+        $humanName->use = 'official';
+        $humanName->text = 'German';
+        $humanName->fathers_family = 'Zuñiga';
+        $humanName->mothers_family = 'Codocedo';
+        $humanName->user_id = $user->id;
+        $humanName->save();
+
+        $identifier = new Identifier();
+        $identifier->use = 'official';
+        $identifier->cod_con_identifier_type_id = 1; // RUN
+        $identifier->value = 16351236;
+        $identifier->dv = 'k';
+        $identifier->user_id = $user->id;
+        $identifier->save();
+
+        $address = new Address();
+        $address->user_id = $user->id;
+        $address->type = 'physical';
+        $address->text = 'Pampa Aerolito';
+        $address->line = 3023;
+        $address->city = 'Iquique';
+        $address->commune_id = 5;
+        $address->region_id = 1;
+        $address->country_id = 42;
+        $address->save();
+
+
+
+
+        $user = new User();
+        $user->active = 1;
+        $user->claveunica = 1;
+        $user->birthday = now();
+        $user->gender = 'male';
+        $user->nationality_id = 41;
+        if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
+        $user->save();
+
+        $user->givePermissionTo(Permission::all());
+
+        $humanName = new HumanName();
+        $humanName->use = 'official';
+        $humanName->text = 'Alvaro';
+        $humanName->fathers_family = 'Torres';
+        $humanName->mothers_family = 'Fuchslocher';
+        $humanName->user_id = $user->id;
+        $humanName->save();
+
+        $identifier = new Identifier();
+        $identifier->use = 'official';
+        $identifier->cod_con_identifier_type_id = 1; // RUN
+        $identifier->value = 15287582;
+        $identifier->dv = 7;
+        $identifier->user_id = $user->id;
+        $identifier->save();
+
+        $address = new Address();
+        $address->user_id = $user->id;
+        $address->type = 'physical';
+        $address->text = 'Ruben Donoso';
+        $address->line = 2942;
+        $address->city = 'Iquique';
+        $address->commune_id = 5;
+        $address->region_id = 1;
+        $address->country_id = 42;
+        $address->save();
+
+
+
+
+
+        $user = new User();
+        $user->active = 1;
+        $user->claveunica = 1;
+        $user->birthday = now();
+        $user->gender = 'female';
+        $user->nationality_id = 41;
+        if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
+        $user->save();
+
+        $user->givePermissionTo(Permission::all());
+
+        $humanName = new HumanName();
+        $humanName->use = 'official';
+        $humanName->text = 'Adriana';
+        $humanName->fathers_family = 'Ovideo';
+        $humanName->mothers_family = 'López';
+        $humanName->user_id = $user->id;
+        $humanName->save();
+
+        $identifier = new Identifier();
+        $identifier->use = 'official';
+        $identifier->cod_con_identifier_type_id = 1; // RUN
+        $identifier->value = 26554948;
+        $identifier->dv = 9;
+        $identifier->user_id = $user->id;
+        $identifier->save();
+
+        $address = new Address();
+        $address->user_id = $user->id;
+        $address->type = 'physical';
+        $address->text = 'Grumete Bolados';
+        $address->line = 168;
+        $address->city = 'Iquique';
+        $address->commune_id = 5;
+        $address->region_id = 1;
+        $address->country_id = 42;
+        $address->save();
+
+
+        
 
 
         // usuarios programador

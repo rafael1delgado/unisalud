@@ -15,13 +15,13 @@ class CreateSamuMobilesInServiceTable extends Migration
     {
         Schema::create('samu_mobiles_in_service', function (Blueprint $table) {
             $table->id();
-            $table->softDeletes();
-            $table->foreignId('shift_id')->constrained('samu_shift');
+            $table->foreignId('shift_id')->constrained('samu_shifts');
             $table->foreignId('mobile_id')->constrained('samu_mobiles');
             $table->text('type')->nullable();
             $table->text('observation')->nullable();
             $table->boolean('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

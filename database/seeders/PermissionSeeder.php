@@ -31,6 +31,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name'=>'Fq: admin','description'=>'Administrador de Fq']);
         Permission::create(['name'=>'Fq: answer request dispensing','description'=>'Atención de requerimientos de medicamentos']);
 
-        Permission::create(['name' => 'SAMU', 'description' => 'Permite asociar a un usuario a SAMU']);
+        Permission::create(['name' => 'SAMU: user', 'description' => 'Permite acceder al módulo SAMU']);
+        Permission::create(['name' => 'SAMU: Admin', 'description' => 'Permite asociar a un usuario a SAMU']);
     }
 }

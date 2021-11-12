@@ -19,7 +19,6 @@ class CreateSamuOtTable extends Migration
             $table->foreignId('call_id')->constrained('samu_calls');
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

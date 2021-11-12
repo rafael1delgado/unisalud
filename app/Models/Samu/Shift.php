@@ -21,7 +21,7 @@ class Shift extends Model implements Auditable
     use HasFactory;
     use SoftDeletes;
 
-    protected $table="samu_shift";
+    protected $table="samu_shifts";
 
     protected $fillable = [
         'id',

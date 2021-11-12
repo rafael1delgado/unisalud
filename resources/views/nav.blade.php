@@ -28,8 +28,8 @@
         <div class="dropdown-menu">
 
             <a class="dropdown-item
-            @if(request()->route()->view == 'codekey') active @endif"
-            href=" {{ route('samu.codekey.index') }}"><i class="fas fa-lock"></i> Codificación de las claves</a>
+            @if(request()->route()->view == 'key') active @endif"
+            href=" {{ route('samu.key.index') }}"><i class="fas fa-lock"></i> Codificación de las claves</a>
 
             <a class="dropdown-item
             @if(request()->route()->view == 'mobile') active @endif"

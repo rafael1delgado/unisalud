@@ -16,9 +16,7 @@ class CreateSamuNoveltiesTable extends Migration
         Schema::create('samu_novelties', function (Blueprint $table) {
             $table->id();
             $table->string('detail');
-            $table->foreignId('shift_id');
-            
-            $table->foreign('shift_id')->references('id')->on('samu_shift');
+            $table->foreignId('shift_id')->constrained('samu_shifts');
             $table->timestamps();
             $table->softDeletes();
         });

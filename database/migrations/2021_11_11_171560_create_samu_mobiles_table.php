@@ -14,8 +14,6 @@ class CreateSamuMobilesTable extends Migration
      */
     public function up()
     {
-        
-
         Schema::create('samu_mobiles', function (Blueprint $table) {
             $table->id();
             $table->string('code');
@@ -25,9 +23,6 @@ class CreateSamuMobilesTable extends Migration
             $table->boolean('managed');
             $table->string('description')->nullable();
             $table->boolean('status')->default(true);
-            //$table->foreignId('job_type_id')->after('user_id')->constrained('samu_job_types');
-
-            /* Permite utilizar softdelete */
             $table->softDeletes();
         });
     }

@@ -445,7 +445,7 @@ Route::prefix('soap')->name('soap.')->group(function(){
 use App\Http\Controllers\Samu\ShiftController;
 use App\Http\Controllers\Samu\MobileInServiceController;
 use App\Http\Controllers\Samu\ShiftMobileController;
-use App\Http\Controllers\Samu\CodeKeyController;
+use App\Http\Controllers\Samu\KeyController;
 use App\Http\Controllers\Samu\MobileController;
 use App\Http\Controllers\Samu\QtcController;
 use App\Http\Controllers\Samu\FollowController;
@@ -493,13 +493,13 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 	// 	Route::view('/edit', 'samu.shift.edit')->name('edit');
     // });
 
-    Route::prefix('codekey')->name('codekey.')->group(function () {
-		Route::get('/' , 			[CodeKeyController::class, 'index'])->name('index');
-		Route::get('/create' , 		[CodeKeyController::class, 'create'])->name('create');
-		Route::post('/store', 		[CodeKeyController::class, 'store'])->name('store');
-		Route::put('/update/{codeKey}',[CodeKeyController::class, 'update'])->name('update');
-		Route::get('/edit/{codeKey}',[CodeKeyController::class, 'edit'])->name('edit');
-		Route::delete('/{codeKey}',	[CodeKeyController::class, 'destroy'])->name('destroy');
+    Route::prefix('key')->name('key.')->group(function () {
+		Route::get('/' , 			[KeyController::class, 'index'])->name('index');
+		Route::get('/create' , 		[KeyController::class, 'create'])->name('create');
+		Route::post('/store', 		[KeyController::class, 'store'])->name('store');
+		Route::put('/update/{key}',	[KeyController::class, 'update'])->name('update');
+		Route::get('/edit/{key}',	[KeyController::class, 'edit'])->name('edit');
+		Route::delete('/{key}',		[KeyController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('mobile')->name('mobile.')->group(function () {
