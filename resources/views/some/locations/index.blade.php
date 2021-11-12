@@ -8,7 +8,7 @@
     <i class="fas fa-plus"></i> Agregar nueva Locación
 </a>
 
-<table class="table table-sm table-borderer">
+<table class="table table-sm table-borderer table-responsive-xl mb-5">
     <thead>
         <tr>
             <th>Id</th>

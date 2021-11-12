@@ -1,15 +1,15 @@
 <div>
     <div class="form-row mt-3">
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-6 col-md-4">
             <label for="inputrut">RUT</label>
             <input type="text" class="form-control" placeholder="Ingrese el rut" wire:model.lazy="run"
                    wire:change="setDv()">
 
         </div>
-        <div class="form-group col-md-1">
-            <label for="inputdv">Dv</label>
-            <input type="text" class="form-control" placeholder="Dv" wire:model="dv" readonly>
+        <div class="form-group col-2 col-md-1">
+            <label for="inputdv">DV</label>
+            <input type="text" class="form-control" placeholder="-" wire:model="dv" readonly>
         </div>
 
         {{--        <div class="form-group col-md-4">--}}
@@ -17,12 +17,12 @@
         {{--            <input type="text" class="form-control" placeholder="Ingrese Nombre" wire:model.lazy="name">--}}
         {{--        </div>--}}
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-2 col-md-2">
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" wire:click="searchUser()"> <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
         </div>
 
-        <div class="form-group col-md-1">
+        <div class="form-group col-2 col-md-1">
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" data-toggle="modal"
                     data-target="#searchUserModal" title="Búsqueda avanzada" >...
@@ -126,7 +126,7 @@
 
 
     <div class="form-row">
-        <div class="form-group col-md-1">
+        <div class="form-group col-6 col-md-2">
             <label for="for_type">Tipo</label>
             <select id="for_type" name="type" class="form-control" wire:model.lazy="type" required
                     wire:change="getPractitioners()">
@@ -136,7 +136,7 @@
             </select>
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-2">
             @if($specialties != null)
                 <label for="for_specialty_id">Especialidad</label>
                 <select id="for_specialty_id" name="specialty_id" class="form-control" wire:model.lazy="specialty_id"
@@ -170,7 +170,7 @@
 
         </div>
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-6 col-md-2">
             <label for="for_practitioner_id">Funcionario</label>
             <select id="for_practitioner_id" name="practitioner_id" class="form-control"
                     wire:model.lazy="practitioner_id" required>
@@ -184,19 +184,19 @@
         </div>
 
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-2">
             <label for="inputEmail4">Desde</label>
             <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha inicio"
                    wire:model.lazy="appointments_from">
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-2">
             <label for="inputEmail4">Hasta</label>
             <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha fin"
                    wire:model.lazy="appointments_to">
         </div>
 
-        <div class="form-group col-md-1">
+        <div class="form-group col-6 col-md-2">
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" wire:click="searchAppointments()"> <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
         </div>
@@ -265,12 +265,12 @@
     <!--opcion asignar-->
 
     <div class="form-row ">
-        <div class="form-group col-md-2">
+        <div class="form-group col-12 col-md-4">
             <label for="inputAsignar">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" wire:click="asignAppointment()"> <i class="fas fa-save    "></i> Asignar</button>
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-5 col-md-4">
             <label for="for_location">Lugar</label>
             <select id="for_location" name="location" class="form-control"
                     wire:model.lazy="selectedLocationId">
@@ -283,7 +283,7 @@
             </select>
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-7 col-md-4">
             <label for="for_observation_id">Instrucción para paciente</label>
             <select id="for_observation_id" name="observation_id" class="form-control" onchange="setPatientObservation(this)" >
                 <option value=""></option>
@@ -298,7 +298,7 @@
                         </select>  --}}
         </div>
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-12 col-md-12">
             <label for="for_patient_instruction">Instrucción para paciente</label>
             <textarea class="form-control" name="patient_instruction" id="for_patient_instruction" cols="10" rows="3" wire:model="patientInstruction"></textarea>
         </div>

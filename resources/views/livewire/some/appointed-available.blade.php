@@ -4,7 +4,7 @@
 <hr/>
 
     <div class="form-row">
-        <div class="form-group col-md-2">
+        <div class="form-group col-5 col-md-2">
             <label for="inputEmail4">Desde</label>
             <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha inicio"
                 wire:model="from">
@@ -13,7 +13,7 @@
                 @enderror
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-5 col-md-2">
             <label for="inputEmail4">Hasta</label>
             <input type="date" class="form-control" id="inputEmail4" placeholder="Fecha fin"
                 wire:model="to">
@@ -22,7 +22,7 @@
                 @enderror
         </div>
 
-        <div class="form-group col-md-1">
+        <div class="form-group col-2 col-md-1">
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" wire:click="search()"> <i
                     class="fa fa-search" aria-hidden="true"></i> Buscar</button>
