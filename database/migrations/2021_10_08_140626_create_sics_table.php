@@ -36,7 +36,7 @@ class CreateSicsTable extends Migration
             $table->string('patient_address')->nullable();
             $table->string('patient_street_type')->nullable();
             $table->string('patient_street_name')->nullable();
-            $table->string('patient_comune_code')->nullable();
+            $table->string('patient_commune_code')->nullable();
             $table->integer('patient_phone_1')->nullable();
             $table->integer('patient_phone_2')->nullable();
             $table->string('derivation_establishment_code')->nullable();
