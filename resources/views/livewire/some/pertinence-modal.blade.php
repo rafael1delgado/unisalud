@@ -61,7 +61,7 @@
                                           wire:model.defer="rejectedObservation"
                                 ></textarea>
                             </fieldset>
-                            @error('motive')
+                            @error('rejectedObservation')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </form>
