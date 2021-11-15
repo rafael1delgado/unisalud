@@ -83,12 +83,14 @@
 
 
                     <td>
-                        <div wire:key="{{$sic->id }}">
-                            <a href class="btn btn-primary" title="Dar Pertinencia"
-                               wire:click.prevent="$emitTo('some.pertinence-modal', 'open', {{ $sic->id }})">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </div>
+                        @if(class_basename($sic) == ExternalIncomingSic::class)
+                            <div wire:key="{{$sic->id }}">
+                                <a href class="btn btn-primary" title="Dar Pertinencia"
+                                wire:click.prevent="$emitTo('some.pertinence-modal', 'open', {{ $sic->id }})">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </div>
+                        @endif
                     </td>
 
 {{--                    <td><a href="{{ route('vista.relevant') }}" class="btn btn-sm btn-outline-secondary"><span--}}

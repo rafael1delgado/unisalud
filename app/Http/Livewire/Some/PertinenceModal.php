@@ -36,11 +36,11 @@ class PertinenceModal extends Component
             if ($this->action == 'pertinent') {
 
                 $newSic = $this->externalIncomingSic->replicate([
-                    'sic_status_id',
+                    'status_id',
                     'diagnosis_hypothesis_destination',
                     'origin_observation'
                 ]);
-                $newSic->sic_status_id = 2; //Pertinente
+                $newSic->status_id = 2; //Pertinente
                 $newSic->diagnosis_hypothesis_destination = $this->diagnosticHypothesis;
                 $newSic->origin_observation = $this->originObservation;
                 $newSic = $newSic->toArray();
@@ -56,10 +56,10 @@ class PertinenceModal extends Component
                 ]);
 
                 $newSic = $this->externalIncomingSic->replicate([
-                    'sic_status_id',
+                    'status_id',
                     'rejected_observation'
                 ]);
-                $newSic->sic_status_id = 5; //Rechazada
+                $newSic->status_id = 5; //Rechazada
                 $newSic->rejected_observation = $this->rejectedObservation;
                 $newSic = $newSic->toArray();
                 Sic::Create($newSic);

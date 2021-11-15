@@ -17,13 +17,13 @@ class Sic extends Model
         'diagnosis_code', 'auge_indicator', 'auge_problem', 'auge_subproblem', 'diagnosis_basis', 'exam_name', 'professional_rut', 'professional_dv',
         'professional_name', 'professional_fathers_family', 'professional_mothers_family', 'professional_job_title', 'urgency_indicator', 'titular_rut', 'titular_dv', 'titular_name',
         'titular_fathers_name', 'titular_mothers_name', 'pension_system', 'pension_system_categorization', 'pension_system_expiration', 'fonasa_number', 'certifying_institution_rut', 'prais',
-        'patient_social_name', 'tutor_name', 'patient_email', 'patient_nationality', 'patient_ethnicity', 'patient_marital_status', 'sic_status_id', 'diagnosis_hypothesis_destination',
+        'patient_social_name', 'tutor_name', 'patient_email', 'patient_nationality', 'patient_ethnicity', 'patient_marital_status', 'status_id', 'diagnosis_hypothesis_destination',
         'origin_observation', 'rejected_observation'
     ];
 
     public function status()
     {
-        return $this->belongsTo(SicStatus::class, 'sic_status_id');
+        return $this->belongsTo(SicStatus::class, 'status_id');
     }
 
     protected $dates = ['request_date', 'entry_date', 'patient_birthday', 'pension_system_expiration',

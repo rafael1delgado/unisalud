@@ -76,10 +76,10 @@ class CreateSicsTable extends Migration
             $table->string('patient_marital_status')->nullable();
         
             
-            $table->foreignId('sic_status_id');
+            $table->foreignId('status_id');
             $table->timestamps();
 
-            $table->foreign('sic_status_id')->on('sic_statuses')->references('id');
+            $table->foreign('status_id')->on('sic_statuses')->references('id');
         });
     }
 
