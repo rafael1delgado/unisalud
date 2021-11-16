@@ -26,6 +26,11 @@ class Sic extends Model
         return $this->belongsTo(SicStatus::class, 'status_id');
     }
 
+    public function getFullNameAttribute(){
+        return "$this->patient_name $this->patient_fathers_family $this->patient_mothers_family";
+    }
+
+
     protected $dates = ['request_date', 'entry_date', 'patient_birthday', 'pension_system_expiration',
     ];
 

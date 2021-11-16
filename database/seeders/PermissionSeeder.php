@@ -33,5 +33,7 @@ class PermissionSeeder extends Seeder
 
         Permission::create(['name' => 'SAMU: user', 'description' => 'Permite acceder al módulo SAMU']);
         Permission::create(['name' => 'SAMU: Admin', 'description' => 'Permite asociar a un usuario a SAMU']);
+
+        Permission::create(['name' => 'Some: user', 'description' => 'Permite acceso al módulo de SOME']);
     }
 }

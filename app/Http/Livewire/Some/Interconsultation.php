@@ -44,6 +44,10 @@ class Interconsultation extends Component
         }
     }
 
+    public function appoint($interconsultationId){
+        return redirect()->route('some.appointment.from_interconsultation', compact('interconsultationId'));
+    }
+
     public function render()
     {
         return view('livewire.some.interconsultation');

@@ -7,6 +7,7 @@ use App\Models\MedicalProgrammer\Profession;
 use App\Models\MedicalProgrammer\Specialty;
 use App\Models\Practitioner;
 use App\Models\Some\Appointment;
+use App\Models\Some\Sic;
 use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -40,7 +41,7 @@ class AsignAppointment extends Component
         'userSelected' => 'setUser',
     ];
 
-    public function mount($appointmentId = null, $pendingPractitionerId = null, $from = null, $to = null)
+    public function mount($appointmentId = null, $pendingPractitionerId = null, $from = null, $to = null, $interconsultationId = null)
     {
         if ($appointmentId) {
             $appointment = Appointment::find($appointmentId);
@@ -67,6 +68,12 @@ class AsignAppointment extends Component
             $this->appointments_to = $to;
 
             $this->searchAppointments();
+        }
+        if($interconsultationId){
+            $sic = Sic::find($interconsultationId);
+            $this->run = $sic->patient_rut;
+            $this->setDv();
+            $this->searchUser();
         }
     }
 
