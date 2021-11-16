@@ -99,7 +99,7 @@ class AsignAppointment extends Component
                 'user' => 'required'
             ],
             [
-                'user.required' => 'No existe paciente.'
+                'user.required' => 'No existe paciente. Intente utilizar la búsqueda avanzada o cree un nuevo paciente.'
             ]
         );
     }
@@ -296,6 +296,10 @@ class AsignAppointment extends Component
             $this->user->refresh();
             $this->appointmentsHistory = $this->user->appointments()->withTrashed()->get();
         }
+    }
+
+    public function createPatient(){
+        \Debugbar::info('crea paciente');        
     }
 
     public function render()

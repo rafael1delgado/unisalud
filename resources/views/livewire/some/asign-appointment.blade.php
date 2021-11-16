@@ -29,8 +29,14 @@
             </button>
         </div>
     </div>
+
     @error('user')
-        <span class="text-danger">{{ $message }}</span>
+        <div class="form-row">
+            <div class="alert alert-warning" role="alert">
+                {{$message}}
+                <button type="button" class="btn btn-primary btn-sm" wire:click="createPatient()"> <span data-feather="users"> </span> Ingresar paciente</button>
+            </div>
+        </div>
     @enderror
 
     <div class="form-row mt-3">
