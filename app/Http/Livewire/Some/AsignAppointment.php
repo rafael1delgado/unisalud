@@ -34,6 +34,7 @@ class AsignAppointment extends Component
     public $locations;
     public $selectedLocationId;
     public $patientInstruction;
+    public $interconsultationId;
     // public $appointmentId; //Viene por parámetro 
     // public $pendingPractitionerId; //Viene por parámetro
 
@@ -74,6 +75,7 @@ class AsignAppointment extends Component
             $this->run = $sic->patient_rut;
             $this->setDv();
             $this->searchUser();
+            $this->interconsultationId = $interconsultationId;
         }
     }
 
@@ -298,8 +300,8 @@ class AsignAppointment extends Component
         }
     }
 
-    public function createPatient(){
-        \Debugbar::info('crea paciente');        
+    public function createPatient($interconsultationId){
+        return redirect()->route('patient.create_from_sic', compact('interconsultationId'));
     }
 
     public function render()

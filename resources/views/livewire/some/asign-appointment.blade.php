@@ -34,7 +34,7 @@
         <div class="form-row">
             <div class="alert alert-warning" role="alert">
                 {{$message}}
-                <button type="button" class="btn btn-primary btn-sm" wire:click="createPatient()"> <span data-feather="users"> </span> Ingresar paciente</button>
+                <button type="button" class="btn btn-primary btn-sm" wire:click="createPatient({{$interconsultationId}})"> <span data-feather="users"> </span> Ingresar paciente</button>
             </div>
         </div>
     @enderror

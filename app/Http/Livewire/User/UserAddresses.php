@@ -16,6 +16,7 @@ class UserAddresses extends Component
     public $countries;
     public $patient;
     public $addresses = [];
+    public $sic;
 
     public function add($i)
     {

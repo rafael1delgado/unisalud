@@ -33,32 +33,32 @@
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
                         <label for="for_name">Nombres *</label>
-                        <input type="text" class="form-control" name="text" id="for_name" required value="{{ old('text') }}"
+                        <input type="text" class="form-control" name="text" id="for_name" required value="{{ old('text') ?? ($sic ? $sic->patient_name : '')  }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                     </fieldset>
 
                     <fieldset class="form-group col-md-3">
                         <label for="for_fathers_family">Apellido Paterno *</label>
-                        <input type="text" class="form-control" name="fathers_family" id="for_fathers_family" required value="{{ old('fathers_family') }}"
+                        <input type="text" class="form-control" name="fathers_family" id="for_fathers_family" required value="{{ old('fathers_family') ?? ($sic ? $sic->patient_fathers_family : '') }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                     </fieldset>
 
                     <fieldset class="form-group col-md-3">
                         <label for="for_mothers_family">Apellido Materno</label>
-                        <input type="text" class="form-control" name="mothers_family" id="for_mothers_family" value="{{ old('mothers_family') }}"
+                        <input type="text" class="form-control" name="mothers_family" id="for_mothers_family" value="{{ old('mothers_family') ?? ($sic ? $sic->patient_mothers_family : '') }}"
                             {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
                     </fieldset>
 
                     <fieldset class="form-group col-md-2">
                         <label for="for_social_name">Nombre Social</label>
-                        <input type="text" class="form-control" name="social_name" id="social_name" value="">
+                        <input type="text" class="form-control" name="social_name" id="social_name" value="{{$sic ? $sic->patient_social_name : ''}}">
 
                     </fieldset>
                 </div>
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
                         <label for="for_birthday">Fecha de nacimiento *</label>
-                        <input type="date" class="form-control" name="birthday" required value="{{ old('birthday') }}"
+                        <input type="date" class="form-control" name="birthday" required value="{{ old('birthday') ?? ($sic ? $sic->patient_birthday->format('Y-m-d') : '') }}"
                             {{-- id="for_birthday" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}"
                             --}}>
                     </fieldset>
@@ -144,7 +144,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-addresses', compact('regions', 'countries'))
+        @livewire('user.user-addresses', compact('regions', 'countries', 'sic'))
 
         <div class="border-bottom mt-3 mb-3"></div>
 
