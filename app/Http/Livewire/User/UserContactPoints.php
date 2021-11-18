@@ -11,6 +11,7 @@ class UserContactPoints extends Component
     public $i = 1;
     public $patient;
     public $contactPoints = [];
+    public $sic;
 
     public function add($i)
     {
@@ -66,7 +67,24 @@ class UserContactPoints extends Component
                 $this->contactPoints[$value]['value'] = old('contact_value.'.$key);
             }
         }
+
+
+        // Agrega tiene sic, se carga info desde sic
+        if ($this->sic) {
+            // dd($this->inputs);
+            foreach ($this->inputs as $key => $value) {
+                // $this->contactPoints[$value]['id'] = $this->patient->contactPoints->slice($key, 1)->first()->id;
+                $this->contactPoints[$value]['system'] = 'phone';
+                $this->contactPoints[$value]['value'] = $this->sic->patient_phone_1;
+                $this->contactPoints[$value]['use'] = 'home';
+                // $this->contactPoints[$value]['actually'] = true;
+            }
+        }
+
     }
+
+
+    
     public function setActuallyContact($index){
             // foreach ($this->inputs as $key => $value) {
             //     $fContact  =  ContactPoint::find($this->contactPoints[$value]["id"]);

@@ -148,7 +148,7 @@
 
         <div class="border-bottom mt-3 mb-3"></div>
 
-        @livewire('user.user-contact-points')
+        @livewire('user.user-contact-points', compact('sic'))
 
         <div class="border-bottom mt-3 mb-3"></div>
 
