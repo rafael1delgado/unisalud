@@ -70,12 +70,25 @@ class UserContactPoints extends Component
 
         // Agrega tiene sic, se carga info desde sic
         if ($this->sic) {
-            // dd($this->contactPoints);
-            foreach ($this->contactPoints as $key => $value) {
+            // $this->contactPoints[$value]['id'] = $this->patient->contactPoints->slice($key, 1)->first()->id;
+            $this->contactPoints[0]['system'] = 'phone';
+            $this->contactPoints[0]['value'] = $this->sic->patient_phone_1;
+            $this->contactPoints[0]['use'] = 'mobile';
+            // $this->contactPoints[$value]['actually'] = true;
+
+            if($this->sic->patient_phone_2){
                 // $this->contactPoints[$value]['id'] = $this->patient->contactPoints->slice($key, 1)->first()->id;
-                $this->contactPoints[$key]['system'] = 'phone';
-                $this->contactPoints[$key]['value'] = $this->sic->patient_phone_1;
-                $this->contactPoints[$key]['use'] = 'home';
+                $this->contactPoints[1]['system'] = 'phone';
+                $this->contactPoints[1]['value'] = $this->sic->patient_phone_2;
+                $this->contactPoints[1]['use'] = 'home';
+                // $this->contactPoints[$value]['actually'] = true;
+            }
+
+            if($this->sic->patient_email){
+                // $this->contactPoints[$value]['id'] = $this->patient->contactPoints->slice($key, 1)->first()->id;
+                $this->contactPoints[2]['system'] = 'email';
+                $this->contactPoints[2]['value'] = $this->sic->patient_email;
+                $this->contactPoints[2]['use'] = 'home';
                 // $this->contactPoints[$value]['actually'] = true;
             }
         }
