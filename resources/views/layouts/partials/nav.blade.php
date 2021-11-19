@@ -95,6 +95,9 @@
         <a class="nav-link" href="{{route('some.reallocationPending') }}"><span data-feather="list"></span>Pendiente de reasignación</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{route('some.interconsultation') }}"><span data-feather="briefcase"></span>Interconsultas</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{route('some.appointedAvailable') }}"><span data-feather="list"></span>Citado/Disponible</a>
     </li>
     <li class="nav-item">

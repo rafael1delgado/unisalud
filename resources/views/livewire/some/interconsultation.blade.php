@@ -75,13 +75,6 @@
                     <td>{{$sic->derivation_specialty_code}}</td>
                     <td>{{$sic->health_service_code}}</td>
 
-{{--                    <td>--}}
-{{--                        <button type="button" class="btn btn-primary" data-toggle="modal"--}}
-{{--                                data-target="#pertinenceModal" title="Dar pertinencia"><i class="fas fa-edit"></i>--}}
-{{--                        </button>--}}
-{{--                    </td>--}}
-
-
                     <td>
                         @if(class_basename($sic) == ExternalIncomingSic::class)
                             <div wire:key="{{$sic->id }}">
