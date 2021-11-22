@@ -45,13 +45,14 @@ class MobileInServiceController extends Controller
     public function store(Request $request)
     {
        
-        $mobileinservices=new mobileinservice($request->all());
-        $mobileinservices->save();
-    
+        $mobileInService=new MobileInService($request->all());
+        $mobil = Mobile::find($request->input('mobile_id'));
+        $mobileInService->status = $mobil->status;
+        $mobileInService->save();
 
-        $mobileinservices = mobileinservice::all();
+        //$mobileinservices = MobileInService::all();
         session()->flash('success', 'Se ha añadido exitosamente');
-        return redirect()->route ('samu.mobileinservice.index', compact('mobileinservices'));
+        return redirect()->route('samu.mobileinservice.index');
     }
 
     /**

@@ -519,7 +519,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
     Route::prefix('call')->name('call.')->group(function () {
 		Route::get('/',				[CallController::class, 'index'])->name('index');
 		Route::get('/edit/{call}',[CallController::class, 'edit'])->name('edit');
-		Route::post('/store',		[CallController::class, 'store'])->name('store');
+		Route::post('/store/{shift}',		[CallController::class, 'store'])->name('store');
 		Route::delete('/{call}', 	[CallController::class, 'destroy'])->name('destroy');
 		Route::put('/update/{call}',		[CallController::class, 'update'])->name('update');
 		Route::post('/addqtc{call}',		[CallController::class, 'addqtc'])->name('addqtc');

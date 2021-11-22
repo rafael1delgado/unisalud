@@ -36,9 +36,6 @@ class CallController extends Controller
      */
     public function create()
     {
-        $call=call::all(); // guarda todos los datos de la tabla
-       
-        //return $codekeys;
         return view ('samu.key.index');
     }
 
@@ -48,13 +45,11 @@ class CallController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Shift $shift)
     {
-
-       
         //Guardar Call
         $call = new Call($request->All());
-       
+        $call->shift_id = $shift->id;
         $call->save();
        
 
@@ -76,9 +71,10 @@ class CallController extends Controller
     public function hora(Request $request)
     {
     
-    $hora = new DateTime("now", new DateTimeZone('Santiago/Chile'));
-    return $hora->format('G');
+        $hora = new DateTime("now", new DateTimeZone('Santiago/Chile'));
+        return $hora->format('G');
     }
+
 
     public function show(Call $call)
     {
@@ -92,17 +88,11 @@ class CallController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Call $call, Shift $shift)
-    
     {
-
         return view ('samu.call.edit' , compact('call'));
-
-        
-       
     }
 
  
-
     /**
      * Update the specified resource in storage.
      *
@@ -112,21 +102,16 @@ class CallController extends Controller
      */
     public function update(Request $request, Call $call)
     {
-
         $call->fill($request->all());
         $call->update();
         session()->flash('success', ' Actualizado satisfactoriamente.');
         return redirect()->route('samu.call.edit');
- 
     }
-
 
 
     public function addqtc()
     {     
         dd('holaaaaaaaaaaaaaaaaaaaa');
- 
-
     }
 
     /**

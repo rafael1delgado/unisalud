@@ -23,6 +23,7 @@ class CreateSamuMobilesTable extends Migration
             $table->boolean('managed');
             $table->string('description')->nullable();
             $table->boolean('status')->default(true);
+            $table->timestamps();
             $table->softDeletes();
         });
     }

@@ -23,7 +23,7 @@
             <!-- registro de llamadas-->
             <h3> Datos de la llamada</h3>
             
-            <form method="POST" action="{{ route('samu.call.store') }}">
+            <form method="POST" action="{{ route('samu.call.store', $shift) }}">
                 @csrf
                 @method('POST')
                 <div class="form-row">
