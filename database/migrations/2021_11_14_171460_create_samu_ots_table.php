@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSamuOtTable extends Migration
+class CreateSamuOtsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateSamuOtTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_ot', function (Blueprint $table) {
+        Schema::create('samu_ots', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->foreignId('call_id')->constrained('samu_calls');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +28,6 @@ class CreateSamuOtTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_ot');
+        Schema::dropIfExists('samu_ots');
     }
 }

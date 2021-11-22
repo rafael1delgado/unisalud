@@ -42,15 +42,19 @@ class SamuSeeder extends Seeder
             'status' => 1
         ]);
 
-        Call::create([
-            'shift_id' => 1,
-            'class_call' => "T1",
-            'hour' => "08:00:00",
-            'call_reception' => "Operador 1",
-            'telephone_information' => "982598059",
-            'applicant' => "aertsdf",
-            'direction' => "Calle numero",
-            'telephone' => "982598059",
-        ]);
+
+
+        // Call::create([
+        //     'shift_id' => 1,
+        //     'class_call' => "T1",
+        //     'qtc_id' => 1,
+        //     'ot_id' => 1,
+        //     'hour' => "08:00:00",
+        //     'call_reception' => "Operador 1",
+        //     'telephone_information' => "982598059",
+        //     'applicant' => "aertsdf",
+        //     'direction' => "Calle numero",
+        //     'telephone' => "982598059",
+        // ]);
     }
 }

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\Samu\Shift;
+use App\Models\Samu\Qtc;
+use App\Models\Samu\Ot;
 
 
 class Call extends Model implements Auditable
@@ -24,17 +27,22 @@ class Call extends Model implements Auditable
         'direction',
         'telephone',
         'shift_id',
-        'created_at'    
-
+        'qtc_id',
+        'ot_id'
     ];
 
-    public function Qtc()
+    public function qtc()
     {
-        return $this->hasOne('\App\Models\Samu\Qtc');
+        return $this->belongsTo(Qtc::class,'qtc_id');
+    }
+
+    public function ot()
+    {
+        return $this->belongsTo(Ot::class);
     }
 
     public function shifts()
     {
-        return $this->hasMany(Shifts::class, 'shift_id');
+        return $this->belongsTo(Shift::class);
     }
 }

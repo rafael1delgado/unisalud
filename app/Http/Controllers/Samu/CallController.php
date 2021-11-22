@@ -50,13 +50,13 @@ class CallController extends Controller
         //Guardar Call
         $call = new Call($request->All());
         $call->shift_id = $shift->id;
+        //$call->qtc()->associate(new Qtc());
         $call->save();
-       
 
         //Guardar Follow
-        //$qtc = new  Call();
-        //$qtc->call_id = $call->id;
-        //$qtc->save();
+        // $qtc = new Qtc();
+        // $qtc->call_id = $call->id;
+        // $qtc->save();
   
         $request->session()->flash('success', 'Ingreso Un nuevo llamado.');
         return redirect()->route('samu.call.index' );
@@ -105,7 +105,7 @@ class CallController extends Controller
         $call->fill($request->all());
         $call->update();
         session()->flash('success', ' Actualizado satisfactoriamente.');
-        return redirect()->route('samu.call.edit');
+        return redirect()->route('samu.call.edit', compact('call'));
     }
 
 

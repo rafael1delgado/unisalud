@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Samu\Mobile;
+use App\Models\Samu\Qtc;
 
 
 class Qtc extends Model implements Auditable
@@ -62,14 +63,13 @@ class Qtc extends Model implements Auditable
         'created_at'
     ];
 
-    public function qtc() {
-        return $this->hasOne(Call::class);
+    public function calls() {
+        return $this->hasMany(Qtc::class);
       }
 
     public function mobile() {
         return $this->belongsTo(Mobile::class);
     }
-
 
     public function mobilesInService(){
         return $this->hasMany(MobileInService::class,'mobile', 'id');
