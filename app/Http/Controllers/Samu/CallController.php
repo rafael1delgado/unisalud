@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
-use App\Models\Samu\Qtc;
-use App\Models\Samu\CodeKey;
 use App\Models\Samu\Call;
+use App\Models\Samu\Qtc;
+use App\Models\Samu\Key;
+use App\Models\Samu\MobileInService;
 use App\Models\Samu\Shift;
 use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
@@ -22,7 +23,7 @@ class CallController extends Controller
     {
         $shift = Shift::where('date', now()->format('Y-m-d'))->first(); //obtienes la variable shift
         $mobiles = Mobile::all();
-        $calls=call::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
+        $calls=Call::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
         //return $calls; 
         
        return view ('samu.call.index' , compact('calls','mobiles', 'shift'));
@@ -36,8 +37,9 @@ class CallController extends Controller
     public function create()
     {
         $call=call::all(); // guarda todos los datos de la tabla
+       
         //return $codekeys;
-        return view ('samu.codekey.index');
+        return view ('samu.key.index');
     }
 
     /**
@@ -48,29 +50,32 @@ class CallController extends Controller
      */
     public function store(Request $request)
     {
-        
-        //Guardar QTC
+
+       
+        //Guardar Call
         $call = new Call($request->All());
+       
         $call->save();
        
 
         //Guardar Follow
-        $follow = new  Qtc();
-        $follow->call_id = $call->id;
-        $follow->save();
+        //$qtc = new  Call();
+        //$qtc->call_id = $call->id;
+        //$qtc->save();
   
-        $request->session()->flash('success', 'Se ha creado el nuevo QTC.');
-        return redirect()->route('samu.qtc.index');
+        $request->session()->flash('success', 'Ingreso Un nuevo llamado.');
+        return redirect()->route('samu.call.index' );
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Samu\Call  $qtc
+     * @param  \App\Models\Samu\Call  $call
      * @return \Illuminate\Http\Response
      */
     public function hora(Request $request)
     {
+    
     $hora = new DateTime("now", new DateTimeZone('Santiago/Chile'));
     return $hora->format('G');
     }
@@ -83,34 +88,17 @@ class CallController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Samu\Call  $qtc
+     * @param  \App\Models\Samu\Call  $call
      * @return \Illuminate\Http\Response
      */
     public function edit(Call $call, Shift $shift)
     
     {
-        //$shift = Shift::where('date', now()->format('Y-m-d'))->first(); //obtienes la variable shift
-        $keys=CodeKey::all();
-     
-        switch ($call->class_call) {
-            case 'T1':
-                return view ('samu.call.edit' , compact('call','keys','shift'));
-                break;
-            case 'T2' :
-                return view ('samu.call.tedit' , compact('call','keys','shift'));
-                break;
-            case 'NM' :
-                    return view ('samu.call.edit' , compact('call','keys','shift'));
-                    break;
-            case 'OT':
-                return view ('samu.call.otedit' , compact('call','keys','shift'));
-                break;
-            default: 
-                return null;
-                break;
-        }
 
-        //return view ('samu.qtc.edit' , compact('qtc'));
+        return view ('samu.call.edit' , compact('call'));
+
+        
+       
     }
 
  
@@ -124,16 +112,27 @@ class CallController extends Controller
      */
     public function update(Request $request, Call $call)
     {
+
         $call->fill($request->all());
         $call->update();
         session()->flash('success', ' Actualizado satisfactoriamente.');
-        return redirect()->route('samu.call.index');
+        return redirect()->route('samu.call.edit');
+ 
+    }
+
+
+
+    public function addqtc()
+    {     
+        dd('holaaaaaaaaaaaaaaaaaaaa');
+ 
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Samu\Call  $qtc
+     * @param  \App\Models\Samu\Call  $call
      * @return \Illuminate\Http\Response
      */
     public function destroy(Call $call)

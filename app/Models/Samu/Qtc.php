@@ -15,15 +15,15 @@ class Qtc extends Model implements Auditable
     use HasFactory;
     use SoftDeletes;
 
-    protected $table="samu_follows";
+    protected $table="samu_qtcs";
 
     protected $fillable = [
 
         //segumiento
-        'qtc_id',
+        'call_id',
         'key_id',
         'return_key_id',
-        'mobile_id',
+        'mobile',
         'transfer_type',
         'departure_time',
         'mobile_departure_time',
@@ -62,10 +62,9 @@ class Qtc extends Model implements Auditable
         'created_at'
     ];
 
-    public function qtc()
-    {
-        return $this->belongsTo('\App\Models\Samu\Qtc');
-    }
+    public function qtc() {
+        return $this->hasOne(Call::class);
+      }
 
     public function mobile() {
         return $this->belongsTo(Mobile::class);
@@ -73,7 +72,7 @@ class Qtc extends Model implements Auditable
 
 
     public function mobilesInService(){
-        return $this->belongsToMany(MobileInService::class,'samu_follow_mis');
+        return $this->hasMany(MobileInService::class,'mobile', 'id');
                 
     }
 
@@ -86,4 +85,5 @@ class Qtc extends Model implements Auditable
     {
        return $this->belongsTo(Key::class,'return_key_id');
     }
+
 }

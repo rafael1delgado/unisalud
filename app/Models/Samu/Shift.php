@@ -38,7 +38,7 @@ class Shift extends Model implements Auditable
                     ->withTimestamps()
                     ->withPivot('job_type');
     }
-
+    
     public function novelitie()
     {
         return $this->belongsTo(Novelitie::class);
@@ -60,5 +60,9 @@ class Shift extends Model implements Auditable
         if( shift::where('date', now()->format('Y-m-d'))->first()) return true;
         else return false;
 
+    }
+    public function calls()
+    {
+        return $this->belongsTo(Call::class);
     }
 }

@@ -20,6 +20,11 @@
         href=" {{ route('samu.noveltie.index') }}"><i class="fas fa-book"></i>Novedades</a>
     </li>
 
+    <li class="nav-item">
+    <a class="nav-link {{ active('samu.call.index') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.call.index') }}"><i class="fas fa-book"></i> Call Center</a>
+    </li>
+
  
 
     

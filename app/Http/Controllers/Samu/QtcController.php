@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
 use App\Models\Samu\Qtc;
+use App\Models\Samu\Key;
 use App\Models\Samu\Call;
+use App\Models\Samu\MobileInService;
 use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
 
@@ -41,14 +43,14 @@ class QtcController extends Controller
      */
     public function store(Request $request)
     {
-        
+       
         //devuelve user o lo crea
        
         Qtc::updateOrCreate(
         ['call_id' => $request->call_id],
         $request->All()
          );
-        return redirect()->route('samu.call.index');
+        return redirect()->route('samu.call.index' ,'key', 'mobilesInService');
         
 
     }
@@ -61,7 +63,7 @@ class QtcController extends Controller
         ['call_id' => $request->call_id],
         $request->All()
         );
-        return redirect()->route('samu.call.index');
+        return redirect()->route('samu.call.index','key', 'mobilesInService');
 
     }
 
@@ -115,7 +117,7 @@ class QtcController extends Controller
         $qtc->fill($request->all());
         $qtc->update();
     
-        return redirect()->route('samu.call.index');
+        return redirect()->route('samu.call.index', compact('qtc'));
     }
 
     public function tupdate(Request $request, qtc $qtc)
@@ -124,7 +126,7 @@ class QtcController extends Controller
         $qtc->fill($request->all());
         $qtc->update();
     
-        return redirect()->route('samu.qtc.index');
+        return redirect()->route('samu.qtc.index', $qtc);
     }
 
     

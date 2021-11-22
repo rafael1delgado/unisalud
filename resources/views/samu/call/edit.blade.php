@@ -12,229 +12,118 @@
 
 <div class="card mb-3">
     <div class="card-body">
-        
-        <!-- seguimiento-->
-        <h3><b><b></h3>
-        <h3 class="text-danger"><b> Seguimiento Emergencia</b></h3>
-            <h4> Asignación de seguimiento horario</h4>
-      
-            <form method="post" action="{{ route('samu.qtc.store') }}">
-                @csrf
-                @method('POST')
-                        <div class="form-row">
-                                    <fieldset class="form-group  col-md-1">
-                                        <label for="for_key">Clave</label>
-                                        <select class="form-control" name="key">
-                                        <option value=""></option>
-                                        @foreach($keys as $key)
-                                            <option value="{{ $call->qtc->key === '$key' ? 'selected' : '' }}">{{$key->key_code}}  - {{$key->name_key_code}} </option>
-                                        
-                                        @endforeach  
-                                        </select>
-                                       <!-- <input type="text" class="form-control" name="key" value="{{ ( $qtc->follow &&  $qtc->follow->key)? $qtc->follow->key : '' }}">-->
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-1">
-                                        <label for="for_return">Clave de Retorno</label>
-                                        <select class="form-control" name="key">
-                                        <option value=""></option>
-                                        @foreach($keys as $key)
-                                            <option value="{{ $call->qtc->key_return === '$key' ? 'selected' : '' }}">{{$key->key_code}} - {{$key->name_key_code}} </option>
-                                        
-                                        @endforeach  
-                                        </select>
-                                        
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-2">
-                                        @if($shift)
-                                        <!--revisar foreach-->
-                                        <label for="for_mobile">Móvil {{$call->qtc->id}}</label>
 
-                                            <select class="form-control" name="mobile" id="mobile">
-                                                <option value=""></option>
-                                                @foreach($call->qtc->mobilesInService as $mis)
-                                                <option value="{{ $call->qtc->mobilesInService === $mis ? 'selected' : '' }}">
-                                                    {{ $mis->mobile->name }} - {{ $mis->mobile->code}}
-                                                </option>
-                                                @endforeach  
-                                            
-                                            </select>
-                                            @endif
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-1">
-                                        <label for="for_transfer_type">Tipo de Traslado </label>
-                                        <select class="form-control" name="transfer_type" id="transfer_type">
-                                                <option value=""></option>
-                                                <option value="T1" {{ $call->qtc->transfer_type === 'T1' ? 'selected' : '' }} >T1</option>
-                                                <option value="T2" {{ $call->qtc->transfer_type === 'T2' ? 'selected' : '' }}  >T2</option>
-                                                <option value="NM"{{ $call->qtc->transfer_type === 'NM' ? 'selected' : '' }} >NM</option>
-                                                <option value="OT"{{ $call->qtc->transfer_type === 'OT' ? 'selected' : '' }} >OT</option>
-                                        </select>
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-2">
-                                        <label for="for_departure_time">Hora Salida </label>
-                                        <input type="time" class="form-control" name="departure_time" value="{{ ( $call->qtc &&  $call->qtc->departure_time)? $call>qtc->departure_time : '' }}">
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-2">
-                                        <label for="for_mobile_departure_time">Hora Salida Movil </label>
-                                        <input type="time" class="form-control" name="mobile_departure_time" value="{{ ( $call->qtc &&  $call->qtc->mobile_departure_time)? $call->qtc->mobile_departure_time : '' }}">
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-2">
-                                        <label for="for_mobile_arrival_place">Llegada Movil Lugar </label>
-                                        <input type="time" class="form-control" name="mobile_arrival_place" value="{{ ( $call->qtc &&  $call->qtc->mobile_arrival_place)? $call->qtc->mobile_arrival_place : '' }}">
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-1">
-                                        <label for="for_route_ca">Ruta C.Asistencial </label>
-                                        <input type="time" class="form-control" name="route_ca" value="{{ ( $call->qtc &&  $call->qtc->route_ca)? $call->qtc->route_ca : '' }}">
-                                    </fieldset>
-                    </div>
-                    
-                    <div class="form-row">
-                           
-                                    <fieldset class="form-group  col-md-2">
-                                        <label for="for_mobile_ca">Movil en centro asistencial</label>
-                                        <input type="time" class="form-control" name="mobile_ca" value="{{ ( $call->qtc &&  $call->qtc->mobile_ca)? $call->qtc->mobile_ca : '' }}">
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-2">
-                                        <label for="for_patient_reception">Recepcion de Pcte </label>
-                                        <input type="time" class="form-control" name="patient_reception" value="{{ ( $call->qtc &&  $call->qtc->patient_reception)? $call->qtc->patient_reception : '' }}">
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-2">
-                                        <label for="for_return_base">Retorno a base </label>
-                                        <input type="time" class="form-control" name="return_base" value="{{ ( $call->qtc &&  $call->qtc->return_base)? $call->qtc->return_base : '' }}">
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-2">
-                                        <label for="for_mobile_base">Movil en base</label>
-                                        <input type="time" class="form-control" name="mobile_base" value="{{ ( $call->qtc &&  $call->qtc->mobile_base)? $call->qtc->mobile_base : '' }}">
-                                    </fieldset>
-                                    <fieldset class="form-group  col-md-4">
-                                        <label for="for_observation">Observacion </label>
-                                        <input type="text" class="form-control" name="observation" value="{{ ( $call->qtc &&  $call->qtc->observation)? $call->qtc->observation : '' }}">
-                                    </fieldset>
-                                    </fieldset>
-                                
-                    </div>
-                    <div class="form-row">
-                                <fieldset class="form-group col-md-2">
-                                    <label for="for_guardar_hours"></label>
-                                    <input hidden name="call_id" value="{{$call->id}}"> 
-                                    <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
-                                </fieldset>
-                        </div>
-        </form>
-
-<!-- inicio evaluacion de paciente-->
-            <hr>
-            <form method="post" action="{{ route('samu.qtc.update', $call->qtc) }}">
+    <h3> Datos de la llamada</h3>
+            
+             <form method="POST" action="{{ route('samu.call.update', $call) }}">
                 @csrf
                 @method('PUT')
+                <div class="form-row">
 
-                    <h4>Evaluación de paciente</h4>
-                    <div class="form-row">
-                        <div class=" col-md-6">
-                        <label for="for_reception_detail">Detalle de Recepción </label>                                
-                        <textarea class="form-control" style="height: 100px" name="reception_detail">{{ ( $call->qtc &&  $call->qtc->reception_detail)? $call->qtc->reception_detail : '' }}</textarea>
-                        </div>
                         <fieldset class="form-group  col-md-3">
-                                    <label for="for_establishment">Est. Recepcion de paciente </label>
-                                    <select class="form-control" name="establishment" id="establishment">
-                                        
-                                            <option> </option>
-                                            <option value="Hospital Dr Ernesto Torres Galdames" {{ $call->qtc->establishment === 'Hospital Dr Ernesto Torres Galdames' ? 'selected' : '' }} >Hospital Dr Ernesto Torres Galdames</option>
-                                            <option value="SAPU Cirujano Aguirre" {{ $call->qtc->establishment === 'SAPU Cirujano Aguirre' ? 'selected' : '' }}>SAPU Cirujano Aguirre</option>
-                                            <option value="SAPU Cirujano Guzmán" {{ $call->qtc->establishment === 'SAPU Cirujano Guzmán' ? 'selected' : '' }}>SAPU Cirujano Guzmán</option>
-                                            <option value="SAPU Cirujano Videla" {{ $call->qtc->establishment === 'SAPU Cirujano Videla' ? 'selected' : '' }}>SAPU Cirujano Videla</option>
-                                            <option value="SAPU El Boro" {{ $call->qtc->establishment === 'SAPU El Boro' ? 'selected' : '' }}>SAPU El Boro</option>
-                                            <option value="SAPU Huara" {{ $call->qtc->establishment === 'SAPU Huara' ? 'selected' : '' }}>SAPU Huara</option>
-                                            <option value="SAPU Pedro Pulgar" {{ $call->qtc->establishment === 'SAPU Pedro Pulgar' ? 'selected' : '' }}>SAPU Pedro Pulgar</option>
-                                            <option value="SAPU Pozo Almonte" {{ $call->qtc->establishment === 'SAPU Pozo Almonte' ? 'selected' : '' }}>SAPU Pozo Almonte</option>
-                                            <option value="SAR La Tortuga" {{ $call->qtc->establishment === 'SAR La Tortuga' ? 'selected' : '' }}>SAR La Tortuga</option>
-                                            <option value="SAR Sur de Iquique" {{ $call->qtc->establishment === 'SAR Sur de Iquique' ? 'selected' : '' }}>SAR Sur de Iquique</option>
-                                            <option value="Servicio Médico Legal Iquique" {{ $call->qtc->establishment === 'Servicio Médico Legal Iquique' ? 'selected' : '' }}>Servicio Médico Legal Iquique</option>
-                                            <option value="SMA Servicios Medicos" {{ $call->qtc->establishment === 'SMA Servicios Medicos' ? 'selected' : '' }}>SMA Servicios Medicos</option>
-                                            <option value="SUR Camiña" {{ $call->qtc->establishment === 'SUR Camiña' ? 'selected' : '' }}>SUR Camiña</option>
-                                            <option value="SUR Cariquima" {{ $call->qtc->establishment === 'SUR Cariquima' ? 'selected' : '' }}>SUR Cariquima</option>
-                                            <option value="SUR Chanavayita" {{ $call->qtc->establishment === 'SUR Chanavayita' ? 'selected' : '' }}>SUR Chanavayita</option>
-                                            <option value="SUR Colchane" {{ $call->qtc->establishment === 'SUR Colchane' ? 'selected' : '' }}>SUR Colchane</option>
-                                            <option value="SUR Pica" {{ $call->qtc->establishment === 'SUR Pica' ? 'selected' : '' }}>SUR Pica</option>
-                                            <option value="SUR Tarapacá" {{ $call->qtc->establishment === 'SUR Tarapacá' ? 'selected' : '' }}>SUR Tarapacá</option>
-                                    </select>
-                                </fieldset>
-                                <fieldset class="form-group  col-md-3">
-                                    <label for="for_reception_person">Personal Recepcion del Pcte.</label>
-                                    <input type="text" class="form-control" name="reception_person" value="{{ ( $call->qtc &&  $call->qtc->reception_person)? $call->qtc->reception_person : '' }}">
-                                </fieldset>
-                    
+                            <label for="for_hour">Clase</label>
+                            <select class="form-control" name="class_call" id="class_call">
+                                    <option> {{ $call->class_call }} </option>
+                                    <option value="T1" >T1</option>
+                                    <option value="T2" >T2</option>
+                                    <option value="NM" >NM</option>
+                                    <option value="OT" >OT</option>
+                                </select>
+                        </fieldset>
+                        <fieldset class="form-group  col-md-2">
+                            <label for="for_hour">Hora</label>
+                            <input type="time" class="form-control" name="hour" id="hour"  value="{{$call->hour}}">
+                        </fieldset>
+                        <fieldset class="form-group  col-md-2">
+                            <label for="for_call_reception">Recep. de llamada</label>
+                                <select class="form-control" name="call_reception" id="call_reception">
+                                    <option >{{ $call->call_reception }}</option>
+                                    <option value="Operador 1" >Operador 1</option>
+                                    <option value="Operador 2" >Operador 2</option>
+                                    <option value="Operador 3" >Operador 3</option>
+                                    <option value="Operador 4" >Operador 4</option>
+                                    <option value="Operador 5" >Operador 5</option>
+                                    <option value="Operador 6" >Operador 6</option>
+                                    <option value="Jefe de turno" >Jefe de turno</option>
+                                    <option value="Medico Regulador" >Medico Regulador</option>
+                                    <option value="Enfermera Reguladora" >Enfermera Reguladora</option>
+                                </select>
+                        </fieldset>
+                        <fieldset class="form-group  col-md-5">
+                            <label for="for_telephone_information">Motivo de solicitud </label>
+                            <input type="text" class="form-control"  name="telephone_information" value="{{ $call->telephone_information }}">
                         
-                    </div>
-                        <!--fin evaluacion paciente-->
-                            <hr>
-                            <h4> Asignación Signos Vitales</h4>
-
-                            <div class="form-row">
-                                        <fieldset class="form-group  col-md-2">
-                                            <label for="for_fc">Frecuencia Cardiaca</label>
-                                            <input type="number" class="form-control" name="fc" value="{{ ( $call->qtc &&  $call->qtc->fc)? $call->qtc->fc : '' }}">
-                                        </fieldset>
-                                        <fieldset class="form-group  col-md-2">
-                                            <label for="for_fr">Frecuencia Respiratoria </label>
-                                            <input type="number" class="form-control" name="fr" value="{{ ( $call->qtc &&  $call->qtc->fr)? $call->qtc->fr : '' }}">
-                                        </fieldset>
-                                        <fieldset class="form-group  col-md-2">
-                                            <label for="for_pa">Presión Arterial</label>
-                                            <input type="number" class="form-control" name="pa" value="{{ ( $call->qtc &&  $call->qtc->pa)? $call->qtc->pa : '' }}">
-                                        </fieldset>
-                                        <fieldset class="form-group  col-md-2">
-                                            <label for="for_pam">Presión Arterial Media</label>
-                                            <input type="number" class="form-control" name="pam" value="{{ ( $call->qtc &&  $call->qtc->pam)? $call->qtc->pam : '' }}">
-                                        </fieldset>
-                                        <fieldset class="form-group  col-md-2">
-                                            <label for="for_gl">Glasgow</label>
-                                            <input type="number" class="form-control" name="gl" value="{{ ( $call->qtc &&  $call->qtc->gl)? $call->qtc->gl : '' }}">
-                                        </fieldset>
-                                        <fieldset class="form-group  col-md-2">
-                                            <label for="for_soam">% Saturacion Oxigeno Ambiental</label>
-                                            <input type="number" class="form-control" name="soam" value="{{ ( $call->qtc &&  $call->qtc->soam)? $call->qtc->soam : '' }}">
-                                        </fieldset>
-                                        <fieldset class="form-group  col-md-2">
-                                            <label for="for_soap">% Saturación Oxigeno/Apoyo</label>
-                                            <input type="number" class="form-control" name="soap" value="{{ ( $call->qtc &&  $call->qtc->soap)? $call->qtc->soap : '' }}">
-                                        </fieldset>
-                                        <fieldset class="form-group  col-md-2">
-                                            <label for="for_hgt">HGT mg/dl</label>
-                                            <input type="number" class="form-control" name="hgt" value="{{ ( $call->qtc &&  $call->qtc->hgt)? $call->qtc->soap : '' }}">
-                                        </fieldset>
-                                        <fieldset class="form-group  col-md-2">
-                                            <label for="for_fill_capillary">Llene Capilar</label>
-                                            <input type="number" class="form-control" name="fill_capillary" value="{{ ( $call->qtc &&  $call->qtc->fill_capillary)? $call->qtc->fill_capillary : '' }}">
-                                        </fieldset>
-                                        <fieldset class="form-group  col-md-2">
-                                            <label for="for_t">Temperatura °C</label>
-                                            <input type="number" class="form-control" name="t" value="{{ ( $call->qtc &&  $call->qtc->t)? $call->qtc->t : '' }}">
-                                        </fieldset>
-                                        <fieldset class="form-group  col-md-4">
-                                            <label for="for_treatment">Tratamiento</label>
-                                            <input type="text" class="form-control" name="treatment" value="{{ ( $call->qtc &&  $call->qtc->treatment)? $call->qtc->treatment : '' }}">
-                                        </fieldset>
-                                        <div class=" col-md-12">
-                                            <label for="for_observation_sv">Observación </label>
-                                            <textarea class="form-control" style="height: 100px" name="observation_sv">{{ ( $call->qtc &&  $call->qtc->observation_sv)? $call->qtc->observation_sv : '' }}</textarea>
-                                        </div>                   
-                        </div>
-                        <div class="form-row mb-3">
-                                    <fieldset class="form-group col-md-2 mt-3 ">
-                                        <label for="for_guardar"></label>
-                                        <input hidden name="call_id" value="{{$call->id}}"> 
-                                        <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
-                                    </fieldset>
-                            </div>       
-
+                        </fieldset>
+                </div>
+                 <div class="form-row">
+                        <fieldset class="form-group  col-md-4">
+                            <label for="for_applicant">Solicitante </label>
+                            <input type="text" class="form-control" name="applicant" value="{{ $call->applicant }}">
+                        </fieldset>
+                        <fieldset class="form-group  col-md-4">
+                            <label for="for_direction">Dirección </label>
+                            <input type="text" class="form-control" name="direction" value="{{ $call->direction }}">
+                        </fieldset>
+                        <fieldset class="form-group  col-md-2">
+                            <label for="for_telephone">Teléfono </label>
+                            <input type="text" class="form-control" name="telephone" value="{{ $call->telephone }}" >
+                        </fieldset>
+                        <fieldset class="form-group col-md-2">
+                            <label for="for_update_call"><br /> <br /><br /></label>
+                            <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
+                        </fieldset>
+                </div>
             </form>
 
-            <!-- fin de seguimeinto-->
+            <div class="form-row">
+            <fieldset class="form-group col-md-2">
+                <label for="for_add_movil"></label>
+                <button type="button" class="btn btn-success button mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="fas fa-plus"></i>  <i class="fas fa-ambulance"></i>  Asignar un Movil</button>
+    
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Asignación de Movil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--aca deberian ir los moviles de turno-->
+                <fieldset class="form-group  col-md-12">
+                                <select class="form-control" name="call_reception" id="movil">
+                                    <option ></option>
+                                    <option value="Movil 1" >Movil 1</option>
+                                    <option value="Movil 3" >Movil 2</option>
+                                    <option value="Movil 3" >Movil 3</option>
+                                </select>
+                        </fieldset>
+            
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success">Guardar Cambios</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            
+            
+            </fieldset>
+            
+            <form method="POST" action="{{ route('samu.call.addqtc' , $call) }}"  class="col-md-2">
+            @csrf
+            @method('POST')
+            <fieldset class="form-group col-md">
+                <label for="for_add_qtc"></label>
+                <button type="button" class="btn btn-success button mb-3"  action="{{ route('samu.call.addqtc' , $call) }}"><i class="fas fa-search-plus"></i>  Asignar Seguimiento</button>
+            </fieldset>
+            </form>
+        </div>
 
-     </div>
+
+
+
+    </div>
 </div>
-
-
-
 @endsection

@@ -44,7 +44,7 @@
                         <fieldset class="form-group  col-md-2">
                             <label for="for_call_reception">Recep. de llamada</label>
                                 <select class="form-control" name="call_reception" id="call_reception">
-                                    <option>Operador 1 </option>
+                                    <option></option>
                                     <option value="Operador 1" >Operador 1</option>
                                     <option value="Operador 2" >Operador 2</option>
                                     <option value="Operador 3" >Operador 3</option>
@@ -121,7 +121,7 @@
                                 <td>{{ $call->telephone }}</td>
                                 
                               
-                                <td class="text-center"><a href="{{ route('samu.call.edit',[$call, $shift]) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button</a> </td>
+                                <td class="text-center"><a href="{{ route('samu.call.edit',$call) }}"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button</a> </td>
                          
 
                                 <td class="text-center" >

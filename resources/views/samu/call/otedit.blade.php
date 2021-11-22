@@ -21,13 +21,13 @@
        
         <!-- inicio detalle OT-->
             <h4>Descipción de la Evaluación</h4>
-            <form method="post" action="{{ route('samu.follow.otstore') }}">
+            <form method="post" action="{{ route('samu.ot.otstore') }}">
                 @csrf
                 @method('POST')
                 <div class="form-row">
                         <div class=" col-md-12">
                         <label for="for_run">Detalle de Orientacion Telefonica </label>
-                            <textarea class="form-control" name="observation"  required>{{ ( $qtc->follow &&  $qtc->follow->observation)? $qtc->follow->observation : '' }}</textarea>
+                            <textarea class="form-control" name="description"  required>{{ ( $call &&  $call->description)? $call->description : '' }}</textarea>
                             <div class="invalid-feedback">
                             Ingrese descripción
                             </div>

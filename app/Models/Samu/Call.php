@@ -16,7 +16,6 @@ class Call extends Model implements Auditable
     protected $table="samu_calls";
 
     protected $fillable = [
-        
         'class_call',
         'hour',
         'call_reception',
@@ -24,12 +23,18 @@ class Call extends Model implements Auditable
         'applicant',
         'direction',
         'telephone',
+        'shift_id',
         'created_at'    
 
     ];
 
-    public function follow()
+    public function Qtc()
     {
-        return $this->hasOne('\App\Models\Samu\Follow');
+        return $this->hasOne('\App\Models\Samu\Qtc');
+    }
+
+    public function shifts()
+    {
+        return $this->hasMany(Shifts::class, 'shift_id');
     }
 }

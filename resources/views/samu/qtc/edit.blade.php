@@ -12,13 +12,13 @@
 
 <div class="card mb-3">
     <div class="card-body">
-    
-        <!-- seguimiento corregirrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr-->
-        <h3 class="text-success"><b> Seguimiento Traslado</b></h3>
-            
-            <hr>
+        
+        <!-- seguimiento-->
+        <h3><b><b></h3>
+        <h3 class="text-danger"><b> Seguimiento Emergencia</b></h3>
             <h4> Asignación de seguimiento horario</h4>
-            <form method="post" action="{{ route('samu.qtc.tstore') }}">
+      
+            <form method="post" action="{{ route('samu.qtc.store') }}">
                 @csrf
                 @method('POST')
                         <div class="form-row">
@@ -27,36 +27,40 @@
                                         <select class="form-control" name="key_id">
                                         <option value=""></option>
                                         @foreach($keys as $key)
-                                            <option value="{{ $call->qtc['key'] === '$key' ? 'selected' : '' }}">{{$key->key}}- {{$key->name}}  </option>
+                                            <option value="{{ $call->qtc['key'] === '$key' ? 'selected' : '' }}">{{$key->key}}  - {{$key->name}} </option>
                                         
                                         @endforeach  
                                         </select>
+                                      
                                     </fieldset>
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_return">Clave de Retorno</label>
                                         <select class="form-control" name="return_key_id">
                                         <option value=""></option>
                                         @foreach($keys as $key)
-                                            
-                                            <option value="{{ $call->qtc['key']=== '$key' ? 'selected' : '' }}">{{$key->key}} - {{$key->name}}</option>
+                                            <option value="{{ $call->qtc['key'] === '$key' ? 'selected' : '' }}">{{$key->key}} - {{$key->name}} </option>
                                         
                                         @endforeach  
                                         </select>
+                                        
                                     </fieldset>
                                     <fieldset class="form-group  col-md-2">
-                                    
-                                        <label for="for_mobile">Movil</label>
+                                       
+                                        <!--revisar foreach-->
+                                        <label for="for_mobile">Móvil</label>
                                         <select class="form-control" name="mobile">
-                                            <option value=""></option>
-                                             @foreach($mobilesInService as $mis)
+                                        <option value=""></option>
+                                        @foreach($mobilesInService as $mis)
                                             <option value="{{ $call->qtc['mis'] === '$mis' ? 'selected' : '' }}">{{$mis->mobile_id}} </option>
-                                             @endforeach 
-                                        </select>     
+                                        
+                                        @endforeach 
+                                        </select>    
+                                         
                                     </fieldset>
                                     <fieldset class="form-group  col-md-1">
                                         <label for="for_transfer_type">Tipo de Traslado </label>
                                         <select class="form-control" name="transfer_type" id="transfer_type">
-                                        <option value=""></option>
+                                                <option value=""></option>
                                                 <option value="T1" {{ $call->qtc['transfer_type'] === 'T1' ? 'selected' : '' }} >T1</option>
                                                 <option value="T2" {{ $call->qtc['transfer_type'] === 'T2' ? 'selected' : '' }}  >T2</option>
                                                 <option value="NM"{{ $call->qtc['transfer_type'] === 'NM' ? 'selected' : '' }} >NM</option>
@@ -103,7 +107,6 @@
                                         <label for="for_observation">Observacion </label>
                                         <input type="text" class="form-control" name="observation" value="{{ ( $call->qtc &&  $call->qtc->observation)? $call->qtc->observation : '' }}">
                                     </fieldset>
-                                    </fieldset>
                                 
                     </div>
                     <div class="form-row">
@@ -117,7 +120,7 @@
 
 <!-- inicio evaluacion de paciente-->
             <hr>
-            <form method="post" action="{{ route('samu.qtc.tupdate') }}">
+            <form method="post" action="{{ route('samu.qtc.update', 1) }}">
                 @csrf
                 @method('PUT')
 
@@ -131,7 +134,7 @@
                                     <label for="for_establishment">Est. Recepcion de paciente </label>
                                     <select class="form-control" name="establishment" id="establishment">
                                         
-                                    <option> </option>
+                                            <option> </option>
                                             <option value="Hospital Dr Ernesto Torres Galdames" {{ $call->qtc['establishment'] === 'Hospital Dr Ernesto Torres Galdames' ? 'selected' : '' }} >Hospital Dr Ernesto Torres Galdames</option>
                                             <option value="SAPU Cirujano Aguirre" {{ $call->qtc['establishment'] === 'SAPU Cirujano Aguirre' ? 'selected' : '' }}>SAPU Cirujano Aguirre</option>
                                             <option value="SAPU Cirujano Guzmán" {{ $call->qtc['establishment'] === 'SAPU Cirujano Guzmán' ? 'selected' : '' }}>SAPU Cirujano Guzmán</option>
@@ -198,7 +201,7 @@
                                         </fieldset>
                                         <fieldset class="form-group  col-md-2">
                                             <label for="for_fill_capillary">Llene Capilar</label>
-                                            <input type="number" class="form-control" name="fill_capillary" value="{{ ( $call->qtc->follow &&  $call->qtc->fill_capillary)? $call->qtc->fill_capillary : '' }}">
+                                            <input type="number" class="form-control" name="fill_capillary" value="{{ ( $call->qtc &&  $call->qtc->fill_capillary)? $call->qtc->fill_capillary : '' }}">
                                         </fieldset>
                                         <fieldset class="form-group  col-md-2">
                                             <label for="for_t">Temperatura °C</label>
@@ -222,8 +225,6 @@
                             </div>       
 
             </form>
-
-
 
             <!-- fin de seguimeinto-->
 
