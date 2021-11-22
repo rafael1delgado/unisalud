@@ -29,11 +29,7 @@ class QtcController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {   $calls=Call::all();
-        $keys=Key::all();
-        return view ('samu.qtc.create' , compact('calls', 'keys'));
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -41,42 +37,7 @@ class QtcController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //devuelve user o lo crea
-       
-        Qtc::create($request->all());
-       $request->session()->flash('success', 'Creado satisfactoriamente.');
-        
-        return redirect()->route('samu.call.index' ,'key', 'mobilesInService');
-        
-
-    }
-
-    public function tstore(Request $request)
-    {
-
-        //devuelve user o lo crea
-        Qtc::updateOrCreate(
-        ['call_id' => $request->call_id],
-        $request->All()
-        );
-        return redirect()->route('samu.call.index','key', 'mobilesInService');
-
-    }
-
-    public function otstore(Request $request)
-    {
-        
-        //devuelve user o lo crea
-        Call::updateOrCreate(
-        ['call_id' => $request->call_id],
-        $request->All()
-        );
-        return redirect()->route('samu.call.index');
-
-    }
-
+   
 
     /**
      * Display the specified resource.
@@ -118,15 +79,7 @@ class QtcController extends Controller
         return redirect()->route('samu.call.index', compact('qtc'));
     }
 
-    public function tupdate(Request $request, qtc $qtc)
-    {
-        //['qtc_id' => $request->qtc_id];
-        $qtc->fill($request->all());
-        $qtc->update();
     
-        return redirect()->route('samu.qtc.index', $qtc);
-    }
-
     
 
     /**

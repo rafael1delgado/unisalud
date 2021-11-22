@@ -10,7 +10,7 @@ use App\Models\Samu\MobileInService;
 use App\Models\Samu\Shift;
 use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
-
+use App\Models\Samu\Ot;
 
 class CallController extends Controller
 {
@@ -45,16 +45,18 @@ class CallController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Shift $shift)
+    public function store(Request $request, Shift $shift, Qtc $qtc )
     {
         //Guardar Call
         $call = new Call($request->All());
         $call->shift_id = $shift->id;
-        //$call->qtc()->associate(new Qtc());
         $call->save();
+        $call->qtc()->associate(new qtc());
+        $ot=new Ot($request->All());
+        $ot->save();
 
 
-        // crear oc
+        // crear ot
         // crear qtc
 
         // guardar el call
@@ -73,12 +75,6 @@ class CallController extends Controller
      * @param  \App\Models\Samu\Call  $call
      * @return \Illuminate\Http\Response
      */
-    public function hora(Request $request)
-    {
-    
-        $hora = new DateTime("now", new DateTimeZone('Santiago/Chile'));
-        return $hora->format('G');
-    }
 
 
     public function show(Call $call)
