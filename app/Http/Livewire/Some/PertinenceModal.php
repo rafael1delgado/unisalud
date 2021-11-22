@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class PertinenceModal extends Component
 {
-    public $sic;
+    public $externalIncomingSic;
     public $diagnosticHypothesis;
     public $originObservation;
     public $action;
@@ -21,7 +21,7 @@ class PertinenceModal extends Component
     public function loadPertinence($sicId)
     {
         //        \Debugbar::info($sicId);
-        $this->sic = ExternalIncomingSic::find($sicId);
+        $this->externalIncomingSic = ExternalIncomingSic::find($sicId);
         $this->emit('togglePertinenceModal');
     }
 
@@ -35,16 +35,18 @@ class PertinenceModal extends Component
         try {
             if ($this->action == 'pertinent') {
 
-                $newSic = $this->sic->replicate([
-                    'sic_status_id'
+                $newSic = $this->externalIncomingSic->replicate([
+                    'status_id',
+                    'diagnosis_hypothesis_destination',
+                    'origin_observation'
                 ]);
-                $newSic->sic_status_id = 2; //Pertinente
-                $newSic->diagnostic_hipotesis = $this->diagnosticHypothesis;
+                $newSic->status_id = 2; //Pertinente
+                $newSic->diagnosis_hypothesis_destination = $this->diagnosticHypothesis;
                 $newSic->origin_observation = $this->originObservation;
                 $newSic = $newSic->toArray();
                 Sic::Create($newSic);
 
-                $this->sic->forceDelete();
+                $this->externalIncomingSic->forceDelete();
                 $this->closeModal();
             } elseif ($this->action == 'nonPertinent') {
                 $this->validate([
@@ -53,15 +55,16 @@ class PertinenceModal extends Component
                     'rejectedObservation.required' => 'Debe ingresar un motivo.'
                 ]);
 
-                $newSic = $this->sic->replicate([
-                    'sic_status_id'
+                $newSic = $this->externalIncomingSic->replicate([
+                    'status_id',
+                    'rejected_observation'
                 ]);
-                $newSic->sic_status_id = 5; //Rechazada
+                $newSic->status_id = 5; //Rechazada
                 $newSic->rejected_observation = $this->rejectedObservation;
                 $newSic = $newSic->toArray();
                 Sic::Create($newSic);
 
-                $this->sic->forceDelete();
+                $this->externalIncomingSic->forceDelete();
 
                 $this->closeModal();
             }

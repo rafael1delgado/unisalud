@@ -36,9 +36,14 @@ class CreateSicsTable extends Migration
             $table->string('patient_address')->nullable();
             $table->string('patient_street_type')->nullable();
             $table->string('patient_street_name')->nullable();
-            $table->string('patient_comune_code')->nullable();
+            $table->string('patient_commune_code')->nullable();
             $table->integer('patient_phone_1')->nullable();
             $table->integer('patient_phone_2')->nullable();
+            $table->string('patient_social_name')->nullable();
+            $table->string('patient_email')->nullable();
+            $table->string('patient_nationality')->nullable();
+            $table->string('patient_ethnicity')->nullable();
+            $table->string('patient_marital_status')->nullable();
             $table->string('derivation_establishment_code')->nullable();
             $table->string('derivation_specialty_code')->nullable();
             $table->string('motive_indicator')->nullable();
@@ -68,18 +73,13 @@ class CreateSicsTable extends Migration
             $table->integer('fonasa_number')->nullable();
             $table->integer('certifying_institution_rut')->nullable();
             $table->integer('prais')->nullable();
-            $table->string('patient_social_name')->nullable();
             $table->string('tutor_name')->nullable();
-            $table->string('patient_email')->nullable();
-            $table->string('patient_nationality')->nullable();
-            $table->string('patient_ethnicity')->nullable();
-            $table->string('patient_marital_status')->nullable();
         
             
-            $table->foreignId('sic_status_id');
+            $table->foreignId('status_id');
             $table->timestamps();
 
-            $table->foreign('sic_status_id')->on('sic_statuses')->references('id');
+            $table->foreign('status_id')->on('sic_statuses')->references('id');
         });
     }
 

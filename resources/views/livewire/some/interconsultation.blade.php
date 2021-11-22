@@ -75,26 +75,23 @@
                     <td>{{$sic->derivation_specialty_code}}</td>
                     <td>{{$sic->health_service_code}}</td>
 
-{{--                    <td>--}}
-{{--                        <button type="button" class="btn btn-primary" data-toggle="modal"--}}
-{{--                                data-target="#pertinenceModal" title="Dar pertinencia"><i class="fas fa-edit"></i>--}}
-{{--                        </button>--}}
-{{--                    </td>--}}
-
-
                     <td>
-                        <div wire:key="{{$sic->id }}">
-                            <a href class="btn btn-primary" title="Dar Pertinencia"
-                               wire:click.prevent="$emitTo('some.pertinence-modal', 'open', {{ $sic->id }})">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </div>
+                        @if(class_basename($sic) == ExternalIncomingSic::class)
+                            <div wire:key="{{$sic->id }}">
+                                <a href class="btn btn-primary" title="Dar Pertinencia"
+                                wire:click.prevent="$emitTo('some.pertinence-modal', 'open', {{ $sic->id }})">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </div>
+                        @endif
                     </td>
 
 {{--                    <td><a href="{{ route('vista.relevant') }}" class="btn btn-sm btn-outline-secondary"><span--}}
 {{--                                class="fas fa-edit" aria-hidden="true"></span></a></td>--}}
                     <td class="text-center">
-                        <button type="button" class="btn btn-primary "><i class="fas fa-file-alt"></i> Citar</button>
+                        @if(class_basename($sic) == Sic::class)
+                            <button type="button" class="btn btn-primary" wire:click='appoint({{$sic->id}})' title="Citar"><i class="fas fa-file-alt"></i> Citar</button>
+                        @endif
                     </td>
                 </tr>
             @endforeach

@@ -8,25 +8,24 @@ use App\Models\Address;
 
 class UserAddresses extends Component
 {
-    public $inputs = [];
-    public $i = 1;
+    public $i = -1;
 
     public $communes;
     public $regions;
     public $countries;
     public $patient;
     public $addresses = [];
+    public $sic;
 
-    public function add($i)
+    public function add()
     {
-        $i = $i + 1;
-        $this->i = $i;
-        array_push($this->inputs, $i);
+        $this->i++;
+        $this->addresses[$this->i]['address_use'] = 'home';
     }
 
     public function remove($i)
     {
-        unset($this->inputs[$i]);
+        unset($this->addresses[$i]);
     }
 
     /**
@@ -41,29 +40,29 @@ class UserAddresses extends Component
 
     public function mount()
     {
-        //Agrega inputs según cantidad de direcciones que tenga
+        //Agrega addresses según cantidad de direcciones que tenga
         if ($this->patient && $this->patient->addresses()->count() > 0) {
             for ($i = 0; $i < $this->patient->addresses()->count(); $i++) {
-                $this->add($i);
+                $this->add();
             }
         } else {
-            $this->add(1);
+            $this->add();
         }
 
         // Agrega address al editar
         if ($this->patient && $this->patient->addresses()->count() > 0) {
-            foreach ($this->inputs as $key => $value) {
-                $this->addresses[$value]['id'] = $this->patient->addresses->slice($key, 1)->first()->id;
-                $this->addresses[$value]['address_use'] = $this->patient->addresses->slice($key, 1)->first()->use;
-                $this->addresses[$value]['street_name'] = $this->patient->addresses->slice($key, 1)->first()->text;
-                $this->addresses[$value]['line'] = $this->patient->addresses->slice($key, 1)->first()->line;
-                $this->addresses[$value]['address_apartment'] = $this->patient->addresses->slice($key, 1)->first()->apartment;
-                $this->addresses[$value]['suburb'] = $this->patient->addresses->slice($key, 1)->first()->suburb;
-                $this->addresses[$value]['commune'] = $this->patient->addresses->slice($key, 1)->first()->commune_id;
-                $this->addresses[$value]['state'] = $this->patient->addresses->slice($key, 1)->first()->region_id;
-                $this->addresses[$value]['city'] = $this->patient->addresses->slice($key, 1)->first()->city;
-                $this->addresses[$value]['country'] = $this->patient->addresses->slice($key, 1)->first()->country_id;
-                $this->addresses[$value]['actually'] = $this->patient->addresses->slice($key, 1)->first()->actually;
+            foreach ($this->addresses as $key => $value) {
+                $this->addresses[$key]['id'] = $this->patient->addresses->slice($key, 1)->first()->id;
+                $this->addresses[$key]['address_use'] = $this->patient->addresses->slice($key, 1)->first()->use;
+                $this->addresses[$key]['street_name'] = $this->patient->addresses->slice($key, 1)->first()->text;
+                $this->addresses[$key]['line'] = $this->patient->addresses->slice($key, 1)->first()->line;
+                $this->addresses[$key]['address_apartment'] = $this->patient->addresses->slice($key, 1)->first()->apartment;
+                $this->addresses[$key]['suburb'] = $this->patient->addresses->slice($key, 1)->first()->suburb;
+                $this->addresses[$key]['commune'] = $this->patient->addresses->slice($key, 1)->first()->commune_id;
+                $this->addresses[$key]['state'] = $this->patient->addresses->slice($key, 1)->first()->region_id;
+                $this->addresses[$key]['city'] = $this->patient->addresses->slice($key, 1)->first()->city;
+                $this->addresses[$key]['country'] = $this->patient->addresses->slice($key, 1)->first()->country_id;
+                $this->addresses[$key]['actually'] = $this->patient->addresses->slice($key, 1)->first()->actually;
             }
         }
         
@@ -82,20 +81,12 @@ class UserAddresses extends Component
                     'city' => $match_addresses['city'][$i],
                     'country' => $match_addresses['country'][$i]
                 ];
-                array_push($this->inputs, $this->i);
+                array_push($this->addresses, $this->i);
             }
         }
 
-//        dd(old('street_name.0'));
-
-//        dd($this->inputs);
-
-//        foreach (old('street_name') as $addressValue) {
-//
-//        }
-
         if (old('street_name.0')) {
-            foreach ($this->inputs as $key => $value) {
+            foreach ($this->addresses as $key => $value) {
                 $this->addresses[$value]['address_use'] = old('address_use.'.$key);
                 $this->addresses[$value]['street_name'] = old('street_name.'.$key);
                 $this->addresses[$value]['line'] = old('line.'.$key);
@@ -108,13 +99,29 @@ class UserAddresses extends Component
             }
         }
 
+        //Si existe SIC(Interconsulta), se carga info desde SIC.
+        if($this->sic){
+            foreach ($this->addresses as $key => $value) {
+                // $this->addresses[$value]['id'] = $this->patient->addresses->slice($key, 1)->first()->id;
+                $this->addresses[$key]['address_use'] = 'home';
+                $this->addresses[$key]['street_name'] = $this->sic->patient_street_name;
+                $this->addresses[$key]['line'] = $this->sic->patient_address;
+                // $this->addresses[$value]['address_apartment'] = $this->patient->addresses->slice($key, 1)->first()->apartment;
+                // $this->addresses[$value]['suburb'] = $this->patient->addresses->slice($key, 1)->first()->suburb;
+                // $this->addresses[$value]['commune'] = $this->patient->addresses->slice($key, 1)->first()->commune_id;
+                // $this->addresses[$value]['state'] = $this->patient->addresses->slice($key, 1)->first()->region_id;
+                // $this->addresses[$value]['city'] = $this->patient->addresses->slice($key, 1)->first()->city;
+                // $this->addresses[$value]['country'] = $this->patient->addresses->slice($key, 1)->first()->country_id;
+                // $this->addresses[$value]['actually'] = $this->patient->addresses->slice($key, 1)->first()->actually;
+            }
+        }
     }
     public function setActuallyAddress($index){
         // $index);
        // dd( $this->addresses[$index] ) ;
          $log = "";
 
-      // foreach ($this->inputs as $key => $value) {
+      // foreach ($this->addresses as $key => $value) {
       //    // $log .= $this->addresses[$value]['id']."||" ;
       //   $fAddress  =  Address::find($this->addresses[$value]["id"]);
 

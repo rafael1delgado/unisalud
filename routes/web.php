@@ -121,6 +121,7 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::get('/', [PatientController::class, 'index'])->name('index');
     Route::post('/', [PatientController::class, 'store'])->name('store');
     Route::get('/create', [PatientController::class, 'create'])->name('create');
+    Route::get('/create-from-sic/{interconsultationId}', [PatientController::class, 'create'])->name('create_from_sic');
     Route::get('/{patient}', [PatientController::class, 'show'])->name('show');
     Route::post('/{patient}', [PatientController::class, 'update'])->name('update');
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
@@ -130,6 +131,7 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
 
 Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
     Route::get('/appointment/{appointmentId?}', AsignAppointment::class)->name('appointment');
+    Route::get('/appointment-from-sic/{interconsultationId?}', AsignAppointment::class)->name('appointment.from_interconsultation');
     Route::get('/appointment-pending-practitioner/{pendingPractitionerId}/{from}/{to}', AsignAppointment::class)->name('appointment.pending_practitioner');
     Route::get('/reallocate', Reallocate::class)->name('reallocate');
     // Route::view('/agenda', 'some.agenda')->name('agenda');

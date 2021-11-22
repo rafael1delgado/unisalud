@@ -17,15 +17,15 @@
                         {{--                        <h3 class="mb-3"></h3>--}}
                         <div class="card border-success mb-3">
                             <div class="card-header bg-success text-white">
-                                N° INTERCONSULTA: {{$sic->id ?? ''}}
+                                N° INTERCONSULTA: {{$externalIncomingSic->id ?? ''}}
                             </div>
                             <div class="card-body">
                                 <ul>
-                                    <li>Nombre: {{$sic->patient_name ?? ''}} </li>
-                                    <li>Edad: {{$sic->age ?? ''}} Años</li>
-                                    <li>Género: {{$sic->patient_sex_indicator?? ''}}</li>
-                                    <li>Centro: {{$sic->health_service_code?? ''}}</li>
-                                    <li>Motivo: {{$sic->motive_indicator?? ''}}</li>
+                                    <li>Nombre: {{$externalIncomingSic->patient_name ?? ''}} </li>
+                                    <li>Edad: {{$externalIncomingSic->age ?? ''}} Años</li>
+                                    <li>Género: {{$externalIncomingSic->patient_sex_indicator?? ''}}</li>
+                                    <li>Centro: {{$externalIncomingSic->health_service_code?? ''}}</li>
+                                    <li>Motivo: {{$externalIncomingSic->motive_indicator?? ''}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                           wire:model.defer="rejectedObservation"
                                 ></textarea>
                             </fieldset>
-                            @error('motive')
+                            @error('rejectedObservation')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </form>

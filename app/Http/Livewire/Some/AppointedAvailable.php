@@ -61,7 +61,7 @@ class AppointedAvailable extends Component
         }])
         ->get();
 
-        \Debugbar::info($this->practitioners);
+        // \Debugbar::info($this->practitioners);
     }
 
     public function appoint($pendingPractitionerId){

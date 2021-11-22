@@ -17,7 +17,6 @@ class ReallocationPending extends Component
     }
 
     public function appoint($appointmentId){
-        // dd($appointmentId);
         return redirect()->route('some.appointment', compact('appointmentId'));
     }
 
