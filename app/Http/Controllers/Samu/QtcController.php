@@ -30,9 +30,9 @@ class QtcController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   //$codemobiles = CodeMobile::all();
-        $qtcs=qtc::all();  // guarda todos los datos de la tabla
-        return view ('samu.call.index' , compact('calls'));
+    {   $calls=Call::all();
+        $keys=Key::all();
+        return view ('samu.qtc.create' , compact('calls', 'keys'));
     }
 
     /**
@@ -43,13 +43,11 @@ class QtcController extends Controller
      */
     public function store(Request $request)
     {
-       
         //devuelve user o lo crea
        
-        Qtc::updateOrCreate(
-        ['call_id' => $request->call_id],
-        $request->All()
-         );
+        Qtc::create($request->all());
+       $request->session()->flash('success', 'Creado satisfactoriamente.');
+        
         return redirect()->route('samu.call.index' ,'key', 'mobilesInService');
         
 
