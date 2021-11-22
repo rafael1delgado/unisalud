@@ -110,7 +110,7 @@
             </fieldset>
             <fieldset class="form-group col-md">
                 <label for="for_add_qtc"></label>
-                <a class="btn btn-success button mb-3" href="{{ route('samu.qtc.create' ,$call)}}"><i class="fas fa-search-plus"></i> Crear Seguimiento</a>
+                <a class="btn btn-success button mb-3" href="{{ route('samu.qtc.edit' ,$call)}}"><i class="fas fa-search-plus"></i> Crear Seguimiento</a>
             </fieldset>
             
         </div>

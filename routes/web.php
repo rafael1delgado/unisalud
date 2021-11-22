@@ -522,26 +522,19 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::post('/store/{shift}',		[CallController::class, 'store'])->name('store');
 		Route::delete('/{call}', 	[CallController::class, 'destroy'])->name('destroy');
 		Route::put('/update/{call}',		[CallController::class, 'update'])->name('update');
-		Route::post('/addqtc{call}',		[CallController::class, 'addqtc'])->name('addqtc');
     
     });
 
 
     Route::prefix('qtc')->name('qtc.')->group(function () {
 		Route::get('/', 			[QtcController::class, 'index'])->name('index');
-		Route::get('/create/{call}' , 		[QtcController::class, 'create'])->name('create');
 		Route::get('/edit/{qtc}', 		[QtcController::class, 'edit'])->name('edit');
-		Route::post('/store', 		[QtcController::class, 'store'])->name('store');
-		Route::post('/tstore', 		[QtcController::class, 'tstore'])->name('tstore');
-		Route::put('/tupdate/{qtc}', [QtcController::class, 'tupdate'])->name('tupdate');
-		Route::put('/update', [QtcController::class, 'update'])->name('update');
+		Route::put('/update/{qtc}', [QtcController::class, 'update'])->name('update');
     });
 
 	Route::prefix('ot')->name('ot.')->group(function () {
-		Route::get('/',				[OtController::class, 'index'])->name('index');
-		Route::get('/edit/{call}',[OtController::class, 'edit'])->name('edit');
-		Route::post('/store',		[OtController::class, 'store'])->name('store');
-		Route::delete('/{call}', 	[OtController::class, 'destroy'])->name('destroy');
+		Route::get('/edit/{ot}',[OtController::class, 'edit'])->name('edit');
+		Route::put('/update/{ot}', [QtcController::class, 'update'])->name('update');
     
     });
 	

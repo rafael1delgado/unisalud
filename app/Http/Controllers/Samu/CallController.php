@@ -109,10 +109,7 @@ class CallController extends Controller
     }
 
 
-    public function addqtc()
-    {     
-        dd('holaaaaaaaaaaaaaaaaaaaa');
-    }
+ 
 
     /**
      * Remove the specified resource from storage.
