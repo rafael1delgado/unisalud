@@ -41,7 +41,7 @@ class Call extends Model implements Auditable
         return $this->belongsTo(Ot::class);
     }
 
-    public function shifts()
+    public function shift()
     {
         return $this->belongsTo(Shift::class);
     }

@@ -63,6 +63,6 @@ class Shift extends Model implements Auditable
     }
     public function calls()
     {
-        return $this->belongsTo(Call::class);
+        return $this->hasMany(Call::class);
     }
 }

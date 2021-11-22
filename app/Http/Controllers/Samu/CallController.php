@@ -53,6 +53,11 @@ class CallController extends Controller
         //$call->qtc()->associate(new Qtc());
         $call->save();
 
+
+        // crear oc
+        // crear qtc
+
+        // guardar el call
         //Guardar Follow
         // $qtc = new Qtc();
         // $qtc->call_id = $call->id;

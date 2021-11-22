@@ -24,4 +24,11 @@ class Ot extends Model
         return $this->hasOne(Call::class);
     }
     
+    /**
+    * The primary key associated with the table.
+    *
+    * @var string
+    */
+    protected $table = 'samu_ots';
+    
 }
