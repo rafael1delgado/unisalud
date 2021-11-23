@@ -53,7 +53,7 @@ class SamuSeeder extends Seeder
         //     'call_reception' => "Operador 1",
         //     'telephone_information' => "982598059",
         //     'applicant' => "aertsdf",
-        //     'direction' => "Calle numero",
+        //     'address' => "Calle numero",
         //     'telephone' => "982598059",
         // ]);
     }
