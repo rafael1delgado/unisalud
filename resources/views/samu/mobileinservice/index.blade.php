@@ -4,93 +4,59 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-ambulance"></i> Listado de Moviles - Tripulación</h3>
+<h3 class="mb-3"><i class="fas fa-ambulance"></i> Listado de Moviles - Tripulación
+    <a class="btn btn-success float-right" href="{{ route('samu.mobileinservice.create') }}">
+        <i class="fas fa-plus"></i> </i> Agregar Moviles en turno
+    </a>
+</h3>
+<div class="table-responsive">
 
-<div class="card mb-3">
-        <div class="card-body">
-            
-                <div class="form-row mb-3 ml-2">
-                    <div class="col-12 col-md-8">
-                        <form method="GET" class="form-horizontal" action="">
-                            <div class="input-group mb-sm-0">
-                                <input class="form-control" type="text" name="search" autocomplete="off" id="for_search"
-                                    style="text-transform: uppercase;"
-                                    placeholder="MOVIL" value="" required>
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                        
-                    <div class="col-12 col-md-4">
-                        <a class="btn btn-success" href="{{ route('samu.mobileinservice.create') }}">
-                        <i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Agregar Moviles en turno
+
+        <table class="table  table-striped small">
+            <thead>
+                <tr class="table-primary">
+                    <th></th>
+                    <th>Turno</th>
+                    <th>Movil</th>
+                    <th>Tipo</th>
+                    <th>Observación</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($shifts as $shift)
+                @foreach($shift->mobilesInService as $mis)
+                <tr>
+                    <td>
+                        <a href="{{ route('samu.mobileinservice.edit',$mis) }}">
+                            <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
                         </a>
-                    </div>
-                
-                </div> 
-            
 
-            <div class="table-responsive col-md-12 mb-3 ">
-            @foreach($shifts as $shift)
-          
-                    <table class="table table-sm table-bordered table-striped small">
-                  
-                  
-                        <thead>
-                       
-                            <tr class="text-center table-info">
-                              
-                              <th colspan="5"><b>DETALLES DE MOVILES DE TURNO</b></th>
-                            </tr>
-                            
-                            <tr class="text-center table-success">
-                              
-                              <th colspan="4"><b>Turno: {{ $shift->id }} - {{ $shift->date }} {{ $shift->type }} {{ $shift->opening_time }}</b></th>
-                            </tr>
-                            @foreach($shift->mobilesInService as $mis)
-              
-                            <tr class="text-center table-secondary">
-                        
-                                <th>Movil</th>
-                                <th>Tipo</th>
-                                <th>Observacion</th>
-                                <th>Editar</th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                        
-                            <tr>
-                                <td>{{ $mis->mobile_id }}</td>
-                                <td>{{ $mis->type}} </td>
-                                <td>{{ $mis->observation}} </td>                             
-                                <td><a href="{{ route('samu.mobileinservice.edit',$mis) }}">Editar</a> </td>
-                                 
-                            </tr>
-                            <tr>
-                            <td colspan="5">
-                            @livewire('samu.mobile-crew',['mobileInService' => $mis])   
-                            </td>
-                        </tr>
-
-                        @endforeach 
-                        </tbody>
-                     
+                    </td>
+                    <td>
+                    {{ $shift->date }} -{{ $shift->type }}
+                    </td>
+                    <td>{{ $mis->mobile_id }}</td>
+                    <td>{{ $mis->type}} </td>
+                    <td>{{ $mis->observation}} </td>
+                    <td>
+                    @livewire('samu.mobile-crew',['mobileInService' => $mis])  
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ route('samu.shift.destroy', $shift) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
                     
-                    </table>
-                    <hr color="success"  >
-               
-                    @endforeach
-                </div>
-            </div>
-        
-            <hr>
-        
-        </div>
-     
+                </tr>
+
+            @endforeach 
+            </tbody>
+            
+        @endforeach
 </div>
 
 

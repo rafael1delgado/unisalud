@@ -478,6 +478,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/edit/{mobileInService}',[MobileInServiceController::class, 'edit'])->name('edit');
 		Route::put('/{mobileInService}',	[MobileInServiceController::class, 'update'])->name('update');
 		Route::delete('/{mobileInService}', [MobileInServiceController::class, 'destroy'])->name('destroy');
+	
     });
 
     Route::prefix('mobile')->name('mobile.')->group(function () {
