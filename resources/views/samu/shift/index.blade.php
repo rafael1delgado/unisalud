@@ -4,75 +4,60 @@
 
 @include('samu.nav')
 
-<div class="mb-3" style="font-size: 1.575rem;">
-    <i class="fas fa-clipboard-list"></i>
-    <span>Listado de Turnos</span>
-    <a class="btn btn-success " href="{{ route('samu.shift.create') }}">
+<h3 class="mb-3"><i class="fas fa-blender-phone"></i> Listado de Turnos
+    <a class="btn btn-success float-right" href="{{ route('samu.shift.create') }}">
         <i class="fas fa-plus"></i> Crear turno
     </a>
-</div>
-<div class="card mb-3">
-    <div class="card-body">
-        <div class="form-row">        
-            <div class="table-responsive col-md-12">
-                <table class="table table-sm table-bordered table-striped small">
-                    <thead>
-                    @foreach($shifts as $shift)
-                        <tr class="text-center table-info">
-                            <th>FECHA</th>
-                            <th>TURNO</th>
-                            <th>APERTURA TURNO</th>
-                            <th>CIERRE TURNO</th>
-                            <th>EDITAR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       
-                        <tr>
-                            
-              
-                            <td class="text-center">{{ $shift->date }}</td>
-                            <td class="text-center">{{ $shift->type }}</td>
-                            <td class="text-center">{{ $shift->opening_time }}</td>
-                            <td class="text-center">{{ $shift->closing_time }}</td>
-                            
-                           
-                            <td class="d-flex align-items-center justify-content-center">
-                                <a href="{{ route('samu.shift.edit', $shift) }}">
-                                    <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
-                                </a>
-                                <form method="POST" action="{{ route('samu.shift.destroy' , $shift) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button " class="btn btn-sm btn-danger mx-1"><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </td>
-                        </tr>
+</h3>
+
+<div class="table-responsive">
+    <table class="table table-striped">
         
-                        <tr>
-                            <td colspan="5">
-                                @livewire('samu.shift-user', ['shift_id' => $shift->id])
-                            </td>
-                        </tr>
-                        @endforeach
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <hr>
-    </div>
-</div>
-<div>
-{{ $shifts->links('pagination::bootstrap-4') }}
-</div>
+        <thead>
+            <tr class="table-primary">
+                <th></th>
+                <th>Fecha</th>
+                <th>Turno</th>
+                <th>Hora apertura</th>
+                <th>Hora cierre</th>
+                <th>Personal</th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @foreach($shifts as $shift)
+            <tr>
+                <td>
+                    <a href="{{ route('samu.shift.edit', $shift) }}">
+                        <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
+                    </a>
+                </td>
+                <td>{{ $shift->date }}</td>
+                <td>{{ $shift->type }}</td>
+                <td>{{ $shift->opening_time }}</td>
+                <td>{{ $shift->closing_time }}</td>
+                <td>
+                    @livewire('samu.shift-user', ['shift_id' => $shift->id])
+                </td>
+                <td>
+                    <form method="POST" action="{{ route('samu.shift.destroy', $shift) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+        
+    </table>
 </div>
 
+{{ $shifts->links('pagination::bootstrap-4') }}
+
 @endsection
+
 @section('custom_js')
-<script>
-$(function () {
-        $('[data-toggle="popover" ]').popover()
-    })
-</script>
+
 @endsection

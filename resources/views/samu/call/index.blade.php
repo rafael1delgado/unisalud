@@ -4,15 +4,9 @@
 
 @include('samu.nav')
 
-<div class="row">
-    <div class="col">
-        <h3 class="mb-3"><i class="fas fa-phone-volume"></i> Centro de Llamadas</h3>
-    </div>
-    <div class="col text-right">
-        <h4><i class="far fa-calendar-alt"></i> Fecha de registro: {{date('Y-m-d')}}</h4>
-    </div>
-</div>
-
+<h3 class="mb-3"><i class="fas fa-headset"></i> Nueva de Llamada
+    <small class="float-right"><i class="far fa-calendar-alt"></i> Fecha de registro: {{ date('Y-m-d') }}</small>
+</h3>
 
 <!-- Create--> 
 <form method="POST" action="{{ route('samu.call.store', $shift) }}">

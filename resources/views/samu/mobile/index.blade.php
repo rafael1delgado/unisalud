@@ -4,7 +4,11 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-lock"></i> Lista de Codificacion de Moviles</h3>
+<h3 class="mb-3"><i class="fas fa-ambulance"></i> Listado de Móviles
+    <a class="btn btn-success float-right" href="{{ route('samu.mobile.create') }}">
+        <i class="fas fa-plus"></i> Agregar
+    </a>
+</h3>
 
 <div class="row mb-4">
     <div class="col-12 col-md-6">
@@ -19,38 +23,37 @@
             </div>
         </form>
     </div>
-    <div class="col-12 col-md-2">
-        <a class="btn btn-success" href="{{ route('samu.mobile.create') }}">
-            <i class="fas fa-plus"></i> Agregar
-        </a>
-    </div>
 </div>
+
 <div class="table-responsive">
-    <table class="table table-sm table-bordered table-striped small">
+    <table class="table table-striped">
         <thead>
-            <tr class="text-center table-info">
+            <tr class="table-primary">
+                <th></th>
                 <th>Codigo</th>
                 <th>Nombre</th>
                 <th>Patente</th>
                 <th>Tipo</th>
                 <th>Descripción</th>
-                <th style="width:15%">Editar - Eliminar</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach($mobiles as $mobile)
             <tr>
+                <td>
+                    <a href="{{ route('samu.mobile.edit', $mobile) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
+                </td>
                 <td>{{ $mobile->code }}</td>
                 <td>{{ $mobile->name }}</td>
                 <td>{{ $mobile->plate }}</td>
                 <td>{{ $mobile->type }}</td>
                 <td>{{ $mobile->description }}</td>
-                <td class="d-flex align-items-center justify-content-center">
-                    <a href="{{ route('samu.mobile.edit', $mobile) }}"><button type="button " class="btn btn-sm btn-warning mx-1"><i class="fas fa-edit"></i></button></a>
-                    <form method="POST" action="{{ route('samu.mobile.destroy' , $mobile) }}">
+                <td>
+                    <form method="POST" action="{{ route('samu.mobile.destroy', $mobile) }}">
                         @csrf
                         @method('DELETE')
-                        <button type="button " class="btn btn-sm btn-danger mx-1"><i class="fas fa-trash-alt fa-lg"></i></button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
                 </td>
             </tr>
