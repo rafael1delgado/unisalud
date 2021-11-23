@@ -53,8 +53,9 @@ class CreateSamuQtcsTable extends Migration
             $table->integer('hgt')->nullable();
             $table->integer('fill_capillary')->nullable();
             $table->integer('t')->nullable();
-            $table->integer('treatment')->nullable();
-            $table->integer('observation_sv')->nullable();
+            
+            $table->text('treatment')->nullable();
+            $table->text('observation_sv')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

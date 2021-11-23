@@ -16,7 +16,7 @@ class ShiftController extends Controller
      */
     public function index()
     {
-        $shifts = Shift::orderBy('id','desc')->paginate(2);
+        $shifts = Shift::orderBy('id','desc')->paginate(60);
         
 
         
@@ -73,9 +73,9 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        $users = User::all();
+        //$users = User::all();
         
-        return view('samu.shift.create', compact('users'));
+        return view('samu.shift.create');
        
     }
 

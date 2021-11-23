@@ -5,41 +5,34 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ active('samu.shift.index') }}"
-        href=" {{ route('samu.shift.index') }}"> <i class="fas fa-list"></i> Turno</a>
-       
+        <a class="nav-link {{ active(['samu.shift.*']) }}"
+        href=" {{ route('samu.shift.index') }}"> <i class="fas fa-blender-phone"></i> Turnos</a>
     </li>
     
     <li class="nav-item">
-        <a class="nav-link {{ active('samu.mobileinservice.index') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        <a class="nav-link {{ active('samu.mobileinservice.*') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
         href=" {{ route('samu.mobileinservice.index') }}"><i class="fas fa-ambulance"></i> Moviles en servicio</a>
     </li>
 
     <li class="nav-item">
-    <a class="nav-link {{ active('samu.noveltie.index') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
-        href=" {{ route('samu.noveltie.index') }}"><i class="fas fa-book"></i>Novedades</a>
+        <a class="nav-link {{ active('samu.noveltie.*') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.noveltie.index') }}"><i class="fas fa-book"></i> Novedades</a>
     </li>
 
     <li class="nav-item">
-    <a class="nav-link {{ active('samu.call.index') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
-        href=" {{ route('samu.call.index') }}"><i class="fas fa-book"></i> Call Center</a>
+        <a class="nav-link {{ active('samu.call.*') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.call.index') }}"><i class="fas fa-headset"></i> Centro de Llamadas</a>
     </li>
 
- 
-
-    
-
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+        <a class="nav-link dropdown-toggle {{ active(['samu.key.*','samu.mobile.*']) }}" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
             <i class="fas fa-cog"></i> Configuración</a>
         <div class="dropdown-menu">
 
-            <a class="dropdown-item
-            @if(request()->route()->view == 'key') active @endif"
-            href=" {{ route('samu.key.index') }}"><i class="fas fa-lock"></i> Codificación de las claves</a>
+            <a class="dropdown-item {{ active('samu.key.*') }}"
+            href=" {{ route('samu.key.index') }}"><i class="fas fa-user-injured"></i> Codificación de las claves</a>
 
-            <a class="dropdown-item
-            @if(request()->route()->view == 'mobile') active @endif"
+            <a class="dropdown-item {{ active('samu.mobile.*') }}"
             href=" {{ route('samu.mobile.index') }}"><i class="fas fa-ambulance"></i> Móviles</a>
 
         </div>

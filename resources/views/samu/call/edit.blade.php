@@ -4,8 +4,7 @@
 
 @include('samu.nav')
 
-
-<h3>Datos de la llamada</h3>
+<h3 class="mb-3"><i class="fas fa-headset"></i> Datos de la llamada</h3>
 
 <!-- Edit --> 
 <form method="POST" action="{{ route('samu.call.update', $call) }}">
@@ -33,6 +32,8 @@
 
     </div>
 </div>
+
+<br>
 
 @endsection
 

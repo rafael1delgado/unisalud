@@ -4,7 +4,11 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-lock"></i> Lista de Codificacion de Claves</h3>
+<h3 class="mb-3"><i class="fas fa-user-injured"></i> Lista de Codificacion de Claves
+    <a class="btn btn-success float-right" href="{{ route('samu.key.create') }}">
+        <i class="fas fa-plus"></i> Agregar
+    </a>
+</h3>
 
 <div class="row mb-4">
     <div class="col-12 col-md-6">
@@ -18,41 +22,36 @@
             </div>
         </form>
     </div>
-    <div class="col-12 col-md-2">
-        <a class="btn btn-success" href="{{ route('samu.key.create') }}">
-            <i class="fas fa-plus"></i> Agregar
-        </a>
-    </div>
 </div>
 
 <div class="table-responsive">
-    <table class="table table-sm table-bordered table-striped small">
+    <table class="table table-striped">
         <thead>
-            <tr class="text-center table-info">
+            <tr class="table-primary">
+                <th></th>
                 <th>Codigo</th>
                 <th>Nombre</th>
-                <th style="width:15%">Editar - Eliminar</th>
-
+                <th></th>
             </tr>
         </thead>
         <tbody >
             @foreach($keys as $key)
             <tr>
-                <td>{{ $key->key }}</td>
-                <td>{{ $key->name }}</td>
-                <td class="d-flex align-items-center justify-content-center">
-                    
+                <td>
                     <a href="{{ route('samu.key.edit', $key) }}">
-                        <button type="button" class="btn btn-sm btn-warning mx-1">
+                        <button type="button" class="btn btn-outline-primary mx-1">
                             <i class="fas fa-edit"></i>
                         </button>
                     </a>
-
+                </td>
+                <td>{{ $key->key }}</td>
+                <td>{{ $key->name }}</td>
+                <td>
                     <form method="POST" action="{{ route('samu.key.destroy' , $key) }}">
                         @csrf
                         @method('DELETE')
-                        <button type="button" class="btn btn-sm btn-danger mx-1">
-                            <i class="fas fa-trash-alt fa-lg"></i>
+                        <button type="submit" class="btn btn-danger mx-1">
+                            <i class="fas fa-trash"></i>
                         </button>
                     </form>
                 </td>
