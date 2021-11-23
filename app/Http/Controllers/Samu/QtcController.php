@@ -75,13 +75,11 @@ class QtcController extends Controller
         //['qtc_id' => $request->qtc_id];
         $qtc->fill($request->all());
         $qtc->update();
-    
+        session()->flash('success', ' Actualizado satisfactoriamente.');
         return redirect()->route('samu.call.index', compact('qtc'));
     }
 
     
-    
-
     /**
      * Remove the specified resource from storage.
      *

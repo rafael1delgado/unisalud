@@ -10,10 +10,15 @@
         <fieldset class="form-group  col-md-1">
             <label for="for_key">Clave</label>
             <select class="form-control" name="key_id">
+                @if($call->qtc->key == null)
                 <option value=""></option>
+                @elseif ($call->qtc->key != null)
+                
                 @foreach($keys as $key)
+         
                 <option value="{{ $call->qtc->key === $key ? 'selected' : '' }}">{{ $key->key }}  - {{ $key->name }}</option>
-                @endforeach  
+                @endforeach 
+                @endif 
             </select>
         </fieldset>
 
@@ -33,7 +38,7 @@
             <select class="form-control" name="mobile">
                 <option value=""></option>
                 @foreach($mobilesInServices as $mis)
-                    <option value="{{ $call->qtc->mis === $mis ? 'selected' : '' }}">{{ $mis->mo }} </option>
+                    <option value="{{ $call->qtc->mis === $mis ? 'selected' : '' }}">{{ $mis->mobile_id }} </option>
                 @endforeach 
             </select>
         </fieldset>
