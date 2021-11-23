@@ -24,7 +24,7 @@ class Call extends Model implements Auditable
         'call_reception',
         'telephone_information',
         'applicant',
-        'direction',
+        'address',
         'telephone',
         'shift_id',
         'qtc_id',

@@ -46,9 +46,9 @@
     </fieldset>
 
     <fieldset class="form-group col-md-2">
-        <label for="for_direction">Dirección </label>
-        <input type="text" class="form-control form-control-sm" name="direction"
-            value="{{ optional($call)->direction }}">
+        <label for="for_address">Dirección </label>
+        <input type="text" class="form-control form-control-sm" name="address"
+            value="{{ optional($call)->address }}">
     </fieldset>
 
     <fieldset class="form-group col-md-2">

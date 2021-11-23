@@ -23,7 +23,7 @@ class CreateSamuCallsTable extends Migration
             $table->string('call_reception');
             $table->text('telephone_information')->nullable();
             $table->string('applicant')->nullable();
-            $table->string('direction')->nullable();
+            $table->string('address')->nullable();
             $table->string('telephone')->nullable();
             $table->timestamps();
             $table->softDeletes();

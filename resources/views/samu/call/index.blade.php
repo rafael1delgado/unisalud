@@ -55,7 +55,7 @@
                 <td>{{ $call->call_reception}}</td>
                 <td>{{ $call->telephone_information }}</td>
                 <td>{{ $call->applicant }}</td>
-                <td>{{ $call->direction }}</td>
+                <td>{{ $call->address }}</td>
                 <td>{{ $call->telephone }}</td>
                            
                 <td class="text-center" >
