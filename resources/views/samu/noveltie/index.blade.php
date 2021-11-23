@@ -30,7 +30,7 @@
                     <i class="fas fa-edit"></i></a>
                 </td>
                 <td>{{ $noveltie->shift->type }}</td>
-                <td>{{ $noveltie->shift->opening_time }}</td>
+                <td>{{ $noveltie->shift->date->format('Y-m-d') }} {{ $noveltie->shift->opening_time }}</td>
                 <td>{{ $noveltie->shift->closing_time }}</td>
                 <td>{{ $noveltie->detail ?? ''}} </td>
             </tr>
