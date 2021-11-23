@@ -16,7 +16,7 @@ class Ot extends Model
     * @var array
     */
     protected $fillable = [
-        'description',
+        'description'
     ];
 
     public function call()

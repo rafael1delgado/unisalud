@@ -15,7 +15,7 @@ class CreateSamuOtsTable extends Migration
     {
         Schema::create('samu_ots', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

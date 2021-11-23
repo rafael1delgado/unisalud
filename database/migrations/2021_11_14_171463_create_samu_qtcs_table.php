@@ -17,11 +17,11 @@ class CreateSamuQtcsTable extends Migration
            //segumiento
             $table->id();
        
-            //llave foranea
-           
-            $table->foreignId('key_id')->constrained('samu_keys');
-            $table->foreignId('return_key_id')->constrained('samu_keys');
+            /* llaves foraneas */
+            $table->foreignId('key_id')->nullable()->constrained('samu_keys');
+            $table->foreignId('return_key_id')->nullable()->constrained('samu_keys');
             $table->foreignId('mobile')->nullable()->constrained('samu_mobiles_in_service');
+
             $table->string('transfer_type')->nullable();
             $table->time('departure_time')->nullable();
             $table->time('mobile_departure_time')->nullable();

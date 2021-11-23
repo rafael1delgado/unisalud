@@ -453,6 +453,7 @@ use App\Http\Controllers\Samu\ShiftMobileController;
 use App\Http\Controllers\Samu\KeyController;
 use App\Http\Controllers\Samu\MobileController;
 use App\Http\Controllers\Samu\QtcController;
+use App\Http\Controllers\Samu\OtController;
 use App\Http\Controllers\Samu\CallController;
 use App\Http\Controllers\Samu\NoveltieController;
 
@@ -518,24 +519,23 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
     Route::prefix('call')->name('call.')->group(function () {
 		Route::get('/',				[CallController::class, 'index'])->name('index');
-		Route::get('/edit/{call}',[CallController::class, 'edit'])->name('edit');
-		Route::post('/store/{shift}',		[CallController::class, 'store'])->name('store');
+		Route::get('/edit/{call}',	[CallController::class, 'edit'])->name('edit');
+		Route::post('/store/{shift}',[CallController::class, 'store'])->name('store');
 		Route::delete('/{call}', 	[CallController::class, 'destroy'])->name('destroy');
-		Route::put('/update/{call}',		[CallController::class, 'update'])->name('update');
+		Route::put('/update/{call}',[CallController::class, 'update'])->name('update');
     
     });
 
 
     Route::prefix('qtc')->name('qtc.')->group(function () {
 		Route::get('/', 			[QtcController::class, 'index'])->name('index');
-		Route::get('/edit/{qtc}', 		[QtcController::class, 'edit'])->name('edit');
+		Route::get('/edit/{qtc}', 	[QtcController::class, 'edit'])->name('edit');
 		Route::put('/update/{qtc}', [QtcController::class, 'update'])->name('update');
     });
 
 	Route::prefix('ot')->name('ot.')->group(function () {
-		Route::get('/edit/{ot}',[OtController::class, 'edit'])->name('edit');
-		Route::put('/update/{ot}', [QtcController::class, 'update'])->name('update');
-    
+		Route::get('/edit/{ot}',	[OtController::class, 'edit'])->name('edit');
+		Route::put('/update/{ot}', 	[OtController::class, 'update'])->name('update');
     });
 	
 

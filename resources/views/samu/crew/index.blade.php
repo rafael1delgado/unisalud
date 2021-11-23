@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('nav')
+@include('samu.nav')
 
 <h3 class="mb-3"><i class="fas fa-clipboard-list"></i> Lista de la Tripulación</h3>
 

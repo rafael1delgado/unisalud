@@ -1,123 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
-@include('nav')
+
+@include('samu.nav')
 
 
-<style>
- .button1{
-     margin-top:30px;
-     }
-</style>
+<h3>Datos de la llamada</h3>
 
-<div class="card mb-3">
+<!-- Edit --> 
+<form method="POST" action="{{ route('samu.call.update', $call) }}">
+    @csrf
+    @method('PUT')
+
+    @include('samu.call.form', ['call' => $call])
+</form>
+
+
+<br>
+
+<div class="card">
     <div class="card-body">
 
-    <h3> Datos de la llamada</h3>
-            
-             <form method="POST" action="{{ route('samu.call.update', $call) }}">
-                @csrf
-                @method('PUT')
-                <div class="form-row">
+    @switch($call->class_call)
+        @case('OT')
+            @include('samu.ot.edit', ['call' => $call])
+            @break
 
-                        <fieldset class="form-group  col-md-3">
-                            <label for="for_hour">Clase</label>
-                            <select class="form-control" name="class_call" id="class_call">
-                                    <option> {{ $call->class_call }} </option>
-                                    <option value="T1" >T1</option>
-                                    <option value="T2" >T2</option>
-                                    <option value="NM" >NM</option>
-                                    <option value="OT" >OT</option>
-                                </select>
-                        </fieldset>
-                        <fieldset class="form-group  col-md-2">
-                            <label for="for_hour">Hora</label>
-                            <input type="time" class="form-control" name="hour" id="hour"  value="{{$call->hour}}">
-                        </fieldset>
-                        <fieldset class="form-group  col-md-2">
-                            <label for="for_call_reception">Recep. de llamada</label>
-                                <select class="form-control" name="call_reception" id="call_reception">
-                                    <option >{{ $call->call_reception }}</option>
-                                    <option value="Operador 1" >Operador 1</option>
-                                    <option value="Operador 2" >Operador 2</option>
-                                    <option value="Operador 3" >Operador 3</option>
-                                    <option value="Operador 4" >Operador 4</option>
-                                    <option value="Operador 5" >Operador 5</option>
-                                    <option value="Operador 6" >Operador 6</option>
-                                    <option value="Jefe de turno" >Jefe de turno</option>
-                                    <option value="Medico Regulador" >Medico Regulador</option>
-                                    <option value="Enfermera Reguladora" >Enfermera Reguladora</option>
-                                </select>
-                        </fieldset>
-                        <fieldset class="form-group  col-md-5">
-                            <label for="for_telephone_information">Motivo de solicitud </label>
-                            <input type="text" class="form-control"  name="telephone_information" value="{{ $call->telephone_information }}">
-                        
-                        </fieldset>
-                </div>
-                 <div class="form-row">
-                        <fieldset class="form-group  col-md-4">
-                            <label for="for_applicant">Solicitante </label>
-                            <input type="text" class="form-control" name="applicant" value="{{ $call->applicant }}">
-                        </fieldset>
-                        <fieldset class="form-group  col-md-4">
-                            <label for="for_direction">Dirección </label>
-                            <input type="text" class="form-control" name="direction" value="{{ $call->direction }}">
-                        </fieldset>
-                        <fieldset class="form-group  col-md-2">
-                            <label for="for_telephone">Teléfono </label>
-                            <input type="text" class="form-control" name="telephone" value="{{ $call->telephone }}" >
-                        </fieldset>
-                        <fieldset class="form-group col-md-2">
-                            <label for="for_update_call"><br /> <br /><br /></label>
-                            <button type="submit" class="btn btn-primary button mb-3" >Guardar</button>
-                        </fieldset>
-                </div>
-            </form>
-
-            <div class="form-row">
-            <fieldset class="form-group col-md-2">
-                <label for="for_add_movil"></label>
-                <button type="button" class="btn btn-success button mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="fas fa-plus"></i>  <i class="fas fa-ambulance"></i>  Asignar OT</button>
-    
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Orientacion Telefónica</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                
-                <fieldset class="form-group  col-md">
-                    <div class=" col-md-12">
-                        <label for="for_observation_sv">Registro Telefónico </label>
-                        <textarea class="form-control" style="height: 100px" name="observation_sv"></textarea>
-                    </div> 
-                </fieldset>
-            
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success">Guardar Cambios</button>
-                </div>
-                </div>
-            </div>
-            </div>
-            
-            
-            </fieldset>
-            <fieldset class="form-group col-md">
-                <label for="for_add_qtc"></label>
-                <a class="btn btn-success button mb-3" href="{{ route('samu.qtc.edit' ,$call)}}"><i class="fas fa-search-plus"></i> Crear Seguimiento</a>
-            </fieldset>
-            
-        </div>
-
-
-
+        @default
+            @include('samu.qtc.edit', ['call' => $call])
+            @break
+    @endswitch
 
     </div>
 </div>
+
+@endsection
+
+@section('custom_js')
+
 @endsection

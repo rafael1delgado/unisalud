@@ -1,13 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-@include('nav')
 
-<style>
- .button1{
-     margin-top:30px;
-     }
-</style>
+@include('samu.nav')
+
 <form action="{{route('samu.mobile.update', $mobile)}}" method="POST" autocomplete="off">
     @csrf
     @method('PUT')

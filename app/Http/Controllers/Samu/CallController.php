@@ -23,7 +23,7 @@ class CallController extends Controller
     {
         $shift = Shift::where('date', now()->format('Y-m-d'))->first(); //obtienes la variable shift
         $mobiles = Mobile::all();
-        $calls=Call::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
+        $calls = Call::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
         //return $calls; 
         
        return view ('samu.call.index' , compact('calls','mobiles', 'shift'));
@@ -45,25 +45,14 @@ class CallController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Shift $shift, Qtc $qtc )
+    public function store(Request $request, Shift $shift)
     {
         //Guardar Call
         $call = new Call($request->All());
-        $call->shift_id = $shift->id;
+        $call->shift()->associate($shift);
+        $call->qtc()->associate(Qtc::create());
+        $call->ot()->associate(Ot::create());
         $call->save();
-        $call->qtc()->associate(new qtc());
-        $ot=new Ot($request->All());
-        $ot->save();
-
-
-        // crear ot
-        // crear qtc
-
-        // guardar el call
-        //Guardar Follow
-        // $qtc = new Qtc();
-        // $qtc->call_id = $call->id;
-        // $qtc->save();
   
         $request->session()->flash('success', 'Ingreso Un nuevo llamado.');
         return redirect()->route('samu.call.index' );
@@ -90,7 +79,9 @@ class CallController extends Controller
      */
     public function edit(Call $call, Shift $shift)
     {
-        return view ('samu.call.edit' , compact('call'));
+        $keys = Key::all();
+        $mobilesInServices = MobileInService::all();
+        return view ('samu.call.edit' , compact('call','keys','mobilesInServices'));
     }
 
  

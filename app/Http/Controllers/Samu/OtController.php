@@ -19,27 +19,6 @@ class OtController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Samu\Ot  $ot
@@ -49,17 +28,7 @@ class OtController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Samu\Ot  $ot
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ot $ot)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -69,8 +38,13 @@ class OtController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Ot $ot)
-    {
-        //
+    {        
+        $ot->fill($request->all());
+        $ot->save();
+        
+        session()->flash('info', 'El ot ha sido actualizado.');
+        return redirect()->route('samu.call.index');
+        
     }
 
     /**

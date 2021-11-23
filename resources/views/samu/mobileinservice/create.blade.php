@@ -1,13 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-@include('nav')
 
-<style>
-    .button1{
-     margin-top:30px;
-    }
-</style>
+@include('samu.nav')
 
 <div class="card mb-3">
     <div class="card-body">

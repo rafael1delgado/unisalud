@@ -2,7 +2,7 @@
 
 @section('content')
  
-@include('nav')
+@include('samu.nav')
 
 
 <div class="jumbotron mt-3">

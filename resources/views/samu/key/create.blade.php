@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('nav')
+@include('samu.nav')
 
 <form method="POST" action="{{ route('samu.key.store') }}">
     @csrf

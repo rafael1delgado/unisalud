@@ -2,8 +2,7 @@
 
 @section('content')
 
-@include('nav')
-
+@include('samu.nav')
 
 <div class="mb-3" style="font-size: 1.575rem;">
     <i class="fas fa-clipboard-list"></i>

@@ -2,12 +2,9 @@
 
 @section('content')
 
-@include('nav')
-
+@include('samu.nav')
 
 <h3 class="mb-3"><i class="fas fa-ambulance"></i> Listado de Moviles - Tripulación</h3>
-
-
 
 <div class="card mb-3">
         <div class="card-body">
