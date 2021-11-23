@@ -80,7 +80,7 @@ class CallController extends Controller
     public function edit(Call $call, Shift $shift)
     {
         $keys = Key::all();
-        $mobilesInServices = MobileInService::all();
+        $mobilesInServices = $shift->mobilesInService;
         return view ('samu.call.edit' , compact('call','keys','mobilesInServices'));
     }
 
