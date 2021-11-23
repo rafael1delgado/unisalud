@@ -33,7 +33,7 @@
             <select class="form-control" name="mobile">
                 <option value=""></option>
                 @foreach($mobilesInServices as $mis)
-                    <option value="{{ $call->qtc->mis === $mis ? 'selected' : '' }}">{{ $mis->mobile_id }} </option>
+                    <option value="{{ $call->qtc->mis === $mis ? 'selected' : '' }}">{{ $mis->mo }} </option>
                 @endforeach 
             </select>
         </fieldset>
