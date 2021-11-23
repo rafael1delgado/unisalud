@@ -64,10 +64,8 @@ class Shift extends Model implements Auditable
 
     public static function todayShiftVerify()
     {
-        // shift::where('date', now()->format('Y-m-d'))->first()
-        if( 1 == 1) return true;
-        else return false;
-
+        return Shift::where('status',1)->exists() ? true : false;
+        
     }
     public function calls()
     {

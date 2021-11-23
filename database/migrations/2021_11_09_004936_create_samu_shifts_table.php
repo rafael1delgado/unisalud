@@ -15,7 +15,7 @@ class CreateSamuShiftsTable extends Migration
     {
         Schema::create('samu_shifts', function (Blueprint $table) {
             $table->id();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(true);
             $table->string('type');
             $table->datetime('opening_at');
             $table->datetime('closing_at')->nullable();

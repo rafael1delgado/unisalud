@@ -14,17 +14,22 @@
 
         <fieldset class="form-group col-md-2">
             <label for="for_type"><b>Tipo de Turno</b> </label>
-            <select class="form-control" name="type" id="for_type">
+            <select class="form-control" name="type" id="for_type" required>
+                <option value=""></option>
                 <option value="Largo">Largo</option>
                 <option value="Noche">Noche</option>
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-md-3">
+        <fieldset class="form-group col-md-2">
             <label for="for_opening_at"><b>Apertura</b> </label>
-            <input type="datetime-local" class="form-control" name="opening_at" id="for_opening_at">
+            <input type="datetime-local" class="form-control" name="opening_at" id="for_opening_at" required>
         </fieldset>
 
+        <fieldset class="form-group col-md-2">
+            <label for="for_closing_at"><i class="fas fa-clock"></i><b> Cierre (opcional aproximado)</b> </label>
+            <input type="datetime-local" class="form-control" name="closing_at" id="for_closing_at">
+        </fieldset>
     
     </div>
 
