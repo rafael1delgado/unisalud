@@ -16,10 +16,9 @@
         <thead>
             <tr class="table-primary">
                 <th></th>
-                <th>Fecha</th>
                 <th>Turno</th>
-                <th>Hora apertura</th>
-                <th>Hora cierre</th>
+                <th>Apertura</th>
+                <th>Cierre</th>
                 <th>Personal</th>
                 <th></th>
             </tr>
@@ -33,10 +32,10 @@
                         <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
                     </a>
                 </td>
-                <td>{{ $shift->date }}</td>
+
                 <td>{{ $shift->type }}</td>
-                <td>{{ $shift->opening_time }}</td>
-                <td>{{ $shift->closing_time }}</td>
+                <td>{{ $shift->opening_at->format('Y-m-d H:i') }}</td>
+                <td>{{ optional($shift->closing_at)->format('Y-m-d H:i') }}</td>
                 <td>
                     @livewire('samu.shift-user', ['shift_id' => $shift->id])
                 </td>

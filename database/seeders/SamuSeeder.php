@@ -18,20 +18,20 @@ class SamuSeeder extends Seeder
     public function run()
     {
         Shift::create([
-            'status' => 'Abierto',
+            'status' => true,
             'type'   => 'Largo',
-            'date'   => now(),
-            'opening_time' => '08:00',
+            'opening_at' => now(),
+            'status' => true
         ]);
 
         Mobile::create([
-            'code' => '123',
-            'name'   => 'Amb 1',
-            'plate'   => 'ZXC69',
-            'type' => 'Grande',
+            'code'      => '123',
+            'name'      => 'Amb 1',
+            'plate'     => 'ZXC69',
+            'type'      => 'Grande',
             'description' => 'Descripcion',
-            'status' => 1,
-            'managed' => 1
+            'status'    => 1,
+            'managed'   => 1
         ]);
 
         MobileInService::create([
@@ -42,19 +42,17 @@ class SamuSeeder extends Seeder
             'status' => 1
         ]);
 
-
-
-        // Call::create([
-        //     'shift_id' => 1,
-        //     'class_call' => "T1",
-        //     'qtc_id' => 1,
-        //     'ot_id' => 1,
-        //     'hour' => "08:00:00",
-        //     'call_reception' => "Operador 1",
-        //     'telephone_information' => "982598059",
-        //     'applicant' => "aertsdf",
-        //     'address' => "Calle numero",
-        //     'telephone' => "982598059",
-        // ]);
+        Call::create([
+            'shift_id' => 1,
+            'class_call' => "T1",
+            'qtc_id' => null,
+            'ot_id' => null,
+            'hour' => "08:00:00",
+            'call_reception' => "Operador 1",
+            'telephone_information' => "982598059",
+            'applicant' => "aertsdf",
+            'address' => "Calle numero",
+            'telephone' => "982598059",
+        ]);
     }
 }

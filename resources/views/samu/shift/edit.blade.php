@@ -13,11 +13,6 @@
         <div class="form-row">
 
             <fieldset class="form-group col-md-2">
-                <label for="for_date"><b>Fecha de registro</b> </label>
-                <input type="date" class="form-control" name="date" id="for_date" value="{{ date_format($shift->created_at,"Y-m-d") }}">
-            </fieldset>
-
-            <fieldset class="form-group col-md-2">
                 <label for="for_type"><b>Tipo de Turno</b> </label>
                 <select class="form-control" name="type" id="for_type">
                     <option value="Noche" {{($shift->type=='Noche')?'selected':''}}>Noche</option>
@@ -26,8 +21,13 @@
             </fieldset>
 
             <fieldset class="form-group col-md-2">
-                <label for="for_opening_time"><i class="fas fa-clock"></i><b> Hora Apertura de turno</b> </label>
-                <input type="time" class="form-control" name="opening_time" id="for_opening_time" value="{{$shift->opening_time}}">
+                <label for="for_opening_at"><i class="fas fa-clock"></i><b> Apertura de turno</b> </label>
+                <input type="datetime-local" class="form-control" name="opening_time" id="for_opening_at" value="{{ $shift->opening_at->format('Y-m-d\TH:i:s') }}">
+            </fieldset>
+
+            <fieldset class="form-group col-md-2">
+                <label for="for_closing_at"><i class="fas fa-clock"></i><b> Cierre de turno</b> </label>
+                <input type="datetime-local" class="form-control" name="closing_at" id="for_closing_at" value="{{ optional($shift->closing_at)->format('Y-m-d\TH:i:s') }}">
             </fieldset>
         </div>
 

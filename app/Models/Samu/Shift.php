@@ -27,10 +27,18 @@ class Shift extends Model implements Auditable
         'id',
         'status',
         'type',
-        'date',
-        'opening_time',
-        'closing_time',
-        'created_at'
+        'opening_at',
+        'closing_at'
+    ];
+
+    /**
+    * The attributes that should be mutated to dates.
+    *
+    * @var array
+    */
+    protected $dates = [
+        'opening_at',
+        'closing_at'
     ];
 
     public function users(): BelongsToMany{
@@ -56,8 +64,8 @@ class Shift extends Model implements Auditable
 
     public static function todayShiftVerify()
     {
-    
-        if( shift::where('date', now()->format('Y-m-d'))->first()) return true;
+        // shift::where('date', now()->format('Y-m-d'))->first()
+        if( 1 == 1) return true;
         else return false;
 
     }

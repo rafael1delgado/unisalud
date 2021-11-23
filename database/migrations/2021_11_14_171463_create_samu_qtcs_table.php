@@ -14,15 +14,14 @@ class CreateSamuQtcsTable extends Migration
     public function up()
     {
         Schema::create('samu_qtcs', function (Blueprint $table) {
-           //segumiento
             $table->id();
        
             /* llaves foraneas */
+            $table->foreignId('shift_id')->constrained('samu_shifts');
             $table->foreignId('key_id')->nullable()->constrained('samu_keys');
             $table->foreignId('return_key_id')->nullable()->constrained('samu_keys');
-            $table->foreignId('mobile')->nullable()->constrained('samu_mobiles_in_service');
+            $table->foreignId('mobile_in_service_id')->nullable()->constrained('samu_mobiles_in_service');
 
-            $table->string('transfer_type')->nullable();
             $table->time('departure_time')->nullable();
             $table->time('mobile_departure_time')->nullable();
             $table->time('mobile_arrival_place')->nullable();
@@ -31,17 +30,18 @@ class CreateSamuQtcsTable extends Migration
             $table->time('patient_reception')->nullable();
             $table->time('return_base')->nullable();
             $table->time('mobile_base')->nullable();
+            
             $table->text('observation')->nullable();
             
             
-            //evaluación de paciente
+            /* Evaluación de paciente */
 
             $table->text('reception_detail')->nullable();
             $table->string('establishment')->nullable();
             $table->string('reception_person')->nullable();
 
 
-            //asignacion signos vitales
+            /* Asignacion signos vitales */
             
             $table->integer('fc')->nullable();
             $table->integer('fr')->nullable();
