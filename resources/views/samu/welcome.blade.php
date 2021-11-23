@@ -7,9 +7,9 @@
 
 <div class="jumbotron mt-3">
     <div class="container">
-        <h1 class="display-4">Portal de Salud</h1>
-        <p class="lead">Bienvenido al portal SAMU de la Región de Tarapacá.</p>
-            <div class="card-body">
+        <h1 class="display-4 text-center">Portal de Salud</h1>
+        <p class="lead text-center">Bienvenido al portal SAMU de la Región de Tarapacá.</p>
+            <div class="card-body text-center">
                     <ul class="list-unstyled mt-3 mb-4">
 
 
