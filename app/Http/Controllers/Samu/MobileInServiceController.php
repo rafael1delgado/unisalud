@@ -18,8 +18,8 @@ class MobileInServiceController extends Controller
     public function index()
     {
       
-        $shifts = Shift::latest()->get();
-        return view('samu.mobileinservice.index', compact('shifts'));
+        $shift = Shift::where('status',1)->get();
+        return view('samu.mobileinservice.index', compact('shift'));
     }
 
     /**
@@ -32,8 +32,8 @@ class MobileInServiceController extends Controller
        
         $mobiles = Mobile::all();
 
-        $shifts = Shift::latest()->get();
-        return view('samu.mobileinservice.create', compact('mobiles','shifts'));
+        $shift = Shift::where('status',1)->get();
+        return view('samu.mobileinservice.create', compact('mobiles','shift'));
     }
 
     /**
@@ -75,8 +75,8 @@ class MobileInServiceController extends Controller
     public function edit(MobileInService $mobileInService)
     {
         $mobiles = Mobile::where('managed',true)->get();
-        $shifts = Shift::latest()->get();
-        return view('samu.mobileinservice.edit', compact('mobiles','shifts','mobileInService'));
+        $shift = Shift::where('status',1)->get();
+        return view('samu.mobileinservice.edit', compact('mobiles','shift','mobileInService'));
     
     }
 
@@ -88,15 +88,25 @@ class MobileInServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, MobileInService $mobileInService)
-
+        
     {
-       
+         /* Obtener el turno actual */
+         $shift = Shift::where('status',1)->first();
+         
+        if($shift) {
         $mobileInService->fill($request->all());
         $mobileInService->save();
 
         session()->flash('info', 'Movil editado.');
         return redirect()->route('samu.mobileinservice.index', compact('mobileInService'));
-    
+        }
+        else {
+            $request->session()->flash('danger', 'No se pudo actualizar el cambio, 
+                el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
+            
+            return redirect()->back()->withInput();
+        }
+
         
     }
 

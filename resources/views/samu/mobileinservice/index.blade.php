@@ -24,14 +24,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($shifts as $shift)
+            @foreach($shift as $shift)
                 @foreach($shift->mobilesInService as $mis)
                 <tr>
                     <td>
+                    @if($mis->shift->status == 1)
                         <a href="{{ route('samu.mobileinservice.edit',$mis) }}">
                             <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
                         </a>
-
+                    @endif
                     </td>
                     <td>
                         {{ $shift->opening_at->format('Y-m-d') }} - {{ $shift->type }}

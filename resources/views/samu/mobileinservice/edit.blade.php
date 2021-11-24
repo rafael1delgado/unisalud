@@ -20,7 +20,7 @@
                 <fieldset class="form-group  col-md-3">
                     <label for="for_return">Turno</label>
                     <select class="form-control" name="shift_id">
-                        @foreach($shifts as $shift)
+                        @foreach($shift as $shift)
                         <!--de la varible que traigo el campo que quiero guaradar - lo que quiero mostrar del As del foreach-->
                             <option value="{{ $shift->id }}">{{$shift->date}}  - {{$shift->type}} </option>
                         @endforeach          
