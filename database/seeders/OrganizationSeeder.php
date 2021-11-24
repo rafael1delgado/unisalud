@@ -558,7 +558,11 @@ class OrganizationSeeder extends Seeder
         $Organization = new Organization();
         $Organization->active = 31;
         $Organization->name = 'Centro de Salud Familiar Cirujano Aguirre';
-        $Organization->alias = 'Centro de Salud Familiar Cirujano Aguirre';
+        $Organization->alias = 'CESFAM Cirujano Aguirre';
+        $Organization->type = 11; //11 Consultorio General Urbano (CGU)
+        $Organization->code_deis = 102300;
+        $Organization->service = 'Servicio de Salud Iquique';
+        $Organization->dependency = 'Municipal';
         $Organization->save();
 
         $address = new Address();
@@ -576,7 +580,11 @@ class OrganizationSeeder extends Seeder
         $Organization = new Organization();
         $Organization->active = 32;
         $Organization->name = 'Centro de Salud Familiar Cirujano Videla';
-        $Organization->alias = 'Centro de Salud Familiar Cirujano Videla';
+        $Organization->alias = 'CESFAM Cirujano Videla';
+        $Organization->type = 11; //11 Consultorio General Urbano (CGU)
+        $Organization->code_deis = 102301;
+        $Organization->service = 'Servicio de Salud Iquique';
+        $Organization->dependency = 'Municipal';
         $Organization->save();
 
         $address = new Address();
@@ -594,7 +602,11 @@ class OrganizationSeeder extends Seeder
         $Organization = new Organization();
         $Organization->active = 33;
         $Organization->name = 'Centro de Salud Familiar Cirujano Guzmán';
-        $Organization->alias = 'Centro de Salud Familiar Cirujano Guzmán';
+        $Organization->alias = 'CESFAM Guzmán';
+        $Organization->type = 11; //11 Consultorio General Urbano (CGU)
+        $Organization->code_deis = 102302;
+        $Organization->service = 'Servicio de Salud Iquique';
+        $Organization->dependency = 'Municipal';        
         $Organization->save();
 
         $address = new Address();

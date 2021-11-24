@@ -47,14 +47,23 @@ class DatabaseSeeder extends Seeder
             // HmOperatingRoomProgrammingTableSeeder::class,
             //PractitionerSeeder::class,
         // ExtMedicineSeeder::class,
-            OrganizationSeeder::class,
             CodConAppointmentTypesSeeder::class,
-            LocationSeeder::class,
             SicStatusesSeeder::class,
 
             //SAMU
             SamuJobTypeSeeder::class,
             SamuKeySeeder::class,
+
+            //Organizacion
+            OrganizationTypeSeeder::class,
+            OrganizationSeeder::class,
+
+            //necesita Organization por eso se agrega despues
+            LocationSeeder::class,
+
+
+
+
         ]);
     }
 }

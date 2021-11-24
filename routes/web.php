@@ -9,6 +9,7 @@ use App\Http\Livewire\Home;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Parameter\PermissionController;
+use App\Http\Controllers\Parameter\OrganizationController;
 use App\Http\Controllers\Profile\ProfileController;
 
 use App\Http\Controllers\User\UserController;
@@ -100,6 +101,7 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 
 Route::prefix('parameter')->as('parameter.')->middleware('auth')->group(function () {
     Route::resource('permission', PermissionController::class);
+	Route::resource('organization', OrganizationController::class);
 });
 
 Route::prefix('profile')->name('profile.')->middleware('auth')->group(function(){
