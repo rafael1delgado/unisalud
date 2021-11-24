@@ -13,12 +13,6 @@
     @method('PUT')
 
     @include('samu.qtc.form', [
-        'qtc'   => null,
-        'keys'  => $keys,
-        'shift' => $shift
-    ])
-
-    @include('samu.qtc.form', [
         'qtc'   => $qtc,
         'keys'  => $keys,
         'shift' => $shift
