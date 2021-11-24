@@ -108,7 +108,9 @@ class MobileInServiceController extends Controller
      */
     public function destroy(MobileInService $mobileInService)
     {
+        
         $mobileInService->delete();
-        return redirect()->route('samu.mobileinservice.index')->with('danger', 'Eliminado satisfactoriamente');
-    }
+ 
+        return redirect()->route('samu.mobileinservice.index')->with('danger', 'Eliminado satisfactoriamente.');
+    }  
 }

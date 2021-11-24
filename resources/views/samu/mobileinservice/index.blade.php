@@ -43,7 +43,7 @@
                     @livewire('samu.mobile-crew',['mobileInService' => $mis])  
                     </td>
                     <td>
-                        <form method="POST" action="{{ route('samu.shift.destroy', $shift) }}">
+                        <form method="POST" action="{{ route('samu.mobileinservice.destroy' , $mis) }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
