@@ -9,12 +9,8 @@
         <fieldset class="form-group col-md-2">
             <label for="for_key">Clave</label>
             <select class="form-control" name="key_id">
-          
                 <option value=""></option>
-          
-                
                 @foreach($keys as $key)
-         
                 <option value="{{ $call->qtc->key === $key ? 'selected' : '' }}">{{ $key->key }}  - {{ $key->name }}</option>
                 @endforeach 
            

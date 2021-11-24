@@ -13,7 +13,7 @@
     @csrf
     @method('POST')
 
-    @include('samu.call.form', ['call' => null])
+    @include('samu.call.form', ['call' => null], ['shift_users => null'])
 </form>
 
 

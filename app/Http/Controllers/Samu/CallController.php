@@ -11,6 +11,7 @@ use App\Models\Samu\Shift;
 use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\Ot;
+use App\Models\Samu\ShiftUser;
 
 class CallController extends Controller
 {
@@ -77,11 +78,12 @@ class CallController extends Controller
      * @param  \App\Models\Samu\Call  $call
      * @return \Illuminate\Http\Response
      */
-    public function edit(Call $call, Shift $shift)
+    public function edit(Call $call, Shift $shift ,ShiftUser  $shiftUser)
     {
         $keys = Key::all();
         $mobilesInServices = $shift->mobilesInService;
-        return view ('samu.call.edit' , compact('call','keys','mobilesInServices'));
+        $shiftUser = ShiftUser::all();
+        return view ('samu.call.edit' , compact('call','keys','mobilesInServices', 'shift_users'));
     }
 
  
