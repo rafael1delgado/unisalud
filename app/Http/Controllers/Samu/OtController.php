@@ -42,7 +42,7 @@ class OtController extends Controller
         $ot->fill($request->all());
         $ot->save();
         
-        session()->flash('info', 'El ot ha sido actualizado.');
+        session()->flash('info', 'La OT ha sido actualizada.');
         return redirect()->route('samu.call.index');
         
     }

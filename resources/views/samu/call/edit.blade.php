@@ -20,13 +20,17 @@
 <div class="card">
     <div class="card-body">
 
-    @switch($call->class_call)
+    @switch($call->classification)
         @case('OT')
             @include('samu.ot.edit', ['call' => $call])
             @break
-
-        @default
+        @case('T1')
+        @case('T2')
+        @case('NM')
             @include('samu.qtc.edit', ['call' => $call])
+            @break
+        @default
+            
             @break
     @endswitch
 

@@ -18,7 +18,7 @@ class CreateSamuCallsTable extends Migration
             $table->foreignId('shift_id')->constrained('samu_shifts');
             $table->foreignId('qtc_id')->nullable()->constrained('samu_qtcs');
             $table->foreignId('ot_id')->nullable()->constrained('samu_ots');
-            $table->string('class_call');
+            $table->string('classification')->nullable();
             $table->time('hour');
             $table->string('call_reception');
             $table->text('telephone_information')->nullable();

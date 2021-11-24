@@ -9,23 +9,22 @@
         <i class="fas fa-plus"></i> </i> Agregar Moviles en turno
     </a>
 </h3>
+
 <div class="table-responsive">
-
-
-        <table class="table  table-striped small">
-            <thead>
-                <tr class="table-primary">
-                    <th></th>
-                    <th>Turno</th>
-                    <th>Movil</th>
-                    <th>Tipo</th>
-                    <th>Observación</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($shifts as $shift)
+    <table class="table table-striped">
+        <thead>
+            <tr class="table-primary">
+                <th></th>
+                <th>Turno</th>
+                <th>Movil</th>
+                <th>Tipo</th>
+                <th>Observación</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($shifts as $shift)
                 @foreach($shift->mobilesInService as $mis)
                 <tr>
                     <td>
@@ -35,7 +34,7 @@
 
                     </td>
                     <td>
-                    {{ $shift->date }} -{{ $shift->type }}
+                        {{ $shift->opening_at->format('Y-m-d') }} - {{ $shift->type }}
                     </td>
                     <td>{{ $mis->mobile_id }}</td>
                     <td>{{ $mis->type}} </td>
@@ -50,21 +49,16 @@
                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                         </form>
                     </td>
-                    
                 </tr>
-
+                @endforeach
             @endforeach 
-            </tbody>
-            
-        @endforeach
+        </tbody>
+    </table>
+        
 </div>
 
-
 @endsection
+
 @section('custom_js')
-<script>
-$(function () {
-        $('[data-toggle="popover" ]').popover()
-    })
-</script>
+
 @endsection

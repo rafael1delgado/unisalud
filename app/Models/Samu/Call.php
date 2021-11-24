@@ -19,7 +19,7 @@ class Call extends Model implements Auditable
     protected $table="samu_calls";
 
     protected $fillable = [
-        'class_call',
+        'classification',
         'hour',
         'call_reception',
         'telephone_information',

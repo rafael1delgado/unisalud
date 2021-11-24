@@ -45,17 +45,34 @@ class CallController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Shift $shift)
+    public function store(Request $request)
     {
-        //Guardar Call
-        $call = new Call($request->All());
-        $call->shift()->associate($shift);
-        $call->qtc()->associate(Qtc::create());
-        $call->ot()->associate(Ot::create());
-        $call->save();
-  
-        $request->session()->flash('success', 'Ingreso Un nuevo llamado.');
-        return redirect()->route('samu.call.index' );
+        $shift = Shift::where('status',1)->first();
+
+        if($shift) {
+            $call = new Call($request->All());
+            $call->shift()->associate($shift);
+
+            switch($call->classification) {
+                case 'OT':
+                    $call->ot()->associate(Ot::create());
+                    $call->save();
+                    $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
+                    return redirect()->route('samu.call.edit', $call);
+                    break;
+                default:
+                    $call->save();
+                    $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
+                    return redirect()->route('samu.call.index');
+                    break;
+            }            
+        }
+        else {
+            $request->session()->flash('danger', 'No se puede guardar el llamado, 
+                el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
+            return redirect()->back()->withInput();
+        }
+
     }
 
     /**
@@ -95,9 +112,36 @@ class CallController extends Controller
     public function update(Request $request, Call $call)
     {
         $call->fill($request->all());
-        $call->update();
-        session()->flash('success', ' Actualizado satisfactoriamente.');
-        return redirect()->route('samu.call.edit', compact('call'));
+
+        switch($call->classification) {
+            case 'OT':
+                /* Si no tiene creada la OT */
+                if(!$call->ot) {
+                    $call->ot()->associate(Ot::create());
+                    $call->save();
+
+                    return redirect()->route('samu.call.edit', $call);
+                }
+                else {
+                    $call->save();
+                    $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
+                    return redirect()->route('samu.call.index');
+                }
+                break;
+            case 'T1':
+            case 'T2':
+            case 'NM':
+                // TODO pendiente
+                $call->save();
+                $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
+                return redirect()->route('samu.call.index');
+                break;
+            default:
+                $call->save();
+                $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
+                return redirect()->route('samu.call.index');
+                break;
+        } 
     }
 
 

@@ -44,7 +44,7 @@ class SamuSeeder extends Seeder
 
         Call::create([
             'shift_id' => 1,
-            'class_call' => "T1",
+            'classification' => "T1",
             'qtc_id' => null,
             'ot_id' => null,
             'hour' => "08:00:00",

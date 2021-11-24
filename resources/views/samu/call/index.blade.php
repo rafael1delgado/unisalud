@@ -9,7 +9,7 @@
 </h3>
 
 <!-- Create--> 
-<form method="POST" action="{{ route('samu.call.store', $shift) }}">
+<form method="POST" action="{{ route('samu.call.store') }}">
     @csrf
     @method('POST')
 
@@ -26,7 +26,7 @@
         <thead>
             <tr class="text-center table-primary">
                 <th>Id</th>
-                <th>Clase</th>
+                <th>Clasificación</th>
                 <th>Hora</th>
                 <th>Recepcion de llamada</th>
                 <th>Información telefonica</th>
@@ -44,7 +44,7 @@
                         <i class="fas fa-edit"></i> {{ $call->id }}
                     </a>
                 </td>
-                <td>{{ $call->class_call }}</td>
+                <td>{{ $call->classification }}</td>
                 <td>{{ $call->hour}}</td>
                 <td>{{ $call->call_reception}}</td>
                 <td>{{ $call->telephone_information }}</td>

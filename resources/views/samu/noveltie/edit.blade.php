@@ -14,7 +14,7 @@
 
         <fieldset class="form-group col">
             <label for="for_detail">Detalles </label>
-            <textarea class="form-control" rows="8" name="detail" required >{{ $noveltie->detail }}</textarea>
+            <textarea class="form-control" rows="8" name="detail" required >{{ old('detail', $noveltie->detail) }}</textarea>
         </fieldset>
 
     </div>

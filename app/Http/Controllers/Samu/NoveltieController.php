@@ -18,27 +18,13 @@ class NoveltieController extends Controller
     public function index()
     {
        
-        $shift = Shift::where('date', now()->format('Y-m-d'))->first(); //obtienes la variable shift
-        $novelties=noveltie::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
-        //consulta para la union de dos tablas
-        //$noveltie=Noveltie::has('shift')->get();
-       
+        $shift = Shift::where('status',1)->get();
+        $novelties = Noveltie::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
 
-        //////////////
         return view ('samu.noveltie.index' , compact('novelties','shift'));//mando la variable al view
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //$noveltie=noveltie::all(); // guarda todos los datos de la tabla
-        //return view ('samu.novelties.index');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -48,29 +34,24 @@ class NoveltieController extends Controller
      */
     public function store(Request $request)
     {
-        //Guardar 
-        $noveltie = new Noveltie($request->All());
+        /* Obtener el turno actual */
+        $shift = Shift::where('status',1)->first();
+
+        if($shift) {
+            $noveltie = new Noveltie($request->All());
+            $noveltie->shift()->associate();
+            $noveltie->save();
     
+            $request->session()->flash('success', 'Novedad Creada.');
+        }
+        else {
+            $request->session()->flash('danger', 'No se pudo registrar la novedad, 
+                el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
+        }
 
-        
-        //Guardar 
-        $shift = Shift::where('date', now()->format('Y-m-d'))->first();
-        $noveltie->shift_id = $shift->id;
-        $noveltie->save();
-        $request->session()->flash('success', 'Novedad Creada.');
-        return redirect()->route('samu.noveltie.index');
+        return redirect()->route('samu.noveltie.index')->withInput();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Samu\Noveltie  $noveltie
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Noveltie $noveltie)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -80,7 +61,6 @@ class NoveltieController extends Controller
      */
     public function edit(Noveltie $noveltie)
     {
-        //dd($noveltie);
         return view ('samu.noveltie.edit' , compact('noveltie'));
     }
 
@@ -93,11 +73,24 @@ class NoveltieController extends Controller
      */
     public function update(Request $request, Noveltie $noveltie)
     {
-        
-        $noveltie->fill($request->all());
-        $noveltie->save();
-        session()->flash('success', ' Actualizado satisfactoriamente.');
-        return redirect()->route('samu.noveltie.index');
+        /* Obtener el turno actual */
+        $shift = Shift::where('status',1)->first();
+
+        if($shift) {
+            $noveltie->fill($request->all());
+            $noveltie->save();
+
+            session()->flash('success', 'La novedad se ha actualizado satisfactoriamente.');
+
+            return redirect()->route('samu.noveltie.index');
+        }
+        else {
+            $request->session()->flash('danger', 'No se pudo cambiar la novedad, 
+                el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
+            
+            return redirect()->back()->withInput();
+        }
+
     }
 
     /**

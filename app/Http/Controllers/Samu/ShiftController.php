@@ -41,11 +41,20 @@ class ShiftController extends Controller
      */
     public function store(Request $request)
     {
-        $shift = new Shift($request->all());
-        $shift->save();
+        $shift = Shift::where('status',1)->first();
 
-        session()->flash('success', 'Se ha creado el turno exitosamente');
-        return redirect()->route('samu.shift.index');
+        if(!$shift) {
+            $shift = new Shift($request->all());
+            $shift->save();
+
+            session()->flash('success', 'Se ha creado el turno exitosamente');
+            return redirect()->route('samu.shift.index');
+        }
+        else {
+            $request->session()->flash('danger', 'No se pudo crear el turno, 
+                ya existe un turno abierto, verifique cerrar todos los turnos antes de crear uno nuevo.');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -67,7 +76,6 @@ class ShiftController extends Controller
      */
     public function edit(Shift $shift)
     {
-        //
         return view('samu.shift.edit', compact('shift'));
     }
 
@@ -81,11 +89,10 @@ class ShiftController extends Controller
     public function update(Request $request, Shift $shift)
     {
         $shift->fill($request->all());
-        //$specialty->user_id = Auth::id();
         $shift->save();
 
         session()->flash('info', 'El turno ha sido editado.');
-        return redirect()->route('samu.shift.index', compact('shift'));
+        return redirect()->route('samu.shift.index');
     }
 
     /**
@@ -97,6 +104,7 @@ class ShiftController extends Controller
     public function destroy(Shift $shift)
     {
         $shift->delete();
-        return redirect()->route('samu.shift.index')->with('danger', 'Eliminado satisfactoriamente');
+        session()->flash('danger', 'El turno ha sido eliminado satisfactoriamente.');
+        return redirect()->route('samu.shift.index');
     }
 }

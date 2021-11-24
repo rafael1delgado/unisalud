@@ -6,7 +6,7 @@
 
         <fieldset class="form-group col">
             <label for="for_detail">Detalles </label>
-            <textarea class="form-control" rows="8" name="detail" required></textarea>
+            <textarea class="form-control" rows="8" name="detail" required>{{ old('detail') }}</textarea>
         </fieldset>
 
     </div>
