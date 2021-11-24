@@ -5,9 +5,15 @@
 @include('samu.nav')
 
 <h3 class="mb-3"><i class="fas fa-blender-phone"></i> Listado de Turnos
+    @if($allowCreate)
     <a class="btn btn-success float-right" href="{{ route('samu.shift.create') }}">
         <i class="fas fa-plus"></i> Crear turno
     </a>
+    @else
+    <button class="btn btn-outline-success float-right" disabled readonly>
+        <i class="fas fa-plus"></i> Hay un turno abierto
+    </button>
+    @endif
 </h3>
 
 <div class="table-responsive">
@@ -16,6 +22,7 @@
         <thead>
             <tr class="table-primary">
                 <th></th>
+                <th>Estado</th>
                 <th>Turno</th>
                 <th>Apertura</th>
                 <th>Cierre</th>
@@ -32,7 +39,7 @@
                         <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
                     </a>
                 </td>
-
+                <td>{{ ($shift->status === 0) ? 'Cerrado':'Abierto' }} </td>
                 <td>{{ $shift->type }}</td>
                 <td>{{ $shift->opening_at->format('Y-m-d H:i') }}</td>
                 <td>{{ optional($shift->closing_at)->format('Y-m-d H:i') }}</td>

@@ -16,9 +16,10 @@ class ShiftController extends Controller
      */
     public function index()
     {
+        $allowCreate = Shift::where('status',true)->exists() ? false: true;
         $shifts = Shift::orderBy('id','desc')->paginate(60);
-        
-        return view('samu.shift.index', compact('shifts'));
+
+        return view('samu.shift.index', compact('shifts','allowCreate'));
     }
 
     /**
@@ -28,9 +29,8 @@ class ShiftController extends Controller
      */
     public function create()
     {
-      
         return view('samu.shift.create');
-        
+
     }
 
     /**
@@ -41,17 +41,11 @@ class ShiftController extends Controller
      */
     public function store(Request $request)
     {
-        $shift=new Shift($request->all());
-        $shift->status = 'No iniciado';
+        $shift = new Shift($request->all());
         $shift->save();
 
-        // foreach($request->nombre_combo as $operador_id){
-        //     $shift->operators()->attach($operador_id, ['job_type'=>'operador']);
-        // }
-
-        $shifts = Shift::all();
         session()->flash('success', 'Se ha creado el turno exitosamente');
-        return redirect()->route ('samu.shift.index', compact('shifts'));
+        return redirect()->route('samu.shift.index');
     }
 
     /**

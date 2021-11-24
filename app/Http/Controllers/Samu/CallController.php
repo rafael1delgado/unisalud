@@ -22,7 +22,7 @@ class CallController extends Controller
      */
     public function index()
     {
-        $shift = Shift::where('date', now()->format('Y-m-d'))->first(); //obtienes la variable shift
+        $shift = Shift::where('status',1)->get();
         $mobiles = Mobile::all();
         $calls = Call::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
         //return $calls; 

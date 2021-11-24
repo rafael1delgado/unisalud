@@ -22,13 +22,22 @@
 
             <fieldset class="form-group col-md-2">
                 <label for="for_opening_at"><i class="fas fa-clock"></i><b> Apertura de turno</b> </label>
-                <input type="datetime-local" class="form-control" name="opening_time" id="for_opening_at" value="{{ $shift->opening_at->format('Y-m-d\TH:i:s') }}">
+                <input type="datetime-local" class="form-control" name="opening_at" id="for_opening_at" value="{{ $shift->opening_at->format('Y-m-d\TH:i:s') }}" required>
             </fieldset>
 
             <fieldset class="form-group col-md-2">
                 <label for="for_closing_at"><i class="fas fa-clock"></i><b> Cierre de turno</b> </label>
                 <input type="datetime-local" class="form-control" name="closing_at" id="for_closing_at" value="{{ optional($shift->closing_at)->format('Y-m-d\TH:i:s') }}">
             </fieldset>
+
+            <fieldset class="form-group col-md-2">
+                <label for="for_status">Estado</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="0" {{ ($shift->status === 0) ? 'selected' : '' }}>Cerrado</option>
+                    <option value="1" {{ ($shift->status === 1) ? 'selected' : '' }}>Abierto</option>
+                </select>
+            </fieldset>
+            
         </div>
 
         <button type="submit" class="btn btn-primary button">Guardar</button>
