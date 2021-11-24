@@ -82,6 +82,43 @@ class UserSeeder extends Seeder
         $address->save();
 
 
+        $user = new User();
+        $user->active = 1;
+        $user->claveunica = 1;
+        $user->birthday = now();
+        $user->gender = 'male';
+        $user->nationality_id = 41;
+        if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
+        $user->save();
+
+        $user->givePermissionTo(Permission::all());
+
+        $humanName = new HumanName();
+        $humanName->use = 'official';
+        $humanName->text = 'Esteban';
+        $humanName->fathers_family = 'Miranda';
+        $humanName->mothers_family = 'Escobar';
+        $humanName->user_id = $user->id;
+        $humanName->save();
+
+        $identifier = new Identifier();
+        $identifier->use = 'official';
+        $identifier->cod_con_identifier_type_id = 1; // RUN
+        $identifier->value = 16055586;
+        $identifier->dv = '6';
+        $identifier->user_id = $user->id;
+        $identifier->save();
+
+        $address = new Address();
+        $address->user_id = $user->id;
+        $address->type = 'physical';
+        $address->text = 'Ernesto Riquelme';
+        $address->line = 466;
+        $address->city = 'Iquique';
+        $address->commune_id = 5;
+        $address->region_id = 1;
+        $address->country_id = 42;
+        $address->save();
 
 
         $user = new User();
