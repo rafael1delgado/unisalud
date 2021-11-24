@@ -41,7 +41,7 @@ class ShiftController extends Controller
      */
     public function store(Request $request)
     {
-        $shift = Shift::where('status',1)->first();
+        $shift = Shift::where('status', true)->first();
 
         if(!$shift) {
             $shift = new Shift($request->all());
@@ -76,7 +76,8 @@ class ShiftController extends Controller
      */
     public function edit(Shift $shift)
     {
-        return view('samu.shift.edit', compact('shift'));
+        $openShift = Shift::where('status',true)->exists() ? true: false;
+        return view('samu.shift.edit', compact('shift','openShift'));
     }
 
     /**

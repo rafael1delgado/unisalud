@@ -57,8 +57,15 @@ class CreateSamuQtcsTable extends Migration
             $table->text('treatment')->nullable();
             $table->text('observation_sv')->nullable();
 
+            $table->foreignId('creator_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::create('samu_call_qtc', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('call_id')->constrained('samu_calls');
+            $table->foreignId('qtc_id')->constrained('samu_qtcs');
         });
     }
 
@@ -69,6 +76,7 @@ class CreateSamuQtcsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('samu_call_qtc');
         Schema::dropIfExists('samu_qtcs');
     }
 }

@@ -32,10 +32,14 @@
 
             <fieldset class="form-group col-md-2">
                 <label for="for_status">Estado</label>
-                <select name="status" id="status" class="form-control">
+                <select name="status" id="status" class="form-control" @if($openShift) disabled readonly @endif>
                     <option value="0" {{ ($shift->status === 0) ? 'selected' : '' }}>Cerrado</option>
                     <option value="1" {{ ($shift->status === 1) ? 'selected' : '' }}>Abierto</option>
                 </select>
+                @if($openShift)
+                <div class="form-text">Ya existe un turno abierto.</div>
+                @endif
+                
             </fieldset>
             
         </div>

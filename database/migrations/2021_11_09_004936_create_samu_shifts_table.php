@@ -19,6 +19,7 @@ class CreateSamuShiftsTable extends Migration
             $table->string('type');
             $table->datetime('opening_at');
             $table->datetime('closing_at')->nullable();
+            $table->foreignId('creator_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

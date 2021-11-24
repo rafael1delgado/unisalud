@@ -15,11 +15,11 @@
         <thead>
             <tr class="table-primary">
                 <th></th>
+                <th>Estado</th>
                 <th>Turno</th>
-                <th>Hora de apertura Turno</th>
-                <th>Hora de cierre de Turno</th>
+                <th>Fecha registro</th>
+                <th>Creador</th>
                 <th>Detalle de Novedades</th>
-
             </tr>
         </thead>
         <tbody>
@@ -31,9 +31,10 @@
                     <i class="fas fa-edit"></i></a>
                     @endif
                 </td>
-                <td>{{ $noveltie->shift->type }}</td>
-                <td>{{ $noveltie->shift->opening_at->format('Y-m-d H:i') }}</td>
-                <td>{{ $noveltie->shift->closing_time }}</td>
+                <td>{{ $noveltie->shift->statusInWord }}</td>
+                <td>{{ $noveltie->shift->opening_at->format('Y-m-d') }} {{ $noveltie->shift->type }}</td>
+                <td>{{ $noveltie->created_at }}</td>
+                <td>{{ $noveltie->creator->officialFullName }}</td>
                 <td>{{ $noveltie->detail ?? ''}} </td>
             </tr>
             @endforeach

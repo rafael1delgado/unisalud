@@ -54,16 +54,21 @@ class CallController extends Controller
         if($shift) {
             $call = new Call($request->All());
             $call->shift()->associate($shift);
+            $call->save();
 
             switch($call->classification) {
                 case 'OT':
-                    $call->ot()->associate(Ot::create());
-                    $call->save();
+                    $ot = new Ot();
+                    $ot->call()->associate($call);
+                    $ot->save();
+
                     $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
                     return redirect()->route('samu.call.edit', $call);
                     break;
+                case 'T1':
+                case 'T2':
+                case 'NM':
                 default:
-                    $call->save();
                     $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
                     return redirect()->route('samu.call.index');
                     break;
@@ -98,11 +103,10 @@ class CallController extends Controller
      */
     public function edit(Call $call)
     {
-        $keys = Key::all();
         $shift = Shift::where('status',1)->get();
         //dd($shift->mobilesInService);
         $shiftUsers = ShiftUser::all();
-        return view ('samu.call.edit' , compact('call','keys', 'shiftUsers'));
+        return view ('samu.call.edit' , compact('call', 'shiftUsers'));
     }
 
  
@@ -116,18 +120,19 @@ class CallController extends Controller
     public function update(Request $request, Call $call)
     {
         $call->fill($request->all());
+        $call->save();
 
         switch($call->classification) {
             case 'OT':
                 /* Si no tiene creada la OT */
                 if(!$call->ot) {
-                    $call->ot()->associate(Ot::create());
-                    $call->save();
-
+                    $ot = new Ot();
+                    $ot->call()->associate($call);
+                    $ot->save();
+                    
                     return redirect()->route('samu.call.edit', $call);
                 }
                 else {
-                    $call->save();
                     $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
                     return redirect()->route('samu.call.index');
                 }
@@ -136,12 +141,12 @@ class CallController extends Controller
             case 'T2':
             case 'NM':
                 // TODO pendiente
-                $call->save();
+
                 $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
                 return redirect()->route('samu.call.index');
                 break;
             default:
-                $call->save();
+
                 $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
                 return redirect()->route('samu.call.index');
                 break;

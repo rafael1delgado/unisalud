@@ -67,8 +67,38 @@ class Shift extends Model implements Auditable
         return Shift::where('status',1)->exists() ? true : false;
         
     }
+
     public function calls()
     {
         return $this->hasMany(Call::class);
+    }
+
+    public function qtcs()
+    {
+        return $this->hasMany(Qtc::class);
+    }
+
+    /* Obtiene el estado en palabra */
+    public function getStatusInWordAttribute()
+    {
+        return $this->status == 1 ? 'Abierto' : 'Cerrado';
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class,'creator_id');
+    }
+
+    /**
+     * Perform any actions required after the model boots.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        /* Asigna el creador */
+        self::creating(function (Shift $shift): void {
+            $shift->creator()->associate(auth()->user());
+        });
     }
 }

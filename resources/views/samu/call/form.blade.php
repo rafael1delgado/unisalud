@@ -17,9 +17,10 @@
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_call_reception">Recep. de llamada</label>
-        <select class="form-control form-control-sm" name="call_reception" id="call_reception">
-            <option>{{ optional($call)->call_reception }}</option>
+        <label for="for_receptor_id">Recep. de llamada</label>
+        <select class="form-control form-control-sm" name="receptor_id" id="receptor_id">
+            <option value="1">1 por defecto para pruebas</option>
+            <option>{{ optional($call)->receptor_id }}</option>
             @foreach($shiftUsers as $su)
             <option value="Operador 1" >{{ $su->user->humanNames->last()->fullName }} - {{ $su->jobType->name }}</option>
             @endforeach
@@ -27,10 +28,10 @@
     </fieldset>
 
     <fieldset class="form-group col-md-2">
-        <label for="for_telephone_information">Motivo de solicitud </label>
+        <label for="for_information">Motivo de solicitud </label>
         <input type="text" class="form-control form-control-sm" 
-            name="telephone_information" 
-            value="{{ old('telephone_information', optional($call)->telephone_information) }}">
+            name="information" 
+            value="{{ old('information', optional($call)->information) }}">
     </fieldset>
 
     <fieldset class="form-group col-md-2">

@@ -17,6 +17,7 @@ class CreateSamuNoveltiesTable extends Migration
             $table->id();
             $table->string('detail');
             $table->foreignId('shift_id')->constrained('samu_shifts');
+            $table->foreignId('creator_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

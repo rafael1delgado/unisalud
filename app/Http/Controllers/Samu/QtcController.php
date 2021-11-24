@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
+use App\Models\Samu\Shift;
 use App\Models\Samu\Qtc;
 use App\Models\Samu\Key;
 use App\Models\Samu\Call;
@@ -20,8 +21,10 @@ class QtcController extends Controller
      */
     public function index()
     {
-      
+        /* Obtener el turno actual */
+        $shift = Shift::where('status',1)->first();
 
+        return view ('samu.qtc.index' , compact('shift'));
     }
 
     /**
@@ -29,7 +32,15 @@ class QtcController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function create()
+    {
+        /* Obtener el turno actual */
+        $shift = Shift::where('status',1)->first();
+
+        $keys = Key::all();
+
+        return view ('samu.qtc.create',compact('shift','keys'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -61,6 +72,11 @@ class QtcController extends Controller
      */
     public function edit(qtc $qtc)
     {
+        /* Obtener el turno actual */
+        $shift = Shift::where('status',1)->first();
+
+        $keys = Key::all();
+        return view ('samu.qtc.edit', compact('shift','keys','qtc'));
     }
 
     /**

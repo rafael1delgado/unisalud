@@ -8,6 +8,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\Call;
+use App\Models\User;
 
 
 class Qtc extends Model implements Auditable
@@ -24,8 +25,8 @@ class Qtc extends Model implements Auditable
         'call_id',
         'key_id',
         'return_key_id',
-        'mobile',
-        'transfer_type',
+        'mobile_in_service_id',
+
         'departure_time',
         'mobile_departure_time',
         'mobile_arrival_place',
@@ -63,17 +64,17 @@ class Qtc extends Model implements Auditable
         'created_at'
     ];
 
-    public function calls() {
-        return $this->hasMany(Call::class);
-      }
+    public function calls()
+    {
+        return $this->belongsToMany(Call::class,'samu_call_qtc');
+    }
 
     public function mobile() {
         return $this->belongsTo(Mobile::class);
     }
 
-    public function mobilesInService(){
-        return $this->hasMany(MobileInService::class,'mobile', 'id');
-                
+    public function mobilInService(){
+        return $this->belongsTo(MobileInService::class,'samu_mobiles_in_service','mobile_in_service_id'); 
     }
 
     public function key()
@@ -86,4 +87,21 @@ class Qtc extends Model implements Auditable
        return $this->belongsTo(Key::class,'return_key_id');
     }
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class,'creator_id');
+    }
+
+    /**
+     * Perform any actions required after the model boots.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        /* Asigna el creador */
+        self::creating(function (Qtc $qtc): void {
+            $qtc->creator()->associate(auth()->user());
+        });
+    }
 }

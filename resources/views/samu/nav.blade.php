@@ -24,6 +24,11 @@
         href=" {{ route('samu.call.index') }}"><i class="fas fa-headset"></i> Centro de Llamadas</a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link {{ active('samu.qtc.*') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.qtc.index') }}"><i class="fas fa-car-crash"></i> QTCs</a>
+    </li>
+
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle {{ active(['samu.key.*','samu.mobile.*']) }}" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
             <i class="fas fa-cog"></i> Configuración</a>

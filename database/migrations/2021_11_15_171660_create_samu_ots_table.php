@@ -16,6 +16,8 @@ class CreateSamuOtsTable extends Migration
         Schema::create('samu_ots', function (Blueprint $table) {
             $table->id();
             $table->string('description')->nullable();
+            $table->foreignId('call_id')->constrained('samu_calls');
+            $table->foreignId('creator_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

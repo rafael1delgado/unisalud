@@ -4,22 +4,16 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Editar Qtc</h3>
+<h3 class="mb-3"><i class="fas fa-car-crash"></i> Nuevo Qtc</h3>
 
 <h4> Asignación de seguimiento y horarios</h4>
       
-<form method="post" action="{{ route('samu.qtc.update', $qtc) }}">
+<form method="post" action="{{ route('samu.qtc.store') }}">
     @csrf
-    @method('PUT')
+    @method('POST')
 
     @include('samu.qtc.form', [
         'qtc'   => null,
-        'keys'  => $keys,
-        'shift' => $shift
-    ])
-
-    @include('samu.qtc.form', [
-        'qtc'   => $qtc,
         'keys'  => $keys,
         'shift' => $shift
     ])

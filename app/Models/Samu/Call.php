@@ -9,6 +9,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use App\Models\Samu\Shift;
 use App\Models\Samu\Qtc;
 use App\Models\Samu\Ot;
+use App\Models\User;
 
 
 class Call extends Model implements Auditable
@@ -21,28 +22,49 @@ class Call extends Model implements Auditable
     protected $fillable = [
         'classification',
         'hour',
-        'call_reception',
-        'telephone_information',
+        'receptor_id',
+        'information',
         'applicant',
         'address',
         'telephone',
-        'shift_id',
-        'qtc_id',
-        'ot_id'
+        'shift_id'
     ];
 
-    public function qtc()
+    public function qtcs()
     {
-        return $this->belongsTo(Qtc::class,'qtc_id');
+        return $this->belongsToMany(Qtc::class,'samu_call_qtc');
     }
 
     public function ot()
     {
-        return $this->belongsTo(Ot::class);
+        return $this->hasOne(Ot::class);
     }
 
     public function shift()
     {
         return $this->belongsTo(Shift::class);
+    }
+
+    public function receptor()
+    {
+        return $this->belongsTo(User::class,'receptor_id');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class,'creator_id');
+    }
+
+    /**
+     * Perform any actions required after the model boots.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        /* Asigna el creador */
+        self::creating(function (Call $call): void {
+            $call->creator()->associate(auth()->user());
+        });
     }
 }

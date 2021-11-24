@@ -7,6 +7,8 @@ use App\Models\Samu\Shift;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\MobileInService;
 use App\Models\Samu\Call;
+use App\Models\Samu\Ot;
+use App\Models\Samu\Qtc;
 
 class SamuSeeder extends Seeder
 {
@@ -17,6 +19,8 @@ class SamuSeeder extends Seeder
      */
     public function run()
     {
+        auth()->loginUsingId(1);
+
         Shift::create([
             'status' => true,
             'type'   => 'Largo',
@@ -42,17 +46,42 @@ class SamuSeeder extends Seeder
             'status' => 1
         ]);
 
-        Call::create([
+        $call1 = Call::create([
+            'shift_id' => 1,
+            'classification' => "OT",
+            'receptor_id' => 1,
+            'hour' => "08:00:00",
+            'receptor_id' => 1,
+            'information' => "Informacion dada por telefono",
+            'applicant' => "Alexsandra Daddario",
+            'address' => "Calle numero",
+            'telephone' => "696969"
+        ]);
+
+        $call2 = Call::create([
             'shift_id' => 1,
             'classification' => "T1",
-            'qtc_id' => null,
-            'ot_id' => null,
-            'hour' => "08:00:00",
-            'call_reception' => "Operador 1",
-            'telephone_information' => "982598059",
-            'applicant' => "aertsdf",
-            'address' => "Calle numero",
-            'telephone' => "982598059",
+            'receptor_id' => 1,
+            'hour' => "08:15:00",
+            'receptor_id' => 1,
+            'information' => "Informacion dada por telefono",
+            'applicant' => "Ewan McGregor",
+            'address' => "Avenida Prat",
+            'telephone' => "123123"
         ]);
+
+        Ot::create([
+            'call_id' => 1,
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, voluptatum! Eaque facilis ex unde maiores quo atque, cum consequuntur vel provident maxime est. Similique hic aspernatur maiores incidunt ab officiis.',
+        ]);
+
+        $qtc = Qtc::create([
+            'shift_id' => 1,
+            'key_id' => 1,
+            'return_key_id' => 2,
+        ]);
+
+        $call2->qtcs()->attach($qtc);
+
     }
 }

@@ -16,15 +16,14 @@ class CreateSamuCallsTable extends Migration
         Schema::create('samu_calls', function (Blueprint $table) {
             $table->id();
             $table->foreignId('shift_id')->constrained('samu_shifts');
-            $table->foreignId('qtc_id')->nullable()->constrained('samu_qtcs');
-            $table->foreignId('ot_id')->nullable()->constrained('samu_ots');
             $table->string('classification')->nullable();
             $table->time('hour');
-            $table->string('call_reception');
-            $table->text('telephone_information')->nullable();
+            $table->foreignId('receptor_id')->constrained('users');
+            $table->text('information')->nullable();
             $table->string('applicant')->nullable();
             $table->string('address')->nullable();
             $table->string('telephone')->nullable();
+            $table->foreignId('creator_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

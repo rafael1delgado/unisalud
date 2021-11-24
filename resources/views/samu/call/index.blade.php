@@ -46,8 +46,8 @@
                 </td>
                 <td>{{ $call->classification }}</td>
                 <td>{{ $call->hour}}</td>
-                <td>{{ $call->call_reception}}</td>
-                <td>{{ $call->telephone_information }}</td>
+                <td>{{ $call->receptor->officialFullName }}</td>
+                <td>{{ $call->information }}</td>
                 <td>{{ $call->applicant }}</td>
                 <td>{{ $call->address }}</td>
                 <td>{{ $call->telephone }}</td>

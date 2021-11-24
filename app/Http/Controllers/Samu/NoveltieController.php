@@ -17,12 +17,12 @@ class NoveltieController extends Controller
      */
     public function index()
     {
-       
-        $shift = Shift::where('status',1)->get();
+        /* Obtener el turno actual */
+        $shift = Shift::where('status',1)->first();
+
         $novelties = Noveltie::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
 
         return view ('samu.noveltie.index' , compact('novelties','shift'));//mando la variable al view
-        
     }
 
 

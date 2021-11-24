@@ -529,8 +529,11 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
     Route::prefix('qtc')->name('qtc.')->group(function () {
 		Route::get('/', 			[QtcController::class, 'index'])->name('index');
+		Route::get('/create',		[QtcController::class, 'create'])->name('create');
+		Route::post('/store',		[QtcController::class, 'store'])->name('store');
 		Route::get('/edit/{qtc}', 	[QtcController::class, 'edit'])->name('edit');
 		Route::put('/update/{qtc}', [QtcController::class, 'update'])->name('update');
+		Route::delete('/{qtc}', 	[QtcController::class, 'destroy'])->name('destroy');
     });
 
 	Route::prefix('ot')->name('ot.')->group(function () {
