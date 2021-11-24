@@ -25,9 +25,10 @@ class CallController extends Controller
         $shift = Shift::where('status',1)->get();
         $mobiles = Mobile::all();
         $calls = Call::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
+        $shiftUsers = ShiftUser::all();
         //return $calls; 
         
-       return view ('samu.call.index' , compact('calls','mobiles', 'shift'));
+       return view ('samu.call.index' , compact('calls','mobiles', 'shift','shiftUsers'));
     }
 
     /**
@@ -95,12 +96,13 @@ class CallController extends Controller
      * @param  \App\Models\Samu\Call  $call
      * @return \Illuminate\Http\Response
      */
-    public function edit(Call $call, Shift $shift ,ShiftUser  $shiftUser)
+    public function edit(Call $call)
     {
         $keys = Key::all();
-        $mobilesInServices = $shift->mobilesInService;
-        $shiftUser = ShiftUser::all();
-        return view ('samu.call.edit' , compact('call','keys','mobilesInServices', 'shift_users'));
+        $shift = Shift::where('status',1)->get();
+        //dd($shift->mobilesInService);
+        $shiftUsers = ShiftUser::all();
+        return view ('samu.call.edit' , compact('call','keys', 'shiftUsers'));
     }
 
  
@@ -145,8 +147,6 @@ class CallController extends Controller
                 break;
         } 
     }
-
-
  
 
     /**

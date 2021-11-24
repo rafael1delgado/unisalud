@@ -20,8 +20,9 @@
         <label for="for_call_reception">Recep. de llamada</label>
         <select class="form-control form-control-sm" name="call_reception" id="call_reception">
             <option>{{ optional($call)->call_reception }}</option>
-            @foreach($shift_users as $su)
+            @foreach($shiftUsers as $su)
             <option value="Operador 1" >{{ $su->user->humanNames->last()->fullName }} - {{ $su->jobType->name }}</option>
+            @endforeach
         </select>
     </fieldset>
 

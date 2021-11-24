@@ -26,8 +26,10 @@
             @foreach($novelties as $noveltie)
             <tr>
                 <td>
+                    @if($noveltie->shift->status == 1)
                     <a class="btn btn-outline-primary" href="{{ route('samu.noveltie.edit', $noveltie) }}">
                     <i class="fas fa-edit"></i></a>
+                    @endif
                 </td>
                 <td>{{ $noveltie->shift->type }}</td>
                 <td>{{ $noveltie->shift->opening_at->format('Y-m-d H:i') }}</td>

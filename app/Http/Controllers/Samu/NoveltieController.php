@@ -39,17 +39,19 @@ class NoveltieController extends Controller
 
         if($shift) {
             $noveltie = new Noveltie($request->All());
-            $noveltie->shift()->associate();
+            $noveltie->shift()->associate($shift);
             $noveltie->save();
     
             $request->session()->flash('success', 'Novedad Creada.');
+
+            return redirect()->route('samu.noveltie.index');
         }
         else {
             $request->session()->flash('danger', 'No se pudo registrar la novedad, 
                 el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
+            
+            return redirect()->back()->withInput();
         }
-
-        return redirect()->route('samu.noveltie.index')->withInput();
     }
 
 

@@ -11,7 +11,7 @@
     @csrf
     @method('PUT')
 
-    @include('samu.call.form', ['call' => $call])
+    @include('samu.call.form', ['call' => $call, 'shiftUsers' => $shiftUsers])
 </form>
 
 
