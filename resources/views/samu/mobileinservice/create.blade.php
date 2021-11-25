@@ -2,34 +2,16 @@
 
 @section('content')
 
-@include('samu.nav')
-
-<div class="card mb-3">
-    <div class="card-body">
-    
-        <div class="col-md-6">
-            <h3 class="mb-3"><i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Asinga un móvil a un turno</h3>
-        </div>
-        
-        <hr>
-        
+@include('samu.nav')  
+<div class="col-md-6">
+    <h3 class="mb-3"><i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Asinga un móvil a un turno</h3>
+</div>    
         <form method="POST" action="{{ route('samu.mobileinservice.store') }}">
             @csrf
             @method('POST')
          
             <div class="form-row">
-                <fieldset class="form-group  col-md-3">
-                    <label for="for_return">Turno</label>
-                    <select class="form-control" name="shift_id">
-                        @foreach($shift as $shift)
-                            <!--de la varible que traigo el campo que quiero guaradar - lo que quiero mostrar del As del foreach-->
-                            <option value="{{ $shift->id }}">{{$shift->date}}  - {{$shift->type}} </option>
-                        @endforeach          
-                    </select> 
-                                        
-                </fieldset>
-        
-                <fieldset class="form-group col-8 col-md-2">
+                <fieldset class="form-group col-8 col-md-3">
                     <label for="for_run">Movil </label>
                     <select class="form-control" name="mobile_id">
                     <option></option>
@@ -39,7 +21,7 @@
                     </select>
                 </fieldset>
       
-                <fieldset class="form-group col-12 col-md-2">
+                <fieldset class="form-group col-12 col-md-3">
                     <label for="empresa">Tipo de  móvil</label>
                     <select class="form-control" name="type">
                         <option value=""></option>
@@ -54,7 +36,7 @@
 
              
 
-                <fieldset class="form-group col-12 col-md-5">
+                <fieldset class="form-group col-12 col-md-6">
                     <label for="empresa">Observación</label>
                     <textarea class="form-control" id="validationTextarea" name="observation" placeholder="" required></textarea>
                         <div class="invalid-feedback">
@@ -73,9 +55,7 @@
                 </fieldset>
             </div>
 
-            
-        </div>
-        </div>
+   
     </form>
         
             

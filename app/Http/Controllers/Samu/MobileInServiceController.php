@@ -33,6 +33,8 @@ class MobileInServiceController extends Controller
         $mobiles = Mobile::all();
 
         $shift = Shift::where('status',1)->get();
+        
+
         return view('samu.mobileinservice.create', compact('mobiles','shift'));
     }
 
@@ -44,15 +46,29 @@ class MobileInServiceController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $shift = Shift::where('status',1)->get();
+        if($shift) 
+        {
         $mobileInService=new MobileInService($request->all());
         $mobil = Mobile::find($request->input('mobile_id'));
         $mobileInService->status = $mobil->status;
+        $shift = Shift::where('status',1)->get();
+        $mobileInService->shift()->associate($shift);
+
         $mobileInService->save();
 
         //$mobileinservices = MobileInService::all();
         session()->flash('success', 'Se ha añadido exitosamente');
         return redirect()->route('samu.mobileinservice.index');
+        }
+        else
+        {
+            $request->session()->flash('danger', 'No se pudo registrar el movil ya que
+                el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
+            
+            return redirect()->back()->withInput();
+
+        }
     }
 
     /**
@@ -92,13 +108,13 @@ class MobileInServiceController extends Controller
     {
          /* Obtener el turno actual */
          $shift = Shift::where('status',1)->first();
-         
-        if($shift) {
-        $mobileInService->fill($request->all());
-        $mobileInService->save();
 
-        session()->flash('info', 'Movil editado.');
-        return redirect()->route('samu.mobileinservice.index', compact('mobileInService'));
+        if($shift) {
+            $mobileInService->fill($request->all());
+            $mobileInService->save();
+            $mobileInService->shift()->associate($shift);    
+            session()->flash('info', 'Movil editado.');
+            return redirect()->route('samu.mobileinservice.index', compact('mobileInService'));
         }
         else {
             $request->session()->flash('danger', 'No se pudo actualizar el cambio, 
