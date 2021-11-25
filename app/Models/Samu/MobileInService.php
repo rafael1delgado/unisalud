@@ -32,11 +32,12 @@ class MobileInService extends Model implements Auditable
 
     public function shift()
     {
-        return $this->belongsTo(Shift::class);
+        return $this->BelongsTo(Shift::class);
     }
 
     public function mobile()
     {
+        /* HasOne? */
         return $this->belongsTo(Mobile::class);
     }
 
