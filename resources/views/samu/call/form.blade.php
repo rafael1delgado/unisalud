@@ -21,9 +21,9 @@
         <select class="form-control form-control-sm" name="receptor_id" id="receptor_id">
             <option value=""></option>
             @foreach($shiftUsers as $su)
-            @if($su->jobType->name=='Operador')
-            <option value="Operador 1" >{{ $su->user->humanNames->last()->fullName }} - {{ $su->jobType->name }}</option>
-            @endif
+                @if($su->jobType->name=='Operador')
+                <option value="Operador 1" >{{ $su->user->humanNames->last()->fullName }} - {{ $su->jobType->name }}</option>
+                @endif
             @endforeach
         </select>
     </fieldset>

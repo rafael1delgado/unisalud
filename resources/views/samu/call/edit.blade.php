@@ -37,6 +37,7 @@
         @break
 @endswitch
 
+<a href="{{ route('samu.call.index') }}" class="btn btn-outline-secondary mt-3">Volver</a>
 <br>
 
 @endsection

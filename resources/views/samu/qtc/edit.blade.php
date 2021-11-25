@@ -4,7 +4,7 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Editar Qtc</h3>
+<h3 class="mb-3"><i class="fas fa-car-crash"></i> Editar Qtc {{ $qtc->id }}</h3>
 
 <h4> Asignación de seguimiento y horarios</h4>
       

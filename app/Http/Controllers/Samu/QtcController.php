@@ -22,7 +22,7 @@ class QtcController extends Controller
     public function index()
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',1)->first();
+        $shift = Shift::where('status',true)->first();
 
         return view ('samu.qtc.index' , compact('shift'));
     }
@@ -35,7 +35,7 @@ class QtcController extends Controller
     public function create()
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',1)->first();
+        $shift = Shift::where('status',true)->first();
 
         $keys = Key::all();
 
@@ -97,7 +97,7 @@ class QtcController extends Controller
     public function edit(qtc $qtc)
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',1)->first();
+        $shift = Shift::where('status',true)->first();
 
         $keys = Key::all();
         return view ('samu.qtc.edit', compact('shift','keys','qtc'));
@@ -112,11 +112,11 @@ class QtcController extends Controller
      */
     public function update(Request $request, qtc $qtc)
     {
-        //['qtc_id' => $request->qtc_id];
         $qtc->fill($request->all());
         $qtc->update();
-        session()->flash('success', ' Actualizado satisfactoriamente.');
-        return redirect()->route('samu.call.index', compact('qtc'));
+
+        session()->flash('success', 'Qtc Actualizado satisfactoriamente.');
+        return redirect()->route('samu.call.index');
     }
 
     

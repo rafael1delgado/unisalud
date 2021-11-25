@@ -141,8 +141,6 @@ class CallController extends Controller
             case 'T1':
             case 'T2':
             case 'NM':
-                // TODO pendiente
-
                 $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
                 return redirect()->route('samu.call.index');
                 break;
@@ -152,6 +150,18 @@ class CallController extends Controller
                 return redirect()->route('samu.call.index');
                 break;
         } 
+    }
+
+
+    public function syncQtcs(Request $request, Call $call)
+    {
+        if ($request->has('qtcs')) 
+        {
+            $call->qtcs()->sync($request->input('qtcs'));
+        }
+
+        $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
+        return redirect()->route('samu.call.index');
     }
  
 
