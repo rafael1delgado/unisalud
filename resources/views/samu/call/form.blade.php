@@ -20,9 +20,12 @@
         <label for="for_receptor_id">Recep. de llamada</label>
         <select class="form-control form-control-sm" name="receptor_id" id="receptor_id">
             <option value="1">1 por defecto para pruebas</option>
+        
             <option>{{ optional($call)->receptor_id }}</option>
             @foreach($shiftUsers as $su)
+            @if($su->jobType->name=='Operador')
             <option value="Operador 1" >{{ $su->user->humanNames->last()->fullName }} - {{ $su->jobType->name }}</option>
+            @endif
             @endforeach
         </select>
     </fieldset>
