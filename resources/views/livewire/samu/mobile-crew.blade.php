@@ -18,7 +18,7 @@
         @error('job_type_id') <span class="error">{{ $message }}</span> @enderror    
     </div>
     <div class="col-1">
-        <button wire:click="store()" class="btn btn-success ml-4 " ><i class="fas fa-plus"></i></button>
+        <button wire:click="store()" class="btn btn-success"><i class="fas fa-plus"></i></button>
     </div>
 </div>
 

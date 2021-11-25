@@ -73,6 +73,10 @@ class Qtc extends Model implements Auditable
         return $this->belongsTo(Mobile::class);
     }
 
+    public function shift() {
+        return $this->belongsTo(Shift::class);
+    }
+
     public function mobilInService(){
         return $this->belongsTo(MobileInService::class,'samu_mobiles_in_service','mobile_in_service_id'); 
     }

@@ -48,6 +48,30 @@ class QtcController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function store(Request $request)
+    {
+        $shift = Shift::where('status',true)->first();
+
+        if($shift) 
+        {
+            $qtc = new Qtc($request->all());
+            
+            $qtc->shift()->associate($shift);
+
+            $qtc->save();
+
+            session()->flash('success', 'Se ha creado el QTC');
+            return redirect()->route('samu.qtc.index');
+        }
+        else
+        {
+            $request->session()->flash('danger', 'No se pudo registrar el QTC ya que
+                el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
+            
+            return redirect()->back()->withInput();
+
+        }
+    }
    
 
     /**

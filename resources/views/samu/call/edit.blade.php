@@ -29,7 +29,11 @@
     @case('T2')
     @case('NM')
     @default
-        
+        <div class="card">
+            <div class="card-body">
+            @include('samu.call.qtc', ['call' => $call, 'shift' => $shift])
+            </div>
+        </div>
         @break
 @endswitch
 
