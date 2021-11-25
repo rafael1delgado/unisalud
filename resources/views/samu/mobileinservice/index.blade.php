@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($shift as $shift)
+            @foreach($shifts as $shift)
                 @foreach($shift->mobilesInService as $mis)
                 <tr>
                     <td>

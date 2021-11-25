@@ -17,9 +17,9 @@ class MobileInServiceController extends Controller
      */
     public function index()
     {
-      
-        $shift = Shift::where('status',1)->get();
-        return view('samu.mobileinservice.index', compact('shift'));
+        $shifts = Shift::all();
+
+        return view('samu.mobileinservice.index', compact('shifts'));
     }
 
     /**
@@ -32,8 +32,7 @@ class MobileInServiceController extends Controller
        
         $mobiles = Mobile::all();
 
-        $shift = Shift::where('status',1)->get();
-        
+        $shift = Shift::where('status',true)->first();
 
         return view('samu.mobileinservice.create', compact('mobiles','shift'));
     }
@@ -46,20 +45,21 @@ class MobileInServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $shift = Shift::where('status',1)->get();
+        $shift = Shift::where('status',true)->first();
+
         if($shift) 
         {
-        $mobileInService=new MobileInService($request->all());
-        $mobil = Mobile::find($request->input('mobile_id'));
-        $mobileInService->status = $mobil->status;
-        $shift = Shift::where('status',1)->get();
-        $mobileInService->shift()->associate($shift);
+            $mobileInService = new MobileInService($request->all());
+            
+            $mobil = Mobile::find($request->input('mobile_id'));
+            $mobileInService->status = $mobil->status;
 
-        $mobileInService->save();
+            $mobileInService->shift()->associate($shift);
 
-        //$mobileinservices = MobileInService::all();
-        session()->flash('success', 'Se ha añadido exitosamente');
-        return redirect()->route('samu.mobileinservice.index');
+            $mobileInService->save();
+
+            session()->flash('success', 'Se ha añadido exitosamente');
+            return redirect()->route('samu.mobileinservice.index');
         }
         else
         {

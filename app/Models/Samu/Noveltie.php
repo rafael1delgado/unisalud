@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Models\User;
+use App\Models\Samu\Shift;
 
 class Noveltie extends Model implements Auditable
 {
-
     use HasFactory;
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
+    
     protected $table="samu_novelties";
 
     protected $fillable = [
