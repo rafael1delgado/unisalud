@@ -8,6 +8,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\Call;
+
 use App\Models\User;
 
 
