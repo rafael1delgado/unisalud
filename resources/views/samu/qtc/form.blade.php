@@ -106,26 +106,11 @@
         <div class="form-row">
             <fieldset class="form-group col-md-12">
                 <label for="for_establishment">Est. Recepcion de paciente </label>
-                <select class="form-control" name="establishment" id="establishment">
+                <select class="form-control" name="establishment_id" id="establishment_id">
                     <option> </option>
-                    <option value="Hospital Dr Ernesto Torres Galdames" >Hospital Dr Ernesto Torres Galdames</option>
-                    <option value="SAPU Cirujano Aguirre" >SAPU Cirujano Aguirre</option>
-                    <option value="SAPU Cirujano Guzmán" >SAPU Cirujano Guzmán</option>
-                    <option value="SAPU Cirujano Videla" >SAPU Cirujano Videla</option>
-                    <option value="SAPU El Boro" >SAPU El Boro</option>
-                    <option value="SAPU Huara" >SAPU Huara</option>
-                    <option value="SAPU Pedro Pulgar" >SAPU Pedro Pulgar</option>
-                    <option value="SAPU Pozo Almonte" >SAPU Pozo Almonte</option>
-                    <option value="SAR La Tortuga" >SAR La Tortuga</option>
-                    <option value="SAR Sur de Iquique" >SAR Sur de Iquique</option>
-                    <option value="Servicio Médico Legal Iquique" >Servicio Médico Legal Iquique</option>
-                    <option value="SMA Servicios Medicos" >SMA Servicios Medicos</option>
-                    <option value="SUR Camiña" >SUR Camiña</option>
-                    <option value="SUR Cariquima" >SUR Cariquima</option>
-                    <option value="SUR Chanavayita" >SUR Chanavayita</option>
-                    <option value="SUR Colchane" >SUR Colchane</option>
-                    <option value="SUR Pica" >SUR Pica</option>
-                    <option value="SUR Tarapacá" >SUR Tarapacá</option>
+                    @foreach($establishments as $id => $establishment)
+                        <option value="{{ $id }}" {{ old('establishment_id', optional($qtc)->establishment_id) == $id ? 'selected' : '' }}>{{ $establishment }}</option>
+                    @endforeach
                 </select>
             </fieldset>
 

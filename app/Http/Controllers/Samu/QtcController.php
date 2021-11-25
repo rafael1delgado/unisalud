@@ -10,6 +10,7 @@ use App\Models\Samu\Call;
 use App\Models\Samu\MobileInService;
 use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
+use App\Models\Organization;
 
 
 class QtcController extends Controller
@@ -37,9 +38,10 @@ class QtcController extends Controller
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
 
+        $establishments = Organization::pluck('name','id')->sort();
         $keys = Key::all();
 
-        return view ('samu.qtc.create',compact('shift','keys'));
+        return view ('samu.qtc.create',compact('shift','keys','establishments'));
     }
 
     /**
@@ -98,9 +100,9 @@ class QtcController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
-
+        $establishments = Organization::pluck('name','id')->sort();
         $keys = Key::all();
-        return view ('samu.qtc.edit', compact('shift','keys','qtc'));
+        return view ('samu.qtc.edit', compact('shift','establishments','keys','qtc'));
     }
 
     /**
@@ -116,7 +118,7 @@ class QtcController extends Controller
         $qtc->update();
 
         session()->flash('success', 'Qtc Actualizado satisfactoriamente.');
-        return redirect()->route('samu.call.index');
+        return redirect()->route('samu.qtc.index');
     }
 
     

@@ -37,7 +37,7 @@ class CreateSamuQtcsTable extends Migration
             /* Evaluación de paciente */
 
             $table->text('reception_detail')->nullable();
-            $table->string('establishment')->nullable();
+            $table->foreignId('establishment_id')->nullable()->constrained('organizations');
             $table->string('reception_person')->nullable();
 
 
