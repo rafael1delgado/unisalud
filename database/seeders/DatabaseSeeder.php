@@ -56,9 +56,11 @@ class DatabaseSeeder extends Seeder
 
             //Organizacion
             OrganizationTypeSeeder::class,
+            OrganizationDependencySeeder::class,
+            OrganizationServiceSeeder::class,
             OrganizationSeeder::class,
 
-            //necesita Organization por eso se agrega despues
+            //necesita Organization por eso se debe ejecutar despues
             LocationSeeder::class,
 
 

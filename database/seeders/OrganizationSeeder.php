@@ -561,8 +561,8 @@ class OrganizationSeeder extends Seeder
         $Organization->alias = 'CESFAM Cirujano Aguirre';
         $Organization->type = 11; //11 Consultorio General Urbano (CGU)
         $Organization->code_deis = 102300;
-        $Organization->service = 'Servicio de Salud Iquique';
-        $Organization->dependency = 'Municipal';
+        $Organization->service = 3; // 3 Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 Municipal
         $Organization->save();
 
         $address = new Address();
@@ -583,8 +583,8 @@ class OrganizationSeeder extends Seeder
         $Organization->alias = 'CESFAM Cirujano Videla';
         $Organization->type = 11; //11 Consultorio General Urbano (CGU)
         $Organization->code_deis = 102301;
-        $Organization->service = 'Servicio de Salud Iquique';
-        $Organization->dependency = 'Municipal';
+        $Organization->service = 3; // 3 Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 Municipal
         $Organization->save();
 
         $address = new Address();
@@ -605,8 +605,8 @@ class OrganizationSeeder extends Seeder
         $Organization->alias = 'CESFAM Guzmán';
         $Organization->type = 11; //11 Consultorio General Urbano (CGU)
         $Organization->code_deis = 102302;
-        $Organization->service = 'Servicio de Salud Iquique';
-        $Organization->dependency = 'Municipal';        
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 = municipal
         $Organization->save();
 
         $address = new Address();
@@ -624,7 +624,11 @@ class OrganizationSeeder extends Seeder
         $Organization = new Organization();
         $Organization->active = 34;
         $Organization->name = 'Centro de Salud Familiar Sur de Iquique';
-        $Organization->alias = 'Centro de Salud Familiar Sur de Iquique';
+        $Organization->alias = 'CESFAM Sur Iquique';
+        $Organization->type = 11; //11 Consultorio General Urbano (CGU)
+        $Organization->code_deis = 102306;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 = municipal
         $Organization->save();
 
         $address = new Address();
@@ -642,7 +646,11 @@ class OrganizationSeeder extends Seeder
         $Organization = new Organization();
         $Organization->active = 35;
         $Organization->name = 'Posta de Salud Rural Chanavayita';
-        $Organization->alias = 'Posta de Salud Rural Chanavayita';
+        $Organization->alias = 'Posta Rural Chanavayita';
+        $Organization->type = 13; //Posta de Salud Rural (PSR)
+        $Organization->code_deis = 102412;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 = municipal
         $Organization->save();
 
         $address = new Address();
@@ -660,7 +668,11 @@ class OrganizationSeeder extends Seeder
         $Organization = new Organization();
         $Organization->active = 36;
         $Organization->name = 'Posta de Salud Rural San Marcos';
-        $Organization->alias = 'Posta de Salud Rural San Marcos';
+        $Organization->alias = 'Posta Rural San Marcos';
+        $Organization->type = 13; //Posta de Salud Rural (PSR)
+        $Organization->code_deis = 102413;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 = municipal
         $Organization->save();
 
         $address = new Address();
@@ -679,6 +691,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 37;
         $Organization->name = 'COSAM Dr. Jorge Seguel Cáceres';
         $Organization->alias = 'COSAM Dr. Jorge Seguel Cáceres';
+        $Organization->type = 14; //Centro Comunitario de Salud Mental  (COSAM)
+        $Organization->code_deis = 102600;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 1; //1 = Servicio de Salud
         $Organization->save();
 
         $address = new Address();
@@ -697,6 +713,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 38;
         $Organization->name = 'COSAM Salvador Allende';
         $Organization->alias = 'COSAM Salvador Allende';
+        $Organization->type = 14; //Centro Comunitario de Salud Mental  (COSAM)
+        $Organization->code_deis = 102601;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 1; //1 = Servicio de Salud
         $Organization->save();
 
         $address = new Address();
@@ -714,7 +734,11 @@ class OrganizationSeeder extends Seeder
         $Organization = new Organization();
         $Organization->active = 39;
         $Organization->name = 'Centro Comunitario de Salud Familiar Cerro Esmeralda';
-        $Organization->alias = 'Centro Comunitario de Salud Familiar Cerro Esmeralda';
+        $Organization->alias = 'CECOSF Cerro Esmeralda';
+        $Organization->type = 16; //Centro Comunitario de Salud Familiar (CECOSF)
+        $Organization->code_deis = 102701;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 = municipal        
         $Organization->save();
 
         $address = new Address();
@@ -733,6 +757,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 40;
         $Organization->name = 'SAPU Cirujano Aguirre';
         $Organization->alias = 'SAPU Cirujano Aguirre';
+        $Organization->type = 20; //Servicio de Urgencia de APS
+        $Organization->code_deis = 102800;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 = municipal
         $Organization->save();
 
         $address = new Address();
@@ -751,6 +779,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 41;
         $Organization->name = 'SAPU Cirujano Videla';
         $Organization->alias = 'SAPU Cirujano Videla';
+        $Organization->type = 20; //Servicio de Urgencia de APS
+        $Organization->code_deis = 102801;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 = municipal
         $Organization->save();
 
         $address = new Address();
@@ -769,6 +801,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 42;
         $Organization->name = 'SAPU Cirujano Guzmán';
         $Organization->alias = 'SAPU Cirujano Guzmán';
+        $Organization->type = 20; //Servicio de Urgencia de APS
+        $Organization->code_deis = 102802;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 = municipal
         $Organization->save();
 
         $address = new Address();
@@ -787,6 +823,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 43;
         $Organization->name = 'SAR Sur de Iquique';
         $Organization->alias = 'SAR Sur de Iquique';
+        $Organization->type = 20; //Servicio de Urgencia de APS
+        $Organization->code_deis = 102806;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 6; //6 = municipal        
         $Organization->save();
 
         $address = new Address();

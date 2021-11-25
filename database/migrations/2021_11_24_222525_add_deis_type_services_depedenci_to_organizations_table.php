@@ -17,11 +17,16 @@ class AddDeisTypeServicesDepedenciToOrganizationsTable extends Migration
             //
             $table->foreignId('type')->after('active')->nullable();
             $table->integer('code_deis')->after('type')->nullable(); //NUEVO codigo deis, se dejará de utilizar el antiguo
-            $table->string('service')->after('code_deis')->nullable();
-            $table->string('dependency')->after('service')->nullable();
+            $table->foreignId('service')->after('code_deis')->nullable();
+            $table->foreignId('dependency')->after('service')->nullable();
 
 
             $table->foreign('type')->references('id')->on('organization_types');
+            $table->foreign('service')->references('id')->on('organization_services');
+            $table->foreign('dependency')->references('id')->on('organization_dependencies');
+
+            
+
 
         });
     }
