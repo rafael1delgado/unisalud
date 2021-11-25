@@ -20,7 +20,11 @@ class OrganizationSeeder extends Seeder
         $Organization = new Organization();
         $Organization->active = 1;
         $Organization->name = 'Actividades gestionadas por la Dirección del Servicio para apoyo de la Red (S.S de Iquique)';
-        $Organization->alias = 'Servicio de Salud Iquique';
+        $Organization->alias = 'Servicio de Salud Iquique';        
+        $Organization->type = 1; //1 Dirección Servicio de Salud
+        $Organization->code_deis = 102010;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 1; //1 = Servicio de Salud
         $Organization->save();
 
         $address = new Address();
@@ -39,6 +43,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 2;
         $Organization->name = 'PRAIS (S.S. Iquique)';
         $Organization->alias = 'PRAIS (S.S. Iquique)';
+        $Organization->type = 2; //2 Centro PRAIS
+        $Organization->code_deis = 102011;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 1; //1 = Servicio de Salud
         $Organization->save();
 
         $address = new Address();
@@ -56,7 +64,11 @@ class OrganizationSeeder extends Seeder
         $Organization = new Organization();
         $Organization->active = 3;
         $Organization->name = 'Clínica Dental Móvil Simple. Pat. RW6740 (Iquique)';
-        $Organization->alias = 'Clínica Dental Móvil Simple. Pat. RW6740 (Iquique)';
+        $Organization->alias = 'Clínica Dental Móvil';
+        $Organization->type = 3; //3 Clínica Dental Móvil
+        $Organization->code_deis = 102012;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 1; //1 = Servicio de Salud
         $Organization->save();
 
         $address = new Address();
@@ -75,6 +87,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 4;
         $Organization->name = 'Hospital Dr. Ernesto Torres Galdames (Iquique)';
         $Organization->alias = 'Hospital Dr. Ernesto Torres Galdames (Iquique)';
+        $Organization->type = 5; //5 Hospital (Alta Complejidad)
+        $Organization->code_deis = 102100;
+        $Organization->service = 3; //3 = Servicio de Salud Iquique
+        $Organization->dependency = 1; //1 = Servicio de Salud
         $Organization->save();
 
         $address = new Address();
@@ -93,6 +109,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 5;
         $Organization->name = 'Clínica Iquique';
         $Organization->alias = 'Clínica Iquique';
+        $Organization->type = 6; //6 Clínica
+        $Organization->code_deis = 102200;
+        $Organization->service = 4; //3 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //1 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -111,6 +131,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 6;
         $Organization->name = 'Clínica Tarapacá';
         $Organization->alias = 'Clínica Tarapacá';
+        $Organization->type = 6; //6 Clínica
+        $Organization->code_deis = 102201;
+        $Organization->service = 4; //3 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //1 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -129,6 +153,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 7;
         $Organization->name = 'Centro Clínico Militar Iquique';
         $Organization->alias = 'Centro Clínico Militar Iquique';
+        $Organization->type = 8; //8 Centro de Salud
+        $Organization->code_deis = 102209;
+        $Organization->service = 4; //3 = SEREMI de Tarapacá
+        $Organization->dependency = 5; //5 = Público No perteneciente al SNSS
         $Organization->save();
 
         $address = new Address();
