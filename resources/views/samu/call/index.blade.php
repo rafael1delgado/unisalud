@@ -44,7 +44,15 @@
                         <i class="fas fa-edit"></i> {{ $call->id }}
                     </a>
                 </td>
-                <td>{{ $call->classification }}</td>
+                <td>
+                    {{ $call->classification }} 
+                    @if($call->classification != 'OT')
+                        - Qtc: 
+                        @foreach($call->qtcs as $qtc)
+                            <a href="{{ route('samu.qtc.edit', $qtc) }}" class="link-primary"> {{ $qtc->id }}</a>, 
+                        @endforeach
+                    @endif
+                </td>
                 <td>{{ $call->hour}}</td>
                 <td>{{ $call->receptor->officialFullName }}</td>
                 <td>{{ $call->information }}</td>

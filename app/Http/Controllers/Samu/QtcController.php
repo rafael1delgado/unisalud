@@ -10,6 +10,7 @@ use App\Models\Samu\Call;
 use App\Models\Samu\MobileInService;
 use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
+use App\Models\Organization;
 
 
 class QtcController extends Controller
@@ -22,7 +23,7 @@ class QtcController extends Controller
     public function index()
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',1)->first();
+        $shift = Shift::where('status',true)->first();
 
         return view ('samu.qtc.index' , compact('shift'));
     }
@@ -35,11 +36,12 @@ class QtcController extends Controller
     public function create()
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',1)->first();
+        $shift = Shift::where('status',true)->first();
 
+        $establishments = Organization::pluck('name','id')->sort();
         $keys = Key::all();
 
-        return view ('samu.qtc.create',compact('shift','keys'));
+        return view ('samu.qtc.create',compact('shift','keys','establishments'));
     }
 
     /**
@@ -48,6 +50,30 @@ class QtcController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function store(Request $request)
+    {
+        $shift = Shift::where('status',true)->first();
+
+        if($shift) 
+        {
+            $qtc = new Qtc($request->all());
+            
+            $qtc->shift()->associate($shift);
+
+            $qtc->save();
+
+            session()->flash('success', 'Se ha creado el QTC');
+            return redirect()->route('samu.qtc.index');
+        }
+        else
+        {
+            $request->session()->flash('danger', 'No se pudo registrar el QTC ya que
+                el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
+            
+            return redirect()->back()->withInput();
+
+        }
+    }
    
 
     /**
@@ -73,10 +99,10 @@ class QtcController extends Controller
     public function edit(qtc $qtc)
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',1)->first();
-
+        $shift = Shift::where('status',true)->first();
+        $establishments = Organization::pluck('name','id')->sort();
         $keys = Key::all();
-        return view ('samu.qtc.edit', compact('shift','keys','qtc'));
+        return view ('samu.qtc.edit', compact('shift','establishments','keys','qtc'));
     }
 
     /**
@@ -88,11 +114,11 @@ class QtcController extends Controller
      */
     public function update(Request $request, qtc $qtc)
     {
-        //['qtc_id' => $request->qtc_id];
         $qtc->fill($request->all());
         $qtc->update();
-        session()->flash('success', ' Actualizado satisfactoriamente.');
-        return redirect()->route('samu.call.index', compact('qtc'));
+
+        session()->flash('success', 'Qtc Actualizado satisfactoriamente.');
+        return redirect()->route('samu.qtc.index');
     }
 
     

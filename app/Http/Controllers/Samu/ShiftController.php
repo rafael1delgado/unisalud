@@ -76,7 +76,9 @@ class ShiftController extends Controller
      */
     public function edit(Shift $shift)
     {
-        $openShift = Shift::where('status',true)->exists() ? true: false;
+        $openShift = Shift::where('status',true)
+                        ->whereNotIn('id',[$shift->id])
+                        ->exists() ? true: false;
         return view('samu.shift.edit', compact('shift','openShift'));
     }
 

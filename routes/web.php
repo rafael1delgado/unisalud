@@ -526,7 +526,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::post('/store',		[CallController::class, 'store'])->name('store');
 		Route::delete('/{call}', 	[CallController::class, 'destroy'])->name('destroy');
 		Route::put('/update/{call}',[CallController::class, 'update'])->name('update');
-    
+		Route::post('/sync-qtcs/{call}',[CallController::class, 'syncQtcs'])->name('syncQtcs');
     });
 
     Route::prefix('qtc')->name('qtc.')->group(function () {

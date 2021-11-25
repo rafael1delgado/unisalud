@@ -29,10 +29,15 @@
     @case('T2')
     @case('NM')
     @default
-        
+        <div class="card">
+            <div class="card-body">
+            @include('samu.call.qtc', ['call' => $call, 'shift' => $shift])
+            </div>
+        </div>
         @break
 @endswitch
 
+<a href="{{ route('samu.call.index') }}" class="btn btn-outline-secondary mt-3">Volver</a>
 <br>
 
 @endsection

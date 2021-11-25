@@ -8,7 +8,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\Call;
-
+use App\Models\Samu\Shift;
 use App\Models\User;
 
 
@@ -23,6 +23,7 @@ class Qtc extends Model implements Auditable
     protected $fillable = [
 
         //segumiento
+        'shift_id',
         'call_id',
         'key_id',
         'return_key_id',
@@ -42,7 +43,7 @@ class Qtc extends Model implements Auditable
         //evaluación de paciente
 
         'reception_detail',
-        'establishment',
+        'establishment_id',
         'reception_person',
         
         //asignacion signos vitales
@@ -74,6 +75,10 @@ class Qtc extends Model implements Auditable
         return $this->belongsTo(Mobile::class);
     }
 
+    public function shift() {
+        return $this->belongsTo(Shift::class,'samu_shifts');
+    }
+
     public function mobilInService(){
         return $this->belongsTo(MobileInService::class,'samu_mobiles_in_service','mobile_in_service_id'); 
     }
@@ -86,6 +91,11 @@ class Qtc extends Model implements Auditable
     public function returnKey()
     {
        return $this->belongsTo(Key::class,'return_key_id');
+    }
+
+    public function establishment()
+    {
+       return $this->belongsTo(Organization::class,'establishment_id');
     }
 
     public function creator()

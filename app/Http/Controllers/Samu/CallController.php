@@ -22,7 +22,9 @@ class CallController extends Controller
      */
     public function index()
     {
-        $shift = Shift::where('status',1)->get();
+        /* Get o first? */
+        $shift = Shift::where('status',true)->get();
+
         $mobiles = Mobile::all();
         $calls = Call::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
         $shiftUsers = ShiftUser::all();
@@ -103,10 +105,9 @@ class CallController extends Controller
      */
     public function edit(Call $call)
     {
-        $shift = Shift::where('status',1)->get();
-        //dd($shift->mobilesInService);
+        $shift = Shift::where('status',true)->first();
         $shiftUsers = ShiftUser::all();
-        return view ('samu.call.edit' , compact('call', 'shiftUsers'));
+        return view ('samu.call.edit' , compact('call', 'shift', 'shiftUsers'));
     }
 
  
@@ -140,8 +141,6 @@ class CallController extends Controller
             case 'T1':
             case 'T2':
             case 'NM':
-                // TODO pendiente
-
                 $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
                 return redirect()->route('samu.call.index');
                 break;
@@ -151,6 +150,18 @@ class CallController extends Controller
                 return redirect()->route('samu.call.index');
                 break;
         } 
+    }
+
+
+    public function syncQtcs(Request $request, Call $call)
+    {
+        if ($request->has('qtcs')) 
+        {
+            $call->qtcs()->sync($request->input('qtcs'));
+        }
+
+        $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
+        return redirect()->route('samu.call.index');
     }
  
 
