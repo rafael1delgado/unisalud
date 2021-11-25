@@ -21,7 +21,7 @@
                 <th>Clave</th>
                 <th>Clave de Retorno</th>
                 <th>Movil en Servicio</th>
-                <th>Detalle</th>
+                <th></th>
             </tr>
         </thead>
         
