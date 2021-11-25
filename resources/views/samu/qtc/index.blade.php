@@ -16,12 +16,12 @@
         <thead>
             <tr class="table-primary">
                 <th></th>
-                <th>Estado</th>
                 <th>Turno</th>
-                <th>Apertura</th>
-                <th>Cierre</th>
-                <th>Personal</th>
-                <th></th>
+                <th>QTC N °</th>
+                <th>Clave</th>
+                <th>Clave de Retorno</th>
+                <th>Movil en Servicio</th>
+                <th>Detalle</th>
             </tr>
         </thead>
         
@@ -33,8 +33,11 @@
                         <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
                     </a>
                 </td>
+                <td>{{ $qtc->shift['type'] }} - {{ $qtc->shift['opening_at'] }} </td>
                 <td>{{ $qtc->id }} </td>
-
+                <td>{{ $qtc->key_id['key'] }} -{{ $qtc->key_id['name'] }} </td>
+                <td>{{ $qtc->return_key_id['key'] }} -{{ $qtc->return_key_id['name'] }} </td>
+                <td>{{ $qtc->mobileinservice['name'] }} </td>
                 <td>
                     <form method="POST" action="{{ route('samu.qtc.destroy', $qtc) }}">
                         @csrf
@@ -42,6 +45,7 @@
                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
                 </td>
+              
             </tr>
             @endforeach
         </tbody>
