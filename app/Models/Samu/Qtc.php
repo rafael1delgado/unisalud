@@ -76,7 +76,7 @@ class Qtc extends Model implements Auditable
     }
 
     public function shift() {
-        return $this->belongsTo(Shift::class,'samu_shifts');
+        return $this->belongsTo(Shift::class);
     }
 
     public function mobilInService(){

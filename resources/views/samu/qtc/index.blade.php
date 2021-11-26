@@ -33,11 +33,11 @@
                         <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
                     </a>
                 </td>
-                <td>{{ $qtc->shift['type'] }} - {{ $qtc->shift['opening_at'] }} </td>
+                <td>{{ $qtc->shift->opening_at }}  </td>
                 <td>{{ $qtc->id }} </td>
-                <td>{{ $qtc->key_id['key'] }} -{{ $qtc->key_id['name'] }} </td>
-                <td>{{ $qtc->return_key_id['key'] }} -{{ $qtc->return_key_id['name'] }} </td>
-                <td>{{ $qtc->mobileinservice['name'] }} </td>
+                <td>{{ $qtc->key_id }} -{{ $qtc->key->name }} </td>
+                <td>{{ $qtc->key->id }} -{{ $qtc->key->name }} </td>
+                <td> </td>
                 <td>
                     <form method="POST" action="{{ route('samu.qtc.destroy', $qtc) }}">
                         @csrf
