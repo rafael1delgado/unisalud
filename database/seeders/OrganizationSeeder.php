@@ -175,6 +175,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 8;
         $Organization->name = 'Centro Médico y Dental Megasalud Iquique';
         $Organization->alias = 'Centro Médico y Dental Megasalud Iquique';
+        $Organization->type = 17; //17 Centro Médico y Dental
+        $Organization->code_deis = 102213;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //3 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -193,6 +197,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 9;
         $Organization->name = 'Centro de Salud Mutual CChC Iquique';
         $Organization->alias = 'Centro de Salud Mutual CChC Iquique';
+        $Organization->type = 8; //8 Centro de Salud
+        $Organization->code_deis = 102216;
+        $Organization->service = 4; //3 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //3 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -211,6 +219,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 10;
         $Organization->name = 'Policlínico Naval de Iquique';
         $Organization->alias = 'Policlínico Naval de Iquique';
+        $Organization->type = 8; //8 Centro de Salud
+        $Organization->code_deis = 102217;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 5; //5 = Público No perteneciente al SNSS
         $Organization->save();
 
         $address = new Address();
@@ -229,6 +241,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 11;
         $Organization->name = 'Policlínico FACH de Iquique';
         $Organization->alias = 'Policlínico FACH de Iquique';
+        $Organization->type = 8; //8 Centro de Salud
+        $Organization->code_deis = 102218;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 5; //5 = Público No perteneciente al SNSS
         $Organization->save();
 
         $address = new Address();
@@ -247,6 +263,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 12;
         $Organization->name = 'Policlínico Carabineros de Iquique';
         $Organization->alias = 'Policlínico Carabineros de Iquique';
+        $Organization->type = 8; //8 Centro de Salud
+        $Organization->code_deis = 102219;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 5; //5 = Público No perteneciente al SNSS
         $Organization->save();
 
         $address = new Address();
@@ -265,6 +285,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 13;
         $Organization->name = 'Centro de Atención Instituto de Seguridad del Trabajador Iquique';
         $Organization->alias = 'Centro de Atención Instituto de Seguridad del Trabajador Iquique';
+        $Organization->type = 8; //8 Centro de Salud
+        $Organization->code_deis = 102222;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //3 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -283,6 +307,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 14;
         $Organization->name = 'Policlínico del Trabajador AChS Iquique';
         $Organization->alias = 'Policlínico del Trabajador AChS Iquique';
+        $Organization->type = 8; //8 Centro de Salud
+        $Organization->code_deis = 102223;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //3 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -301,6 +329,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 15;
         $Organization->name = 'Vacunatorio Sonrisa Infantil';
         $Organization->alias = 'Vacunatorio Sonrisa Infantil';
+        $Organization->type = 18; //18 Vacunatorio
+        $Organization->code_deis = 102224;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //3 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -319,6 +351,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 16;
         $Organization->name = 'Centro Médico y Dental Megasalud Alto Hospicio';
         $Organization->alias = 'Centro Médico y Dental Megasalud Alto Hospicio';
+        $Organization->type = 17; //17 Centro Médico y Dental
+        $Organization->code_deis = 102225;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //3 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -337,6 +373,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 17;
         $Organization->name = 'Centro de Salud Universidad Arturo Prat';
         $Organization->alias = 'Centro de Salud Universidad Arturo Prat';
+        $Organization->type = 8; //8 Centro de Salud
+        $Organization->code_deis = 102227;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 4; //4 = Otra Institución
         $Organization->save();
 
         $address = new Address();
@@ -355,6 +395,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 18;
         $Organization->name = 'Laboratorio Clínico Bionet S.A. - Iquique';
         $Organization->alias = 'Laboratorio Clínico Bionet S.A. - Iquique';
+        $Organization->type = 10; //10 Laboratorio Clínico o Dental
+        $Organization->code_deis = 102228;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //3 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -373,6 +417,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 19;
         $Organization->name = 'Laboratorio Clínico Automatizado Elmo';
         $Organization->alias = 'Laboratorio Clínico Automatizado Elmo';
+        $Organization->type = 10; //10 Laboratorio Clínico o Dental
+        $Organization->code_deis = 102229;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //3 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -391,6 +439,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 20;
         $Organization->name = 'Laboratorio Clínico Automatizado Biogénesis';
         $Organization->alias = 'Laboratorio Clínico Automatizado Biogénesis';
+        $Organization->type = 10; //10 Laboratorio Clínico o Dental
+        $Organization->code_deis = 102330;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //3 = Privado
         $Organization->save();
 
         $address = new Address();
@@ -409,6 +461,10 @@ class OrganizationSeeder extends Seeder
         $Organization->active = 21;
         $Organization->name = 'Clinicum Laboratorio Automatizado Ltda.';
         $Organization->alias = 'Clinicum Laboratorio Automatizado Ltda.';
+        $Organization->type = 10; //10 Laboratorio Clínico o Dental
+        $Organization->code_deis = 102331;
+        $Organization->service = 4; //4 = SEREMI de Tarapacá
+        $Organization->dependency = 3; //3 = Privado
         $Organization->save();
 
         $address = new Address();
