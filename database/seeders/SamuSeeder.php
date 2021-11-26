@@ -28,24 +28,26 @@ class SamuSeeder extends Seeder
             'status' => true
         ]);
 
-        Mobile::create([
-            'code'      => '123',
-            'name'      => 'Amb 1',
-            'plate'     => 'ZXC69',
-            'type'      => 'Grande',
-            'description' => 'Descripcion',
-            'status'    => 1,
-            'managed'   => 1
+        Shift::create([
+            'status' => true,
+            'type'   => 'Noche',
+            'opening_at' =>25-11-2021,
+            'status' => false
         ]);
-        Mobile::create([
-            'code'      => '123',
-            'name'      => 'Amb 1',
-            'plate'     => 'ZXC69',
-            'type'      => 'Grande',
-            'description' => 'Descripcion',
-            'status'    => 1,
-            'managed'   => 1
+
+        Shift::create([
+            'status' => true,
+            'type'   => 'Largo',
+            'opening_at' => 24-11-2021,
+            'status' => false
         ]);
+        Shift::create([
+            'status' => true,
+            'type'   => 'Noche',
+            'opening_at' => 24-11-2021,
+            'status' => false
+        ]);
+
         Mobile::create([
             'code'      => '31',
             'name'      => 'POZO AL MONTE',
