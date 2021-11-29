@@ -144,6 +144,7 @@
             initialView: 'timeGridWeek',
             allDaySlot: false,
             firstDay: 1,
+            initialDate: '{{$programmingProposal->start_date->format('Y-m-d')}}',
             slotMinTime: "08:00:00",
             timeFormat: 'HH:mm',
             locale: 'es',
