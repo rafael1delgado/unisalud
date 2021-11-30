@@ -70,7 +70,7 @@ class CreateSamuQtcsTable extends Migration
         
         Schema::create('samu_user_qtc', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('samu_users');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('qtc_id')->constrained('samu_qtcs');
         });
     }
