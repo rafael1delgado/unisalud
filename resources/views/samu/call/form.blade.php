@@ -22,7 +22,7 @@
             <option value=""></option>
             @foreach($shiftUsers as $su)
                 @if($su->jobType->name ==='Operador'|| $su->jobType->name ==='Jefe de Turno' || $su->jobType->name ==='Médico Regulador' || $su->jobType->name ==='Enfermero Regulador' || $su->jobType->name==='Despachador')
-                <option value="Operador 1" >{{ $su->user->humanNames->last()->fullName }} - {{ $su->jobType->name }}</option>
+                <option value="{{ $su->user->humanNames->last()->id }}" >{{ $su->user->humanNames->last()->fullName }} - {{ $su->jobType->name }}</option>
                 @endif
             @endforeach
         </select>

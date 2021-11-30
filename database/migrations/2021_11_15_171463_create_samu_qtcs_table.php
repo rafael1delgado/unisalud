@@ -73,6 +73,7 @@ class CreateSamuQtcsTable extends Migration
             $table->foreignId('qtc_id')->constrained('samu_qtcs');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('job_type_id')->constrained('samu_job_types');
+            $table->timestamps();
             $table->softDeletes();
         });
     }

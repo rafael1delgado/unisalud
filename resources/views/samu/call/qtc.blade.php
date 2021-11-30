@@ -3,10 +3,19 @@
     @method('POST')
 
     <div class="form-row">
-        <fieldset class="col-md-6 col-12">
+        <fieldset class="col-md-12 col-12">
             <label for="qtcs" class="form-label mb-3">
                 <b>Asignar uno o más QTCs al llamado</b>
             </label>
+        
+        </fieldset>
+        <fieldset class="col-md-12 col-12 mb-3">
+        <button  class="btn btn-primary" type="submit">Asignar</button>
+        <a class="btn btn-success ml-3" href="{{ route('samu.qtc.create') }}">
+            <i class="fas fa-plus"></i> Crear QTC
+        </a>
+        </fieldset>
+        <fieldset class="col-md-12 col-12">
             
             @foreach ($shift->qtcs as $qtc)
             <div class="mb-3 form-check">
@@ -22,6 +31,6 @@
         </fieldset>
     </div>
 
-    <button  class="btn btn-primary" type="submit">Asignar</button>
+    
 
 </form>

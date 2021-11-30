@@ -115,4 +115,16 @@ class Qtc extends Model implements Auditable
             $qtc->creator()->associate(auth()->user());
         });
     }
+
+
+    public function users()
+    {
+        
+        return $this->belongsToMany(User::class,'samu_qtc_user','qtc_id')
+
+                    ->using(QtcUser::class)
+                    ->withPivot('id','job_type_id')
+                    ->withTimestamps();
+    }
+
 }

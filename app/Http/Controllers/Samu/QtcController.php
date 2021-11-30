@@ -7,10 +7,13 @@ use App\Models\Samu\Shift;
 use App\Models\Samu\Qtc;
 use App\Models\Samu\Key;
 use App\Models\Samu\Call;
+use App\Models\Samu\MobileCrew;
+use App\Models\Samu\QtcUser;
 use App\Models\Samu\MobileInService;
 use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
 use App\Models\Organization;
+
 
 
 class QtcController extends Controller
@@ -59,9 +62,21 @@ class QtcController extends Controller
             $qtc = new Qtc($request->all());
             
             $qtc->shift()->associate($shift);
-
             $qtc->save();
+        
+            $mobilecrews=MobileCrew::where('mobiles_in_service_id', $request->mobile_in_service_id)->get();
 
+            foreach($mobilecrews as $mobilecrew)
+            {
+                QtcUser::create([
+                    'qtc_id'                => $qtc->id,
+                    'user_id'               => $mobilecrew->user_id,
+                    'job_type_id'           => $mobilecrew->job_type_id
+                ]);
+                
+
+
+            }
             session()->flash('success', 'Se ha creado el QTC');
             return redirect()->route('samu.qtc.index');
         }
