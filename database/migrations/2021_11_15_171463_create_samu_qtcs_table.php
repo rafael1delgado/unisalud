@@ -67,6 +67,14 @@ class CreateSamuQtcsTable extends Migration
             $table->foreignId('call_id')->constrained('samu_calls');
             $table->foreignId('qtc_id')->constrained('samu_qtcs');
         });
+
+        Schema::create('samu_qtc_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('qtc_id')->constrained('samu_qtcs');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('job_type_id')->constrained('samu_job_types');
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -76,6 +84,7 @@ class CreateSamuQtcsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('samu_qtc_user');
         Schema::dropIfExists('samu_call_qtc');
         Schema::dropIfExists('samu_qtcs');
     }
