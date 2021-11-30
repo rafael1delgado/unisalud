@@ -20,7 +20,7 @@ class NoveltieController extends Controller
         /* Obtener el turno actual */
         $shift = Shift::where('status',1)->first();
 
-        $novelties = Noveltie::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
+        $novelties = Noveltie::latest()->paginate(20);
 
         return view ('samu.noveltie.index' , compact('novelties','shift'));//mando la variable al view
     }

@@ -218,7 +218,7 @@ class UserSeeder extends Seeder
         $humanName = new HumanName();
         $humanName->use = 'official';
         $humanName->text = 'Adriana';
-        $humanName->fathers_family = 'Ovideo';
+        $humanName->fathers_family = 'Oviedo';
         $humanName->mothers_family = 'López';
         $humanName->user_id = $user->id;
         $humanName->save();

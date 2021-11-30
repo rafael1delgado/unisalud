@@ -5,15 +5,16 @@ namespace App\Models\Samu;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+// use Illuminate\Database\Eloquent\Relations\BelongsTo;
+// use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+// use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
-use Carbon\Carbon;
+// use Carbon\Carbon;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\Noveltie;
 use App\Models\Samu\MobileInService;
+use App\Models\Samu\ShiftUser;
 
 class Shift extends Model implements Auditable
 {
@@ -41,10 +42,10 @@ class Shift extends Model implements Auditable
         'closing_at'
     ];
 
-    public function users(): BelongsToMany{
+    public function users() {
         return $this->belongsToMany(User::class, 'samu_shift_user')
-                    ->withTimestamps()
-                    ->withPivot('job_type');
+            ->withPivot('job_type_id')
+            ->withTimestamps();
     }
     
     public function novelitie()

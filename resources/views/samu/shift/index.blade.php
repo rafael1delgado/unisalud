@@ -36,22 +36,24 @@
             <tr>
                 <td>
                     <a href="{{ route('samu.shift.edit', $shift) }}">
-                        <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-outline-primary"><i class="fas fa-edit"></i> {{ $shift->id }}</button>
                     </a>
                 </td>
-                <td>{{ ($shift->status === 0) ? 'Cerrado':'Abierto' }} </td>
+                <td>{{ $shift->statusInWord }} </td>
                 <td>{{ $shift->type }}</td>
                 <td>{{ $shift->opening_at->format('Y-m-d H:i') }}</td>
                 <td>{{ optional($shift->closing_at)->format('Y-m-d H:i') }}</td>
                 <td>
-                    @livewire('samu.shift-user', ['shift_id' => $shift->id])
+                    @livewire('samu.shift-user', ['shift' => $shift])
                 </td>
                 <td>
+                    @if($shift->status == true)
                     <form method="POST" action="{{ route('samu.shift.destroy', $shift) }}">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
+                    @endif
                 </td>
             </tr>
             @endforeach
@@ -60,7 +62,7 @@
     </table>
 </div>
 
-{{ $shifts->links('pagination::bootstrap-4') }}
+{{ $shifts->links() }}
 
 @endsection
 

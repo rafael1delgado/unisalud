@@ -1,3 +1,4 @@
+@if($mobileInService->shift->status == true)
 <div class="form-row"> 
     <div class="col-6">            
         <select class="form-control" wire:model='user_id' required="required">
@@ -18,9 +19,12 @@
         @error('job_type_id') <span class="error">{{ $message }}</span> @enderror    
     </div>
     <div class="col-1">
+        @if($mobileInService->shift->status == true)
         <button wire:click="store()" class="btn btn-success"><i class="fas fa-plus"></i></button>
+        @endif
     </div>
 </div>
+@endif
 
 @foreach($mobileInService->crew as $tripulant)
 <div class="form-row m-1">
@@ -33,7 +37,9 @@
         {{ $tripulant->pivot->jobType->name }}
     </div>
     <div class="col-1">
+        @if($mobileInService->shift->status == true)
         <button class="btn btn-danger mx-2" wire:click="delete({{ $tripulant }})"><i class="fas fa-trash"></i></button>
+        @endif
     </div>
 </div>
 @endforeach

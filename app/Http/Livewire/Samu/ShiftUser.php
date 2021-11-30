@@ -10,6 +10,7 @@ use App\Models\Samu\JobType;
 class ShiftUser extends Component
 {
     public $users;
+    public $shift;
     public $shift_users;
     public $job_types;
     
@@ -34,7 +35,7 @@ class ShiftUser extends Component
         $shift_user = ShiftUserModel::create([
             'user_id'       => $this->user_id,
             'job_type_id'   => $this->job_type_id,
-            'shift_id'      => $this->shift_id
+            'shift_id'      => $this->shift->id
         ]);
 
         redirect()->to(route('samu.shift.index'));
@@ -47,7 +48,7 @@ class ShiftUser extends Component
 
     public function render()
     {
-        $this->shift_users  = ShiftUserModel::where('shift_id',$this->shift_id)->get();
+        $this->shift_users  = ShiftUserModel::where('shift_id',$this->shift->id)->get();
         $this->users        = User::Permission('SAMU')->get();
         $this->job_types    = JobType::all();
         return view('livewire.samu.shift-user');

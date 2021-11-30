@@ -4,9 +4,9 @@
 
 @section('content')
 
-<h3 class="mb-3">Asignar permisos a: <strong> {{ $user->fullName }} </strong> </h3>
+<h3 class="mb-3">Asignar permisos a: <strong> {{ $user->officialFullName }} </strong> </h3>
 
-<form class="form-horizontal" method="POST" action="{{ route('user.update',$user) }}">
+<form class="form-horizontal" method="POST" action="{{ route('user.update', $user) }}">
     @csrf
     @method('PUT')
 	<input type="hidden" name="user_id" value="{{ $user->id }}">

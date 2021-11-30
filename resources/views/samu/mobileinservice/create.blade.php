@@ -13,7 +13,7 @@
     <div class="form-row">
         
         <fieldset class="form-group col-8 col-md-3">
-            <label for="for_run">Movil </label>
+            <label for="for_run">Móvil*</label>
             <select class="form-control" name="mobile_id">
             <option></option>
                 @foreach($mobiles as $mobile)
@@ -26,7 +26,7 @@
         </fieldset>
 
         <fieldset class="form-group col-12 col-md-3">
-            <label for="empresa">Tipo de  móvil</label>
+            <label for="empresa">Tipo de  móvil*</label>
             <select class="form-control" name="type">
                 <option value=""></option>
                 <option value="M1">M1</option>
@@ -39,8 +39,8 @@
         </fieldset>
 
         <fieldset class="form-group col-12 col-md-6">
-            <label for="empresa">Observación</label>
-            <textarea class="form-control" id="validationTextarea" name="observation" placeholder="" required></textarea>
+            <label for="observation">Observación</label>
+            <textarea class="form-control" id="validationTextarea" name="observation"></textarea>
                 <div class="invalid-feedback">
                         Ingrese Observaciones
                 </div>

@@ -19,6 +19,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name'=>'Developer','description'=>'Desarrollador']);
 
         // Permission::create(['name'=>'Mp:  administrator','description'=>'Administrador del programador médico']);
+        Permission::create(['name' => 'Mp: user', 'description' => 'Usuario del sistema programador']);
         Permission::create(['name' => 'Mp: administrador']);
         Permission::create(['name' => 'Mp: programacion teorica']);
         Permission::create(['name' => 'Mp: programacion medica']);

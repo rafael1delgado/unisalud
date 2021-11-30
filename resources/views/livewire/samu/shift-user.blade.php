@@ -1,3 +1,4 @@
+@if($shift->status == true)
 <div class="form-row">
     <div class="col-6">
         <select class="form-control" wire:model='user_id' required="required">
@@ -23,7 +24,8 @@
         <button class="btn btn-success" wire:click="store()"><i class="fas fa-plus"></i></button>
     </div>
     
-</div>          
+</div>
+@endif
        
     
 @foreach($shift_users as $su)
@@ -38,7 +40,9 @@
         {{ $su->jobType->name }}
     </div>
     <div class="col-1">
+        @if($su->shift->status == true)
         <button class="btn btn-danger mx-2" wire:click="delete({{ $su }})"><i class="fas fa-trash"></i></button>
+        @endif
     </div>
 </div>
 @endforeach

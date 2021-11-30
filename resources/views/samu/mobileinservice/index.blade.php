@@ -19,44 +19,49 @@
                 <th>Movil</th>
                 <th>Tipo</th>
                 <th>Observación</th>
-                <th></th>
+                <th>Tripulación</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach($shifts as $shift)
-                @foreach($shift->mobilesInService as $mis)
-                <tr>
-                    <td>
-                    @if($mis->shift->status == 1)
-                        <a href="{{ route('samu.mobileinservice.edit',$mis) }}">
-                            <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
-                        </a>
-                    @endif
-                    </td>
-                    <td>
-                        {{ $shift->opening_at->format('Y-m-d') }} - {{ $shift->type }}
-                    </td>
-                    <td>{{ $mis->mobile_id }}</td>
-                    <td>{{ $mis->type}} </td>
-                    <td>{{ $mis->observation}} </td>
-                    <td>
+
+            @foreach($mobilesInService as $mis)
+            <tr>
+                <td>
+                @if($mis->shift->status == true)
+                    <a href="{{ route('samu.mobileinservice.edit',$mis) }}">
+                        <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
+                    </a>
+                @endif
+                </td>
+                <td>
+                    {{ $mis->shift->id }} -
+                    {{ $mis->shift->opening_at->format('Y-m-d') }} - 
+                    {{ $mis->shift->type }} ({{ $mis->shift->statusInWord }})
+                </td>
+                <td>{{ $mis->mobile_id }}</td>
+                <td>{{ $mis->type}} </td>
+                <td>{{ $mis->observation}} </td>
+                <td>
                     @livewire('samu.mobile-crew',['mobileInService' => $mis])  
-                    </td>
-                    <td>
-                        <form method="POST" action="{{ route('samu.mobileinservice.destroy' , $mis) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            @endforeach 
+                </td>
+                <td>
+                    @if($mis->shift->status == true)
+                    <form method="POST" action="{{ route('samu.mobileinservice.destroy' , $mis) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    </form>
+                    @endif
+                </td>
+            </tr>
+            @endforeach
+
         </tbody>
     </table>
-        
 </div>
+        
+{{ $mobilesInService->links() }}
 
 @endsection
 
