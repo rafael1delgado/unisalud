@@ -35,9 +35,9 @@
                 </td>
                 <td>{{ $qtc->shift->opening_at }}  </td>
                 <td>{{ $qtc->id }} </td>
-                <td>{{ $qtc->key_id }} -{{ $qtc->key->name }} </td>
-                <td></td>
-                <td> </td>
+                <td>{{ $qtc->key->key }} - {{ $qtc->key->name }} </td>
+                <td>{{ optional($qtc->returnKey)->key }} - {{ optional($qtc->returnKey)->name }}</td>
+                <td>{{ optional(optional($qtc->mobileInService)->mobile)->code }} {{ optional(optional($qtc->mobileInService)->mobile)->name }}</td>
                 <td>
                     <form method="POST" action="{{ route('samu.qtc.destroy', $qtc) }}">
                         @csrf
