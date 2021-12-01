@@ -62,6 +62,7 @@ use Spatie\Permission\Contracts\Role;
 
 
 
+use App\Http\Controllers\Epi\SuspectCaseController;
 
 
 /*
@@ -573,10 +574,17 @@ Route::prefix('absences')->name('absences.')->group(function () {
 //Rutas Epi
 Route::prefix('epi')->name('epi.')->group(function () {
 	Route::prefix('chagas')->name('chagas.')->group(function () {
-		Route::view('/', 'epi.chagas.index')->name('index');
-		Route::view('/create', 'epi.chagas.create')->name('create');
-		Route::view('/edit', 'epi.chagas.edit')->name('edit');
+		Route::get('/{suspectCase}/edit', [SuspectCaseController::class, 'edit'])->name('edit');
+		Route::put('/{suspectCase}', [SuspectCaseController::class, 'update'])->name('update');
+		Route::get('/', [SuspectCaseController::class, 'index'])->name('index');
+		Route::get('/{user}/create', [SuspectCaseController::class, 'create'])->name('create');
+		Route::post('/', [SuspectCaseController::class, 'store'])->name('store');
+		
 	});
+	
+
+
+
 });
 //fin rutas EPI
 

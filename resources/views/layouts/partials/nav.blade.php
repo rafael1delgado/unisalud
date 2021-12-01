@@ -380,17 +380,20 @@
 </h6>
 <ul class="nav flex-column collapse collapse-menu" id="epidemiology">
     <li class="nav-item">
-        <a class="nav-link {{ active('epi.chagas.create') }}" href="{{ route('epi.chagas.create') }}">
+        <a class="nav-link" href="#">
+            <span data-feather="chevrons-right"></span>
+            Laboratorios<span class="sr-only"></span>
+        </a>
+    </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('patient.index') }}" href="{{ route('patient.index') }}">
             <span data-feather="chevrons-right"></span>
             Solicitud Examen Chagas<span class="sr-only">(en desarrollo)</span>
         </a>
     </li>
-    <!-- <li class="nav-item">
-    <a class="nav-link {{ active('epi.chagas.edit') }}" href="{{ route('epi.chagas.edit') }}">
-    <span data-feather="chevrons-right"></span>
-    Añadir datos adicionales<span class="sr-only">(en desarrollo)</span>
-    </a>
-</li> -->
+    
     <li class="nav-item">
         <a class="nav-link {{ active('epi.chagas.index') }}" href="{{ route('epi.chagas.index') }}">
             <span data-feather="chevrons-right"></span>

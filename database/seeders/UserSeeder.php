@@ -85,10 +85,11 @@ class UserSeeder extends Seeder
         $user = new User();
         $user->active = 1;
         $user->claveunica = 1;
-        $user->birthday = now();
+        $user->birthday = '1985-04-17';
         $user->gender = 'male';
+        $user->sex = 'male';
         $user->nationality_id = 41;
-        if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
+        if(env('APP_ENV') == 'local') $user->password = bcrypt('estoypreocupao');
         $user->save();
 
         $user->givePermissionTo(Permission::all());
@@ -124,7 +125,7 @@ class UserSeeder extends Seeder
         $user = new User();
         $user->active = 1;
         $user->claveunica = 1;
-        $user->birthday = now();
+        $user->birthday = now();        
         $user->gender = 'male';
         $user->nationality_id = 41;
         if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');

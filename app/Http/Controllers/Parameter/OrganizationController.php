@@ -44,6 +44,10 @@ class OrganizationController extends Controller
     public function store(Request $request)
     {
         //
+        $establishment = new Establishment($request->All());
+        $establishment->save();
+        session()->flash('success', 'Se creo establecimiento exitosamente');
+        return redirect()->route('parameters.establishment');
     }
 
     /**

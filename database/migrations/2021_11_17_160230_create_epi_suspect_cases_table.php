@@ -15,6 +15,17 @@ class CreateEpiSuspectCasesTable extends Migration
     {
         Schema::create('epi_suspect_cases', function (Blueprint $table) {
             $table->id();
+            $table->string('type')->nullable(); //Tipo de caso sospecha:Chagas, PCR, etc
+            
+            
+            //Datos Chagas            
+            $table->string('research_group')->nullable();
+            $table->string('chagas_result_screening')->nullable();
+            $table->datetime('chagas_result_screening_at')->nullable();
+            $table->string('chagas_result_confirmation')->nullable();
+            $table->datetime('chagas_result_confirmation_at')->nullable();
+            
+            
 
             $table->smallInteger('age')->nullable();
             $table->enum('gender',['male', 'female', 'other', 'unknown']);
@@ -66,12 +77,12 @@ class CreateEpiSuspectCasesTable extends Migration
 
             $table->unsignedBigInteger('minsal_ws_id')->nullable();
 
-            $table->foreignId('patient_id');
+            $table->foreignId('patient_id')->nullable();
             $table->foreignId('laboratory_id')->nullable();
 
             $table->foreignId('organization_id');
 
-            $table->foreignId('user_id');
+            //$table->foreignId('user_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -81,7 +92,7 @@ class CreateEpiSuspectCasesTable extends Migration
             $table->foreign('patient_id')->references('id')->on('users');
             $table->foreign('laboratory_id')->references('id')->on('organizations');
             $table->foreign('organization_id')->references('id')->on('organizations');
-            $table->foreign('user_id')->references('id')->on('users');
+            //$table->foreign('user_id')->references('id')->on('users');
         });
     }
 
