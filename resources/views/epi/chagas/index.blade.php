@@ -14,52 +14,32 @@
                 <th>RUN</th>
                 <th>Edad</th>
                 <th>Sexo</th>
-                <th>Fecha de Resultado</th>
-                <th>Estado</th>
+                <th>Fecha de Resultado Tamizaje</th>
+                <th>Resultado Tamizaje</th>
+                <th>Fecha de Resultado Confirmación</th>
+                <th>Resultado Confirmación</th>
                 <th>Observación</th>
             </tr>
         </thead>
         <tbody id="tableCases">
+            @foreach($suspectcases as $suspectcase)
             <tr>
-                <td>777 <a href="{{ route('epi.chagas.edit') }}" class="btn_edit"><i class="fas fa-edit"></i></a></td>
-                <td>01-09-2021</td>
-                <td>Hospital Ernesto Torres Galdames</td>
-                <td>ANA MARIA CHAPPE VARGAS</td>
-                <td>22601558-2</td>
-                <td>58</td>
-                <td>F</td>
-                <td></td>
-                <td>Pendiente</td>
-                <td>Sin Observaciones</td>
+                <td>{{$suspectcase->id??''}} <a href="{{ route('epi.chagas.edit',$suspectcase) }}" pclass="btn_edit"><i class="fas fa-edit"></i></a></td>
+                <td>{{$suspectcase->sample_at? $suspectcase->sample_at: ''}}</td>
+                <td>{{$suspectcase->organization->alias??''}}</td>
+                <td>{{$suspectcase->patient->OfficialFullName ??''}}</td>
+                <td>{{$suspectcase->patient->identifierRun->value ??''}}-{{$suspectcase->patient->identifierRun->dv}}</td>
+                <td>
+                {{\Carbon\Carbon::parse($suspectcase->patient->birthday)->age}}
+                </td>
+                <td>{{$suspectcase->patient->sex ??''}}</td>
+                <td>{{$suspectcase->chagas_result_screening_at ??''}}</td>
+                <td>{{$suspectcase->chagas_result_screening ?? ''}}</td>
+                <td>{{$suspectcase->chagas_result_confirmation_at ??''}}</td>
+                <td>{{$suspectcase->chagas_result_confirmation}}</td>
+                <td>{{$suspectcase->observatio??''}}</td>
             </tr>
-
-            <tr>
-                <td>778 <a href="#" class="btn_edit"><i class="fas fa-edit"></i></a></td>
-                <td>28-08-2021</td>
-                <td>Hospital Ernesto Torres Galdames</td>
-                <td>ICIAR DEL CARMEN DUFRAIX</td>
-                <td>15684886-7</td>
-                <td>34</td>
-                <td>F</td>
-                <td>01-09-2021</td>
-                <td>Negativo</td>
-                <td>Sin Observaciones</td>
-            </tr>
-
-
-            <tr>
-                <td>780 <a href="#" class="btn_edit"><i class="fas fa-edit"></i></a></td>
-                <td>28-08-2021</td>
-                <td>SAPU Pozo Almonte</td>
-                <td>ALCIRA RIVERA MERCHAN</td>
-                <td>19181123-2</td>
-                <td>25</td>
-                <td>F</td>
-                <td>01-09-2021</td>
-                <td>Rechazo</td>
-                <td>Sin Observaciones</td>
-            </tr>
-
+            @endforeach            
         </tbody>
     </table>
 

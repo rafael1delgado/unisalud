@@ -256,6 +256,15 @@ class User extends Authenticatable implements Auditable
 
     }
 
+    function getSexEspAttribute(){
+        switch($this->sex) {
+            case 'male': return 'Masculino'; break;
+            case 'female': return 'Femenino'; break;
+            case 'other': return 'Otro'; break;
+            case 'unknown': return 'Desconocido'; break;
+        }
+    }
+
     //Scopes
     public function scopeGetByRun($query, $run)
     {

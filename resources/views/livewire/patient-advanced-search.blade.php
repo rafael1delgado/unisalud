@@ -25,13 +25,17 @@
             <thead class="table-info">
                 <tr>
                     <th scope="col">Nombre:</th>
-                    <th scope="col">Indentificación</th>
+                    <th scope="col">Identificación</th>
                     <th scope="col">Edad</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Dirección</th>
                     <th scope="col">Teléfono</th>
                     <th scope="col">Correo</th>
                     <th scope="col">Selec.</th>
+                    @can('Epi: Create')
+                    <th scope="col">Añadir Caso Sospecha</th>
+                    @endcan
+                    
             </thead>
             <tbody>
                 @if($patients)
@@ -45,6 +49,11 @@
                         <td>{{($patient) ? $patient->officialPhone : ''}}</td>
                         <td>{{($patient && $patient->officialEmail) ? $patient->officialEmail : ''}}</td>
                         <td><a class="btn-primary btn-sm" href="{{ route('patient.edit',$patient->id)}}"> <i class="fas fa-check"></i> </a></td>
+                        @can('Epi: Create')
+                        <td>
+                            <a href="{{ route('epi.chagas.create',$patient) }}"><i class="fas fa-viruses"></i></a>
+                        </td>
+                        @endcan
                     </tr>
                     @empty
                         <tr><th scope="row" colspan="8" class="text-center">No hay coincidencias con la búsqueda <a class="btn-primary btn-sm" href="{{ route('patient.create')}}"> Ingresar uno nuevo</a></td></th>
