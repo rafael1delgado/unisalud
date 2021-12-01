@@ -1,7 +1,7 @@
 <div class="form-row">
 
     <fieldset class="form-group col-md-2">
-        <label for="for_key">Clave</label>
+        <label for="for_key">Clave*</label>
         <select class="form-control" name="key_id" required>
             <option value=""></option>
             @foreach($keys as $key)
@@ -26,7 +26,7 @@
         <select class="form-control" name="mobile_in_service_id">
             <option value=""></option>
             @foreach($shift->mobilesInService as $mis)
-            <option value="{{ $mis->id }}" {{ old('mobile_in_service_id', optional($qtc)->mobile_in_service_id) == $mis->id ? 'selected' : '' }}>{{ $mis->mobile->name }}</option>
+            <option value="{{ $mis->id }}" {{ old('mobile_in_service_id', optional($qtc)->mobile_in_service_id) == $mis->id ? 'selected' : '' }}>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</option>
             @endforeach 
         </select>
     </fieldset>
