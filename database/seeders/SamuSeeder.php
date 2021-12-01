@@ -20,32 +20,42 @@ class SamuSeeder extends Seeder
     public function run()
     {
         auth()->loginUsingId(1);
+        $date = now();
 
         Shift::create([
             'status' => true,
+            'type'   => 'Noche',
+            'opening_at' => date('Y-m-d 8:00:00',(strtotime ( '-3 day' , strtotime ( $date) ) )),
+            'status' => false,
+            'created_at' => date('Y-m-d 8:00:00',(strtotime ( '-3 day' , strtotime ( $date) ) )),
+            'updated_at' => date('Y-m-d 8:00:00',(strtotime ( '-3 day' , strtotime ( $date) ) ))
+        ]);
+        
+        Shift::create([
+            'status' => true,
             'type'   => 'Largo',
-            'opening_at' => now(),
-            'status' => true
+            'opening_at' => date('Y-m-d 8:00:00',(strtotime ( '-2 day' , strtotime ( $date) ) )),
+            'status' => false,
+            'created_at' => date('Y-m-d 8:00:00',(strtotime ( '-2 day' , strtotime ( $date) ) )),
+            'updated_at' => date('Y-m-d 8:00:00',(strtotime ( '-2 day' , strtotime ( $date) ) ))
         ]);
 
         Shift::create([
             'status' => true,
             'type'   => 'Noche',
-            'opening_at' =>25-11-2021,
-            'status' => false
+            'opening_at' => date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $date) ) )),
+            'status' => false,
+            'created_at' => date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $date) ) )),
+            'updated_at' => date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $date) ) ))
         ]);
 
         Shift::create([
             'status' => true,
             'type'   => 'Largo',
-            'opening_at' => 24-11-2021,
-            'status' => false
-        ]);
-        Shift::create([
+            'opening_at' => date('Y-m-d 8:00:00'),
             'status' => true,
-            'type'   => 'Noche',
-            'opening_at' => 24-11-2021,
-            'status' => false
+            'created_at' => date('Y-m-d 8:00:00'),
+            'updated_at' => date('Y-m-d 8:00:00')
         ]);
 
         Mobile::create([
@@ -55,8 +65,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '32',
             'name'      => 'POZO AL MONTE',
@@ -64,8 +75,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '33',
             'name'      => 'POZO AL MONTE',
@@ -73,8 +85,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '34',
             'name'      => 'POZO AL MONTE',
@@ -84,6 +97,7 @@ class SamuSeeder extends Seeder
             'status'    => 1,
             'managed'   => 1
         ]);
+
         Mobile::create([
             'code'      => '41',
             'name'      => 'PICA',
@@ -91,8 +105,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '51',
             'name'      => 'HUARA',
@@ -102,6 +117,7 @@ class SamuSeeder extends Seeder
             'status'    => 1,
             'managed'   => 1
         ]);
+
         Mobile::create([
             'code'      => '52',
             'name'      => 'HUARA',
@@ -109,8 +125,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '61',
             'name'      => 'CAMIÑA',
@@ -118,8 +135,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '71',
             'name'      => 'COLCHANE',
@@ -127,8 +145,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '12CH',
             'name'      => 'CHANAVAYITA',
@@ -136,8 +155,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '11SM',
             'name'      => 'SAN MARCO',
@@ -145,8 +165,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '25',
             'name'      => 'SAPU VIDELA',
@@ -154,8 +175,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '26',
             'name'      => 'SAPU AGUIRRE',
@@ -163,8 +185,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '27',
             'name'      => 'SAPU GUZMAN',
@@ -172,8 +195,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'No operativo',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '28',
             'name'      => 'SAR SUR',
@@ -181,8 +205,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '2H',
             'name'      => 'CGU',
@@ -190,8 +215,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '21',
             'name'      => 'SAPU PULGAR',
@@ -199,8 +225,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '22',
             'name'      => 'SAPU PULGAR',
@@ -208,8 +235,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '23',
             'name'      => 'SAPU PULGAR',
@@ -217,8 +245,9 @@ class SamuSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
+
         Mobile::create([
             'code'      => '2',
             'name'      => 'SAMU',
@@ -228,6 +257,7 @@ class SamuSeeder extends Seeder
             'status'    => 1,
             'managed'   => 1
         ]);
+
         Mobile::create([
             'code'      => '3',
             'name'      => 'SAMU',
@@ -237,6 +267,7 @@ class SamuSeeder extends Seeder
             'status'    => 1,
             'managed'   => 1
         ]);
+
         Mobile::create([
             'code'      => '4',
             'name'      => 'SAMU',
@@ -246,6 +277,7 @@ class SamuSeeder extends Seeder
             'status'    => 1,
             'managed'   => 1
         ]);
+
         Mobile::create([
             'code'      => '4H',
             'name'      => 'SAMU',
@@ -255,6 +287,7 @@ class SamuSeeder extends Seeder
             'status'    => 1,
             'managed'   => 1
         ]);
+
         Mobile::create([
             'code'      => '7',
             'name'      => 'SAMU',
@@ -264,6 +297,7 @@ class SamuSeeder extends Seeder
             'status'    => 1,
             'managed'   => 1
         ]);
+
         Mobile::create([
             'code'      => '13',
             'name'      => 'SAMU',
@@ -273,16 +307,17 @@ class SamuSeeder extends Seeder
             'status'    => 1,
             'managed'   => 1
         ]);
+
         MobileInService::create([
-            'shift_id' => 1,
+            'shift_id' => 4,
             'mobile_id' => 1,
             'type' => "M1",
-            'observation' => "asdfa",
+            'observation' => "observación",
             'status' => 1
         ]);
 
         $call1 = Call::create([
-            'shift_id' => 1,
+            'shift_id' => 4,
             'classification' => "OT",
             'receptor_id' => 1,
             'hour' => "08:00:00",
@@ -294,7 +329,7 @@ class SamuSeeder extends Seeder
         ]);
 
         $call2 = Call::create([
-            'shift_id' => 1,
+            'shift_id' => 4,
             'classification' => "T1",
             'receptor_id' => 1,
             'hour' => "08:15:00",
@@ -311,7 +346,7 @@ class SamuSeeder extends Seeder
         ]);
 
         $qtc = Qtc::create([
-            'shift_id' => 1,
+            'shift_id' => 4,
             'key_id' => 1,
             'return_key_id' => 2,
         ]);

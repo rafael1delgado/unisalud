@@ -12,26 +12,26 @@
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_hour">Hora</label>
-        <input type="time" class="form-control form-control-sm" name="hour" id="hour" value="{{ old('hour', optional($call)->hour) }}"> 
+        <label for="for_hour">Hora*</label>
+        <input type="time" class="form-control form-control-sm" name="hour" id="hour" value="{{ old('hour', optional($call)->hour) }}" required> 
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_receptor_id">Recep. de llamada</label>
-        <select class="form-control form-control-sm" name="receptor_id" id="receptor_id">
+        <label for="for_receptor_id">Recep. de llamada*</label>
+        <select class="form-control form-control-sm" name="receptor_id" id="receptor_id" required>
             <option value=""></option>
             @foreach($shiftUsers as $su)
                 @if($su->jobType->name ==='Operador'|| $su->jobType->name ==='Jefe de Turno' || $su->jobType->name ==='Médico Regulador' || $su->jobType->name ==='Enfermero Regulador' || $su->jobType->name==='Despachador')
-                <option value="{{ $su->user->humanNames->last()->id }}" >{{ $su->user->humanNames->last()->fullName }} - {{ $su->jobType->name }}</option>
+                <option value="{{ $su->user->id }}" {{ ($su->user == optional($call)->receptor) ? 'selected' : '' }}>{{ $su->user->OfficialFullName }} - {{ $su->jobType->name }}</option>
                 @endif
             @endforeach
         </select>
     </fieldset>
 
     <fieldset class="form-group col-md-2">
-        <label for="for_information">Motivo de solicitud </label>
+        <label for="for_information">Motivo de solicitud*</label>
         <input type="text" class="form-control form-control-sm" 
-            name="information" 
+            name="information" required
             value="{{ old('information', optional($call)->information) }}">
     </fieldset>
 

@@ -17,11 +17,10 @@
             <select class="form-control" name="mobile_id">
             <option></option>
                 @foreach($mobiles as $mobile)
-                @if ($mobile->name=="SAMU")
-                    <option value="{{ $mobile->id }}">{{$mobile->code}}-{{$mobile->name}} </option>
+                @if ($mobile->managed == true)
+                    <option value="{{ $mobile->id }}">{{ $mobile->code }} - {{ $mobile->name }} </option>
                 @endif
-                    @endforeach
-            
+                @endforeach
             </select>
         </fieldset>
 

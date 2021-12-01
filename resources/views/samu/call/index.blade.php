@@ -27,7 +27,7 @@
             <tr class="text-center table-primary">
                 <th>Id</th>
                 <th>Clasificación</th>
-                <th>Hora</th>
+                <th>(turno) Hora</th>
                 <th>Recepcion de llamada</th>
                 <th>Información telefonica</th>
                 <th>Solicitante</th>
@@ -53,7 +53,7 @@
                         @endforeach
                     @endif
                 </td>
-                <td>{{ $call->hour}}</td>
+                <td>({{ $call->shift->id}}) {{ $call->hour}}</td>
                 <td>{{ $call->receptor->officialFullName }}</td>
                 <td>{{ $call->information }}</td>
                 <td>{{ $call->applicant }}</td>

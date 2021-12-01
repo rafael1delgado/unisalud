@@ -30,7 +30,7 @@ class MobileInServiceController extends Controller
     public function create()
     {
        
-        $mobiles = Mobile::all();
+        $mobiles = Mobile::where('managed',1)->get();
 
         $shift = Shift::where('status',true)->first();
 

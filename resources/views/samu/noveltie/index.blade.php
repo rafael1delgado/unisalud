@@ -4,7 +4,7 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-book"></i> Registro de Novedades del turno {{ $shift->id }}</h3>
+<h3 class="mb-3"><i class="fas fa-book"></i> Registro de Novedades del turno {{ optional($shift)->id }}</h3>
 
 @if($shift)
     @include('samu.noveltie.create')

@@ -2,7 +2,7 @@
 
     <fieldset class="form-group col-md-2">
         <label for="for_key">Clave</label>
-        <select class="form-control" name="key_id">
+        <select class="form-control" name="key_id" required>
             <option value=""></option>
             @foreach($keys as $key)
             <option value="{{ $key->id }}" {{ old('key_id', optional($qtc)->key_id) == $key->id ? 'selected' : '' }}>{{ $key->key }}  - {{ $key->name }}</option>
