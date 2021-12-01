@@ -1,3 +1,4 @@
+<div>
 @if($mobileInService->shift->status == true)
 <div class="form-row"> 
     <div class="col-6">            
@@ -43,4 +44,4 @@
     </div>
 </div>
 @endforeach
-    
+</div>

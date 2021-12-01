@@ -32,7 +32,7 @@ class MobileCrew extends Component
      
         $this->validate();
 
-        $shift_user = MobileCrewModel::create([
+        $mobileCrew = MobileCrewModel::create([
             'mobiles_in_service_id' => $this->mobileInService->id,
             'user_id'               => $this->user_id,
             'job_type_id'           => $this->job_type_id
