@@ -36,7 +36,7 @@
                 <td>{{ $qtc->shift->opening_at }}  </td>
                 <td>{{ $qtc->id }} </td>
                 <td>{{ $qtc->key_id }} -{{ $qtc->key->name }} </td>
-                <td>{{ $qtc->key->id }} -{{ $qtc->key->name }} </td>
+                <td></td>
                 <td> </td>
                 <td>
                     <form method="POST" action="{{ route('samu.qtc.destroy', $qtc) }}">
