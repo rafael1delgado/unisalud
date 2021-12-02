@@ -9,6 +9,7 @@ use App\Models\Samu\Key;
 use App\Models\Samu\Call;
 use App\Models\Samu\MobileCrew;
 use App\Models\Samu\QtcUser;
+use App\Models\Samu\QtcCounter;
 use App\Models\Samu\MobileInService;
 use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
@@ -26,9 +27,13 @@ class QtcController extends Controller
     public function index()
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',true)->first();
+        $today = now();
+        $yesterday = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $today) ) ));
 
-        return view ('samu.qtc.index' , compact('shift'));
+        $qtcs_today = Qtc::whereDate('date',$today)->latest()->get();
+        $qtcs_yesterday = Qtc::whereDate('date',$yesterday)->latest()->get();
+
+        return view ('samu.qtc.index' , compact('qtcs_today','qtcs_yesterday'));
     }
 
     /**
@@ -42,9 +47,10 @@ class QtcController extends Controller
         $shift = Shift::where('status',true)->first();
 
         $establishments = Organization::pluck('name','id')->sort();
+        $nextCounter = QtcCounter::getNext();
         $keys = Key::all();
 
-        return view ('samu.qtc.create',compact('shift','keys','establishments'));
+        return view ('samu.qtc.create',compact('shift','keys','establishments','nextCounter'));
     }
 
     /**

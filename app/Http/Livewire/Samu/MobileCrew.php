@@ -43,14 +43,20 @@ class MobileCrew extends Component
 
     public function delete(MobileCrewModel $mobileCrew)
     {
-        $mobileCrew->delete();
+        debug('aca');
+        //$mobileCrew->delete();
     }
 
     public function render()
     {
-        //$this->pivot        = MobileInService::where('id',$this->pivot->id)->get();
-        $this->users        = User::Permission('SAMU')->get();
-        $this->job_types    = JobType::all();
+        //$this->pivot      = MobileInService::where('id',$this->pivot->id)->get();
+        $users              = User::Permission('SAMU')->get();
+        foreach($users as $user) 
+        {
+            $this->users[$user->id] = $user->OfficialFullName;
+        }
+        sort($this->users);
+        $this->job_types    = JobType::where('tripulant', true)->orderBy('name')->get();
         return view('livewire.samu.mobile-crew');
     }
 }

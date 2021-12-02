@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSamuJobTypesTable extends Migration
+class CreateSamuQtcCountersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateSamuJobTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_job_types', function (Blueprint $table) {
+        Schema::create('samu_qtc_counters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->boolean('tripulant')->default(false);
+            $table->integer('counter');
+            $table->date('date');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +28,6 @@ class CreateSamuJobTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_job_types');
+        Schema::dropIfExists('samu_qtc_counters');
     }
 }

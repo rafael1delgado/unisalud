@@ -14,16 +14,16 @@ class SamuJobTypeSeeder extends Seeder
      */
     public function run()
     {
-        JobType::create(['name' => 'Jefe de Turno']);
-        JobType::create(['name' => 'Médico Regulador']);
-        JobType::create(['name' => 'Enfermero Regulador']);
-        JobType::create(['name' => 'Operador']);
-        JobType::create(['name' => 'Despachador']);
+        JobType::create(['name' => 'Jefe de Turno', 'tripulant' => false]);
+        JobType::create(['name' => 'Médico Regulador', 'tripulant' => false]);
+        JobType::create(['name' => 'Enfermero Regulador', 'tripulant' => false]);
+        JobType::create(['name' => 'Operador', 'tripulant' => false]);
+        JobType::create(['name' => 'Despachador', 'tripulant' => false]);
 
-        JobType::create(['name' => 'Conductor']);
-        JobType::create(['name' => 'Paramédico']);
-        JobType::create(['name' => 'Reanimador']);
-        JobType::create(['name' => 'Médico']);
-        JobType::create(['name' => 'Enfermero']);
+        JobType::create(['name' => 'Conductor', 'tripulant' => true]);
+        JobType::create(['name' => 'Paramédico', 'tripulant' => true]);
+        JobType::create(['name' => 'Reanimador', 'tripulant' => true]);
+        JobType::create(['name' => 'Médico', 'tripulant' => true]);
+        JobType::create(['name' => 'Enfermero', 'tripulant' => true]);
     }
 }

@@ -17,6 +17,7 @@ class JobType extends Model implements Auditable
 
     protected $fillable = [
         'id',
-        'name'
+        'name',
+        'tripulant',
     ];
 }

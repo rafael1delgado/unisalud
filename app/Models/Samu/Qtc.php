@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\Call;
 use App\Models\Samu\Shift;
+use App\Models\Samu\QtcCounter;
 use App\Models\User;
 
 
@@ -21,6 +22,9 @@ class Qtc extends Model implements Auditable
     protected $table="samu_qtcs";
 
     protected $fillable = [
+        'counter',
+        'date',
+        
         'shift_id',
         'key_id',
         'return_key_id',
@@ -117,16 +121,20 @@ class Qtc extends Model implements Auditable
      */
     protected static function booted()
     {
-        /* Asigna el creador */
         self::creating(function (Qtc $qtc): void {
+            /* Asigna el creador */
             $qtc->creator()->associate(auth()->user());
+
+            $counter = QtcCounter::useNext();
+            $qtc->counter = $counter->counter;
+            $qtc->date    = $counter->date;
         });
+
     }
 
 
     public function users()
     {
-        
         return $this->belongsToMany(User::class,'samu_qtc_user','qtc_id')
 
                     ->using(QtcUser::class)

@@ -15,6 +15,9 @@ class CreateSamuQtcsTable extends Migration
     {
         Schema::create('samu_qtcs', function (Blueprint $table) {
             $table->id();
+            
+            $table->date('date');
+            $table->integer('counter');
        
             /* llaves foraneas */
             $table->foreignId('shift_id')->constrained('samu_shifts');

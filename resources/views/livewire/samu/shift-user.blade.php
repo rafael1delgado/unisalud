@@ -4,8 +4,8 @@
     <div class="col-6">
         <select class="form-control" wire:model='user_id' required="required">
             <option value=""></option>
-            @foreach($users as $user)
-            <option value="{{ $user->id }}">{{ $user->humanNames->last()->fullName }} </option>
+            @foreach($users as $key => $user)
+            <option value="{{ $key }}">{{ $user }} </option>
             @endforeach
         </select>
         @error('user_id') <span class="error">{{ $message }}</span> @enderror
@@ -33,7 +33,7 @@
 <div class="form-row m-1">
     <div class="col-6">
         <li>
-            {{ $su->user->humanNames->last()->fullName }}
+            {{ $su->user->officialFullName }}
         </li>
         
     </div>
