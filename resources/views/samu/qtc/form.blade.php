@@ -41,43 +41,43 @@
 <div class="form-row">
 
     <fieldset class="form-group col-md-1">
-        <label for="for_departure_time">Salida </label>
-        <input type="time" class="form-control" name="departure_time" value="{{ ( $qtc &&  $qtc->departure_time)? $qtc->departure_time : '' }}">
+        <label for="for_departure_at">Salida </label>
+        <input type="time" class="form-control" name="departure_at" value="{{ ( $qtc &&  $qtc->departure_at)? $qtc->departure_at : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_mobile_departure_time">Salida Movil </label>
-        <input type="time" class="form-control" name="mobile_departure_time" value="{{ ( $qtc &&  $qtc->mobile_departure_time)? $qtc->mobile_departure_time : '' }}">
+        <label for="for_mobile_departure_at">Salida Movil </label>
+        <input type="time" class="form-control" name="mobile_departure_at" value="{{ ( $qtc &&  $qtc->mobile_departure_at)? $qtc->mobile_departure_at : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_mobile_arrival_place">Llegada al Lugar</label>
-        <input type="time" class="form-control" name="mobile_arrival_place" value="{{ ( $qtc &&  $qtc->mobile_arrival_place)? $qtc->mobile_arrival_place : '' }}">
+        <label for="for_mobile_arrival_at">Llegada al Lugar</label>
+        <input type="time" class="form-control" name="mobile_arrival_at" value="{{ ( $qtc &&  $qtc->mobile_arrival_at)? $qtc->mobile_arrival_at : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_route_ca">Ruta C.Asistencial </label>
-        <input type="time" class="form-control" name="route_ca" value="{{ ( $qtc &&  $qtc->route_ca)? $qtc->route_ca : '' }}">
+        <label for="for_route_to_healtcenter_at">Ruta C.Asistencial </label>
+        <input type="time" class="form-control" name="route_to_healtcenter_at" value="{{ ( $qtc &&  $qtc->route_to_healtcenter_at)? $qtc->route_to_healtcenter_at : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_mobile_ca">Centro asistencial</label>
-        <input type="time" class="form-control" name="mobile_ca" value="{{ ( $qtc &&  $qtc->mobile_ca)? $qtc->mobile_ca : '' }}">
+        <label for="for_healthcenter_at">Centro asistencial</label>
+        <input type="time" class="form-control" name="healthcenter_at" value="{{ ( $qtc &&  $qtc->healthcenter_at)? $qtc->healthcenter_at : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_patient_reception">Recepción de Pcte</label>
-        <input type="time" class="form-control" name="patient_reception" value="{{ ( $qtc &&  $qtc->patient_reception)? $qtc->patient_reception : '' }}">
+        <label for="for_patient_reception_at">Recepción de Pcte</label>
+        <input type="time" class="form-control" name="patient_reception_at" value="{{ ( $qtc &&  $qtc->patient_reception_at)? $qtc->patient_reception_at : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_return_base">Retorno base</label>
-        <input type="time" class="form-control" name="return_base" value="{{ ( $qtc &&  $qtc->return_base)? $qtc->return_base : '' }}">
+        <label for="for_return_base_at">Retorno base</label>
+        <input type="time" class="form-control" name="return_base_at" value="{{ ( $qtc &&  $qtc->return_base_at)? $qtc->return_base_at : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_mobile_base">Móvil en base</label>
-        <input type="time" class="form-control" name="mobile_base" value="{{ ( $qtc &&  $qtc->mobile_base)? $qtc->mobile_base : '' }}">
+        <label for="for_on_base_at">Móvil en base</label>
+        <input type="time" class="form-control" name="on_base_at" value="{{ ( $qtc &&  $qtc->on_base_at)? $qtc->on_base_at : '' }}">
     </fieldset>
         
 </div>
@@ -89,15 +89,38 @@
 
 
 <!-- inicio evaluacion de paciente-->
-<h4>Evaluación del paciente</h4>
+<h4>Datos del paciente</h4>
+<div class="form-row">
 
+    <fieldset class="form-check form-check-inline col-1">
+        <input class="form-check-input" type="checkbox" name="patient_unknown" id="patient_unknown" value="1">
+        <label class="form-check-label" for="patient_unknown">No identificado</label>
+    </fieldset>
+
+    <fieldset class="form-group col-md-3">
+        <label for="for_patient_name">Nombre del paciente</label>
+        <input type="text" class="form-control" name="patient_name" value="{{ ( $qtc &&  $qtc->patient_name)? $qtc->patient_name : '' }}">
+    </fieldset>
+
+    <fieldset class="form-group col-md-3">
+        <label for="for_patient_identification">Identificación</label>
+        <input type="text" class="form-control" name="patient_identification" 
+            value="{{ ( $qtc &&  $qtc->patient_identification)? $qtc->patient_identification : '' }}"
+            placeholder="run:123234 , dni:12313, pasaporte:123123">
+    </fieldset>
+
+</div>
+
+<hr>
+
+<h4>Evaluación </h4>
 <div class="form-row">
 
     <div class="col-8">
         <div class="form-row">
             <fieldset class="form-group col-md-12">
                 <label for="for_reception_detail">Detalle de Recepción </label>                                
-                <textarea class="form-control" rows="6" name="reception_detail">{{ ( $qtc &&  $qtc->reception_detail)? $qtc->reception_detail : '' }}</textarea>
+                <textarea class="form-control" rows="8" name="reception_detail">{{ ( $qtc &&  $qtc->reception_detail)? $qtc->reception_detail : '' }}</textarea>
             </fieldset>
         </div>
     </div>
@@ -117,6 +140,11 @@
             <fieldset class="form-group col-md-12">
                 <label for="for_reception_person">Personal Recepcion del Pcte.</label>
                 <input type="text" class="form-control" name="reception_person" value="{{ ( $qtc &&  $qtc->reception_person)? $qtc->reception_person : '' }}">
+            </fieldset>
+
+            <fieldset class="form-group col-12 col-md-6">
+                <label for="for_rau">Registro atención Urgencia</label>
+                <input type="text" class="form-control" name="rau" value="{{ ( $qtc &&  $qtc->rau)? $qtc->rau : '' }}">
             </fieldset>
         </div>
     </div>
@@ -144,7 +172,8 @@
     </fieldset>
     <fieldset class="form-group col-md-1">
         <label for="for_pam">Presión Arterial Media</label>
-        <input type="number" class="form-control" name="pam" value="{{ ( $qtc &&  $qtc->pam)? $qtc->pam : '' }}">
+        <input type="text" class="form-control" name="pam" value="{{ ( $qtc &&  $qtc->pam)? $qtc->pam : '' }}"
+            placeholder="xxx/xx">
     </fieldset>
     <fieldset class="form-group col-md-1">
         <label for="for_gl">Glasgow<br>&nbsp;</label>

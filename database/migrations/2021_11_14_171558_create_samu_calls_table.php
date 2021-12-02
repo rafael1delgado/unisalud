@@ -23,7 +23,7 @@ class CreateSamuCallsTable extends Migration
             $table->string('applicant')->nullable();
             $table->string('address')->nullable();
             $table->string('telephone')->nullable();
-            $table->foreignId('creator_id')->constrained('users');
+            // $table->foreignId('creator_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

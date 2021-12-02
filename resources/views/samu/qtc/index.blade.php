@@ -27,7 +27,7 @@
         
         <tbody>
             @foreach($shift->qtcs as $qtc)
-            <tr>
+            <tr class="table-{{ $qtc->color }}">
                 <td>
                     <a href="{{ route('samu.qtc.edit', $qtc) }}">
                         <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>

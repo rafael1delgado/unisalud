@@ -21,33 +21,36 @@ class Qtc extends Model implements Auditable
     protected $table="samu_qtcs";
 
     protected $fillable = [
-
-        //segumiento
         'shift_id',
-        'call_id',
         'key_id',
         'return_key_id',
         'mobile_in_service_id',
+        'mobile_id',
 
-        'departure_time',
-        'mobile_departure_time',
-        'mobile_arrival_place',
-        'route_ca',
-        'mobile_ca',
-        
-        'patient_reception',
-        'return_base',
-        'mobile_base',
+        /* Tiempos */
+        'departure_at',
+        'mobile_departure_at',
+        'mobile_arrival_at',
+        'route_to_healtcenter_at',
+        'healthcenter_at',
+        'patient_reception_at',
+        'return_base_at',
+        'on_base_at',
+
         'observation',
         
-        //evaluación de paciente
-
+        /* Paciente */
+        'patient_unknown',
+        'patient_identification',
+        'patient_name',
+        
+        /* Recepción en centro asistencial */
         'reception_detail',
         'establishment_id',
         'reception_person',
+        'rau',
         
-        //asignacion signos vitales
-        
+        /* Asignacion signos vitales */
         'fc',
         'fr',
         'pa',
@@ -58,29 +61,14 @@ class Qtc extends Model implements Auditable
         'hgt',
         'fill_capillary',
         't',
+
         'treatment',
         'observation_sv',
-
-        'mobile_code',
-        'name_mobile_code',
-        'created_at'
     ];
 
-    public function calls()
+    public function shift() 
     {
-        return $this->belongsToMany(Call::class,'samu_call_qtc');
-    }
-
-    public function mobile() {
-        return $this->belongsTo(Mobile::class);
-    }
-
-    public function shift() {
         return $this->belongsTo(Shift::class);
-    }
-
-    public function mobileInService(){
-        return $this->belongsTo(MobileInService::class); 
     }
 
     public function key()
@@ -93,6 +81,16 @@ class Qtc extends Model implements Auditable
        return $this->belongsTo(Key::class,'return_key_id');
     }
 
+    public function mobileInService()
+    {
+        return $this->belongsTo(MobileInService::class); 
+    }
+
+    public function mobile() 
+    {
+        return $this->belongsTo(Mobile::class);
+    }
+
     public function establishment()
     {
        return $this->belongsTo(Organization::class,'establishment_id');
@@ -101,6 +99,15 @@ class Qtc extends Model implements Auditable
     public function creator()
     {
         return $this->belongsTo(User::class,'creator_id');
+    }
+
+    public function getColorAttribute()
+    {
+        if(!$this->mobile_departure_at) $color = 'danger';
+        if($this->mobile_departure_at) $color = 'warning';
+        if($this->return_base_at) $color = 'info';
+        if($this->on_base_at) $color = 'success';
+        return $color;
     }
 
     /**

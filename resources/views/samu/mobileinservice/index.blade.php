@@ -39,7 +39,7 @@
                     {{ $mis->shift->opening_at->format('Y-m-d') }} - 
                     {{ $mis->shift->type }} ({{ $mis->shift->statusInWord }})
                 </td>
-                <td>{{ $mis->mobile_id }}</td>
+                <td>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
                 <td>{{ $mis->type}} </td>
                 <td>{{ $mis->observation}} </td>
                 <td>

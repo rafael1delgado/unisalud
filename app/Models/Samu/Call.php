@@ -50,10 +50,10 @@ class Call extends Model implements Auditable
         return $this->belongsTo(User::class,'receptor_id');
     }
 
-    public function creator()
-    {
-        return $this->belongsTo(User::class,'creator_id');
-    }
+    // public function creator()
+    // {
+    //     return $this->belongsTo(User::class,'creator_id');
+    // }
 
     /**
      * Perform any actions required after the model boots.
@@ -64,7 +64,7 @@ class Call extends Model implements Auditable
     {
         /* Asigna el creador */
         self::creating(function (Call $call): void {
-            $call->creator()->associate(auth()->user());
+            $call->receptor()->associate(auth()->user());
         });
     }
 }

@@ -20,6 +20,13 @@
 
 </form>
 
+
+@canany(['SAMU'])
+<div>
+    @include('partials.short_audit', ['audits' => $qtc->audits] )
+</div>
+@endcanany
+
 <br>
 
 @endsection

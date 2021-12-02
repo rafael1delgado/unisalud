@@ -17,7 +17,6 @@
 </form>
 
 
-
 <h3>Registro de llamadas</h3>
 
 <div class="table-responsive">
@@ -27,12 +26,12 @@
             <tr class="text-center table-primary">
                 <th>Id</th>
                 <th>Clasificación</th>
-                <th>(turno) Hora</th>
-                <th>Recepcion de llamada</th>
-                <th>Información telefonica</th>
+                <th nowrap>(turno) Hora</th>
                 <th>Solicitante</th>
+                <th>Información telefonica</th>
                 <th>Dirección</th>
                 <th>Teléfono</th>
+                <th>Receptor de llamada</th>
                 <th></th>
             </tr>
         </thead>
@@ -54,12 +53,12 @@
                     @endif
                 </td>
                 <td>({{ $call->shift->id}}) {{ $call->hour}}</td>
-                <td>{{ $call->receptor->officialFullName }}</td>
-                <td>{{ $call->information }}</td>
                 <td>{{ $call->applicant }}</td>
+                <td>{{ $call->information }}</td>
+                
                 <td>{{ $call->address }}</td>
                 <td>{{ $call->telephone }}</td>
-                           
+                <td>{{ $call->receptor->officialFullName }}</td>
                 <td class="text-center" >
 
                     <form method="POST" action="{{ route('samu.call.destroy' , $call) }}">
