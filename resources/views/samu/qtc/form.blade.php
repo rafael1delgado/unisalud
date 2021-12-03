@@ -93,13 +93,15 @@
 <div class="form-row">
 
     <fieldset class="form-check form-check-inline col-1">
-        <input class="form-check-input" type="checkbox" name="patient_unknown" id="patient_unknown" value="1">
+        <input class="form-check-input" type="checkbox" name="patient_unknown" 
+            id="patient_unknown" value="1" {{ ( $qtc &&  $qtc->patient_unknown)? 'checked' : '' }}>
         <label class="form-check-label" for="patient_unknown">No identificado</label>
     </fieldset>
 
     <fieldset class="form-group col-md-3">
         <label for="for_patient_name">Nombre del paciente</label>
-        <input type="text" class="form-control" name="patient_name" value="{{ ( $qtc &&  $qtc->patient_name)? $qtc->patient_name : '' }}">
+        <input type="text" class="form-control" name="patient_name" 
+            value="{{ ( $qtc &&  $qtc->patient_name)? $qtc->patient_name : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-3">

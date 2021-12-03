@@ -43,7 +43,7 @@ class MobileController extends Controller
     public function store(Request $request)
     {
       
-        $mobile=new mobile($request->all());
+        $mobile = new mobile($request->all());
         //consultando si esta o no clickeado un checkbox
         $mobile->managed = $request->has('managed') ? true:false;
         $mobile->save();

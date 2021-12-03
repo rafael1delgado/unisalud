@@ -16,14 +16,11 @@ class KeyController extends Controller
     public function index(Request $request)
     {
         //busqueda de codigos de clave
-        $search_key=$request->get('search_key');       
-        $keys=Key::when($search_key!=null, function ($query) use ($search_key){
-                $query->where('name','like','%'.$search_key.'%');
-            })->paginate(30);
+        $search_key = $request->get('search_key');       
+        $keys = Key::when($search_key!=null, function ($query) use ($search_key){
+                    $query->where('name','like','%'.$search_key.'%');
+                })->paginate(100);
          
-     
-        //$keys=Key::all(); // guarda todos los datos de la tabla
-        //return $keys;  mostrar los datos de la bd
         return view ('samu.key.index' , compact('keys','search_key'));
     }
     
@@ -35,8 +32,7 @@ class KeyController extends Controller
      */
     public function create()
     {
-        $keys=Key::all(); // guarda todos los datos de la tabla
-        //return $keys;
+        $keys = Key::all(); // guarda todos los datos de la tabla
         return view ('samu.key.create');
     }
 
@@ -49,10 +45,6 @@ class KeyController extends Controller
     public function store(Request $request)
 
     {
-        //validacion de datos
-        
-        //fin de validacion de datos
-        
         Key::create($request->all());
         $request->session()->flash('success', 'Creado satisfactoriamente.');
         return redirect()->route('samu.key.index');

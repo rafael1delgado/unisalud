@@ -66,7 +66,7 @@ class QtcController extends Controller
         if($shift) 
         {
             $qtc = new Qtc($request->all());
-            
+            $qtc->patient_unknown = $request->has('patient_unknown') ? true:false;
             $qtc->shift()->associate($shift);
             $qtc->save();
         
@@ -136,6 +136,7 @@ class QtcController extends Controller
     public function update(Request $request, qtc $qtc)
     {
         $qtc->fill($request->all());
+        $qtc->patient_unknown = $request->has('patient_unknown') ? true:false;
         $qtc->update();
 
         session()->flash('success', 'Qtc Actualizado satisfactoriamente.');

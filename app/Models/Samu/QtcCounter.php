@@ -37,7 +37,9 @@ class QtcCounter extends Model
 
     public static function getNext()
     {
-        return QtcCounter::whereDate('date',now())->first()->counter + 1 ?? 1;
+        $counter = QtcCounter::whereDate('date',now())->first();
+        if($counter) return $counter->counter + 1;
+        else return 1;
     }
 
     public static function useNext()
