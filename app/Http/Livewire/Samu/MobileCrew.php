@@ -58,10 +58,10 @@ class MobileCrew extends Component
         $users              = User::Permission('SAMU')->get();
         foreach($users as $user) 
         {
-            $this->users[$user->id] = $user->OfficialFullName;
+            $arrayUsers[$user->id] = $user->OfficialFullName;
         }
-        asort($this->users);
-        //debug($this->users);
+        $this->users = collect($arrayUsers);
+        
         $this->job_types    = JobType::where('tripulant', true)->orderBy('name')->get();
         return view('livewire.samu.mobile-crew');
     }

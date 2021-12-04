@@ -52,9 +52,10 @@ class ShiftUser extends Component
         $users              = User::Permission('SAMU')->get();
         foreach($users as $user) 
         {
-            $this->users[$user->id] = $user->OfficialFullName;
+            $arrayUsers[$user->id] = $user->OfficialFullName;
         }
-        // debug($tmp);
+        $this->users = collect($arrayUsers);
+
         $this->job_types    = JobType::where('tripulant', false)->orderBy('name')->get();
         return view('livewire.samu.shift-user');
     }

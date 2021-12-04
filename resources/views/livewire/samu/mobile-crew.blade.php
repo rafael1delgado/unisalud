@@ -4,7 +4,7 @@
         <fieldset class="col-6">            
             <select class="form-control" wire:model='user_id' required="required">
                 <option value=""></option>
-                @foreach($users as $key => $user)
+                @foreach($users->sort() as $key => $user)
                 <option value="{{ $key }}">{{ $user }} </option>
                 @endforeach
             </select>

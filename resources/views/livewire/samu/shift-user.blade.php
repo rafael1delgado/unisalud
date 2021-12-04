@@ -4,7 +4,7 @@
     <div class="col-6">
         <select class="form-control" wire:model='user_id' required="required">
             <option value=""></option>
-            @foreach($users as $key => $user)
+            @foreach($users->sort() as $key => $user)
             <option value="{{ $key }}">{{ $user }} </option>
             @endforeach
         </select>
@@ -24,7 +24,6 @@
     <div class="col-1">
         <button class="btn btn-success" wire:click="store()"><i class="fas fa-plus"></i></button>
     </div>
-
 </div>
 @endif
        
