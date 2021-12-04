@@ -24,7 +24,7 @@
     <div class="col-1">
         <button class="btn btn-success" wire:click="store()"><i class="fas fa-plus"></i></button>
     </div>
-    
+
 </div>
 @endif
        

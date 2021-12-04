@@ -130,9 +130,9 @@ class Qtc extends Model implements Auditable
             /* Asigna el creador */
             $qtc->creator()->associate(auth()->user());
 
-            $counter = QtcCounter::useNext();
-            $qtc->counter = $counter->counter;
-            $qtc->date    = $counter->date;
+            $counter        = QtcCounter::useNext();
+            $qtc->counter   = $counter->counter;
+            $qtc->date      = $counter->date;
         });
 
     }

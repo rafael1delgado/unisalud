@@ -22,7 +22,9 @@ class MobileCrew extends pivot
         'id',
         'mobiles_in_service_id',
         'user_id',
-        'job_type_id'
+        'job_type_id',
+        'assumes_at',
+        'leaves_at'
     ];
 
     public function mobileInService()

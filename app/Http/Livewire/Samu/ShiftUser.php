@@ -54,7 +54,7 @@ class ShiftUser extends Component
         {
             $this->users[$user->id] = $user->OfficialFullName;
         }
-        sort($this->users);
+        // debug($tmp);
         $this->job_types    = JobType::where('tripulant', false)->orderBy('name')->get();
         return view('livewire.samu.shift-user');
     }

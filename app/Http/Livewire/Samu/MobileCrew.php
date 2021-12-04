@@ -16,26 +16,31 @@ class MobileCrew extends Component
 
     public $user_id;
     public $job_type_id;
+    public $assumes_at;
+    public $leaves_at;
 
     protected $rules = [
         'user_id'       => 'required',
         'job_type_id'   => 'required',
+        'assumes_at'    => 'required'
     ];
 
     protected $messages = [
         'user_id.required'      => 'Debe selecionar un usuario',
         'job_type_id.required'  => 'Debe seleccionar una función',
+        'assumes_at.required'   => 'Debe ingresar fecha y hora en que asume'
     ];
 
     public function store()
     {
-     
         $this->validate();
 
         $mobileCrew = MobileCrewModel::create([
             'mobiles_in_service_id' => $this->mobileInService->id,
             'user_id'               => $this->user_id,
-            'job_type_id'           => $this->job_type_id
+            'job_type_id'           => $this->job_type_id,
+            'assumes_at'            => $this->assumes_at,
+            'leaves_at'             => $this->leaves_at
         ]);
        
         redirect()->to(route('samu.mobileinservice.index'));
@@ -55,7 +60,8 @@ class MobileCrew extends Component
         {
             $this->users[$user->id] = $user->OfficialFullName;
         }
-        sort($this->users);
+        asort($this->users);
+        //debug($this->users);
         $this->job_types    = JobType::where('tripulant', true)->orderBy('name')->get();
         return view('livewire.samu.mobile-crew');
     }
