@@ -62,10 +62,10 @@
         </div>
         <div class="col-2">
             @if($mobileInService->shift->status == true)
-            <a class="btn btn-primary" href="{{ $tripulant->pivot->id }}">
+            <a class="btn btn-primary disabled btn-sm" href="{{ $tripulant->pivot->id }}">
                 <i class="fas fa-edit"></i>
             </a>
-            <button class="btn btn-danger ml-4" wire:click="delete({{ $tripulant->pivot->id }})">
+            <button class="btn btn-danger btn-sm ml-4" wire:click="delete({{ $tripulant->pivot->id }})">
                 <i class="fas fa-trash"></i>
             </button>
             @endif
