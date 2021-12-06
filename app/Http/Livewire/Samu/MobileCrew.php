@@ -19,6 +19,7 @@ class MobileCrew extends Component
     public $assumes_at;
     public $leaves_at;
 
+
     protected $rules = [
         'user_id'       => 'required',
         'job_type_id'   => 'required',
@@ -48,19 +49,26 @@ class MobileCrew extends Component
 
     public function delete(MobileCrewModel $mobileCrew)
     {
-        debug('aca');
-        //$mobileCrew->delete();
+        $mobileCrew->delete();
     }
 
-    public function render()
+    public function getUsers()
     {
-        //$this->pivot      = MobileInService::where('id',$this->pivot->id)->get();
-        $users              = User::Permission('SAMU')->get();
+        $users = User::Permission('SAMU')->get();
         foreach($users as $user) 
         {
             $arrayUsers[$user->id] = $user->OfficialFullName;
         }
         $this->users = collect($arrayUsers);
+    }
+
+    public function render()
+    {
+        $this->assumes_at = $this->mobileInService->shift->opening_at->format('Y-m-d\TH:i:s');
+
+        $this->mobileInService = MobileInService::find($this->mobileInService->id);
+
+        $this->getUsers();
         
         $this->job_types    = JobType::where('tripulant', true)->orderBy('name')->get();
         return view('livewire.samu.mobile-crew');

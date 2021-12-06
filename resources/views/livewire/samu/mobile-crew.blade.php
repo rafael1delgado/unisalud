@@ -38,7 +38,7 @@
         <fieldset class="col-md-5 col-5">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="for_leaves_at">Leave:</span>
+                    <span class="input-group-text" id="for_leaves_at">Se retira:</span>
                 </div>
                 <input type="datetime-local" class="form-control" wire:model="leaves_at">
             </div>
@@ -49,17 +49,25 @@
 
     @foreach($mobileInService->crew as $tripulant)
     <div class="form-row m-1">
-        <div class="col-6">
+        <div class="col-5">
             <li>
                 {{ $tripulant->officialFullName }}
             </li>
         </div>
-        <div class="col-5">
+        <div class="col-2">
             {{ $tripulant->pivot->jobType->name }}
         </div>
-        <div class="col-1">
+        <div class="col-3">
+            {{ $tripulant->pivot->assumes_at }}
+        </div>
+        <div class="col-2">
             @if($mobileInService->shift->status == true)
-            <button disabled class="btn btn-danger mx-2" wire:click="delete({{ $tripulant }})"><i class="fas fa-trash"></i></button>
+            <a class="btn btn-primary" href="{{ $tripulant->pivot->id }}">
+                <i class="fas fa-edit"></i>
+            </a>
+            <button class="btn btn-danger ml-4" wire:click="delete({{ $tripulant->pivot->id }})">
+                <i class="fas fa-trash"></i>
+            </button>
             @endif
         </div>
     </div>

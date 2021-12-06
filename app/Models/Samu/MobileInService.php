@@ -54,7 +54,7 @@ class MobileInService extends Model implements Auditable
         return $this->belongsToMany(User::class,'samu_mobile_crew','mobiles_in_service_id')
                     //->join('amenity_master','amenity_icon_url','=','image_url')
                     ->using(MobileCrew::class)
-                    ->withPivot('id','job_type_id')
+                    ->withPivot('id','job_type_id','assumes_at','leaves_at')
                     ->withTimestamps();
     }
 

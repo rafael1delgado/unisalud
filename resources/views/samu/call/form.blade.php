@@ -41,13 +41,10 @@
     
     <fieldset class="form-group col-md-11">
         <label for="for_information">Información telefónica*</label>
-        <input type="text" class="form-control form-control-sm" 
-            name="information" required
-            value="{{ old('information', optional($call)->information) }}">
+        <textarea class="form-control form-control-sm" name="information" rows="3" required>{{ old('information', optional($call)->information) }}</textarea>
     </fieldset>
 
-    <div class="col-1">
-        <label for="">&nbsp; </label>
+    <div class="col-1 align-self-end ml-auto pb-3">
         <button type="submit" class="btn btn-primary btn-sm form-control  form-control-sm"> <i class="fas fa-save"></i> </button>
     </div>
 
