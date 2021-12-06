@@ -119,6 +119,9 @@
           <td>
             <span data-feather="square" style="color:#85C1E9"></span> Anterior
           </td>
+          <td>
+            <span data-feather="square" style="color:#F8CDC4"></span> Otros contratos
+          </td>
         </tr>
       </table>
     </div>
@@ -182,6 +185,25 @@
                   title: '{{$programmed_day['data']->activity->activity_name}}',
                   start: '{{$programmed_day['start_date']}}',
                   end: '{{$programmed_day['end_date']}}'
+                  },
+                @endif
+              @endforeach
+
+              // otras propuestas de la persona
+              @foreach($other_contracts_info as $programmed_day)
+                @if($programmed_day['data']->subactivity)
+                  {
+                  title: '{{$programmed_day['data']->subactivity->sub_activity_name}}',
+                  start: '{{$programmed_day['start_date']}}',
+                  end: '{{$programmed_day['end_date']}}',
+                  color: '#F8CDC4'
+                  },
+                @else
+                  {
+                  title: '{{$programmed_day['data']->activity->activity_name}}',
+                  start: '{{$programmed_day['start_date']}}',
+                  end: '{{$programmed_day['end_date']}}',
+                  color: '#F8CDC4'
                   },
                 @endif
               @endforeach
