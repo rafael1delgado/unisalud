@@ -18,7 +18,7 @@ class KeyController extends Controller
         //busqueda de codigos de clave
         $search_key = $request->get('search_key');       
         $keys = Key::when($search_key!=null, function ($query) use ($search_key){
-                    $query->where('name','like','%'.$search_key.'%');
+                    $query->where('key','like','%'.$search_key.'%');
                 })->paginate(100);
          
         return view ('samu.key.index' , compact('keys','search_key'));

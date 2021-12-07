@@ -15,7 +15,7 @@
         <form method="GET" class="form-horizontal" action="{{ route('samu.key.index') }}">
             <div class="input-group mb-sm-0">
                 <input class="form-control" type="text" name="search_key" autocomplete="off" id="for_search" 
-                style="text-transform: uppercase;" placeholder="Nombre Codigo" value="{{ $search_key }}">
+                style="text-transform: uppercase;" placeholder="Codigo" value="{{ $search_key }}">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
                 </div>

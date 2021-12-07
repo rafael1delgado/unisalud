@@ -26,7 +26,7 @@
         </fieldset>
     </div>
     <div class="form-row">
-        <fieldset class="col-md-6 col-6">
+        <fieldset class="col-md-6 col-6 mt-3">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="for_assumes_at">Asume:</span>
@@ -35,7 +35,7 @@
             </div>
             @error('assumes_at') <span class="error">{{ $message }}</span> @enderror
         </fieldset>
-        <fieldset class="col-md-5 col-5">
+        <fieldset class="col-md-5 col-5 mt-3">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="for_leaves_at">Se retira:</span>
@@ -62,7 +62,7 @@
         </div>
         <div class="col-2">
             @if($mobileInService->shift->status == true)
-            <a class="btn btn-primary disabled btn-sm" href="{{ $tripulant->pivot->id }}">
+            <a class="btn btn-primary  btn-sm ml-4" href="{{route('samu.mobileinservice.crewedit', $tripulant->pivot->id) }}">
                 <i class="fas fa-edit"></i>
             </a>
             <button class="btn btn-danger btn-sm ml-4" wire:click="delete({{ $tripulant->pivot->id }})">

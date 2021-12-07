@@ -480,6 +480,8 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::post('/store',				[MobileInServiceController::class, 'store'])->name('store');
 		Route::get('/edit/{mobileInService}',[MobileInServiceController::class, 'edit'])->name('edit');
 		Route::put('/{mobileInService}',	[MobileInServiceController::class, 'update'])->name('update');
+		Route::get('/crewedit/{mobileCrew}',[MobileInServiceController::class, 'crewedit'])->name('crewedit');
+		Route::put('/crewupdate/{mobileCrew}',	[MobileInServiceController::class, 'crewupdate'])->name('crewupdate');
 		Route::delete('/{mobileInService}', [MobileInServiceController::class, 'destroy'])->name('destroy');
 	
     });
@@ -495,6 +497,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::view('/', 'samu.crew.index')->name('index');
 		Route::view('/create', 'samu.crew.create')->name('create');
 		Route::view('/edit', 'samu.crew.edit')->name('edit');
+	
     });
 
     // Route::prefix('shift')->name('shift.')->group(function () {

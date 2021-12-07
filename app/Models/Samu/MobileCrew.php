@@ -23,6 +23,11 @@ class MobileCrew extends pivot
         'leaves_at'
     ];
 
+    protected $dates = [
+        'assumes_at',
+        'leaves_at'
+    ];
+
     public function mobileInService()
     {
         return $this->BelongsTo(MobileInService::class, 'mobiles_in_service_id');

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
 use App\Models\Samu\MobileInService;
+use App\Models\Samu\MobileCrew;
 use App\Models\Samu\Shift;
 use App\Models\Samu\Mobile;
 use Illuminate\Http\Request;
+
 
 class MobileInServiceController extends Controller
 {
@@ -139,4 +141,35 @@ class MobileInServiceController extends Controller
  
         return redirect()->route('samu.mobileinservice.index')->with('danger', 'Eliminado satisfactoriamente.');
     }  
-}
+
+
+    public function crewedit(MobileCrew $mobileCrew)
+    {
+        $mobiles = Mobile::where('managed',true)->get();
+    
+        $shift = Shift::where('status',1)->get();
+        return view('samu.crew.crewedit', compact('mobiles','shift','mobileCrew'));
+    
+
+    }
+
+    public function crewupdate(Request $request, MobileCrew $mobileCrew)    
+    {
+
+        $mobileCrew->fill($request->all());
+        $mobileCrew->save();
+        session()->flash('info', 'Movil editado.');
+        return redirect()->route('samu.mobileinservice.index');
+
+
+
+    }
+
+
+
+}  
+
+
+
+
+
