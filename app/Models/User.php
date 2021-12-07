@@ -12,10 +12,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements Auditable
 {
     use HasFactory, Notifiable, HasRoles;
+    use SoftDeletes;
+    
     /* TODO: Revisar si es necesaro poner la ruta completa de Auditable */
     use \OwenIt\Auditing\Auditable;
 
@@ -144,7 +147,9 @@ class User extends Authenticatable implements Auditable
 
     public function getOfficialFullNameAttribute()
     {
+      if ($this->actualOfficialHumanName) {
         return "{$this->actualOfficialHumanName->text} {$this->actualOfficialHumanName->fathers_family} {$this->actualOfficialHumanName->mothers_family}";
+      }
     }
 
     public function getOfficialNameAttribute()
