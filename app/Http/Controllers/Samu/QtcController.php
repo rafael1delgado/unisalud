@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Samu\Shift;
 use App\Models\Samu\Qtc;
 use App\Models\Samu\Key;
@@ -11,11 +12,8 @@ use App\Models\Samu\MobileCrew;
 use App\Models\Samu\QtcUser;
 use App\Models\Samu\QtcCounter;
 use App\Models\Samu\MobileInService;
-use Illuminate\Http\Request;
 use App\Models\Samu\Mobile;
 use App\Models\Organization;
-
-
 
 class QtcController extends Controller
 {
@@ -45,12 +43,12 @@ class QtcController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
-
+        $mobiles = Mobile::where('managed',false)->get();
         $establishments = Organization::pluck('name','id')->sort();
         $nextCounter = QtcCounter::getNext();
         $keys = Key::all();
 
-        return view ('samu.qtc.create',compact('shift','keys','establishments','nextCounter'));
+        return view ('samu.qtc.create',compact('shift','keys','establishments','nextCounter','mobiles'));
     }
 
     /**
@@ -67,6 +65,13 @@ class QtcController extends Controller
         {
             $qtc = new Qtc($request->all());
             $qtc->patient_unknown = $request->has('patient_unknown') ? true:false;
+            $isMobileInService = $shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
+            
+            if($isMobileInService)
+            {
+                $qtc->mobileInService()->associate($isMobileInService);
+            }
+            
             $qtc->shift()->associate($shift);
             $qtc->save();
         
@@ -79,9 +84,6 @@ class QtcController extends Controller
                     'user_id'               => $mobilecrew->user_id,
                     'job_type_id'           => $mobilecrew->job_type_id
                 ]);
-                
-
-
             }
             session()->flash('success', 'Se ha creado el QTC');
             return redirect()->route('samu.qtc.index');
@@ -123,7 +125,9 @@ class QtcController extends Controller
         $shift = Shift::where('status',true)->first();
         $establishments = Organization::pluck('name','id')->sort();
         $keys = Key::all();
-        return view ('samu.qtc.edit', compact('shift','establishments','keys','qtc'));
+        $mobiles = Mobile::where('managed',false)->get();
+
+        return view ('samu.qtc.edit', compact('shift','establishments','keys','qtc','mobiles'));
     }
 
     /**
@@ -135,8 +139,20 @@ class QtcController extends Controller
      */
     public function update(Request $request, qtc $qtc)
     {
+        $shift = Shift::where('status',true)->first();
+
         $qtc->fill($request->all());
         $qtc->patient_unknown = $request->has('patient_unknown') ? true:false;
+        $isMobileInService = $shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
+
+        if($isMobileInService)
+        {
+            $qtc->mobileInService()->associate($isMobileInService);
+        }
+        else 
+        {
+            $qtc->mobileInService()->dissociate();
+        }
         $qtc->update();
 
         session()->flash('success', 'Qtc Actualizado satisfactoriamente.');

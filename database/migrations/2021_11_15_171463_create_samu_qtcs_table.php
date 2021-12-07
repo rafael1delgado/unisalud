@@ -25,6 +25,7 @@ class CreateSamuQtcsTable extends Migration
             $table->foreignId('return_key_id')->nullable()->constrained('samu_keys');
             $table->foreignId('mobile_in_service_id')->nullable()->constrained('samu_mobiles_in_service');
             $table->foreignId('mobile_id')->nullable()->constrained('samu_mobiles');
+            $table->string('external_crew')->nullable();
 
             $table->time('departure_at')->nullable();
             $table->time('mobile_departure_at')->nullable();
