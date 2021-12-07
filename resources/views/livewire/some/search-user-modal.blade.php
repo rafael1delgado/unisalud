@@ -30,7 +30,7 @@
                             <thead class="table-info">
                             <tr>
                                 <th scope="col">Nombre:</th>
-                                <th scope="col">Indentificación</th>
+                                <th scope="col">Identificación</th>
                                 <th scope="col">Edad</th>
                                 <th scope="col">Sexo</th>
                                 <th scope="col">Dirección</th>

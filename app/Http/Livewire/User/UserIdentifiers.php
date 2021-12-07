@@ -17,10 +17,10 @@ class UserIdentifiers extends Component
         //Agrega inputs según cantidad de identifiers que tenga
         if ($this->patient && $this->patient->identifiers()->count() > 0) {
             for ($i = 0; $i < $this->patient->identifiers()->count(); $i++) {
-                $this->add($i);
+                $this->add();
             }
         } else {
-            $this->add(0);
+            $this->add();
         }
 
 

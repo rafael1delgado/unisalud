@@ -65,36 +65,33 @@
 
             @foreach($sics as $sic)
                 <tr>
-                    <td>{{$sic->pciNumSic}}</td>
-                    <td>{{$sic->pcdFechaSolic->format('d-m-Y')}}</td>
-                    <td>{{$sic->pciIndMotivo}}</td>
-                    <td>{{$sic->pcsIndUrgencia}}</td>
-                    <td>{{"$sic->pciRutPac-$sic->pcsDigVerPac"}}</td>
-                    <td>{{"$sic->pcsNombrePac $sic->pcsApellidoPat $sic->pcsApellidoMat"}}</td>
-                    <td>{{$sic->pcdFechNacPac->format('d-m-Y')}}</td>
-                    <td>{{$sic->pcsCodEspecDer}}</td>
-                    <td>{{$sic->pcsCodEspecDer}}</td>
-
-{{--                    <td>--}}
-{{--                        <button type="button" class="btn btn-primary" data-toggle="modal"--}}
-{{--                                data-target="#pertinenceModal" title="Dar pertinencia"><i class="fas fa-edit"></i>--}}
-{{--                        </button>--}}
-{{--                    </td>--}}
-
+                    <td>{{$sic->sic_number}}</td>
+                    <td>{{$sic->request_date->format('d-m-Y')}}</td>
+                    <td>{{$sic->motive_indicator}}</td>
+                    <td>{{$sic->urgency_indicator}}</td>
+                    <td>{{"$sic->patient_rut-$sic->patient_dv"}}</td>
+                    <td>{{"$sic->patient_name $sic->patient_fathers_family $sic->patient_mothers_family"}}</td>
+                    <td>{{$sic->patient_birthday->format('d-m-Y')}}</td>
+                    <td>{{$sic->derivation_specialty_code}}</td>
+                    <td>{{$sic->health_service_code}}</td>
 
                     <td>
-                        <div wire:key="{{$sic->id }}">
-                            <a href class="btn btn-primary" title="Dar Pertinencia"
-                               wire:click.prevent="$emitTo('some.pertinence-modal', 'open', {{ $sic->id }})">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </div>
+                        @if(class_basename($sic) == ExternalIncomingSic::class)
+                            <div wire:key="{{$sic->id }}">
+                                <a href class="btn btn-primary" title="Dar Pertinencia"
+                                wire:click.prevent="$emitTo('some.pertinence-modal', 'open', {{ $sic->id }})">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </div>
+                        @endif
                     </td>
 
 {{--                    <td><a href="{{ route('vista.relevant') }}" class="btn btn-sm btn-outline-secondary"><span--}}
 {{--                                class="fas fa-edit" aria-hidden="true"></span></a></td>--}}
                     <td class="text-center">
-                        <button type="button" class="btn btn-primary "><i class="fas fa-file-alt"></i> Citar</button>
+                        @if(class_basename($sic) == Sic::class)
+                            <button type="button" class="btn btn-primary" wire:click='appoint({{$sic->id}})' title="Citar"><i class="fas fa-file-alt"></i> Citar</button>
+                        @endif
                     </td>
                 </tr>
             @endforeach

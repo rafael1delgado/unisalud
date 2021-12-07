@@ -31,6 +31,7 @@ class SoapController extends Controller
         //DEFINICION WS
         $namespace = 'wsSicNamespace';
         $server = new soap_server();
+        // $server->configureWSDL('wsSIC', $namespace, 'http://localhost/soap/rayen');
         $server->configureWSDL('wsSIC', $namespace, 'https://www.saludiquique.app/soap/rayen');
         $server->wsdl->schemaTargetNamespace = $namespace;
 
@@ -56,7 +57,6 @@ class SoapController extends Controller
                'VLmensaje' => array('name' => 'VLmensaje', 'type' => 'xsd:string'),
             )
         );
-
 
         $server->wsdl->addComplexType(
             'datos_entrada_GuardarSicGes',

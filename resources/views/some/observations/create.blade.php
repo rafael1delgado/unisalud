@@ -8,12 +8,12 @@
     @csrf
     @method('POST')
 
-    <div class="row">
-        <fieldset class="form-group col">
+    <div class="form-row">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_description">Observaciones</label>
             <input type="text" class="form-control" id="for_description" placeholder="" name="description" required>
         </fieldset>
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-3">
         <label for="for_status">Estado de observación</label>
         <select id="for_status" name="status" class="form-control" required>
                 <option></option>
@@ -27,7 +27,7 @@
                 <option value="unknown" {{old('status') === 'unknown'? 'selected' : ''}}>Desconocido</option>
             </select> 
         </fieldset> 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-3">
         <label for="for_type">Tipo de observación</label>
         <select id="for_type" name="type" class="form-control" required>
                 <option></option>
@@ -35,7 +35,7 @@
                 <option value="patient" {{old('type') === 'patient'? 'selected' : ''}}>Paciente</option>
             </select> 
         </fieldset>
-        <fieldset class="form-group col-md-3">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_cod_con_obs_categories_id">Categoría</label>
             <select name="cod_con_obs_categories_id" id="for_cod_con_obs_categories_id" class="form-control" required>
             <option value=""></option>

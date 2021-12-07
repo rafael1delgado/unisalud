@@ -5,62 +5,88 @@
 <h3 class="mb-3">Nueva Solicitud de Chagas</h3>
 
 
-<form method="POST" class="form-horizontal" action="#" enctype="multipart/form-data">
+<form method="POST" class="form-horizontal" action="{{ route('epi.chagas.store') }}" enctype="multipart/form-data">
     @csrf
     @method('POST')
     <div class="form-row">
-        <fieldset class="form-group col-10 col-md-2">
+        <fieldset class="form-group col-10 col-md-3">            
+            <input type="hidden" class="form-control" id="for_id" name="patient_id"
+            value="{{$user->id}}"
+            >
+
+            <input type="hidden" class="form-control" id="for_id" name="type"
+            value="Chagas"
+            >
             <label for="for_run">Run</label>
-            <input type="hidden" class="form-control" id="for_id" name="id">
-            <input type="number" max="50000000" class="form-control" id="for_run" name="run">
+
+            <input type="number" max="50000000" class="form-control" id="for_run" name="run"
+            value="{{$user->identifierRun->value}}"
+            readonly
+            >
         </fieldset>
 
         <fieldset class="form-group col-2 col-md-1">
             <label for="for_dv">DV</label>
-            <input type="text" class="form-control" id="for_dv" name="dv" readonly>
+            <input type="text" class="form-control" id="for_dv" name="dv"             
+            value="{{$user->identifierRun->dv}}"
+            readonly>
         </fieldset>
 
-        <fieldset class="form-group col-12 col-md-2">
+        <fieldset class="form-group col-12 col-md-3">
             <label for="for_other_identification">Otra identificación</label>
-            <input type="text" class="form-control" id="for_other_identification"
-                placeholder="Extranjeros sin run" name="other_identification">
+            <input type="text" class="form-control" id="for_other_identification" placeholder="Extranjeros sin run" name="other_identification"
+            readonly
+            >
         </fieldset>
 
         <fieldset class="form-group col-6 col-md-2">
-            <label for="for_gender">Género</label>
-            <select name="gender" id="for_gender" class="form-control genero">
-                <option value="male">Masculino</option>
-                <option value="female">Femenino</option>
-                <option value="other">Otro</option>
-                <option value="unknown">Desconocido</option>
+            <label for="for_sex">Sexo</label>
+            <select name="sex" id="for_sex" class="form-control sex" readonly>
+                <option value="male" {{$user->sex === 'male'? 'selected' : ''}}>Masculino</option>
+                <option value="female" {{$user->sex === 'female'? 'selected' : ''}}>Femenino</option>
+                <option value="other" {{$user->sex === 'other'? 'selected' : ''}}>Otro</option>
+                <option value="unknown" {{$user->sex === 'unknown'? 'selected' : ''}}>Desconocido</option>
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-6 col-md-3">
+        <fieldset class="form-group col-6 col-md-2">
             <label for="for_birthday">Fecha Nacimiento</label>
-            <input type="date" class="form-control" id="for_birthday"
-                name="birthday" required>
+            <input type="date" class="form-control" id="for_birthday" name="birthday" 
+            value="{{ $user->birthday }}"
+            readonly
+            required>
+        </fieldset>
+
+        <fieldset class="form-group col-2 col-md-1">
+            <label for="for_age">Edad</label>
+            <input type="number" class="form-control" id="for_age" name="age"
+            value={{\Carbon\Carbon::parse($user->birthday)->age}}
+            readonly
+            >
         </fieldset>
 
     </div>
+    
 
     <div class="form-row">
         <fieldset class="form-group col-12 col-md-4">
             <label for="for_name">Nombres *</label>
-            <input type="text" class="form-control" id="for_name" name="name"
-             style="text-transform: uppercase;" required>
+            <input type="text" class="form-control" id="for_name" name="name" style="text-transform: uppercase;" autocomplete="off" value="{{ $user->actualOfficialHumanName->text?? '' }}"  readonly>
         </fieldset>
 
-        <fieldset class="form-group col-12 col-md-3">
+        <fieldset class="form-group col-6 col-md-4">
             <label for="for_fathers_family">Apellido Paterno *</label>
-            <input type="text" class="form-control" id="for_fathers_family"
-                name="fathers_family" style="text-transform: uppercase;" required>
+            <input type="text" class="form-control" id="for_fathers_family" name="fathers_family" style="text-transform: uppercase;" autocomplete="off" 
+            value="{{ $user->actualOfficialHumanName->fathers_family }}"
+            readonly>
         </fieldset>
 
-        <fieldset class="form-group col-12 col-md-3">
+        <fieldset class="form-group col-6 col-md-4">
             <label for="for_mothers_family">Apellido Materno</label>
-            <input type="text" class="form-control" id="for_mothers_family"
-                name="mothers_family" style="text-transform: uppercase;">
+            <input type="text" class="form-control" id="for_mothers_family" name="mothers_family" autocomplete="off" style="text-transform: uppercase;"
+            value="{{ $user->actualOfficialHumanName->mothers_family }}"
+            readonly
+            >
         </fieldset>
 
 
@@ -70,47 +96,56 @@
 
     <div class="form-row">
 
-        <fieldset class="form-group col-6 col-md-2">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_sample_at">Fecha Muestra</label>
-            <input type="date" class="form-control" id="for_sample_at"
-                name="sample_at" required min="{{ date('Y-m-d', strtotime("-2 week")) }}" max="{{ date('Y-m-d') }}">
+            <input type="datetime-local" class="form-control" id="for_sample_at" name="sample_at" 
+            value="{{ date('Y-m-d\TH:i:s') }}"
+            required 
+            min="{{ date('Y-m-d\TH:i:s', strtotime('-2 week')) }}"
+            max="{{ date('Y-m-d\TH:i:s') }}"
+            >
         </fieldset>
 
         <fieldset class="form-group col-6 col-md-3">
             <label for="for_sample_type">Grupo de Pesquiza</label>
-            <select name="sample_type" id="for_sample_type" class="form-control">
+            <select name="research_group" id="for_research_group" class="form-control" requireds>
                 <option value=""></option>
-                <option value="TÓRULAS NASOFARÍNGEAS">Control Pre concepcional</option>
-                <option value="ESPUTO">Gestante (+semana gestacional)</option>
-                <option value="TÓRULAS NASOFARÍNGEAS/ESPUTO">Estudio de contacto</option>
-                <option value="ASPIRADO NASOFARÍNGEO">Morbilidad (cualquier persona)</option>
+                <option value="Control Pre concepcional">Control Pre concepcional</option>
+                <option value="Gestante (+semana gestacional)">Gestante (+semana gestacional)</option>
+                <option value="Estudio de contacto">Estudio de contacto</option>
+                <option value="Morbilidad (cualquier persona)">Morbilidad (cualquier persona)</option>
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-6 col-md-3">
-            <label for="for_establishment_id">Establecimiento *</label>
-            <select name="establishment_id" id="for_establishment_id" class="form-control" required>
-                
-                <option value="">Seleccionar Establecimiento</option>                    
-                
+        <fieldset class="form-group col-12 col-md-4">
+            <label for="for_establishment_id">Establecimiento*</label>
+            <select name="organization_id" id="for_organization_id" class="form-control" required>
+                <option value="">Seleccionar Establecimiento</option>
+                @foreach($organizations as $organization)
+                <option value="{{$organization->id}}">{{$organization->alias??''}}</option>
+                @endforeach
+
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-6 col-md-3">
+        <!-- <fieldset class="form-group col-12 col-md-3">
             <label for="for_origin">Estab. Detalle (Opcional)</label>
             <select name="origin" id="for_origin" class="form-control">
                 <option value="">Seleccionar Detalle</option>
-                
-                    <option value=""></option>
-                
+
+                <option value=""></option>
+
             </select>
-        </fieldset>
+        </fieldset> -->
 
-        <fieldset class="form-group col-4 col-md-1">
-            <label for="for_age">Edad</label>
-            <input type="number" class="form-control" id="for_age" name="age">
-        </fieldset>
+        
 
+        <!-- <fieldset class="form-group col-8 col-md-3">
+            <label for="for_external_laboratory">Laboratorio externo</label>
+            <select name="external_laboratory" id="for_external_laboratory" class="form-control">
+                <option value=""></option>
+            </select>
+        </fieldset> -->
 
     </div>
 
@@ -119,14 +154,13 @@
 
         <fieldset class="form-group col-6 col-md-2 alert-warning">
             <label for="for_result_ifd_at">Fecha Resultado IFD</label>
-            <input type="date" class="form-control" id="for_result_ifd_at"
-                name="result_ifd_at" max="{{ date('Y-m-d') }}">
+            <input type="date" class="form-control" id="for_result_ifd_at" name="result_ifd_at" max="{{ date('Y-m-d') }}">
         </fieldset>
 
         <fieldset class="form-group col-6 col-md-2 alert-warning">
             <label for="for_result_ifd">Resultado IFD</label>
             <select name="result_ifd" id="for_result_ifd" class="form-control">
-                <option ></option>
+                <option></option>
                 <option value="Negativo">Negativo</option>
                 <option value="Adenovirus">Adenovirus</option>
                 <option value="Influenza A">Influenza A</option>
@@ -157,14 +191,12 @@
 
         <fieldset class="form-group col-6 col-md-2 alert-danger">
             <label for="for_pcr_sars_cov_2_at">Fecha Resultado PCR</label>
-            <input type="date" class="form-control" id="for_pcr_sars_cov_2_at"
-                name="pcr_sars_cov_2_at" max="{{ date('Y-m-d') }}">
+            <input type="date" class="form-control" id="for_pcr_sars_cov_2_at" name="pcr_sars_cov_2_at" max="{{ date('Y-m-d') }}">
         </fieldset>
 
         <fieldset class="form-group col-6 col-md-2 alert-danger">
             <label for="for_pcr_sars_cov_2">PCR SARS-Cov2</label>
-            <select name="pcr_sars_cov_2" id="for_pcr_sars_cov_2"
-                class="form-control">
+            <select name="pcr_sars_cov_2" id="for_pcr_sars_cov_2" class="form-control">
                 <option value="pending">Pendiente</option>
                 <option value="negative">Negativo</option>
                 <option value="positive">Positivo</option>
@@ -175,18 +207,10 @@
 
         <fieldset class="form-group col-6 col-md-2">
             <label for="for_sent_external_lab_at">Fecha envío lab externo</label>
-            <input type="date" class="form-control" id="for_sent_external_lab_at"
-                name="sent_external_lab_at">
+            <input type="date" class="form-control" id="for_sent_external_lab_at" name="sent_external_lab_at">
         </fieldset>
 
         @endcan
-
-        <fieldset class="form-group col-6 col-md-2">
-            <label for="for_external_laboratory">Laboratorio externo</label>
-            <select name="external_laboratory" id="for_external_laboratory" class="form-control">
-                <option value=""></option>                
-            </select>
-        </fieldset>
 
         @can('SuspectCase: tecnologo')
 
@@ -204,57 +228,14 @@
 
     @endcan
 
-    <!-- <div class="form-row">
-
-        <fieldset class="form-group col-4 col-md-1">
-            <label for="for_symptoms">Sintomas</label>
-            <select name="symptoms" id="for_symptoms" class="form-control">
-                <option value=""></option>
-                <option value="Si">Si</option>
-                <option value="No">No</option>
-            </select>
-        </fieldset>
-
-        <fieldset class="form-group col-6 col-md-1">
-            <label for="for_gestation">Gestante *</label>
-            <select name="gestation" id="for_gestation" class="form-control" required>
-                <option value=""></option>
-                <option value="0">No</option>
-                <option value="1">Si</option>
-            </select>
-        </fieldset>
-
-        <fieldset class="form-group col-6 col-md-2">
-            <label for="for_gestation_week">Semanas de gestación</label>
-            <input type="number" class="form-control" name="gestation_week"
-                id="for_gestation_week">
-        </fieldset>
-
-        <fieldset class="form-group col-4 col-md-2">
-            <label for="for_close_contact">Contacto estrecho</label>
-            <select name="close_contact" id="for_close_contact" class="form-control">
-                <option value=""></option>
-                <option value="0">No</option>
-                <option value="1">Si</option>
-            </select>
-        </fieldset>
-
-
-    </div> -->
-
     <div class="form-row">
 
-        <fieldset class="form-group col-md-6">
+        <fieldset class="form-group col-6 col-md-6">
             <label for="for_observation">Observación</label>
-            <input type="text" class="form-control" name="observation"
-                id="for_observation">
+            <input type="text" class="form-control" name="observation" id="for_observation">
         </fieldset>
 
-        <!-- <fieldset class="form-group col-md-2">
-            <label for="for_paho_flu">PAHO FLU</label>
-            <input type="number" class="form-control" name="paho_flu"
-                id="for_paho_flu">
-        </fieldset> -->
+
 
         {{-- <fieldset class="form-group col-6 col-md-2">
             <label for="for_run_medic">Run Médico Solicitante</label>
@@ -262,21 +243,10 @@
                 placeholder="Ej: 12345678-9">
         </fieldset> --}}
 
-        <!-- <fieldset class="form-group col-8 col-md-2">
-            <label for="for_run_medic_s_dv">Run Médico SIN DV</label>
-            <input type="number" class="form-control" id="for_run_medic_s_dv" name="run_medic_s_dv">
-        </fieldset>
 
-        <fieldset class="form-group col-4 col-md-1">
-            <label for="for_run_medic_dv">DV</label>
-            <input type="text" class="form-control" id="for_run_medic_dv" name="run_medic_dv" readonly>
-        </fieldset> -->
-
-
-        <fieldset class="form-group col-md-2">
+        <fieldset class="form-group col-6 col-md-6">
             <label for="for_epivigila">Epivigila</label>
-            <input type="number" class="form-control" id="for_epivigila"
-                name="epivigila">
+            <input type="number" class="form-control" id="for_epivigila" name="epivigila">
         </fieldset>
 
 
@@ -288,10 +258,24 @@
     <a class="btn btn-outline-secondary" href="#">
         Cancelar
     </a>
-</form>
+</form><br>
 
 @endsection
 
 @section('custom_js')
+<script src='{{asset("js/jquery.rut.chileno.js")}}'></script>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+    $('input[name=run]').keyup(function(e) {
+        var str = $("#for_run").val();
+        $('#for_dv').val($.rut.dv(str));
+    });
+
+});
+
+</script>
+
+<script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('js/defaults-es_CL.min.js') }}"></script>
 
 @endsection

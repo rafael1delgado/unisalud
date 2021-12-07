@@ -2,42 +2,50 @@
 
 @section('content')
 
-<h3 class="mb-3">Listado de Contratos</h3>
-
-<a class="btn btn-primary mb-3" href="{{ route('medical_programmer.contracts.create') }}">
+<h3> Listado de Contratos</h3>
+<a class="btn btn-primary mb-2" href="{{ route('medical_programmer.contracts.create') }}">
     <i class="fas fa-plus"></i> Agregar nuevo
 </a>
 
-<form method="GET" class="form-horizontal" action="{{ route('medical_programmer.contracts.index') }}">
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-          <span class="input-group-text">Año contrato</span>
-      </div>
-      <select name="year" id="for_year" class="form-control">
-        <option value="2020" {{ $request->get('year') == "2020" ? 'selected' : '' }}>2020</option>
-        <option value="2021" {{ $request->get('year') == "2021" ? 'selected' : '' }}>2021</option>
-        <option value="2022" {{ $request->get('year') == "2022" ? 'selected' : '' }}>2022</option>
-        <option value="2023" {{ $request->get('year') == "2023" ? 'selected' : '' }}>2023</option>
-        <option value="2024" {{ $request->get('year') == "2024" ? 'selected' : '' }}>2024</option>
-        <option value="2025" {{ $request->get('year') == "2025" ? 'selected' : '' }}>2025</option>
-      </select>
-
-      <div class="input-group-append">
-          <button type="submit" class="btn btn-primary" id="button"><i class="fas fa-search"></i> Buscar</button>
-      </div>
-  </div>
+<form>
+    <div class="form-row">
+        <div class="form-group col-md-4 col-6">
+            <label>Nombre</label>
+            <input type="text" class="form-control" name="name" value="{{$request->get('name')}}">
+        </div>
+        <div class="form-group col-md-3 col-6">
+            <label>Rut</label>
+            <input type="number" class="form-control" name="rut" value="{{$request->get('rut')}}">
+        </div>
+        <div class="form-group col-md-3 col-6">
+            <label>Año contrato</label>
+            <select name="year" id="for_year" class="form-control">
+                <option value="2020" {{ $request->get('year') == "2020" ? 'selected' : '' }}>2020</option>
+                <option value="2021" {{ $request->get('year') == "2021" ? 'selected' : '' }}>2021</option>
+                <option value="2022" {{ $request->get('year') == "2022" ? 'selected' : '' }}>2022</option>
+                <option value="2023" {{ $request->get('year') == "2023" ? 'selected' : '' }}>2023</option>
+                <option value="2024" {{ $request->get('year') == "2024" ? 'selected' : '' }}>2024</option>
+                <option value="2025" {{ $request->get('year') == "2025" ? 'selected' : '' }}>2025</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2 col-6">
+            <label>&nbsp;</label>
+            <button type="submit" class="form-control btn btn-primary" id="button">
+                <i class="fas fa-search"></i> Buscar
+            </button>
+        </div>
+    </div>
 </form>
 
-<table class="table table-sm table-borderer">
+<table class="table table-sm table-borderer table-responsive-xl">
     <thead>
         <tr>
             <th>Trabajador</th>
             <th>Especialista</th>
             <th>Ley</th>
-            <th>Correlativo contrato</th>
+            <th>Contrato Correlativo</th>
             <th>Horas Semanales</th>
             <th>Servicio</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>

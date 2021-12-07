@@ -8,7 +8,7 @@
     <i class="fas fa-plus"></i> Agregar nueva Observación
 </a>
 
-<table class="table table-sm table-borderer">
+<table class="table table-sm table-borderer table-responsive-xl">
     <thead>
         <tr>
             <th>Id</th>

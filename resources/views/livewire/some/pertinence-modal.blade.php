@@ -17,15 +17,15 @@
                         {{--                        <h3 class="mb-3"></h3>--}}
                         <div class="card border-success mb-3">
                             <div class="card-header bg-success text-white">
-                                N° INTERCONSULTA: {{$sic->id ?? ''}}
+                                N° INTERCONSULTA: {{$externalIncomingSic->id ?? ''}}
                             </div>
                             <div class="card-body">
                                 <ul>
-                                    <li>Nombre: {{$sic->pcsNombrePac ?? ''}} </li>
-                                    <li>Edad: {{$sic->age ?? ''}} Años</li>
-                                    <li>Género: {{$sic->pcsIndSexoPac ?? ''}}</li>
-                                    <li>Centro: {{$sic->pcsCodEstab ?? ''}}</li>
-                                    <li>Motivo: {{$sic->pciIndMotivo ?? ''}}</li>
+                                    <li>Nombre: {{$externalIncomingSic->patient_name ?? ''}} </li>
+                                    <li>Edad: {{$externalIncomingSic->age ?? ''}} Años</li>
+                                    <li>Género: {{$externalIncomingSic->patient_sex_indicator?? ''}}</li>
+                                    <li>Centro: {{$externalIncomingSic->health_service_code?? ''}}</li>
+                                    <li>Motivo: {{$externalIncomingSic->motive_indicator?? ''}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -40,11 +40,11 @@
                                 ></textarea>
                             </fieldset>
                             <fieldset class="form-group  col-md-12 mb-3">
-                                <label for="observation"> <b>OBSERVACIÓN DEL CENTRO DE ORIGEN</b></label>
+                                <label for="originObservation"> <b>OBSERVACIÓN DEL CENTRO DE ORIGEN</b></label>
                                 <textarea class="form-control" placeholder="Ingrese Observación del Centro de Salud"
-                                          id="observation"
+                                          id="originObservation"
                                           style="height: 100px"
-                                          wire:model.defer="observation"
+                                          wire:model.defer="originObservation"
                                 ></textarea>
                             </fieldset>
 
@@ -55,12 +55,15 @@
                                 <button  class="btn btn-danger mr-2 float-right" wire:click="$set('action', 'nonPertinent')">No pertinente</button>
                             </fieldset>
                             <fieldset class="form-group  col-md-6">
-                                <label for="motive"> <b>(Motivo)</b></label>
-                                <textarea class="form-control" placeholder="" id="motive"
+                                <label for="rejectedObservation"> <b>(Motivo)</b></label>
+                                <textarea class="form-control" placeholder="" id="rejectedObservation"
                                           style="height: 100px"
-                                          wire:model.defer="motive"
+                                          wire:model.defer="rejectedObservation"
                                 ></textarea>
                             </fieldset>
+                            @error('rejectedObservation')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </form>
                     </div>
                 </div>

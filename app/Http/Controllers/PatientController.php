@@ -29,6 +29,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use App\Traits\GoogleToken;
+use App\Models\Some\Sic;
 use Session;
 
 class PatientController extends Controller
@@ -45,7 +46,7 @@ class PatientController extends Controller
         return view('patients.index');
     }
 
-    public function create()
+    public function create($interconsultationId = null)
     {
         if(request()->session()->has('request_match')) request()->session()->forget('request_match');
         $permissions = Permission::OrderBy('name')->get();
@@ -57,7 +58,13 @@ class PatientController extends Controller
         $organizations = Organization::all();
         $professions = Profession::all();
         $specialties = Specialty::all();
-        return view('patients.create', compact('permissions', 'maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations', 'professions', 'organizations', 'specialties'));
+
+        $sic = null;
+        if($interconsultationId){
+            $sic = Sic::find($interconsultationId);
+        }
+
+        return view('patients.create', compact('permissions', 'maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations', 'professions', 'organizations', 'specialties', 'sic'));
     }
 
 
@@ -70,10 +77,6 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-
-
-    //dd($request);
-
         if ($request->has('id_type')) {
             foreach ($request->id_type as $key => $id_type) {
                 $repeated = Identifier::query()
@@ -106,9 +109,6 @@ class PatientController extends Controller
 
     public function savePatientData(Request $request)
     {
-        // dd($request);
-
-
         DB::beginTransaction();
         try {
             $newPatient = new User($request->all());

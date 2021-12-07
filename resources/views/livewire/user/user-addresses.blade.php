@@ -1,15 +1,15 @@
 <div>
-    @foreach($inputs as $key => $value)
+    @foreach($addresses as $key => $value)
     <div class="card mb-3">
         <div class="card-body">
             <h5 class="card-title">Dirección {{$key + 1}}</h5>
             <div class="form-row">
 
-                <input type="hidden" name='address_id[]' wire:model='addresses.{{$value}}.id'>
+                <input type="hidden" name='address_id[]' wire:model='addresses.{{$key}}.id'>
 
                 <fieldset class="form-group col-md-2">
                     <label for="for_address_type">Tipo *</label>
-                    <select name="address_use[]" class="form-control" wire:model='addresses.{{$value}}.address_use' required
+                    <select name="address_use[]" class="form-control" wire:model='addresses.{{$key}}.address_use' required
                         >
                         <option value=''></option>
                         <option value="home" selected>Casa</option>
@@ -34,28 +34,28 @@
                 <fieldset class="form-group col-2">
                     <label for="for_street_name">Calle *</label>
                     <input type="text" class="form-control" name="street_name[]" value="{{old('street_name.1')}}"
-                        wire:model='addresses.{{$value}}.street_name' required
-                        {{--                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}"--}}>
+                        wire:model='addresses.{{$key}}.street_name' required 
+                        >
                 </fieldset>
 
                 <fieldset class="form-group col-md-2">
                     <label for="for_line">Número</label>
                     <input type="text" class="form-control" name="line[]"
-                        wire:model='addresses.{{$value}}.line'
-                        {{--                               value="{{ substr(str_shuffle('0123456789'), 0, 4) }}"--}}>
+                        wire:model='addresses.{{$key}}.line'
+                        >
                 </fieldset>
 
                 <fieldset class="form-group col-md-2">
                     <label for="for_address_apartament">Depto</label>
                     <input type="text" class="form-control" name="address_apartment[]"
-                        wire:model='addresses.{{$value}}.address_apartment'
-                        {{--                               value="{{ substr(str_shuffle('0123456789'), 0, 2) }}"--}}>
+                        wire:model='addresses.{{$key}}.address_apartment'
+                       >
                 </fieldset>
 
                 <fieldset class="form-group col-md-4">
                     <label for="for_poblacion">Población/Villa/Condominio</label>
-                    <input type="text" class="form-control" name="suburb[]" wire:model='addresses.{{$value}}.suburb'
-                        {{--                               value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10) }}"--}}>
+                    <input type="text" class="form-control" name="suburb[]" wire:model='addresses.{{$key}}.suburb'
+                       >
                 </fieldset>
 
             </div>
@@ -64,8 +64,8 @@
 
                 <fieldset class="form-group col-md-3">
                     <label for="for_state">Región *</label>
-                    <select name="state[]" class="form-control" wire:model='addresses.{{$value}}.state'
-                        wire:change='getCommunes({{$value}})' required>
+                    <select name="state[]" class="form-control" wire:model='addresses.{{$key}}.state'
+                        wire:change='getCommunes({{$key}})' required>
                         <option value=""></option>
                         @foreach($regions as $region)
                         <option value="{{ $region->id }}">{{ $region->name }}</option>
@@ -75,7 +75,7 @@
 
                 <fieldset class="form-group col-md-3">
                     <label for="for_district">Comuna *</label>
-                    <select name="district[]" class="form-control" wire:model='addresses.{{$value}}.commune' required>
+                    <select name="district[]" class="form-control" wire:model='addresses.{{$key}}.commune' required>
                         <option value=""></option>
 
                         @if ($communes)
@@ -98,12 +98,12 @@
                 </fieldset> --}}
                 <fieldset class="form-group col-md-3">
                     <label for="for_city">Ciudad</label>
-                    <input type="text" class="form-control" name="city[]" wire:model='addresses.{{$value}}.city'
-                         {{--                               value="Iquique"--}}>
+                    <input type="text" class="form-control" name="city[]" wire:model='addresses.{{$key}}.city'
+                        >
                 </fieldset>
                 <fieldset class="form-group col-md-2">
                     <label for="for_country">País *</label>
-                    <select name="country[]" class="form-control" wire:model='addresses.{{$value}}.country' required>
+                    <select name="country[]" class="form-control" wire:model='addresses.{{$key}}.country' required>
                         <option value=""></option>
                         @foreach($countries as $country)
                         <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -113,7 +113,7 @@
                  <fieldset class=" form-group col-md-1">
                     <label for="for_id_dv">Predeterminado</label>
                     <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" value="1" {{ ( (isset($addresses[$value]) && isset($addresses[$value]["actually"]) && $addresses[$value]["actually"] == 1 )? "checked" : "" )}} name="actually[]"  >
+                        <input type="radio" class="form-check-input" value="1" {{ ( (isset($addresses[$key]) && isset($addresses[$key]["actually"]) && $addresses[$key]["actually"] == 1 )? "checked" : "" )}} name="actually[]"  >
                     </div>
 
                 </fieldset>
@@ -131,7 +131,7 @@
 
     <div class="form-row">
         <div class="col">
-            <button type="button" class="btn btn-primary" wire:click.prevent="add({{$i}})"> <i class="fa fa-plus" aria-hidden="true"></i> Agregar otra dirección</button>
+            <button type="button" class="btn btn-primary" wire:click.prevent="add()"> <i class="fa fa-plus" aria-hidden="true"></i> Agregar otra dirección</button>
         </div>
     </div>
 </div>

@@ -18,7 +18,8 @@ class ShiftMobileController extends Controller
      */
     public function index()
     {
-        return view('samu.mobile.index');
+        $shifts = Shift::all()->sortByDesc("id");
+        return view('samu.mobile.index',compact('shifts'));
     }
 
     /**

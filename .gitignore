@@ -18,3 +18,5 @@ artisan
 .tic-ssi.json
 .DS_Store
 
+/config-git-crypt.key
+docker-compose.yml

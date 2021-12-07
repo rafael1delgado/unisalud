@@ -15,8 +15,8 @@
     @livewire('absence.asign-user-inputs-form')
 
     <hr>
-    <div class="row">
-        <fieldset class="form-group col-md-4">
+    <div class="form-row">
+        <fieldset class="form-group col-12 col-md-5">
             <label for="for_type">Tipo de ausentismo</label>
             <select name="type" id="for_type" class="form-control">
               <option value="">--</option>
@@ -40,7 +40,7 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-md-2">
+        <fieldset class="form-group col-6 col-md-2">
             <label for="for_legal_quality">Calidad jurídica</label>
             <select name="legal_quality" id="for_legal_quality" class="form-control">
               <option value="">--</option>
@@ -52,7 +52,7 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-md-2">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_staff">Planta</label>
             <select name="staff" id="for_staff" class="form-control">
               <option value="">--</option>
@@ -69,53 +69,50 @@
             </select>
         </fieldset>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-2">
             <label for="for_res_number">N° Resolución</label>
             <input type="number" class="form-control" id="for_res_number" name="res_number">
         </div>
 
-        <fieldset class="form-group col-md-2">
+        <fieldset class="form-group col-6 col-md-2">
             <label for="for_res_date">Fecha Resolución</label>
             <input type="date" class="form-control" id="for_res_date" name="res_date">
         </fieldset>
-    </div>
 
-    <div class="row">
-
-        <fieldset class="form-group col-2">
-            <label for="for_start_date">Fecha inicio ausencia</label>
-            <input type="date" class="form-control" id="for_start_date" name="start_date" required >
-        </fieldset>
-
-        <fieldset class="form-group col-2">
-            <label for="for_end_date">Fecha término ausencia</label>
-            <input type="date" class="form-control" id="for_end_date" name="end_date" required >
-        </fieldset>
-
-        <fieldset class="form-group col-2">
-            <label for="for_total_days">Total días de ausentismo</label>
-            <input type="number" class="form-control" id="for_total_days" name="total_days" step=".1">
-        </fieldset>
-
-        <fieldset class="form-group col-2">
-            <label for="for_period_days">Ausentismo en el periodo</label>
-            <input type="number" class="form-control" id="for_period_days" name="period_days" step=".1">
-        </fieldset>
-
-        <fieldset class="form-group col-2">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_license_cost">Costo de licencia</label>
             <input type="number" class="form-control" id="for_license_cost" name="license_cost" step=".1">
         </fieldset>
 
-        <fieldset class="form-group col-2">
+        <fieldset class="form-group col-6 col-md-2">
+            <label for="for_start_date">Fecha inicio ausencia</label>
+            <input type="date" class="form-control" id="for_start_date" name="start_date" required >
+        </fieldset>
+
+        <fieldset class="form-group col-6 col-md-2">
+            <label for="for_end_date">Fecha término ausencia</label>
+            <input type="date" class="form-control" id="for_end_date" name="end_date" required >
+        </fieldset>
+
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_balance_days_not_replaced">Saldo días no reemplazados</label>
             <input type="number" class="form-control" id="for_balance_days_not_replaced" name="balance_days_not_replaced">
+        </fieldset>
+
+        <fieldset class="form-group col-6 col-md-3">
+            <label for="for_period_days">Ausentismo en el periodo</label>
+            <input type="number" class="form-control" id="for_period_days" name="period_days" step=".1">
+        </fieldset>
+
+        <fieldset class="form-group col-6 col-md-3">
+            <label for="for_total_days">Total días de ausentismo</label>
+            <input type="number" class="form-control" id="for_total_days" name="total_days" step=".1">
         </fieldset>
     </div>
 
     <button type="submit" class="btn btn-primary">Guardar</button>
 
-</form>
+</form><br>
 
 @endsection
 

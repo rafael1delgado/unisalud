@@ -12,10 +12,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements Auditable
 {
     use HasFactory, Notifiable, HasRoles;
+    use SoftDeletes;
+    
+    /* TODO: Revisar si es necesaro poner la ruta completa de Auditable */
     use \OwenIt\Auditing\Auditable;
 
 
@@ -143,7 +147,9 @@ class User extends Authenticatable implements Auditable
 
     public function getOfficialFullNameAttribute()
     {
+      if ($this->actualOfficialHumanName) {
         return "{$this->actualOfficialHumanName->text} {$this->actualOfficialHumanName->fathers_family} {$this->actualOfficialHumanName->mothers_family}";
+      }
     }
 
     public function getOfficialNameAttribute()
@@ -194,6 +200,27 @@ class User extends Authenticatable implements Auditable
         return $queryUser;
     }
 
+    /**
+     * Retorna Usuarios según contenido en $searchText
+     * Busqueda realizada en: nombres, apellidos, rut.
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function getUsersBySearch($searchText){
+        $queryUser = User::query();
+        $arraySearch = explode(' ', $searchText);
+        foreach($arraySearch as $word){
+            $queryUser->whereHas('humanNames',  function($q) use($word){
+                $q->where('text', 'LIKE', '%' . $word . '%')
+                    ->orwhere('fathers_family', 'LIKE', '%' . $word . '%')
+                    ->orwhere('mothers_family', 'LIKE', '%' . $word . '%');
+            })
+            ->orwhereHas('identifiers', function ($q) use ($word) {
+                $q->where('value', 'LIKE', '%' . $word . '%');
+            });
+        }
+        return $queryUser;
+    }
+
     public static function getUsersByIdentifier($searchText)
     {
         return User::whereHas('identifiers', function($query) use($searchText) {
@@ -232,6 +259,15 @@ class User extends Authenticatable implements Auditable
         }else
             return '';
 
+    }
+
+    function getSexEspAttribute(){
+        switch($this->sex) {
+            case 'male': return 'Masculino'; break;
+            case 'female': return 'Femenino'; break;
+            case 'other': return 'Otro'; break;
+            case 'unknown': return 'Desconocido'; break;
+        }
     }
 
     //Scopes

@@ -10,18 +10,18 @@ use Livewire\Component;
 
 class PertinenceModal extends Component
 {
-    public $sic;
+    public $externalIncomingSic;
     public $diagnosticHypothesis;
-    public $observation;
+    public $originObservation;
     public $action;
-    public $motive;
+    public $rejectedObservation;
 
     protected $listeners = ['open' => 'loadPertinence'];
 
     public function loadPertinence($sicId)
     {
-//        \Debugbar::info($sicId);
-        $this->sic = ExternalIncomingSic::find($sicId);
+        //        \Debugbar::info($sicId);
+        $this->externalIncomingSic = ExternalIncomingSic::find($sicId);
         $this->emit('togglePertinenceModal');
     }
 
@@ -30,23 +30,46 @@ class PertinenceModal extends Component
      */
     public function pertinence()
     {
-      DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             if ($this->action == 'pertinent') {
-                $newSic = $this->sic->replicate([
-                    'sic_status_id'
-                ]);
-                $newSic->sic_status_id = 2; //Pertinente
 
+                $newSic = $this->externalIncomingSic->replicate([
+                    'status_id',
+                    'diagnosis_hypothesis_destination',
+                    'origin_observation'
+                ]);
+                $newSic->status_id = 2; //Pertinente
+                $newSic->diagnosis_hypothesis_destination = $this->diagnosticHypothesis;
+                $newSic->origin_observation = $this->originObservation;
                 $newSic = $newSic->toArray();
                 Sic::Create($newSic);
 
-                $this->sic->forceDelete();
+                $this->externalIncomingSic->forceDelete();
                 $this->closeModal();
+            } elseif ($this->action == 'nonPertinent') {
+                $this->validate([
+                    'rejectedObservation' => 'required'
+                ], [
+                    'rejectedObservation.required' => 'Debe ingresar un motivo.'
+                ]);
 
+                $newSic = $this->externalIncomingSic->replicate([
+                    'status_id',
+                    'rejected_observation'
+                ]);
+                $newSic->status_id = 5; //Rechazada
+                $newSic->rejected_observation = $this->rejectedObservation;
+                $newSic = $newSic->toArray();
+                Sic::Create($newSic);
+
+                $this->externalIncomingSic->forceDelete();
+
+                $this->closeModal();
             }
             DB::commit();
+            $this->emit('refreshSicsList');
         } catch (Exception $e) {
             DB::rollBack();
             throw $e;

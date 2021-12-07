@@ -8,8 +8,8 @@
     @csrf
     @method('POST')
 
-    <div class="row">
-    <fieldset class="form-group col">
+    <div class="form-row">
+        <fieldset class="form-group col-6 col-md-3">
         <label for="for_status">Estado</label>
         <select id="for_status" name="status" class="form-control" required>
                 <option></option>
@@ -19,24 +19,23 @@
             </select> 
         </fieldset>           
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-5">
             <label for="for_name">Nombre Locación</label>
             <input type="text" class="form-control" id="for_description" placeholder="" name="name" required>
         </fieldset>           
 
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-4">
             <label for="for_alias">Alias</label>
             <input type="text" class="form-control" id="for_description" placeholder="" name="alias" required>
-        </fieldset>           
+        </fieldset>
+    <div class="form-row">
     </div>
-
-    <div class="row">
-        <fieldset class="form-group col col-md-4">
+        <fieldset class="form-group col-6 col-md-6">
         <label for="for_description">Descripción</label>
             <input type="text" class="form-control" id="for_description" placeholder="" name="description" required>
         </fieldset>
 
-        <fieldset class="form-group col-md-3">
+        <fieldset class="form-group col-12 col-md-6">
             <label for="for_cod_con_organization_id">Organizacion</label>
             <select name="organization_id" id="for_cod_con_organization_id" class="form-control" required>
             <option value=""></option>

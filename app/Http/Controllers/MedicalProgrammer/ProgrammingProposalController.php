@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
+use App\Models\MedicalProgrammer\Specialty;
 use App\Models\MedicalProgrammer\ProgrammingProposal;
 use App\Models\MedicalProgrammer\ProgrammingProposalDetail;
 use App\Models\MedicalProgrammer\ProgrammingProposalSignatureFlow;
@@ -21,19 +22,78 @@ class ProgrammingProposalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+      $type = $request->get('type');
+      $specialty_id = $request->get('specialty_id');
+      $profesion_id = $request->get('profesion_id');
+      $user_id = $request->get('user_id');
+
       if (Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de CAE Médico') ||
           Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica')) {
-        $programmingProposals = ProgrammingProposal::whereNotNull('specialty_id')->orderBy('id','DESC')->get();
+        $programmingProposals = ProgrammingProposal::whereNotNull('specialty_id')
+                                                   ->when($type != null, function ($q) use ($type) {
+                                                      return $q->when($type == "Médico", function ($q) {
+                                                         return $q->whereNull('profession_id');
+                                                      })->when($type == "No médico", function ($q) {
+                                                         return $q->whereNull('specialty_id');
+                                                      });
+                                                   })
+                                                   ->when($specialty_id != null, function ($q) use ($specialty_id) {
+                                                      return $q->where('specialty_id',$specialty_id);
+                                                   })
+                                                   ->when($profesion_id != null, function ($q) use ($profesion_id) {
+                                                      return $q->where('profesion_id',$profesion_id);
+                                                   })
+                                                   ->when($user_id != null, function ($q) use ($user_id) {
+                                                      return $q->where('user_id',$user_id);
+                                                   })
+                                                   ->orderBy('id','DESC')
+                                                   ->get();
       }elseif (Auth::user()->hasPermissionTo('Mp: Proposal - Jefe de CAE No médico') ||
                Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección DGCP')) {
-        $programmingProposals = ProgrammingProposal::whereNotNull('profession_id')->orderBy('id','DESC')->get();
+        $programmingProposals = ProgrammingProposal::whereNotNull('profession_id')
+                                                    ->when($type != null, function ($q) use ($type) {
+                                                       return $q->when($type == "Médico", function ($q) {
+                                                          return $q->whereNull('profession_id');
+                                                       })->when($type == "No médico", function ($q) {
+                                                          return $q->whereNull('specialty_id');
+                                                       });
+                                                    })
+                                                    ->when($specialty_id != null, function ($q) use ($specialty_id) {
+                                                       return $q->where('specialty_id',$specialty_id);
+                                                    })
+                                                    ->when($profesion_id != null, function ($q) use ($profesion_id) {
+                                                       return $q->where('profesion_id',$profesion_id);
+                                                    })
+                                                    ->when($user_id != null, function ($q) use ($user_id) {
+                                                       return $q->where('user_id',$user_id);
+                                                    })
+                                                    ->orderBy('id','DESC')
+                                                    ->get();
       }else{
-        $programmingProposals = ProgrammingProposal::orderBy('id','DESC')->get();
+        $programmingProposals = ProgrammingProposal::orderBy('id','DESC')
+                                                    ->when($type != null, function ($q) use ($type) {
+                                                       return $q->when($type == "Médico", function ($q) {
+                                                          return $q->whereNull('profession_id');
+                                                       })->when($type == "No médico", function ($q) {
+                                                          return $q->whereNull('specialty_id');
+                                                       });
+                                                    })
+                                                    ->when($specialty_id != null, function ($q) use ($specialty_id) {
+                                                       return $q->where('specialty_id',$specialty_id);
+                                                    })
+                                                    ->when($profesion_id != null, function ($q) use ($profesion_id) {
+                                                       return $q->where('profesion_id',$profesion_id);
+                                                    })
+                                                    ->when($user_id != null, function ($q) use ($user_id) {
+                                                       return $q->where('user_id',$user_id);
+                                                    })
+                                                    ->get();
       }
 
-      return view('medical_programmer.programming_proposals.index',compact('programmingProposals'));
+      return view('medical_programmer.programming_proposals.index',compact('request','programmingProposals'));
     }
 
     /**
@@ -222,7 +282,31 @@ class ProgrammingProposalController extends Controller
          }
        }
 
-        return view('medical_programmer.programming_proposals.edit', compact('programmingProposal','last_programmed_days','programmed_days','total_hours'));
+       //otras propuestas de la persona
+       $other_contracts_info = [];
+       foreach ($programmingProposal->user->programmingProposals->where('status','!=','Rechazado')->where('id','!=',$programmingProposal->id) as $key => $programmingProposal_) {
+         if ($programmingProposal_ != null) {
+           $start_date = $programmingProposal_->start_date;
+           $end_date = $programmingProposal_->end_date;
+           $count = 0;
+
+           while ($start_date <= $end_date) {
+             $dayOfWeek = $start_date->dayOfWeek;
+
+             foreach ($programmingProposal_->details->where('day',$dayOfWeek) as $key => $detail) {
+               $other_contracts_info[$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
+               $other_contracts_info[$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
+               $other_contracts_info[$count]['data'] = $detail;
+               $count+=1;
+             }
+             $start_date->addDays(1);
+           }
+         }
+       }
+       // dd($other_contracts_info);
+
+        return view('medical_programmer.programming_proposals.edit', compact('programmingProposal','last_programmed_days',
+                                                                             'programmed_days','total_hours','other_contracts_info'));
     }
 
     /**

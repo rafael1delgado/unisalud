@@ -1,6 +1,6 @@
 <div>
     <div class="row mt-3">
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm table-bordered table-responsive-xl">
             <thead>
             <tr>
                 <th>Nombre</th>
@@ -8,7 +8,6 @@
                 <th>Especialidad</th>
                 <th>Diagnóstico</th>
                 <th>N° Interconsulta</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
