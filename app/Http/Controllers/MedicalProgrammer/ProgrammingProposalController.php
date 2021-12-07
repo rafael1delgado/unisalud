@@ -283,8 +283,8 @@ class ProgrammingProposalController extends Controller
        }
 
        //otras propuestas de la persona
+       $other_contracts_info = [];
        foreach ($programmingProposal->user->programmingProposals->where('status','!=','Rechazado')->where('id','!=',$programmingProposal->id) as $key => $programmingProposal_) {
-         $other_contracts_info = [];
          if ($programmingProposal_ != null) {
            $start_date = $programmingProposal_->start_date;
            $end_date = $programmingProposal_->end_date;
