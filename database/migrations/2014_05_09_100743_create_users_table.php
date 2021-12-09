@@ -17,10 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->boolean('active');
-            $table->enum('sex', ['female', 'male', 'other', 'unknown',
-            ])->nullable();
-            $table->enum('gender', ['female', 'male', 'non-binary', 'transgender-male', 'transgender-female', 'other', 'non-disclose'
-            ])->nullable();
+            $table->enum('sex', ['female', 'male', 'other', 'unknown'])->nullable();
+            $table->enum('gender', ['female', 'male', 'non-binary', 'transgender-male', 'transgender-female', 'other', 'non-disclose'])->nullable();
             $table->date('birthday')->nullable();
             $table->datetime('deceased_datetime')->nullable();
             $table->foreignId('cod_con_marital_id')->nullable(); /** marriage  */
@@ -28,9 +26,6 @@ class CreateUsersTable extends Migration
             $table->foreignId('nationality_id')->nullable();
             $table->string('team')->nullable();
 
-
-
-          /**  $table->timestamp('email_verified_at')->nullable(); */
            /** Este campo viene por defecto en laravel */
             $table->string('password')->nullable();
 

@@ -35,9 +35,9 @@
                 <div class="form-row">
                     <fieldset class="form-group col-md-5">
                         <label for="for_name">Nombres</label>
-                        <input type="text" class="form-control" name="text"
+                        <input type="text" class="form-control" name="given"
                                id="for_name" required
-                               value="{{ $patient->actualOfficialHumanName->text }}">
+                               value="{{ $patient->actualOfficialHumanName->given }}">
                     </fieldset>
 
                     <fieldset class="form-group col-md-3">

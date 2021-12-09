@@ -6,27 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 class AddDescriptionActivities extends Migration
 {
-  /**
-   * Run the migrations.
-   *
-   * @return void
-   */
-  public function up()
-  {
-      Schema::table('mp_activities', function (Blueprint $table) {
-          $table->LONGTEXT('description')->after('activity_name')->nullable();
-      });
-  }
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('mp_activities', function (Blueprint $table) {
+            $table->LONGTEXT('description')->after('activity_name')->nullable();
+        });
+    }
 
-  /**
-   * Reverse the migrations.
-   *
-   * @return void
-   */
-  public function down()
-  {
-      Schema::table('mp_activities', function (Blueprint $table) {
-          $table->dropColumn('description');
-      });
-  }
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('mp_activities', function (Blueprint $table) {
+            $table->dropColumn('description');
+        });
+    }
 }

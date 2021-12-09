@@ -54,7 +54,7 @@ class MobileCrew extends Component
 
     public function getUsers()
     {
-        $users = User::Permission('SAMU')->get();
+        $users = User::Permission('SAMU')->with('humanNames')->get();
         foreach($users as $user) 
         {
             $arrayUsers[$user->id] = $user->OfficialFullName;
