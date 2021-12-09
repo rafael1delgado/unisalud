@@ -1,6 +1,6 @@
 <div class="form-row">
 
-    <fieldset class="form-group col-md-2">
+    <fieldset class="form-group col-md-3">
         <label for="for_key">Clave*</label>
         <select class="form-control" name="key_id" required>
             <option value=""></option>
@@ -10,7 +10,7 @@
         </select>
     </fieldset>
 
-    <fieldset class="form-group col-md-2">
+    <fieldset class="form-group col-md-3">
         <label for="for_return">Clave de retorno</label>
         <select class="form-control" name="return_key_id">
             <option value=""></option>
@@ -20,8 +20,16 @@
         </select>
     </fieldset>
                                 
-    <fieldset class="form-group col-md-2">                        
-        <!--revisar foreach-->
+   
+    <fieldset class="form-group col-md-6">
+        <label for="for_observation">Observación</label>
+        <input type="text" class="form-control" name="observation" value="{{ ( $qtc &&  $qtc->observation)? $qtc->observation : '' }}">
+    </fieldset>
+</div>
+
+<div class="form-row">
+
+    <fieldset class="form-group col-md-3">
         <label for="for_mobile">Móvil</label>
         <select class="form-control" name="mobile_id">
             <option value=""></option>
@@ -38,9 +46,9 @@
         </select>
     </fieldset>
 
-    <fieldset class="form-group col-md-6">
-        <label for="for_observation">Observación</label>
-        <input type="text" class="form-control" name="observation" value="{{ ( $qtc &&  $qtc->observation)? $qtc->observation : '' }}">
+    <fieldset class="form-group col-md-9">
+        <label for="for_external_crew">Tripulación externa (si el móvil no pertenece a SAMU)</label>
+        <input type="text" class="form-control" name="external_crew" value="{{ ( $qtc &&  $qtc->external_crew)? $qtc->external_crew : '' }}">
     </fieldset>
 
 </div>

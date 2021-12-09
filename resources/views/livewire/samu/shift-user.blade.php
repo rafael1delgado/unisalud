@@ -41,7 +41,7 @@
     </div>
     <div class="col-1">
         @if($su->shift->status == true)
-        <button class="btn btn-danger mx-2" wire:click="delete({{ $su }})"><i class="fas fa-trash"></i></button>
+        <button class="btn btn-danger btn-sm mx-2" wire:click="delete({{ $su }})"><i class="fas fa-trash"></i></button>
         @endif
     </div>
 </div>
