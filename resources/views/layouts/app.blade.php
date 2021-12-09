@@ -32,7 +32,7 @@
             integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
             crossorigin="anonymous">
 
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 
         <!-- Bootstrap CSS -->
         <!--link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"-->
@@ -41,14 +41,14 @@
         <link href="{{ asset('css/ssi.css') }}" rel="stylesheet">
 
         <!-- Favicons -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
+        <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+        <link rel="manifest" href="/icon/site.webmanifest">
         @production
-        <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/icon/favicon.ico">
         @else
-        <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon-local.ico">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/icon/favicon-local.ico">
         @endproduction
 
         <!-- programador -->
@@ -59,7 +59,7 @@
     <body>
 
     @livewireScripts
-    <nav class="navbar navbar-dark sticky-top bg-ssi flex-md-nowrap p-0 shadow ssi-azul">
+    <nav class="navbar navbar-dark sticky-top bg-ssi flex-md-nowrap p-0 mb-3 shadow ssi-azul">
             <a class="navbar-ssi @production ssi-rojo @else ssi-morado @endproduction col-md-3 col-lg-2 mr-0 px-3" href="{{ route('home') }}">Servicio de Salud</a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -80,9 +80,10 @@
                     </div>
                 </nav>
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
                     @include('layouts.partials.errors')
                     @include('layouts.partials.flash_message')
-                    <hr>
+                    
                     @yield('content') @if( isset($slot) ) {{ $slot }} @endif
                 </main>
             </div>

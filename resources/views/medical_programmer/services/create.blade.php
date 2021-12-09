@@ -8,7 +8,7 @@
     @csrf
     @method('POST')
 
-    <div class="row">
+    <div class="form-row">
 
         <fieldset class="form-group col">
             <label for="for_service_code">Código de Servicio</label>

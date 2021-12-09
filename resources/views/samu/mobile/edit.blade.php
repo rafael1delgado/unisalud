@@ -2,133 +2,49 @@
 
 @section('content')
 
-<style>
- .button1{
-     margin-top:30px;
-     }
-</style>
+@include('samu.nav')
 
-<div class="card mb-3">
-    <div class="card-body">
-   
+<h3 class="mb-3"><i class="fas fa-ambulance"></i> Editar Móvil</h3>
 
-            <div class="col-md-6">
-                <h3 class="mb-3"><i class="fas fa-plus"></i> Editar Movil</h3>
-            </div>
-            <hr>
-            <div class="form-row">
+<form action="{{route('samu.mobile.update', $mobile)}}" method="POST" autocomplete="off">
+    @csrf
+    @method('PUT')
+
+    <div class="form-row">
+
+        <fieldset class="form-group col-8 col-md-4">
+            <label for="for_mobile_code">Código </label>
+            <input type="text" class="form-control" id="for_mobile_code" name="code" value="{{ $mobile->code }}">
+        </fieldset>
+
+        <fieldset class="form-group col-8 col-md-4">
+            <label for="for_name_mobile_code">Nombre </label>
+            <input type="text" class="form-control" id="for_name_mobile_code" name="name" value="{{ $mobile->name}}">
+        </fieldset>
+        <fieldset class="form-group col-8 col-md-4">
+            <label for="for_name_mobile_plate">Patente </label>
+            <input type="text" class="form-control" id="for_name_mobile_plate" name="plate" value="{{ $mobile->plate}}" required>
+        </fieldset>
+        <fieldset class="form-group col-8 col-md-4">
+            <label for="for_name_mobile_type">Tipo </label>
+            <input type="text" class="form-control" id="for_name_mobile_type" name="type" value="{{ $mobile->type}}" required>
+        </fieldset>
+        <fieldset class="form-group col-8 col-md-4">
+            <label for="for_name_mobile_type">Descripción</label>
+            <input type="text" class="form-control" id="for_name_mobile_description" name="description" value="{{ $mobile->description}}" required>
+        </fieldset>
+        <fieldset class="mt-5 form-check col-md-4">
+            <input type="checkbox" class="form-check-input ml-3" name="managed" {{ ($mobile->managed) ? 'checked':''}} >
+            <label class="form-check-label ml-5" for="exampleCheck1">Móvil Pertenece a Samu</label>
+        </fieldset>
         
-                <fieldset class="form-group col-8 col-md-2">
-                    <label for="for_run">Número de Amb </label>
-                    <input type="hidden" class="form-control" id="for_id" name="id" value="">
-                    <input type="number" max="50000000" class="form-control" id="for_run" name="run" value="2">
-                </fieldset>
+    </div>
 
-                <fieldset class="form-group col-12 col-md-4">
-                    <label for="empresa">Tipo</label>
-                    <select class="form-control" name="region_id" id="regiones">
-                        <option>Movil 2</option>
-                                    <option value="1" >Movil 1</option>
-                                    <option value="2" >Movil  2</option>
-                                    <option value="3" >Movil  3</option>
-                                    <option value="4" >Movil  4</option>
-                                    <option value="5" >Movil  5</option>
-                                    <option value="3" >Movil  6</option>
-                                    <option value="4" >Movil  7</option>
-                                    <option value="5" >Movil  8</option>
-                                    <option value="1" >Movil 9</option>
-                                    <option value="2" >Movil  10</option>
-                                    <option value="3" >Movil  11</option>
-                                    <option value="4" >Movil  12</option>
-                                    <option value="5" >Movil  13</option>
-                                    <option value="3" >Movil  14</option>
-                                    <option value="4" >Movil  15</option>
-                                    <option value="5" >Movil  16</option>
-                                </select>
-                </fieldset>
-                
-                <fieldset class="form-group col-12 col-md-2">
-                    <label for="empresa">Estado</label>
-                    <select class="form-control" name="region_id" id="regiones">
-                        <option>Activo</option>
-                                    <option value="1" >Activo</option>
-                                    <option value="2" >Inactivo</option>
-                                </select>
-                </fieldset>
+    <button type="submit" class="btn btn-primary">Guardar</button>
 
-                <fieldset class="form-group col-12 col-md-4">
-                    <label for="empresa">Detalle</label>
-                    <input type="hidden" class="form-control" id="for_id" name="id" value="">
-                    <input type="text"  class="form-control" id="for_run" name="run" value="Sin detalle">
-                </fieldset>
+    <a href="{{ route('samu.mobile.index') }}" class="btn btn-outline-secondary">Cancelar</a>
 
-            </div>
-
-
-            <hr>
-
-            <div class="form-row">
-
-                <fieldset class="form-group col-12 col-md-2 ">
-                
-                <button type="submit" class="btn btn-primary button" >Guardar</button>
-     
-                </fieldset>
-            </div>
-            <div class="card mb-3">
-    <div class="card-body">
-   
-
-            <div class="col-md-6">
-                <h3 class="mb-3"><i class="fas fa-users"></i> Editar Tripulación</h3>
-            </div>
-            <hr>
-            <div class="form-row">
-        
-                <fieldset class="form-group col-8 col-md-3">
-                    <label for="for_run">Conductor </label>
-                    <input type="hidden" class="form-control" id="for_id" name="id" value="">
-                    <input type="Text" max="50000000" class="form-control" id="for_run" name="run" value="Mario Cortez">
-                </fieldset>
-
-                <fieldset class="form-group col-8 col-md-3">
-                    <label for="for_run">Paramedico </label>
-                    <input type="hidden" class="form-control" id="for_id" name="id" value="">
-                    <input type="Text" max="50000000" class="form-control" id="for_run" name="run" value="Sofia Valencia">
-                </fieldset>
-                <fieldset class="form-group col-8 col-md-3">
-                    <label for="for_run">Reanimador </label>
-                    <input type="hidden" class="form-control" id="for_id" name="id" value="">
-                    <input type="Text" max="50000000" class="form-control" id="for_run" name="run" value="Carlos Fuentes">
-                </fieldset>
-                <fieldset class="form-group col-8 col-md-3">
-                    <label for="for_run">Observación</label>
-                    <input type="hidden" class="form-control" id="for_id" name="id" value="">
-                    <input type="Text" max="50000000" class="form-control" id="for_run" name="run" value="Dra Marta Sanchez acompaña a emergencia">
-                </fieldset>
-
-              
-            </div>
-
-
-            <hr>
-
-            <div class="form-row">
-
-                <fieldset class="form-group col-12 col-md-2 ">
-                
-                <button type="submit" class="btn btn-primary button" >Guardar</button>
-     
-                </fieldset>
-            </div>
-
-            
-        </div>
-     </div>
-    
-            
-        </div>
-        </div>
+</form>
     
 
 

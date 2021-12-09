@@ -1,21 +1,21 @@
 <div>
     <form wire:submit.prevent="search">
         <div class="form-row pb-2">
-            <div class="col-2">
+            <div class="col-6 col-md-6">
                 <input type="text" class="form-control" placeholder="Autenticación sin digito verificador" wire:model.lazy="searchByIdentifier" autocomplete="off">
             </div>
-            <div class="col-2">
+            <div class="col-6 col-md-6 mb-2">
                 <input type="text" class="form-control" placeholder="Nombre y/o apellido" wire:model.lazy="searchByHumanName" autocomplete="off">
             </div>
-            <div class="col-2">
+            <div class="col-6 col-md-6">
                 <input type="text" class="form-control" placeholder="Domicilio" wire:model.lazy="searchByAddress" autocomplete="off">
             </div>
-            <div class="col-2">
+            <div class="col-6 col-md-6 mb-2">
                 <input type="text" class="form-control" placeholder="Teléfono, celular o e-mail" wire:model.lazy="searchByContactPoint" autocomplete="off">
             </div>
-            <div class="col-2">
-                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> Buscar</button>
-                <button type="button" class="btn btn-secondary mb-2" wire:click="clean">Limpiar</button>
+            <div class="col-12 col-md-12">
+                <button type="button" class="btn btn-secondary mb-2 float-left" wire:click="clean">Limpiar</button>
+                <button type="submit" class="btn btn-primary mb-2 float-right"><i class="fa fa-search"></i> Buscar</button>
             </div>
         </div>
     </form>
@@ -25,13 +25,17 @@
             <thead class="table-info">
                 <tr>
                     <th scope="col">Nombre:</th>
-                    <th scope="col">Indentificación</th>
+                    <th scope="col">Identificación</th>
                     <th scope="col">Edad</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Dirección</th>
                     <th scope="col">Teléfono</th>
                     <th scope="col">Correo</th>
                     <th scope="col">Selec.</th>
+                    @can('Epi: Create')
+                    <th scope="col">Añadir Caso Sospecha</th>
+                    @endcan
+                    
             </thead>
             <tbody>
                 @if($patients)
@@ -45,6 +49,11 @@
                         <td>{{($patient) ? $patient->officialPhone : ''}}</td>
                         <td>{{($patient && $patient->officialEmail) ? $patient->officialEmail : ''}}</td>
                         <td><a class="btn-primary btn-sm" href="{{ route('patient.edit',$patient->id)}}"> <i class="fas fa-check"></i> </a></td>
+                        @can('Epi: Create')
+                        <td>
+                            <a href="{{ route('epi.chagas.create',$patient) }}"><i class="fas fa-viruses"></i></a>
+                        </td>
+                        @endcan
                     </tr>
                     @empty
                         <tr><th scope="row" colspan="8" class="text-center">No hay coincidencias con la búsqueda <a class="btn-primary btn-sm" href="{{ route('patient.create')}}"> Ingresar uno nuevo</a></td></th>

@@ -1,8 +1,8 @@
 <div>
 {{--    @include('layouts.partials.flash_message')--}}
-    <div class="form-row mt-3">
+    <div class="form-row mt-1">
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-6 col-md-3">
             <label for="for_type">Tipo</label>
             <select id="for_type" name="type" class="form-control"
                     wire:model.lazy="typeFrom" required
@@ -13,7 +13,7 @@
             </select>
         </div>
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-6 col-md-3">
             @if($specialtiesFrom != null)
                 <label for="for_specialty_id">Especialidad</label>
                 <select id="for_specialty_id" name="specialty_id" class="form-control"
@@ -49,7 +49,7 @@
 
         </div>
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-6 col-md-3">
             <label for="for_practitioner_id">Funcionario</label>
             <select id="for_practitioner_id" name="practitioner_id" class="form-control"
                     wire:model.lazy="selectedPractitionerIdFrom" required>
@@ -66,14 +66,15 @@
             @enderror
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-4 col-md-2">
             <label for="inputEmail4">Fecha </label>
             <input type="date" class="form-control" id="inputEmail4" placeholder="Ingrese Fecha"
                    wire:model.lazy="selectedDateFrom">
         </div>
-        <div class="form-group col-md-1">
+        <div class="form-group col-2 col-md-1">
             <label for="inputEmail4">&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" wire:click="getAppointmentsFrom()"> <i class="fa fa-search"></i> Buscar
+            <button type="button" class="btn btn-primary form-control" wire:click="getAppointmentsFrom()">
+                <i class="fa fa-search"></i> Buscar
             </button>
         </div>
 
@@ -140,17 +141,14 @@
 
 <!--fin tabla doctor-->
     <div class="form-row">
-
-        <div class="form-group col-md-10">
-        </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-12 col-md-2">
             <button type="button" class="btn btn-danger form-control" wire:click="suspend()"> <i class="fas fa-pause"></i> SUSPENDER</button>
         </div>
     </div>
 
     <div class="form-row">
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-6 col-md-3">
             <label for="for_type_to">Tipo</label>
             <select id="for_type_to" name="type_to" class="form-control" wire:model.lazy="typeTo" required
                     wire:change="getPractitionersTo()">
@@ -160,7 +158,7 @@
             </select>
         </div>
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-6 col-md-3">
             @if($specialtiesTo != null)
                 <label for="for_specialty_id_to">Especialidad</label>
                 <select id="for_specialty_id_to" name="specialty_id_to" class="form-control"
@@ -197,7 +195,7 @@
             @endif
         </div>
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-6 col-md-3">
             <label for="for_practitioner_id_to">Funcionario</label>
             <select id="for_practitioner_id_to" name="practitioner_id_to" class="form-control"
                     wire:model.lazy="selectedPractitionerIdTo" required>
@@ -214,11 +212,11 @@
             @enderror
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-4 col-md-2">
             <label for="inputEmail4">Fecha </label>
             <input type="date" class="form-control" id="inputEmail4" placeholder="Ingrese Fecha">
         </div>
-        <div class="form-group col-md-1">
+        <div class="form-group col-2 col-md-1">
             <label for="inputEmail4">&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" wire:click="getAppointmentsTo()"> <i class="fa fa-search"></i> Buscar</button>
         </div>
@@ -234,15 +232,11 @@
     <!--anterior,siguiente,traspasar-->
     <div class="form-row">
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-2">
             <button type="button" class="btn btn-outline-primary">ANTERIOR <<</button>
-
-            </select>
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-6 col-md-2">
             <button type="button" class="btn btn-outline-primary">SIGUIENTE >></button>
-        </div>
-        <div class="form-group col-md-6">
         </div>
         <div class="form-group col-md-2">
             <button type="button" class="btn btn-primary form-control" wire:click="reallocate()"> <i class="fas fa-angle-double-down"></i>  TRASPASAR</button>
@@ -262,7 +256,7 @@
     <span class="text-danger">{{ $message }}</span>
     @enderror
 <!--tabla agenda-->
-    <div class="table-responsive">
+    <div class="table-responsive mb-5">
         <table class="table table-sm table-hover">
             <thead class="table-info">
             <tr>

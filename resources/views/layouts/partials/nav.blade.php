@@ -1,7 +1,6 @@
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Mi información</span>
-    <a class="d-flex align-items-center text-muted" data-bs-toggle="collapse" aria-expanded="false"
-        aria-label="Mi información" href="#my-info" aria-controls="my-info">
+    <a class="d-flex align-items-center text-muted" data-bs-toggle="collapse" aria-expanded="false" aria-label="Mi información" href="#my-info" aria-controls="my-info">
         <span id="icon_my-info" data-feather="plus-circle"></span>
     </a>
 </h6>
@@ -26,8 +25,7 @@
 @canany(['Developer', 'Administrator', 'Mp: user creator'])
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Pacientes</span>
-    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
-        aria-label="Pacientes" href="#patients" aria-controls="patients">
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="Pacientes" href="#patients" aria-controls="patients">
         <span id="icon_patients" data-feather="plus-circle"></span>
     </a>
 </h6>
@@ -73,8 +71,7 @@
 @can('Some: user')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>SOME</span>
-    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
-        aria-label="SOME" href="#some" aria-controls="some">
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="SOME" href="#some" aria-controls="some">
         <span id="icon_some" data-feather="plus-circle"></span>
     </a>
 </h6>
@@ -93,6 +90,9 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('some.reallocationPending') }}"><span data-feather="list"></span>Pendiente de reasignación</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('some.interconsultation') }}"><span data-feather="briefcase"></span>Interconsultas</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('some.appointedAvailable') }}"><span data-feather="list"></span>Citado/Disponible</a>
@@ -121,8 +121,7 @@
 @can('Administrator')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Administrador</span>
-    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
-        aria-label="Administrador" href="#administrador" aria-controls="administrador">
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="Administrador" href="#administrador" aria-controls="administrador">
         <span id="icon_administrador" data-feather="plus-circle"></span>
     </a>
 </h6>
@@ -148,8 +147,7 @@
 @canany(['Mp: user'])
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Programador médico</span>
-    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
-        aria-label="Programador" href="#programmer" aria-controls="programmer">
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="Programador" href="#programmer" aria-controls="programmer">
         <span id="icon_programmer" data-feather="plus-circle"></span>
     </a>
 </h6>
@@ -209,8 +207,8 @@
 </ul>
 @endcanany
 
-    <!-- programador teorico -->
-    <!-- @canany(['Mp: programacion teorica'])
+<!-- programador teorico -->
+<!-- @canany(['Mp: programacion teorica'])
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.theoretical_programming.index') }}">
         <span data-feather="chevrons-right"></span>
@@ -238,8 +236,8 @@
     </ul>
     @endcanany -->
 
-    <!-- programador real -->
-    <!-- <li class="nav-item">
+<!-- programador real -->
+<!-- <li class="nav-item">
         <a class="nav-link">
         <span data-feather="chevrons-right"></span>
         Programador Real<span class="sr-only">(current)</span>
@@ -261,23 +259,32 @@
     </ul> -->
 
 
- <!-- mantenedores -->
- @canany(['Mp: mantenedores'])
+<!-- mantenedores -->
+@canany(['Mp: mantenedores'])
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Mantenedores</span>
-    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
-        aria-label="Mantenedores del programador" href="#mp_settings" aria-controls="mp_settings">
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="Mantenedores del programador" href="#mp_settings" aria-controls="mp_settings">
         <span id="icon_mp_settings" data-feather="plus-circle"></span>
     </a>
 </h6>
 
 <ul class="nav flex-column collapse collapse-menu" id="mp_settings">
-    <!--<li class="nav-item">
-    <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
-    <span data-feather="chevrons-right"></span>
-    RRHH
-    </a>
-    </li> -->
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('parameter.organization.index') }}">
+            <span data-feather="chevrons-right"></span>
+            Organizaciones
+        </a>
+    </li>
+
+
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('medical_programmer.rrhh.index') }}" href="{{ route('medical_programmer.rrhh.index') }}">
+            <span data-feather="chevrons-right"></span>
+            RRHH
+        </a>
+    </li>
 
     <li class="nav-item">
         <a class="nav-link {{ active('medical_programmer.contracts.index') }}" href="{{ route('medical_programmer.contracts.index') }}">
@@ -367,24 +374,26 @@
 @can('Administrator')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Epidemiología</span>
-    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
-        aria-label="Epidemiología" href="#epidemiology" aria-controls="epidemiology">
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="Epidemiología" href="#epidemiology" aria-controls="epidemiology">
         <span id="icon_epidemiology" data-feather="plus-circle"></span>
     </a>
 </h6>
 <ul class="nav flex-column collapse collapse-menu" id="epidemiology">
     <li class="nav-item">
-        <a class="nav-link {{ active('epi.chagas.create') }}" href="{{ route('epi.chagas.create') }}">
+        <a class="nav-link" href="#">
+            <span data-feather="chevrons-right"></span>
+            Laboratorios<span class="sr-only"></span>
+        </a>
+    </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('patient.index') }}" href="{{ route('patient.index') }}">
             <span data-feather="chevrons-right"></span>
             Solicitud Examen Chagas<span class="sr-only">(en desarrollo)</span>
         </a>
     </li>
-    <!-- <li class="nav-item">
-    <a class="nav-link {{ active('epi.chagas.edit') }}" href="{{ route('epi.chagas.edit') }}">
-    <span data-feather="chevrons-right"></span>
-    Añadir datos adicionales<span class="sr-only">(en desarrollo)</span>
-    </a>
-</li> -->
+    
     <li class="nav-item">
         <a class="nav-link {{ active('epi.chagas.index') }}" href="{{ route('epi.chagas.index') }}">
             <span data-feather="chevrons-right"></span>
@@ -400,28 +409,27 @@
 @can('Administrator')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Ausentismos</span>
-    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false"
-        aria-label="Ausentismos" href="#absences" aria-controls="absences">
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="Ausentismos" href="#absences" aria-controls="absences">
         <span id="icon_absences" data-feather="plus-circle"></span>
     </a>
 </h6>
 <ul class="nav flex-column collapse collapse-menu" id="absences">
     <li class="nav-item">
         <a class="nav-link {{ active('absences.index') }}" href="{{ route('absences.index') }}">
-        <span data-feather="chevrons-right"></span>
-        Listar ausentismos<span class="sr-only"></span>
+            <span data-feather="chevrons-right"></span>
+            Listar ausentismos<span class="sr-only"></span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link {{ active('absences.create') }}" href="{{ route('absences.create') }}">
-        <span data-feather="chevrons-right"></span>
-        Registrar nueva ausencia<span class="sr-only"></span>
+            <span data-feather="chevrons-right"></span>
+            Registrar nueva ausencia<span class="sr-only"></span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link {{ active('absences.load') }}" href="{{ route('absences.load') }}">
-        <span data-feather="chevrons-right"></span>
-        Importar ausencias<span class="sr-only"></span>
+            <span data-feather="chevrons-right"></span>
+            Importar ausencias<span class="sr-only"></span>
         </a>
     </li>
 </ul>
@@ -433,14 +441,14 @@
 <!--SAMU-->
 <ul class="nav flex-column">
 
-    @canany(['SAMU: admin'])
-        <li class="nav-item">
-            <a class="nav-link {{ active('samu.welcome') }}" href="{{ route('samu.welcome') }}">
+    @canany(['SAMU: user'])
+    <li class="nav-item">
+        <a class="nav-link {{ active('samu.welcome') }}" href="{{ route('samu.welcome') }}">
             <i class="fas fa-ambulance"></i> SAMU
-            </a>
-        </li>
+        </a>
+    </li>
     @endcanany
-    
+
 </ul>
 <!--SAMU-->
 

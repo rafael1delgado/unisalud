@@ -22,9 +22,31 @@ class ContractController extends Controller
     {
         if ($request->get('year')) {
           $year = $request->get('year');
-        }else{$year = Carbon::now()->format('Y');}
+        }else{
+          $year = Carbon::now()->format('Y');
+        }
 
-        $contracts = Contract::where('year',$year)->paginate(50);
+        $rut = $request->get('rut');
+        $name = $request->get('name');
+
+        $contracts = Contract::where('year',$year)
+                             ->when($rut != null, function ($q) use ($rut) {
+                               return $q->whereHas('user', function ($query) use ($rut) {
+                                   return $query->whereHas('identifiers', function ($query) use ($rut) {
+                                       return $query->where('value', $rut)->where('cod_con_identifier_type_id', 1);
+                                     });
+                                 });
+                              })
+                              ->when($name != null, function ($q) use ($name) {
+                                return $q->whereHas('user', function ($query) use ($name) {
+                                    return $query->whereHas('humanNames', function ($query) use ($name) {
+                                        return $query->where('text', 'LIKE', '%' . $name . '%')
+                                                     ->orwhere('fathers_family', 'LIKE', '%' . $name . '%')
+                                                     ->orwhere('mothers_family', 'LKE', '%' . $name . '%');
+                                      });
+                                  });
+                               })
+                             ->paginate(50);
         return view('medical_programmer.contracts.index', compact('contracts', 'request'));
     }
 

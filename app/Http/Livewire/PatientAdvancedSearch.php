@@ -49,10 +49,10 @@ class PatientAdvancedSearch extends Component
                         $query->where('value', 'like', "%{$this->searchByContactPoint}%");
                     });
                 })
-                //cuando sea usuario del programador, solo trae usuarios que sean del programador
-                ->when(Auth::user()->hasPermissionTo('Mp: user creator'), function ($query) {
-                    $query->permission('Mp: user');
-                })
+                // //cuando sea usuario del programador, solo trae usuarios que sean del programador
+                // ->when(Auth::user()->hasPermissionTo('Mp: user creator'), function ($query) {
+                //     $query->permission('Mp: user');
+                // })
                 ->get();
         }
     }

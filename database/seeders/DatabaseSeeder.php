@@ -28,29 +28,46 @@ class DatabaseSeeder extends Seeder
             CodConObservationCategorySeeder::class,
             // PractitionerSeeder::class,
             // // HmRrhhTableSeeder::class,
-            HmMotherActivityTableSeeder::class,
-            HmActivityTypesTableSeeder::class,
-            HmActivitiesTableSeeder::class,
-            HmSpecialtiesTableSeeder::class,
-            HmSpecialtyActivitiesTableSeeder::class,
-            HmProfessionsTableSeeder::class,
-            HmProfessionActivitiesTableSeeder::class,
-            HmOperatingRoomsTableSeeder::class,
-            HmOperatingRoomSpecialties::class,
-            HmServicesTableSeeder::class,
+        // HmMotherActivityTableSeeder::class,
+        // HmActivityTypesTableSeeder::class,
+        // HmActivitiesTableSeeder::class,
+        // HmSpecialtiesTableSeeder::class,
+        // HmSpecialtyActivitiesTableSeeder::class,
+        // HmProfessionsTableSeeder::class,
+        // HmProfessionActivitiesTableSeeder::class,
+        // HmOperatingRoomsTableSeeder::class,
+        // HmOperatingRoomSpecialties::class,
+        // HmServicesTableSeeder::class,
             // HmUserServicesTableSeeder::class,
             // HmContractsTableSeeder::class,
             // // HmUnscheduledProgrammingTableSeeder::class,
-            HmUserSpecialtiesTableSeeder::class,
-            HmUserProfessionsTableSeeder::class,
+        // HmUserSpecialtiesTableSeeder::class,
+        // HmUserProfessionsTableSeeder::class,
             // // HmTheoreticalProgrammingTableSeeder::class,
             // HmOperatingRoomProgrammingTableSeeder::class,
             //PractitionerSeeder::class,
-            ExtMedicineSeeder::class,
-            OrganizationSeeder::class,
+        // ExtMedicineSeeder::class,
             CodConAppointmentTypesSeeder::class,
-            LocationSeeder::class,
             SicStatusesSeeder::class,
+
+            /* SAMU */
+            SamuMobileSeeder::class,
+            SamuJobTypeSeeder::class,
+            SamuKeySeeder::class,
+            SamuSeeder::class,
+
+            //Organizacion
+            OrganizationTypeSeeder::class,
+            OrganizationDependencySeeder::class,
+            OrganizationServiceSeeder::class,
+            OrganizationSeeder::class,
+
+            //necesita Organization por eso se debe ejecutar despues
+            LocationSeeder::class,
+
+
+
+
         ]);
     }
 }

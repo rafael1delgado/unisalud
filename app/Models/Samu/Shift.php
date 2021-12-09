@@ -5,79 +5,101 @@ namespace App\Models\Samu;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+// use Illuminate\Database\Eloquent\Relations\BelongsTo;
+// use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+// use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
+// use Carbon\Carbon;
+use App\Models\Samu\Mobile;
+use App\Models\Samu\Noveltie;
+use App\Models\Samu\MobileInService;
+use App\Models\Samu\ShiftUser;
 
-class Shift extends Model
+class Shift extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     use HasFactory;
     use SoftDeletes;
 
-    protected $table="samu_shift";
+    protected $table="samu_shifts";
 
     protected $fillable = [
         'id',
         'status',
         'type',
-        'date',
-        'opening_time',
-        'closing_time',
-        // 'manager_shift',
-        // 'regulatory_doctor',
-        // 'regulatory_nurse',
-        'created_at'
+        'opening_at',
+        'closing_at'
     ];
 
-    // public function manager(): BelongsTo
-    // {
-    //     return $this->belongsTo(User::class, 'manager_shift');
-    // }
+    /**
+    * The attributes that should be mutated to dates.
+    *
+    * @var array
+    */
+    protected $dates = [
+        'opening_at',
+        'closing_at'
+    ];
 
-    // public function doctor(): BelongsTo
-    // {
-    //     return $this->belongsTo(User::class, 'regulatory_doctor');
-    // }
-
-    // public function nurse(): BelongsTo
-    // {
-    //     return $this->belongsTo(User::class, 'regulatory_nurse');
-    // }
-
-    public function users(): BelongsToMany{
-        return $this->belongsToMany(User::class, 'samu_shift_user')->withTimestamps()->withPivot('job_type');
-    }
-
-    public function users_manager_shift(): BelongsToMany{
-        return $this->belongsToMany(User::class, 'samu_shift_user')->withTimestamps()->wherePivot('job_type', 'jefe de turno');
+    public function users() {
+        return $this->belongsToMany(User::class, 'samu_shift_user')
+            ->withPivot('job_type_id')
+            ->withTimestamps();
     }
     
-    public function users_regulatory_doctor(): BelongsToMany{
-        return $this->belongsToMany(User::class, 'samu_shift_user')->withTimestamps()->wherePivot('job_type', 'medico regulador');
-    }
-
-    public function users_regulatory_nurse(): BelongsToMany{
-        return $this->belongsToMany(User::class, 'samu_shift_user')->withTimestamps()->wherePivot('job_type', 'enfermera reguladora');
-    }
-
-    public function users_operators(): BelongsToMany{
-        return $this->belongsToMany(User::class, 'samu_shift_user')->withTimestamps()->wherePivot('job_type', 'operador');
-    }
-
-    public function users_dispatchers(): BelongsToMany{
-        return $this->belongsToMany(User::class, 'samu_shift_user')->withTimestamps()->wherePivot('job_type', 'despachador');
-    }
-
-    public function noveltie()
+    public function novelitie()
     {
-        return $this->belongsTo('\App\Models\Samu\Noveltie');
+        return $this->belongsTo(Novelitie::class);
     }
 
-    public function ShiftMobiles()
+    public function mobilesInService()
     {
-        return $this->belongsToMany('\App\Models\Samu\ShiftMobile','samu_shift_user')->withTimestamps()->wherePivot('id', 'detail','type');
+        return $this->hasMany(MobileInService::class);
+
+        // return $this->belongsToMany(Mobile::class,'samu_mobiles_in_service')
+        //             ->using(MobileInService::class)
+        //             ->withPivot('id','observation')
+        //             ->withTimestamps();
+    }
+
+    public static function todayShiftVerify()
+    {
+        return Shift::where('status',1)->exists() ? true : false;
+        
+    }
+
+    public function calls()
+    {
+        return $this->hasMany(Call::class);
+    }
+
+    public function qtcs()
+    {
+        return $this->hasMany(Qtc::class);
+    }
+
+    /* Obtiene el estado en palabra */
+    public function getStatusInWordAttribute()
+    {
+        return $this->status == 1 ? 'Abierto' : 'Cerrado';
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class,'creator_id');
+    }
+
+    /**
+     * Perform any actions required after the model boots.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        /* Asigna el creador */
+        self::creating(function (Shift $shift): void {
+            $shift->creator()->associate(auth()->user());
+        });
     }
 }
-
-

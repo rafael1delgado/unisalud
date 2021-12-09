@@ -1,53 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-@include('nav')
 
-<style>
- .button1{
-     margin-top:30px;
-     }
-</style>
+@include('samu.nav')
+
+<h3 class="mb-3"><i class="fas fa-blender-phone"></i> Editar Turno</h3>
+
 <form action="{{route('samu.shift.update', $shift)}}" method="POST" autocomplete="off">
     @csrf
     @method('PUT')
-    <div class="card mb-3">
-        <div class="card-body">
-            <div class="col-md-6">
-                <h3 class="mb-3"><i class="fas fa-blender-phone"></i> Editar Turno</h3>
-            </div>
-            <hr>
-            <div class="form-row">
-                <fieldset class="form-group  col-md-4">
-                    <label for="for_date"><b>Fecha de registro</b> </label>
-                    <input type="date" class="form-control" name="date" id="for_date" value="{{ date_format($shift->created_at,"Y-m-d") }}">
-                </fieldset>
-                <fieldset class="form-group  col-md-4">
-                    <label for="for_type"><b>Tipo de Turno</b> </label>
-                    <select class="form-control" name="type" id="for_type">
-                        <option value="Noche" {{($shift->type=='Noche')?'selected':''}}>Noche</option>
-                        <option value="Largo" {{($shift->type=='Largo')?'selected':''}}>Largo</option>
-                    </select>
-                </fieldset>
-                <fieldset class="form-group  col-md-4">
-                    <label for="for_opening_time"><i class="fas fa-clock"></i><b> Hora Apertura de turno</b> </label>
-                    <input type="time" class="form-control" name="opening_time" id="for_opening_time" value="{{$shift->opening_time}}">
-                </fieldset>
-            </div>
-            <hr>
 
-            <fieldset class="form-group col-12 col-md-2  ">
-                
-                <button type="submit" class="btn btn-primary button " >Guardar</button>
+        <div class="form-row">
 
+            <fieldset class="form-group col-md-2">
+                <label for="for_type"><b>Tipo de Turno</b> </label>
+                <select class="form-control" name="type" id="for_type">
+                    <option value="Noche" {{($shift->type=='Noche')?'selected':''}}>Noche</option>
+                    <option value="Largo" {{($shift->type=='Largo')?'selected':''}}>Largo</option>
+                </select>
             </fieldset>
+
+            <fieldset class="form-group col-md-2">
+                <label for="for_opening_at"><i class="fas fa-clock"></i><b> Apertura de turno</b> </label>
+                <input type="datetime-local" class="form-control" name="opening_at" id="for_opening_at" value="{{ $shift->opening_at->format('Y-m-d\TH:i:s') }}" required>
+            </fieldset>
+
+            <fieldset class="form-group col-md-2">
+                <label for="for_closing_at"><i class="fas fa-clock"></i><b> Cierre de turno</b> </label>
+                <input type="datetime-local" class="form-control" name="closing_at" id="for_closing_at" value="{{ optional($shift->closing_at)->format('Y-m-d\TH:i:s') }}">
+            </fieldset>
+
+            <fieldset class="form-group col-md-2">
+                <label for="for_status">Estado</label>
+                <select name="status" id="status" class="form-control" @if($openShift) disabled readonly @endif>
+                    <option value="0" {{ ($shift->status === 0) ? 'selected' : '' }}>Cerrado</option>
+                    <option value="1" {{ ($shift->status === 1) ? 'selected' : '' }}>Abierto</option>
+                </select>
+                @if($openShift)
+                <div class="form-text">Ya existe un turno abierto.</div>
+                @endif
+                
+            </fieldset>
+            
         </div>
-    </div>
+
+        <button type="submit" class="btn btn-primary button">Guardar</button>
+
+        <a class="btn btn-outline-secondary" href="{{ route('samu.shift.index') }}">Cancelar</a>
+
 </form>
-    
-
-
-
 
 
 @endsection

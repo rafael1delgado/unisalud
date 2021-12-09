@@ -16,10 +16,17 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-      $activities = Activity::all();
-      return view('medical_programmer.activities.index', compact('activities'));
+      $type = $request->get('type');
+
+      $activities = Activity::when($type != null, function ($q) use ($type) {
+                                  return $q->where('activity_type_id',$type);
+                              })
+                              ->orderBy('id_activity','ASC')
+                              ->get();
+
+      return view('medical_programmer.activities.index', compact('request','activities'));
     }
 
     /**

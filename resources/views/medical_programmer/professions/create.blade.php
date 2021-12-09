@@ -10,32 +10,30 @@
     @csrf
     @method('POST')
 
-    <div class="row">
-        <fieldset class="form-group col">
+    <div class="form-row">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_id_profession">id_Profession</label>
             <input type="text" class="form-control" id="for_id_profession" name="id_profession" required>
         </fieldset>
 
-        {{-- <fieldset class="form-group col">
+        {{-- <fieldset class="form-group col-6 col-md-3">
             <label for="for_id_sigte">id Sigte</label>
             <input type="text" class="form-control" id="for_id_sigte" placeholder="(opcional)" name="id_sigte">
         </fieldset> --}}
-    </div>
 
-    <div class="row">
-        <fieldset class="form-group col">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_profession_name">Profesión</label>
             <input type="text" class="form-control" id="for_profession_name" placeholder="" name="profession_name" required>
         </fieldset>
 
-        <fieldset class="form-group col-4">
+        <fieldset class="form-group col-6 col-md-3">
             <label for="for_name">Color</label>
             <input class="form-control jscolor" name="color" value="ab2567" required="">
         </fieldset>
     </div>
 
     <hr>
-    <fieldset class="form-group col-12 col-md-6">
+    <fieldset class="form-group">
       <h3><label for="">Actividades No Médicas</label></h3>
       <table>
         @foreach($activities as $activity)
@@ -50,9 +48,9 @@
           </td>
           <td>
             @if($activity->performance == 1)
-                <input type="text" name="performance_activity_{{$activity->id}}" class="form-control col-md-4" id="for_activity_name" placeholder="ej: 3">
+                <input type="text" name="performance_activity_{{$activity->id}}" class="form-control col-md-4 float-right" id="for_activity_name" placeholder="ej: 3">
             @else
-                <input type="text" name="performance_activity_{{$activity->id}}" class="form-control col-md-4" id="for_activity_name" placeholder="--" disabled>
+                <input type="text" name="performance_activity_{{$activity->id}}" class="form-control col-md-4 float-right" id="for_activity_name" placeholder="--" disabled>
             @endif
           </td>
         </tr>
@@ -61,7 +59,7 @@
     </fieldset>
     <hr>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary mb-4">Guardar</button>
 
 </form>
 

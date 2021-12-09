@@ -16,51 +16,10 @@ class ShiftController extends Controller
      */
     public function index()
     {
-        $shifts = Shift::all();
-        // $users_shift = Shift::find(4)->users;
-        $jefe_turno = '';
-        $medico_regulador = '';
-        $enfermera_reguladora = '';
-        $operadores = '';
-        $despachadores = '';
-        foreach($shifts as $shift){
-            foreach($shift->users_manager_shift as $manager_shift){
-                $nombres = $manager_shift->humanNames->first()->text;
-                $apaterno = $manager_shift->humanNames->first()->fathers_family;
-                $amaterno = $manager_shift->humanNames->first()->mothers_family;
-                $jefe_turno .= $nombres." ".$apaterno." ".$amaterno.", ";
-            }
-            foreach($shift->users_regulatory_doctor as $regulatory_doctor){
-                $nombres = $regulatory_doctor->humanNames->first()->text;
-                $apaterno = $regulatory_doctor->humanNames->first()->fathers_family;
-                $amaterno = $regulatory_doctor->humanNames->first()->mothers_family;
-                $medico_regulador .= $nombres." ".$apaterno." ".$amaterno.", ";
-            }
-            foreach($shift->users_regulatory_nurse as $regulatory_nurse){
-                $nombres = $regulatory_nurse->humanNames->first()->text;
-                $apaterno = $regulatory_nurse->humanNames->first()->fathers_family;
-                $amaterno = $regulatory_nurse->humanNames->first()->mothers_family;
-                $enfermera_reguladora .= $nombres." ".$apaterno." ".$amaterno.", ";
-            }
-            foreach($shift->users_operators as $operator){
-                $nombres = $operator->humanNames->first()->text;
-                $apaterno = $operator->humanNames->first()->fathers_family;
-                $amaterno = $operator->humanNames->first()->mothers_family;
-                $operadores .= $nombres." ".$apaterno." ".$amaterno.", ";
-            }
-            foreach($shift->users_dispatchers as $dispatcher){
-                $nombres = $dispatcher->humanNames->first()->text;
-                $apaterno = $dispatcher->humanNames->first()->fathers_family;
-                $amaterno = $dispatcher->humanNames->first()->mothers_family;
-                $despachadores .= $nombres." ".$apaterno." ".$amaterno.", ";
-            }
-        }
-        $str_jefe_turno = substr($jefe_turno, 0, -2);
-        $str_medico_regulador = substr($medico_regulador, 0, -2);
-        $str_enfermera_reguladora = substr($enfermera_reguladora, 0, -2);
-        $str_operadores = substr($operadores, 0, -2);
-        $str_despachadores = substr($despachadores, 0, -2);
-        return view('samu.shift.index', compact('shifts', 'str_jefe_turno', 'str_medico_regulador', 'str_enfermera_reguladora', 'str_operadores', 'str_despachadores'));
+        $allowCreate = Shift::where('status',true)->exists() ? false: true;
+        $shifts = Shift::latest()->paginate(50);
+
+        return view('samu.shift.index', compact('shifts','allowCreate'));
     }
 
     /**
@@ -70,8 +29,8 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        return view('samu.shift.create', compact('users'));
+        return view('samu.shift.create');
+
     }
 
     /**
@@ -82,17 +41,20 @@ class ShiftController extends Controller
      */
     public function store(Request $request)
     {
-        $shift=new Shift($request->all());
-        $shift->status = 'No iniciado';
-        $shift->save();
+        $shift = Shift::where('status', true)->first();
 
-        // foreach($request->nombre_combo as $operador_id){
-        //     $shift->operators()->attach($operador_id, ['job_type'=>'operador']);
-        // }
+        if(!$shift) {
+            $shift = new Shift($request->all());
+            $shift->save();
 
-        $shifts = Shift::all();
-        session()->flash('success', 'Se ha creado el turno exitosamente');
-        return redirect()->route ('samu.shift.index', compact('shifts'));
+            session()->flash('success', 'Se ha creado el turno exitosamente');
+            return redirect()->route('samu.shift.index');
+        }
+        else {
+            $request->session()->flash('danger', 'No se pudo crear el turno, 
+                ya existe un turno abierto, verifique cerrar todos los turnos antes de crear uno nuevo.');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -114,8 +76,10 @@ class ShiftController extends Controller
      */
     public function edit(Shift $shift)
     {
-        //
-        return view('samu.shift.edit', compact('shift'));
+        $openShift = Shift::where('status',true)
+                        ->whereNotIn('id',[$shift->id])
+                        ->exists() ? true: false;
+        return view('samu.shift.edit', compact('shift','openShift'));
     }
 
     /**
@@ -128,11 +92,10 @@ class ShiftController extends Controller
     public function update(Request $request, Shift $shift)
     {
         $shift->fill($request->all());
-        //$specialty->user_id = Auth::id();
         $shift->save();
 
         session()->flash('info', 'El turno ha sido editado.');
-        return redirect()->route('samu.shift.index', compact('shift'));
+        return redirect()->route('samu.shift.index');
     }
 
     /**
@@ -144,6 +107,7 @@ class ShiftController extends Controller
     public function destroy(Shift $shift)
     {
         $shift->delete();
-        return redirect()->route('samu.shift.index')->with('danger', 'Eliminado satisfactoriamente');
+        session()->flash('danger', 'El turno ha sido eliminado satisfactoriamente.');
+        return redirect()->route('samu.shift.index');
     }
 }

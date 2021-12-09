@@ -18,6 +18,8 @@ class Interconsultation extends Component
     public $selectedStatusId;
     public $sics = array();
 
+    protected $listeners = ['refreshSicsList' => 'search'];
+
     public function mount()
     {
         $this->specialties = Specialty::all();
@@ -40,6 +42,10 @@ class Interconsultation extends Component
                 })
                 ->get();
         }
+    }
+
+    public function appoint($interconsultationId){
+        return redirect()->route('some.appointment.from_interconsultation', compact('interconsultationId'));
     }
 
     public function render()
