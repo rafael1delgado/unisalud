@@ -156,9 +156,11 @@ class User extends Authenticatable implements Auditable
 
     public function getOfficialFullNameAttribute()
     {
-      if ($this->actualOfficialHumanName) {
-        return "{$this->actualOfficialHumanName->text} {$this->actualOfficialHumanName->fathers_family} {$this->actualOfficialHumanName->mothers_family}";
-      }
+        return $this->text;
+
+    //   if ($this->actualOfficialHumanName) {
+    //     return "{$this->actualOfficialHumanName->text} {$this->actualOfficialHumanName->fathers_family} {$this->actualOfficialHumanName->mothers_family}";
+    //   }
     }
 
     public function getOfficialNameAttribute()
