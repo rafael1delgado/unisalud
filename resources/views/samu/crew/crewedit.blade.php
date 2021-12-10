@@ -6,12 +6,12 @@
 
 <h3 class="mb-3">Editar Fecha</h3>
 
-
 <form method="POST" class="form-horizontal" action="{{ route('samu.mobileinservice.crewupdate', $mobileCrew) }}">
     @csrf
     @method('PUT')
 
-	<div class="form-row">
+    <div class="form-row">
+
         <fieldset class="form-group col-md-6 col-6">
 			<label for="user_id">Funcionario</label>
 			<input type="text" class="form-control"value="{{ $mobileCrew->user->officialFullName }}" disabled readonly>
@@ -21,9 +21,11 @@
 			<label for="job_type_id">Funcionario</label>
 			<input type="text" class="form-control" value="{{ $mobileCrew->jobType->name }}" disabled readonly>
         </fieldset>
-    </div>       
+        
+    </div>  
 
     <div class="form-row">
+
         <fieldset class="form-group col-md-6 col-6">
 			<label>Asume:</label>
             <input type="datetime-local" class="form-control" name="assumes_at" value="{{ $mobileCrew->assumes_at->format('Y-m-d\TH:i:s') }}" >
@@ -33,11 +35,21 @@
             <input type="datetime-local" class="form-control" name="leaves_at"  value="{{ optional($mobileCrew->leaves_at)->format('Y-m-d\TH:i:s') }}">
         </fieldset>
 
-    </div>       
-    <div class="form-row">
-        <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
+<<<<<<< HEAD
 </form>
+=======
+
+    <div class="form-row">
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+
+    </div>
+
+</form>
+
+
+>>>>>>> 4d87567204d2b57c3d72e348f4c025b334d0fef6
 @endsection
 
 

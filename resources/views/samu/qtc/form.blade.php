@@ -19,7 +19,8 @@
             @endforeach 
         </select>
     </fieldset>
-
+                                
+   
     <fieldset class="form-group col-md-6">
         <label for="for_observation">Observación</label>
         <input type="text" class="form-control" name="observation" value="{{ ( $qtc &&  $qtc->observation)? $qtc->observation : '' }}">
