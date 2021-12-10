@@ -51,7 +51,7 @@ class User extends Authenticatable implements Auditable
 
     public function humanNames(): HasMany
     {
-        return $this->hasMany(HumanName::class, 'user_id');
+        return $this->hasMany(HumanName::class, 'user_id')->orderBy('created_at');
     }
 
     public function addresses()
