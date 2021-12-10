@@ -39,7 +39,10 @@ class HumanName extends Model
         /* Asigna el creador */
         self::creating(function (HumanName $humanName): void {
             $humanName->text = $humanName->given.' '.$humanName->fathers_family.' '.$humanName->mothers_family;
+            $humanName->period_start = now();
         });
+
+
     }
 
 }
