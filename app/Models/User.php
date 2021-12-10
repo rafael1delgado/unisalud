@@ -165,7 +165,7 @@ class User extends Authenticatable implements Auditable
 
     public function getOfficialNameAttribute()
     {
-        return "{$this->actualOfficialHumanName->text}";
+        return "{$this->actualOfficialHumanName->given}";
     }
 
     public function getOfficialFathersFamilyAttribute()

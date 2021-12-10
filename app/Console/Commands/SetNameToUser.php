@@ -39,11 +39,19 @@ class SetNameToUser extends Command
      */
     public function handle()
     {
+        $humanNames = HumanName::all();
+        foreach($humanNames as $hn)
+        {
+            $hn->given = $hn->text;
+            $hn->text = trim($hn->given).' '.trim($hn->fathers_family).' '.trim($hn->mothers_family);
+            $hn->save();
+        }
+
         $users = User::with('HumanNames')->get();
         foreach($users as $user) 
         {
             if(count($user->humanNames) > 0) {
-                $user->given = $user->text ?? null;
+                $user->given = $user->OfficialName ?? null;
                 $user->fathers_family = $user->OfficialFathersFamily ?? null;
                 $user->mothers_family = $user->OfficialMothersFamily ?? null;
                 $user->save();
@@ -51,14 +59,6 @@ class SetNameToUser extends Command
             else{
                 echo $user->id.', ';
             }
-        }
-
-        $humanNames = HumanName::all();
-        foreach($humanNames as $hn)
-        {
-            $hn->given = $hn->text;
-            $hn->text = trim($hn->given).' '.trim($hn->fathers_family).' '.trim($hn->mothers_family);
-            $hn->save();
         }
     }
 }
