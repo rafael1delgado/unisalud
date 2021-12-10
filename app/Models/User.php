@@ -32,6 +32,11 @@ class User extends Authenticatable implements Auditable
      */
     protected $fillable = [
         'id',
+        'active',
+        'text',
+        'given',
+        'fathers_family',
+        'mothers_family',
         'sex',
         'gender',
         'birthday',
@@ -145,11 +150,17 @@ class User extends Authenticatable implements Auditable
             ->first();
     }
 
+    // function getGivenArray(){
+    //     return explode(' ', $this->given);
+    // }
+
     public function getOfficialFullNameAttribute()
     {
-      if ($this->actualOfficialHumanName) {
-        return "{$this->actualOfficialHumanName->text} {$this->actualOfficialHumanName->fathers_family} {$this->actualOfficialHumanName->mothers_family}";
-      }
+        return $this->text;
+
+    //   if ($this->actualOfficialHumanName) {
+    //     return "{$this->actualOfficialHumanName->text} {$this->actualOfficialHumanName->fathers_family} {$this->actualOfficialHumanName->mothers_family}";
+    //   }
     }
 
     public function getOfficialNameAttribute()
@@ -442,5 +453,22 @@ class User extends Authenticatable implements Auditable
     public function teleconsultationSurveys()
     {
         return $this->hasMany(Surveys\TeleconsultationSurvey::class, 'user_id');
+    }
+
+    /**
+     * Perform any actions required after the model boots.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        /* Asigna el creador */
+        self::creating(function (User $user): void {
+            $user->text = $user->given.' '.$user->fathers_family.' '.$user->mothers_family;
+        });
+
+        self::updating(function (User $user): void {
+            $user->text = $user->given.' '.$user->fathers_family.' '.$user->mothers_family;
+        });
     }
 }
