@@ -28,20 +28,19 @@
 @endif
        
     
-@foreach($shift_users as $su)
+@foreach($shift->users as $user)
 <div class="form-row m-1">
     <div class="col-6">
         <li>
-            {{ $su->user->officialFullName }}
+            {{ $user->officialFullName }}
         </li>
-        
     </div>
     <div class="col-5">
-        {{ $su->jobType->name }}
+        {{ $user->pivot->jobType->name }}
     </div>
     <div class="col-1">
-        @if($su->shift->status == true)
-        <button class="btn btn-danger btn-sm mx-2" wire:click="delete({{ $su }})"><i class="fas fa-trash"></i></button>
+        @if($shift->status == true)
+        <button class="btn btn-danger btn-sm mx-2" wire:click="delete({{ $user }})"><i class="fas fa-trash"></i></button>
         @endif
     </div>
 </div>

@@ -51,7 +51,7 @@
     <div class="form-row m-1">
         <div class="col-5">
             <li>
-                
+                {{ $tripulant->text }}
             </li>
         </div>
         <div class="col-2">

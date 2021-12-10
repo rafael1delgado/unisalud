@@ -44,7 +44,25 @@
                 <td>{{ $shift->opening_at->format('Y-m-d H:i') }}</td>
                 <td>{{ optional($shift->closing_at)->format('Y-m-d H:i') }}</td>
                 <td>
-                    @livewire('samu.shift-user', ['shift' => $shift])
+                    @if($shift->status == true)
+                        @livewire('samu.shift-user', ['shift' => $shift])
+                    @else
+                        @foreach($shift->users as $user)
+                        <div class="form-row m-1">
+                            <div class="col-6">
+                                <li>
+                                    {{ optional($user)->officialFullName }}
+                                </li>
+                            </div>
+                            <div class="col-5">
+                                {{ optional($user->pivot)->JobType->name }}
+                            </div>
+                            <div class="col-1">
+                                
+                            </div>
+                        </div>
+                        @endforeach
+                    @endif
                 </td>
                 <td>
                     @if($shift->status == true)
