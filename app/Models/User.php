@@ -165,7 +165,7 @@ class User extends Authenticatable implements Auditable
 
     public function getOfficialNameAttribute()
     {
-        return "{$this->actualOfficialHumanName->text}";
+        return "{$this->actualOfficialHumanName->given}";
     }
 
     public function getOfficialFathersFamilyAttribute()
@@ -464,11 +464,11 @@ class User extends Authenticatable implements Auditable
     {
         /* Asigna el creador */
         self::creating(function (User $user): void {
-            $user->text = $user->given.' '.$user->fathers_family.' '.$user->mothers_family;
+            $user->text = trim($user->given).' '.trim($user->fathers_family).' '.trim($user->mothers_family);
         });
 
         self::updating(function (User $user): void {
-            $user->text = $user->given.' '.$user->fathers_family.' '.$user->mothers_family;
+            $user->text = trim($user->given).' '.trim($user->fathers_family).' '.trim($user->mothers_family);
         });
     }
 }
