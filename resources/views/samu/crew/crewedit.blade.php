@@ -36,20 +36,14 @@
         </fieldset>
 
     </div>
-<<<<<<< HEAD
-</form>
-=======
 
     <div class="form-row">
-
         <button type="submit" class="btn btn-primary">Guardar</button>
-
     </div>
 
 </form>
 
 
->>>>>>> 4d87567204d2b57c3d72e348f4c025b334d0fef6
 @endsection
 
 

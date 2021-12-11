@@ -33,7 +33,6 @@ class User extends Authenticatable implements Auditable
     protected $fillable = [
         'id',
         'active',
-        'text',
         'given',
         'fathers_family',
         'mothers_family',
@@ -462,13 +461,28 @@ class User extends Authenticatable implements Auditable
      */
     protected static function booted()
     {
-        /* Asigna el creador */
         self::creating(function (User $user): void {
-            $user->text = trim($user->given).' '.trim($user->fathers_family).' '.trim($user->mothers_family);
+            $user->given = trim($user->given);
+            $user->fathers_family = trim($user->fathers_family);
+            $user->mothers_family = trim($user->mothers_family);
+
+            $user->text = $user->given.' '.$user->fathers_family.' '.$user->mothers_family;
+
+            // $humanName = HumanName::create([
+            //     'use' => 'official',
+            //     'given' => $user->given,
+            //     'fathers_family' => $user->fathers_family,
+            //     'mothers_family' => $user->mothers_family,
+            // ]);
+            // $user->humanNames()->attach($humanName);
         });
 
         self::updating(function (User $user): void {
-            $user->text = trim($user->given).' '.trim($user->fathers_family).' '.trim($user->mothers_family);
+            $user->given = trim($user->given);
+            $user->fathers_family = trim($user->fathers_family);
+            $user->mothers_family = trim($user->mothers_family);
+
+            $user->text = $user->given.' '.$user->fathers_family.' '.$user->mothers_family;
         });
     }
 }

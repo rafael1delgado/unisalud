@@ -4,8 +4,8 @@
         <fieldset class="col-6">            
             <select class="form-control" wire:model='user_id' required="required">
                 <option value=""></option>
-                @foreach($users->sort() as $key => $user)
-                <option value="{{ $key }}">{{ $user }} </option>
+                @foreach($users as $user => $id)
+                <option value="{{ $id }}">{{ strtoupper($user) }}</option>
                 @endforeach
             </select>
             @error('user_id') <span class="error">{{ $message }}</span> @enderror

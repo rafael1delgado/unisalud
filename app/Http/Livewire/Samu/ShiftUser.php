@@ -48,14 +48,7 @@ class ShiftUser extends Component
 
     public function render()
     {
-        //$this->shift_users  = ShiftUserModel::with('jobType')->where('shift_id',$this->shift->id)->get();
-        $users              = User::Permission('SAMU')->pluck('text','id');
-        foreach($users as $id => $user) 
-        {
-            $arrayUsers[$id] = strtoupper($user);
-        }
-        //debug($arrayUsers);
-        $this->users = collect($arrayUsers);
+        $this->users = User::OrderBy('text')->Permission('SAMU')->pluck('id','text');
 
         $this->job_types    = JobType::where('tripulant', false)->orderBy('name')->get();
         return view('livewire.samu.shift-user');

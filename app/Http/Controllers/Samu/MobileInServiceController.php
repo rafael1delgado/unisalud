@@ -19,7 +19,9 @@ class MobileInServiceController extends Controller
      */
     public function index()
     {
-        $mobilesInService = MobileInService::with('shift')->latest()->paginate(25);
+        $mobilesInService = MobileInService::with(['shift','mobile','crew'])
+                            ->latest()
+                            ->paginate(25);
 
         return view('samu.mobileinservice.index', compact('mobilesInService'));
     }
@@ -31,7 +33,6 @@ class MobileInServiceController extends Controller
      */
     public function create()
     {
-       
         $mobiles = Mobile::where('managed',1)->get();
 
         $shift = Shift::where('status',true)->first();

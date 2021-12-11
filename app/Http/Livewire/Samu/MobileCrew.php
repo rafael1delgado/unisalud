@@ -52,15 +52,15 @@ class MobileCrew extends Component
         $mobileCrew->delete();
     }
 
-    public function getUsers()
-    {
-        $users = User::Permission('SAMU')->with('humanNames')->get();
-        foreach($users as $user) 
-        {
-            $arrayUsers[$user->id] = $user->OfficialFullName;
-        }
-        $this->users = collect($arrayUsers);
-    }
+    // public function getUsers()
+    // {
+    //     $users = User::Permission('SAMU')->with('humanNames')->get();
+    //     foreach($users as $user) 
+    //     {
+    //         $arrayUsers[$user->id] = $user->OfficialFullName;
+    //     }
+    //     $this->users = collect($arrayUsers);
+    // }
 
     public function render()
     {
@@ -68,7 +68,7 @@ class MobileCrew extends Component
 
         $this->mobileInService = MobileInService::find($this->mobileInService->id);
 
-        $this->getUsers();
+        $this->users = User::OrderBy('text')->Permission('SAMU')->pluck('id','text');
         
         $this->job_types    = JobType::where('tripulant', true)->orderBy('name')->get();
         return view('livewire.samu.mobile-crew');
