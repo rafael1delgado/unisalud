@@ -21,7 +21,10 @@
                 <th>Observación</th>
             </tr>
         </thead>
-        <tbody id="tableCases">
+
+
+        @can('Epi: Add Value')
+        <tbody id="tableCases">        
             @foreach($suspectcases as $suspectcase)
             <tr>
                 <td>{{$suspectcase->id??''}} <a href="{{ route('epi.chagas.edit',$suspectcase) }}" pclass="btn_edit"><i class="fas fa-edit"></i></a></td>
@@ -39,8 +42,9 @@
                 <td>{{$suspectcase->chagas_result_confirmation}}</td>
                 <td>{{$suspectcase->observatio??''}}</td>
             </tr>
-            @endforeach            
+            @endforeach
         </tbody>
+        @endcan
     </table>
 
 </div>

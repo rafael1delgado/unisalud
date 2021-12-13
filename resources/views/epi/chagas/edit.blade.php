@@ -112,10 +112,10 @@
 
 
 
-        <fieldset class="form-group col-6 col-md-6">
+        <!-- <fieldset class="form-group col-6 col-md-6">
             <label for="for_epivigila">Epivigila</label>
             <input type="number" class="form-control" id="for_epivigila" name="epivigila" value="{{$suspectCase->epivigila??''}}" readonly>
-        </fieldset>
+        </fieldset> -->
 
 
     </div>
