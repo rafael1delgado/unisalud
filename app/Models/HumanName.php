@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class HumanName extends Model
 {
@@ -39,7 +40,7 @@ class HumanName extends Model
         /* Asigna el creador */
         self::creating(function (HumanName $humanName): void {
             $humanName->text = $humanName->given.' '.$humanName->fathers_family.' '.$humanName->mothers_family;
-            $humanName->period_start = now();
+            $humanName->period_start = Carbon::now()->addSeconds(1);
         });
 
 

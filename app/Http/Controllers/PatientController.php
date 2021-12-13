@@ -309,6 +309,8 @@ class PatientController extends Controller
                 $actualOfficialHumanName->fathers_family != $request->fathers_family ||
                 $actualOfficialHumanName->mothers_family != $request->mothers_family
             ) {
+                $actualOfficialHumanName->period_end = now();
+                $actualOfficialHumanName->save();
                 $newHumanName = new HumanName($request->all());
                 $newHumanName->use = $request->human_name_use;
                 $newHumanName->user_id = $patient->id;
