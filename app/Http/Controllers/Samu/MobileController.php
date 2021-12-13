@@ -86,6 +86,7 @@ class MobileController extends Controller
         $mobile->fill($request->all());
         //consultando si esta o no clickeado un checkbox
         $mobile->managed = $request->has('managed') ? true:false;
+        $mobile->status = $request->has('status') ? true:false;
         $mobile->save();
 
         session()->flash('info', 'La codificación de Móvil ha sido editada.');

@@ -36,6 +36,7 @@
             <input type="checkbox" class="form-check-input ml-3" name="managed" >
             <label class="form-check-label ml-5" for="exampleCheck1">Móvil Pertenece a Samu</label>
         </div>
+        
     
     </div>
 

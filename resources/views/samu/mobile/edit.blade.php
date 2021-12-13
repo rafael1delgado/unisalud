@@ -25,18 +25,22 @@
             <label for="for_name_mobile_plate">Patente </label>
             <input type="text" class="form-control" id="for_name_mobile_plate" name="plate" value="{{ $mobile->plate}}" required>
         </fieldset>
-        <fieldset class="form-group col-8 col-md-4">
+        <fieldset class="form-group col-8 col-md-3">
             <label for="for_name_mobile_type">Tipo </label>
             <input type="text" class="form-control" id="for_name_mobile_type" name="type" value="{{ $mobile->type}}" required>
         </fieldset>
-        <fieldset class="form-group col-8 col-md-4">
+        <fieldset class="form-group col-8 col-md-5">
             <label for="for_name_mobile_type">Descripción</label>
             <input type="text" class="form-control" id="for_name_mobile_description" name="description" value="{{ $mobile->description}}" required>
         </fieldset>
-        <fieldset class="mt-5 form-check col-md-4">
+        <div class="mt-5 form-check col-md-2">
             <input type="checkbox" class="form-check-input ml-3" name="managed" {{ ($mobile->managed) ? 'checked':''}} >
             <label class="form-check-label ml-5" for="exampleCheck1">Móvil Pertenece a Samu</label>
-        </fieldset>
+        </div>
+        <div class="mt-5 form-check col-md-1">
+            <input type="checkbox" class="form-check-input ml-3" name="managed" {{ ($mobile->status) ? 'checked':''}} >
+            <label class="form-check-label ml-5" for="exampleCheck1">Activo</label>
+        </div>
         
     </div>
 
