@@ -60,7 +60,7 @@
                             @endforeach
                         @endif
                     </td>
-                    <td>({{ $call->shift->id}}) {{ $call->hour}}</td>
+                    <td>({{ $shift->id}}) {{ $call->hour}}</td>
                     <td>{{ $call->applicant }}</td>
                     <td>{{ $call->information }}</td>
                     
@@ -87,8 +87,6 @@
     <!-- fin de registro de llamadas-->
     @endunless
 @endforeach
-
-
 
 
 @endsection

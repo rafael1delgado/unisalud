@@ -23,8 +23,13 @@ class CallController extends Controller
     public function index()
     {
         /*  */
-        $openShift = Shift::where('status',true)->with('calls')->first();
-        $lastShift = Shift::latest()->skip(1)->with('calls')->first();
+        $openShift = Shift::where('status',true)
+                    ->with(['calls','calls.qtcs','calls.receptor'])
+                    ->first();
+        $lastShift = Shift::latest()
+                    ->skip(1)
+                    ->with(['calls','calls.qtcs','calls.receptor'])
+                    ->first();
         
        return view ('samu.call.index' , compact('openShift','lastShift'));
     }

@@ -16,8 +16,8 @@ class ShiftController extends Controller
      */
     public function index()
     {
-        $allowCreate = Shift::where('status',true)->exists() ? false: true;
-        $shifts = Shift::latest()->paginate(50);
+        $allowCreate = Shift::where('status',true)->exists() ?? false;
+        $shifts = Shift::with('users')->latest()->paginate(50);
 
         return view('samu.shift.index', compact('shifts','allowCreate'));
     }

@@ -11,7 +11,7 @@ class ShiftUser extends Component
 {
     public $users;
     public $shift;
-    public $shift_users;
+    //public $shift_users;
     public $job_types;
     
     public $user_id;
@@ -48,13 +48,7 @@ class ShiftUser extends Component
 
     public function render()
     {
-        $this->shift_users  = ShiftUserModel::where('shift_id',$this->shift->id)->get();
-        $users              = User::Permission('SAMU')->get();
-        foreach($users as $user) 
-        {
-            $arrayUsers[$user->id] = $user->OfficialFullName;
-        }
-        $this->users = collect($arrayUsers);
+        $this->users = User::OrderBy('text')->Permission('SAMU')->pluck('id','text');
 
         $this->job_types    = JobType::where('tripulant', false)->orderBy('name')->get();
         return view('livewire.samu.shift-user');

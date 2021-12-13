@@ -4,8 +4,8 @@
     <div class="col-6">
         <select class="form-control" wire:model='user_id' required="required">
             <option value=""></option>
-            @foreach($users->sort() as $key => $user)
-            <option value="{{ $key }}">{{ $user }} </option>
+            @foreach($users as $user => $id)
+            <option value="{{ $id }}">{{ $user }}</option>
             @endforeach
         </select>
         @error('user_id') <span class="error">{{ $message }}</span> @enderror
@@ -28,20 +28,19 @@
 @endif
        
     
-@foreach($shift_users as $su)
+@foreach($shift->users as $user)
 <div class="form-row m-1">
     <div class="col-6">
         <li>
-            {{ $su->user->officialFullName }}
+            {{ $user->officialFullName }}
         </li>
-        
     </div>
     <div class="col-5">
-        {{ $su->jobType->name }}
+        {{ $user->pivot->jobType->name }}
     </div>
     <div class="col-1">
-        @if($su->shift->status == true)
-        <button class="btn btn-danger btn-sm mx-2" wire:click="delete({{ $su }})"><i class="fas fa-trash"></i></button>
+        @if($shift->status == true)
+        <button class="btn btn-danger btn-sm mx-2" wire:click="delete({{ $user }})"><i class="fas fa-trash"></i></button>
         @endif
     </div>
 </div>
