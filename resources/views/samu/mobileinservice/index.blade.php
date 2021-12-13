@@ -50,7 +50,7 @@
                         <div class="form-row m-1">
                             <div class="col-5">
                                 <li>
-                                    {{ $tripulant->text }}
+                                    {{ $tripulant->officialFullName }}
                                 </li>
                             </div>
                             <div class="col-2">

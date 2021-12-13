@@ -19,7 +19,6 @@ class User extends Authenticatable implements Auditable
     use HasFactory, Notifiable, HasRoles;
     use SoftDeletes;
     
-    /* TODO: Revisar si es necesaro poner la ruta completa de Auditable */
     use \OwenIt\Auditing\Auditable;
 
 
@@ -47,6 +46,26 @@ class User extends Authenticatable implements Auditable
         'password',
         'claveunica'
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
 
     public function humanNames(): HasMany
     {
@@ -110,30 +129,12 @@ class User extends Authenticatable implements Auditable
         // return $this->belongsToMany(Shift::class, 'samu_shift_user')->withTimestamps()->withPivot('job_type','deleted_at')->whereNull('deleted_at');
         return $this->belongsToMany(Shift::class, 'samu_shift_user')->withTimestamps()->withPivot('job_type');
     }
+
     public function programmingProposals()
     {
         return $this->hasMany(MedicalProgrammer\ProgrammingProposal::class, 'user_id');
     }
 
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 
     //HumanNames
     public function officialHumanNames()
@@ -155,7 +156,7 @@ class User extends Authenticatable implements Auditable
 
     public function getOfficialFullNameAttribute()
     {
-        return $this->text;
+        return ucwords(mb_strtolower($this->text));
 
     //   if ($this->actualOfficialHumanName) {
     //     return "{$this->actualOfficialHumanName->text} {$this->actualOfficialHumanName->fathers_family} {$this->actualOfficialHumanName->mothers_family}";

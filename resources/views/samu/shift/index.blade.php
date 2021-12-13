@@ -4,15 +4,15 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-blender-phone"></i> Listado de Turnos
-    @if($allowCreate)
-    <a class="btn btn-success float-right" href="{{ route('samu.shift.create') }}">
-        <i class="fas fa-plus"></i> Crear turno
-    </a>
-    @else
+<h3 class="mb-3"><i class="fas fa-blender-phone"></i> Listado de Turnos {{ $openShift }}
+    @if($openShift)
     <button class="btn btn-outline-success float-right" disabled readonly>
         <i class="fas fa-plus"></i> Hay un turno abierto
     </button>
+    @else
+    <a class="btn btn-success float-right" href="{{ route('samu.shift.create') }}">
+        <i class="fas fa-plus"></i> Crear turno
+    </a>
     @endif
 </h3>
 

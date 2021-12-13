@@ -51,14 +51,14 @@
     <div class="form-row m-1">
         <div class="col-5">
             <li>
-                {{ $tripulant->text }}
+                {{ $tripulant->officialFullName }}
             </li>
         </div>
         <div class="col-2">
             {{ $tripulant->pivot->jobType->name }}
         </div>
         <div class="col-3">
-            {{ $tripulant->pivot->assumes_at }}
+            {{ $tripulant->pivot->assumes_at }} <br> {{ $tripulant->pivot->leaves_at }}
         </div>
         <div class="col-2">
             @if($mobileInService->shift->status == true)
