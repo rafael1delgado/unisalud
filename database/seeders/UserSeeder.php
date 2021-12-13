@@ -26,6 +26,9 @@ class UserSeeder extends Seeder
         $user->active = 1;
         $user->claveunica = 1;
         $user->birthday = now();
+        $user->given = 'Angelina';
+        $user->fathers_family = 'Jolie';
+        $user->mothers_family = 'Voight';
         $user->gender = 'female';
         $user->nationality_id = 41;
         if(env('APP_ENV') == 'local') $user->password = bcrypt('admin');
@@ -35,7 +38,7 @@ class UserSeeder extends Seeder
 
         $humanName = new HumanName();
         $humanName->use = 'official';
-        $humanName->text = 'Angelina';
+        $humanName->given = 'Angelina';
         $humanName->fathers_family = 'Jolie';
         $humanName->mothers_family = 'Voight';
         $humanName->user_id = $user->id;
@@ -82,8 +85,13 @@ class UserSeeder extends Seeder
         $address->save();
 
 
+
+
         $user = new User();
         $user->active = 1;
+        $user->given = 'Esteban';
+        $user->fathers_family = 'Miranda';
+        $user->mothers_family = 'Escobar';
         $user->claveunica = 1;
         $user->birthday = '1985-04-17';
         $user->gender = 'male';
@@ -96,7 +104,7 @@ class UserSeeder extends Seeder
 
         $humanName = new HumanName();
         $humanName->use = 'official';
-        $humanName->text = 'Esteban';
+        $humanName->given = 'Esteban';
         $humanName->fathers_family = 'Miranda';
         $humanName->mothers_family = 'Escobar';
         $humanName->user_id = $user->id;
@@ -122,8 +130,13 @@ class UserSeeder extends Seeder
         $address->save();
 
 
+
+
         $user = new User();
         $user->active = 1;
+        $user->given = 'German';
+        $user->fathers_family = 'Zuñiga';
+        $user->mothers_family = 'Codocedo';
         $user->claveunica = 1;
         $user->birthday = now();        
         $user->gender = 'male';
@@ -135,7 +148,7 @@ class UserSeeder extends Seeder
 
         $humanName = new HumanName();
         $humanName->use = 'official';
-        $humanName->text = 'German';
+        $humanName->given = 'German';
         $humanName->fathers_family = 'Zuñiga';
         $humanName->mothers_family = 'Codocedo';
         $humanName->user_id = $user->id;
@@ -165,6 +178,9 @@ class UserSeeder extends Seeder
 
         $user = new User();
         $user->active = 1;
+        $user->given = 'Álvaro Raymundo Edgardo';
+        $user->fathers_family = 'Torres';
+        $user->mothers_family = 'Fuchslocher';
         $user->claveunica = 1;
         $user->birthday = now();
         $user->gender = 'male';
@@ -176,7 +192,7 @@ class UserSeeder extends Seeder
 
         $humanName = new HumanName();
         $humanName->use = 'official';
-        $humanName->text = 'Alvaro';
+        $humanName->given = 'Alvaro';
         $humanName->fathers_family = 'Torres';
         $humanName->mothers_family = 'Fuchslocher';
         $humanName->user_id = $user->id;
@@ -205,8 +221,12 @@ class UserSeeder extends Seeder
 
 
 
+
         $user = new User();
         $user->active = 1;
+        $user->given = 'Adriana';
+        $user->fathers_family = 'Oviedo';
+        $user->mothers_family = 'López';
         $user->claveunica = 1;
         $user->birthday = now();
         $user->gender = 'female';
@@ -218,7 +238,7 @@ class UserSeeder extends Seeder
 
         $humanName = new HumanName();
         $humanName->use = 'official';
-        $humanName->text = 'Adriana';
+        $humanName->given = 'Adriana';
         $humanName->fathers_family = 'Oviedo';
         $humanName->mothers_family = 'López';
         $humanName->user_id = $user->id;
@@ -250,6 +270,9 @@ class UserSeeder extends Seeder
         // usuarios programador
         $user = new User();
         $user->active = 1;
+        $user->given = 'Administrador';
+        $user->fathers_family = 'Programador';
+        $user->mothers_family = 'Médico';
         $user->claveunica = 1;
         $user->birthday = now();
         $user->gender = 'other';
@@ -259,7 +282,7 @@ class UserSeeder extends Seeder
 
         $humanName = new HumanName();
         $humanName->use = 'official';
-        $humanName->text = 'Administrador';
+        $humanName->given = 'Administrador';
         $humanName->fathers_family = 'Programador';
         $humanName->mothers_family = 'Médico';
         $humanName->user_id = $user->id;
@@ -287,7 +310,7 @@ class UserSeeder extends Seeder
         //
         // $humanName = new HumanName();
         // $humanName->use = 'official';
-        // $humanName->text = 'LEIDY JOHANA';
+        // $humanName->given = 'LEIDY JOHANA';
         // $humanName->fathers_family = 'MOLINA';
         // $humanName->mothers_family = 'PRIETO';
         // $humanName->user_id = $user->id;
@@ -316,7 +339,7 @@ class UserSeeder extends Seeder
         //
         // $humanName = new HumanName();
         // $humanName->use = 'official';
-        // $humanName->text = 'ARMANDO';
+        // $humanName->given = 'ARMANDO';
         // $humanName->fathers_family = 'HENER';
         // $humanName->mothers_family = 'NUÑEZ';
         // $humanName->user_id = $user->id;

@@ -6,7 +6,7 @@
 
 <h3 class="mb-3"><i class="fas fa-book"></i> Registro de Novedades del turno {{ optional($shift)->id }}</h3>
 
-@if($shift)
+@if($shift OR old('detail'))
     @include('samu.noveltie.create')
 @endif
           

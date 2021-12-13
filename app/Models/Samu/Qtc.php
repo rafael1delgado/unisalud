@@ -30,6 +30,7 @@ class Qtc extends Model implements Auditable
         'return_key_id',
         'mobile_in_service_id',
         'mobile_id',
+        'external_crew',
 
         /* Tiempos */
         'departure_at',

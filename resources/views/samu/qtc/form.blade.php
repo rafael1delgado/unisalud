@@ -1,6 +1,6 @@
 <div class="form-row">
 
-    <fieldset class="form-group col-md-2">
+    <fieldset class="form-group col-md-3">
         <label for="for_key">Clave*</label>
         <select class="form-control" name="key_id" required>
             <option value=""></option>
@@ -10,8 +10,8 @@
         </select>
     </fieldset>
 
-    <fieldset class="form-group col-md-2">
-        <label for="for_return">Clave de Retorno</label>
+    <fieldset class="form-group col-md-3">
+        <label for="for_return">Clave de retorno</label>
         <select class="form-control" name="return_key_id">
             <option value=""></option>
             @foreach($keys as $key)
@@ -20,20 +20,35 @@
         </select>
     </fieldset>
                                 
-    <fieldset class="form-group col-md-2">                        
-        <!--revisar foreach-->
+   
+    <fieldset class="form-group col-md-6">
+        <label for="for_observation">Observación</label>
+        <input type="text" class="form-control" name="observation" value="{{ ( $qtc &&  $qtc->observation)? $qtc->observation : '' }}">
+    </fieldset>
+</div>
+
+<div class="form-row">
+
+    <fieldset class="form-group col-md-3">
         <label for="for_mobile">Móvil</label>
-        <select class="form-control" name="mobile_in_service_id">
+        <select class="form-control" name="mobile_id">
             <option value=""></option>
             @foreach($shift->mobilesInService as $mis)
-            <option value="{{ $mis->id }}" {{ old('mobile_in_service_id', optional($qtc)->mobile_in_service_id) == $mis->id ? 'selected' : '' }}>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</option>
+            <option value="{{ $mis->mobile->id }}" {{ old('mobile_id', optional($qtc)->mobile_id) == $mis->mobile->id ? 'selected' : '' }}>
+                {{ $mis->mobile->code }} {{ $mis->mobile->name }} (PROPIO)
+            </option>
             @endforeach 
+            @foreach($mobiles as $mobile)
+            <option value="{{ $mobile->id }}" {{ old('mobile_id', optional($qtc)->mobile_id) == $mobile->id ? 'selected' : '' }}>
+                {{ $mobile->code }} {{ $mobile->name }}
+            </option>
+            @endforeach
         </select>
     </fieldset>
 
-    <fieldset class="form-group col-md-6">
-        <label for="for_observation">Observacion </label>
-        <input type="text" class="form-control" name="observation" value="{{ ( $qtc &&  $qtc->observation)? $qtc->observation : '' }}">
+    <fieldset class="form-group col-md-9">
+        <label for="for_external_crew">Tripulación externa (si el móvil no pertenece a SAMU)</label>
+        <input type="text" class="form-control" name="external_crew" value="{{ ( $qtc &&  $qtc->external_crew)? $qtc->external_crew : '' }}">
     </fieldset>
 
 </div>
@@ -41,22 +56,22 @@
 <div class="form-row">
 
     <fieldset class="form-group col-md-1">
-        <label for="for_departure_at">Salida </label>
+        <label for="for_departure_at">Salida</label>
         <input type="time" class="form-control" name="departure_at" value="{{ ( $qtc &&  $qtc->departure_at)? $qtc->departure_at : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_mobile_departure_at">Salida Movil </label>
+        <label for="for_mobile_departure_at">Salida móvil</label>
         <input type="time" class="form-control" name="mobile_departure_at" value="{{ ( $qtc &&  $qtc->mobile_departure_at)? $qtc->mobile_departure_at : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_mobile_arrival_at">Llegada al Lugar</label>
+        <label for="for_mobile_arrival_at">Llegada al lugar</label>
         <input type="time" class="form-control" name="mobile_arrival_at" value="{{ ( $qtc &&  $qtc->mobile_arrival_at)? $qtc->mobile_arrival_at : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_route_to_healtcenter_at">Ruta C.Asistencial </label>
+        <label for="for_route_to_healtcenter_at">Ruta c.asistencial </label>
         <input type="time" class="form-control" name="route_to_healtcenter_at" value="{{ ( $qtc &&  $qtc->route_to_healtcenter_at)? $qtc->route_to_healtcenter_at : '' }}">
     </fieldset>
 
@@ -66,7 +81,7 @@
     </fieldset>
 
     <fieldset class="form-group col-md-1">
-        <label for="for_patient_reception_at">Recepción de Pcte</label>
+        <label for="for_patient_reception_at">Recepción de pcte</label>
         <input type="time" class="form-control" name="patient_reception_at" value="{{ ( $qtc &&  $qtc->patient_reception_at)? $qtc->patient_reception_at : '' }}">
     </fieldset>
 
@@ -121,7 +136,7 @@
     <div class="col-8">
         <div class="form-row">
             <fieldset class="form-group col-md-12">
-                <label for="for_reception_detail">Detalle de Recepción </label>                                
+                <label for="for_reception_detail">Detalle de recepción</label>                                
                 <textarea class="form-control" rows="8" name="reception_detail">{{ ( $qtc &&  $qtc->reception_detail)? $qtc->reception_detail : '' }}</textarea>
             </fieldset>
         </div>
@@ -130,7 +145,7 @@
     <div class="col-4">
         <div class="form-row">
             <fieldset class="form-group col-md-12">
-                <label for="for_establishment">Est. Recepcion de paciente </label>
+                <label for="for_establishment">Establecimiento recepción pcte.</label>
                 <select class="form-control" name="establishment_id" id="establishment_id">
                     <option> </option>
                     @foreach($establishments as $id => $establishment)
@@ -140,12 +155,12 @@
             </fieldset>
 
             <fieldset class="form-group col-md-12">
-                <label for="for_reception_person">Personal Recepcion del Pcte.</label>
+                <label for="for_reception_person">Personal recepción pcte.</label>
                 <input type="text" class="form-control" name="reception_person" value="{{ ( $qtc &&  $qtc->reception_person)? $qtc->reception_person : '' }}">
             </fieldset>
 
             <fieldset class="form-group col-12 col-md-6">
-                <label for="for_rau">Registro atención Urgencia</label>
+                <label for="for_rau">Registro Atención Urgencia</label>
                 <input type="text" class="form-control" name="rau" value="{{ ( $qtc &&  $qtc->rau)? $qtc->rau : '' }}">
             </fieldset>
         </div>
@@ -165,7 +180,7 @@
         <input type="number" class="form-control" name="fc" value="{{ ( $qtc &&  $qtc->fc)? $qtc->fc : '' }}">
     </fieldset>
     <fieldset class="form-group col-md-1">
-        <label for="for_fr">Frecuencia Respiratoria </label>
+        <label for="for_fr">Frecuencia Respiratoria</label>
         <input type="number" class="form-control" name="fr" value="{{ ( $qtc &&  $qtc->fr)? $qtc->fr : '' }}">
     </fieldset>
     <fieldset class="form-group col-md-1">

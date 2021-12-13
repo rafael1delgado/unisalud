@@ -61,7 +61,7 @@ class SamuSeeder extends Seeder
 
         MobileInService::create([
             'shift_id' => 4,
-            'mobile_id' => 1,
+            'mobile_id' => 20,
             'type' => "M1",
             'observation' => "observación",
             'status' => 1

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDescriptionActivities extends Migration
+class AddPeriodEndNullableHumanNamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddDescriptionActivities extends Migration
      */
     public function up()
     {
-        Schema::table('mp_activities', function (Blueprint $table) {
-            $table->LONGTEXT('description')->after('activity_name')->nullable();
+         Schema::table('human_names', function (Blueprint $table) {
+            $table->string('period_end')->nullable()->change();
         });
     }
 
@@ -25,8 +25,8 @@ class AddDescriptionActivities extends Migration
      */
     public function down()
     {
-        Schema::table('mp_activities', function (Blueprint $table) {
-            $table->dropColumn('description');
+         Schema::table('human_names', function (Blueprint $table) {
+            $table->string('period_end')->nullable(false)->change();
         });
     }
 }

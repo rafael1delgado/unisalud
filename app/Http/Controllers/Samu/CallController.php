@@ -22,25 +22,16 @@ class CallController extends Controller
      */
     public function index()
     {
-        /* Get o first? */
-        $shift = Shift::where('status',true)->get();
-
-        $mobiles = Mobile::all();
-        $calls = Call::orderBy('id','desc')->get(); // guarda todos los datos de la tabla
-        $shiftUsers = ShiftUser::all();
-        //return $calls; 
+        /*  */
+        $openShift = Shift::where('status',true)
+                    ->with(['calls','calls.qtcs','calls.receptor'])
+                    ->first();
+        $lastShift = Shift::latest()
+                    ->skip(1)
+                    ->with(['calls','calls.qtcs','calls.receptor'])
+                    ->first();
         
-       return view ('samu.call.index' , compact('calls','mobiles', 'shift','shiftUsers'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view ('samu.key.index');
+       return view ('samu.call.index' , compact('openShift','lastShift'));
     }
 
     /**
@@ -145,7 +136,6 @@ class CallController extends Controller
                 return redirect()->route('samu.call.index');
                 break;
             default:
-
                 $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
                 return redirect()->route('samu.call.index');
                 break;
@@ -174,6 +164,6 @@ class CallController extends Controller
     public function destroy(Call $call)
     {
         $call->delete();
-        return redirect()->route('samu.call.index')->with('danger', ' Eliminado');
+        return redirect()->route('samu.call.index')->with('danger', 'Eliminado');
     }
 }

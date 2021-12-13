@@ -32,6 +32,10 @@ class User extends Authenticatable implements Auditable
      */
     protected $fillable = [
         'id',
+        'active',
+        'given',
+        'fathers_family',
+        'mothers_family',
         'sex',
         'gender',
         'birthday',
@@ -46,7 +50,7 @@ class User extends Authenticatable implements Auditable
 
     public function humanNames(): HasMany
     {
-        return $this->hasMany(HumanName::class, 'user_id');
+        return $this->hasMany(HumanName::class, 'user_id')->orderBy('created_at');
     }
 
     public function addresses()
@@ -145,16 +149,22 @@ class User extends Authenticatable implements Auditable
             ->first();
     }
 
+    // function getGivenArray(){
+    //     return explode(' ', $this->given);
+    // }
+
     public function getOfficialFullNameAttribute()
     {
-      if ($this->actualOfficialHumanName) {
-        return "{$this->actualOfficialHumanName->text} {$this->actualOfficialHumanName->fathers_family} {$this->actualOfficialHumanName->mothers_family}";
-      }
+        return $this->text;
+
+    //   if ($this->actualOfficialHumanName) {
+    //     return "{$this->actualOfficialHumanName->text} {$this->actualOfficialHumanName->fathers_family} {$this->actualOfficialHumanName->mothers_family}";
+    //   }
     }
 
     public function getOfficialNameAttribute()
     {
-        return "{$this->actualOfficialHumanName->text}";
+        return "{$this->actualOfficialHumanName->given}";
     }
 
     public function getOfficialFathersFamilyAttribute()
@@ -442,5 +452,37 @@ class User extends Authenticatable implements Auditable
     public function teleconsultationSurveys()
     {
         return $this->hasMany(Surveys\TeleconsultationSurvey::class, 'user_id');
+    }
+
+    /**
+     * Perform any actions required after the model boots.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        self::creating(function (User $user): void {
+            $user->given = trim($user->given);
+            $user->fathers_family = trim($user->fathers_family);
+            $user->mothers_family = trim($user->mothers_family);
+
+            $user->text = $user->given.' '.$user->fathers_family.' '.$user->mothers_family;
+
+            // $humanName = HumanName::create([
+            //     'use' => 'official',
+            //     'given' => $user->given,
+            //     'fathers_family' => $user->fathers_family,
+            //     'mothers_family' => $user->mothers_family,
+            // ]);
+            // $user->humanNames()->attach($humanName);
+        });
+
+        self::updating(function (User $user): void {
+            $user->given = trim($user->given);
+            $user->fathers_family = trim($user->fathers_family);
+            $user->mothers_family = trim($user->mothers_family);
+
+            $user->text = $user->given.' '.$user->fathers_family.' '.$user->mothers_family;
+        });
     }
 }

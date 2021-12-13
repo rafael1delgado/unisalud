@@ -43,7 +43,27 @@
                 <td>{{ $mis->type}} </td>
                 <td>{{ $mis->observation}} </td>
                 <td>
-                    @livewire('samu.mobile-crew',['mobileInService' => $mis])  
+                    @if($mis->shift->status == true)
+                        @livewire('samu.mobile-crew',['mobileInService' => $mis])
+                    @else
+                        @foreach($mis->crew as $tripulant)
+                        <div class="form-row m-1">
+                            <div class="col-5">
+                                <li>
+                                    {{ $tripulant->text }}
+                                </li>
+                            </div>
+                            <div class="col-2">
+                                {{ $tripulant->pivot->jobType->name }}
+                            </div>
+                            <div class="col-3">
+                                {{ $tripulant->pivot->assumes_at }}
+                            </div>
+                            <div class="col-2">
+                            </div>
+                        </div>
+                        @endforeach
+                    @endif
                 </td>
                 <td>
                     @if($mis->shift->status == true)

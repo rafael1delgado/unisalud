@@ -51,7 +51,7 @@ class SamuMobileSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
 
         Mobile::create([
@@ -71,7 +71,7 @@ class SamuMobileSeeder extends Seeder
             'type'      => 'AMBULANCIA',
             'description' => 'Descripcion',
             'status'    => 1,
-            'managed'   => 1
+            'managed'   => 0
         ]);
 
         Mobile::create([

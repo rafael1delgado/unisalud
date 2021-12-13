@@ -16,8 +16,7 @@ class CreateHumanNamesTable extends Migration
         Schema::create('human_names', function (Blueprint $table) {
             $table->id();
             $table->foreignId('human_name_id')->nullable();
-            $table->enum('use', ['official', 'temp', 'nickname', 'anonymous', 'old', 'maiden',
-            ])->nullable();
+            $table->enum('use', ['official', 'temp', 'nickname', 'anonymous', 'old', 'maiden',])->nullable();
             $table->string('text')->nullable();
             $table->string('fathers_family')->nullable();
             $table->string('mothers_family')->nullable();
@@ -29,7 +28,7 @@ class CreateHumanNamesTable extends Migration
             $table->timestamps();
             $table->foreign('human_name_id')->references('id')->on('human_names');
             $table->foreign('user_id')->references('id')->on('users');
-//            $table->foreign('practitioner_id')->references('id')->on('practitioners');
+            // $table->foreign('practitioner_id')->references('id')->on('practitioners');
 
         });
     }
