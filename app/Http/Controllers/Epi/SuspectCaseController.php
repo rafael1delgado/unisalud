@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class SuspectCaseController extends Controller
 {
@@ -29,7 +30,8 @@ class SuspectCaseController extends Controller
      */
     public function create(User $user)
     {
-        $organizations = Organization::OrderBy('alias')->get();
+        //traigo la última organizacion
+        $organizations = Organization::where('id',Auth::user()->practitioners->last()->organization->id)->OrderBy('alias')->get();
         return view('epi.chagas.create', compact('organizations','user'));
     }
 

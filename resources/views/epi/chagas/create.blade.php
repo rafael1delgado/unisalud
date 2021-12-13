@@ -117,12 +117,14 @@
             </select>
         </fieldset>
 
+        
+
         <fieldset class="form-group col-12 col-md-4">
             <label for="for_establishment_id">Establecimiento*</label>
             <select name="organization_id" id="for_organization_id" class="form-control" required>
                 <option value="">Seleccionar Establecimiento</option>
                 @foreach($organizations as $organization)
-                <option value="{{$organization->id}}">{{$organization->alias??''}}</option>
+                <option value="{{$organization->id}}" >{{$organization->alias??''}}</option>
                 @endforeach
 
             </select>
@@ -244,10 +246,10 @@
         </fieldset> --}}
 
 
-        <fieldset class="form-group col-6 col-md-6">
+        <!-- <fieldset class="form-group col-6 col-md-6">
             <label for="for_epivigila">Epivigila</label>
             <input type="number" class="form-control" id="for_epivigila" name="epivigila">
-        </fieldset>
+        </fieldset> -->
 
 
     </div>

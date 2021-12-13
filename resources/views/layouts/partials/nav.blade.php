@@ -380,28 +380,44 @@
 </h6>
 <ul class="nav flex-column collapse collapse-menu" id="epidemiology">
     <li class="nav-item">
-        <a class="nav-link" href="#">
-            <span data-feather="chevrons-right"></span>
-            Laboratorios<span class="sr-only"></span>
-        </a>
-    </li>
-
-
-    <li class="nav-item">
         <a class="nav-link {{ active('patient.index') }}" href="{{ route('patient.index') }}">
             <span data-feather="chevrons-right"></span>
             Solicitud Examen Chagas<span class="sr-only">(en desarrollo)</span>
         </a>
     </li>
-    
+
     <li class="nav-item">
-        <a class="nav-link {{ active('epi.chagas.index') }}" href="{{ route('epi.chagas.index') }}">
+        <a class="nav-link" href="#">
             <span data-feather="chevrons-right"></span>
-            Listar Solicitudes Chagas<span class="sr-only">(en desarrollo)</span>
+            Mis Solicitudes Chagas<span class="sr-only">(en desarrollo)</span>
         </a>
     </li>
 </ul>
 @endcan
+
+
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>Laboratorios</span>
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="Laboratorio" href="#laboratory" aria-controls="laboratory">
+        <span id="icon_epidemiology" data-feather="plus-circle"></span>
+    </a>
+</h6>
+<ul class="nav flex-column collapse collapse-menu" id="laboratory">
+
+
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="{{ route('parameter.organization.index', ['type' => 'laboratorio'] ) }}">
+            <span data-feather="chevrons-right"></span>
+            Listado de Laboratorios<span class="sr-only">(en desarrollo)</span>
+        </a>
+    </li> -->
+    <li class="nav-item">
+        <a class="nav-link {{ active('epi.chagas.index') }}" href="{{ route('epi.chagas.index') }}">
+            <span data-feather="chevrons-right"></span>
+            Todas las Solicitudes Chagas<span class="sr-only">(en desarrollo)</span>
+        </a>
+    </li>
+</ul>
 
 
 
