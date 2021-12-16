@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h4 class="mb-3">Listado de Solicitudes de Examenes de Chagas</h4>
+<h4 class="mb-3">Listado de Solicitudes de Examenes de Chagas de {{$tray}}</h4>
 
 <div class="table-responsive">
     <table class="table table-sm table-bordered" id="tabla_casos">

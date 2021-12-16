@@ -14,11 +14,19 @@ class OrganizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type)
     {
         //
-        $organizations = Organization::OrderBy('name')->get();
-        return view('parameters.organizations.index', compact('organizations'));
+        //dd($type);
+        if ($type == 'Laboratorios') {
+            //10 es tipo laboratorio
+            $organizations = Organization::where('type', 10)->get();
+        } 
+        else 
+        {
+            $organizations = Organization::OrderBy('name')->get();
+        }
+        return view('parameters.organizations.index', compact('organizations','type'));
     }
 
     /**
@@ -31,8 +39,6 @@ class OrganizationController extends Controller
         //
         $organizationtypes = OrganizationType::OrderBy('name')->get();
         return view('parameters.organizations.create', compact('organizationtypes'));
-
-
     }
 
     /**
@@ -71,7 +77,7 @@ class OrganizationController extends Controller
     {
         //
         $organizationtypes = OrganizationType::OrderBy('name')->get();
-        return view('parameters.organizations.edit', compact('organization','organizationtypes'));
+        return view('parameters.organizations.edit', compact('organization', 'organizationtypes'));
     }
 
     /**
@@ -86,7 +92,7 @@ class OrganizationController extends Controller
         //
         $organization->fill($request->all());
         $organization->save();
-        session()->flash('success', 'Organización: '.$organization->name.' ha sido actualizado.');
+        session()->flash('success', 'Organización: ' . $organization->name . ' ha sido actualizado.');
 
         return redirect()->route('parameter.organization.index');
     }
@@ -101,7 +107,7 @@ class OrganizationController extends Controller
     {
         //
         $organization->delete();
-        session()->flash('success', 'Organización: '.$organization->name.' ha sido eliminado.');
+        session()->flash('success', 'Organización: ' . $organization->name . ' ha sido eliminado.');
         return redirect()->route('parameter.organization.index');
     }
 }

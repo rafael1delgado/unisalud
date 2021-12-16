@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h2 class="mb-3">Organizaciones</h2>
+<h2 class="mb-3">{{$type}}</h2>
 <a class="btn btn-primary btn-sm mb-1" href="#">Crear</a>
 
 <table class="table table-sm">

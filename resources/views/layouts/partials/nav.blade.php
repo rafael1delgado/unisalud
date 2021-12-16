@@ -271,7 +271,7 @@
 <ul class="nav flex-column collapse collapse-menu" id="mp_settings">
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('parameter.organization.index',['type', 'all'] ) }}">
+        <a class="nav-link" href="{{ route('parameter.organization.index','Todas las Organizaciones' ) }}">
             <span data-feather="chevrons-right"></span>
             Organizaciones
         </a>
@@ -386,10 +386,11 @@
         </a>
     </li>
 
+    
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link {{ active('epi.chagas.index','Mi Organización') }}"  href="{{ route('epi.chagas.index','Mi Organización') }}">
             <span data-feather="chevrons-right"></span>
-            Mis Solicitudes Chagas<span class="sr-only">(en desarrollo)</span>
+            Sol. Chagas de mi Organización<span class="sr-only">(en desarrollo)</span>
         </a>
     </li>
 </ul>
@@ -405,9 +406,16 @@
 </h6>
 <ul class="nav flex-column collapse collapse-menu" id="laboratory">
 
-    
     <li class="nav-item">
-        <a class="nav-link {{ active('epi.chagas.index') }}" href="{{ route('epi.chagas.index') }}">
+        <a class="nav-link" href="{{ route('parameter.organization.index','Laboratorios' ) }}">
+            <span data-feather="chevrons-right"></span>
+            Laboratorios
+        </a>
+    </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('epi.chagas.index','Todas las Solicitudes') }}" href="{{ route('epi.chagas.index','Todas las Solicitudes') }}">
             <span data-feather="chevrons-right"></span>
             Todas las Solicitudes Chagas<span class="sr-only">(en desarrollo)</span>
         </a>

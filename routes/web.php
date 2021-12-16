@@ -102,7 +102,12 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 
 Route::prefix('parameter')->as('parameter.')->middleware('auth')->group(function () {
     Route::resource('permission', PermissionController::class);
-	Route::resource('organization', OrganizationController::class);
+	Route::prefix('organization')->as('organization.')->middleware('auth')->group(function () {
+		Route::get('/{type}', [OrganizationController::class, 'index'])->name('index');
+		Route::get('/edit', [OrganizationController::class, 'edit'])->name('edit');
+	});
+	//Route::get('organization/index/{type?}', [OrganizationController::class, 'index'])->name('index');
+	//Route::resource('organization', OrganizationController::class);
 });
 
 Route::prefix('profile')->name('profile.')->middleware('auth')->group(function(){
@@ -579,7 +584,7 @@ Route::prefix('epi')->name('epi.')->group(function () {
 	Route::prefix('chagas')->name('chagas.')->group(function () {
 		Route::get('/{suspectCase}/edit', [SuspectCaseController::class, 'edit'])->name('edit');
 		Route::put('/{suspectCase}', [SuspectCaseController::class, 'update'])->name('update');
-		Route::get('/', [SuspectCaseController::class, 'index'])->name('index');
+		Route::get('/{tray}', [SuspectCaseController::class, 'index'])->name('index');
 		Route::get('/{user}/create', [SuspectCaseController::class, 'create'])->name('create');
 		Route::post('/', [SuspectCaseController::class, 'store'])->name('store');
 		

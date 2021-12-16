@@ -16,11 +16,16 @@ class SuspectCaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($tray)
     {
-        
-        $suspectcases = SuspectCase::all();
-        return view('epi.chagas.index', compact('suspectcases'));
+        if ($tray == 'Mi Organización') {
+            //dd('soy organizacion');
+            $suspectcases = SuspectCase::where('organization_id', Auth::user()->practitioners->last()->organization->id)->get();
+        } 
+        else {
+            $suspectcases = SuspectCase::all();
+        }
+        return view('epi.chagas.index', compact('suspectcases','tray'));
     }
 
     /**
@@ -31,8 +36,8 @@ class SuspectCaseController extends Controller
     public function create(User $user)
     {
         //traigo la última organizacion
-        $organizations = Organization::where('id',Auth::user()->practitioners->last()->organization->id)->OrderBy('alias')->get();
-        return view('epi.chagas.create', compact('organizations','user'));
+        $organizations = Organization::where('id', Auth::user()->practitioners->last()->organization->id)->OrderBy('alias')->get();
+        return view('epi.chagas.create', compact('organizations', 'user'));
     }
 
     /**
@@ -42,7 +47,7 @@ class SuspectCaseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         $sc = new SuspectCase($request->All());
         $sc->save();
         session()->flash('success', 'Se creo caso sospecha exitosamente');
@@ -70,7 +75,7 @@ class SuspectCaseController extends Controller
     {
         //
         $organizations = Organization::OrderBy('alias')->get();
-        return view('epi.chagas.edit', compact('suspectCase','organizations'));
+        return view('epi.chagas.edit', compact('suspectCase', 'organizations'));
     }
 
     /**
@@ -88,7 +93,6 @@ class SuspectCaseController extends Controller
 
         session()->flash('success', 'Se añadieron los datos adicionales a Caso sospecha');
         return redirect()->route('epi.chagas.index');
-
     }
 
     /**
