@@ -271,7 +271,7 @@
 <ul class="nav flex-column collapse collapse-menu" id="mp_settings">
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('parameter.organization.index') }}">
+        <a class="nav-link" href="{{ route('parameter.organization.index',['type', 'all'] ) }}">
             <span data-feather="chevrons-right"></span>
             Organizaciones
         </a>
@@ -371,7 +371,7 @@
 
 
 <!-- Epi -->
-@can('Administrator')
+@can('Epi: Create')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Epidemiología</span>
     <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="Epidemiología" href="#epidemiology" aria-controls="epidemiology">
@@ -396,6 +396,7 @@
 @endcan
 
 
+@can('Epi: Add Value')
 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
     <span>Laboratorios</span>
     <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="Laboratorio" href="#laboratory" aria-controls="laboratory">
@@ -404,13 +405,7 @@
 </h6>
 <ul class="nav flex-column collapse collapse-menu" id="laboratory">
 
-
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="{{ route('parameter.organization.index', ['type' => 'laboratorio'] ) }}">
-            <span data-feather="chevrons-right"></span>
-            Listado de Laboratorios<span class="sr-only">(en desarrollo)</span>
-        </a>
-    </li> -->
+    
     <li class="nav-item">
         <a class="nav-link {{ active('epi.chagas.index') }}" href="{{ route('epi.chagas.index') }}">
             <span data-feather="chevrons-right"></span>
@@ -418,7 +413,7 @@
         </a>
     </li>
 </ul>
-
+@endcan
 
 
 <!-- ausencias -->
