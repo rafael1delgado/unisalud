@@ -51,8 +51,8 @@
     <tbody>
         @foreach( $contracts as $contract )
         <tr>
-            <td>{{ $contract->user->IdentifierRun->value }}</td>
-            <td>{{ $contract->user->OfficialFullName }}</td>
+            <td>@if($contract->user){{ $contract->user->IdentifierRun->value }}@endif</td>
+            <td>@if($contract->user){{ $contract->user->OfficialFullName }}@endif</td>
             <td>{{ $contract->law }}</td>
             <td>{{ $contract->contract_id }}</td>
             <td>{{ $contract->weekly_hours }}</td>
