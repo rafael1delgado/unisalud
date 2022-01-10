@@ -545,6 +545,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/edit/{qtc}', 	[QtcController::class, 'edit'])->name('edit');
 		Route::put('/update/{qtc}', [QtcController::class, 'update'])->name('update');
 		Route::delete('/{qtc}', 	[QtcController::class, 'destroy'])->name('destroy');
+		Route::post('/filter',		[QtcController::class, 'filter'])->name('filter');
     });
 
 	Route::prefix('ot')->name('ot.')->group(function () {
