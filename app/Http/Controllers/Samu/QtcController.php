@@ -170,4 +170,22 @@ class QtcController extends Controller
     {
         //
     }
+
+    public function filter(Request $request){
+
+        /* Obtener el turno actual */
+        $today = now();
+        $yesterday = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $today) ) ));
+        $filter_date = $request->date;
+
+        // Obtener los de ayer
+        $qtcs_today = Qtc::whereDate('date',$today)->latest()->get();
+        $qtcs_yesterday = Qtc::whereDate('date',$yesterday)->latest()->get();
+
+        //Obtener los filtrados
+        $qtcs_filtered = Qtc::whereDate('date',$filter_date)->latest()->get();
+
+        return view ('samu.qtc.index' , compact('qtcs_today','qtcs_yesterday', 'qtcs_filtered', 'filter_date'));
+    }
+
 }
