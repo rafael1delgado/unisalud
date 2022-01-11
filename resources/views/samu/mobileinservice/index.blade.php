@@ -11,14 +11,13 @@
 </h3>
 
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table">
         <thead>
             <tr class="table-primary">
                 <th></th>
                 <th>Turno</th>
                 <th>Movil</th>
                 <th>Tipo</th>
-                <th>Observación</th>
                 <th>Tripulación</th>
                 <th></th>
             </tr>
@@ -41,7 +40,6 @@
                 </td>
                 <td>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
                 <td>{{ $mis->type}} </td>
-                <td>{{ $mis->observation}} </td>
                 <td>
                     @if($mis->shift->status == true)
                         @livewire('samu.mobile-crew',['mobileInService' => $mis])
@@ -74,6 +72,9 @@
                     </form>
                     @endif
                 </td>
+            </tr>
+            <tr>
+                <td colspan="6">Observación: {{ $mis->observation}} </td>
             </tr>
             @endforeach
 

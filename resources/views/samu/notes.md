@@ -11,7 +11,7 @@ Bloquear QTC si no tiene mobiles en servicio
 [AT] Eliminar personal (error en el sistema)
 [GZ] Listado personal para darle el atributo de ingresar usuarios
 
-[AT] En el listado de events (index)no muestra los moviles rurales.
+[AT] En el listado de eventos (index) no muestra los moviles rurales.
 [ ] Solo registro de llamada en una sola hoja planilla
 
 (datos de la llamada)regulacion telefonica (usuario medico, clasifica la llamada y alli se clasifica)
@@ -20,7 +20,7 @@ de regulacion de llamado (solo para profesionales)
 [ ] clasificacion 
 [ ] clave medica
 
-[ ] Hora de recepción de llamada quede registrado automaticamente.
+[AT] Hora de recepción de llamada quede registrado automaticamente (depende de cuando se carga la página).
 [AT] Evento cuadro informativo con colores
 [AT] QTC -> Eventos
 

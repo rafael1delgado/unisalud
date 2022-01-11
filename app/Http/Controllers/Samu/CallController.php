@@ -30,8 +30,8 @@ class CallController extends Controller
                     ->skip(1)
                     ->with(['calls','calls.events','calls.receptor'])
                     ->first();
-        
-       return view ('samu.call.index' , compact('openShift','lastShift'));
+                    
+        return view ('samu.call.index' , compact('openShift','lastShift'));
     }
 
     /**
