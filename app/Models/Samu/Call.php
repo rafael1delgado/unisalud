@@ -27,7 +27,9 @@ class Call extends Model implements Auditable
         'applicant',
         'address',
         'telephone',
-        'shift_id'
+        'shift_id',
+        'regulator_id',
+        'clasificator_id'
     ];
 
     public function events()
@@ -35,10 +37,10 @@ class Call extends Model implements Auditable
         return $this->belongsToMany(Event::class,'samu_call_event');
     }
 
-    public function ot()
-    {
-        return $this->hasOne(Ot::class);
-    }
+    // public function ot()
+    // {
+    //     return $this->hasOne(Ot::class);
+    // }
 
     public function shift()
     {

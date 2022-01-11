@@ -25,13 +25,15 @@ class EventController extends Controller
     public function index()
     {
         /* Obtener el turno actual */
+        $shift = Shift::where('status',true)->first();
+
         $today = now();
         $yesterday = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $today) ) ));
 
         $events_today = Event::whereDate('date',$today)->latest()->get();
         $events_yesterday = Event::whereDate('date',$yesterday)->latest()->get();
 
-        return view ('samu.event.index' , compact('events_today','events_yesterday'));
+        return view ('samu.event.index' , compact('shift','events_today','events_yesterday'));
     }
 
     /**

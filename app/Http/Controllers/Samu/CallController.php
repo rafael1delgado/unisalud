@@ -34,6 +34,32 @@ class CallController extends Controller
         return view ('samu.call.index' , compact('openShift','lastShift'));
     }
 
+    public function ots()
+    {
+        /*  */
+        $openShift = Shift::where('status',true)
+                    ->with(['calls','calls.events','calls.receptor'])
+                    ->first();
+        $lastShift = Shift::latest()
+                    ->skip(1)
+                    ->with(['calls','calls.events','calls.receptor'])
+                    ->first();
+                    
+        return view ('samu.call.ots' , compact('openShift','lastShift'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Samu\Call  $call
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $shift = Shift::where('status',true)->first();
+        return view ('samu.call.create' , compact('shift'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -42,30 +68,15 @@ class CallController extends Controller
      */
     public function store(Request $request)
     {
-        $shift = Shift::where('status',1)->first();
+        $shift = Shift::where('status',true)->first();
 
         if($shift) {
             $call = new Call($request->All());
             $call->shift()->associate($shift);
             $call->save();
 
-            switch($call->classification) {
-                case 'OT':
-                    $ot = new Ot();
-                    $ot->call()->associate($call);
-                    $ot->save();
-
-                    $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
-                    return redirect()->route('samu.call.edit', $call);
-                    break;
-                case 'T1':
-                case 'T2':
-                case 'NM':
-                default:
-                    $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
-                    return redirect()->route('samu.call.index');
-                    break;
-            }            
+            $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
+            return redirect()->route('samu.call.create');
         }
         else {
             $request->session()->flash('danger', 'No se puede guardar el llamado, 
@@ -97,8 +108,8 @@ class CallController extends Controller
     public function edit(Call $call)
     {
         $shift = Shift::where('status',true)->first();
-        $shiftUsers = ShiftUser::all();
-        return view ('samu.call.edit' , compact('call', 'shift', 'shiftUsers'));
+        //$shiftUsers = ShiftUser::all();
+        return view ('samu.call.edit' , compact('call', 'shift'));
     }
 
  
@@ -114,29 +125,18 @@ class CallController extends Controller
         $call->fill($request->all());
         $call->save();
 
+        $request->session()->flash('success', 'Se han actualizado los datos la orientación telefónica.');
+
         switch($call->classification) {
-            case 'OT':
-                /* Si no tiene creada la OT */
-                if(!$call->ot) {
-                    $ot = new Ot();
-                    $ot->call()->associate($call);
-                    $ot->save();
-                    
-                    return redirect()->route('samu.call.edit', $call);
-                }
-                else {
-                    $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
-                    return redirect()->route('samu.call.index');
-                }
+            case 'OT':                    
+                return redirect()->route('samu.call.ots');
                 break;
             case 'T1':
             case 'T2':
             case 'NM':
-                $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
                 return redirect()->route('samu.call.index');
                 break;
             default:
-                $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
                 return redirect()->route('samu.call.index');
                 break;
         } 

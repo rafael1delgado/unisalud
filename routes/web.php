@@ -531,6 +531,8 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
     Route::prefix('call')->name('call.')->group(function () {
 		Route::get('/',				[CallController::class, 'index'])->name('index');
+		Route::get('/ots',			[CallController::class, 'ots'])->name('ots');
+		Route::get('/create',		[CallController::class, 'create'])->name('create');
 		Route::get('/edit/{call}',	[CallController::class, 'edit'])->name('edit');
 		Route::post('/store',		[CallController::class, 'store'])->name('store');
 		Route::delete('/{call}', 	[CallController::class, 'destroy'])->name('destroy');

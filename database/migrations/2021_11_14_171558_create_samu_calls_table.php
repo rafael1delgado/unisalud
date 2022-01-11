@@ -19,11 +19,12 @@ class CreateSamuCallsTable extends Migration
             $table->string('classification')->nullable();
             $table->time('hour');
             $table->foreignId('receptor_id')->constrained('users');
+            $table->foreignId('clasificator_id')->nullable()->constrained('users');
+            $table->foreignId('regulator_id')->nullable()->constrained('users');
             $table->text('information')->nullable();
             $table->string('applicant')->nullable();
             $table->string('address')->nullable();
             $table->string('telephone')->nullable();
-            // $table->foreignId('creator_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

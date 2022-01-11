@@ -20,8 +20,18 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ active('samu.call.*') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
-        href=" {{ route('samu.call.index') }}"><i class="fas fa-headset"></i> Centro de Llamadas</a>
+        <a class="nav-link {{ active('samu.call.create') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.call.create') }}"><i class="fas fa-headset"></i> Llamadas</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ active(['samu.call.index','samu.call.edit']) }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.call.index') }}"><i class="fas fa-clipboard-check"></i> Regulación</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ active('samu.call.ots') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.call.ots') }}"><i class="fas fa-phone"></i> Orientaciones telefónicas</a>
     </li>
 
     <li class="nav-item">
