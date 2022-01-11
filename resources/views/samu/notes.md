@@ -21,7 +21,7 @@ de regulacion de llamado (solo para profesionales)
 [ ] clave medica
 
 [ ] Hora de recepción de llamada quede registrado automaticamente.
-[ ] Evento cuadro informativo con colores
+[AT] Evento cuadro informativo con colores
 [AT] QTC -> Eventos
 
 [ ] Call center (todas las ot en una pestaña aparte con conteo propio)

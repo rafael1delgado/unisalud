@@ -4,6 +4,14 @@
 
 @include('samu.nav')
 
+<table class="table table-sm">
+    <tr>
+        <td class="table-danger">Movil aun no sale</td>
+        <td class="table-warning">Móvil rumbo a destino</td>
+        <td class="table-info">Móvil retornando a base</td>
+        <td class="table-success">Móvil en base</td>
+    </tr>
+</table>
 
 <h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de Eventos filtrados</h3>
 
