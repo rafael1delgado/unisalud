@@ -16,6 +16,7 @@
             <tr class="table-primary">
                 <th></th>
                 <th>Turno</th>
+                <th>Posición</th>
                 <th>Movil</th>
                 <th>Tipo</th>
                 <th>Tripulación</th>
@@ -38,6 +39,7 @@
                     {{ $mis->shift->opening_at->format('Y-m-d') }} - 
                     {{ $mis->shift->type }} <br> ({{ $mis->shift->statusInWord }})
                 </td>
+                <td>{{ $mis->position }}</td>
                 <td>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
                 <td>{{ $mis->type}} </td>
                 <td>

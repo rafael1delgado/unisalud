@@ -24,6 +24,7 @@ class MobileInService extends Model implements Auditable
         'id',
         'shift_id',
         'mobile_id',
+        'position',
         'observation',
         'status',
         'type'
