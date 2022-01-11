@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Samu;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Samu\Shift;
-use App\Models\Samu\Qtc;
+use App\Models\Samu\Event;
 use App\Models\Samu\Key;
 use App\Models\Samu\Call;
 use App\Models\Samu\MobileCrew;
-use App\Models\Samu\QtcUser;
-use App\Models\Samu\QtcCounter;
+use App\Models\Samu\EventUser;
+use App\Models\Samu\EventCounter;
 use App\Models\Samu\MobileInService;
 use App\Models\Samu\Mobile;
 use App\Models\Organization;
 
-class QtcController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,10 +28,10 @@ class QtcController extends Controller
         $today = now();
         $yesterday = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $today) ) ));
 
-        $qtcs_today = Qtc::whereDate('date',$today)->latest()->get();
-        $qtcs_yesterday = Qtc::whereDate('date',$yesterday)->latest()->get();
+        $events_today = Event::whereDate('date',$today)->latest()->get();
+        $events_yesterday = Event::whereDate('date',$yesterday)->latest()->get();
 
-        return view ('samu.qtc.index' , compact('qtcs_today','qtcs_yesterday'));
+        return view ('samu.event.index' , compact('events_today','events_yesterday'));
     }
 
     /**
@@ -45,10 +45,10 @@ class QtcController extends Controller
         $shift = Shift::where('status',true)->first();
         $mobiles = Mobile::where('managed',false)->get();
         $establishments = Organization::pluck('name','id')->sort();
-        $nextCounter = QtcCounter::getNext();
+        $nextCounter = EventCounter::getNext();
         $keys = Key::all();
 
-        return view ('samu.qtc.create',compact('shift','keys','establishments','nextCounter','mobiles'));
+        return view ('samu.event.create',compact('shift','keys','establishments','nextCounter','mobiles'));
     }
 
     /**
@@ -63,34 +63,34 @@ class QtcController extends Controller
 
         if($shift) 
         {
-            $qtc = new Qtc($request->all());
-            $qtc->patient_unknown = $request->has('patient_unknown') ? true:false;
+            $event = new Event($request->all());
+            $event->patient_unknown = $request->has('patient_unknown') ? true:false;
             $isMobileInService = $shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
             
             if($isMobileInService)
             {
-                $qtc->mobileInService()->associate($isMobileInService);
+                $event->mobileInService()->associate($isMobileInService);
             }
             
-            $qtc->shift()->associate($shift);
-            $qtc->save();
+            $event->shift()->associate($shift);
+            $event->save();
         
             $mobilecrews=MobileCrew::where('mobiles_in_service_id', $request->mobile_in_service_id)->get();
 
             foreach($mobilecrews as $mobilecrew)
             {
-                QtcUser::create([
-                    'qtc_id'                => $qtc->id,
+                EventUser::create([
+                    'event_id'                => $event->id,
                     'user_id'               => $mobilecrew->user_id,
                     'job_type_id'           => $mobilecrew->job_type_id
                 ]);
             }
-            session()->flash('success', 'Se ha creado el QTC');
-            return redirect()->route('samu.qtc.index');
+            session()->flash('success', 'Se ha creado el evento');
+            return redirect()->route('samu.event.index');
         }
         else
         {
-            $request->session()->flash('danger', 'No se pudo registrar el QTC ya que
+            $request->session()->flash('danger', 'No se pudo registrar el evento ya que
                 el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
             
             return redirect()->back()->withInput();
@@ -102,13 +102,13 @@ class QtcController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Samu\Qtc $qtc
+     * @param  \App\Models\Samu\Event $event
      * @return \Illuminate\Http\Response
      */
 
 
      
-    public function show(qtc $qtc)
+    public function show(event $event)
     {
         //
     }
@@ -116,10 +116,10 @@ class QtcController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Samu\qtc  $follow
+     * @param  \App\Models\Samu\event  $follow
      * @return \Illuminate\Http\Response
      */
-    public function edit(qtc $qtc)
+    public function edit(event $event)
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
@@ -127,46 +127,46 @@ class QtcController extends Controller
         $keys = Key::all();
         $mobiles = Mobile::where('managed',false)->get();
 
-        return view ('samu.qtc.edit', compact('shift','establishments','keys','qtc','mobiles'));
+        return view ('samu.event.edit', compact('shift','establishments','keys','event','mobiles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Samu\qtc  $follow
+     * @param  \App\Models\Samu\event  $follow
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, qtc $qtc)
+    public function update(Request $request, event $event)
     {
         $shift = Shift::where('status',true)->first();
 
-        $qtc->fill($request->all());
-        $qtc->patient_unknown = $request->has('patient_unknown') ? true:false;
+        $event->fill($request->all());
+        $event->patient_unknown = $request->has('patient_unknown') ? true:false;
         $isMobileInService = $shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
 
         if($isMobileInService)
         {
-            $qtc->mobileInService()->associate($isMobileInService);
+            $event->mobileInService()->associate($isMobileInService);
         }
         else 
         {
-            $qtc->mobileInService()->dissociate();
+            $event->mobileInService()->dissociate();
         }
-        $qtc->update();
+        $event->update();
 
-        session()->flash('success', 'Qtc Actualizado satisfactoriamente.');
-        return redirect()->route('samu.qtc.index');
+        session()->flash('success', 'Event Actualizado satisfactoriamente.');
+        return redirect()->route('samu.event.index');
     }
 
     
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Samu\qtc  $qtc
+     * @param  \App\Models\Samu\event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(qtc $qtc)
+    public function destroy(event $event)
     {
         //
     }
@@ -179,13 +179,13 @@ class QtcController extends Controller
         $filter_date = $request->date;
 
         // Obtener los de ayer
-        $qtcs_today = Qtc::whereDate('date',$today)->latest()->get();
-        $qtcs_yesterday = Qtc::whereDate('date',$yesterday)->latest()->get();
+        $events_today = Event::whereDate('date',$today)->latest()->get();
+        $events_yesterday = Event::whereDate('date',$yesterday)->latest()->get();
 
         //Obtener los filtrados
-        $qtcs_filtered = Qtc::whereDate('date',$filter_date)->latest()->get();
+        $events_filtered = Event::whereDate('date',$filter_date)->latest()->get();
 
-        return view ('samu.qtc.index' , compact('qtcs_today','qtcs_yesterday', 'qtcs_filtered', 'filter_date'));
+        return view ('samu.event.index' , compact('events_today','events_yesterday', 'events_filtered', 'filter_date'));
     }
 
 }

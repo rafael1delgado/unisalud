@@ -28,6 +28,12 @@ class ShiftUser extends Component
         'job_type_id.required'  => 'Debe seleccionar una función',
     ];
 
+    public function resetInputs()
+    {
+        $this->user_id = '';
+        $this->job_type_id = '';
+    }
+
     public function store()
     {
         $this->validate();
@@ -38,12 +44,14 @@ class ShiftUser extends Component
             'shift_id'      => $this->shift->id
         ]);
 
-        redirect()->to(route('samu.shift.index'));
+        $this->shift->refresh();
+        $this->resetInputs();
     }
 
     public function delete(ShiftUserModel $shiftUser)
     {
         $shiftUser->delete();
+        $this->shift->refresh();
     }
 
     public function render()

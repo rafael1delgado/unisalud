@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSamuQtcCountersTable extends Migration
+class CreateSamuEventCountersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSamuQtcCountersTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_qtc_counters', function (Blueprint $table) {
+        Schema::create('samu_event_counters', function (Blueprint $table) {
             $table->id();
             $table->integer('counter');
             $table->date('date');
@@ -28,6 +28,6 @@ class CreateSamuQtcCountersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_qtc_counters');
+        Schema::dropIfExists('samu_event_counters');
     }
 }

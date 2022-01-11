@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Models\Samu\Shift;
-use App\Models\Samu\Qtc;
+use App\Models\Samu\Event;
 use App\Models\Samu\Ot;
 use App\Models\User;
 
@@ -30,9 +30,9 @@ class Call extends Model implements Auditable
         'shift_id'
     ];
 
-    public function qtcs()
+    public function events()
     {
-        return $this->belongsToMany(Qtc::class,'samu_call_qtc');
+        return $this->belongsToMany(Event::class,'samu_call_event');
     }
 
     public function ot()

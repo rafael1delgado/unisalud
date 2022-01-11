@@ -5,10 +5,9 @@
 @include('samu.nav')
 
 
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de QTCs filtrados
-</h3>
+<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de Eventos filtrados</h3>
 
-<form method="post" action="{{ route('samu.qtc.filter')}}">
+<form method="post" action="{{ route('samu.event.filter')}}">
     @csrf
     @method('POST')
     <div class="form-row">
@@ -23,14 +22,14 @@
     </div>
 </form>
 
-@if(isset($qtcs_filtered) && $qtcs_filtered != null && $qtcs_filtered->count() > 0)
+@if(isset($events_filtered) && $events_filtered != null && $events_filtered->count() > 0)
     <div class="table-responsive">
         <table class="table table-striped">
             
             <thead>
                 <tr class="table-primary">
                     <th>ID</th>
-                    <th>QTC N°</th>
+                    <th>Evento N°</th>
                     <th>Turno</th>
                     <th>Clave</th>
                     <th>Clave de Retorno</th>
@@ -40,20 +39,23 @@
             </thead>
             
             <tbody>
-                @foreach($qtcs_filtered as $qtc)
-                <tr class="table-{{ $qtc->color }}">
+                @foreach($events_filtered as $event)
+                <tr class="table-{{ $event->color }}">
                     <td>
-                        <a href="{{ route('samu.qtc.edit', $qtc) }}">
-                            <button class="btn btn-outline-primary"><i class="fas fa-edit"></i> {{ $qtc->id }}</button>
+                        <a href="{{ route('samu.event.edit', $event) }}">
+                            <button class="btn btn-outline-primary"><i class="fas fa-edit"></i> {{ $event->id }}</button>
                         </a>
                     </td>
-                    <td>{{ $qtc->counter }} </td>
-                    <td>{{ $qtc->shift->opening_at }}</td>
-                    <td>{{ $qtc->key->key }} - {{ $qtc->key->name }} </td>
-                    <td>{{ optional($qtc->returnKey)->key }} - {{ optional($qtc->returnKey)->name }}</td>
-                    <td>{{ optional(optional($qtc->mobileInService)->mobile)->code }} {{ optional(optional($qtc->mobileInService)->mobile)->name }}</td>
+                    <td>{{ $event->counter }} </td>
+                    <td>{{ $event->shift->opening_at }}</td>
+                    <td>{{ $event->key->key }} - {{ $event->key->name }} </td>
+                    <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
                     <td>
-                        <form method="POST" action="{{ route('samu.qtc.destroy', $qtc) }}">
+                        {{ optional($event->mobile)->code }} 
+                        {{ optional($event->mobile)->name }}
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ route('samu.event.destroy', $event) }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
@@ -68,16 +70,16 @@
     </div>
 @endif
 
-@if(isset($qtcs_filtered) && $qtcs_filtered != null && $qtcs_filtered->count() === 0)
+@if(isset($events_filtered) && $events_filtered != null && $events_filtered->count() === 0)
     <div class="alert alert-warning">
         No hay eventos con esos parámetros
     </div>
 @endif
 
 
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de QTCs de hoy
-    <a class="btn btn-success float-right" href="{{ route('samu.qtc.create') }}">
-        <i class="fas fa-plus"></i> Crear QTC
+<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de Eventos de hoy
+    <a class="btn btn-success float-right" href="{{ route('samu.event.create') }}">
+        <i class="fas fa-plus"></i> Crear Evento
     </a>
 </h3>
 
@@ -87,7 +89,7 @@
         <thead>
             <tr class="table-primary">
                 <th>ID</th>
-                <th>QTC N°</th>
+                <th>Evento N°</th>
                 <th>Turno</th>
                 <th>Clave</th>
                 <th>Clave de Retorno</th>
@@ -97,20 +99,23 @@
         </thead>
         
         <tbody>
-            @foreach($qtcs_today as $qtc)
-            <tr class="table-{{ $qtc->color }}">
+            @foreach($events_today as $event)
+            <tr class="table-{{ $event->color }}">
                 <td>
-                    <a href="{{ route('samu.qtc.edit', $qtc) }}">
-                        <button class="btn btn-outline-primary"><i class="fas fa-edit"></i> {{ $qtc->id }}</button>
+                    <a href="{{ route('samu.event.edit', $event) }}">
+                        <button class="btn btn-outline-primary"><i class="fas fa-edit"></i> {{ $event->id }}</button>
                     </a>
                 </td>
-                <td>{{ $qtc->counter }} </td>
-                <td>{{ $qtc->shift->opening_at }}</td>
-                <td>{{ $qtc->key->key }} - {{ $qtc->key->name }} </td>
-                <td>{{ optional($qtc->returnKey)->key }} - {{ optional($qtc->returnKey)->name }}</td>
-                <td>{{ optional(optional($qtc->mobileInService)->mobile)->code }} {{ optional(optional($qtc->mobileInService)->mobile)->name }}</td>
+                <td>{{ $event->counter }} </td>
+                <td>{{ $event->shift->opening_at }}</td>
+                <td>{{ $event->key->key }} - {{ $event->key->name }} </td>
+                <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
                 <td>
-                    <form method="POST" action="{{ route('samu.qtc.destroy', $qtc) }}">
+                    {{ optional($event->mobile)->code }} 
+                    {{ optional($event->mobile)->name }}
+                </td>
+                <td>
+                    <form method="POST" action="{{ route('samu.event.destroy', $event) }}">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
@@ -125,7 +130,7 @@
 </div>
 
 
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de QTCs de ayer</h3>
+<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de Eventos de ayer</h3>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -133,7 +138,7 @@
         <thead>
             <tr class="table-primary">
                 <th></th>
-                <th>QTC N°</th>
+                <th>Evento N°</th>
                 <th>Turno</th>
                 <th>Clave</th>
                 <th>Clave de Retorno</th>
@@ -143,20 +148,20 @@
         </thead>
         
         <tbody>
-            @foreach($qtcs_yesterday as $qtc)
-            <tr class="table-{{ $qtc->color }}">
+            @foreach($events_yesterday as $event)
+            <tr class="table-{{ $event->color }}">
                 <td>
-                    <a href="{{ route('samu.qtc.edit', $qtc) }}">
-                        <button class="btn btn-outline-primary"><i class="fas fa-edit"></i> {{ $qtc->id }}</button>
+                    <a href="{{ route('samu.event.edit', $event) }}">
+                        <button class="btn btn-outline-primary"><i class="fas fa-edit"></i> {{ $event->id }}</button>
                     </a>
                 </td>
-                <td>{{ $qtc->counter }} </td>
-                <td>{{ $qtc->shift->opening_at }}</td>
-                <td>{{ $qtc->key->key }} - {{ $qtc->key->name }} </td>
-                <td>{{ optional($qtc->returnKey)->key }} - {{ optional($qtc->returnKey)->name }}</td>
-                <td>{{ optional(optional($qtc->mobileInService)->mobile)->code }} {{ optional(optional($qtc->mobileInService)->mobile)->name }}</td>
+                <td>{{ $event->counter }} </td>
+                <td>{{ $event->shift->opening_at }}</td>
+                <td>{{ $event->key->key }} - {{ $event->key->name }} </td>
+                <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
+                <td>{{ optional(optional($event->mobileInService)->mobile)->code }} {{ optional(optional($event->mobileInService)->mobile)->name }}</td>
                 <td>
-                    <form method="POST" action="{{ route('samu.qtc.destroy', $qtc) }}">
+                    <form method="POST" action="{{ route('samu.event.destroy', $event) }}">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>

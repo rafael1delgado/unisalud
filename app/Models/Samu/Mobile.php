@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Models\Samu\Shift;
-use App\Models\Samu\Qtc;
+use App\Models\Samu\Event;
 use App\Models\User;
 
 class Mobile extends Model implements Auditable

@@ -29,7 +29,7 @@
     @case('NM')
         <div class="card">
             <div class="card-body">
-            @include('samu.call.qtc', ['call' => $call, 'shift' => $shift])
+            @include('samu.call.event', ['call' => $call, 'shift' => $shift])
             </div>
         </div>
         @break

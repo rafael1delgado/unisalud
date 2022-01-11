@@ -54,9 +54,9 @@
                     <td>
                         {{ $call->classification }} 
                         @if($call->classification != 'OT')
-                            - Qtc: 
-                            @foreach($call->qtcs as $qtc)
-                                <a href="{{ route('samu.qtc.edit', $qtc) }}" class="link-primary"> {{ $qtc->id }}</a>, 
+                            - Evento: 
+                            @foreach($call->events as $event)
+                                <a href="{{ route('samu.event.edit', $event) }}" class="link-primary"> {{ $event->id }}</a>, 
                             @endforeach
                         @endif
                     </td>

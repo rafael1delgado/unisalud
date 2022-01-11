@@ -75,9 +75,9 @@ class Shift extends Model implements Auditable
         return $this->hasMany(Call::class);
     }
 
-    public function qtcs()
+    public function events()
     {
-        return $this->hasMany(Qtc::class);
+        return $this->hasMany(Event::class);
     }
 
     /* Obtiene el estado en palabra */

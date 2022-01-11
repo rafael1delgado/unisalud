@@ -40,7 +40,7 @@
     </div>
     <div class="col-1">
         @if($shift->status == true)
-        <button class="btn btn-danger btn-sm mx-2" wire:click="delete({{ $user }})"><i class="fas fa-trash"></i></button>
+        <button class="btn btn-danger btn-sm mx-2" wire:click="delete({{$user->pivot->id}})"><i class="fas fa-trash"></i></button>
         @endif
     </div>
 </div>

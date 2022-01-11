@@ -8,10 +8,10 @@ Bloquear QTC si no tiene mobiles en servicio
 
 ### Pestaña turnos
 [ ] Observaciones (en caso de ausencia o reemplazo de personal) editar
-[ ] Eliminar personal (error en el sistema)
+[AT] Eliminar personal (error en el sistema)
 [GZ] Listado personal para darle el atributo de ingresar usuarios
 
-[ ] En el listado de qtcs (index)no muestra los moviles rurales.
+[AT] En el listado de events (index)no muestra los moviles rurales.
 [ ] Solo registro de llamada en una sola hoja planilla
 
 (datos de la llamada)regulacion telefonica (usuario medico, clasifica la llamada y alli se clasifica)
@@ -21,17 +21,17 @@ de regulacion de llamado (solo para profesionales)
 [ ] clave medica
 
 [ ] Hora de recepción de llamada quede registrado automaticamente.
-[ ] QTC cuadro informativo con colores
-[ ] Eventos ¿que ese esto?
+[ ] Evento cuadro informativo con colores
+[AT] QTC -> Eventos
 
 [ ] Call center (todas las ot en una pestaña aparte con conteo propio)
-[ ] Asignar o crear qtc solo despacho en una pestaña aparte
+[ ] Asignar o crear event solo despacho en una pestaña aparte
 [ ] Call center solo llamados de dia
 
 ### Filtros 
-[GZ] Filtro de call center por fecha, (hora), Nº qtc, ¿dirección, telefono?, personal
+[GZ] Filtro de call center por fecha, (hora), Nº event, ¿dirección, telefono?, personal
 
-[ ] Impresion de informes (de un QTC)
+[ ] Impresion de informes (de un Evento)
 [ ] Historial de cambios sólo para dra Astudillo
 [ ] Orden de salida de los moviles (listado de moviles) de acuerdo al orden de salida
 [ ] Estadisticas (enfermero, coordinador)

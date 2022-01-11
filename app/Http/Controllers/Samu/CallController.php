@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
 use App\Models\Samu\Call;
-use App\Models\Samu\Qtc;
+use App\Models\Samu\Event;
 use App\Models\Samu\Key;
 use App\Models\Samu\MobileInService;
 use App\Models\Samu\Shift;
@@ -24,11 +24,11 @@ class CallController extends Controller
     {
         /*  */
         $openShift = Shift::where('status',true)
-                    ->with(['calls','calls.qtcs','calls.receptor'])
+                    ->with(['calls','calls.events','calls.receptor'])
                     ->first();
         $lastShift = Shift::latest()
                     ->skip(1)
-                    ->with(['calls','calls.qtcs','calls.receptor'])
+                    ->with(['calls','calls.events','calls.receptor'])
                     ->first();
         
        return view ('samu.call.index' , compact('openShift','lastShift'));
@@ -143,11 +143,11 @@ class CallController extends Controller
     }
 
 
-    public function syncQtcs(Request $request, Call $call)
+    public function syncevents(Request $request, Call $call)
     {
-        if ($request->has('qtcs')) 
+        if ($request->has('events')) 
         {
-            $call->qtcs()->sync($request->input('qtcs'));
+            $call->events()->sync($request->input('events'));
         }
 
         $request->session()->flash('success', 'Se han actualizado los datos del llamado.');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSamuQtcsTable extends Migration
+class CreateSamuEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSamuQtcsTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_qtcs', function (Blueprint $table) {
+        Schema::create('samu_events', function (Blueprint $table) {
             $table->id();
             
             $table->date('date');
@@ -71,15 +71,15 @@ class CreateSamuQtcsTable extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('samu_call_qtc', function (Blueprint $table) {
+        Schema::create('samu_call_event', function (Blueprint $table) {
             $table->id();
             $table->foreignId('call_id')->constrained('samu_calls');
-            $table->foreignId('qtc_id')->constrained('samu_qtcs');
+            $table->foreignId('event_id')->constrained('samu_events');
         });
 
-        Schema::create('samu_qtc_user', function (Blueprint $table) {
+        Schema::create('samu_event_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('qtc_id')->constrained('samu_qtcs');
+            $table->foreignId('event_id')->constrained('samu_events');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('job_type_id')->constrained('samu_job_types');
             $table->timestamps();
@@ -94,8 +94,8 @@ class CreateSamuQtcsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_qtc_user');
-        Schema::dropIfExists('samu_call_qtc');
-        Schema::dropIfExists('samu_qtcs');
+        Schema::dropIfExists('samu_event_user');
+        Schema::dropIfExists('samu_call_event');
+        Schema::dropIfExists('samu_events');
     }
 }

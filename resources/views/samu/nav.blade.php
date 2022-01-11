@@ -25,8 +25,8 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ active('samu.qtc.*') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
-        href=" {{ route('samu.qtc.index') }}"><i class="fas fa-car-crash"></i> QTCs</a>
+        <a class="nav-link {{ active('samu.event.*') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.event.index') }}"><i class="fas fa-car-crash"></i> Eventos</a>
     </li>
 
     <li class="nav-item dropdown">
