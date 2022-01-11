@@ -51,7 +51,8 @@ class SuspectCaseController extends Controller
         $sc = new SuspectCase($request->All());
         $sc->save();
         session()->flash('success', 'Se creo caso sospecha exitosamente');
-        return redirect()->route('epi.chagas.index');
+        return redirect()->back();
+        //return redirect()->route('epi.chagas.index');
     }
 
     /**
@@ -92,7 +93,8 @@ class SuspectCaseController extends Controller
         $suspectCase->save();
 
         session()->flash('success', 'Se añadieron los datos adicionales a Caso sospecha');
-        return redirect()->route('epi.chagas.index');
+        return redirect()->back();
+        //return redirect()->route('epi.chagas.index');
     }
 
     /**
