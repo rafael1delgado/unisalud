@@ -21,7 +21,9 @@ class HumanName extends Model
         'fathers_family',
         'mothers_family',
         'prefix',
-        'suffix'
+        'suffix',
+        'period_start',
+        'period_end'
     ];
 
     /**

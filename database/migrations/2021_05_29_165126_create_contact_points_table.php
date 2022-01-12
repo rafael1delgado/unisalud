@@ -26,6 +26,7 @@ class CreateContactPointsTable extends Migration
             $table->enum('use', ['home', 'work', 'temp', 'old', 'mobile'])->nullable();
             $table->unsignedInteger('rank')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('contact_point_id')->references('id')->on('contact_points');
             $table->foreign('user_id')->references('id')->on('users');

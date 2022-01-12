@@ -121,6 +121,9 @@ Route::prefix('profile')->name('profile.')->middleware('auth')->group(function()
 });
 
 Route::prefix('user')->name('user.')->middleware('auth')->group(function(){
+    Route::get('/', [UserController::class, 'index'])->name('index');
+    Route::get('/create', [UserController::class, 'create'])->name('create');
+    Route::post('/', [UserController::class, 'store'])->name('store');
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
     Route::put('/{user}', [UserController::class, 'update'])->name('update');
     Route::get('/search_by_name', [UserController::class, 'searchByName'])->name('search_by_name');
@@ -561,6 +564,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::put('/update/{noveltie}',[NoveltieController::class, 'update'])->name('update');
 		//Route::view('/edit', 'samu.novelties.create')->name('edit');
     });
+
 
 });
 //fin rutas samu

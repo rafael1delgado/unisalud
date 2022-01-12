@@ -305,7 +305,7 @@ class PatientController extends Controller
 
             if (
                 $actualOfficialHumanName->use != $request->human_name_use ||
-                $actualOfficialHumanName->text != $request->text ||
+                $actualOfficialHumanName->text != $request->text || //TODO verificar
                 $actualOfficialHumanName->fathers_family != $request->fathers_family ||
                 $actualOfficialHumanName->mothers_family != $request->mothers_family
             ) {

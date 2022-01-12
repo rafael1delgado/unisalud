@@ -138,6 +138,12 @@
             Mis permisos
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('user.index') }}" href="{{ route('user.index')}}">
+            <span data-feather="unlock"></span>
+            Usuarios
+        </a>
+    </li>
 </ul>
 @endcan
 

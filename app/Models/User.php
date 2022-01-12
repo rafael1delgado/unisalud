@@ -146,7 +146,7 @@ class User extends Authenticatable implements Auditable
     {
         return $this->officialHumanNames()
             ->where('use', 'official')
-            ->latest()
+            ->whereNull('period_end')
             ->first();
     }
 
@@ -251,12 +251,29 @@ class User extends Authenticatable implements Auditable
             return '';
     }
 
+    public function getOfficialContactPointPhoneAttribute()
+    {
+        return $this->contactPoints()
+            ->where('system', 'phone')
+            ->first();
+        
+    }
+
     public function getOfficialEmailAttribute()
     {
         $email = $this->contactPoints()
             ->where('system', 'email')
             ->first('value');
         return ($email) ? $email->value : null;
+    }
+
+
+    public function getOfficialContactPointEmailAttribute()
+    {
+        $contactPointEmail = $this->contactPoints()
+            ->where('system', 'email')
+            ->first();
+        return $contactPointEmail;
     }
 
     //Addresses
