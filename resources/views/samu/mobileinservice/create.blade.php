@@ -11,8 +11,13 @@
     @method('POST')
     
     <div class="form-row">
+
+        <fieldset class="form-group col-8 col-md-1">
+            <label for="for_position">Posición </label>
+            <input type="number" value="1" class="form-control" name="position">             
+        </fieldset>
         
-        <fieldset class="form-group col-8 col-md-3">
+        <fieldset class="form-group col-8 col-md-2">
             <label for="for_run">Móvil*</label>
             <select class="form-control" name="mobile_id">
             <option></option>
@@ -24,7 +29,7 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-12 col-md-3">
+        <fieldset class="form-group col-12 col-md-2">
             <label for="empresa">Tipo de  móvil*</label>
             <select class="form-control" name="type">
                 <option value=""></option>

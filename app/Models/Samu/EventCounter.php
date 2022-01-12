@@ -5,7 +5,7 @@ namespace App\Models\Samu;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class QtcCounter extends Model
+class EventCounter extends Model
 {
     use HasFactory;
 
@@ -33,18 +33,18 @@ class QtcCounter extends Model
     *
     * @var string
     */
-    protected $table = 'samu_qtc_counters';
+    protected $table = 'samu_event_counters';
 
     public static function getNext()
     {
-        $counter = QtcCounter::whereDate('date',now())->first();
+        $counter = EventCounter::whereDate('date',now())->first();
         if($counter) return $counter->counter + 1;
         else return 1;
     }
 
     public static function useNext()
     {
-        $counter = QtcCounter::whereDate('date',now())->first();
+        $counter = EventCounter::whereDate('date',now())->first();
 
         if($counter) 
         {
@@ -54,7 +54,7 @@ class QtcCounter extends Model
         } 
         else 
         {
-            $newCounter = QtcCounter::create([
+            $newCounter = EventCounter::create([
                 'date' => now(),
                 'counter' => 1,
             ]);

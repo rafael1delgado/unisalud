@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
-use App\Models\Samu\QtcKey;
+use App\Models\Samu\EventKey;
 use Illuminate\Http\Request;
 
-class QtcKeyController extends Controller
+class EventKeyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class QtcKeyController extends Controller
      */
     public function index()
     {
-        return 'controaldor QTC Clave';
+        return 'controaldor Evento Clave';
     }
 
     /**
@@ -42,10 +42,10 @@ class QtcKeyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Samu\QtcKey  $qtcKey
+     * @param  \App\Models\Samu\EventKey  $eventKey
      * @return \Illuminate\Http\Response
      */
-    public function show(QtcKey $qtcKey)
+    public function show(EventKey $eventKey)
     {
         //
     }
@@ -53,10 +53,10 @@ class QtcKeyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Samu\QtcKey  $qtcKey
+     * @param  \App\Models\Samu\EventKey  $eventKey
      * @return \Illuminate\Http\Response
      */
-    public function edit(QtcKey $qtcKey)
+    public function edit(EventKey $eventKey)
     {
         //
     }
@@ -65,10 +65,10 @@ class QtcKeyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Samu\QtcKey  $qtcKey
+     * @param  \App\Models\Samu\EventKey  $eventKey
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, QtcKey $qtcKey)
+    public function update(Request $request, EventKey $eventKey)
     {
         //
     }
@@ -76,10 +76,10 @@ class QtcKeyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Samu\QtcKey  $qtcKey
+     * @param  \App\Models\Samu\EventKey  $eventKey
      * @return \Illuminate\Http\Response
      */
-    public function destroy(QtcKey $qtcKey)
+    public function destroy(EventKey $eventKey)
     {
         //
     }

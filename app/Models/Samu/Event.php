@@ -9,17 +9,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\Call;
 use App\Models\Samu\Shift;
-use App\Models\Samu\QtcCounter;
+use App\Models\Samu\EventCounter;
 use App\Models\User;
 
 
-class Qtc extends Model implements Auditable
+class Event extends Model implements Auditable
 {   
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
     use SoftDeletes;
 
-    protected $table="samu_qtcs";
+    protected $table="samu_events";
 
     protected $fillable = [
         'counter',
@@ -78,7 +78,7 @@ class Qtc extends Model implements Auditable
 
     public function calls()
     {
-        return $this->belongsToMany(Call::class,'samu_call_qtc');
+        return $this->belongsToMany(Call::class,'samu_call_event');
     }
 
     public function key()
@@ -127,13 +127,13 @@ class Qtc extends Model implements Auditable
      */
     protected static function booted()
     {
-        self::creating(function (Qtc $qtc): void {
+        self::creating(function (Event $event): void {
             /* Asigna el creador */
-            $qtc->creator()->associate(auth()->user());
+            $event->creator()->associate(auth()->user());
 
-            $counter        = QtcCounter::useNext();
-            $qtc->counter   = $counter->counter;
-            $qtc->date      = $counter->date;
+            $counter        = EventCounter::useNext();
+            $event->counter   = $counter->counter;
+            $event->date      = $counter->date;
         });
 
     }
@@ -141,9 +141,9 @@ class Qtc extends Model implements Auditable
 
     public function users()
     {
-        return $this->belongsToMany(User::class,'samu_qtc_user','qtc_id')
+        return $this->belongsToMany(User::class,'samu_event_user','event_id')
 
-                    ->using(QtcUser::class)
+                    ->using(EventUser::class)
                     ->withPivot('id','job_type_id')
                     ->withTimestamps();
     }

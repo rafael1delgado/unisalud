@@ -4,16 +4,16 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Nuevo Qtc {{ $nextCounter }}</h3>
+<h3 class="mb-3"><i class="fas fa-car-crash"></i> Nuevo Evento {{ $nextCounter }}</h3>
 
 <h4> Asignación de seguimiento y horarios</h4>
       
-<form method="post" action="{{ route('samu.qtc.store') }}">
+<form method="post" action="{{ route('samu.event.store') }}">
     @csrf
     @method('POST')
 
-    @include('samu.qtc.form', [
-        'qtc'   => null,
+    @include('samu.event.form', [
+        'event' => null,
         'keys'  => $keys,
         'shift' => $shift
     ])

@@ -1,5 +1,6 @@
 <div class="form-row">
 
+    @if(request()->routeIs('samu.call.edit'))
     <fieldset class="form-group col-md-1">
         <label for="for_hour">Clasificación</label>
         <select class="form-control form-control-sm" name="classification" id="classification" {{ optional($call)->classification == 'OT' ? 'disabled readonly' : '' }}>
@@ -10,10 +11,11 @@
             <option value="OT" {{ optional($call)->classification == 'OT' ? 'selected' : '' }}>OT</option>
         </select>
     </fieldset>
+    @endif
 
     <fieldset class="form-group col-md-1">
         <label for="for_hour">Hora*</label>
-        <input type="time" class="form-control form-control-sm" name="hour" id="hour" value="{{ old('hour', optional($call)->hour) }}" required> 
+        <input type="time" class="form-control form-control-sm" name="hour" id="hour" value="{{ old('hour', ($call)? $call->hour : date('H:i')) }}" required> 
     </fieldset>
 
     <fieldset class="form-group col-md-3">
@@ -39,13 +41,9 @@
 
 <div class="form-row">
     
-    <fieldset class="form-group col-md-11">
+    <fieldset class="form-group col-md-12">
         <label for="for_information">Información telefónica*</label>
-        <textarea class="form-control form-control-sm" name="information" rows="3" required>{{ old('information', optional($call)->information) }}</textarea>
+        <textarea class="form-control form-control-sm" name="information" rows="5" required>{{ old('information', optional($call)->information) }}</textarea>
     </fieldset>
-
-    <div class="col-1 align-self-end ml-auto pb-3">
-        <button type="submit" class="btn btn-primary btn-sm form-control  form-control-sm"> <i class="fas fa-save"></i> </button>
-    </div>
 
 </div>

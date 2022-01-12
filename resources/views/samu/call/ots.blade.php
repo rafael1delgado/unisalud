@@ -4,9 +4,7 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-clipboard-check"></i> Regulación de llamadas
-    <small class="float-right"><i class="far fa-calendar-alt"></i> Fecha de registro: {{ date('Y-m-d') }}</small>
-</h3>
+<h3 class="mb-3"><i class="fas fa-phone"></i> Orientaciones télefónicas</h3>
 
 @unless($openShift)
     <div class="alert alert-warning" role="alert">
@@ -35,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($shift->calls->where('classification','<>','OT')->sortByDesc('id') as $call)
+                @foreach($shift->calls->where('classification','OT')->sortByDesc('id') as $call)
                 <tr>
                     <td class="text-center">
                         <a href="{{ route('samu.call.edit',$call) }}" class="btn btn-sm btn-outline-primary">

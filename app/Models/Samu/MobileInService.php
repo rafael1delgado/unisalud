@@ -24,6 +24,7 @@ class MobileInService extends Model implements Auditable
         'id',
         'shift_id',
         'mobile_id',
+        'position',
         'observation',
         'status',
         'type'
@@ -63,8 +64,8 @@ class MobileInService extends Model implements Auditable
         return $this->belongsToMany(Follow::class,'samu_follow_mis');    
     }
 
-    public function qtc()
+    public function event()
     {
-        return $this->belongsTo(Qtc::class);
+        return $this->belongsTo(Event::class);
     }
 }

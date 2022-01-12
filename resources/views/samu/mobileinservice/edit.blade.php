@@ -13,8 +13,14 @@
         @method('PUT')
         
         <div class="form-row">
-            <fieldset class="form-group col-8 col-md-3">
-                <label for="for_run">Movil </label>
+
+            <fieldset class="form-group col-8 col-md-1">
+                <label for="for_position">Posición </label>
+                <input type="number" value="{{ $mobileInService->position }}" class="form-control" name="position">             
+            </fieldset>
+
+            <fieldset class="form-group col-8 col-md-2">
+                <label for="for_mobile_id">Móvil </label>
                 <select class="form-control" name="mobile_id">
                     @foreach($mobiles as $mobile)
                         <option value="{{ $mobile->id }}">{{$mobile->name}}</option>
@@ -23,7 +29,7 @@
                 
             </fieldset>
     
-            <fieldset class="form-group col-12 col-md-3">
+            <fieldset class="form-group col-12 col-md-2">
                 <label for="empresa">Tipo de  móvil</label>
                 <select class="form-control" name="type">
                     <option value="M1" {{ $mobileInService->type === 'M1' ? 'selected' : '' }}>M1</option>

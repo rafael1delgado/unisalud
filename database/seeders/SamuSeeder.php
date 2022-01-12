@@ -8,8 +8,8 @@ use App\Models\Samu\Mobile;
 use App\Models\Samu\MobileInService;
 use App\Models\Samu\Call;
 use App\Models\Samu\Ot;
-use App\Models\Samu\Qtc;
-use App\Models\Samu\QtcCounter;
+use App\Models\Samu\Event;
+use App\Models\Samu\EventCounter;
 
 class SamuSeeder extends Seeder
 {
@@ -96,12 +96,12 @@ class SamuSeeder extends Seeder
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, voluptatum! Eaque facilis ex unde maiores quo atque, cum consequuntur vel provident maxime est. Similique hic aspernatur maiores incidunt ab officiis.',
         ]);
 
-        // QtcCounter::create([
+        // EventCounter::create([
         //     'date' => now(),
         //     'counter' => 1,
         // ]);
 
-        $qtc = Qtc::create([
+        $event = Event::create([
             // 'date' => now(),
             // 'counter' => 1,
             'shift_id' => 4,
@@ -109,7 +109,7 @@ class SamuSeeder extends Seeder
             'return_key_id' => 2,
         ]);
 
-        $call2->qtcs()->attach($qtc);
+        $call2->events()->attach($event);
 
     }
 }

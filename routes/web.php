@@ -463,7 +463,7 @@ use App\Http\Controllers\Samu\MobileInServiceController;
 use App\Http\Controllers\Samu\ShiftMobileController;
 use App\Http\Controllers\Samu\KeyController;
 use App\Http\Controllers\Samu\MobileController;
-use App\Http\Controllers\Samu\QtcController;
+use App\Http\Controllers\Samu\EventController;
 use App\Http\Controllers\Samu\OtController;
 use App\Http\Controllers\Samu\CallController;
 use App\Http\Controllers\Samu\NoveltieController;
@@ -534,21 +534,23 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
     Route::prefix('call')->name('call.')->group(function () {
 		Route::get('/',				[CallController::class, 'index'])->name('index');
+		Route::get('/ots',			[CallController::class, 'ots'])->name('ots');
+		Route::get('/create',		[CallController::class, 'create'])->name('create');
 		Route::get('/edit/{call}',	[CallController::class, 'edit'])->name('edit');
 		Route::post('/store',		[CallController::class, 'store'])->name('store');
 		Route::delete('/{call}', 	[CallController::class, 'destroy'])->name('destroy');
 		Route::put('/update/{call}',[CallController::class, 'update'])->name('update');
-		Route::post('/sync-qtcs/{call}',[CallController::class, 'syncQtcs'])->name('syncQtcs');
+		Route::post('/sync-events/{call}',[CallController::class, 'syncEvents'])->name('syncEvents');
     });
 
-    Route::prefix('qtc')->name('qtc.')->group(function () {
-		Route::get('/', 			[QtcController::class, 'index'])->name('index');
-		Route::get('/create',		[QtcController::class, 'create'])->name('create');
-		Route::post('/store',		[QtcController::class, 'store'])->name('store');
-		Route::get('/edit/{qtc}', 	[QtcController::class, 'edit'])->name('edit');
-		Route::put('/update/{qtc}', [QtcController::class, 'update'])->name('update');
-		Route::delete('/{qtc}', 	[QtcController::class, 'destroy'])->name('destroy');
-		Route::post('/filter',		[QtcController::class, 'filter'])->name('filter');
+    Route::prefix('event')->name('event.')->group(function () {
+		Route::get('/', 			[EventController::class, 'index'])->name('index');
+		Route::get('/create',		[EventController::class, 'create'])->name('create');
+		Route::post('/store',		[EventController::class, 'store'])->name('store');
+		Route::get('/edit/{event}', [EventController::class, 'edit'])->name('edit');
+		Route::put('/update/{event}',[EventController::class, 'update'])->name('update');
+		Route::delete('/{event}', 	[EventController::class, 'destroy'])->name('destroy');
+		Route::post('/filter',		[EventController::class, 'filter'])->name('filter');
     });
 
 	Route::prefix('ot')->name('ot.')->group(function () {

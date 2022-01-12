@@ -13,25 +13,25 @@
         <div class="form-row">
 
             <fieldset class="form-group col-md-2">
-                <label for="for_type"><b>Tipo de Turno</b> </label>
-                <select class="form-control" name="type" id="for_type">
+                <label for="for_type"><b>Tipo de Turno*</b> </label>
+                <select class="form-control" name="type" id="for_type" required>
                     <option value="Noche" {{($shift->type=='Noche')?'selected':''}}>Noche</option>
                     <option value="Largo" {{($shift->type=='Largo')?'selected':''}}>Largo</option>
                 </select>
             </fieldset>
 
             <fieldset class="form-group col-md-2">
-                <label for="for_opening_at"><i class="fas fa-clock"></i><b> Apertura de turno</b> </label>
+                <label for="for_opening_at"><b> Apertura de turno*</b> </label>
                 <input type="datetime-local" class="form-control" name="opening_at" id="for_opening_at" value="{{ $shift->opening_at->format('Y-m-d\TH:i:s') }}" required>
             </fieldset>
 
             <fieldset class="form-group col-md-2">
-                <label for="for_closing_at"><i class="fas fa-clock"></i><b> Cierre de turno</b> </label>
+                <label for="for_closing_at"><b> Cierre de turno</b> </label>
                 <input type="datetime-local" class="form-control" name="closing_at" id="for_closing_at" value="{{ optional($shift->closing_at)->format('Y-m-d\TH:i:s') }}">
             </fieldset>
 
             <fieldset class="form-group col-md-2">
-                <label for="for_status">Estado</label>
+                <label for="for_status"><b>Estado</b></label>
                 <select name="status" id="status" class="form-control" @if($openShift) disabled readonly @endif>
                     <option value="0" {{ ($shift->status === 0) ? 'selected' : '' }}>Cerrado</option>
                     <option value="1" {{ ($shift->status === 1) ? 'selected' : '' }}>Abierto</option>
@@ -40,6 +40,15 @@
                 <div class="form-text">Ya existe un turno abierto.</div>
                 @endif
                 
+            </fieldset>
+        
+        </div>
+        
+        <div class="form-row">
+
+            <fieldset class="form-group col-md-8">
+                <label for="for_observation"><b> Observación</b> </label>
+                <textarea class="form-control" name="observation" id="for_observation" rows="6">{{ $shift->observation }}</textarea>
             </fieldset>
             
         </div>
