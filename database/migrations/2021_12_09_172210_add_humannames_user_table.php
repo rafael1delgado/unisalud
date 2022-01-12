@@ -27,7 +27,7 @@ class AddHumannamesUserTable extends Migration
             $table->string('given')->nullable()->after('text');
 
             $table->datetime('period_start')->after('suffix')->default('1800-01-01 00:00:00');
-            $table->datetime('period_end')->after('period_start')->default('1800-01-01 00:00:00');
+            $table->datetime('period_end')->after('period_start')->nullable();
 
             /* TODO update period_start desde created_at */
         });
