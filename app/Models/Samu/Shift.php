@@ -25,7 +25,8 @@ class Shift extends Model implements Auditable
         'status',
         'type',
         'opening_at',
-        'closing_at'
+        'closing_at',
+        'observation'
     ];
 
     /**

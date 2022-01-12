@@ -17,7 +17,7 @@
 </h3>
 
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table">
         
         <thead>
             <tr class="table-primary">
@@ -34,17 +34,31 @@
         <tbody>
             @foreach($shifts as $shift)
             <tr>
-                <td>
+                <td rowspan="2" nowrap>
                     <a href="{{ route('samu.shift.edit', $shift) }}">
                         <button class="btn btn-outline-primary"><i class="fas fa-edit"></i> {{ $shift->id }}</button>
                     </a>
                 </td>
                 <td>{{ $shift->statusInWord }} </td>
                 <td>{{ $shift->type }}</td>
-                <td>{{ $shift->opening_at->format('Y-m-d H:i') }}</td>
-                <td>{{ optional($shift->closing_at)->format('Y-m-d H:i') }}</td>
+                <td nowrap>{{ $shift->opening_at->format('Y-m-d H:i') }}</td>
+                <td nowrap>{{ optional($shift->closing_at)->format('Y-m-d H:i') }}</td>
+                <td>
+                    {{ $shift->observation }}
+                </td>
                 <td>
                     @if($shift->status == true)
+                    <form method="POST" action="{{ route('samu.shift.destroy', $shift) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    </form>
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                @if($shift->status == true)
                         @livewire('samu.shift-user', ['shift' => $shift])
                     @else
                         @foreach($shift->users as $user)
@@ -62,16 +76,7 @@
                             </div>
                         </div>
                         @endforeach
-                    @endif
-                </td>
-                <td>
-                    @if($shift->status == true)
-                    <form method="POST" action="{{ route('samu.shift.destroy', $shift) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                    </form>
-                    @endif
+                    @endif    
                 </td>
             </tr>
             @endforeach

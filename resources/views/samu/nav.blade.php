@@ -31,7 +31,7 @@
 
     <li class="nav-item">
         <a class="nav-link {{ active('samu.call.ots') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
-        href=" {{ route('samu.call.ots') }}"><i class="fas fa-phone"></i> Orientaciones telefónicas</a>
+        href=" {{ route('samu.call.ots') }}"><i class="fas fa-phone"></i> OTs</a>
     </li>
 
     <li class="nav-item">

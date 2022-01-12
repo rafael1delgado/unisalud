@@ -7,7 +7,7 @@ Bloquear QTC si no tiene mobiles en servicio
 
 ## Observaciones 30-12-2020
 ### Pestaña turnos
-[ ] Observaciones (en caso de ausencia o reemplazo de personal) editar
+[AT] Observaciones (en caso de ausencia o reemplazo de personal) editar
 [AT] Eliminar personal (error en el sistema)
 [GZ] Listado personal para darle el atributo de ingresar usuarios
 
