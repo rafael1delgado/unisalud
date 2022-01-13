@@ -83,7 +83,7 @@
                         </a>
                     </td>
                     <td>{{ $event->counter }} </td>
-                    <td>{{ $event->shift->opening_at }}</td>
+                    <td>{{ optional($event->shift)->opening_at }}</td>
                     <td>{{ $event->key->key }} - {{ $event->key->name }} </td>
                     <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
                     <td>
@@ -192,7 +192,7 @@
                     </a>
                 </td>
                 <td>{{ $event->counter }} </td>
-                <td>{{ $event->shift->opening_at }}</td>
+                <td>{{ optional($event->shift)->opening_at }}</td>
                 <td>{{ $event->key->key }} - {{ $event->key->name }} </td>
                 <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
                 <td>{{ optional(optional($event->mobileInService)->mobile)->code }} {{ optional(optional($event->mobileInService)->mobile)->name }}</td>
