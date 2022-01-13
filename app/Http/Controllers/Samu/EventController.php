@@ -176,6 +176,7 @@ class EventController extends Controller
     public function filter(Request $request){
 
         /* Obtener el turno actual */
+        $shift = Shift::where('status',true)->first();
         $today = now();
         $yesterday = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $today) ) ));
         $filter_date = $request->date;
@@ -187,7 +188,7 @@ class EventController extends Controller
         //Obtener los filtrados
         $events_filtered = Event::whereDate('date',$filter_date)->latest()->get();
 
-        return view ('samu.event.index' , compact('events_today','events_yesterday', 'events_filtered', 'filter_date'));
+        return view ('samu.event.index' , compact('shift','events_today','events_yesterday', 'events_filtered', 'filter_date'));
     }
 
 }

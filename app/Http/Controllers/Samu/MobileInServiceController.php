@@ -20,6 +20,7 @@ class MobileInServiceController extends Controller
     public function index()
     {
         $mobilesInService = MobileInService::with(['shift','mobile','crew'])
+                            ->whereHas('shift')
                             ->latest()
                             ->paginate(25);
 

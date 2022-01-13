@@ -49,7 +49,7 @@
     <div class="form-row">
             <fieldset class="form-group col-md-2">
                 <label for="for_hour">Fecha</label>
-                <input type="date" class="form-control form-control-sm" name="date" id="date" value="{{ old('date', isset($filter_date) ? $filter_date : null) }}"> 
+                <input type="date" class="form-control form-control-sm" name="date" id="date" value="{{ old('date', isset($filter_date) ? $filter_date : null) }}" required> 
             </fieldset>
 
             <div class="col-1 align-self-end ml-auto pb-3">
@@ -83,7 +83,7 @@
                         </a>
                     </td>
                     <td>{{ $event->counter }} </td>
-                    <td>{{ $event->shift->opening_at }}</td>
+                    <td>{{ optional($event->shift)->opening_at }}</td>
                     <td>{{ $event->key->key }} - {{ $event->key->name }} </td>
                     <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
                     <td>
@@ -192,7 +192,7 @@
                     </a>
                 </td>
                 <td>{{ $event->counter }} </td>
-                <td>{{ $event->shift->opening_at }}</td>
+                <td>{{ optional($event->shift)->opening_at }}</td>
                 <td>{{ $event->key->key }} - {{ $event->key->name }} </td>
                 <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
                 <td>{{ optional(optional($event->mobileInService)->mobile)->code }} {{ optional(optional($event->mobileInService)->mobile)->name }}</td>
