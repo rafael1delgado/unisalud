@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Crear nuevo usuario</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
         </div>
     </div>
-@canany(['Administrator', 'SAMU: Admin'])
+    @canany(['Administrator', 'SAMU: Admin'])
     <form method="POST" class="form-horizontal" action="{{ route('user.store') }}">
         @csrf
         @method('POST')
@@ -77,30 +76,39 @@
     </div>
 
     <div class="form-row">
-
 			<div class="col">
-
 				<h4>Permisos</h4>
-
 				@php $anterior = null; @endphp
 				@foreach($permissions as $permission)
-					@if(Gate::check('Administrator') || Gate::check('SAMU: Admin'))
-						@if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
-							<hr {{ !Gate::check('Administrator') && !Str::contains($permission->name, 'SAMU') ? 'hidden' : '' }}>
-							@php $anterior = $permission->name; @endphp
-						@endif
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="permissions[]"
-								value="{{ $permission->name }}" id="{{$permission->name}}"
-                                {{ !Gate::check('Administrator') && !Str::contains($permission->name, 'SAMU') ? 'hidden' : '' }}
+                    @if(Gate::check('Administrator'))
+                        @if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
+                            <hr>
+                            @php $anterior = $permission->name; @endphp
+                        @endif
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="permissions[]"
+                                value="{{ $permission->name }}" id="{{$permission->name}}"
                                 {{ !Gate::check('Administrator') && $permission->name == 'SAMU' ? 'checked' : '' }}
                                 {{ !Gate::check('Administrator') && $permission->name == 'SAMU: user' ? 'checked' : '' }}
                                 >
-							<label class="form-check-label" for="{{$permission->name}}"
-                                {{ !Gate::check('Administrator') && !Str::contains($permission->name, 'SAMU') ? 'hidden' : '' }}
+                            <label class="form-check-label" for="{{$permission->name}}"
                                 > <b>{{$permission->name}}</b> {{$permission->description}}</label>
-						</div>
-					@endif
+                        </div>
+                    @elseif(Gate::check('SAMU: Admin') && Str::contains($permission->name, 'SAMU'))
+                        @if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
+                            <hr>
+                            @php $anterior = $permission->name; @endphp
+                        @endif
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="permissions[]"
+                                value="{{ $permission->name }}" id="{{$permission->name}}"
+                                {{ !Gate::check('Administrator') && $permission->name == 'SAMU' ? 'checked' : '' }}
+                                {{ !Gate::check('Administrator') && $permission->name == 'SAMU: user' ? 'checked' : '' }}
+                                >
+                            <label class="form-check-label" for="{{$permission->name}}"
+                                > <b>{{$permission->name}}</b> {{$permission->description}}</label>
+                        </div>
+                    @endif
 				@endforeach
 				<hr>
                 <button type="submit" class="btn btn-primary mb-3"> <i class="fas fa-save"></i> Guardar</button>
@@ -108,8 +116,9 @@
 
 		</div>
     </form>
-@endcanany
+    @endcanany
 @endsection
+
 @section('custom_js')
     <script src='{{asset("js/jquery.rut.chileno.js")}}'></script>
     <script type="text/javascript">
