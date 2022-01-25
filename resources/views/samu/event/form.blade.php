@@ -160,8 +160,8 @@
                 <label for="for_establishment">Establecimiento recepción pcte.</label>
                 <select class="form-control" name="establishment_id" id="establishment_id">
                     <option> </option>
-                    @foreach($establishments as $id => $establishment)
-                        <option value="{{ $id }}" {{ old('establishment_id', optional($event)->establishment_id) == $id ? 'selected' : '' }}>{{ $establishment }}</option>
+                    @foreach($establishments as $name => $id)
+                        <option value="{{ $id }}" {{ old('establishment_id', optional($event)->establishment_id) == $id ? 'selected' : '' }}>{{ $name }}</option>
                     @endforeach
                 </select>
             </fieldset>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEstablishmentsTable extends Migration
+class CreateSamuReceptionPlacesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateEstablishmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_establishments', function (Blueprint $table) {
+        Schema::create('samu_reception_places', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('establishment_id')->constrained('organizations');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateEstablishmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_establishments');
+        Schema::dropIfExists('samu_reception_places');
     }
 }

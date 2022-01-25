@@ -14,6 +14,7 @@ use App\Models\Samu\EventCounter;
 use App\Models\Samu\MobileInService;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\ReceptionPlace;
+use App\Models\Samu\Establishment;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
 
@@ -48,7 +49,7 @@ class EventController extends Controller
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
         $mobiles = Mobile::where('managed',false)->get();
-        $establishments = Organization::pluck('name','id')->sort();
+        $establishments = Organization::whereHas('samu')->pluck('id','name')->sort();
         $nextCounter = EventCounter::getNext();
         $receptionPlaces = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes = CodConIdentifierType::pluck('id','text')->sort();
@@ -129,7 +130,7 @@ class EventController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
-        $establishments = Organization::pluck('name','id')->sort();
+        $establishments = Organization::whereHas('samu')->pluck('id','name')->sort();
         $keys = Key::all();
         $mobiles = Mobile::where('managed',false)->get();
         $receptionPlaces = ReceptionPlace::pluck('id','name')->sort();
