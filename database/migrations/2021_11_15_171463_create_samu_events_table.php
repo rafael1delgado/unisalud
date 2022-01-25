@@ -40,6 +40,7 @@ class CreateSamuEventsTable extends Migration
 
             /* Paciente */
             $table->boolean('patient_unknown')->nullable();
+            $table->foreignId('patient_identifier_type_id')->nullable()->constrained('cod_con_identifier_types');
             $table->string('patient_identification')->nullable();
             $table->string('patient_name')->nullable();
             
@@ -47,6 +48,7 @@ class CreateSamuEventsTable extends Migration
             $table->text('reception_detail')->nullable();
             $table->foreignId('establishment_id')->nullable()->constrained('organizations');
             $table->string('reception_person')->nullable();
+            $table->foreignId('reception_place_id')->nullable()->constrained('samu_reception_places');
             /* Registro atención de urgencia */
             $table->string('rau')->nullable();
 

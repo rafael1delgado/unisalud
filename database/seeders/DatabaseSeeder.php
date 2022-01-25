@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder
             SamuJobTypeSeeder::class,
             SamuKeySeeder::class,
             SamuSeeder::class,
+            SamuReceptionPlaceSeeder::class,
 
             //Organizacion
             OrganizationTypeSeeder::class,

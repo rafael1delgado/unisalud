@@ -103,7 +103,7 @@
 
 
 
-<!-- inicio evaluacion de paciente-->
+<!-- Inicio evaluacion de paciente-->
 <h4>Datos del paciente</h4>
 <div class="form-row">
 
@@ -119,16 +119,28 @@
             value="{{ ( $event &&  $event->patient_name)? $event->patient_name : '' }}">
     </fieldset>
 
-    <fieldset class="form-group col-md-3">
+    <fieldset class="form-group col-12 col-md-2">
+        <label for="for_identifierType">Tipo de identificación</label>
+        <select class="form-control" name="patient_identifier_type_id" id="patient_identifier_type_id">
+            <option> </option>
+            @foreach($identifierTypes as $text => $id)
+                <option value="{{ $id }}" {{ old('patient_identifier_type_id', optional($event)->patient_identifier_type_id) == $id ? 'selected' : '' }}>{{ $text }}</option>
+            @endforeach
+        </select>
+    </fieldset>
+
+    <fieldset class="form-group col-md-2">
         <label for="for_patient_identification">Identificación</label>
         <input type="text" class="form-control" name="patient_identification" 
             value="{{ ( $event &&  $event->patient_identification)? $event->patient_identification : '' }}"
-            placeholder="run:123234 , dni:12313, pasaporte:123123">
+            placeholder="sin puntos ni guión">
     </fieldset>
 
 </div>
 
+
 <hr>
+
 
 <h4>Evaluación </h4>
 <div class="form-row">
@@ -154,15 +166,26 @@
                 </select>
             </fieldset>
 
+            <fieldset class="form-group col-12 col-md-6">
+                <label for="for_rau">Registro Atención Urgencia</label>
+                <input type="text" class="form-control" name="rau" value="{{ ( $event &&  $event->rau)? $event->rau : '' }}">
+            </fieldset>
+
+            <fieldset class="form-group col-md-6">
+                <label for="for_reception_place_id">Otro lugar de recepción</label>
+                <select class="form-control" name="reception_place_id" id="reception_place_id">
+                    <option> </option>
+                    @foreach($receptionPlaces as $name => $id)
+                        <option value="{{ $id }}" {{ old('reception_place_id', optional($event)->reception_place_id) == $id ? 'selected' : '' }}>{{ $name }}</option>
+                    @endforeach
+                </select>
+            </fieldset>
+
             <fieldset class="form-group col-md-12">
                 <label for="for_reception_person">Personal recepción pcte.</label>
                 <input type="text" class="form-control" name="reception_person" value="{{ ( $event &&  $event->reception_person)? $event->reception_person : '' }}">
             </fieldset>
 
-            <fieldset class="form-group col-12 col-md-6">
-                <label for="for_rau">Registro Atención Urgencia</label>
-                <input type="text" class="form-control" name="rau" value="{{ ( $event &&  $event->rau)? $event->rau : '' }}">
-            </fieldset>
         </div>
     </div>
 

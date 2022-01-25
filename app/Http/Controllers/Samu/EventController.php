@@ -13,6 +13,8 @@ use App\Models\Samu\EventUser;
 use App\Models\Samu\EventCounter;
 use App\Models\Samu\MobileInService;
 use App\Models\Samu\Mobile;
+use App\Models\Samu\ReceptionPlace;
+use App\Models\CodConIdentifierType;
 use App\Models\Organization;
 
 class EventController extends Controller
@@ -48,9 +50,11 @@ class EventController extends Controller
         $mobiles = Mobile::where('managed',false)->get();
         $establishments = Organization::pluck('name','id')->sort();
         $nextCounter = EventCounter::getNext();
+        $receptionPlaces = ReceptionPlace::pluck('id','name')->sort();
+        $identifierTypes = CodConIdentifierType::pluck('id','text')->sort();
         $keys = Key::all();
 
-        return view ('samu.event.create',compact('shift','keys','establishments','nextCounter','mobiles'));
+        return view ('samu.event.create',compact('shift','keys','establishments','nextCounter','mobiles','receptionPlaces','identifierTypes'));
     }
 
     /**
@@ -128,8 +132,10 @@ class EventController extends Controller
         $establishments = Organization::pluck('name','id')->sort();
         $keys = Key::all();
         $mobiles = Mobile::where('managed',false)->get();
-
-        return view ('samu.event.edit', compact('shift','establishments','keys','event','mobiles'));
+        $receptionPlaces = ReceptionPlace::pluck('id','name')->sort();
+        $identifierTypes = CodConIdentifierType::pluck('id','text')->sort();
+        
+        return view ('samu.event.edit', compact('shift','establishments','keys','event','mobiles','receptionPlaces','identifierTypes'));
     }
 
     /**

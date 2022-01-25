@@ -46,6 +46,7 @@ class Event extends Model implements Auditable
         
         /* Paciente */
         'patient_unknown',
+        'patient_identifier_type_id',
         'patient_identification',
         'patient_name',
         
@@ -53,6 +54,7 @@ class Event extends Model implements Auditable
         'reception_detail',
         'establishment_id',
         'reception_person',
+        'reception_place_id',
         'rau',
         
         /* Asignacion signos vitales */
