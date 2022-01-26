@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
 use App\Models\Samu\Establishment;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 
 class EstablishmentController extends Controller
@@ -15,17 +16,11 @@ class EstablishmentController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $organizations = Organization::pluck('id','name')->sort();
+        $establishments = Organization::whereHas('samu')->pluck('id')->toArray();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('samu.establishment.index', compact('organizations','establishments'));
+        
     }
 
     /**
@@ -36,51 +31,14 @@ class EstablishmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach($request->input('establishments') as $establishment_id)
+        {
+            $data[] = ['organization_id'=> $establishment_id];
+        }
+        Establishment::truncate();
+        Establishment::insert($data);
+
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Samu\Establishment  $establishment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Establishment $establishment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Samu\Establishment  $establishment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Establishment $establishment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Samu\Establishment  $establishment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Establishment $establishment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Samu\Establishment  $establishment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Establishment $establishment)
-    {
-        //
-    }
 }

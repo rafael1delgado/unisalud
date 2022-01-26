@@ -467,6 +467,7 @@ use App\Http\Controllers\Samu\EventController;
 use App\Http\Controllers\Samu\OtController;
 use App\Http\Controllers\Samu\CallController;
 use App\Http\Controllers\Samu\NoveltieController;
+use App\Http\Controllers\Samu\EstablishmentController;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
@@ -532,6 +533,11 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::delete('/{mobile}', 	[MobileController::class, 'destroy'])->name('destroy');
     });
 
+	Route::prefix('establishment')->name('establishment.')->group(function () {
+		Route::get('/', 			[EstablishmentController::class, 'index'])->name('index');
+		Route::post('/', 			[EstablishmentController::class, 'store'])->name('store');
+	});
+	
     Route::prefix('call')->name('call.')->group(function () {
 		Route::get('/',				[CallController::class, 'index'])->name('index');
 		Route::get('/ots',			[CallController::class, 'ots'])->name('ots');

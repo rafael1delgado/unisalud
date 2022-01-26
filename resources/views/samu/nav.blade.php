@@ -50,6 +50,9 @@
             <a class="dropdown-item {{ active('samu.mobile.*') }}"
             href=" {{ route('samu.mobile.index') }}"><i class="fas fa-ambulance"></i> Móviles</a>
 
+            <a class="dropdown-item {{ active('samu.establishment.*') }}"
+            href=" {{ route('samu.establishment.index') }}"><i class="fas fa-building"></i> Establecimientos</a>
+
             <a class="dropdown-item {{ active('user.*') }}"
             href=" {{ route('user.index') }}"><i class="fas fa-user"></i> Usuarios</a>
         </div>
