@@ -16,12 +16,12 @@ class Establishment extends Model
     * @var array
     */
     protected $fillable = [
-        'establishment_id',
+        'organization_id',
     ];
 
     public function organization()
     {
-        return $this->hasOne(Organization::class,'id','establishment_id');
+        return $this->hasOne(Organization::class,'id','organization_id');
     }
     
 

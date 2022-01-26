@@ -59,7 +59,7 @@ class Organization extends Model
 
     public function samu()
     {
-        return $this->belongsTo(Establishment::class,'id', 'establishment_id');
+        return $this->belongsTo(Establishment::class,'id', 'organization_id');
     }
     
 }

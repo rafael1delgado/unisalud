@@ -15,7 +15,7 @@ class CreateSamuEstablishmentsTable extends Migration
     {
         Schema::create('samu_establishments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('establishment_id')->constrained('organizations');
+            $table->foreignId('organization_id')->constrained('organizations');
             $table->timestamps();
         });
     }
