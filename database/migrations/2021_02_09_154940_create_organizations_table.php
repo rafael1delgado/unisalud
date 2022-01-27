@@ -16,7 +16,7 @@ class CreateOrganizationsTable extends Migration
         Schema::create('organizations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('organization_id')->nullable();
-            $table->boolean('active')->nullabe();
+            $table->boolean('active')->default('1')->nullabe();
             $table->string('name')->nullabe();
             $table->string('alias')->nullabe();
 
