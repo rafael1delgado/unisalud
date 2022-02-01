@@ -24,11 +24,11 @@ class MobileInService extends Model implements Auditable
         'id',
         'shift_id',
         'mobile_id',
+        'type',
         'position',
         'observation',
+        'o2',
         'status',
-        'type'
-        
     ];
 
     public function shift()

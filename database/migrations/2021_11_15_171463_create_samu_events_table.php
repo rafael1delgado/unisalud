@@ -27,6 +27,8 @@ class CreateSamuEventsTable extends Migration
             $table->foreignId('mobile_id')->nullable()->constrained('samu_mobiles');
             $table->text('external_crew')->nullable();
 
+            $table->text('observation')->nullable();
+
             $table->time('departure_at')->nullable();
             $table->time('mobile_departure_at')->nullable();
             $table->time('mobile_arrival_at')->nullable();
@@ -36,7 +38,9 @@ class CreateSamuEventsTable extends Migration
             $table->time('return_base_at')->nullable();
             $table->time('on_base_at')->nullable();
             
-            $table->text('observation')->nullable();
+            $table->string('address')->nullable();
+            $table->foreignId('commune_id')->nullable()->constrained('communes');
+            
 
             /* Paciente */
             $table->boolean('patient_unknown')->nullable();
@@ -57,7 +61,7 @@ class CreateSamuEventsTable extends Migration
             $table->integer('fc')->nullable();
             $table->integer('fr')->nullable();
             $table->string('pa')->nullable();
-            $table->integer('pam')->nullable();
+            $table->string('pam')->nullable();
             $table->integer('gl')->nullable();
             $table->integer('soam')->nullable();
             $table->integer('soap')->nullable();

@@ -15,6 +15,7 @@ use App\Models\Samu\MobileInService;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\ReceptionPlace;
 use App\Models\Samu\Establishment;
+use App\Models\Commune;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
 
@@ -53,9 +54,11 @@ class EventController extends Controller
         $nextCounter = EventCounter::getNext();
         $receptionPlaces = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes = CodConIdentifierType::pluck('id','text')->sort();
-        $keys = Key::all();
+        $keys = Key::orderBy('key')->get();
+        /* TODO: Parametrizar */
+        $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
 
-        return view ('samu.event.create',compact('shift','keys','establishments','nextCounter','mobiles','receptionPlaces','identifierTypes'));
+        return view ('samu.event.create',compact('shift','keys','establishments','nextCounter','mobiles','receptionPlaces','identifierTypes','communes'));
     }
 
     /**
@@ -131,12 +134,14 @@ class EventController extends Controller
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
         $establishments = Organization::whereHas('samu')->pluck('id','name')->sort();
-        $keys = Key::all();
+        $keys = Key::orderBy('key')->get();
         $mobiles = Mobile::where('managed',false)->get();
         $receptionPlaces = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes = CodConIdentifierType::pluck('id','text')->sort();
+        /* TODO: Parametrizar */
+        $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
         
-        return view ('samu.event.edit', compact('shift','establishments','keys','event','mobiles','receptionPlaces','identifierTypes'));
+        return view ('samu.event.edit', compact('shift','establishments','keys','event','mobiles','receptionPlaces','identifierTypes','communes'));
     }
 
     /**
@@ -180,22 +185,34 @@ class EventController extends Controller
         //
     }
 
-    public function filter(Request $request){
+    public function filter(Request $request)
+    {
+        /* Obtener los filtrados */
+        $keys = Key::orderBy('key')->get();
+        /* TODO: Parametrizar */
+        $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
 
-        /* Obtener el turno actual */
-        $shift = Shift::where('status',true)->first();
-        $today = now();
-        $yesterday = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $today) ) ));
-        $filter_date = $request->date;
+        $query = Event::query();
 
-        // Obtener los de ayer
-        $events_today = Event::whereDate('date',$today)->latest()->get();
-        $events_yesterday = Event::whereDate('date',$yesterday)->latest()->get();
+        if($request->filled('date')) {
+            $query->whereDate('date',$request->input('date'));
+        }
+        if($request->filled('key_id')) {
+            $query->where('key_id',$request->input('key_id'));
+        }
+        if($request->filled('address')) {
+            $query->where('address', 'LIKE', '%' . $request->input('address') . '%');
+        }
+        if($request->filled('commune_id')) {
+            $query->where('commune_id',$request->input('commune_id'));
+        }
+            
+            
+        $events = $query->paginate(50);
+        
+        $request->flash();
 
-        //Obtener los filtrados
-        $events_filtered = Event::whereDate('date',$filter_date)->latest()->get();
-
-        return view ('samu.event.index' , compact('shift','events_today','events_yesterday', 'events_filtered', 'filter_date'));
+        return view ('samu.event.filter', compact('events','keys','communes'));
     }
 
 }

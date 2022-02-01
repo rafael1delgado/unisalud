@@ -11,6 +11,7 @@ use App\Models\Samu\Call;
 use App\Models\Samu\Shift;
 use App\Models\Samu\EventCounter;
 use App\Models\User;
+use App\Models\Commune;
 
 
 class Event extends Model implements Auditable
@@ -32,6 +33,8 @@ class Event extends Model implements Auditable
         'mobile_id',
         'external_crew',
 
+        'observation',
+
         /* Tiempos */
         'departure_at',
         'mobile_departure_at',
@@ -42,7 +45,8 @@ class Event extends Model implements Auditable
         'return_base_at',
         'on_base_at',
 
-        'observation',
+        'address',
+        'commune_id',
         
         /* Paciente */
         'patient_unknown',
@@ -120,6 +124,11 @@ class Event extends Model implements Auditable
         if($this->return_base_at) $color = 'info';
         if($this->on_base_at) $color = 'success';
         return $color;
+    }
+
+    public function commune() 
+    {
+        return $this->belongsTo(Commune::class);
     }
 
     /**

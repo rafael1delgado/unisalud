@@ -4,7 +4,7 @@
 
 @include('samu.nav')  
 
-<h3 class="mb-3"><i class="fas fa-ambulance"> <i class="fas fa-plus"></i> </i> Asinga un móvil a un turno</h3>
+<h3 class="mb-3"><i class="fas fa-ambulance"></i> Asinga un móvil a un turno</h3>
 
 <form method="POST" action="{{ route('samu.mobileinservice.store') }}">
     @csrf
@@ -42,20 +42,24 @@
             </select>
         </fieldset>
 
-        <fieldset class="form-group col-12 col-md-6">
+        <fieldset class="form-group col-8 col-md-3">
+            <label for="for_o2">Oxígeno Central</label>
+            <input type="text" class="form-control" name="o2">             
+        </fieldset>
+
+    </div>
+    <div class="form-row">
+
+        <fieldset class="form-group col-12 col-md-8">
             <label for="observation">Observación</label>
-            <textarea class="form-control" id="validationTextarea" name="observation"></textarea>
-                <div class="invalid-feedback">
-                        Ingrese Observaciones
-                </div>
+            <textarea class="form-control" id="observation" name="observation"></textarea>
         </fieldset>
 
     </div>
 
-
     <button type="submit" class="btn btn-primary button" >Guardar</button>
-
     <a href="{{ route('samu.mobileinservice.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+    
 </form>
 
 

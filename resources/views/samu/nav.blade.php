@@ -35,8 +35,12 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ active('samu.event.*') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
-        href=" {{ route('samu.event.index') }}"><i class="fas fa-car-crash"></i> Eventos</a>
+        <a class="nav-link {{ active('samu.event.index') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
+        href=" {{ route('samu.event.index') }}"><i class="fas fa-car-crash"></i> Despacho</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ active('samu.event.filter') }}" 
+        href=" {{ route('samu.event.filter') }}"><i class="fas fa-search"></i></a>
     </li>
 
     <li class="nav-item dropdown">

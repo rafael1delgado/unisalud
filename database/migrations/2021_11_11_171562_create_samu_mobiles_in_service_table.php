@@ -20,6 +20,7 @@ class CreateSamuMobilesInServiceTable extends Migration
             $table->string('type')->nullable();
             $table->unsignedTinyInteger('position')->default(0);
             $table->text('observation')->nullable();
+            $table->string('o2')->nullable();
             $table->boolean('status');
             $table->timestamps();
             $table->softDeletes();

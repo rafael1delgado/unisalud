@@ -473,7 +473,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
     Route::view('/', 'samu.welcome')->name('welcome');
 
-	Route::prefix('shift')->name('shift.')->group(function () {
+	Route::prefix('shifts')->name('shift.')->group(function () {
 		// Route::view('/', 'samu.shift.index')->name('index');
 		Route::get('/',				[ShiftController::class, 'index'])->name('index');
 		Route::get('/create',		[ShiftController::class, 'create'])->name('create');
@@ -483,7 +483,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::delete('/{shift}', 	[ShiftController::class, 'destroy'])->name('destroy');
     });
 
-	Route::prefix('mobile-in-service')->name('mobileinservice.')->group(function () {
+	Route::prefix('mobiles-in-service')->name('mobileinservice.')->group(function () {
 		Route::get('/',						[MobileInServiceController::class, 'index'])->name('index');
 		Route::get('/create',				[MobileInServiceController::class, 'create'])->name('create');
 		Route::post('/store',				[MobileInServiceController::class, 'store'])->name('store');
@@ -495,14 +495,14 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 	
     });
 
-    Route::prefix('mobile')->name('mobile.')->group(function () {
-		Route::get('/', 			[ShiftMobileController::class, 'index'])->name('index');
-		Route::get('/create' , 		[ShiftMobileController::class, 'create'])->name('create');
-		Route::post('/store', 		[ShiftMobileController::class, 'store'])->name('store');
-		Route::view('/edit', 'samu.mobile.edit')->name('edit');
-    });
+    // Route::prefix('mobile')->name('mobile.')->group(function () {
+	// 	Route::get('/', 			[ShiftMobileController::class, 'index'])->name('index');
+	// 	Route::get('/create' , 		[ShiftMobileController::class, 'create'])->name('create');
+	// 	Route::post('/store', 		[ShiftMobileController::class, 'store'])->name('store');
+	// 	Route::view('/edit', 'samu.mobile.edit')->name('edit');
+    // });
 
-    Route::prefix('crew')->name('crew.')->group(function () {
+    Route::prefix('crews')->name('crew.')->group(function () {
 		Route::view('/', 'samu.crew.index')->name('index');
 		Route::view('/create', 'samu.crew.create')->name('create');
 		Route::view('/edit', 'samu.crew.edit')->name('edit');
@@ -515,7 +515,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 	// 	Route::view('/edit', 'samu.shift.edit')->name('edit');
     // });
 
-    Route::prefix('key')->name('key.')->group(function () {
+    Route::prefix('keys')->name('key.')->group(function () {
 		Route::get('/' , 			[KeyController::class, 'index'])->name('index');
 		Route::get('/create' , 		[KeyController::class, 'create'])->name('create');
 		Route::post('/store', 		[KeyController::class, 'store'])->name('store');
@@ -524,7 +524,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::delete('/{key}',		[KeyController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('mobile')->name('mobile.')->group(function () {
+    Route::prefix('mobiles')->name('mobile.')->group(function () {
 		Route::get('/',				[MobileController::class, 'index'])->name('index');
 		Route::get('/create',		[MobileController::class, 'create'])->name('create');
 		Route::post('/store',		[MobileController::class, 'store'])->name('store');
@@ -533,12 +533,12 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::delete('/{mobile}', 	[MobileController::class, 'destroy'])->name('destroy');
     });
 
-	Route::prefix('establishment')->name('establishment.')->group(function () {
+	Route::prefix('establishments')->name('establishment.')->group(function () {
 		Route::get('/', 			[EstablishmentController::class, 'index'])->name('index');
 		Route::post('/', 			[EstablishmentController::class, 'store'])->name('store');
 	});
 	
-    Route::prefix('call')->name('call.')->group(function () {
+    Route::prefix('calls')->name('call.')->group(function () {
 		Route::get('/',				[CallController::class, 'index'])->name('index');
 		Route::get('/ots',			[CallController::class, 'ots'])->name('ots');
 		Route::get('/create',		[CallController::class, 'create'])->name('create');
@@ -549,23 +549,23 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::post('/sync-events/{call}',[CallController::class, 'syncEvents'])->name('syncEvents');
     });
 
-    Route::prefix('event')->name('event.')->group(function () {
+    Route::prefix('events')->name('event.')->group(function () {
 		Route::get('/', 			[EventController::class, 'index'])->name('index');
 		Route::get('/create',		[EventController::class, 'create'])->name('create');
 		Route::post('/store',		[EventController::class, 'store'])->name('store');
 		Route::get('/edit/{event}', [EventController::class, 'edit'])->name('edit');
 		Route::put('/update/{event}',[EventController::class, 'update'])->name('update');
 		Route::delete('/{event}', 	[EventController::class, 'destroy'])->name('destroy');
-		Route::post('/filter',		[EventController::class, 'filter'])->name('filter');
+		Route::match(['get','post'], '/filter',	[EventController::class, 'filter'])->name('filter');
     });
 
-	Route::prefix('ot')->name('ot.')->group(function () {
-		Route::get('/edit/{ot}',	[OtController::class, 'edit'])->name('edit');
-		Route::put('/update/{ot}', 	[OtController::class, 'update'])->name('update');
-    });
+	// Route::prefix('ots')->name('ot.')->group(function () {
+	// 	Route::get('/edit/{ot}',	[OtController::class, 'edit'])->name('edit');
+	// 	Route::put('/update/{ot}', 	[OtController::class, 'update'])->name('update');
+    // });
 	
 
-    Route::prefix('noveltie')->name('noveltie.')->group(function () {
+    Route::prefix('novelties')->name('noveltie.')->group(function () {
 		Route::get('/', 			[NoveltieController::class, 'index'])->name('index');
 		Route::post('/store', 		[NoveltieController::class, 'store'])->name('store');
 		Route::get('/edit/{noveltie}', [NoveltieController::class, 'edit'])->name('edit');

@@ -97,6 +97,25 @@
         
 </div>
 
+            
+<div class="form-row">
+
+    <fieldset class="form-group col-md-5">
+        <label for="for_address">Dirección</label>
+        <input type="text" class="form-control" name="address" value="{{ ( $event &&  $event->address)? $event->address : '' }}">
+    </fieldset>
+
+    <fieldset class="form-group col-md-3">
+        <label for="for_commune">Comuna</label>
+        <select class="form-control" name="commune_id" required>
+            <option value=""></option>
+            @foreach($communes as $name => $id)
+            <option value="{{ $id }}" {{ old('commune_id', optional($event)->commune_id) == $id ? 'selected' : '' }}>{{ $name }}</option>
+            @endforeach 
+        </select>
+    </fieldset>
+
+</div>
 
 
 <hr>
@@ -208,7 +227,8 @@
     </fieldset>
     <fieldset class="form-group col-md-1">
         <label for="for_pa">Presión <br>Arterial</label>
-        <input type="number" class="form-control" name="pa" value="{{ ( $event &&  $event->pa)? $event->pa : '' }}">
+        <input type="text" class="form-control" name="pa" value="{{ ( $event &&  $event->pa)? $event->pa : '' }}" 
+            placeholder="xxx/xx">
     </fieldset>
     <fieldset class="form-group col-md-1">
         <label for="for_pam">Presión Arterial Media</label>

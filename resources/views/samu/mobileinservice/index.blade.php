@@ -19,6 +19,7 @@
                 <th>Posición</th>
                 <th>Movil</th>
                 <th>Tipo</th>
+                <th>O2 central</th>
                 <th>Observaciones</th>
                 <th></th>
             </tr>
@@ -41,7 +42,8 @@
                 </td>
                 <td>{{ $mis->position }}</td>
                 <td>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
-                <td>{{ $mis->type}} </td>
+                <td>{{ $mis->type }}</td>
+                <td>{{ $mis->o2 }}</td>
                 <td>
                     {{ $mis->observation}} 
                 </td>
