@@ -208,7 +208,7 @@ class EventController extends Controller
         }
             
             
-        $events = $query->paginate(50);
+        $events = $query->latest()->paginate(50);
         
         $request->flash();
 

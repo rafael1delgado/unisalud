@@ -24,7 +24,7 @@
 
 [AT] Hora de recepción de llamada quede registrado automaticamente (depende de cuando se carga la página).
 [AT] Evento cuadro informativo con colores
-[AT] Menú QTC -> Eventos
+[AT] QTC -> Eventos
 
 [AT] Call center (todas las ot en una pestaña aparte)
 [AT] Asignar o crear evento solo despacho en una pestaña aparte

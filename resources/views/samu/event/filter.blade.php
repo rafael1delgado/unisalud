@@ -4,7 +4,7 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de Eventos filtrados</h3>
+<h3 class="mb-3"><i class="fas fa-car-crash"></i> Buscar eventos</h3>
 
 <form method="post" action="{{ route('samu.event.filter')}}">
     @csrf
@@ -51,9 +51,10 @@
 
 @if(old('btn-search'))
     @if($events->isNotEmpty())
+        <h4>Total de registros: {{ $events->count() }}</h4>
+
         @include('samu.event.partials.index', ['events' => $events])
 
-        Total de registros: {{ $events->count() }}
         {{ $events->links() }}
     @else
         <div class="alert alert-warning">
