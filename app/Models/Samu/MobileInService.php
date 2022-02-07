@@ -26,9 +26,21 @@ class MobileInService extends Model implements Auditable
         'mobile_id',
         'type',
         'position',
-        'observation',
         'o2',
+        'lunch_start_at',
+        'lunch_end_at',
+        'observation',
         'status',
+    ];
+
+    /**
+    * The attributes that should be mutated to dates.
+    *
+    * @var array
+    */
+    protected $dates = [
+        'lunch_start_at',
+        'lunch_end_at',
     ];
 
     public function shift()

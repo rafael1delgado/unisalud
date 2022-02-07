@@ -77,6 +77,22 @@ class Event extends Model implements Auditable
         'observation_sv',
     ];
 
+    /**
+    * The attributes that should be mutated to dates.
+    *
+    * @var array
+    */
+    protected $dates = [
+        'departure_at',
+        'mobile_departure_at',
+        'mobile_arrival_at',
+        'route_to_healtcenter_at',
+        'healthcenter_at',
+        'patient_reception_at',
+        'return_base_at',
+        'on_base_at'
+    ];
+
     public function shift() 
     {
         return $this->belongsTo(Shift::class);
@@ -119,10 +135,10 @@ class Event extends Model implements Auditable
 
     public function getColorAttribute()
     {
-        if(!$this->mobile_departure_at) $color = 'danger';
-        if($this->mobile_departure_at) $color = 'warning';
-        if($this->return_base_at) $color = 'info';
-        if($this->on_base_at) $color = 'success';
+        if(!$this->mobile_departure_at)     $color = 'danger';
+        if($this->mobile_departure_at)      $color = 'warning';
+        if($this->return_base_at)           $color = 'info';
+        if($this->on_base_at)               $color = 'success';
         return $color;
     }
 
@@ -142,7 +158,7 @@ class Event extends Model implements Auditable
             /* Asigna el creador */
             $event->creator()->associate(auth()->user());
 
-            $counter        = EventCounter::useNext();
+            $counter          = EventCounter::useNext();
             $event->counter   = $counter->counter;
             $event->date      = $counter->date;
         });

@@ -19,8 +19,10 @@ class CreateSamuMobilesInServiceTable extends Migration
             $table->foreignId('mobile_id')->constrained('samu_mobiles');
             $table->string('type')->nullable();
             $table->unsignedTinyInteger('position')->default(0);
-            $table->text('observation')->nullable();
             $table->string('o2')->nullable();
+            $table->datetime('lunch_start_at')->nullable();
+            $table->datetime('lunch_end_at')->nullable();
+            $table->text('observation')->nullable();
             $table->boolean('status');
             $table->timestamps();
             $table->softDeletes();

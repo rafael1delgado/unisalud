@@ -6,16 +6,16 @@
 
 <div class="row">
     <div class="col-10">
-        <table class="table table-sm">
+        <table class="table table-sm ">
             <tr>
                 <th>Orden salida</th>
                 <th>Móvil</th>
                 <th>Tripulación</th>
                 <th>O2 central</th>
-                <th>Estado</th>
+                <th>Colación</th>
             </tr>
             @foreach($shift->mobilesInService->sortBy('position') as $mis)
-                <tr>
+                <tr class="{{ ($mis->lunch_start_at AND !$mis->lunch_end_at) ? 'bg-secondary text-white' : '' }}">
                     <td>{{ $mis->position }}</td>
                     <td>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
                     <td>
@@ -24,7 +24,16 @@
                         @endforeach
                     </td>
                     <td>{{ $mis->o2 }}</td>
-                    <td>{{ $mis->status ? 'Activo' : 'Inactivo' }}</td>
+                    <td>
+                        @if($mis->lunch_start_at AND !$mis->lunch_end_at)
+                            {{ $mis->lunch_start_at->format('H:i')}} - 
+                            {{ now()->diff($mis->lunch_start_at->copy()->addMinutes('45'))->format('%I') }}"
+                        @elseif($mis->lunch_end_at)
+                            {{ $mis->lunch_start_at->format('H:i')}} - 
+                            {{ $mis->lunch_end_at->format('H:i')}} - 
+                            {{ $mis->lunch_start_at->diff($mis->lunch_end_at)->format('%I') }}"
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </table>

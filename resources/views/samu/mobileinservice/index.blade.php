@@ -16,6 +16,7 @@
             <tr class="table-primary">
                 <th></th>
                 <th>Turno</th>
+                <th>Almuerzo</th>
                 <th>Posición</th>
                 <th>Movil</th>
                 <th>Tipo</th>
@@ -39,6 +40,9 @@
                     <b>{{ $mis->shift->id }}</b> -
                     {{ $mis->shift->opening_at->format('Y-m-d') }} - 
                     {{ $mis->shift->type }} <br> ({{ $mis->shift->statusInWord }})
+                </td>
+                <td>
+                    @livewire('samu.lunch',['mis' => $mis])
                 </td>
                 <td>{{ $mis->position }}</td>
                 <td>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
