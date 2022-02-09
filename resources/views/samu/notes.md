@@ -4,7 +4,7 @@
 [ ] En el listado de eventos, cambiar º de evento por QTC
 [X] El filtrado en una página a parte y que se pueda filtrar por QTH y clave.
 [X] No todos los cometidos se cierran a las 8AM del día siguiente, pero necesito abrir otro turno desde las 8AM
-[ ] En listado de moviles de Despacho, Los Móviles tenga una indicación de clave actual.( 45 minutos) modo de Click y que se registre la hora desde que se da el click y que indique la hora de termino del almuerzo, que este sombreado (almuerzo)
+[X] En listado de moviles de Despacho, Los Móviles tenga una indicación de clave actual.( 45 minutos) modo de Click y que se registre la hora desde que se da el click y que indique la hora de termino del almuerzo, que este sombreado
 [X] Agregar Oxigeno central
 [X] Eliminar columna turno de listado de eventos
 [X] Corregir PA que permita "/"

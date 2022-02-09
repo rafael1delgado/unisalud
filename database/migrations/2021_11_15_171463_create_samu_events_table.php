@@ -29,14 +29,14 @@ class CreateSamuEventsTable extends Migration
 
             $table->text('observation')->nullable();
 
-            $table->time('departure_at')->nullable();
-            $table->time('mobile_departure_at')->nullable();
-            $table->time('mobile_arrival_at')->nullable();
-            $table->time('route_to_healtcenter_at')->nullable();
-            $table->time('healthcenter_at')->nullable();
-            $table->time('patient_reception_at')->nullable();
-            $table->time('return_base_at')->nullable();
-            $table->time('on_base_at')->nullable();
+            $table->datetime('departure_at')->nullable();
+            $table->datetime('mobile_departure_at')->nullable();
+            $table->datetime('mobile_arrival_at')->nullable();
+            $table->datetime('route_to_healtcenter_at')->nullable();
+            $table->datetime('healthcenter_at')->nullable();
+            $table->datetime('patient_reception_at')->nullable();
+            $table->datetime('return_base_at')->nullable();
+            $table->datetime('on_base_at')->nullable();
             
             $table->string('address')->nullable();
             $table->foreignId('commune_id')->nullable()->constrained('communes');

@@ -48,13 +48,14 @@ class EventController extends Controller
     public function create()
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',true)->first();
-        $mobiles = Mobile::where('managed',false)->get();
-        $establishments = Organization::whereHas('samu')->pluck('id','name')->sort();
-        $nextCounter = EventCounter::getNext();
-        $receptionPlaces = ReceptionPlace::pluck('id','name')->sort();
-        $identifierTypes = CodConIdentifierType::pluck('id','text')->sort();
-        $keys = Key::orderBy('key')->get();
+        $shift              = Shift::where('status',true)->first();
+        $mobiles            = Mobile::where('managed',false)->get();
+        $establishments     = Organization::whereHas('samu')->pluck('id','name')->sort();
+        $nextCounter        = EventCounter::getNext();
+        $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
+        $identifierTypes    = CodConIdentifierType::pluck('id','text')->sort();
+        $keys               = Key::orderBy('key')->get();
+        
         /* TODO: Parametrizar */
         $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
 
@@ -90,7 +91,7 @@ class EventController extends Controller
             foreach($mobilecrews as $mobilecrew)
             {
                 EventUser::create([
-                    'event_id'                => $event->id,
+                    'event_id'              => $event->id,
                     'user_id'               => $mobilecrew->user_id,
                     'job_type_id'           => $mobilecrew->job_type_id
                 ]);
@@ -132,12 +133,12 @@ class EventController extends Controller
     public function edit(event $event)
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',true)->first();
-        $establishments = Organization::whereHas('samu')->pluck('id','name')->sort();
-        $keys = Key::orderBy('key')->get();
-        $mobiles = Mobile::where('managed',false)->get();
-        $receptionPlaces = ReceptionPlace::pluck('id','name')->sort();
-        $identifierTypes = CodConIdentifierType::pluck('id','text')->sort();
+        $shift              = Shift::where('status',true)->first();
+        $establishments     = Organization::whereHas('samu')->pluck('id','name')->sort();
+        $keys               = Key::orderBy('key')->get();
+        $mobiles            = Mobile::where('managed',false)->get();
+        $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
+        $identifierTypes    = CodConIdentifierType::pluck('id','text')->sort();
         /* TODO: Parametrizar */
         $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
         
