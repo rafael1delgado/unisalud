@@ -15,7 +15,7 @@
 
     <fieldset class="form-group col-md-1">
         <label for="for_hour">Hora*</label>
-        <input type="time" class="form-control form-control-sm" name="hour" id="hour" value="{{ old('hour', ($call)? $call->hour : date('H:i')) }}" required> 
+        <input type="time" class="form-control form-control-sm" name="hour" id="hour" value="{{ old('hour', ($call)? $call->hour->format('H:i') : date('H:i')) }}" readonly> 
     </fieldset>
 
     <fieldset class="form-group col-md-3">

@@ -10,7 +10,6 @@ use App\Models\Samu\MobileCrew as MobileCrewModel;
 
 class MobileCrew extends Component
 {
-    //public $mobil;
     public $users;
     public $mobileInService;
 
@@ -32,6 +31,13 @@ class MobileCrew extends Component
         'assumes_at.required'   => 'Debe ingresar fecha y hora en que asume'
     ];
 
+    public function mount()
+    {
+        $this->assumes_at   = $this->mobileInService->shift->opening_at->format('Y-m-d\TH:i:s');
+        $this->users        = User::OrderBy('text')->Permission('SAMU')->pluck('id','text');
+        $this->job_types    = JobType::where('tripulant', true)->orderBy('name')->get();
+    }
+
     public function store()
     {
         $this->validate();
@@ -50,27 +56,12 @@ class MobileCrew extends Component
     public function delete(MobileCrewModel $mobileCrew)
     {
         $mobileCrew->delete();
-    }
 
-    // public function getUsers()
-    // {
-    //     $users = User::Permission('SAMU')->with('humanNames')->get();
-    //     foreach($users as $user) 
-    //     {
-    //         $arrayUsers[$user->id] = $user->OfficialFullName;
-    //     }
-    //     $this->users = collect($arrayUsers);
-    // }
+        $this->mobileInService->refresh();
+    }
 
     public function render()
     {
-        $this->assumes_at = $this->mobileInService->shift->opening_at->format('Y-m-d\TH:i:s');
-
-        $this->mobileInService = MobileInService::find($this->mobileInService->id);
-
-        $this->users = User::OrderBy('text')->Permission('SAMU')->pluck('id','text');
-        
-        $this->job_types    = JobType::where('tripulant', true)->orderBy('name')->get();
         return view('livewire.samu.mobile-crew');
     }
 }

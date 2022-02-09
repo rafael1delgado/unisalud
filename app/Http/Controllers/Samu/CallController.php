@@ -72,6 +72,7 @@ class CallController extends Controller
 
         if($shift) {
             $call = new Call($request->All());
+            $call->hour = now();
             $call->shift()->associate($shift);
             $call->save();
 
@@ -122,6 +123,15 @@ class CallController extends Controller
      */
     public function update(Request $request, Call $call)
     {
+        // if(!$call->regulator_id AND $request->filled('classification'))
+        // {
+        //     $call->regulator_id = auth()->id();
+        // }
+        if($call->classification != $request->filled('classification'))
+        {
+            $call->regulator_id = auth()->id();
+        }
+
         $call->fill($request->all());
         $call->save();
 
@@ -139,7 +149,7 @@ class CallController extends Controller
             default:
                 return redirect()->route('samu.call.index');
                 break;
-        } 
+        }
     }
 
 

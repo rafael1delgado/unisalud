@@ -4,16 +4,7 @@
 
     <div class="form-row mb-3">
         <fieldset class="col-md-12 col-12">
-            <label for="events" class="form-label mb-3">
-                <b>Asignar uno o más Eventos al llamado</b>
-            </label>
-        </fieldset>
-
-        <fieldset class="col-md-12 col-12">
-            <button  class="btn btn-primary" type="submit">Asignar</button>
-            <a class="btn btn-success ml-3" href="{{ route('samu.event.create') }}">
-                <i class="fas fa-plus"></i> Crear Evento
-            </a>
+            <button  class="btn btn-success" type="submit">Asignar uno o más eventos al llamado</button>
         </fieldset>
     </div>
     <div class="form-row">

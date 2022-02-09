@@ -16,8 +16,9 @@ class CreateSamuCallsTable extends Migration
         Schema::create('samu_calls', function (Blueprint $table) {
             $table->id();
             $table->foreignId('shift_id')->constrained('samu_shifts');
+            $table->foreignId('call_id')->nullable()->constrained('samu_calls');
             $table->string('classification')->nullable();
-            $table->time('hour');
+            $table->datetime('hour');
             $table->foreignId('receptor_id')->constrained('users');
             $table->foreignId('clasificator_id')->nullable()->constrained('users');
             $table->foreignId('regulator_id')->nullable()->constrained('users');

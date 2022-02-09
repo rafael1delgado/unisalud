@@ -17,9 +17,16 @@ class Call extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
     use SoftDeletes;
+
     protected $table="samu_calls";
 
+    /**
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
     protected $fillable = [
+        'call_id',
         'classification',
         'hour',
         'receptor_id',
@@ -32,15 +39,19 @@ class Call extends Model implements Auditable
         'clasificator_id'
     ];
 
+    /**
+    * The attributes that should be mutated to dates.
+    *
+    * @var array
+    */
+    protected $dates = [
+        'hour',
+    ];
+
     public function events()
     {
         return $this->belongsToMany(Event::class,'samu_call_event');
     }
-
-    // public function ot()
-    // {
-    //     return $this->hasOne(Ot::class);
-    // }
 
     public function shift()
     {
@@ -52,11 +63,24 @@ class Call extends Model implements Auditable
         return $this->belongsTo(User::class,'receptor_id');
     }
 
-    // public function creator()
-    // {
-    //     return $this->belongsTo(User::class,'creator_id');
-    // }
+    public function regulator()
+    {
+        return $this->belongsTo(User::class,'regulator_id');
 
+    }
+
+    /* Una llamada puede hace referencia o tener relación con otra llamada  */
+    public function referenceCall()
+    {
+        return $this->belongsTo(Call::class,'call_id');
+    }
+    
+    /* Una llamada puede tener muchas llamadas asociadas  */
+    public function associatedCalls()
+    {
+        return $this->hasMany(Call::class);
+    }
+    
     /**
      * Perform any actions required after the model boots.
      *

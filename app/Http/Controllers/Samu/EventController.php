@@ -37,7 +37,12 @@ class EventController extends Controller
         $events_today = Event::whereDate('date',$today)->latest()->get();
         $events_yesterday = Event::whereDate('date',$yesterday)->latest()->get();
 
-        return view ('samu.event.index' , compact('shift','events_today','events_yesterday'));
+        $calls = Call::where('shift_id',$shift->id)
+                    ->doesnthave('events')
+                    ->where('classification','<>','OT')
+                    ->get();
+
+        return view ('samu.event.index' , compact('shift','events_today','events_yesterday','calls'));
     }
 
     /**
