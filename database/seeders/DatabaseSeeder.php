@@ -50,12 +50,7 @@ class DatabaseSeeder extends Seeder
             CodConAppointmentTypesSeeder::class,
             SicStatusesSeeder::class,
 
-            /* SAMU */
-            SamuMobileSeeder::class,
-            SamuJobTypeSeeder::class,
-            SamuKeySeeder::class,
-            SamuSeeder::class,
-            SamuReceptionPlaceSeeder::class,
+
 
             //Organizacion
             OrganizationTypeSeeder::class,
@@ -66,7 +61,12 @@ class DatabaseSeeder extends Seeder
             //necesita Organization por eso se debe ejecutar despues
             LocationSeeder::class,
 
-
+            /* SAMU */
+            SamuMobileSeeder::class,
+            SamuJobTypeSeeder::class,
+            SamuKeySeeder::class,
+            SamuReceptionPlaceSeeder::class,
+            SamuEstablishmentSeeder::class,
 
 
         ]);

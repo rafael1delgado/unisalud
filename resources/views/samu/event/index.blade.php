@@ -50,7 +50,7 @@
 </div>
 
 <h3 class="mb-3"><i class="fas fa-phone"></i> Llamadas sin cometido asociado</h3>
-@include('samu.call.partials.list',['calls' => $calls])
+@include('samu.call.partials.list',['calls' => $calls, 'edit' => true])
 
 
 <h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de cometidos de hoy
