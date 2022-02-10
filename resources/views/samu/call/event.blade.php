@@ -4,7 +4,7 @@
 
     <div class="form-row mb-3">
         <fieldset class="col-md-12 col-12">
-            <button  class="btn btn-success" type="submit">Asignar uno o más eventos al llamado</button>
+            <button  class="btn btn-success" type="submit">Asignar uno o más cometidos a la llamada</button>
         </fieldset>
     </div>
     <div class="form-row">
@@ -15,8 +15,12 @@
                     name="events[]" value="{{ $event->id }}"
                     @if(in_array($event->id, $call->events->pluck('id')->toArray())) checked @endif>
                 <label class="form-check-label" for="for_events">
-                    Evento turno: {{ ++$key }} - Evento global: {{ $event->id }} - {{ $event->key->name }} 
-                    <a href="{{ route('samu.event.edit',$event) }}" class="link-primary">[Ver event]</a>
+                    <b>Cometido:</b>  
+                    <a href="{{ route('samu.event.edit', $event) }}">
+                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> {{ $event->id }}</button>
+                    </a>
+                    - <b>Clave:</b> {{ $event->key->name }} 
+                    - <b>Mobil:</b> {{ optional($event->mobile)->code }} {{ optional($event->mobile)->name }}
                 </label>
             </div>
             @endforeach

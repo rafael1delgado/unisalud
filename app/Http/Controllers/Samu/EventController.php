@@ -30,6 +30,12 @@ class EventController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
+        
+        if(!$shift) 
+        {
+            session()->flash('danger', 'Debe abrir un turno primero');
+            return redirect()->route('samu.welcome');
+        }
 
         $today = now();
         $yesterday = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $today) ) ));
@@ -54,6 +60,11 @@ class EventController extends Controller
     {
         /* Obtener el turno actual */
         $shift              = Shift::where('status',true)->first();
+        if(!$shift) 
+        {
+            session()->flash('danger', 'Debe abrir un turno primero');
+            return redirect()->route('samu.welcome');
+        }
         $mobiles            = Mobile::where('managed',false)->get();
         $establishments     = Organization::whereHas('samu')->pluck('id','name')->sort();
         $nextCounter        = EventCounter::getNext();
@@ -138,7 +149,12 @@ class EventController extends Controller
     public function edit(event $event)
     {
         /* Obtener el turno actual */
-        $shift              = Shift::where('status',true)->first();
+        $shift  = Shift::where('status',true)->first();
+        if(!$shift) 
+        {
+            session()->flash('danger', 'Debe abrir un turno primero');
+            return redirect()->route('samu.welcome');
+        }
         $establishments     = Organization::whereHas('samu')->pluck('id','name')->sort();
         $keys               = Key::orderBy('key')->get();
         $mobiles            = Mobile::where('managed',false)->get();
@@ -160,7 +176,11 @@ class EventController extends Controller
     public function update(Request $request, event $event)
     {
         $shift = Shift::where('status',true)->first();
-
+        if(!$shift) 
+        {
+            session()->flash('danger', 'Debe abrir un turno primero');
+            return redirect()->back()->withInput();
+        }
         $event->fill($request->all());
         $event->patient_unknown = $request->has('patient_unknown') ? true:false;
         $isMobileInService = $shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();

@@ -36,7 +36,6 @@ class CallController extends Controller
 
     public function ots()
     {
-        /*  */
         $openShift = Shift::where('status',true)
                     ->with(['calls','calls.events','calls.receptor'])
                     ->first();
@@ -56,7 +55,15 @@ class CallController extends Controller
      */
     public function create()
     {
+        /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
+
+        if(!$shift) 
+        {
+            session()->flash('danger', 'Debe abrir un turno primero');
+            return redirect()->route('samu.welcome');
+        }
+
         return view ('samu.call.create' , compact('shift'));
     }
 
@@ -108,8 +115,15 @@ class CallController extends Controller
      */
     public function edit(Call $call)
     {
+        /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
-        //$shiftUsers = ShiftUser::all();
+
+        if(!$shift) 
+        {
+            session()->flash('danger', 'Debe abrir un turno primero');
+            return redirect()->route('samu.welcome');
+        }
+
         return view ('samu.call.edit' , compact('call', 'shift'));
     }
 
@@ -123,10 +137,7 @@ class CallController extends Controller
      */
     public function update(Request $request, Call $call)
     {
-        // if(!$call->regulator_id AND $request->filled('classification'))
-        // {
-        //     $call->regulator_id = auth()->id();
-        // }
+
         if($call->classification != $request->filled('classification'))
         {
             $call->regulator_id = auth()->id();
@@ -161,7 +172,7 @@ class CallController extends Controller
         }
 
         $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
-        return redirect()->route('samu.call.index');
+        return redirect()->route('samu.event.index');
     }
  
 

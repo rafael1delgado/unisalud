@@ -49,17 +49,15 @@
     </div>
 </div>
 
-<h3 class="mb-3"><i class="fas fa-phone"></i> Llamadas sin cometido asociado</h3>
-@include('samu.call.partials.list',['calls' => $calls, 'edit' => true])
-
-
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de cometidos de hoy
-    
+<h3 class="mb-3"><i class="fas fa-phone"></i> Llamadas sin cometido asociado
     <a class="btn btn-success float-right" href="{{ route('samu.event.create') }}">
         <i class="fas fa-plus"></i> Crear cometido
     </a>
-
 </h3>
+@include('samu.call.partials.list',['calls' => $calls, 'edit' => true])
+
+
+<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de cometidos de hoy</h3>
 
 @include('samu.event.partials.index', ['events' => $events_today])
 

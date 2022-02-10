@@ -19,6 +19,13 @@ class MobileInServiceController extends Controller
      */
     public function index()
     {
+        $shift = Shift::where('status',true)->first();
+        if(!$shift) 
+        {
+            session()->flash('danger', 'Debe abrir un turno primero');
+            return redirect()->route('samu.welcome');
+        }
+
         $mobilesInService = MobileInService::with(['shift','mobile','crew'])
                             ->whereHas('shift')
                             ->latest()
@@ -34,10 +41,15 @@ class MobileInServiceController extends Controller
      */
     public function create()
     {
-        $mobiles = Mobile::where('managed',1)->get();
-
         $shift = Shift::where('status',true)->first();
+        if(!$shift) 
+        {
+            session()->flash('danger', 'Debe abrir un turno primero');
+            return redirect()->route('samu.welcome');
+        }
 
+        $mobiles = Mobile::where('managed',1)->get();
+        
         return view('samu.mobileinservice.create', compact('mobiles','shift'));
     }
 
@@ -94,10 +106,15 @@ class MobileInServiceController extends Controller
      */
     public function edit(MobileInService $mobileInService)
     {
+        $shift = Shift::where('status',true)->first();
+        if(!$shift) 
+        {
+            session()->flash('danger', 'Debe abrir un turno primero');
+            return redirect()->route('samu.welcome');
+        }
         $mobiles = Mobile::where('managed',true)->get();
-        $shift = Shift::where('status',1)->get();
+
         return view('samu.mobileinservice.edit', compact('mobiles','shift','mobileInService'));
-    
     }
 
     /**
@@ -111,7 +128,7 @@ class MobileInServiceController extends Controller
         
     {
          /* Obtener el turno actual */
-         $shift = Shift::where('status',1)->first();
+         $shift = Shift::where('status',true)->first();
 
         if($shift) {
             $mobileInService->fill($request->all());
@@ -138,7 +155,6 @@ class MobileInServiceController extends Controller
      */
     public function destroy(MobileInService $mobileInService)
     {
-        
         $mobileInService->delete();
  
         return redirect()->route('samu.mobileinservice.index')->with('danger', 'Eliminado satisfactoriamente.');
@@ -149,29 +165,17 @@ class MobileInServiceController extends Controller
     {
         $mobiles = Mobile::where('managed',true)->get();
     
-        $shift = Shift::where('status',1)->get();
+        $shift = Shift::where('status',true)->get();
         return view('samu.crew.crewedit', compact('mobiles','shift','mobileCrew'));
-    
-
     }
 
     public function crewupdate(Request $request, MobileCrew $mobileCrew)    
     {
-
         $mobileCrew->fill($request->all());
         $mobileCrew->save();
         session()->flash('info', 'Movil editado.');
         return redirect()->route('samu.mobileinservice.index');
 
-
-
     }
 
-
-
 }  
-
-
-
-
-

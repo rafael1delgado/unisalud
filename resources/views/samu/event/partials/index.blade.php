@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table table-sm">
             
         <thead>
             <tr class="table-primary">
@@ -19,7 +19,7 @@
             <tr class="table-{{ $event->color }}">
                 <td>
                     <a href="{{ route('samu.event.edit', $event) }}">
-                        <button class="btn btn-outline-primary"><i class="fas fa-edit"></i> {{ $event->id }}</button>
+                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> {{ $event->id }}</button>
                     </a>
                 </td>
                 <td>{{ $event->date }} </td>
