@@ -1,3 +1,4 @@
+<h4> Asignación de seguimiento y horarios</h4>
 <div class="form-row">
 
     <fieldset class="form-group col-md-3">
@@ -269,7 +270,3 @@
     </fieldset>             
 </div>
 <!-- fin de seguimeinto-->
-
-<button type="submit" class="btn btn-primary" >Guardar</button>
-
-<a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>
