@@ -83,15 +83,15 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
         $user->fill($request->all());
-        // $user->password = bcrypt($user->password);
 
-        $user->syncPermissions(is_array($request->input('permissions')) ? $request->input('permissions') : array());
+        $this->updatePermissions($user, is_array($request->input('permissions')) ? $request->input('permissions') : array());
+        // $user->syncPermissions(is_array($request->input('permissions')) ? $request->input('permissions') : array());
 
         if (
             $user->actualOfficialHumanName->use != $request->human_name_use ||
@@ -137,6 +137,16 @@ class UserController extends Controller
         session()->flash('success', 'El usuario ' . $user->name . ' ha sido actualizado.');
 
         return redirect()->back();
+    }
+
+    private function updatePermissions(User $user, Array $permissions) {
+        foreach ($permissions as $permissionName => $permission) {
+            if($permission === 'true'){
+                $user->givePermissionTo($permissionName);
+            }else{
+                $user->revokePermissionTo($permissionName);
+            }
+        }
     }
 
     public function searchByName(Request $request)
