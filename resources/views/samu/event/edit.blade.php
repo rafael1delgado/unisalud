@@ -5,8 +5,6 @@
 @include('samu.nav')
 
 <h3 class="mb-3"><i class="fas fa-car-crash"></i> Editar cometido {{ $event->id }}</h3>
-
-<h4> Asignación de seguimiento y horarios</h4>
       
 <form method="post" action="{{ route('samu.event.update', $event) }}">
     @csrf
@@ -17,6 +15,10 @@
         'keys'  => $keys,
         'shift' => $shift
     ])
+
+    <button type="submit" class="btn btn-primary" >Guardar</button>
+
+    <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>
 
 </form>
 

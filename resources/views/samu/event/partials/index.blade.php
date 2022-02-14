@@ -4,9 +4,9 @@
         <thead>
             <tr class="table-primary">
                 <th>ID</th>
-                <th>Fecha</th>
-                <th>Evento N°</th>
-                <th>Movil en Servicio</th>
+                <th>N°</th>
+                <th>Llamadas</th>
+                <th>Móvil en Servicio</th>
                 <th>Dirección</th>
                 <th>Clave</th>
                 <th>Clave de Retorno</th>
@@ -22,8 +22,12 @@
                         <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> {{ $event->id }}</button>
                     </a>
                 </td>
-                <td>{{ $event->date }} </td>
                 <td>{{ $event->counter }} </td>
+                <td>
+                    @foreach($event->calls as $call)
+                        <a href="{{ route('samu.call.edit',$call) }}">{{ $call->id }}</a>,
+                    @endforeach
+                </td>
                 <td>
                     {{ optional($event->mobile)->code }} 
                     {{ optional($event->mobile)->name }}

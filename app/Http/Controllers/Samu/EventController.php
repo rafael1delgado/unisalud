@@ -71,11 +71,26 @@ class EventController extends Controller
         $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes    = CodConIdentifierType::pluck('id','text')->sort();
         $keys               = Key::orderBy('key')->get();
+
+        $calls = Call::latest()
+            ->where('classification','<>','OT')
+            ->limit(20)
+            ->get();
         
         /* TODO: Parametrizar */
         $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
 
-        return view ('samu.event.create',compact('shift','keys','establishments','nextCounter','mobiles','receptionPlaces','identifierTypes','communes'));
+        return view ('samu.event.create',compact(
+            'shift',
+            'keys',
+            'establishments',
+            'nextCounter',
+            'mobiles',
+            'receptionPlaces',
+            'identifierTypes',
+            'communes',
+            'calls')
+        );
     }
 
     /**
@@ -101,6 +116,11 @@ class EventController extends Controller
             
             $event->shift()->associate($shift);
             $event->save();
+
+            if($request->filled('call'))
+            {
+                $event->calls()->attach($request->input('call'));
+            }
         
             $mobilecrews=MobileCrew::where('mobiles_in_service_id', $request->mobile_in_service_id)->get();
 

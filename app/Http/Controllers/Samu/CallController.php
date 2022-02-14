@@ -166,12 +166,9 @@ class CallController extends Controller
 
     public function syncevents(Request $request, Call $call)
     {
-        if ($request->has('events')) 
-        {
-            $call->events()->sync($request->input('events'));
-        }
+        $call->events()->sync($request->input('events'));
 
-        $request->session()->flash('success', 'Se han actualizado los datos del llamado.');
+        $request->session()->flash('success', 'Se han asignado los cometidos a la llamada.');
         return redirect()->route('samu.event.index');
     }
  

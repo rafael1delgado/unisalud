@@ -86,19 +86,34 @@
 
 				@php $anterior = null; @endphp
 				@foreach($permissions as $permission)
-					@if(Gate::check('Administrator') || Gate::check('SAMU: Admin'))
+					@if(Gate::check('Administrator'))
 						@if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
-							<hr {{ !Gate::check('Administrator') && !Str::contains($permission->name, 'SAMU') ? 'hidden' : '' }}>
+							<hr>
 							@php $anterior = $permission->name; @endphp
 						@endif
+
+                        <input type="hidden" name="permissions[{{$permission->name}}]" value="false">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="permissions[]"
-								value="{{ $permission->name }}" id="{{$permission->name}}"
+							<input class="form-check-input" type="checkbox" name="permissions[{{ $permission->name}}]"
+								value="true" id="{{$permission->name}}"
 								{{ $user->can($permission->name)? 'checked':'' }}
-                                {{ !Gate::check('Administrator') && !Str::contains($permission->name, 'SAMU') ? 'hidden' : '' }}
                                 >
 							<label class="form-check-label" for="{{$permission->name}}"
-                                {{ !Gate::check('Administrator') && !Str::contains($permission->name, 'SAMU') ? 'hidden' : '' }}
+                                > <b>{{$permission->name}}</b> {{$permission->description}}</label>
+						</div>
+                    @elseif(Gate::check('SAMU: Admin') && Str::contains($permission->name, 'SAMU'))
+						@if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
+							<hr>
+							@php $anterior = $permission->name; @endphp
+						@endif
+
+                        <input type="hidden" name="permissions[{{$permission->name}}]" value="false">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" name="permissions[{{$permission->name}}]"
+								value="true" id="{{$permission->name}}"
+								{{ $user->can($permission->name)? 'checked':'' }}
+                                >
+							<label class="form-check-label" for="{{$permission->name}}"
                                 > <b>{{$permission->name}}</b> {{$permission->description}}</label>
 						</div>
 					@endif
