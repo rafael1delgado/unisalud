@@ -25,7 +25,7 @@
 </div>
 
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table table-sm table-striped">
         <thead>
             <tr class="table-primary">
                 <th></th>
@@ -39,7 +39,7 @@
             <tr>
                 <td>
                     <a href="{{ route('samu.key.edit', $key) }}">
-                        <button type="button" class="btn btn-outline-primary mx-1">
+                        <button type="button" class="btn btn-sm btn-outline-primary mx-1">
                             <i class="fas fa-edit"></i>
                         </button>
                     </a>
@@ -50,7 +50,7 @@
                     <form method="POST" action="{{ route('samu.key.destroy' , $key) }}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger mx-1">
+                        <button type="submit" class="btn btn-sm btn-danger mx-1">
                             <i class="fas fa-trash"></i>
                         </button>
                     </form>

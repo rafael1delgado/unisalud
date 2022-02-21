@@ -26,7 +26,7 @@
 </div>
 
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table table-sm table-striped">
         <thead>
             <tr class="table-primary">
                 <th></th>
@@ -42,7 +42,7 @@
             @foreach($mobiles as $mobile)
             <tr>
                 <td>
-                    <a href="{{ route('samu.mobile.edit', $mobile) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
+                    <a href="{{ route('samu.mobile.edit', $mobile) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></a>
                 </td>
                 <td>{{ $mobile->code }}</td>
                 <td>{{ $mobile->name }}</td>
@@ -53,7 +53,7 @@
                     <form method="POST" action="{{ route('samu.mobile.destroy', $mobile) }}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
                 </td>
             </tr>
