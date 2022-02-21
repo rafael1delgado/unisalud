@@ -5,8 +5,11 @@
 @include('samu.nav')
 
 <h3 class="mb-3"><i class="fas fa-car-crash"></i> Editar cometido {{ $event->id }}</h3>
-      
+
+@if($event->status)
 <form method="post" action="{{ route('samu.event.update', $event) }}">
+@endif
+
     @csrf
     @method('PUT')
 
@@ -16,15 +19,21 @@
         'shift' => $shift
     ])
 
-    <button type="submit" class="btn btn-primary" >Guardar</button>
+    @if($event->status)
+    <button type="submit" name="btn_save" value="true" class="btn btn-primary">Guardar</button>
 
+    <button type="submit" name="btn_save_close" value="true" class="btn btn-success">Guardar y cerrar</button>
+    @endif
+    
     <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>
-
+    
+@if($event->status)    
 </form>
+@endif
 
 <br>
 
-<h3>Llamadas relacionadas a este cometido</h3>
+<h3 class="mt-3">Llamadas relacionadas a este cometido</h3>
 
 <div class="table-responsive">
 

@@ -102,7 +102,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $shift = Shift::where('status',true)->first();
-
+        
         if($shift) 
         {
             $event = new Event($request->all());
@@ -194,7 +194,7 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, event $event)
-    {
+    {   
         $shift = Shift::where('status',true)->first();
         if(!$shift) 
         {
@@ -213,8 +213,14 @@ class EventController extends Controller
         {
             $event->mobileInService()->dissociate();
         }
+        
+        if($request->has("btn_save_close"))
+        {
+            $event->status = false;
+        }
+        
         $event->update();
-
+        
         session()->flash('success', 'Event Actualizado satisfactoriamente.');
         return redirect()->route('samu.event.index');
     }

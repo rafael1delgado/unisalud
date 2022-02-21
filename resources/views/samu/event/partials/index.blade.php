@@ -20,7 +20,13 @@
             <tr class="table-{{ $event->color }}">
                 <td>
                     <a href="{{ route('samu.event.edit', $event) }}">
-                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> {{ $event->id }}</button>
+                        <button class="btn btn-sm btn-outline-primary">
+                            @if($event->status)    
+                                <i class="fas fa-edit"></i>
+                            @else
+                                <i class="fas fa-eye"></i>
+                            @endif
+                            {{ $event->id }}</button>
                     </a>
                 </td>
                 <td>{{ $event->counter }} </td>

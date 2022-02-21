@@ -36,7 +36,7 @@
             <option value=""></option>
             @foreach($shift->mobilesInService as $mis)
             <option value="{{ $mis->mobile->id }}" {{ old('mobile_id', optional($event)->mobile_id) == $mis->mobile->id ? 'selected' : '' }}>
-                {{ $mis->mobile->code }} {{ $mis->mobile->name }} (PROPIO)
+                {{ $mis->mobile->code }} {{ $mis->mobile->name }} - {{ $mis->type }} (PROPIO)
             </option>
             @endforeach 
             @foreach($mobiles as $mobile)
@@ -220,7 +220,7 @@
 <div class="form-row">
     <fieldset class="form-group col-md-1">
         <label for="for_fc">Frecuencia Cardiaca</label>
-        <input type="text" class="form-control" name="fc" value="{{ ( $event &&  $event->fc)? $event->fc : '' }}">
+        <input type="text" class="form-control" maxlength="8" name="fc" value="{{ ( $event &&  $event->fc)? $event->fc : '' }}">
     </fieldset>
     <fieldset class="form-group col-md-1">
         <label for="for_fr">Frecuencia Respiratoria</label>
