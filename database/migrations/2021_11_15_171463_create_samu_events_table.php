@@ -59,7 +59,7 @@ class CreateSamuEventsTable extends Migration
 
 
             /* Asignacion signos vitales */
-            $table->string('fc')->nullable();
+            $table->string('fc',10)->nullable();
             $table->integer('fr')->nullable();
             $table->string('pa')->nullable();
             $table->string('pam')->nullable();
