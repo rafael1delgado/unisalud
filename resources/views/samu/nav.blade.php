@@ -1,4 +1,6 @@
-<ul class="nav nav-tabs mb-3" >
+<h3 class="d-none d-print-block">SAMU Tarapacá - <small>Servicio de Salud Iquique</small></h3>
+
+<ul class="nav nav-tabs mb-3 d-print-none">
     <li class="nav-item" >
         <a class="nav-link {{ active('samu.welcome') }}"
         href=" {{ route('samu.welcome') }}"><i class="fas fa-home"></i> Home</a>

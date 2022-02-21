@@ -38,7 +38,7 @@
                         Referencia a: <a href="{{ route('samu.call.edit',$call->referenceCall) }}">{{ $call->referenceCall->id }}</a>
                     @endif
                 </td>
-                <td>{{ $call->hour }}</td>
+                <td width="90">{{ $call->hour }}</td>
                 <td>{{ $call->applicant }}</td>
                 <td>{{ $call->information }}</td>
                 

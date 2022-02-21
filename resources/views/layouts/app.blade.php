@@ -72,7 +72,7 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse d-print-none">
                     <div class="sidebar-sticky pt-3">
                         @auth
                         @include('layouts.partials.nav')
