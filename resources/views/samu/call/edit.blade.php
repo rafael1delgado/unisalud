@@ -13,6 +13,15 @@
 
     @include('samu.call.form', ['call' => $call])
 
+    <div class="form-row">
+
+        <fieldset class="form-group col-md-12">
+            <label for="for_regulation">Regulación</label>
+            <textarea class="form-control form-control-sm" name="regulation" rows="5">{{ old('regulation', optional($call)->regulation) }}</textarea>
+        </fieldset>
+
+    </div>
+
     <button type="submit" class="btn btn-primary" >Guardar</button>
 
     <a href="{{ route('samu.call.index') }}" class="btn btn-outline-secondary">Cancelar</a>

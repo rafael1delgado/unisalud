@@ -220,7 +220,7 @@
 <div class="form-row">
     <fieldset class="form-group col-md-1">
         <label for="for_fc">Frecuencia Cardiaca</label>
-        <input type="number" class="form-control" name="fc" value="{{ ( $event &&  $event->fc)? $event->fc : '' }}">
+        <input type="text" class="form-control" name="fc" value="{{ ( $event &&  $event->fc)? $event->fc : '' }}">
     </fieldset>
     <fieldset class="form-group col-md-1">
         <label for="for_fr">Frecuencia Respiratoria</label>

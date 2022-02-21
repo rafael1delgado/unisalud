@@ -10,6 +10,7 @@
                 <th>Dirección</th>
                 <th>Clave</th>
                 <th>Clave de Retorno</th>
+                <th>Observación</th>
                 <th></th>
             </tr>
         </thead>
@@ -35,6 +36,7 @@
                 <td>{{ $event->address }}, {{ optional($event->commune)->name }}</td>
                 <td>{{ $event->key->key }} - {{ $event->key->name }} </td>
                 <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
+                <td>{{ $event->observation }}</td>
                 <td>
                     <form method="POST" action="{{ route('samu.event.destroy', $event) }}">
                         @csrf

@@ -26,17 +26,18 @@ class Call extends Model implements Auditable
     * @var array
     */
     protected $fillable = [
+        'shift_id',
         'call_id',
         'classification',
         'hour',
         'receptor_id',
+        'clasificator_id',
+        'regulator_id',
         'information',
+        'regulation',
         'applicant',
         'address',
         'telephone',
-        'shift_id',
-        'regulator_id',
-        'clasificator_id'
     ];
 
     /**

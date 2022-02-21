@@ -57,6 +57,7 @@ class Event extends Model implements Auditable
         /* Recepción en centro asistencial */
         'reception_detail',
         'establishment_id',
+        'establishment_details',
         'reception_person',
         'reception_place_id',
         'rau',
@@ -75,6 +76,8 @@ class Event extends Model implements Auditable
 
         'treatment',
         'observation_sv',
+
+        'status',
     ];
 
     /**

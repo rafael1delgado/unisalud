@@ -51,6 +51,7 @@ class CreateSamuEventsTable extends Migration
             /* Recepción en centro asistencial */
             $table->text('reception_detail')->nullable();
             $table->foreignId('establishment_id')->nullable()->constrained('organizations');
+            $table->string('establishment_details')->nullable();
             $table->string('reception_person')->nullable();
             $table->foreignId('reception_place_id')->nullable()->constrained('samu_reception_places');
             /* Registro atención de urgencia */
@@ -58,7 +59,7 @@ class CreateSamuEventsTable extends Migration
 
 
             /* Asignacion signos vitales */
-            $table->integer('fc')->nullable();
+            $table->string('fc')->nullable();
             $table->integer('fr')->nullable();
             $table->string('pa')->nullable();
             $table->string('pam')->nullable();
@@ -71,6 +72,8 @@ class CreateSamuEventsTable extends Migration
             
             $table->text('treatment')->nullable();
             $table->text('observation_sv')->nullable();
+            
+            $table->boolean('status')->default(true);
 
             $table->foreignId('creator_id')->constrained('users');
             $table->timestamps();
