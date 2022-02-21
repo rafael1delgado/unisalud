@@ -1,4 +1,4 @@
-<h3 class="d-none d-print-block">SAMU Tarapacá - <small>Servicio de Salud Iquique</small></h3>
+<h4 class="d-none d-print-block">SAMU</h4>
 
 <ul class="nav nav-tabs mb-3 d-print-none">
     <li class="nav-item" >
