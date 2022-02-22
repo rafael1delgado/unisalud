@@ -32,6 +32,7 @@
                 <th></th>
                 <th>Codigo</th>
                 <th>Nombre</th>
+                <th>Estado</th>
                 <th>Patente</th>
                 <th>Tipo</th>
                 <th>Descripción</th>
@@ -46,6 +47,7 @@
                 </td>
                 <td>{{ $mobile->code }}</td>
                 <td>{{ $mobile->name }}</td>
+                <td>{{ $mobile->status ? 'Activo':'Inactivo' }}</td>
                 <td>{{ $mobile->plate }}</td>
                 <td>{{ $mobile->type }}</td>
                 <td>{{ $mobile->description }}</td>

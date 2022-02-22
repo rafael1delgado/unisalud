@@ -519,7 +519,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/' , 			[KeyController::class, 'index'])->name('index');
 		Route::get('/create' , 		[KeyController::class, 'create'])->name('create');
 		Route::post('/store', 		[KeyController::class, 'store'])->name('store');
-		Route::put('/update/{key}',	[KeyController::class, 'update'])->name('update');
+		Route::put('/{key}',		[KeyController::class, 'update'])->name('update');
 		Route::get('/edit/{key}',	[KeyController::class, 'edit'])->name('edit');
 		Route::delete('/{key}',		[KeyController::class, 'destroy'])->name('destroy');
     });

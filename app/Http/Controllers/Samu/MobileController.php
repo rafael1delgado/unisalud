@@ -45,10 +45,11 @@ class MobileController extends Controller
       
         $mobile = new mobile($request->all());
         //consultando si esta o no clickeado un checkbox
-        $mobile->managed = $request->has('managed') ? true:false;
+        $mobile->managed = $request->has('managed') ? 1:0;
+        $mobile->status = 1;
         $mobile->save();
         $mobiles = mobile::all();
-        session()->flash('success', 'Se ha creado la codificación de móvil exitosamente');
+        session()->flash('success', 'Se ha creado el móvil exitosamente');
         return redirect()->route ('samu.mobile.index', compact('mobiles'));
     }
 
@@ -85,13 +86,13 @@ class MobileController extends Controller
     {
         $mobile->fill($request->all());
         //consultando si esta o no clickeado un checkbox
-        $mobile->managed = $request->has('managed') ? true:false;
-        $mobile->status = $request->has('status') ? true:false;
+        $mobile->managed = $request->has('managed') ? 1:0;
+        $mobile->status = $request->has('status') ? 1:0;
         $mobile->save();
 
-        session()->flash('info', 'La codificación de Móvil ha sido editada.');
-        return redirect()->route('samu.mobile.index', compact('mobile'));
-    
+        session()->flash('info', 'El móvil ha sido editado.');
+
+        return redirect()->route('samu.mobile.index');
     }
 
     /**

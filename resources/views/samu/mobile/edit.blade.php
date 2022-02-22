@@ -38,7 +38,7 @@
             <label class="form-check-label ml-5" for="exampleCheck1">Móvil Pertenece a Samu</label>
         </div>
         <div class="mt-5 form-check col-md-1">
-            <input type="checkbox" class="form-check-input ml-3" name="managed" {{ ($mobile->status) ? 'checked':''}} >
+            <input type="checkbox" class="form-check-input ml-3" name="status" {{ ($mobile->status) ? 'checked':''}} >
             <label class="form-check-label ml-5" for="exampleCheck1">Activo</label>
         </div>
         
