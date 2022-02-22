@@ -108,6 +108,11 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
+                $('form').submit(function(){
+                    $('input[type=submit]', this).attr('disabled', 'disabled');
+                    $('button[type=submit]', this).attr('disabled', 'disabled');
+                });
+
                 $(".collapse-menu").on("shown.bs.collapse", function () {
                     localStorage.setItem("coll_" + this.id, true);
                     $('#icon_'+this.id).replaceWith(feather.icons['minus-circle'].toSvg());
@@ -130,6 +135,7 @@
                     }
                 });
             });
+
         </script>
 
     </body>

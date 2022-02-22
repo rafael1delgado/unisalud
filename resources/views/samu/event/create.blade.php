@@ -43,7 +43,7 @@
         'shift' => $shift
     ])
 
-    <button type="submit" class="btn btn-primary" >Guardar</button>
+    <button type="submit" class="btn btn-primary">Guardar</button>
 
     <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>
 
