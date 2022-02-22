@@ -35,7 +35,7 @@
                         @endif
                     @endif
                     @if($call->referenceCall)
-                        Refer. a: <a href="{{ route('samu.call.edit',$call->referenceCall) }}">{{ $call->referenceCall->id }}</a>
+                        Referencia: <a href="{{ route('samu.call.edit',$call->referenceCall) }}">{{ $call->referenceCall->id }}</a>
                     @endif
                 </td>
                 <td width="90">{{ $call->hour }}</td>

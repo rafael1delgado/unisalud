@@ -18,7 +18,7 @@
         <tbody>
             @foreach($events as $event)
             <tr class="table-{{ $event->color }}">
-                <td>
+                <td nowrap>
                     <a href="{{ route('samu.event.edit', $event) }}">
                             @if($event->status)
                                 <button class="btn btn-sm btn-outline-primary">
@@ -37,7 +37,7 @@
                         <a href="{{ route('samu.call.edit',$call) }}">{{ $call->id }}</a>,
                     @endforeach
                 </td>
-                <td>
+                <td nowrap>
                     {{ optional($event->mobile)->code }} 
                     {{ optional($event->mobile)->name }}
                 </td>

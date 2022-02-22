@@ -106,7 +106,7 @@ class EventController extends Controller
         if($shift) 
         {
             $event = new Event($request->all());
-            $event->patient_unknown = $request->has('patient_unknown') ? true:false;
+            $event->patient_unknown = $request->has('patient_unknown') ? 1:0;
             $isMobileInService = $shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
             
             if($isMobileInService)
@@ -195,15 +195,15 @@ class EventController extends Controller
      */
     public function update(Request $request, event $event)
     {   
-        $shift = Shift::where('status',true)->first();
-        if(!$shift) 
-        {
-            session()->flash('danger', 'Debe abrir un turno primero');
-            return redirect()->back()->withInput();
-        }
+        // $shift = Shift::where('status',true)->first();
+        // if(!$shift) 
+        // {
+        //     session()->flash('danger', 'Debe abrir un turno primero');
+        //     return redirect()->back()->withInput();
+        // }
         $event->fill($request->all());
-        $event->patient_unknown = $request->has('patient_unknown') ? true:false;
-        $isMobileInService = $shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
+        $event->patient_unknown = $request->has('patient_unknown') ? 1:0;
+        $isMobileInService = $event->shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
 
         if($isMobileInService)
         {
@@ -216,12 +216,13 @@ class EventController extends Controller
         
         if($request->has("btn_save_close"))
         {
+            /** Chequear campos obligatorios */
             $event->status = false;
         }
         
         $event->update();
         
-        session()->flash('success', 'Event Actualizado satisfactoriamente.');
+        session()->flash('success', 'Cometido actualizado satisfactoriamente.');
         return redirect()->route('samu.event.index');
     }
 
@@ -234,7 +235,12 @@ class EventController extends Controller
      */
     public function destroy(event $event)
     {
-        //
+        $event->mobileInService()->dissociate();
+        $event->calls()->detach();
+        $event->delete();
+
+        session()->flash('danger', 'Cometido eliminado.');
+        return redirect()->back();
     }
 
     public function filter(Request $request)
