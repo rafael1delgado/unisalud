@@ -15,7 +15,7 @@
         <tbody>
             @foreach($calls as $call)
             <tr>
-                <td class="text-center">
+                <td class="text-center" nowrap>
                     @if($edit)
                         <a href="{{ route('samu.call.edit',$call) }}" class="btn btn-sm btn-outline-primary">
                             <i class="fas fa-edit"></i> {{ $call->id }}

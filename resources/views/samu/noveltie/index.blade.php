@@ -4,7 +4,7 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-book"></i> Registro de Novedades del turno {{ optional($shift)->id }}</h3>
+<h3 class="mb-3"><i class="fas fa-book"></i> Registro de novedades</h3>
 
 @if($shift OR old('detail'))
     @include('samu.noveltie.create')
@@ -17,27 +17,26 @@
                 <th></th>
                 <th>Turno</th>
                 <th>Fecha registro</th>
-                <th>Creador</th>
                 <th>Detalle de Novedades</th>
+                <th>Creador</th>
             </tr>
         </thead>
         <tbody>
             @foreach($novelties as $noveltie)
             <tr>
                 <td>
-                    @if($noveltie->shift->status == true)
-                    <a class="btn btn-outline-primary" href="{{ route('samu.noveltie.edit', $noveltie) }}">
-                    <i class="fas fa-edit"></i></a>
+                    @if($noveltie->shift->status)
+                    <a class="btn btn-sm btn-outline-primary" href="{{ route('samu.noveltie.edit', $noveltie) }}">
+                    <i class="fas fa-edit"></i> {{ $noveltie->id }} </a>
                     @endif
                 </td>
                 <td>
-                    {{ $noveltie->shift->id }} -
-                    {{ $noveltie->shift->opening_at->format('Y-m-d') }} - 
+                    {{ $noveltie->shift->opening_at }}
                     {{ $noveltie->shift->type }} ({{ $noveltie->shift->statusInWord }})
                 </td>
                 <td>{{ $noveltie->created_at }}</td>
-                <td>{{ $noveltie->creator->officialFullName }}</td>
                 <td>{{ $noveltie->detail ?? ''}} </td>
+                <td>{{ $noveltie->creator->officialFullName }}</td>
             </tr>
             @endforeach
         </tbody>

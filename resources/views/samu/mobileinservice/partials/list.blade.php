@@ -45,7 +45,8 @@
             </tr>
             <tr>
                 <td colspan="6">
-                @if($mis->shift->status == true)
+
+                    @if($mis->shift->status == true)
                         @livewire('samu.mobile-crew',['mobileInService' => $mis])
                     @else
                         @foreach($mis->crew as $tripulant)
@@ -65,7 +66,8 @@
                             </div>
                         </div>
                         @endforeach
-                    @endif    
+                    @endif
+
                 </td>
             </tr>
             @endforeach

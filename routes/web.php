@@ -629,3 +629,16 @@ Route::prefix('vista')->name('vista.')->group(function () {
 
 Route::get('/test/rayen' ,[RayenController::class, 'getUrgencyStatus'])->name('getUrgencyStatus');
 Route::get('/test/sendip',[TestController::class,'sendIp']);
+
+
+// Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
+// 	Route::get('/down', function() 
+// 	{
+// 		Artisan::call('down --secret="pum"');
+// 	});
+// 	Route::get('/up', function() 
+// 	{
+// 		Artisan::call('up');
+// 		return back();
+// 	});
+// });

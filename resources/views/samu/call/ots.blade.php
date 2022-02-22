@@ -15,7 +15,11 @@
 @foreach([$openShift,$lastShift] as $shift)
     @unless($shift == null)
 
-    <h4 class="mb-3">Registro de llamadas turno: {{ optional(optional($shift)->opening_at)->format('Y-m-d H:i') }}</h4>
+    <h4 class="mb-3">Llamadas turno 
+        {{ optional(optional($shift)->opening_at)->format('Y-m-d H:i') }}
+        ({{ optional($shift)->statusInWord }})
+    </h4>
+    
     @include('samu.call.partials.list', ['calls' => $shift->calls->where('classification','OT')->sortByDesc('id'), 'edit' => true])
 
     @endunless
