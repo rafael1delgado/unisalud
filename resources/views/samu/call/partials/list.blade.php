@@ -28,14 +28,14 @@
                     @if($call->classification)
                         {{ $call->classification }} 
                         @if($call->classification != 'OT')
-                            - Evento: 
+                            <br> Evento: 
                             @foreach($call->events as $event)
                                 <a href="{{ route('samu.event.edit', $event) }}" class="link-primary"> {{ $event->id }}</a>, 
                             @endforeach
                         @endif
                     @endif
                     @if($call->referenceCall)
-                        Referencia a: <a href="{{ route('samu.call.edit',$call->referenceCall) }}">{{ $call->referenceCall->id }}</a>
+                        Refer. a: <a href="{{ route('samu.call.edit',$call->referenceCall) }}">{{ $call->referenceCall->id }}</a>
                     @endif
                 </td>
                 <td width="90">{{ $call->hour }}</td>

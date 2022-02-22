@@ -21,7 +21,7 @@
             <label for="for_mobile_id">Móvil </label>
             <select class="form-control" name="mobile_id">
                 @foreach($mobiles as $mobile)
-                    <option value="{{ $mobile->id }}">{{$mobile->name}}</option>
+                    <option value="{{ $mobile->id }}" {{ $mobileInService->mobile_id === $mobile->id ? 'selected' : '' }}>{{ $mobile->code }} - {{ $mobile->name }} </option>
                 @endforeach
             </select>
             

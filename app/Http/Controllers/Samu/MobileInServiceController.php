@@ -19,19 +19,16 @@ class MobileInServiceController extends Controller
      */
     public function index()
     {
-        $shift = Shift::where('status',true)->first();
-        if(!$shift) 
+        $openShift = Shift::where('status',true)->first();
+        if(!$openShift) 
         {
             session()->flash('danger', 'Debe abrir un turno primero');
             return redirect()->route('samu.welcome');
         }
 
-        $mobilesInService = MobileInService::with(['shift','mobile','crew'])
-                            ->whereHas('shift')
-                            ->latest()
-                            ->paginate(25);
+        $lastShift = Shift::find($openShift->id - 1);
 
-        return view('samu.mobileinservice.index', compact('mobilesInService'));
+        return view('samu.mobileinservice.index', compact('openShift','lastShift'));
     }
 
     /**
