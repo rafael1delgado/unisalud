@@ -214,7 +214,7 @@ class EventController extends Controller
             $event->mobileInService()->dissociate();
         }
         
-        if($request->has("btn_save_close"))
+        if($request->has("save_close"))
         {
             /** Chequear campos obligatorios */
             $event->status = false;

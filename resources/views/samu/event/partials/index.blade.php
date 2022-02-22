@@ -4,7 +4,7 @@
         <thead>
             <tr class="table-primary">
                 <th>ID</th>
-                <th>N°</th>
+                <th>QTC</th>
                 <th>Llamadas</th>
                 <th>Móvil en Servicio</th>
                 <th>Dirección</th>

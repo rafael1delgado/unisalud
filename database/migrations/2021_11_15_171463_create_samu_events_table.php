@@ -68,7 +68,7 @@ class CreateSamuEventsTable extends Migration
             $table->integer('soap')->nullable();
             $table->integer('hgt')->nullable();
             $table->integer('fill_capillary')->nullable();
-            $table->integer('t')->nullable();
+            $table->decimal('t',5,2)->nullable();
             
             $table->text('treatment')->nullable();
             $table->text('observation_sv')->nullable();

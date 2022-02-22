@@ -258,7 +258,7 @@
     </fieldset>
     <fieldset class="form-group col-md-1">
         <label for="for_t">Temperatura <br>°C</label>
-        <input type="number" class="form-control" name="t" value="{{ ( $event &&  $event->t)? $event->t : '' }}">
+        <input type="number" class="form-control" step=".01" name="t" value="{{ ( $event &&  $event->t)? $event->t : '' }}">
     </fieldset>
     <fieldset class="form-group col-md-4">
         <label for="for_treatment">Tratamiento</label>

@@ -20,9 +20,10 @@
     ])
 
     @if($event->status)
-    <button type="submit" name="btn_save" value="true" class="btn btn-primary">Guardar</button>
+        <button type="submit" name="btn_save" class="btn btn-primary">Guardar</button>
 
-    <button type="submit" name="btn_save_close" value="true" class="btn btn-success">Guardar y cerrar</button>
+        <button type="submit" name="btn_save_close" id="btn_save_close" class="btn btn-success" >Guardar y cerrar</button>
+        <input type="hidden" id="save_close" name="save_close" value="">
     @endif
     
     <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>
@@ -127,5 +128,9 @@
 @endsection
 
 @section('custom_js')
-
+    <script>
+        $("#btn_save_close").click(function(event) {
+            $('#save_close').val("true");
+        });
+    </script>
 @endsection

@@ -1,7 +1,7 @@
 
-[ ] Cambiar número por qtc
-[ ] El 16 no se puede cerrar
-[ ] Temperatura, fraccionaria
+[x] Cambiar número por qtc
+[x] El 16 no se puede cerrar
+[x] Temperatura, fraccionaria
 [ ] Separar los cometidos cerrados
 [ ] Impresión de informe
 
