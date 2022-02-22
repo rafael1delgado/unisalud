@@ -1,3 +1,20 @@
+
+[ ] Cambiar número por qtc
+[ ] El 16 no se puede cerrar
+[ ] Temperatura, fraccionaria
+[ ] Separar los cometidos cerrados
+[ ] Impresión de informe
+
+[ ] Permisos 
+- Visor
+- Regulador
+- Operador y despachador
+- Administrador
+
+[ ] Colación, termine en forma automática (y pausar)
+[ ] Tiempo de secado por cometido (30 min)
+
+
 ## Observaciones 27-01-2022
 [X] Que salga la dirección de la emergencia en el despacho (QTH)
 [X] Cambiar evento por despacho en el menú
