@@ -66,8 +66,6 @@
             },
         });
 
-        map.setHeading(map.getHeading() + 90);
-
         const movil_2 = { lat: -20.21340, lng: -70.13764 };
         new google.maps.Marker({
             position: movil_2,

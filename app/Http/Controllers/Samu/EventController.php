@@ -245,30 +245,35 @@ class EventController extends Controller
 
     public function filter(Request $request)
     {
-        /* Obtener los filtrados */
+        /* Obtener los filtros */
         $keys = Key::orderBy('key')->get();
         /* TODO: Parametrizar */
         $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
 
-        $query = Event::query();
+        $events = collect();
 
-        if($request->filled('date')) {
-            $query->whereDate('date',$request->input('date'));
+        if($request->isMethod('post'))
+        {
+            $query = Event::query();
+    
+            if($request->filled('date')) {
+                $query->whereDate('date',$request->input('date'));
+            }
+            if($request->filled('key_id')) {
+                $query->where('key_id',$request->input('key_id'));
+            }
+            if($request->filled('address')) {
+                $query->where('address', 'LIKE', '%' . $request->input('address') . '%');
+            }
+            if($request->filled('commune_id')) {
+                $query->where('commune_id',$request->input('commune_id'));
+            }
+                
+            $events = $query->latest()->paginate(100);
+                
+            $request->flash();
         }
-        if($request->filled('key_id')) {
-            $query->where('key_id',$request->input('key_id'));
-        }
-        if($request->filled('address')) {
-            $query->where('address', 'LIKE', '%' . $request->input('address') . '%');
-        }
-        if($request->filled('commune_id')) {
-            $query->where('commune_id',$request->input('commune_id'));
-        }
-            
-            
-        $events = $query->latest()->paginate(50);
-        
-        $request->flash();
+    
 
         return view ('samu.event.filter', compact('events','keys','communes'));
     }

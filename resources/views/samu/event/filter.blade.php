@@ -49,19 +49,19 @@
     </div>
 </form>
 
-@if(old('btn-search'))
-    @if($events->isNotEmpty())
-        <h4>Total de registros: {{ $events->count() }}</h4>
 
-        @include('samu.event.partials.index', ['events' => $events])
+@if($events->isNotEmpty())
+    <h4>Total de registros: {{ $events->count() }}</h4>
 
-        {{ $events->links() }}
-    @else
-        <div class="alert alert-warning">
-            No hay eventos con esos parámetros
-        </div>
-    @endif
+    @include('samu.event.partials.index', ['events' => $events])
+
+    {{ $events->links() }}
+@else
+    <div class="alert alert-warning">
+        No hay eventos con esos parámetros
+    </div>
 @endif
+
 
 
 @endsection
