@@ -15,7 +15,7 @@ class GpsController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('lat') AND $request->has('long'))
+        if($request->has('lat') AND $request->has('lon'))
         {
             $gps = new Gps($request->all());
             $gps->save();
