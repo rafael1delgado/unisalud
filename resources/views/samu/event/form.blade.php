@@ -57,7 +57,7 @@
 <div class="form-row">
 
     <fieldset class="form-group col-md-1">
-        <label for="for_departure_at">Salida</label>
+        <label for="for_departure_at">Aviso salida</label>
         <input type="time" class="form-control" name="departure_at" value="{{ ( $event &&  $event->departure_at)? $event->departure_at->format('H:i') : '' }}">
     </fieldset>
 

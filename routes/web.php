@@ -545,6 +545,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::put('/update/{event}',[EventController::class, 'update'])->name('update');
 		Route::delete('/{event}', 	[EventController::class, 'destroy'])->name('destroy');
 		Route::match(['get','post'], '/filter',	[EventController::class, 'filter'])->name('filter');
+		Route::get('/{event}/report',[EventController::class, 'report'])->name('report');
     });
 
     Route::prefix('novelties')->name('noveltie.')->group(function () {

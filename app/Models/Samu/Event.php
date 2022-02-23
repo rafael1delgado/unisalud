@@ -10,8 +10,11 @@ use App\Models\Samu\Mobile;
 use App\Models\Samu\Call;
 use App\Models\Samu\Shift;
 use App\Models\Samu\EventCounter;
+use App\Models\Samu\ReceptionPlace;
 use App\Models\User;
 use App\Models\Commune;
+use App\Models\CodConIdentifierType;
+use App\Models\Organization;
 
 
 class Event extends Model implements Auditable
@@ -134,6 +137,16 @@ class Event extends Model implements Auditable
     public function creator()
     {
         return $this->belongsTo(User::class,'creator_id');
+    }
+
+    public function identifierType()
+    {
+        return $this->belongsTo(CodConIdentifierType::class,'patient_identifier_type_id');
+    }
+    
+    public function receptionPlace()
+    {
+        return $this->belongsTo(receptionPlace::class,'reception_place_id');
     }
 
     public function getColorAttribute()

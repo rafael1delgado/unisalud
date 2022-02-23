@@ -278,4 +278,9 @@ class EventController extends Controller
         return view ('samu.event.filter', compact('events','keys','communes'));
     }
 
+    public function report(Event $event)
+    {
+        return view('samu.event.report',compact('event'));
+    }
+
 }

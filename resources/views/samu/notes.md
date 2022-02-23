@@ -1,9 +1,9 @@
-
+## Observaciones segundo día puesta en marcha
 [x] Cambiar número por qtc
-[x] El 16 no se puede cerrar
+[x] Eventos no se pueden cerrar
 [x] Temperatura, fraccionaria
-[ ] Separar los cometidos cerrados
-[ ] Impresión de informe
+[x] Separar los cometidos cerrados
+[x] Impresión de informe
 
 [ ] Permisos 
 - Visor
