@@ -175,4 +175,9 @@ class MobileInServiceController extends Controller
 
     }
 
+    public function location()
+    {
+        return view('samu.mobileinservice.location');
+    }
+
 }  

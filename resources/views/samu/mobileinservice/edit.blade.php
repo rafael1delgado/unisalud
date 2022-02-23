@@ -59,6 +59,12 @@
 
 </form>
 
+@can('Developer')
+    <a class="btn btn-info mt-4" href=" {{ route('samu.mobileinservice.location', $mobileInService) }}">
+        <i class="fas fa-map-marked"></i> Ubicación
+    </a>
+@endcan
+
 @endsection
 
 @section('custom_js')
