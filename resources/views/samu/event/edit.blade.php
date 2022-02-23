@@ -23,7 +23,7 @@
         <button type="submit" name="btn_save" class="btn btn-primary">Guardar</button>
 
         <button type="submit" name="btn_save_close" id="btn_save_close" class="btn btn-success" >Guardar y cerrar</button>
-        <input type="hidden" id="save_close" name="save_close" value="">
+        <input type="hidden" id="save_close" name="save_close" value="no">
     @endif
     
     <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>
@@ -130,7 +130,7 @@
 @section('custom_js')
     <script>
         $("#btn_save_close").click(function(event) {
-            $('#save_close').val("true");
+            $('#save_close').val("yes");
         });
     </script>
 @endsection
