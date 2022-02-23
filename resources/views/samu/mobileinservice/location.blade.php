@@ -8,16 +8,9 @@
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
-  height: 100%;
+  height: 600px;
 }
 
-/* Optional: Makes the sample page fill the window. */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
 </style>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -37,7 +30,7 @@ body {
         <label for="longitude" class="form-label">Longitud</label>
         <input type="text" class="form-control" id="longitude">
     </div>
-    
+
     <button class="btn btn-primary" onclick="getLocation()">Obtener ubicación</button>
 </div>
 
@@ -65,14 +58,28 @@ body {
     }
     
     function initMap() {
-        const myLatLng = { lat: -20.244520315752016, lng: -70.13443840906216 };
         const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 4,
-            center: myLatLng,
+            zoom: 14,
+            center: {
+                lat: -20.244520315752016,
+                lng: -70.13443840906216,
+            },
         });
 
+        map.setHeading(map.getHeading() + 90);
+
+        const movil_2 = { lat: -20.21340, lng: -70.13764 };
         new google.maps.Marker({
-            position: myLatLng,
+            position: movil_2,
+            label: "2",
+            map,
+            title: "Hello World!",
+        });
+
+        const movil_4 = { lat: -20.25089, lng: -70.12808 };
+        new google.maps.Marker({
+            position: movil_4,
+            label: "4",
             map,
             title: "Hello World!",
         });
@@ -81,7 +88,7 @@ body {
 
 <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly&channel=2"
+    src="https://maps.googleapis.com/maps/api/js?key={{env('API_KEY_GOOGLE_MAPS')}}&callback=initMap&v=weekly&channel=2"
     async
 >
 @endsection
