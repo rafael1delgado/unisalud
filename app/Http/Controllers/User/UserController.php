@@ -20,20 +20,18 @@ class UserController extends Controller
 
     public function create()
     {
-
         $permissions = Permission::OrderBy('name')->get();
         return view('users.create', compact('permissions'));
     }
 
     public function store(Request $request)
     {
-        $repeated = Identifier::query()
-            ->where('use', 'official')
+        $repeatedIdentifier = Identifier::query()
             ->where('cod_con_identifier_type_id', 1)
             ->where('value', $request->run);
-        if ($repeated->count() > 0) {
-            session()->flash('warning', 'Este rut ya ha sido ingresado.');
-            return redirect()->back()->withInput();
+        if ($repeatedIdentifier->count() > 0) {
+            session()->flash('warning', 'Este rut ya ha sido ingresado. Se ha encontrado el siguiente usuario con este rut.');
+            return view('users.index', ['run' => $request->run]);
         }
 
         $newUser = new User($request->all());

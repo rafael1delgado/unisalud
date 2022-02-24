@@ -9,8 +9,12 @@
         </div>
     </div> --}}
 </div>
+@isset($run)
+    @livewire('user.advanced-search', compact('run'))
+@else
+    @livewire('user.advanced-search')
+@endif
 
-@livewire('user.advanced-search')
 
 @endsection
 
