@@ -27,6 +27,15 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $repeated = Identifier::query()
+            ->where('use', 'official')
+            ->where('cod_con_identifier_type_id', 1)
+            ->where('value', $request->run);
+        if ($repeated->count() > 0) {
+            session()->flash('warning', 'Este rut ya ha sido ingresado.');
+            return redirect()->back()->withInput();
+        }
+
         $newUser = new User($request->all());
 
         $newUser->password = bcrypt($newUser->password);
