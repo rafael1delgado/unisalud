@@ -5,7 +5,7 @@
     <div class="form-row">
 
         <fieldset class="form-group col">
-            <label for="for_detail">Novedades turno {{ optional($shift)->opening_at }}</label>
+            <label for="for_detail">Novedades turno {{ optional($openShift)->opening_at }}</label>
             <textarea class="form-control" rows="8" name="detail" required>{{ old('detail') }}</textarea>
         </fieldset>
 

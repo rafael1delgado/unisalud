@@ -24,8 +24,12 @@
         
         <button type="submit" name="btn_save_close" id="btn_save_close" class="btn btn-success" >Guardar y cerrar</button>
         <input type="hidden" id="save_close" name="save_close" value="no">
-    @else    
-        <a class="btn btn-secondary" target="_blank"  href="{{ route('samu.event.report',$event) }}"><i class="fas fa-print"></i> Imprimir</a>
+    @else
+        @can('SAMU administrador')
+        <a class="btn btn-secondary" target="_blank"  href="{{ route('samu.event.report',$event) }}">
+            <i class="fas fa-print"></i> Imprimir
+        </a>
+        @endcan
     @endif
     
     <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>

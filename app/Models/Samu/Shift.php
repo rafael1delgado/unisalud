@@ -51,9 +51,9 @@ class Shift extends Model implements Auditable
                     ->withTimestamps();
     }
     
-    public function novelitie()
+    public function novelties()
     {
-        return $this->belongsTo(Novelitie::class);
+        return $this->hasMany(Noveltie::class);
     }
 
     public function mobilesInService()

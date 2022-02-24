@@ -26,7 +26,7 @@
                 <th>Turno</th>
                 <th>Apertura</th>
                 <th>Cierre</th>
-                <th>Personal</th>
+                <th>Observación</th>
                 <th></th>
             </tr>
         </thead>
@@ -47,7 +47,7 @@
                     {{ $shift->observation }}
                 </td>
                 <td>
-                    @if($shift->status == true)
+                    @if($shift->status AND $shift->users->isEmpty())
                     <form method="POST" action="{{ route('samu.shift.destroy', $shift) }}">
                         @csrf
                         @method('DELETE')
@@ -58,7 +58,7 @@
             </tr>
             <tr>
                 <td colspan="6">
-                @if($shift->status == true)
+                @if($shift->status)
                         @livewire('samu.shift-user', ['shift' => $shift])
                     @else
                         @foreach($shift->users as $user)

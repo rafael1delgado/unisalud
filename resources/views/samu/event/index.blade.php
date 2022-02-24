@@ -5,8 +5,8 @@
 @include('samu.nav')
 
 <div class="row">
-    <div class="col-10">
-        <table class="table table-sm ">
+    <div class="col-md-10 col-12">
+        <table class="table table-sm">
             <tr>
                 <th>Orden salida</th>
                 <th>Móvil</th>
@@ -38,7 +38,7 @@
             @endforeach
         </table>
     </div>
-    <div class="col-2">
+    <div class="col-md-2 col-12">
         <table class="table table-sm">
             <tr><th>Codificación colores</th></tr>
             <tr><td class="table-danger">Móvil aun no sale</td></tr>
