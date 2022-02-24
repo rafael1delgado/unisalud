@@ -464,10 +464,10 @@ use App\Http\Controllers\Samu\ShiftMobileController;
 use App\Http\Controllers\Samu\KeyController;
 use App\Http\Controllers\Samu\MobileController;
 use App\Http\Controllers\Samu\EventController;
-use App\Http\Controllers\Samu\OtController;
 use App\Http\Controllers\Samu\CallController;
 use App\Http\Controllers\Samu\NoveltieController;
 use App\Http\Controllers\Samu\EstablishmentController;
+use App\Http\Controllers\Samu\GpsController;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
@@ -487,20 +487,13 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/',						[MobileInServiceController::class, 'index'])->name('index');
 		Route::get('/create',				[MobileInServiceController::class, 'create'])->name('create');
 		Route::post('/store',				[MobileInServiceController::class, 'store'])->name('store');
-		Route::get('/edit/{mobileInService}',[MobileInServiceController::class, 'edit'])->name('edit');
+		Route::get('/{mobileInService}/edit',[MobileInServiceController::class, 'edit'])->name('edit');
 		Route::put('/{mobileInService}',	[MobileInServiceController::class, 'update'])->name('update');
 		Route::get('/crewedit/{mobileCrew}',[MobileInServiceController::class, 'crewedit'])->name('crewedit');
 		Route::put('/crewupdate/{mobileCrew}',	[MobileInServiceController::class, 'crewupdate'])->name('crewupdate');
 		Route::delete('/{mobileInService}', [MobileInServiceController::class, 'destroy'])->name('destroy');
-	
+		Route::get('/{mobileInService}/location', [MobileInServiceController::class, 'location'])->name('location');
     });
-
-    // Route::prefix('mobile')->name('mobile.')->group(function () {
-	// 	Route::get('/', 			[ShiftMobileController::class, 'index'])->name('index');
-	// 	Route::get('/create' , 		[ShiftMobileController::class, 'create'])->name('create');
-	// 	Route::post('/store', 		[ShiftMobileController::class, 'store'])->name('store');
-	// 	Route::view('/edit', 'samu.mobile.edit')->name('edit');
-    // });
 
     Route::prefix('crews')->name('crew.')->group(function () {
 		Route::view('/', 'samu.crew.index')->name('index');
@@ -509,17 +502,12 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 	
     });
 
-    // Route::prefix('shift')->name('shift.')->group(function () {
-	// 	Route::view('/', 'samu.shift.index')->name('index');
-	// 	Route::view('/create', 'samu.shift.create')->name('create');
-	// 	Route::view('/edit', 'samu.shift.edit')->name('edit');
-    // });
 
     Route::prefix('keys')->name('key.')->group(function () {
 		Route::get('/' , 			[KeyController::class, 'index'])->name('index');
 		Route::get('/create' , 		[KeyController::class, 'create'])->name('create');
 		Route::post('/store', 		[KeyController::class, 'store'])->name('store');
-		Route::put('/update/{key}',	[KeyController::class, 'update'])->name('update');
+		Route::put('/{key}',		[KeyController::class, 'update'])->name('update');
 		Route::get('/edit/{key}',	[KeyController::class, 'edit'])->name('edit');
 		Route::delete('/{key}',		[KeyController::class, 'destroy'])->name('destroy');
     });
@@ -557,13 +545,8 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::put('/update/{event}',[EventController::class, 'update'])->name('update');
 		Route::delete('/{event}', 	[EventController::class, 'destroy'])->name('destroy');
 		Route::match(['get','post'], '/filter',	[EventController::class, 'filter'])->name('filter');
+		Route::get('/{event}/report',[EventController::class, 'report'])->name('report');
     });
-
-	// Route::prefix('ots')->name('ot.')->group(function () {
-	// 	Route::get('/edit/{ot}',	[OtController::class, 'edit'])->name('edit');
-	// 	Route::put('/update/{ot}', 	[OtController::class, 'update'])->name('update');
-    // });
-	
 
     Route::prefix('novelties')->name('noveltie.')->group(function () {
 		Route::get('/', 			[NoveltieController::class, 'index'])->name('index');
@@ -572,9 +555,10 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::put('/update/{noveltie}',[NoveltieController::class, 'update'])->name('update');
 		//Route::view('/edit', 'samu.novelties.create')->name('edit');
     });
-
-
+	
+	
 });
+Route::get('/samu/mobiles-in-service/{mobileInService}/gps', [GpsController::class, 'index'])->name('samu.mobileinservice.gps');
 //fin rutas samu
 
 
@@ -629,3 +613,16 @@ Route::prefix('vista')->name('vista.')->group(function () {
 
 Route::get('/test/rayen' ,[RayenController::class, 'getUrgencyStatus'])->name('getUrgencyStatus');
 Route::get('/test/sendip',[TestController::class,'sendIp']);
+
+
+// Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
+// 	Route::get('/down', function() 
+// 	{
+// 		Artisan::call('down --secret="pum"');
+// 	});
+// 	Route::get('/up', function() 
+// 	{
+// 		Artisan::call('up');
+// 		return back();
+// 	});
+// });

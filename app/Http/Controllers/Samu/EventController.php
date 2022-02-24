@@ -71,11 +71,26 @@ class EventController extends Controller
         $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes    = CodConIdentifierType::pluck('id','text')->sort();
         $keys               = Key::orderBy('key')->get();
+
+        $calls = Call::latest()
+            ->where('classification','<>','OT')
+            ->limit(20)
+            ->get();
         
         /* TODO: Parametrizar */
         $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
 
-        return view ('samu.event.create',compact('shift','keys','establishments','nextCounter','mobiles','receptionPlaces','identifierTypes','communes'));
+        return view ('samu.event.create',compact(
+            'shift',
+            'keys',
+            'establishments',
+            'nextCounter',
+            'mobiles',
+            'receptionPlaces',
+            'identifierTypes',
+            'communes',
+            'calls')
+        );
     }
 
     /**
@@ -87,11 +102,11 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $shift = Shift::where('status',true)->first();
-
+        
         if($shift) 
         {
             $event = new Event($request->all());
-            $event->patient_unknown = $request->has('patient_unknown') ? true:false;
+            $event->patient_unknown = $request->has('patient_unknown') ? 1:0;
             $isMobileInService = $shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
             
             if($isMobileInService)
@@ -101,6 +116,11 @@ class EventController extends Controller
             
             $event->shift()->associate($shift);
             $event->save();
+
+            if($request->filled('call'))
+            {
+                $event->calls()->attach($request->input('call'));
+            }
         
             $mobilecrews=MobileCrew::where('mobiles_in_service_id', $request->mobile_in_service_id)->get();
 
@@ -174,16 +194,16 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, event $event)
-    {
-        $shift = Shift::where('status',true)->first();
-        if(!$shift) 
-        {
-            session()->flash('danger', 'Debe abrir un turno primero');
-            return redirect()->back()->withInput();
-        }
+    {   
+        // $shift = Shift::where('status',true)->first();
+        // if(!$shift) 
+        // {
+        //     session()->flash('danger', 'Debe abrir un turno primero');
+        //     return redirect()->back()->withInput();
+        // }
         $event->fill($request->all());
-        $event->patient_unknown = $request->has('patient_unknown') ? true:false;
-        $isMobileInService = $shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
+        $event->patient_unknown = $request->has('patient_unknown') ? 1:0;
+        $isMobileInService = $event->shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
 
         if($isMobileInService)
         {
@@ -193,9 +213,16 @@ class EventController extends Controller
         {
             $event->mobileInService()->dissociate();
         }
+        
+        if($request->input("save_close") == "yes")
+        {
+            /** Chequear campos obligatorios */
+            $event->status = false;
+        }
+        
         $event->update();
-
-        session()->flash('success', 'Event Actualizado satisfactoriamente.');
+        
+        session()->flash('success', 'Cometido actualizado satisfactoriamente.');
         return redirect()->route('samu.event.index');
     }
 
@@ -208,37 +235,52 @@ class EventController extends Controller
      */
     public function destroy(event $event)
     {
-        //
+        $event->mobileInService()->dissociate();
+        $event->calls()->detach();
+        $event->delete();
+
+        session()->flash('danger', 'Cometido eliminado.');
+        return redirect()->back();
     }
 
     public function filter(Request $request)
     {
-        /* Obtener los filtrados */
+        /* Obtener los filtros */
         $keys = Key::orderBy('key')->get();
         /* TODO: Parametrizar */
         $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
 
-        $query = Event::query();
+        $events = collect();
 
-        if($request->filled('date')) {
-            $query->whereDate('date',$request->input('date'));
+        if($request->isMethod('post'))
+        {
+            $query = Event::query();
+    
+            if($request->filled('date')) {
+                $query->whereDate('date',$request->input('date'));
+            }
+            if($request->filled('key_id')) {
+                $query->where('key_id',$request->input('key_id'));
+            }
+            if($request->filled('address')) {
+                $query->where('address', 'LIKE', '%' . $request->input('address') . '%');
+            }
+            if($request->filled('commune_id')) {
+                $query->where('commune_id',$request->input('commune_id'));
+            }
+                
+            $events = $query->latest()->paginate(100);
+                
+            $request->flash();
         }
-        if($request->filled('key_id')) {
-            $query->where('key_id',$request->input('key_id'));
-        }
-        if($request->filled('address')) {
-            $query->where('address', 'LIKE', '%' . $request->input('address') . '%');
-        }
-        if($request->filled('commune_id')) {
-            $query->where('commune_id',$request->input('commune_id'));
-        }
-            
-            
-        $events = $query->latest()->paginate(50);
-        
-        $request->flash();
+    
 
         return view ('samu.event.filter', compact('events','keys','communes'));
+    }
+
+    public function report(Event $event)
+    {
+        return view('samu.event.report',compact('event'));
     }
 
 }

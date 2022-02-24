@@ -57,10 +57,13 @@
 @include('samu.call.partials.list',['calls' => $calls, 'edit' => true])
 
 
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de cometidos de hoy</h3>
+<h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de cometidos abiertos</h3>
 
-@include('samu.event.partials.index', ['events' => $events_today])
+@include('samu.event.partials.index', ['events' => $events_today->where('status',true) ])
 
+<h3 class="mb-3"><i class="fas fa-eye"></i> Listado de cometidos cerrados de hoy</h3>
+
+@include('samu.event.partials.index', ['events' => $events_today->where('status',false) ])
 
 <h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de cometidos de ayer</h3>
 

@@ -72,7 +72,7 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse d-print-none">
                     <div class="sidebar-sticky pt-3">
                         @auth
                         @include('layouts.partials.nav')
@@ -81,6 +81,8 @@
                 </nav>
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
+                    <h4 class="d-none d-print-block">{{ env('APP_NAME') }}</h4>
+                    
                     @include('layouts.partials.errors')
                     @include('layouts.partials.flash_message')
                     
@@ -106,6 +108,11 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
+                $('form').submit(function(){
+                    $('input[type=submit]', this).attr('disabled', 'disabled');
+                    $('button[type=submit]', this).attr('disabled', 'disabled');
+                });
+
                 $(".collapse-menu").on("shown.bs.collapse", function () {
                     localStorage.setItem("coll_" + this.id, true);
                     $('#icon_'+this.id).replaceWith(feather.icons['minus-circle'].toSvg());
@@ -128,6 +135,7 @@
                     }
                 });
             });
+
         </script>
 
     </body>

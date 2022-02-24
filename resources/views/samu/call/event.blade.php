@@ -9,7 +9,7 @@
     </div>
     <div class="form-row">
         <fieldset class="col-md-12 col-12">
-            @foreach ($shift->events as $key => $event)
+            @foreach ($shift->events->reverse() as $key => $event)
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" 
                     name="events[]" value="{{ $event->id }}"
@@ -20,7 +20,7 @@
                         <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> {{ $event->id }}</button>
                     </a>
                     - <b>Clave:</b> {{ $event->key->name }} 
-                    - <b>Mobil:</b> {{ optional($event->mobile)->code }} {{ optional($event->mobile)->name }}
+                    - <b>Móvil:</b> {{ optional($event->mobile)->code }} {{ optional($event->mobile)->name }}
                 </label>
             </div>
             @endforeach

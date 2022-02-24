@@ -91,10 +91,6 @@ class SamuSeeder extends Seeder
             'telephone' => "123123"
         ]);
 
-        Ot::create([
-            'call_id' => 1,
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, voluptatum! Eaque facilis ex unde maiores quo atque, cum consequuntur vel provident maxime est. Similique hic aspernatur maiores incidunt ab officiis.',
-        ]);
 
         // EventCounter::create([
         //     'date' => now(),

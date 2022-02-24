@@ -13,7 +13,7 @@
     <div class="form-row">
 
         <fieldset class="form-group col-8 col-md-1">
-            <label for="for_position">Posición </label>
+            <label for="for_position">Posición salida</label>
             <input type="number" value="1" class="form-control" name="position">             
         </fieldset>
         

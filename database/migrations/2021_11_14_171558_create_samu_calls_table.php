@@ -23,6 +23,7 @@ class CreateSamuCallsTable extends Migration
             $table->foreignId('clasificator_id')->nullable()->constrained('users');
             $table->foreignId('regulator_id')->nullable()->constrained('users');
             $table->text('information')->nullable();
+            $table->text('regulation')->nullable();
             $table->string('applicant')->nullable();
             $table->string('address')->nullable();
             $table->string('telephone')->nullable();

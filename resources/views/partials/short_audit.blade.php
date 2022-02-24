@@ -1,6 +1,6 @@
-<h5 class="mt-3">Historial de cambios</h5>
+<h5 class="mt-3 d-print-none">Historial de cambios</h5>
 
-<div class="table-responsive-md">
+<div class="table-responsive-md d-print-none">
     <table class="table table-sm small text-muted mt-3">
         <thead>
             <tr>

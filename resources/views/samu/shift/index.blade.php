@@ -4,7 +4,7 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-blender-phone"></i> Listado de Turnos {{ $openShift }}
+<h3 class="mb-3"><i class="fas fa-blender-phone"></i> Listado de turnos 
     @if($openShift)
     <button class="btn btn-outline-success float-right" disabled readonly>
         <i class="fas fa-plus"></i> Hay un turno abierto

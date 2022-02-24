@@ -1,3 +1,4 @@
+<h4> Asignación de seguimiento y horarios</h4>
 <div class="form-row">
 
     <fieldset class="form-group col-md-3">
@@ -35,7 +36,7 @@
             <option value=""></option>
             @foreach($shift->mobilesInService as $mis)
             <option value="{{ $mis->mobile->id }}" {{ old('mobile_id', optional($event)->mobile_id) == $mis->mobile->id ? 'selected' : '' }}>
-                {{ $mis->mobile->code }} {{ $mis->mobile->name }} (PROPIO)
+                {{ $mis->mobile->code }} {{ $mis->mobile->name }} - {{ $mis->type }} (PROPIO)
             </option>
             @endforeach 
             @foreach($mobiles as $mobile)
@@ -56,7 +57,7 @@
 <div class="form-row">
 
     <fieldset class="form-group col-md-1">
-        <label for="for_departure_at">Salida</label>
+        <label for="for_departure_at">Aviso salida</label>
         <input type="time" class="form-control" name="departure_at" value="{{ ( $event &&  $event->departure_at)? $event->departure_at->format('H:i') : '' }}">
     </fieldset>
 
@@ -219,7 +220,7 @@
 <div class="form-row">
     <fieldset class="form-group col-md-1">
         <label for="for_fc">Frecuencia Cardiaca</label>
-        <input type="number" class="form-control" name="fc" value="{{ ( $event &&  $event->fc)? $event->fc : '' }}">
+        <input type="text" class="form-control" maxlength="8" name="fc" value="{{ ( $event &&  $event->fc)? $event->fc : '' }}">
     </fieldset>
     <fieldset class="form-group col-md-1">
         <label for="for_fr">Frecuencia Respiratoria</label>
@@ -257,7 +258,7 @@
     </fieldset>
     <fieldset class="form-group col-md-1">
         <label for="for_t">Temperatura <br>°C</label>
-        <input type="number" class="form-control" name="t" value="{{ ( $event &&  $event->t)? $event->t : '' }}">
+        <input type="number" class="form-control" step=".01" name="t" value="{{ ( $event &&  $event->t)? $event->t : '' }}">
     </fieldset>
     <fieldset class="form-group col-md-4">
         <label for="for_treatment">Tratamiento</label>
@@ -269,7 +270,3 @@
     </fieldset>             
 </div>
 <!-- fin de seguimeinto-->
-
-<button type="submit" class="btn btn-primary" >Guardar</button>
-
-<a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>

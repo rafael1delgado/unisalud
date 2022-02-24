@@ -1,4 +1,6 @@
-<ul class="nav nav-tabs mb-3" >
+<h4 class="d-none d-print-block">SAMU</h4>
+
+<ul class="nav nav-tabs mb-3 d-print-none">
     <li class="nav-item" >
         <a class="nav-link {{ active('samu.welcome') }}"
         href=" {{ route('samu.welcome') }}"><i class="fas fa-home"></i> Home</a>
@@ -38,6 +40,7 @@
         <a class="nav-link {{ active('samu.event.index') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
         href=" {{ route('samu.event.index') }}"><i class="fas fa-car-crash"></i> Despacho</a>
     </li>
+
     <li class="nav-item">
         <a class="nav-link {{ active('samu.event.filter') }}" 
         href=" {{ route('samu.event.filter') }}"><i class="fas fa-search"></i></a>

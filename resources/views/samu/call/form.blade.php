@@ -1,18 +1,5 @@
 <div class="form-row">
 
-    @if(request()->routeIs('samu.call.edit'))
-    <fieldset class="form-group col-md-1">
-        <label for="for_hour">Clasificación</label>
-        <select class="form-control form-control-sm" name="classification" id="classification" {{ optional($call)->classification == 'OT' ? 'disabled readonly' : '' }}>
-            <option></option>
-            <option value="T1" {{ optional($call)->classification == 'T1' ? 'selected' : '' }}>T1</option>
-            <option value="T2" {{ optional($call)->classification == 'T2' ? 'selected' : '' }}>T2</option>
-            <option value="NM" {{ optional($call)->classification == 'NM' ? 'selected' : '' }}>NM</option>
-            <option value="OT" {{ optional($call)->classification == 'OT' ? 'selected' : '' }}>OT</option>
-        </select>
-    </fieldset>
-    @endif
-
     <fieldset class="form-group col-md-1">
         <label for="for_hour">Hora*</label>
         <input type="time" class="form-control form-control-sm" name="hour" id="hour" value="{{ old('hour', ($call)? $call->hour->format('H:i') : date('H:i')) }}" readonly> 
@@ -24,7 +11,7 @@
             value="{{ old('applicant', optional($call)->applicant) }}">
     </fieldset>
 
-    <fieldset class="form-group col-md-4">
+    <fieldset class="form-group col-md-5">
         <label for="for_address">Dirección </label>
         <input type="text" class="form-control form-control-sm" name="address"
             value="{{ old('address', optional($call)->address) }}">
@@ -45,5 +32,30 @@
         <label for="for_information">Información telefónica*</label>
         <textarea class="form-control form-control-sm" name="information" rows="5" required>{{ old('information', optional($call)->information) }}</textarea>
     </fieldset>
+    
+</div>
+
+@if(request()->routeIs('samu.call.edit'))
+
+<div class="form-row">
+    <fieldset class="form-group col-md-3">
+        <label for="for_hour">Clasificación</label>
+        <select class="form-control form-control-sm" name="classification" id="classification" {{ optional($call)->classification == 'OT' ? 'disabled readonly' : '' }}>
+            <option></option>
+            <option value="T1" {{ optional($call)->classification == 'T1' ? 'selected' : '' }}>T1</option>
+            <option value="T2" {{ optional($call)->classification == 'T2' ? 'selected' : '' }}>T2</option>
+            <option value="NM" {{ optional($call)->classification == 'NM' ? 'selected' : '' }}>NM</option>
+            <option value="OT" {{ optional($call)->classification == 'OT' ? 'selected' : '' }}>OT</option>
+        </select>
+        <small id="emailHelp" class="form-text text-danger">Si hace referencia a otra llamada, no debe clasificarla.</small>
+    </fieldset>
+</div>
+<div class="form-row">
+
+    <fieldset class="form-group col-md-12">
+        <label for="for_regulation">Regulación</label>
+        <textarea class="form-control form-control-sm" name="regulation" rows="5">{{ old('regulation', optional($call)->regulation) }}</textarea>
+    </fieldset>
 
 </div>
+@endif

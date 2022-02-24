@@ -6,9 +6,10 @@
 
 <h3 class="mb-3"><i class="fas fa-car-crash"></i> Editar cometido {{ $event->id }}</h3>
 
-<h4> Asignación de seguimiento y horarios</h4>
-      
+@if($event->status)
 <form method="post" action="{{ route('samu.event.update', $event) }}">
+@endif
+
     @csrf
     @method('PUT')
 
@@ -18,11 +19,24 @@
         'shift' => $shift
     ])
 
+    @if($event->status)
+        <button type="submit" name="btn_save" class="btn btn-primary">Guardar</button>
+        
+        <button type="submit" name="btn_save_close" id="btn_save_close" class="btn btn-success" >Guardar y cerrar</button>
+        <input type="hidden" id="save_close" name="save_close" value="no">
+    @else    
+        <a class="btn btn-secondary" target="_blank"  href="{{ route('samu.event.report',$event) }}"><i class="fas fa-print"></i> Imprimir</a>
+    @endif
+    
+    <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+    
+@if($event->status)    
 </form>
+@endif
 
 <br>
 
-<h3>Llamadas relacionadas a este cometido</h3>
+<h3 class="mt-3">Llamadas relacionadas a este cometido</h3>
 
 <div class="table-responsive">
 
@@ -116,5 +130,9 @@
 @endsection
 
 @section('custom_js')
-
+    <script>
+        $("#btn_save_close").click(function(event) {
+            $('#save_close').val("yes");
+        });
+    </script>
 @endsection

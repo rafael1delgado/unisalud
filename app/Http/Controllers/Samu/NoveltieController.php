@@ -18,7 +18,7 @@ class NoveltieController extends Controller
     public function index()
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',1)->first();
+        $shift = Shift::where('status',true)->first();
 
         $novelties = Noveltie::latest()->paginate(20);
 

@@ -21,7 +21,7 @@
             <label for="for_mobile_id">Móvil </label>
             <select class="form-control" name="mobile_id">
                 @foreach($mobiles as $mobile)
-                    <option value="{{ $mobile->id }}">{{$mobile->name}}</option>
+                    <option value="{{ $mobile->id }}" {{ $mobileInService->mobile_id === $mobile->id ? 'selected' : '' }}>{{ $mobile->code }} - {{ $mobile->name }} </option>
                 @endforeach
             </select>
             
@@ -58,6 +58,12 @@
     <a href="{{ route('samu.mobileinservice.index') }}" class="btn btn-outline-secondary">Cancelar</a>
 
 </form>
+
+@can('Developer')
+    <a class="btn btn-info mt-4" href=" {{ route('samu.mobileinservice.location', $mobileInService) }}">
+        <i class="fas fa-map-marked"></i> Ubicación
+    </a>
+@endcan
 
 @endsection
 
