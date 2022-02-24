@@ -7,7 +7,7 @@
         <div class="btn-toolbar mb-2 mb-md-0">
         </div>
     </div>
-    @canany(['Administrator', 'SAMU: Admin'])
+    @canany(['Administrator', 'SAMU administrador'])
     <form method="POST" class="form-horizontal" action="{{ route('user.store') }}">
         @csrf
         @method('POST')
@@ -94,7 +94,7 @@
                             <label class="form-check-label" for="{{$permission->name}}"
                                 > <b>{{$permission->name}}</b> {{$permission->description}}</label>
                         </div>
-                    @elseif(Gate::check('SAMU: Admin') && Str::contains($permission->name, 'SAMU'))
+                    @elseif(Gate::check('SAMU administrador') && Str::contains($permission->name, 'SAMU'))
                         @if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
                             <hr>
                             @php $anterior = $permission->name; @endphp
