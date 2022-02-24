@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">Editar usuario: <strong> {{ $user->officialFullName }} </strong> </h3>
 
-@canany(['Administrator', 'SAMU: Admin'])
+@canany(['Administrator', 'SAMU administrador'])
 
 	<form class="form-horizontal" method="POST" action="{{ route('user.update', $user) }}">
 		@csrf
@@ -101,7 +101,7 @@
 							<label class="form-check-label" for="{{$permission->name}}"
                                 > <b>{{$permission->name}}</b> {{$permission->description}}</label>
 						</div>
-                    @elseif(Gate::check('SAMU: Admin') && Str::contains($permission->name, 'SAMU'))
+                    @elseif(Gate::check('SAMU administrador') && Str::contains($permission->name, 'SAMU'))
 						@if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
 							<hr>
 							@php $anterior = $permission->name; @endphp
