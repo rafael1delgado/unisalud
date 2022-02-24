@@ -59,11 +59,11 @@
 
 <h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de cometidos abiertos</h3>
 
-@include('samu.event.partials.index', ['events' => $events_today->where('status',true) ])
+@include('samu.event.partials.index', ['events' => $open_events ])
 
 <h3 class="mb-3"><i class="fas fa-eye"></i> Listado de cometidos cerrados de hoy</h3>
 
-@include('samu.event.partials.index', ['events' => $events_today->where('status',false) ])
+@include('samu.event.partials.index', ['events' => $events_today ])
 
 <h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de cometidos de ayer</h3>
 

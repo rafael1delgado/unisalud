@@ -19,7 +19,11 @@
                     @if(!$currentCall->call_id)
                         <button class="btn btn-sm btn-success" wire:click="associate({{ $call->id }})">Asociar a {{ $call->id }}</button>
                     @elseif($currentCall->call_id == $call->id)
-                        <button class="btn btn-sm btn-outline-success" disabled>Asociado a {{ $call->id }}</button>
+                        <button class="btn btn-sm btn-info" disabled>Asociado a {{ $call->id }}</button>
+                        @can('SAMU administrador')
+                            <button class="btn btn-sm btn-outline-danger" wire:click="disassociate()">
+                                Desasociar</button>
+                        @endcan
                     @else
                         {{ $call->id }}
                     @endif
