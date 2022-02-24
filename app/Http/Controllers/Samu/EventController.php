@@ -40,7 +40,8 @@ class EventController extends Controller
         $today = now();
         $yesterday = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $today) ) ));
 
-        $events_today = Event::whereDate('date',$today)->latest()->get();
+        $open_events = Event::where('status',true)->latest()->get();
+        $events_today = Event::whereDate('date',$today)->where('status',false)->latest()->get();
         $events_yesterday = Event::whereDate('date',$yesterday)->latest()->get();
 
         $calls = Call::where('shift_id',$shift->id)
@@ -48,7 +49,7 @@ class EventController extends Controller
                     ->where('classification','<>','OT')
                     ->get();
 
-        return view ('samu.event.index' , compact('shift','events_today','events_yesterday','calls'));
+        return view ('samu.event.index' , compact('shift','open_events','events_today','events_yesterday','calls'));
     }
 
     /**

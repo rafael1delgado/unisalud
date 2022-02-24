@@ -17,6 +17,13 @@ class AssociatedCalls extends Component
         $this->currentCall->refresh();
     }
 
+    public function disassociate()
+    {
+        $this->currentCall->call_id = null;
+        $this->currentCall->save();
+        $this->currentCall->refresh();
+    }
+
     public function render()
     {
         return view('livewire.samu.associated-calls');
