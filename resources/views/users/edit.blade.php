@@ -79,28 +79,38 @@
 
 		
 		<div class="form-row">
-
 			<div class="col">
-
 				<h4>Permisos</h4>
+                @can('be god')
+                    <div class="form-check">
+                        <input type="hidden" name="permissions[be god]" value="false">
+                        <input class="form-check-input" type="checkbox" name="permissions[be god]"
+                            value="true" id="be god"
+                            {{ $user->can('be god')? 'checked':'' }}>
+                        <label class="form-check-label" for="be god"><b>be god</b></label>
+                    </div>
+                @endcan
 
 				@php $anterior = null; @endphp
 				@foreach($permissions as $permission)
 					@if(Gate::check('Administrator'))
-						@if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
-							<hr>
-							@php $anterior = $permission->name; @endphp
-						@endif
 
-                        <input type="hidden" name="permissions[{{$permission->name}}]" value="false">
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="permissions[{{ $permission->name}}]"
-								value="true" id="{{$permission->name}}"
-								{{ $user->can($permission->name)? 'checked':'' }}
-                                >
-							<label class="form-check-label" for="{{$permission->name}}"
-                                > <b>{{$permission->name}}</b> {{$permission->description}}</label>
-						</div>
+                        @if($permission->name != 'be god')
+                            @if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
+                                <hr>
+                                @php $anterior = $permission->name; @endphp
+                            @endif
+
+                            <input type="hidden" name="permissions[{{$permission->name}}]" value="false">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="permissions[{{ $permission->name}}]"
+                                    value="true" id="{{$permission->name}}"
+                                    {{ $user->can($permission->name)? 'checked':'' }}
+                                    >
+                                <label class="form-check-label" for="{{$permission->name}}"
+                                    > <b>{{$permission->name}}</b> {{$permission->description}}</label>
+                            </div>
+                        @endif
                     @elseif(Gate::check('SAMU administrador') && Str::contains($permission->name, 'SAMU'))
 						@if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
 							<hr>
@@ -117,6 +127,7 @@
                                 > <b>{{$permission->name}}</b> {{$permission->description}}</label>
 						</div>
 					@endif
+
 				@endforeach
 				<hr>
 				<input type="submit" class="btn btn-primary mb-4" value="Guardar">
