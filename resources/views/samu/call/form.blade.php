@@ -67,7 +67,7 @@
 </div>
 
 <div class="form-row">
-    <fieldset class="form-group col-md-3">
+    <fieldset class="form-group col-md-2">
         <label for="for-age">Edad</label>
         <input type="number" class="form-control form-control-sm @error('age') is-invalid @enderror" step=".1" name="age" id="for-age"
             value="{{ old('age', optional($call)->age) }}">
@@ -78,7 +78,7 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-3">
+    <fieldset class="form-group col-md-2">
         <label for="for-sex">Sexo</label>
         <select class="form-control form-control-sm @error('sex') is-invalid @enderror" name="sex" id="for-sex">
             <option value="">Selecciona un Sexo</option>
@@ -94,7 +94,7 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-3">
+    <fieldset class="form-group col-md-6">
         <label for="for-reason">Motivo</label>
         <input type="reason" class="form-control form-control-sm @error('reason') is-invalid @enderror" name="reason" id="for-reason"
             value="{{ old('reason', optional($call)->reason) }}">
@@ -105,7 +105,7 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-3">
+    <fieldset class="form-group col-md-2">
         <label for="for-intervention">Intervención de Carabinero</label>
         <select class="form-control form-control-sm @error('intervention') is-invalid @enderror" name="intervention" id="for-intervention">
             <option value="">Selecciona una opción</option>
@@ -120,33 +120,6 @@
     </fieldset>
 
 </div>
-
-<div class="form-row">
-
-    <fieldset class="form-group col-md-3">
-        <label for="latitude">Latitud </label>
-        <input type="text" class="form-control form-control-sm @error('latitude') is-invalid @enderror" name="latitude" id="latitude"
-            value="{{ old('latitude', optional($call)->latitude) }}">
-        @error('latitude')
-            <div class="text-danger">
-                <small>{{ $message }}</small>
-            </div>
-        @enderror
-    </fieldset>
-
-    <fieldset class="form-group col-md-3">
-        <label for="longitude">Longitud</label>
-        <input type="text" class="form-control form-control-sm @error('longitude') is-invalid @enderror" name="longitude" id="longitude"
-            value="{{ old('longitude', optional($call)->longitude) }}">
-        @error('longitude')
-            <div class="text-danger">
-                <small>{{ $message }}</small>
-            </div>
-        @enderror
-    </fieldset>
-
-</div>
-
 
 @if(request()->routeIs('samu.call.edit'))
 
@@ -182,3 +155,39 @@
 
 </div>
 @endif
+
+<div class="my-1">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+
+    <a href="{{ route('samu.call.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+</div>
+
+<div class="my-3">
+    <div id="map"></div>
+</div>
+ 
+<div class="form-row">
+
+    <fieldset class="form-group col-md-3">
+        <label for="latitude">Latitud </label>
+        <input type="text" class="form-control form-control-sm @error('latitude') is-invalid @enderror" name="latitude" id="latitude"
+            value="{{ old('latitude', optional($call)->latitude) }}">
+        @error('latitude')
+            <div class="text-danger">
+                <small>{{ $message }}</small>
+            </div>
+        @enderror
+    </fieldset>
+
+    <fieldset class="form-group col-md-3">
+        <label for="longitude">Longitud</label>
+        <input type="text" class="form-control form-control-sm @error('longitude') is-invalid @enderror" name="longitude" id="longitude"
+            value="{{ old('longitude', optional($call)->longitude) }}">
+        @error('longitude')
+            <div class="text-danger">
+                <small>{{ $message }}</small>
+            </div>
+        @enderror
+    </fieldset>
+
+</div>

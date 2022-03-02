@@ -6,7 +6,7 @@
 <style>
     #map { 
     width: 100%;
-    height: 580px;
+    height: 400px;
 }
 </style>
 @endsection
@@ -26,51 +26,12 @@
 
     @include('samu.call.form', ['call' => null])
 
-    <button type="submit" class="btn btn-primary" >Guardar</button>
-
-    <a href="{{ route('samu.call.index') }}" class="btn btn-outline-secondary">Cancelar</a>
-
 </form>
 
-<div class="my-3">
-    <div id="map"></div>
-</div>
- 
 @endsection
 
 @section('custom_js')
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-<script>
-    const LATITUDE = -20.249956245793552;
-    const LONGITUDE = -70.12817358465354;
-    
-    let mapOptions = {
-        center: [LATITUDE, LONGITUDE],
-        zoom: 17
-    }
-
-    let map = new L.map('map' , mapOptions);
-    let layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-    map.addLayer(layer);
-
-    let marker = new L.Marker([LATITUDE, LONGITUDE], { 
-        draggable: true,
-    }).addTo(map);
-
-    marker.on('drag', (e) => {
-        var marker = e.target;
-        var latLang = marker.getLatLng();
-    
-        let setLatitude = latLang.lat;
-        let setLongitude = latLang.lng;
-        
-        let inputLatitude = document.getElementById("latitude");
-        let inputLongitude = document.getElementById("longitude");
-
-        inputLatitude.setAttribute('value', setLatitude.toFixed(8));
-        inputLongitude.setAttribute('value', setLongitude.toFixed(8));
-
-        marker.setLatLng(latLang);
-    });
-</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="{{ asset('/js/samu/call-form.js') }}"></script>
 @endsection
