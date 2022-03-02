@@ -28,15 +28,22 @@ class Call extends Model implements Auditable
     protected $fillable = [
         'shift_id',
         'call_id',
+        'commune_id',
         'classification',
-        'hour',
-        'receptor_id',
         'clasificator_id',
         'regulator_id',
+        'receptor_id',
+        'hour',
+        'reason',
+        'intervention',
         'information',
         'regulation',
+        'sex',
         'applicant',
+        'age',
         'address',
+        'latitude',
+        'longitude',
         'telephone',
     ];
 
@@ -93,5 +100,10 @@ class Call extends Model implements Auditable
         self::creating(function (Call $call): void {
             $call->receptor()->associate(auth()->user());
         });
+    }
+
+    public function scopeWithClassification($query, $type)
+    {
+        return $query->whereIn('classification', $type);
     }
 }
