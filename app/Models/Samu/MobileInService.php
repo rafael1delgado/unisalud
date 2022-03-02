@@ -102,7 +102,7 @@ class MobileInService extends Model implements Auditable
         }
         else
         {
-            return "No disponible";
+            return "Inactivo";
         }
     }
 }

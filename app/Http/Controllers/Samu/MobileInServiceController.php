@@ -129,6 +129,7 @@ class MobileInServiceController extends Controller
 
         if($shift) {
             $mobileInService->fill($request->all());
+            $mobileInService->status = $request->has('status') ? 1:0;
             $mobileInService->save();
             $mobileInService->shift()->associate($shift);    
             session()->flash('info', 'Movil editado.');

@@ -17,15 +17,19 @@
                 <th>Colación</th>
             </tr>
             @foreach($shift->mobilesInService->sortBy('position') as $mis)
-                <tr class="{{ ($mis->lunch_start_at AND !$mis->lunch_end_at) ? 'bg-secondary text-white' : '' }}">
+                <tr class="{{ (($mis->lunch_start_at AND !$mis->lunch_end_at) OR !$mis->status) ? 'bg-secondary text-white' : '' }}">
                     <td>{{ $mis->position }}</td>
                     <td>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
                     <td>{{ $mis->type }}</td>
                     <td>{{ $mis->event_status }}</td>
                     <td>
-                        @foreach($mis->crew as $tripulant)
-                        {{ $tripulant->officialFullName }} <span class="badge bg-secondary text-white">{{ substr($tripulant->pivot->jobType->name,0,1) }}</span>
-                        @endforeach
+                        @if(!$mis->status)
+                            {{ $mis->observation }}
+                        @else
+                            @foreach($mis->crew as $tripulant)
+                            {{ $tripulant->officialFullName }} <span class="badge bg-secondary text-white">{{ substr($tripulant->pivot->jobType->name,0,1) }}</span>
+                            @endforeach
+                        @endif
                     </td>
                     <td>{{ $mis->o2 }}</td>
                     <td>
