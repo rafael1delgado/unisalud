@@ -18,6 +18,7 @@ class Gps extends Model
         'lat',
         'lon',
         'desc',
+        'mobile_id',
         'sat',
         'alt',
         'spd',
@@ -32,5 +33,10 @@ class Gps extends Model
     * @var string
     */
     protected $table = 'samu_gps';
-    
+
+
+    public function mobile()
+    {
+        return $this->belongsTo(Mobile::class);
+    }
 }
