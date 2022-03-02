@@ -60,8 +60,8 @@ class CallController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
-        $communes = Commune::get(['id', 'name']);
-        
+        $communes = Commune::where('region_id', 1)->get(['id', 'name', 'latitude', 'longitude']);
+
         if(!$shift) 
         {
             session()->flash('danger', 'Debe abrir un turno primero');
@@ -120,7 +120,7 @@ class CallController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
-        $communes = Commune::get(['id', 'name']);
+        $communes = Commune::where('region_id', 1)->get(['id', 'name', 'latitude', 'longitude']);
 
         if(!$shift) 
         {
