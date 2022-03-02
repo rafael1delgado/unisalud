@@ -1,3 +1,43 @@
+## Observaciones 28 febrero 2022
+
+[x] En Despacho |Orden de salida|Móvil|Tipo de móvil|Estado actual (disponible o en emergencia)
+[ ] Automatizar la rotación de salida
+[ ] Movil en secado (30 mintos largo), (40 noche) 
+[ ] Colación, pausar.
+
+[x] En vez de llamadas sin cometido asosciado, cambiar a llamadas pendientes.
+[x] Al guardar y cerrar se va a la otra hoja el cometido.
+[X] Quitar la s a OT
+[x] Agregar detalle al establecimiento de entrega de paciente. (establishment_details)
+
+Cometidos Abiertos
+- Móvil,
+- Tipo de movil,
+- Dirección (QTH)
+- Información telefónica.
+
+[] Crear un despacho en base a una llamada, y con la dirección copiada en los datos del cometido.
+
+Codificación de colores:
+Rojo: Aviso de salida.
+
+hora es de "Salia movil" estado es "Navegación"
+Hora "Llegada al lugar" Estado actual "Contacto"
+Hora ruta centro asistencial ,también navegación pero de distinto color.
+"Centro asistencial" estado actual "AP".
+"Retorno a base" -> "Retorno a base"
+"Movil en base" -> Disponible.
+Recepción de paciente -> Estado actual "
+
+Agregar en llamada 
+Quitar "hora"
+"Cómuna"
+"Sexo" (Masculino, Femenino, Indeterminado, Otro)
+"Motivo"
+"Edad" (incluir meses)
+"Intervención de carabinero" (si/no)
+
+
 ## Observaciones segundo día puesta en marcha
 [x] Cambiar número por qtc
 [x] Eventos no se pueden cerrar

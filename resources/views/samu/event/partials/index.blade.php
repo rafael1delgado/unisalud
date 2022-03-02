@@ -46,14 +46,25 @@
                 <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
                 <td>{{ $event->observation }}</td>
                 <td>
-                    @if($event->status)
-                    <form method="POST" action="{{ route('samu.event.destroy', $event) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                    </form>
-                    @endif
+                    @can('SAMU administrador')
+                        @if($event->status)
+                        <form method="POST" action="{{ route('samu.event.destroy', $event) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                        </form>
+                        @endif
+                    @endcan
                 </td>
+            </tr>
+            <tr class="table-{{ $event->color }}">
+                <td class="text-center"><i class="fas fa-phone"></i></td>
+                <td colspan="8">
+                    {!! implode("<br>", $event->calls->pluck('information')->toArray()) !!}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10"></td>
             </tr>
             @endforeach
         </tbody>
