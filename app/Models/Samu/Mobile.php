@@ -15,7 +15,8 @@ class Mobile extends Model implements Auditable
     use HasFactory;
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-    protected $table="samu_mobiles";
+
+    protected $table = "samu_mobiles";
 
     protected $fillable = [
         'id',
@@ -28,6 +29,21 @@ class Mobile extends Model implements Auditable
         'managed'
     ];
 
-    
+    protected $appends = [
+        'last_location'
+    ];
 
+    public function locations()
+    {
+        return $this->hasMany(Gps::class, 'mobile_id');
+    }
+
+    public function getLastLocationAttribute()
+    {
+        if($this->locations())
+        {
+            return $this->locations()->orderBy('created_at', 'desc')->first();
+        }
+        return null;
+    }
 }
