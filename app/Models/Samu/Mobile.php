@@ -42,7 +42,7 @@ class Mobile extends Model implements Auditable
     {
         if($this->locations())
         {
-            return $this->locations()->orderBy('created_at', 'desc')->first();
+            return $this->locations->last();
         }
         return null;
     }
