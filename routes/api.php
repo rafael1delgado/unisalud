@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Parameters\RegionController;
 use App\Http\Controllers\Api\Samu\CallController;
 use App\Http\Controllers\Api\Samu\MobileController;
 use Illuminate\Http\Request;
@@ -22,3 +23,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('calls', [CallController::class, 'index']);
 Route::get('mobiles', [MobileController::class, 'index']);
+Route::get('region/{region}/communes', [RegionController::class, 'communes']);
