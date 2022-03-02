@@ -632,14 +632,19 @@ Route::get('/test/rayen' ,[RayenController::class, 'getUrgencyStatus'])->name('g
 Route::get('/test/sendip',[TestController::class,'sendIp']);
 
 
-// Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
-// 	Route::get('/down', function() 
-// 	{
-// 		Artisan::call('down --secret="pum"');
-// 	});
-// 	Route::get('/up', function() 
-// 	{
-// 		Artisan::call('up');
-// 		return back();
-// 	});
-// });
+Route::prefix('developer')->name('developer.')->middleware('can:Developer')->group(function(){
+	Route::view('/artisan', 'developer.artisan')->name('artisan');
+
+	Route::prefix('artisan')->name('artisan.')->group(function () {
+		Route::get('/down', function() 
+		{
+			Artisan::call('down --secret='. env('MAINTENANCE_TOKEN'));
+			echo 'En modo mantención.';
+		})->name('down');
+		Route::get('/up', function() 
+		{
+			Artisan::call('up');
+			return redirect()->route('developer.artisan') ;
+		})->name('up');
+	});
+});
