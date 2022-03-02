@@ -76,8 +76,33 @@ class MobileInService extends Model implements Auditable
         return $this->belongsToMany(Follow::class,'samu_follow_mis');    
     }
 
-    public function event()
+    public function events()
     {
-        return $this->belongsTo(Event::class);
+        return $this->hasMany(Event::class);
+    }
+
+    public function getEventStatusAttribute()
+    {
+        if($this->status)
+        {
+            $lastEvent = $this->events->where('status',true)->last();
+            if(!$lastEvent) return "Disponible";
+            else
+            {
+                $msg = 'Aviso de salida';
+                if(!$lastEvent->departure_at)           $msg = 'Aviso de salida';
+                if($lastEvent->mobile_departure_at)     $msg = 'Navegación';
+                if($lastEvent->mobile_arrival_at)       $msg = 'Contacto';
+                if($lastEvent->route_to_healtcenter_at) $msg = 'Navegación';
+                if($lastEvent->healthcenter_at)         $msg = 'AP';
+                if($lastEvent->return_base_at)          $msg = 'Retorno a base';
+                if($lastEvent->on_base_at)              $msg = 'Disponible';
+                return $msg;
+            }
+        }
+        else
+        {
+            return "No disponible";
+        }
     }
 }

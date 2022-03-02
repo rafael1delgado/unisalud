@@ -18,7 +18,7 @@
                 <td>
                 @foreach($audit->getModified() as $attribute => $modified)
                     @if(isset($modified['old']) OR isset($modified['new']))
-                    <strong>{{ $attribute }}</strong> :  {{ isset($modified['old']) ? $modified['old'] : '' }}  => {{ $modified['new'] }}; <br>
+                    <strong>{{ $attribute }}</strong> :  {{ isset($modified['old']) ? $modified['old'] : '' }}  => {{ $modified['new'] ?? '' }}; <br>
                     @endif
                 @endforeach
                 </td>
