@@ -41,7 +41,7 @@
     </li>
     @endcan
     
-    @canany(['SAMU administrador','SAMU regulador'])
+    @canany(['SAMU administrador','SAMU regulador','SAMU operador','SAMU despachador'])
     <li class="nav-item">
         <a class="nav-link {{ active('samu.call.ots') }} @if(!App\Models\Samu\Shift::todayShiftVerify()) disabled @endif" 
         href=" {{ route('samu.call.ots') }}"><i class="fas fa-phone"></i> OT</a>

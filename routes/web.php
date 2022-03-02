@@ -518,7 +518,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 	
 	
     Route::prefix('calls')->name('call.')
-	->middleware('permission:SAMU administrador|SAMU operador|SAMU regulador')
+	->middleware('permission:SAMU administrador|SAMU regulador|SAMU operador|SAMU despachador')
 	->group(function () {
 		Route::get('/',				[CallController::class, 'index'])->name('index');
 		Route::get('/ots',			[CallController::class, 'ots'])->name('ots');
