@@ -4,7 +4,7 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-ambulance"></i> Editar móvil en truno</h3>
+<h3 class="mb-3"><i class="fas fa-ambulance"></i> Editar móvil en servicio</h3>
 
 <form method="POST" action="{{ route('samu.mobileinservice.update', $mobileInService) }}">
     @csrf

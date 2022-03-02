@@ -34,7 +34,7 @@
         <label for="for_mobile">Móvil</label>
         <select class="form-control" name="mobile_id">
             <option value=""></option>
-            @foreach($shift->mobilesInService as $mis)
+            @foreach($shift->mobilesInService->where('status',true) as $mis)
             <option value="{{ $mis->mobile->id }}" {{ old('mobile_id', optional($event)->mobile_id) == $mis->mobile->id ? 'selected' : '' }}>
                 {{ $mis->mobile->code }} {{ $mis->mobile->name }} - {{ $mis->type }} (PROPIO)
             </option>
