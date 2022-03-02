@@ -29,6 +29,7 @@ class CreateSamuGpsTable extends Migration
 
             $table->time('hour_start')->nullable();
             $table->time('hour_utc')->nullable();
+
             $table->timestamp('date_diff')->nullable();
             $table->timestamp('date')->nullable();
 
@@ -48,6 +49,7 @@ class CreateSamuGpsTable extends Migration
                 ->constrained('samu_mobiles');
 
             $table->softDeletes();
+            
             $table->timestamps();
         });
     }
