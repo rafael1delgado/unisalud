@@ -470,6 +470,7 @@ use App\Http\Controllers\Samu\CallController;
 use App\Http\Controllers\Samu\NoveltieController;
 use App\Http\Controllers\Samu\EstablishmentController;
 use App\Http\Controllers\Samu\GpsController;
+use App\Http\Livewire\Samu\MobileTimeMarks;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
@@ -568,6 +569,8 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::put('/{mobile}',		[MobileController::class, 'update'])->name('update');
 		Route::delete('/{mobile}', 	[MobileController::class, 'destroy'])->name('destroy');
 	});
+
+	Route::get('/movil', MobileTimeMarks::class);
 	
 	Route::prefix('establishments')->name('establishment.')
 	->middleware('permission:SAMU administrador')
