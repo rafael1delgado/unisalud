@@ -61,7 +61,6 @@ use App\Http\Controllers\RayenWs\SoapController;
 use Spatie\Permission\Contracts\Role;
 
 
-
 use App\Http\Controllers\Epi\SuspectCaseController;
 
 
@@ -471,6 +470,7 @@ use App\Http\Controllers\Samu\NoveltieController;
 use App\Http\Controllers\Samu\EstablishmentController;
 use App\Http\Controllers\Samu\GpsController;
 use App\Http\Livewire\Samu\MobileTimeMarks;
+use App\Http\Controllers\Samu\CoordinateController;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
@@ -579,6 +579,12 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::post('/', 			[EstablishmentController::class, 'store'])->name('store');
 	});
 	
+	Route::prefix('coordinates')->name('coordinate.')
+	->middleware('permission:SAMU')
+	->group(function () {
+		Route::get('/', [CoordinateController::class, 'index'])->name('index');
+		Route::get('/create', [CoordinateController::class, 'create'])->name('create');
+	});
 	
 });
 Route::get('/samu/mobiles-in-service/{mobileInService}/gps', [GpsController::class, 'index'])->name('samu.mobileinservice.gps');

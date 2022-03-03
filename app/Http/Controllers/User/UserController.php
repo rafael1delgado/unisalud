@@ -10,6 +10,7 @@ use App\Models\HumanName;
 use App\Models\User;
 use App\Models\Identifier;
 use App\Models\ContactPoint;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -176,4 +177,19 @@ class UserController extends Controller
 
         return $data;
     }
+
+    public function switch(User $user) {
+        if (session()->has('god')) {
+            /* Clean session var */
+            session()->pull('god');
+        }
+        else {
+            /* set god session var = user_id */
+            session(['god' => Auth::id()]);
+        }
+
+        Auth::login($user);
+        return back();
+    }
+
 }
