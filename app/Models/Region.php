@@ -8,25 +8,31 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Region extends Model
 {
-    use HasFactory;
+  use HasFactory;
+  use SoftDeletes;
 
-    /**
+  /**
    * The attributes that are mass assignable.
    *
    * @var array
    */
   protected $fillable = [
-    'id','id_minsal','name'
-];
+    'id_minsal',
+    'name'
+  ];
 
-use SoftDeletes;
 
-/**
- * The attributes that should be mutated to dates.
- *
- * @var array
- */
-protected $dates = ['deleted_at'];
+  /**
+   * The attributes that should be mutated to dates.
+   *
+   * @var array
+   */
+  protected $dates = ['deleted_at'];
+
+  public function communes()
+  {
+      return $this->hasMany(Commune::class);
+  }
 }
 
 
