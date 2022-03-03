@@ -15,14 +15,8 @@ class GpsController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('lat') AND $request->has('lon'))
-        {
-            $gps = new Gps($request->all());
-            $gps->save();
-        }
         $locations = Gps::all();
-
-        return view('samu.mobileinservice.gps',compact('locations'));
+        return view('samu.mobileinservice.gps', compact('locations'));
     }
 
     /**
