@@ -35,7 +35,7 @@ class Call extends Model implements Auditable
         'receptor_id',
         'hour',
         'reason',
-        'intervention',
+        'police_intervention',
         'information',
         'regulation',
         'sex',
