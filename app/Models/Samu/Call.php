@@ -96,20 +96,22 @@ class Call extends Model implements Auditable
 
     public function getAgeFormatAttribute()
     {
-        list($integer, $decimal) = explode('.', $this->age);
+        if($this->age) {
+            list($integer, $decimal) = explode('.', $this->age);
 
-        $edad = '';
+            $edad = '';
 
-        if($integer != '00')
-        {
-            $edad .= $integer == '01' ? (int)$integer . ' AÑO ': (int)$integer . ' AÑOS ';
+            if($integer != '00')
+            {
+                $edad .= $integer == '01' ? (int)$integer . ' AÑO ': (int)$integer . ' AÑOS ';
+            }
+
+            if($decimal != '00')
+            {
+                $edad .= $decimal == '01' ? (int)$decimal . ' MES ': (int)$decimal . ' MESES ';
+            }
+            return $edad;
         }
-
-        if($decimal != '00')
-        {
-            $edad .= $decimal == '01' ? (int)$decimal . ' MES ': (int)$decimal . ' MESES ';
-        }
-        return $edad;
     }
 
     /* Una llamada puede hace referencia o tener relación con otra llamada  */
