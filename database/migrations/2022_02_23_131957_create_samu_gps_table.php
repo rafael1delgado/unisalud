@@ -18,7 +18,7 @@ class CreateSamuGpsTable extends Migration
 
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 10, 8)->nullable();
-            $table->decimal('altitude', 10, 8)->nullable();
+            $table->string('altitude')->nullable();
 
             $table->string('anotation')->nullable();
             $table->string('satelite')->nullable();
@@ -27,15 +27,15 @@ class CreateSamuGpsTable extends Migration
             $table->string('address')->nullable();
             $table->string('operator')->nullable();
 
-            $table->time('hour_start')->nullable();
-            $table->time('hour_utc')->nullable();
+            $table->string('time_start')->nullable();
+            $table->timestamp('time')->nullable();
+            $table->string('date_diff')->nullable();
+            $table->date('date')->nullable();
+            $table->string('hour_diff')->nullable();
 
-            $table->timestamp('date_diff')->nullable();
-            $table->timestamp('date')->nullable();
-
-            $table->string('battery')->nullable();
-            $table->string('charging')->nullable();
-            $table->string('android_id')->nullable();
+            $table->decimal('battery')->nullable();
+            $table->boolean('is_charging')->nullable();
+            $table->string('android_identifier')->nullable();
             $table->string('serial')->nullable();
             $table->string('file')->nullable();
             $table->string('profile')->nullable();
