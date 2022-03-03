@@ -247,7 +247,7 @@
     </fieldset>
     <fieldset class="form-group col-6 col-md-1">
         <label for="for_hgt">HGT <br>mg/dl</label>
-        <input type="number" class="form-control" name="hgt" value="{{ ( $event &&  $event->hgt)? $event->soap : '' }}">
+        <input type="number" class="form-control" name="hgt" value="{{ ( $event &&  $event->hgt)? $event->hgt : '' }}">
     </fieldset>
     <fieldset class="form-group col-6 col-md-1">
         <label for="for_fill_capillary">Llene <br>Capilar</label>
