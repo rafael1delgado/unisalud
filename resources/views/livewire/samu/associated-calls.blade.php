@@ -13,7 +13,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($shift->calls->where('classification','<>','OT')->where('id','<>',$currentCall->id)->whereNull('call_id')->whereNotNull('classification')->sortByDesc('id') as $call)
+            @foreach($shift->calls->where('classification','<>','OT')
+                ->where('id','<>',$currentCall->id)
+                ->whereNull('call_id')
+                ->whereNotNull('classification')
+                ->sortByDesc('id') 
+                    as $call)
             <tr>
                 <td class="text-center">
                     @if(!$currentCall->call_id)
