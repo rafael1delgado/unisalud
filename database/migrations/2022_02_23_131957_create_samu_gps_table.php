@@ -15,15 +15,41 @@ class CreateSamuGpsTable extends Migration
     {
         Schema::create('samu_gps', function (Blueprint $table) {
             $table->id();
-            $table->string('lat');
-            $table->string('lon');
-            $table->string('desc')->nullable();
-            $table->string('sat')->nullable();
-            $table->string('alt')->nullable();
-            $table->string('spd')->nullable();
-            $table->string('time')->nullable();
-            $table->string('batt')->nullable();
-            $table->string('aid')->nullable();
+
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 10, 8)->nullable();
+            $table->decimal('altitude', 10, 8)->nullable();
+
+            $table->string('anotation')->nullable();
+            $table->string('satelite')->nullable();
+            $table->string('speed')->nullable();
+            $table->string('precision')->nullable();
+            $table->string('address')->nullable();
+            $table->string('operator')->nullable();
+
+            $table->time('hour_start')->nullable();
+            $table->time('hour_utc')->nullable();
+
+            $table->timestamp('date_diff')->nullable();
+            $table->timestamp('date')->nullable();
+
+            $table->string('battery')->nullable();
+            $table->string('charging')->nullable();
+            $table->string('android_id')->nullable();
+            $table->string('serial')->nullable();
+            $table->string('file')->nullable();
+            $table->string('profile')->nullable();
+            $table->string('hdop')->nullable();
+            $table->string('vdop')->nullable();
+            $table->string('pdop')->nullable();
+            $table->string('travel')->nullable();
+
+            $table->foreignId('mobile_id')
+                ->nullable()
+                ->constrained('samu_mobiles');
+
+            $table->softDeletes();
+            
             $table->timestamps();
         });
     }

@@ -14,7 +14,8 @@ Installation:
 - Navigate to http://localhost:8000/patient
 
 ## Dependencies
-Build on laravel 8.24 + bootstrap + livewire
+- Requires having the php soap extension enabled `extension=soap`.
+- Build on laravel 8.24 + bootstrap + livewire
 
 ## License
 

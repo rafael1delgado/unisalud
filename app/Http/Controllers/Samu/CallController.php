@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Call\StoreCallRequest;
+use App\Http\Requests\Call\UpdateCallRequest;
+use App\Models\Commune;
 use App\Models\Samu\Call;
 use App\Models\Samu\Event;
 use App\Models\Samu\Key;
@@ -57,6 +60,7 @@ class CallController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
+        $communes = Commune::where('region_id', 1)->get(['id', 'name', 'latitude', 'longitude']);
 
         if(!$shift) 
         {
@@ -64,20 +68,21 @@ class CallController extends Controller
             return redirect()->route('samu.welcome');
         }
 
-        return view ('samu.call.create' , compact('shift'));
+        return view ('samu.call.create' , compact('communes', 'shift'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Call\StoreCallRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCallRequest $request)
     {
         $shift = Shift::where('status',true)->first();
 
-        if($shift) {
+        if($shift) 
+        {
             $call = new Call($request->All());
             $call->hour = now();
             $call->shift()->associate($shift);
@@ -86,12 +91,12 @@ class CallController extends Controller
             $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
             return redirect()->route('samu.call.create');
         }
-        else {
+        else 
+        {
             $request->session()->flash('danger', 'No se puede guardar el llamado, 
                 el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
             return redirect()->back()->withInput();
         }
-
     }
 
     /**
@@ -100,8 +105,6 @@ class CallController extends Controller
      * @param  \App\Models\Samu\Call  $call
      * @return \Illuminate\Http\Response
      */
-
-
     public function show(Call $call)
     {
         //
@@ -117,6 +120,7 @@ class CallController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
+        $communes = Commune::where('region_id', 1)->get(['id', 'name', 'latitude', 'longitude']);
 
         if(!$shift) 
         {
@@ -124,27 +128,26 @@ class CallController extends Controller
             return redirect()->route('samu.welcome');
         }
 
-        return view ('samu.call.edit' , compact('call', 'shift'));
+        return view ('samu.call.edit' , compact('call', 'communes', 'shift'));
     }
 
- 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Call\UpdateCallRequest $request
      * @param  \App\Models\Samu\Call  $call
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Call $call)
+    public function update(UpdateCallRequest $request, Call $call)
     {
 
         if($call->classification != $request->filled('classification'))
         {
             $call->regulator_id = auth()->id();
+            $call->save();
         }
 
-        $call->fill($request->all());
-        $call->save();
+        $call->update($request->validated());
 
         $request->session()->flash('success', 'Se han actualizado los datos la orientación telefónica.');
 
@@ -163,7 +166,6 @@ class CallController extends Controller
         }
     }
 
-
     public function syncevents(Request $request, Call $call)
     {
         $call->events()->sync($request->input('events'));
@@ -172,7 +174,6 @@ class CallController extends Controller
         return redirect()->route('samu.event.index');
     }
  
-
     /**
      * Remove the specified resource from storage.
      *
@@ -183,5 +184,15 @@ class CallController extends Controller
     {
         $call->delete();
         return redirect()->route('samu.call.index')->with('danger', 'Eliminado');
+    }
+
+    /**
+     * Shows the locations of calls and mobiles.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function maps()
+    {
+        return view('samu.maps.maps');
     }
 }
