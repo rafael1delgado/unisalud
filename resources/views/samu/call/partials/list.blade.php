@@ -40,8 +40,11 @@
                 </td>
                 <td width="90">{{ $call->hour }}</td>
                 <td>{{ $call->applicant }}</td>
-                <td>{{ $call->information }}</td>
-                
+                <td>
+                    {{ $call->sex_abbr }}
+                    {{ $call->age_format }}
+                    {{ $call->information }}
+                </td>
                 <td>{{ $call->address }} {{ optional($call->commune)->name }}</td>
                 <td>{{ $call->telephone }}</td>
                 <td>{{ $call->receptor->officialFullName }}</td>

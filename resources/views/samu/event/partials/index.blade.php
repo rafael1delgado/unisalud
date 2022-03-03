@@ -60,7 +60,9 @@
             <tr class="table-{{ $event->color }}">
                 <td class="text-center"><i class="fas fa-phone"></i></td>
                 <td colspan="8">
-                    {!! implode("<br>", $event->calls->pluck('information')->toArray()) !!}
+                    @foreach($event->calls as $call)
+                    <li>{{ $call->sex_abbr }} {{ $call->age_format }} {{ $call->information }}</li>
+                    @endforeach
                 </td>
             </tr>
             <tr>

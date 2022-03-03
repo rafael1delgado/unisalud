@@ -18,13 +18,55 @@ class CommuneSeeder extends Seeder
         Commune::Create(['name' => 'Putre', 'code_deis' => '15201', 'region_id' => 15]);
         Commune::Create(['name' => 'General Lagos', 'code_deis' => '15202', 'region_id' => 15]);
         Commune::Create(['name' => 'Camarones', 'code_deis' => '15102', 'region_id' => 15]);
-        Commune::Create(['name' => 'Iquique', 'code_deis' => '1101', 'region_id' => 1]);
-        Commune::Create(['name' => 'Pica', 'code_deis' => '1405', 'region_id' => 1]);
-        Commune::Create(['name' => 'Alto Hospicio', 'code_deis' => '1107', 'region_id' => 1]);
-        Commune::Create(['name' => 'Pozo Almonte', 'code_deis' => '1401', 'region_id' => 1]);
-        Commune::Create(['name' => 'Huara', 'code_deis' => '1404', 'region_id' => 1]);
-        Commune::Create(['name' => 'Camiña', 'code_deis' => '1402', 'region_id' => 1]);
-        Commune::Create(['name' => 'Colchane', 'code_deis' => '1403', 'region_id' => 1]);
+        Commune::Create([
+            'name' => 'Iquique', 
+            'code_deis' => '1101', 
+            'region_id' => 1,
+            'latitude' => -20.2159772,
+            'longitude' => -70.1468313
+        ]);
+        Commune::Create([
+            'name' => 'Pica', 
+            'code_deis' => '1405', 
+            'region_id' => 1,
+            'latitude' => -20.49124158,
+            'longitude' => -69.32915497
+        ]);
+        Commune::Create([
+            'name' => 'Alto Hospicio', 
+            'code_deis' => '1107', 
+            'region_id' => 1,
+            'latitude' => -20.26970134,
+            'longitude' => -70.10069561
+        ]);
+        Commune::Create([
+            'name' => 'Pozo Almonte', 
+            'code_deis' => '1401', 
+            'region_id' => 1,
+            'latitude' => -20.25708500,
+            'longitude' => -69.78465900
+        ]);
+        Commune::Create([
+            'name' => 'Huara', 
+            'code_deis' => '1404', 
+            'region_id' => 1,
+            'latitude' => -19.99531200,
+            'longitude' => -69.77021200
+        ]);
+        Commune::Create([
+            'name' => 'Camiña', 
+            'code_deis' => '1402', 
+            'region_id' => 1,
+            'latitude' => -19.31340126,
+            'longitude' => -69.42567576
+        ]);
+        Commune::Create([
+            'name' => 'Colchane', 
+            'code_deis' => '1403', 
+            'region_id' => 1,
+            'latitude' => -19.27617732,
+            'longitude' => -68.63824369
+        ]);
         Commune::Create(['name' => 'Antofagasta', 'code_deis' => '2101', 'region_id' => 2]);
         Commune::Create(['name' => 'Calama', 'code_deis' => '2201', 'region_id' => 2]);
         Commune::Create(['name' => 'Tocopilla', 'code_deis' => '2301', 'region_id' => 2]);

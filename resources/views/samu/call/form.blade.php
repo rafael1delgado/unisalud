@@ -23,9 +23,9 @@
     </fieldset>
 
     <fieldset class="form-group col-md-2">
-        <label for="for-commune">Comuna *</label>
-        <select class="form-control form-control-sm @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune" required>
-            <option value="">Selecciona una Comuna</option>
+        <label for="for-commune">Comuna</label>
+        <select class="form-control form-control-sm @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune">
+            <option value=""></option>
             @foreach ($communes as $commune)
                 <option value="{{ $commune->id }}" {{ optional($call)->commune_id == $commune->id ? 'selected' : '' }}>
                     {{ $commune->name }}
@@ -74,6 +74,7 @@
         <label for="for-age">Edad</label>
         <input type="number" class="form-control form-control-sm @error('age') is-invalid @enderror" step=".01" name="age" id="for-age"
         value="{{ old('age', optional($call)->age) }}">
+        <small id="for-age" class="form-text">1,06 = 1 año 6 meses</small>
         @error('age')
         <div class="text-danger">
             <small>{{ $message }}</small>

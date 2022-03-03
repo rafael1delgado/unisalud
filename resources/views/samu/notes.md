@@ -4,6 +4,7 @@
 [ ] Automatizar la rotación de salida
 [ ] Movil en secado (30 mintos largo), (40 noche) 
 [ ] Colación, pausar.
+[x] Permitir otra comuna
 
 [x] En vez de llamadas sin cometido asosciado, cambiar a llamadas pendientes.
 [x] Al guardar y cerrar se va a la otra hoja el cometido.
@@ -16,7 +17,7 @@ Cometidos Abiertos
 - Dirección (QTH)
 - Información telefónica.
 
-[] Crear un despacho en base a una llamada, y con la dirección copiada en los datos del cometido.
+[ ] Crear un despacho en base a una llamada, y con la dirección copiada en los datos del cometido.
 
 Codificación de colores:
 Rojo: Aviso de salida.
@@ -29,13 +30,7 @@ Hora ruta centro asistencial ,también navegación pero de distinto color.
 "Movil en base" -> Disponible.
 Recepción de paciente -> Estado actual "
 
-Agregar en llamada 
-Quitar "hora"
-"Cómuna"
-"Sexo" (Masculino, Femenino, Indeterminado, Otro)
-"Motivo"
-"Edad" (incluir meses)
-"Intervención de carabinero" (si/no)
+[x] En llamada, quitar "hora" y agregar "Cómuna", "Sexo" (Masculino, Femenino, Indeterminado, Otro)", "Edad" (incluir meses), "Intervención de carabinero" (si/no)
 
 
 ## Observaciones segundo día puesta en marcha
