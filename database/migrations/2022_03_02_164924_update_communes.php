@@ -34,26 +34,26 @@ class UpdateCommunes extends Migration
 
         $pozoAlmonte = Commune::find(8);
         $pozoAlmonte->update([
-            'latitude' => -20.2507767,
-            'longitude' => -70.1251825,
+            'latitude' => -20.25708500,
+            'longitude' => -69.78465900,
         ]);
 
         $huara = Commune::find(9);
         $huara->update([
-            'latitude' => -20.2416331,
-            'longitude' => -70.1333774,
+            'latitude' => -19.99531200,
+            'longitude' => -69.77021200,
         ]);
 
         $caminha = Commune::find(10);
         $caminha->update([
-            'latitude' => -19.311947,
-            'longitude' => -69.4327198,
+            'latitude' => -19.31340126,
+            'longitude' => -69.42567576,
         ]);
 
         $colchane = Commune::find(11);
         $colchane->update([
-            'latitude' => -20.2494923,
-            'longitude' => -70.1315449,
+            'latitude' => -19.27617732,
+            'longitude' => -68.63824369,
         ]);
     }
 

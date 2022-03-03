@@ -168,7 +168,7 @@ return [
         'gender'                => 'género',
         'hour'                  => 'hora',
         'information'           => 'información',
-        'intervention'          => 'intervención de carabinero',
+        'police_intervention'   => 'intervención de carabineros',
         'last_name'             => 'apellido',
         'latitude'              => 'latitud',
         'longitude'             => 'longitud',

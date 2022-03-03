@@ -35,7 +35,7 @@ class UpdateSamuCalls extends Migration
                 ->after('regulator_id')
                 ->nullable();
 
-            $table->boolean('intervention')
+            $table->boolean('police_intervention')
                 ->after('reason')
                 ->nullable();
 

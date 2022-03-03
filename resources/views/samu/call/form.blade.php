@@ -23,8 +23,8 @@
     </fieldset>
 
     <fieldset class="form-group col-md-2">
-        <label for="for-commune">Comuna</label>
-        <select class="form-control form-control-sm @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune">
+        <label for="for-commune">Comuna *</label>
+        <select class="form-control form-control-sm @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune" required>
             <option value="">Selecciona una Comuna</option>
             @foreach ($communes as $commune)
                 <option value="{{ $commune->id }}" {{ optional($call)->commune_id == $commune->id ? 'selected' : '' }}>
@@ -53,6 +53,62 @@
 </div>
 
 <div class="form-row">
+    
+    <fieldset class="form-group col-md-2">
+        <label for="for-sex">Sexo</label>
+        <select class="form-control form-control-sm @error('sex') is-invalid @enderror" name="sex" id="for-sex">
+            <option value="">Selecciona un Sexo</option>
+            <option value="MALE" {{ optional($call)->sex == 'MALE' ? 'selected' : '' }}>Masculino</option>
+            <option value="FEMALE" {{ optional($call)->sex == 'FEMALE' ? 'selected' : '' }}>Femenino</option>
+            <option value="UNKNOWN" {{ optional($call)->sex == 'UNKNOWN' ? 'selected' : '' }}>Indeterminado</option>
+            <option value="OTHER" {{ optional($call)->sex == 'OTHER' ? 'selected' : '' }}>Otro</option>
+        </select>
+        @error('sex')
+        <div class="text-danger">
+            <small>{{ $message }}</small>
+        </div>
+        @enderror
+    </fieldset>
+    
+    <fieldset class="form-group col-md-1">
+        <label for="for-age">Edad</label>
+        <input type="number" class="form-control form-control-sm @error('age') is-invalid @enderror" step=".01" name="age" id="for-age"
+        value="{{ old('age', optional($call)->age) }}">
+        @error('age')
+        <div class="text-danger">
+            <small>{{ $message }}</small>
+        </div>
+        @enderror
+    </fieldset>
+    
+    <!-- <fieldset class="form-group col-md-6">
+        <label for="for-reason">Motivo</label>
+        <input type="reason" class="form-control form-control-sm @error('reason') is-invalid @enderror" name="reason" id="for-reason"
+        value="{{ old('reason', optional($call)->reason) }}">
+        @error('reason')
+        <div class="text-danger">
+                <small>{{ $message }}</small>
+            </div>
+            @enderror
+    </fieldset> -->
+    
+    <fieldset class="form-group col-md-2">
+        <label for="for-police_intervention">Intervención de carabineros</label>
+        <select class="form-control form-control-sm @error('police_intervention') is-invalid @enderror" name="police_intervention" id="for-police_intervention">
+            <option value="">Selecciona una opción</option>
+            <option value="1" {{ optional($call)->police_intervention == '1' ? 'selected' : '' }}>Si</option>
+            <option value="0" {{ optional($call)->police_intervention == '0' ? 'selected' : '' }}>No</option>
+        </select>
+        @error('police_intervention')
+        <div class="text-danger">
+            <small>{{ $message }}</small> 
+        </div>
+        @enderror
+    </fieldset>
+        
+</div>
+    
+<div class="form-row">
 
     <fieldset class="form-group col-md-12">
         <label for="for-information">Información telefónica *</label>
@@ -66,60 +122,6 @@
 
 </div>
 
-<div class="form-row">
-    <fieldset class="form-group col-md-2">
-        <label for="for-age">Edad</label>
-        <input type="number" class="form-control form-control-sm @error('age') is-invalid @enderror" step=".1" name="age" id="for-age"
-            value="{{ old('age', optional($call)->age) }}">
-        @error('age')
-            <div class="text-danger">
-                <small>{{ $message }}</small>
-            </div>
-        @enderror
-    </fieldset>
-
-    <fieldset class="form-group col-md-2">
-        <label for="for-sex">Sexo</label>
-        <select class="form-control form-control-sm @error('sex') is-invalid @enderror" name="sex" id="for-sex">
-            <option value="">Selecciona un Sexo</option>
-            <option value="MALE" {{ optional($call)->sex == 'MALE' ? 'selected' : '' }}>Masculino</option>
-            <option value="FEMALE" {{ optional($call)->sex == 'FEMALE' ? 'selected' : '' }}>Femenino</option>
-            <option value="UNKNOWN" {{ optional($call)->sex == 'UNKNOWN' ? 'selected' : '' }}>Indeterminado</option>
-            <option value="OTHER" {{ optional($call)->sex == 'OTHER' ? 'selected' : '' }}>Otro</option>
-        </select>
-        @error('sex')
-            <div class="text-danger">
-                <small>{{ $message }}</small>
-            </div>
-        @enderror
-    </fieldset>
-
-    <fieldset class="form-group col-md-6">
-        <label for="for-reason">Motivo</label>
-        <input type="reason" class="form-control form-control-sm @error('reason') is-invalid @enderror" name="reason" id="for-reason"
-            value="{{ old('reason', optional($call)->reason) }}">
-        @error('reason')
-            <div class="text-danger">
-                <small>{{ $message }}</small>
-            </div>
-        @enderror
-    </fieldset>
-
-    <fieldset class="form-group col-md-2">
-        <label for="for-intervention">Intervención de Carabinero</label>
-        <select class="form-control form-control-sm @error('intervention') is-invalid @enderror" name="intervention" id="for-intervention">
-            <option value="">Selecciona una opción</option>
-            <option value="0" {{ optional($call)->intervention == '0' ? 'selected' : '' }}>No</option>
-            <option value="1" {{ optional($call)->intervention == '1' ? 'selected' : '' }}>Si</option>
-        </select>
-        @error('intervention')
-            <div class="text-danger">
-                <small>{{ $message }}</small> 
-            </div>
-        @enderror
-    </fieldset>
-
-</div>
 
 @if(request()->routeIs('samu.call.edit'))
 
@@ -163,6 +165,7 @@
 </div>
 
 <div class="my-3">
+    <label for="for-regulation">Mueva el pin para ubicar la llamada en el mapa</label>
     <div id="map"></div>
 </div>
  
