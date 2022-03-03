@@ -587,7 +587,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 	});
 	
 });
-Route::get('/samu/mobiles-in-service/{mobileInService}/gps', [GpsController::class, 'index'])->name('samu.mobileinservice.gps');
+Route::get('/samu/mobile/{mobile}/gps', [GpsController::class, 'index'])->name('samu.mobileinservice.gps');
 //fin rutas samu
 
 

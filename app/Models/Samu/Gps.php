@@ -15,16 +15,31 @@ class Gps extends Model
     * @var array
     */
     protected $fillable = [
-        'lat',
-        'lon',
-        'desc',
-        'mobile_id',
-        'sat',
-        'alt',
-        'spd',
+        'latitude',
+        'longitude',
+        'altitude',
+        'anotation',
+        'satelite',
+        'speed',
+        'precision',
+        'address',
+        'operator',
+        'time_start',
         'time',
-        'batt',
-        'aid',        
+        'date_diff',
+        'date',
+        'hour_diff',
+        'battery',
+        'is_charging',
+        'android_identifier',
+        'serial',
+        'file',
+        'profile',
+        'hdop',
+        'vdop',
+        'pod',
+        'travel',
+        'mobile_id'
     ];
 
     /**
