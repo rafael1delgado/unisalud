@@ -474,7 +474,7 @@ use App\Http\Controllers\Samu\GpsController;
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
     Route::view('/', 'samu.welcome')->name('welcome');
-	Route::get('/maps', [CallController::class, 'maps'])->name('samu.maps');
+	Route::get('/map', [CallController::class, 'maps'])->name('samu.maps');
 
 	Route::prefix('shifts')->name('shift.')
 	->middleware('permission:SAMU administrador|SAMU regulador|SAMU despachador')

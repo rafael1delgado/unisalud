@@ -10,6 +10,7 @@ use App\Models\Samu\Shift;
 use App\Models\Samu\Event;
 use App\Models\Samu\Ot;
 use App\Models\User;
+use App\Models\Commune;
 
 
 class Call extends Model implements Auditable
@@ -64,6 +65,11 @@ class Call extends Model implements Auditable
     public function shift()
     {
         return $this->belongsTo(Shift::class);
+    }
+    
+    public function commune()
+    {
+        return $this->belongsTo(Commune::class);
     }
 
     public function receptor()
