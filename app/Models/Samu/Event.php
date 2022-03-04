@@ -99,6 +99,10 @@ class Event extends Model implements Auditable
         'on_base_at'
     ];
 
+    protected $appends = [
+        'color'
+    ];
+
     public function shift() 
     {
         return $this->belongsTo(Shift::class);
