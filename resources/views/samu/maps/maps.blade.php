@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.fullscreen')
 
 @section('content')
 
@@ -7,14 +7,12 @@
 <style>
     #map { 
     width: 100%;
-    height: 75vh;
+    height: 94vh;
 }
 </style>
 @endsection
 
-@include('samu.nav')
-
-<h3 class="mb-3"><i class="fas fa-ambulance"></i> Mapas</h3>
+<h4><i class="fas fa-ambulance"></i> SAMU </h4>
 
 <div id="map"></div>
 

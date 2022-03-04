@@ -25,4 +25,9 @@ class Identifier extends Model
         'period_id',
         'organization',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

@@ -61,9 +61,8 @@ use App\Http\Controllers\RayenWs\SoapController;
 use Spatie\Permission\Contracts\Role;
 
 
-
 use App\Http\Controllers\Epi\SuspectCaseController;
-
+use App\Http\Controllers\CoordinateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +96,15 @@ Route::get('/claveunica/logout', [ClaveUnicaController::class,'logout'])->name('
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::get('/logout', [LoginController::class,'logout'])->name('logout');
+
+
+Route::get('/miubicacion', [CoordinateController::class, 'create'])->name('coordinate.create');
+
+Route::prefix('coordinates')->name('coordinate.')
+->group(function () {
+	Route::get('/', [CoordinateController::class, 'index'])->name('index');
+	Route::post('/', [CoordinateController::class, 'store'])->name('store');
+});
 
 /** Ejempo con livewire */
 //Route::get('/home', Home::class)->middleware('auth')->name('home');
@@ -470,11 +478,12 @@ use App\Http\Controllers\Samu\CallController;
 use App\Http\Controllers\Samu\NoveltieController;
 use App\Http\Controllers\Samu\EstablishmentController;
 use App\Http\Controllers\Samu\GpsController;
+use App\Http\Livewire\Samu\MobileTimeMarks;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
     Route::view('/', 'samu.welcome')->name('welcome');
-	Route::get('/maps', [CallController::class, 'maps'])->name('samu.maps');
+	Route::get('/map', [CallController::class, 'maps'])->name('samu.maps');
 
 	Route::prefix('shifts')->name('shift.')
 	->middleware('permission:SAMU administrador|SAMU regulador|SAMU despachador')
@@ -521,7 +530,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 	
 	
     Route::prefix('calls')->name('call.')
-	->middleware('permission:SAMU administrador|SAMU operador|SAMU regulador')
+	->middleware('permission:SAMU administrador|SAMU regulador|SAMU operador|SAMU despachador')
 	->group(function () {
 		Route::get('/',				[CallController::class, 'index'])->name('index');
 		Route::get('/ots',			[CallController::class, 'ots'])->name('ots');
@@ -567,7 +576,10 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/edit/{mobile}',[MobileController::class, 'edit'])->name('edit');
 		Route::put('/{mobile}',		[MobileController::class, 'update'])->name('update');
 		Route::delete('/{mobile}', 	[MobileController::class, 'destroy'])->name('destroy');
+		Route::get('/{mobile}/gps', [GpsController::class, 'index'])->name('gps');
 	});
+
+	Route::get('/movil', MobileTimeMarks::class);
 	
 	Route::prefix('establishments')->name('establishment.')
 	->middleware('permission:SAMU administrador')
@@ -578,7 +590,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 	
 	
 });
-Route::get('/samu/mobile/{mobile}/gps', [GpsController::class, 'index'])->name('samu.mobileinservice.gps');
+
 //fin rutas samu
 
 
@@ -635,14 +647,19 @@ Route::get('/test/rayen' ,[RayenController::class, 'getUrgencyStatus'])->name('g
 Route::get('/test/sendip',[TestController::class,'sendIp']);
 
 
-// Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
-// 	Route::get('/down', function() 
-// 	{
-// 		Artisan::call('down --secret="pum"');
-// 	});
-// 	Route::get('/up', function() 
-// 	{
-// 		Artisan::call('up');
-// 		return back();
-// 	});
-// });
+Route::prefix('developer')->name('developer.')->middleware('can:Developer')->group(function(){
+	Route::view('/artisan', 'developer.artisan')->name('artisan');
+
+	Route::prefix('artisan')->name('artisan.')->group(function () {
+		Route::get('/down', function() 
+		{
+			Artisan::call('down --secret='. env('MAINTENANCE_TOKEN'));
+			echo 'En modo mantención.';
+		})->name('down');
+		Route::get('/up', function() 
+		{
+			Artisan::call('up');
+			return redirect()->route('developer.artisan') ;
+		})->name('up');
+	});
+});

@@ -14,6 +14,14 @@ class AdvancedSearch extends Component
     public $searchByAddress = null;
     public $searchByContactPoint = null;
     public $patients = null;
+    public $run = null;
+
+    public function mount(){
+        if($this->run){
+            $this->searchByIdentifier = $this->run;
+            $this->search();
+        }
+    }
 
     public function search()
     {

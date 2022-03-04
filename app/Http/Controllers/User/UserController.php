@@ -10,6 +10,7 @@ use App\Models\HumanName;
 use App\Models\User;
 use App\Models\Identifier;
 use App\Models\ContactPoint;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -20,20 +21,18 @@ class UserController extends Controller
 
     public function create()
     {
-
         $permissions = Permission::OrderBy('name')->get();
         return view('users.create', compact('permissions'));
     }
 
     public function store(Request $request)
     {
-        $repeated = Identifier::query()
-            ->where('use', 'official')
+        $repeatedIdentifier = Identifier::query()
             ->where('cod_con_identifier_type_id', 1)
             ->where('value', $request->run);
-        if ($repeated->count() > 0) {
-            session()->flash('warning', 'Este rut ya ha sido ingresado.');
-            return redirect()->back()->withInput();
+        if ($repeatedIdentifier->count() > 0) {
+            session()->flash('warning', 'Este rut ya ha sido ingresado. Se ha encontrado el siguiente usuario con este rut.');
+            return view('users.index', ['run' => $request->run]);
         }
 
         $newUser = new User($request->all());
@@ -178,4 +177,19 @@ class UserController extends Controller
 
         return $data;
     }
+
+    public function switch(User $user) {
+        if (session()->has('god')) {
+            /* Clean session var */
+            session()->pull('god');
+        }
+        else {
+            /* set god session var = user_id */
+            session(['god' => Auth::id()]);
+        }
+
+        Auth::login($user);
+        return back();
+    }
+
 }

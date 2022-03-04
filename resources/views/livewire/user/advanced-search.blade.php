@@ -45,7 +45,12 @@
                         <td>{{($patient) ? $patient->officialFullAddress : ''}}</td>
                         <td>{{($patient) ? $patient->officialPhone : ''}}</td>
                         <td>{{($patient && $patient->officialEmail) ? $patient->officialEmail : ''}}</td>
-                        <td><a class="btn-primary btn-sm" href="{{ route('user.edit',$patient->id)}}"> <i class="fas fa-check"></i> </a></td>
+                        <td nowrap>
+                            <a class="btn-primary btn-sm mr-1" title="Seleccionar" href="{{ route('user.edit',$patient->id)}}"><span class="fas fa-check" aria-hidden="true"></span></a>
+                            @can('be god')
+                                <a class="btn-warning btn-sm" href="#"><span class="fas fa-redo" aria-hidden="true"></span></a>
+                            @endcan
+                        </td>
                     </tr>
                     @empty
                         <tr><th scope="row" colspan="8" class="text-center">No hay coincidencias con la búsqueda <a class="btn-primary btn-sm" href="{{ route('user.create')}}"> Ingresar uno nuevo</a></td></th>

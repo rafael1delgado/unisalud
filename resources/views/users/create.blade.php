@@ -78,37 +78,49 @@
     <div class="form-row">
 			<div class="col">
 				<h4>Permisos</h4>
+                @can('be god')
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="permissions[]"
+                            value="be god" id="be god">
+                        <label class="form-check-label" for="be god"><b>be god</b></label>
+                    </div>
+                @endcan
+
 				@php $anterior = null; @endphp
 				@foreach($permissions as $permission)
                     @if(Gate::check('Administrator'))
-                        @if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
-                            <hr>
-                            @php $anterior = $permission->name; @endphp
+
+
+                        @if($permission->name != 'be god')
+                            @if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
+                                <hr>
+                                @php $anterior = $permission->name; @endphp
+                            @endif
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="permissions[]"
+                                    value="{{ $permission->name }}" id="{{$permission->name}}"
+                                    {{ !Gate::check('Administrator') && $permission->name == 'SAMU' ? 'checked' : '' }}
+                                    >
+                                <label class="form-check-label" for="{{$permission->name}}"
+                                    > <b>{{$permission->name}}</b> {{$permission->description}}</label>
+                            </div>
                         @endif
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="permissions[]"
-                                value="{{ $permission->name }}" id="{{$permission->name}}"
-                                {{ !Gate::check('Administrator') && $permission->name == 'SAMU' ? 'checked' : '' }}
-                                {{ !Gate::check('Administrator') && $permission->name == 'SAMU: user' ? 'checked' : '' }}
-                                >
-                            <label class="form-check-label" for="{{$permission->name}}"
-                                > <b>{{$permission->name}}</b> {{$permission->description}}</label>
-                        </div>
-                    @elseif(Gate::check('SAMU administrador') && Str::contains($permission->name, 'SAMU'))
-                        @if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
-                            <hr>
-                            @php $anterior = $permission->name; @endphp
+
+                        @elseif(Gate::check('SAMU administrador') && Str::contains($permission->name, 'SAMU'))
+                            @if( current(explode(':', $permission->name)) != current(explode(':', $anterior)))
+                                <hr>
+                                @php $anterior = $permission->name; @endphp
+                            @endif
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="permissions[]"
+                                    value="{{ $permission->name }}" id="{{$permission->name}}"
+                                    {{ !Gate::check('Administrator') && $permission->name == 'SAMU' ? 'checked' : '' }}
+                                    >
+                                <label class="form-check-label" for="{{$permission->name}}"
+                                    > <b>{{$permission->name}}</b> {{$permission->description}}</label>
+                            </div>
                         @endif
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="permissions[]"
-                                value="{{ $permission->name }}" id="{{$permission->name}}"
-                                {{ !Gate::check('Administrator') && $permission->name == 'SAMU' ? 'checked' : '' }}
-                                {{ !Gate::check('Administrator') && $permission->name == 'SAMU: user' ? 'checked' : '' }}
-                                >
-                            <label class="form-check-label" for="{{$permission->name}}"
-                                > <b>{{$permission->name}}</b> {{$permission->description}}</label>
-                        </div>
-                    @endif
+
 				@endforeach
 				<hr>
                 <button type="submit" class="btn btn-primary mb-3"> <i class="fas fa-save"></i> Guardar</button>

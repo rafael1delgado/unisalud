@@ -13,14 +13,19 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($shift->calls->where('classification','<>','OT')->where('id','<>',$currentCall->id)->whereNull('call_id')->whereNotNull('classification')->sortByDesc('id') as $call)
+            @foreach($shift->calls->where('classification','<>','OT')
+                ->where('id','<>',$currentCall->id)
+                ->whereNull('call_id')
+                ->whereNotNull('classification')
+                ->sortByDesc('id') 
+                    as $call)
             <tr>
                 <td class="text-center">
                     @if(!$currentCall->call_id)
                         <button class="btn btn-sm btn-success" wire:click="associate({{ $call->id }})">Asociar a {{ $call->id }}</button>
                     @elseif($currentCall->call_id == $call->id)
                         <button class="btn btn-sm btn-info" disabled>Asociado a {{ $call->id }}</button>
-                        @can('SAMU administrador')
+                        @can('SAMU regulador')
                             <button class="btn btn-sm btn-outline-danger" wire:click="disassociate()">
                                 Desasociar</button>
                         @endcan

@@ -20,13 +20,13 @@
                     @if($call->events->isNotEmpty())
                      &nbsp;
                     @endif
-                        <b>ID: {{ $call->id }}</b> - 
-                        COM: 
+                        <b>ID: {{ $call->id }}</b>
                         @if($call->events->isNotEmpty())
+                            - COM: 
                             {{ implode(',', $call->events->pluck('id')->toArray() )}}
-                        @endif -
-                        CLAS: {{ $call->classification }} - 
-                        DIR: {{ $call->address }} -
+                        @endif
+                        - CLAS: {{ $call->classification }} 
+                        - DIR: {{ $call->address }} 
                         ( {{ $call->information }} )
                     </option>
                 @endforeach

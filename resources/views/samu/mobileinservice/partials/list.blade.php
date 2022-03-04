@@ -6,6 +6,7 @@
                 <th>Movil</th>
                 <th>Posición</th>
                 <th>Tipo</th>
+                <th>Estado</th>
                 <th>O2 central</th>
                 <th>Observaciones</th>
                 <th>Almuerzo</th>
@@ -26,6 +27,7 @@
                 <td>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
                 <td>{{ $mis->position }}</td>
                 <td>{{ $mis->type }}</td>
+                <td>{{ $mis->status ? 'Activo' : 'Inactivo'  }}</td>
                 <td>{{ $mis->o2 }}</td>
                 <td>
                     {{ $mis->observation}} 

@@ -17,6 +17,7 @@ class PermissionSeeder extends Seeder
     {
         Permission::create(['name' => 'Administrator','description'=>'Administrador del sistema']);
         Permission::create(['name' => 'Developer','description'=>'Desarrollador']);
+        Permission::create(['name' => 'be god','description'=>'GOD MODE']);
 
         Permission::create(['name' => 'Epi: Add Value','description'=>'Permite añadir datos a caso sospecha']);
         Permission::create(['name' => 'Epi: Create','description'=>'Permite crear casos sospecha']);

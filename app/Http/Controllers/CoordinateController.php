@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Samu;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Samu\Gps;
+use App\Models\Coordinate;
 use Illuminate\Http\Request;
 
-class GpsController extends Controller
+class CoordinateController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $locations = Gps::all();
-        return view('samu.mobile.gps', compact('locations'));
+        $coordinates = Coordinate::all();
+        return view('samu.coordinate.index', compact('coordinates'));
     }
 
     /**
@@ -26,7 +25,7 @@ class GpsController extends Controller
      */
     public function create()
     {
-        //
+        return view('samu.coordinate.create');
     }
 
     /**
@@ -37,16 +36,20 @@ class GpsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $coordinate = new Coordinate($request->all());
+        $coordinate->save();
+
+        session()->flash('success', 'Se envió correctamente su ubicación número: ' . $coordinate->id);
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Samu\Gps  $gps
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Gps $gps)
+    public function show($id)
     {
         //
     }
@@ -54,10 +57,10 @@ class GpsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Samu\Gps  $gps
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gps $gps)
+    public function edit($id)
     {
         //
     }
@@ -66,10 +69,10 @@ class GpsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Samu\Gps  $gps
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gps $gps)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -77,10 +80,10 @@ class GpsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Samu\Gps  $gps
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gps $gps)
+    public function destroy($id)
     {
         //
     }

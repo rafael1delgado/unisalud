@@ -84,7 +84,7 @@
                 <td>{{ $call->receptor->officialFullName }}</td>
             </tr>
             @if($call->associatedCalls->isNotEmpty())
-                @foreach($call->associatedCalls as $call)
+                @foreach($call->associatedCalls->reverse() as $call)
                 <tr>
                     <td class="text-center">
                         <a href="{{ route('samu.call.edit',$call) }}" class="btn btn-sm btn-outline-primary">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSamuNoveltiesTable extends Migration
+class CreateCoordinatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateSamuNoveltiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('samu_novelties', function (Blueprint $table) {
+        Schema::create('coordinates', function (Blueprint $table) {
             $table->id();
-            $table->text('detail');
-            $table->foreignId('shift_id')->constrained('samu_shifts');
-            $table->foreignId('creator_id')->constrained('users');
+            $table->string('name');
+            $table->string('observation')->nullable();
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +31,6 @@ class CreateSamuNoveltiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('samu_novelties');
+        Schema::dropIfExists('coordinates');
     }
 }

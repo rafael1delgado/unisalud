@@ -4,7 +4,7 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-ambulance"></i> Editar móvil en truno</h3>
+<h3 class="mb-3"><i class="fas fa-ambulance"></i> Editar móvil en servicio</h3>
 
 <form method="POST" action="{{ route('samu.mobileinservice.update', $mobileInService) }}">
     @csrf
@@ -27,7 +27,7 @@
             
         </fieldset>
 
-        <fieldset class="form-group col-12 col-md-2">
+        <fieldset class="form-group col-12 col-md-1">
             <label for="empresa">Tipo de  móvil</label>
             <select class="form-control" name="type">
                 <option value="M1" {{ $mobileInService->type === 'M1' ? 'selected' : '' }}>M1</option>
@@ -39,11 +39,16 @@
             </select>
         </fieldset>
 
+        
         <fieldset class="form-group col-8 col-md-3">
             <label for="for_o2">Oxígeno Central</label>
             <input type="text" class="form-control" name="o2" value="{{ $mobileInService->o2 }}">             
         </fieldset>
-
+        
+        <div class="mt-5 form-check col-md-1">
+            <input type="checkbox" class="form-check-input ml-3" name="status" {{ ($mobileInService->status) ? 'checked':''}} >
+            <label class="form-check-label ml-5" for="exampleCheck1">Activo</label>
+        </div>
     </div>
     <div class="form-row">
         
