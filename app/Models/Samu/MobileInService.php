@@ -79,6 +79,6 @@ class MobileInService extends Model implements Auditable
 
     public function event()
     {
-        return $this->belongsTo(Event::class);
+        return $this->hasOne(Event::class);
     }
 }
