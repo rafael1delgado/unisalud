@@ -19,7 +19,7 @@
             @foreach($shift->mobilesInService->sortBy('position') as $mis)
                 <tr class="{{ (($mis->lunch_start_at AND !$mis->lunch_end_at) OR !$mis->status) ? 'bg-secondary text-white' : '' }}">
                     <td>{{ $mis->position }}</td>
-                    <td>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
+                    <td nowrap>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
                     <td>{{ $mis->type }}</td>
                     <td>{{ $mis->event_status }}</td>
                     <td>
@@ -32,7 +32,7 @@
                         @endif
                     </td>
                     <td>{{ $mis->o2 }}</td>
-                    <td>
+                    <td nowrap>
                         @if($mis->lunch_start_at AND !$mis->lunch_end_at)
                             {{ $mis->lunch_start_at->format('H:i')}} - 
                             {{ now()->diff($mis->lunch_start_at->copy()->addMinutes('45'))->format('%I') }}"
