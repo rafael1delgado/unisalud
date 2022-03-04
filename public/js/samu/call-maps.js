@@ -4,10 +4,10 @@ let urlCalls = '/api/calls';
 let urlMobiles = '/api/mobiles';
 let mobileMarkers = [];
 let calls = [];
-let mobiles = [];
+let mobilesInService = [];
 
 let iconCall = {
-    iconUrl: '/images/icons/phone-call.png',
+    iconUrl: '/images/icons/phone-orange.png',
     iconSize: [20, 20],
     iconAnchor: [20, 20],
 };
@@ -48,17 +48,22 @@ async function addCallMarkers() {
 async function addMobileMarkers() {
     try {
         const response = await axios.get(urlMobiles);
-        mobiles = response.data.mobiles;
+        mobilesInService = response.data.mobilesInService;
 
-        
-        mobiles.map((mobile) => {
-            if(mobile.last_location != null) {
-                if(mobile.last_location.latitude != null && mobile.last_location.longitude != null) {
+        mobilesInService.map((mobileInService) => {
+
+            if(mobileInService.mobile.last_location != null) {
+
+                if(mobileInService.event != null) {
+                    iconAmbulance.iconUrl = `/images/icons/ambulance-${mobileInService.event.color}.png`;
+                }
+
+                if(mobileInService.mobile.last_location.latitude != null && mobileInService.mobile.last_location.longitude != null) {
                     let icon = new L.icon(iconAmbulance);
-                    let latLng = [mobile.last_location.latitude, mobile.last_location.longitude];
+                    let latLng = [mobileInService.mobile.last_location.latitude, mobileInService.mobile.last_location.longitude];
                     let marker = new L.marker(latLng, {icon: icon});
                     mobileMarkers.push(marker);
-                    marker.bindTooltip(`${mobile.code} ${mobile.name}`).openTooltip();
+                    marker.bindTooltip(`${mobileInService.mobile.code} ${mobileInService.mobile.name}`).openTooltip();
                     marker.addTo(map);
                 }
             }
