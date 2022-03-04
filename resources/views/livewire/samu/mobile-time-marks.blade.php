@@ -9,15 +9,15 @@
 
     <div class="row mb-4">
         <div class="col-6 pb-5">
-            <button class="btn btn-lg btn-danger btn-block 
+            <button class="btn btn-lg btn-{{ $selectedEvent->departure_at ? 'outline-':''}}danger btn-block 
                 {{ $selectedEvent->departure_at ? 'disabled':'active'}}" 
                 @if(!$selectedEvent->departure_at) wire:click="setTime('departure_at')" @endif >
-                Aviso de salida<br>
+                Aviso salida<br>
                 {{ $selectedEvent->departure_at }}
             </button>
         </div>
         <div class="col-6 pb-5">
-            <button class="btn btn-lg btn-warning btn-block 
+            <button class="btn btn-lg btn-{{ $selectedEvent->mobile_departure_at ? 'outline-':''}}warning btn-block 
                 {{ $selectedEvent->mobile_departure_at ? 'disabled':'active'}}" 
                 @if(!$selectedEvent->mobile_departure_at) wire:click="setTime('mobile_departure_at')" @endif >
                 Salida móvil<br>&nbsp;
@@ -25,15 +25,15 @@
             </button>
         </div>
         <div class="col-6 pb-5">
-            <button class="btn btn-lg btn-warning btn-block
+            <button class="btn btn-lg btn-{{ $selectedEvent->mobile_arrival_at ? 'outline-':''}}warning btn-block
                 {{ $selectedEvent->mobile_arrival_at ? 'disabled':'active'}}" 
                 @if(!$selectedEvent->mobile_arrival_at) wire:click="setTime('mobile_arrival_at')" @endif >
-                Llegada al lugar<br>&nbsp;
+                Llegada lugar<br>&nbsp;
                 {{ $selectedEvent->mobile_arrival_at }}
             </button>    
         </div>
         <div class="col-6 pb-5">
-            <button class="btn btn-lg btn-primary btn-block 
+            <button class="btn btn-lg btn-{{ $selectedEvent->route_to_healtcenter_at ? 'outline-':''}}primary btn-block 
                 {{ $selectedEvent->route_to_healtcenter_at ? 'disabled':'active'}}" 
                 @if(!$selectedEvent->route_to_healtcenter_at) wire:click="setTime('route_to_healtcenter_at')" @endif >
                 Ruta c.asistencial<br>&nbsp;
@@ -41,7 +41,7 @@
             </button>
         </div>
         <div class="col-6 pb-5">
-            <button class="btn btn-lg btn-primary btn-block 
+            <button class="btn btn-lg btn-{{ $selectedEvent->healthcenter_at ? 'outline-':''}}primary btn-block 
                 {{ $selectedEvent->healthcenter_at ? 'disabled':'active'}}" 
                 @if(!$selectedEvent->healthcenter_at) wire:click="setTime('healthcenter_at')" @endif >
                 Centro asistencial<br>&nbsp;
@@ -49,7 +49,7 @@
             </button>
         </div>
         <div class="col-6 pb-5">
-            <button class="btn btn-lg btn-primary btn-block 
+            <button class="btn btn-lg btn-{{ $selectedEvent->patient_reception_at ? 'outline-':''}}primary btn-block 
                 {{ $selectedEvent->patient_reception_at ? 'disabled':'active'}}" 
                 @if(!$selectedEvent->patient_reception_at) wire:click="setTime('patient_reception_at')" @endif >
                 Recepción de pcte<br>&nbsp;
@@ -57,7 +57,7 @@
             </button>
         </div>
         <div class="col-6 pb-5">
-            <button class="btn btn-lg btn-info btn-block 
+            <button class="btn btn-lg btn-{{ $selectedEvent->return_base_at ? 'outline-':''}}info btn-block 
                 {{ $selectedEvent->return_base_at ? 'disabled':'active'}}" 
                 @if(!$selectedEvent->return_base_at) wire:click="setTime('return_base_at')" @endif >
                 Retorno base<br>&nbsp;
@@ -65,7 +65,7 @@
             </button>
         </div>
         <div class="col-6 pb-5">
-            <button class="btn btn-lg btn-success btn-block 
+            <button class="btn btn-lg btn-{{ $selectedEvent->on_base_at ? 'outline-':''}}success btn-block 
                 {{ $selectedEvent->on_base_at ? 'disabled':'active'}}" 
                 @if(!$selectedEvent->on_base_at) wire:click="setTime('on_base_at')" @endif >
                 Móvil en base<br>&nbsp;
