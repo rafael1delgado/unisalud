@@ -16,7 +16,7 @@ class GpsController extends Controller
     public function index(Request $request)
     {
         $locations = Gps::all();
-        return view('samu.mobileinservice.gps', compact('locations'));
+        return view('samu.mobile.gps', compact('locations'));
     }
 
     /**

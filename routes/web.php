@@ -568,6 +568,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/edit/{mobile}',[MobileController::class, 'edit'])->name('edit');
 		Route::put('/{mobile}',		[MobileController::class, 'update'])->name('update');
 		Route::delete('/{mobile}', 	[MobileController::class, 'destroy'])->name('destroy');
+		Route::get('/{mobile}/gps', [GpsController::class, 'index'])->name('gps');
 	});
 
 	Route::get('/movil', MobileTimeMarks::class);
@@ -587,7 +588,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 	});
 	
 });
-Route::get('/samu/mobile/{mobile}/gps', [GpsController::class, 'index'])->name('samu.mobileinservice.gps');
+
 //fin rutas samu
 
 
