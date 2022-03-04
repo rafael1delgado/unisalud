@@ -2,11 +2,9 @@
 
 @section('content')
 
-@include('samu.nav')
+<h3 class="mb-3"><i class="fas fa-globe"></i> Mi ubicación</h3>
 
-<h3 class="mb-3"><i class="fas fa-globe"></i> Agregar Coordenadas</h3>
-
-<form action="{{route('samu.mobile.store')}}" method="post" autocomplete="off">
+<form action="{{route('coordinate.store')}}" method="post" autocomplete="off">
     @csrf
     @method('POST')
 
@@ -18,25 +16,23 @@
             <label for="for_mobile_code">Nombre</label>
             <input type="text" class="form-control" id="for_name" name="name" value="" required>
         </fieldset>
+        <fieldset class="form-group col-12 col-md-8">
+            <label for="for_name_mobile_code">Observación </label>
+            <input type="textarea" class="form-control" id="for_observation" name="observation" value="" required>
+        </fieldset>
         <fieldset class="form-group col-12 col-md-4">
             <label for="for_name_mobile_plate">Latitud </label>
-            <input type="text" class="form-control" id="for_latitude" name="latitude" value="" required>
+            <input type="text" class="form-control" readonly id="for_latitude" name="latitude" value="" required>
         </fieldset>
         <fieldset class="form-group col-12 col-md-4">
             <label for="for_name_mobile_type">Longitud </label>
-            <input type="text" class="form-control" id="for_longitude" name="longitude" value="" required>
-        </fieldset>
-        <fieldset class="form-group col-12 col-md-4">
-            <label for="for_name_mobile_code">Observación </label>
-            <input type="textarea" class="form-control" id="for_observation" name="observation" value="" required>
+            <input type="text" class="form-control" readonly id="for_longitude" name="longitude" value="" required>
         </fieldset>
     
     </div>
 
-    <button type="submit" class="btn btn-primary">Crear</button>
+    <button type="submit" class="btn btn-primary"> <i class="fa fa-send"></i> Enviar mi ubicación</button>
 
-    <a href="{{ route('samu.coordinate.index') }}" class="btn btn-outline-secondary">Cancelar</a>
-   
 </form>
 @endsection
 
