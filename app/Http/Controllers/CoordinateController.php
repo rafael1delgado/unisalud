@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Samu;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 
+use App\Models\Coordinate;
 use Illuminate\Http\Request;
 
 class CoordinateController extends Controller
@@ -14,7 +14,8 @@ class CoordinateController extends Controller
      */
     public function index()
     {
-        return view('samu.coordinate.index');
+        $coordinates = Coordinate::all();
+        return view('samu.coordinate.index', compact('coordinates'));
     }
 
     /**
@@ -35,7 +36,11 @@ class CoordinateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $coordinate = new Coordinate($request->all());
+        $coordinate->save();
+
+        session()->flash('success', 'Se envió correctamente su ubicación número: ' . $coordinate->id);
+        return redirect()->back();
     }
 
     /**
