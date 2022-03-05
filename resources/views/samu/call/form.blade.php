@@ -1,6 +1,6 @@
 <div class="form-row">
 
-    <fieldset class="form-group col-md-3">
+    <fieldset class="form-group col-12 col-md-3">
         <label for="for-applicant">Solicitante</label>
         <input type="text" class="form-control form-control-sm @error('applicant') is-invalid @enderror" name="applicant" id="for-applicant"
             value="{{ old('applicant', optional($call)->applicant) }}">
@@ -11,7 +11,7 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-5">
+    <fieldset class="form-group col-12 col-md-5">
         <label for="for-address">Dirección</label>
         <input type="text" class="form-control form-control-sm @error('address') is-invalid @enderror" name="address" id="for-address"
             value="{{ old('address', optional($call)->address) }}">
@@ -22,7 +22,7 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-2">
+    <fieldset class="form-group col-12 col-md-2">
         <label for="for-commune">Comuna</label>
         <select class="form-control form-control-sm @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune">
             <option value=""></option>
@@ -39,7 +39,7 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-2">
+    <fieldset class="form-group col-12 col-md-2">
         <label for="for-telephone">Teléfono</label>
         <input type="text" class="form-control form-control-sm @error('telephone') is-invalid @enderror" name="telephone" id="for-telephone"
             value="{{ old('telephone', optional($call)->telephone) }}">
@@ -54,7 +54,7 @@
 
 <div class="form-row">
     
-    <fieldset class="form-group col-md-2">
+    <fieldset class="form-group col-6 col-md-2">
         <label for="for-sex">Sexo</label>
         <select class="form-control form-control-sm @error('sex') is-invalid @enderror" name="sex" id="for-sex">
             <option value="">Selecciona un Sexo</option>
@@ -70,7 +70,7 @@
         @enderror
     </fieldset>
     
-    <fieldset class="form-group col-md-1">
+    <fieldset class="form-group col-6 col-md-1">
         <label for="for-age">Edad</label>
         <input type="number" class="form-control form-control-sm @error('age') is-invalid @enderror" step=".01" name="age" id="for-age"
         value="{{ old('age', optional($call)->age) }}">
@@ -93,7 +93,7 @@
             @enderror
     </fieldset> -->
     
-    <fieldset class="form-group col-md-2">
+    <fieldset class="form-group col-12 col-md-2">
         <label for="for-police_intervention">Intervención de carabineros</label>
         <select class="form-control form-control-sm @error('police_intervention') is-invalid @enderror" name="police_intervention" id="for-police_intervention">
             <option value="">Selecciona una opción</option>
@@ -172,7 +172,7 @@
  
 <div class="form-row">
 
-    <fieldset class="form-group col-md-3">
+    <fieldset class="form-group col-6 col-md-3">
         <label for="latitude">Latitud </label>
         <input type="text" class="form-control form-control-sm @error('latitude') is-invalid @enderror" name="latitude" id="latitude"
             value="{{ old('latitude', optional($call)->latitude) }}">
@@ -183,7 +183,7 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-3">
+    <fieldset class="form-group col-6 col-md-3">
         <label for="longitude">Longitud</label>
         <input type="text" class="form-control form-control-sm @error('longitude') is-invalid @enderror" name="longitude" id="longitude"
             value="{{ old('longitude', optional($call)->longitude) }}">

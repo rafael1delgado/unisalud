@@ -22,7 +22,7 @@
     @if($event->status)
         <button type="submit" name="btn_save" class="btn btn-primary">Guardar</button>
         
-        <button type="submit" name="btn_save_close" id="btn_save_close" class="btn btn-success" >Guardar y cerrar</button>
+        <button type="submit" name="btn_save_close" id="btn_save_close" class="btn btn-success float-right" >Guardar y cerrar</button>
         <input type="hidden" id="save_close" name="save_close" value="no">
     @else
         @can('SAMU administrador')
