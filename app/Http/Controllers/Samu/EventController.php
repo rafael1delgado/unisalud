@@ -235,13 +235,30 @@ class EventController extends Controller
      * @param  \App\Models\Samu\event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(event $event)
+    public function destroy(Event $event)
     {
         $event->mobileInService()->dissociate();
         $event->calls()->detach();
         $event->delete();
 
         session()->flash('danger', 'Cometido eliminado.');
+        return redirect()->back();
+    }
+
+    public function reopen(Event $event)
+    {
+        if($event->created_at->gt(now()->subDays(1)))
+        {
+            $event->status = true;
+            $event->save();
+    
+            session()->flash('success', 'Cometido re abierto.');
+        }
+        else
+        {
+            session()->flash('danger', 'El cometido es mayor a 24 horas, no se puede reabrir.');
+        }
+
         return redirect()->back();
     }
 

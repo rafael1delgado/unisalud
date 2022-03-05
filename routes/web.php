@@ -479,6 +479,7 @@ use App\Http\Controllers\Samu\NoveltieController;
 use App\Http\Controllers\Samu\EstablishmentController;
 use App\Http\Controllers\Samu\GpsController;
 use App\Http\Livewire\Samu\MobileTimeMarks;
+use App\Http\Livewire\Samu\FindEvent;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
@@ -551,9 +552,12 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/edit/{event}', [EventController::class, 'edit'])->name('edit');
 		Route::put('/update/{event}',[EventController::class, 'update'])->name('update');
 		Route::delete('/{event}', 	[EventController::class, 'destroy'])->name('destroy');
+		Route::get('/{event}/reopen',[EventController::class, 'reopen'])
+			->middleware('permission:SAMU administrador')->name('reopen');
 		Route::match(['get','post'], '/filter',	[EventController::class, 'filter'])->name('filter');
 		Route::get('/{event}/report',[EventController::class, 'report'])
-		->middleware('permission:SAMU administrador')->name('report');
+			->middleware('permission:SAMU administrador')->name('report');
+		Route::get('/find', FindEvent::class);
     });
 	
 	Route::prefix('keys')->name('key.')

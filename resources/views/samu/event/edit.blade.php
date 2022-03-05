@@ -20,15 +20,25 @@
     ])
 
     @if($event->status)
-        <button type="submit" name="btn_save" class="btn btn-primary">Guardar</button>
+        <button type="submit" name="btn_save" class="btn btn-primary">
+            <i class="fas fa-save"></i> Guardar
+        </button>
         
-        <button type="submit" name="btn_save_close" id="btn_save_close" class="btn btn-success float-right" >Guardar y cerrar</button>
+        <button type="submit" name="btn_save_close" id="btn_save_close" class="btn btn-success float-right">
+            <i class="fas fa-lock"></i> Guardar y cerrar
+        </button>
+
         <input type="hidden" id="save_close" name="save_close" value="no">
     @else
         @can('SAMU administrador')
-        <a class="btn btn-secondary" target="_blank"  href="{{ route('samu.event.report',$event) }}">
-            <i class="fas fa-print"></i> Imprimir
-        </a>
+            <a class="btn btn-secondary" target="_blank"  href="{{ route('samu.event.report',$event) }}">
+                <i class="fas fa-print"></i> Imprimir
+            </a>
+            @if( $event->created_at->gt(now()->subDays(1)) )
+            <a class="btn btn-warning float-right" href="{{ route('samu.event.reopen',$event) }}">
+                <i class="fas fa-lock-open"></i> Reabrir < 24 hrs
+            </a>
+            @endif
         @endcan
     @endif
     
