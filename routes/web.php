@@ -480,6 +480,7 @@ use App\Http\Controllers\Samu\EstablishmentController;
 use App\Http\Controllers\Samu\GpsController;
 use App\Http\Livewire\Samu\MobileTimeMarks;
 use App\Http\Livewire\Samu\FindEvent;
+use App\Http\Livewire\Samu\GetLocation;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
@@ -581,6 +582,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::put('/{mobile}',		[MobileController::class, 'update'])->name('update');
 		Route::delete('/{mobile}', 	[MobileController::class, 'destroy'])->name('destroy');
 		Route::get('/{mobile}/gps', [GpsController::class, 'index'])->name('gps');
+		Route::get('/gps', GetLocation::class);
 	});
 
 	Route::get('/movil', MobileTimeMarks::class);
