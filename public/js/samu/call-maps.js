@@ -54,8 +54,8 @@ async function addMobileMarkers() {
 
             if(mobileInService.mobile.last_location != null) {
 
-                if(mobileInService.event != null) {
-                    iconAmbulance.iconUrl = `/images/icons/ambulance-${mobileInService.event.color}.png`;
+                if(mobileInService.last_event != null) {
+                    iconAmbulance.iconUrl = `/images/icons/ambulance-${mobileInService.last_event.color}.png`;
                 }
 
                 if(mobileInService.mobile.last_location.latitude != null && mobileInService.mobile.last_location.longitude != null) {
@@ -65,6 +65,7 @@ async function addMobileMarkers() {
                     mobileMarkers.push(marker);
                     marker.bindTooltip(`${mobileInService.mobile.code} ${mobileInService.mobile.name}`).openTooltip();
                     marker.addTo(map);
+                    console.log(mobileInService.mobile.id,mobileInService.mobile.last_location.latitude, mobileInService.mobile.last_location.longitude)
                 }
             }
         });
