@@ -10,7 +10,7 @@ class MobileController extends Controller
     public function index()
     {
         $shift = Shift::query()
-            ->with('mobilesInService.mobile', 'mobilesInService.event')
+            ->with('mobilesInService.mobile')
             ->whereStatus(true)
             ->first();
 
