@@ -105,7 +105,8 @@
 
         @yield('custom_js')
 
-
+        @stack('scripts')
+        
         <script type="text/javascript">
             $(document).ready(function () {
                 $('form').submit(function(){

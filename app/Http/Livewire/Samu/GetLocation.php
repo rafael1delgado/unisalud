@@ -10,16 +10,11 @@ class GetLocation extends Component
 {
     public $latitude;
     public $longitude;
-    // public $ct=0;
 
     protected $listeners = ['storeLocation' => 'storeLocation'];
 
     public function storeLocation()
     {
-        // $this->ct++;
-        // debug($this->ct);
-        // debug($this->latitude,$this->longitude);
-        
         $mobile = Mobile::find(1);
 
         $gps = Gps::Create([

@@ -478,8 +478,9 @@ use App\Http\Controllers\Samu\CallController;
 use App\Http\Controllers\Samu\NoveltieController;
 use App\Http\Controllers\Samu\EstablishmentController;
 use App\Http\Controllers\Samu\GpsController;
-use App\Http\Livewire\Samu\MobileTimeMarks;
 use App\Http\Livewire\Samu\FindEvent;
+use App\Http\Livewire\Samu\MobileSelector;
+use App\Http\Livewire\Samu\TimestampsAndLocation;
 use App\Http\Livewire\Samu\GetLocation;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
@@ -585,7 +586,8 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/gps', GetLocation::class);
 	});
 
-	Route::get('/movil', MobileTimeMarks::class);
+	Route::get('/movil/event/{event}', TimestampsAndLocation::class)->name('mobiles.timestamps_locations');
+	Route::get('/movil', MobileSelector::class)->name('mobiles.mobile_selector');
 	
 	Route::prefix('establishments')->name('establishment.')
 	->middleware('permission:SAMU administrador')
