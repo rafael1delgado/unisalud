@@ -87,7 +87,7 @@
                 </td>
                 <td>{{ $call->hour }}</td>
                 <td>{{ $call->applicant }}</td>
-                <td>{{ $call->information }}</td>
+                <td>{{ $call->sex_abbr }} {{ $call->age_format }} {{ $call->information }}</td>
                 
                 <td>{{ $call->address }}</td>
                 <td>{{ $call->telephone }}</td>

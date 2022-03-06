@@ -5,6 +5,7 @@
             <tr class="table-primary">
                 <th>ID</th>
                 <th>QTC</th>
+                <th>Aviso</th>
                 <th>Llamadas</th>
                 <th>Móvil en Servicio</th>
                 <th>Dirección</th>
@@ -32,6 +33,7 @@
                     </a>
                 </td>
                 <td>{{ $event->counter }} </td>
+                <td>{{ optional($event->departure_at)->format('H:i') }} </td>
                 <td>
                     @foreach($event->calls as $call)
                         <a href="{{ route('samu.call.edit',$call) }}">{{ $call->id }}</a>,

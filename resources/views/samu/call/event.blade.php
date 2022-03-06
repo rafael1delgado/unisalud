@@ -16,8 +16,8 @@
                     @if(in_array($event->id, $call->events->pluck('id')->toArray())) checked @endif>
                 <label class="form-check-label" for="for_events">
                     <b>Cometido:</b>  
-                    <a href="{{ route('samu.event.edit', $event) }}">
-                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> {{ $event->id }}</button>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ route('samu.event.edit', $event) }}">
+                        <i class="fas fa-edit"></i> {{ $event->id }}
                     </a>
                     - <b>Clave:</b> {{ $event->key->name }} 
                     - <b>Móvil:</b> {{ optional($event->mobile)->code }} {{ optional($event->mobile)->name }}
