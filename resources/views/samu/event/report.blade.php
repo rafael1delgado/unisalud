@@ -94,7 +94,7 @@
             <tbody>
                 <tr>
                     <td class="center">{{ $event->key->key }}</td>
-                    <td class="center">{{ $event->returnKey->key }}</td>
+                    <td class="center">{{ optional($event->returnKey)->key }}</td>
                     <td class="center">{{ $event->counter }}</td>
                     <td class="center">{{ optional($event->mobileInService)->mobile_id }}</td>
                     <td class="center">{{ optional($event->mobileInService)->type }}</td>
