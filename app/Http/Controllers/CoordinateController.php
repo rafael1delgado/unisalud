@@ -14,8 +14,16 @@ class CoordinateController extends Controller
      */
     public function index()
     {
-        $coordinates = Coordinate::all();
+
+            $coordinates = Coordinate::all();
+
         return view('samu.coordinate.index', compact('coordinates'));
+    }
+
+    public function search(Request $request){
+        $searchString = $request->string;
+        $coordinates = Coordinate::where('name', 'like', "%{$request->string}%")->get();
+        return view('samu.coordinate.index', compact('coordinates', 'searchString'));
     }
 
     /**

@@ -4,7 +4,7 @@
 
 <h3 class="mb-3"><i class="fas fa-globe"></i> Mi ubicación</h3>
 
-<form action="{{route('coordinate.store')}}" method="post" autocomplete="off">
+<form action="{{route('samu.coordinate.store')}}" method="post" autocomplete="off">
     @csrf
     @method('POST')
 
@@ -13,12 +13,12 @@
 
     <div class="form-row">
         <fieldset class="form-group col-12 col-md-4">
-            <label for="for_mobile_code">Nombre</label>
+            <label for="for_mobile_code">Nombre *</label>
             <input type="text" class="form-control" id="for_name" name="name" value="" required>
         </fieldset>
         <fieldset class="form-group col-12 col-md-8">
             <label for="for_name_mobile_code">Observación </label>
-            <input type="textarea" class="form-control" id="for_observation" name="observation" value="" required>
+            <input type="textarea" class="form-control" id="for_observation" name="observation" value="">
         </fieldset>
         <fieldset class="form-group col-12 col-md-4">
             <label for="for_name_mobile_plate">Latitud </label>
