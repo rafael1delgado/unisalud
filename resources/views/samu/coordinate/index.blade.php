@@ -2,17 +2,16 @@
 
 @section('content')
 
-
+@include('samu.nav')
 
 <h3 class="mb-3"><i class="fas fa-globe"></i> Coordenadas ingresadas</h3>
 
 <div class="row mb-4">
     <div class="col-12 col-md-6">
-        <form method="GET" class="form-horizontal" action="">
+        <form method="GET" class="form-horizontal" action="{{ route('samu.coordinate.search')}}">
             <div class="input-group mb-sm-0">
-                <input class="form-control" type="text" name="search" autocomplete="off" id="for_search"
-                    style="text-transform: uppercase;"
-                    placeholder="Nombre" value="" required>
+                <input class="form-control" type="text" name="string" autocomplete="off" id="for_string"
+                    placeholder="Nombre" value="{{$searchString ?? ''}}" >
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
                 </div>

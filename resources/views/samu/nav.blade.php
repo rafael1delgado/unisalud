@@ -67,6 +67,9 @@
             <a class="dropdown-item {{ active('samu.calls.search') }}"
             href=" {{ route('samu.call.search') }}"><i class="fas fa-phone"></i> Llamadas</a>
 
+            <a class="dropdown-item {{ active('samu.coordinate.index') }}"
+            href=" {{ route('samu.coordinate.index') }}"><i class="fas fa-globe"></i> Coordenadas Pacientes</a>
+
         </div>
     </li>
     @endcan
