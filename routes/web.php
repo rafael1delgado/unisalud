@@ -482,6 +482,7 @@ use App\Http\Livewire\Samu\FindEvent;
 use App\Http\Livewire\Samu\MobileSelector;
 use App\Http\Livewire\Samu\TimestampsAndLocation;
 use App\Http\Livewire\Samu\GetLocation;
+use App\Http\Livewire\Samu\SearchCalls;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
@@ -543,6 +544,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::delete('/{call}', 	[CallController::class, 'destroy'])->name('destroy');
 		Route::put('/update/{call}',[CallController::class, 'update'])->name('update');
 		Route::post('/sync-events/{call}',[CallController::class, 'syncEvents'])->name('syncEvents');
+		Route::get('/search',SearchCalls::class)->name('search');
     });
 
     Route::prefix('events')->name('event.')

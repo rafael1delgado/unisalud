@@ -23,6 +23,9 @@
                     @else
                         {{ $call->id }}
                     @endif
+                    @if($call->trashed())
+                    <br><span class="badge badge-danger">Eliminado</span>
+                    @endif
                 </td>
                 <td>
                     @if($call->classification)
