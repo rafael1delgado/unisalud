@@ -34,7 +34,7 @@
             <button class="btn btn-lg btn-{{ $event->route_to_healtcenter_at ? 'outline-':''}}primary btn-block 
                 {{ $event->route_to_healtcenter_at ? 'disabled':'active'}}" 
                 @if(!$event->route_to_healtcenter_at) wire:click="setTime('route_to_healtcenter_at')" @endif >
-                Ruta c.asistencial<br>&nbsp;
+                Ruta hacia AP<br>&nbsp;
                 {{ $event->route_to_healtcenter_at }}
             </button>
         </div>
@@ -42,7 +42,7 @@
             <button class="btn btn-lg btn-{{ $event->healthcenter_at ? 'outline-':''}}primary btn-block 
                 {{ $event->healthcenter_at ? 'disabled':'active'}}" 
                 @if(!$event->healthcenter_at) wire:click="setTime('healthcenter_at')" @endif >
-                Centro asistencial<br>&nbsp;
+                En AP<br>&nbsp;
                 {{ $event->healthcenter_at }}
             </button>
         </div>
