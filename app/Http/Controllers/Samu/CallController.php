@@ -79,12 +79,13 @@ class CallController extends Controller
      */
     public function store(StoreCallRequest $request)
     {
+        $dataValidated = $request->validated();
         $shift = Shift::where('status',true)->first();
 
         if($shift) 
         {
-            $call = new Call($request->All());
-            $call->hour = now();
+            $dataValidated['hour'] = now();
+            $call = Call::create($dataValidated);
             $call->shift()->associate($shift);
             $call->save();
 
@@ -140,15 +141,13 @@ class CallController extends Controller
      */
     public function update(UpdateCallRequest $request, Call $call)
     {
-
+        $dataValidated = $request->validated();
         if($call->classification != $request->filled('classification'))
         {
-            $call->regulator_id = auth()->id();
-            $call->save();
+            $dataValidated['regulator_id'] = auth()->id();
         }
 
-        $call->update($request->validated());
-
+        $call->update($dataValidated);
         $request->session()->flash('success', 'Se han actualizado los datos la orientación telefónica.');
 
         switch($call->classification) {
