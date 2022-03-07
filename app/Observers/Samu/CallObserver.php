@@ -25,6 +25,8 @@ class CallObserver
                 $call->longitude = null;
             }
         }
+
+        $call->hour = now();
     }
 
     /**
