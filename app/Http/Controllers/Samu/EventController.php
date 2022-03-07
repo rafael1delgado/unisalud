@@ -44,8 +44,7 @@ class EventController extends Controller
         $events_today = Event::whereDate('date',$today)->where('status',false)->latest()->get();
         $events_yesterday = Event::whereDate('date',$yesterday)->latest()->get();
 
-        $calls = Call::where('shift_id',$shift->id)
-                    ->doesnthave('events')
+        $calls = Call::doesnthave('events')
                     ->where('classification','<>','OT')
                     ->latest()
                     ->get();
@@ -288,7 +287,7 @@ class EventController extends Controller
                 $query->where('commune_id',$request->input('commune_id'));
             }
                 
-            $events = $query->latest()->paginate(100);
+            $events = $query->withTrashed()->latest()->paginate(100);
                 
             $request->flash();
         }

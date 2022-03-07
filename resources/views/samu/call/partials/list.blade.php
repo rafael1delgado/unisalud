@@ -24,7 +24,7 @@
                         {{ $call->id }}
                     @endif
                     @if($call->trashed())
-                    <br><span class="badge badge-danger">Eliminado</span>
+                    <br><span class="badge badge-danger">Eliminada</span>
                     @endif
                 </td>
                 <td>
