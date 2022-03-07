@@ -56,9 +56,18 @@
     @endcan
     
     @canany(['SAMU administrador','SAMU despachador','SAMU regulador'])
-    <li class="nav-item">
-        <a class="nav-link {{ active('samu.event.filter') }}" 
-        href=" {{ route('samu.event.filter') }}"><i class="fas fa-search"></i></a>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle {{ active(['samu.event.filter','samu.calls.search']) }}" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+            <i class="fas fa-search"></i> </a>
+        <div class="dropdown-menu">
+
+            <a class="nav-link {{ active('samu.event.filter') }}" 
+            href=" {{ route('samu.event.filter') }}"><i class="fas fa-car-crash"></i> Eventos </a>
+
+            <a class="dropdown-item {{ active('samu.calls.search') }}"
+            href=" {{ route('samu.call.search') }}"><i class="fas fa-phone"></i> Llamadas</a>
+
+        </div>
     </li>
     @endcan
 

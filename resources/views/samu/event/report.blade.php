@@ -40,7 +40,7 @@
                     <td class="center">{{ $call->receptor_id }}</td>
                 </tr>
                 <tr>
-                    <td colspan="6">{{ $call->information }}</td>
+                    <td colspan="6">{{ $call->sex_abbr }} {{ $call->age_format }} {{ $call->information }}</td>
                 </tr>
                 @if(!$loop->last)
                     <tr><td colspan="6" style="border-left: 1px solid white; border-right: 1px solid white;">&nbsp;</td></tr>
@@ -94,7 +94,7 @@
             <tbody>
                 <tr>
                     <td class="center">{{ $event->key->key }}</td>
-                    <td class="center">{{ $event->returnKey->key }}</td>
+                    <td class="center">{{ optional($event->returnKey)->key }}</td>
                     <td class="center">{{ $event->counter }}</td>
                     <td class="center">{{ optional($event->mobileInService)->mobile_id }}</td>
                     <td class="center">{{ optional($event->mobileInService)->type }}</td>

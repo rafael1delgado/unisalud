@@ -44,8 +44,7 @@ class EventController extends Controller
         $events_today = Event::whereDate('date',$today)->where('status',false)->latest()->get();
         $events_yesterday = Event::whereDate('date',$yesterday)->latest()->get();
 
-        $calls = Call::where('shift_id',$shift->id)
-                    ->doesnthave('events')
+        $calls = Call::doesnthave('events')
                     ->where('classification','<>','OT')
                     ->latest()
                     ->get();
@@ -235,13 +234,30 @@ class EventController extends Controller
      * @param  \App\Models\Samu\event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(event $event)
+    public function destroy(Event $event)
     {
         $event->mobileInService()->dissociate();
         $event->calls()->detach();
         $event->delete();
 
         session()->flash('danger', 'Cometido eliminado.');
+        return redirect()->back();
+    }
+
+    public function reopen(Event $event)
+    {
+        if($event->created_at->gt(now()->subDays(1)))
+        {
+            $event->status = true;
+            $event->save();
+    
+            session()->flash('success', 'Cometido re abierto.');
+        }
+        else
+        {
+            session()->flash('danger', 'El cometido es mayor a 24 horas, no se puede reabrir.');
+        }
+
         return redirect()->back();
     }
 
@@ -271,7 +287,7 @@ class EventController extends Controller
                 $query->where('commune_id',$request->input('commune_id'));
             }
                 
-            $events = $query->latest()->paginate(100);
+            $events = $query->withTrashed()->latest()->paginate(100);
                 
             $request->flash();
         }

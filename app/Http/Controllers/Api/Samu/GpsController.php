@@ -19,8 +19,10 @@ class GpsController extends Controller
             $data['time'] = Carbon::parse($data['time']);
         }
 
-        $gps = Gps::create($data);
-        $gps->mobile()->associate($mobile);
+        $gps = Gps::updateOrCreate(
+            ['mobile_id' => $mobile->id],
+            $data);
+        //$gps->mobile()->associate($mobile);
         $gps->save();
 
         return $mobile;

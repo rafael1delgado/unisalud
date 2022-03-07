@@ -478,7 +478,11 @@ use App\Http\Controllers\Samu\CallController;
 use App\Http\Controllers\Samu\NoveltieController;
 use App\Http\Controllers\Samu\EstablishmentController;
 use App\Http\Controllers\Samu\GpsController;
-use App\Http\Livewire\Samu\MobileTimeMarks;
+use App\Http\Livewire\Samu\FindEvent;
+use App\Http\Livewire\Samu\MobileSelector;
+use App\Http\Livewire\Samu\TimestampsAndLocation;
+use App\Http\Livewire\Samu\GetLocation;
+use App\Http\Livewire\Samu\SearchCalls;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
@@ -540,6 +544,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::delete('/{call}', 	[CallController::class, 'destroy'])->name('destroy');
 		Route::put('/update/{call}',[CallController::class, 'update'])->name('update');
 		Route::post('/sync-events/{call}',[CallController::class, 'syncEvents'])->name('syncEvents');
+		Route::get('/search',SearchCalls::class)->name('search');
     });
 
     Route::prefix('events')->name('event.')
@@ -551,9 +556,12 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/edit/{event}', [EventController::class, 'edit'])->name('edit');
 		Route::put('/update/{event}',[EventController::class, 'update'])->name('update');
 		Route::delete('/{event}', 	[EventController::class, 'destroy'])->name('destroy');
+		Route::get('/{event}/reopen',[EventController::class, 'reopen'])
+			->middleware('permission:SAMU administrador')->name('reopen');
 		Route::match(['get','post'], '/filter',	[EventController::class, 'filter'])->name('filter');
 		Route::get('/{event}/report',[EventController::class, 'report'])
-		->middleware('permission:SAMU administrador')->name('report');
+			->middleware('permission:SAMU administrador')->name('report');
+		Route::get('/find', FindEvent::class);
     });
 	
 	Route::prefix('keys')->name('key.')
@@ -577,9 +585,11 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::put('/{mobile}',		[MobileController::class, 'update'])->name('update');
 		Route::delete('/{mobile}', 	[MobileController::class, 'destroy'])->name('destroy');
 		Route::get('/{mobile}/gps', [GpsController::class, 'index'])->name('gps');
+		Route::get('/gps', GetLocation::class);
 	});
 
-	Route::get('/movil', MobileTimeMarks::class);
+	Route::get('/movil/event/{event}', TimestampsAndLocation::class)->name('mobiles.timestamps_locations');
+	Route::get('/movil', MobileSelector::class)->name('mobiles.mobile_selector');
 	
 	Route::prefix('establishments')->name('establishment.')
 	->middleware('permission:SAMU administrador')

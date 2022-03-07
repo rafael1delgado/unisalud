@@ -86,4 +86,4 @@ addCallMarkers();
 setInterval(() => {
     deleteMobileMarkers();
     addMobileMarkers();
-}, 60000);
+}, 20000);

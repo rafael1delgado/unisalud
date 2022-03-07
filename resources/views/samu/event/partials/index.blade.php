@@ -5,6 +5,7 @@
             <tr class="table-primary">
                 <th>ID</th>
                 <th>QTC</th>
+                <th>Aviso</th>
                 <th>Llamadas</th>
                 <th>Móvil en Servicio</th>
                 <th>Dirección</th>
@@ -30,8 +31,12 @@
                             {{ $event->id }}
                             </button>
                     </a>
+                    @if($event->trashed())
+                    <br><span class="badge badge-danger">Eliminado</span>
+                    @endif
                 </td>
                 <td>{{ $event->counter }} </td>
+                <td>{{ optional($event->departure_at)->format('H:i') }} </td>
                 <td>
                     @foreach($event->calls as $call)
                         <a href="{{ route('samu.call.edit',$call) }}">{{ $call->id }}</a>,
@@ -47,7 +52,7 @@
                 <td>{{ $event->observation }}</td>
                 <td>
                     @can('SAMU administrador')
-                        @if($event->status)
+                        @if($event->status AND !$event->trashed())
                         <form method="POST" action="{{ route('samu.event.destroy', $event) }}">
                             @csrf
                             @method('DELETE')
@@ -59,7 +64,7 @@
             </tr>
             <tr class="table-{{ $event->color }}">
                 <td class="text-center"><i class="fas fa-phone"></i></td>
-                <td colspan="8">
+                <td colspan="9">
                     @foreach($event->calls as $call)
                     <li>{{ $call->sex_abbr }} {{ $call->age_format }} {{ $call->information }}</li>
                     @endforeach
