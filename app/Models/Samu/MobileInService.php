@@ -33,6 +33,10 @@ class MobileInService extends Model implements Auditable
         'status',
     ];
 
+    protected $appends = [
+        'last_event'
+    ];
+
     /**
     * The attributes that should be mutated to dates.
     *
@@ -72,13 +76,19 @@ class MobileInService extends Model implements Auditable
     }
 
 
-    public function follows(){
+    public function follows()
+    {
         return $this->belongsToMany(Follow::class,'samu_follow_mis');    
     }
 
     public function events()
     {
         return $this->hasMany(Event::class);
+    }
+
+    public function getLastEventAttribute()
+    {
+        return $this->events->where('status', true)->last();
     }
 
     public function getEventStatusAttribute()

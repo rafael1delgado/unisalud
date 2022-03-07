@@ -99,6 +99,10 @@ class Event extends Model implements Auditable
         'on_base_at'
     ];
 
+    protected $appends = [
+        'color'
+    ];
+
     public function shift() 
     {
         return $this->belongsTo(Shift::class);
@@ -149,6 +153,20 @@ class Event extends Model implements Auditable
         return $this->belongsTo(receptionPlace::class,'reception_place_id');
     }
 
+    public function commune() 
+    {
+        return $this->belongsTo(Commune::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'samu_event_user','event_id')
+
+                    ->using(EventUser::class)
+                    ->withPivot('id','job_type_id')
+                    ->withTimestamps();
+    }
+
     public function getColorAttribute()
     {
         if(!$this->mobile_departure_at)     $color = 'danger';
@@ -156,11 +174,6 @@ class Event extends Model implements Auditable
         if($this->return_base_at)           $color = 'info';
         if($this->on_base_at)               $color = 'success';
         return $color;
-    }
-
-    public function commune() 
-    {
-        return $this->belongsTo(Commune::class);
     }
 
     /**
@@ -180,15 +193,4 @@ class Event extends Model implements Auditable
         });
 
     }
-
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class,'samu_event_user','event_id')
-
-                    ->using(EventUser::class)
-                    ->withPivot('id','job_type_id')
-                    ->withTimestamps();
-    }
-
 }

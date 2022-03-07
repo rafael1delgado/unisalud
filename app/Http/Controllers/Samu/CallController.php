@@ -79,14 +79,9 @@ class CallController extends Controller
      */
     public function store(StoreCallRequest $request)
     {
-        $shift = Shift::where('status',true)->first();
-
-        if($shift) 
+        if(Shift::whereStatus(true)->exists()) 
         {
-            $call = new Call($request->All());
-            $call->hour = now();
-            $call->shift()->associate($shift);
-            $call->save();
+            Call::create($request->validated());
 
             $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
             return redirect()->route('samu.call.create');
@@ -140,15 +135,13 @@ class CallController extends Controller
      */
     public function update(UpdateCallRequest $request, Call $call)
     {
-
+        $dataValidated = $request->validated();
         if($call->classification != $request->filled('classification'))
         {
-            $call->regulator_id = auth()->id();
-            $call->save();
+            $dataValidated['regulator_id'] = auth()->id();
         }
 
-        $call->update($request->validated());
-
+        $call->update($dataValidated);
         $request->session()->flash('success', 'Se han actualizado los datos la orientación telefónica.');
 
         switch($call->classification) {
