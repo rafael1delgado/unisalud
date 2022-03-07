@@ -79,13 +79,9 @@ class CallController extends Controller
      */
     public function store(StoreCallRequest $request)
     {
-        $shift = Shift::where('status',true)->first();
-
-        if($shift) 
+        if(Shift::whereStatus(true)->exists()) 
         {
-            $call = Call::create($request->validated());
-            $call->shift()->associate($shift);
-            $call->save();
+            Call::create($request->validated());
 
             $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
             return redirect()->route('samu.call.create');
