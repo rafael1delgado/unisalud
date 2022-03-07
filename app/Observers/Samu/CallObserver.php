@@ -4,6 +4,7 @@ namespace App\Observers\Samu;
 
 use App\Models\Commune;
 use App\Models\Samu\Call;
+use App\Models\Samu\Shift;
 
 class CallObserver
 {
@@ -15,17 +16,17 @@ class CallObserver
      */
     public function creating(Call $call)
     {
-        $selectedCommune = Commune::find($call->commune_id);
-        
-        if($selectedCommune)
+        if($call->commune)
         {
-            if ($selectedCommune->latitude == $call->latitude && $selectedCommune->longitude == $call->longitude)
+            if ($call->commune->latitude == $call->latitude && $call->commune->longitude == $call->longitude)
             {
                 $call->latitude = null;
                 $call->longitude = null;
             }
         }
 
+        $call->receptor()->associate(auth()->user());
+        $call->shift()->associate(Shift::whereStatus(true)->first());
         $call->hour = now();
     }
 
@@ -37,11 +38,9 @@ class CallObserver
      */
     public function updating(Call $call)
     {
-        $selectedCommune = Commune::find($call->commune_id);
-        
-        if($selectedCommune)
+        if($call->commune)
         {
-            if ($selectedCommune->latitude == $call->latitude && $selectedCommune->longitude == $call->longitude)
+            if ($call->commune->latitude == $call->latitude && $call->commune->longitude == $call->longitude)
             {
                 $call->latitude = null;
                 $call->longitude = null;
