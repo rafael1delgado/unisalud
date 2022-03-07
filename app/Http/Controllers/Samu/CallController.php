@@ -79,13 +79,11 @@ class CallController extends Controller
      */
     public function store(StoreCallRequest $request)
     {
-        $dataValidated = $request->validated();
         $shift = Shift::where('status',true)->first();
 
         if($shift) 
         {
-            $dataValidated['hour'] = now();
-            $call = Call::create($dataValidated);
+            $call = Call::create($request->validated());
             $call->shift()->associate($shift);
             $call->save();
 
