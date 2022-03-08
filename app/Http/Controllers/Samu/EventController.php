@@ -16,6 +16,7 @@ use App\Models\Samu\ReceptionPlace;
 use App\Models\Commune;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
+use App\Models\Samu\MobileInService;
 
 class EventController extends Controller
 {
@@ -28,7 +29,7 @@ class EventController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
-        
+
         if(!$shift) 
         {
             session()->flash('danger', 'Debe abrir un turno primero');
@@ -64,7 +65,7 @@ class EventController extends Controller
             session()->flash('danger', 'Debe abrir un turno primero');
             return redirect()->route('samu.welcome');
         }
-        $mobiles            = Mobile::where('managed',false)->get();
+        $mobiles            = Mobile::whereManaged(false)->get();
         $establishments     = Organization::whereHas('samu')->pluck('id','name')->sort();
         $nextCounter        = EventCounter::getNext();
         $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
@@ -75,21 +76,28 @@ class EventController extends Controller
             ->where('classification','<>','OT')
             ->limit(20)
             ->get();
-        
+
+        $mobilesInService = MobileInService::query()
+            ->whereShiftId($shift->id)
+            ->whereStatus(true)
+            ->orderBy('position', 'asc')
+            ->get();
+
         /* TODO: Parametrizar */
         $communes = Commune::whereRegionId(1)->pluck('id','name')->sort();
 
-        return view ('samu.event.create',compact(
+        return view('samu.event.create', compact(
             'shift',
             'keys',
             'establishments',
             'nextCounter',
             'mobiles',
+            'mobilesInService',
             'receptionPlaces',
             'identifierTypes',
             'communes',
-            'calls')
-        );
+            'calls'
+        ));
     }
 
     /**
@@ -152,10 +160,26 @@ class EventController extends Controller
         $mobiles            = Mobile::where('managed',false)->get();
         $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes    = CodConIdentifierType::pluck('id','text')->sort();
+        $mobilesInService   = MobileInService::query()
+            ->whereShiftId($shift->id)
+            ->whereStatus(true)
+            ->orderBy('position', 'asc')
+            ->get();
+
         /* TODO: Parametrizar */
         $communes = Commune::whereRegionId(1)->pluck('id','name')->sort();
         
-        return view ('samu.event.edit', compact('shift','establishments','keys','event','mobiles','receptionPlaces','identifierTypes','communes'));
+        return view('samu.event.edit', compact(
+            'shift',
+            'establishments',
+            'keys',
+            'event',
+            'mobiles',
+            'mobilesInService',
+            'receptionPlaces',
+            'identifierTypes',
+            'communes'
+        ));
     }
 
     /**
