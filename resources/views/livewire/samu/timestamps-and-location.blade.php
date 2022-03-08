@@ -76,7 +76,7 @@
         <div class="col-12">
             <a class="btn btn-lg btn-outline-secondary btn-block p-4" 
                 href="{{ route('samu.mobiles.mobile_selector') }}"
-                >Volver</button>
+                >Volver</a>
         </div>
     </div>
 

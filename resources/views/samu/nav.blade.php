@@ -61,7 +61,7 @@
             <i class="fas fa-search"></i> </a>
         <div class="dropdown-menu">
 
-            <a class="nav-link {{ active('samu.event.filter') }}" 
+            <a class="dropdown-item {{ active('samu.event.filter') }}" 
             href=" {{ route('samu.event.filter') }}"><i class="fas fa-car-crash"></i> Eventos </a>
 
             <a class="dropdown-item {{ active('samu.calls.search') }}"

@@ -34,7 +34,7 @@
                 <tr>
                     <td class="center">{{ $call->hour->format('H:i') }}</td>
                     <td>{{ $call->telephone }}</td>
-                    <td>{{ $call->address }}</td>
+                    <td>{{ $call->address }} {{ optional($call->commune)->name }}</td>
                     <td>{{ $call->applicant }}</td>
                     <td class="center">{{ $call->classification }}</td>
                     <td class="center">{{ $call->receptor_id }}</td>
@@ -96,8 +96,22 @@
                     <td class="center">{{ $event->key->key }}</td>
                     <td class="center">{{ optional($event->returnKey)->key }}</td>
                     <td class="center">{{ $event->counter }}</td>
-                    <td class="center">{{ optional($event->mobileInService)->mobile_id }}</td>
-                    <td class="center">{{ optional($event->mobileInService)->type }}</td>
+                    <td class="center">
+                        @if($event->mobileInService)
+                            {{ optional($event->mobileInService)->mobile->code }} - 
+                            {{ optional($event->mobileInService)->mobile->name }}
+                        @else
+                            {{ optional($event->mobile)->code }} -
+                            {{ optional($event->mobile)->name }}
+                        @endif
+                    </td>
+                    <td class="center">
+                        @if($event->mobileInService)
+                            {{ optional($event->mobileInService)->type }}
+                        @else
+                            {{ optional($event->mobile)->type }}
+                        @endif
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -156,12 +170,15 @@
                 <th>Establecimiento o lugar</th>
                 <th>Quien recepciona</th>
                 <th>Registro Atención Urgencia</th>
-
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td class="center">{{ optional($event->establishment)->name }} {{ optional($event->receptionPlace)->name}}</td>
+                <td class="center">
+                    {{ optional($event->establishment)->name }} 
+                    {{ optional($event->receptionPlace)->name }} 
+                    {{ $event->establishment_details }}
+                </td>
                 <td class="center">{{ $event->reception_person }}</td>
                 <td class="center">{{ $event->rau }}&nbsp;</td>
             </tr>
@@ -188,7 +205,7 @@
         </tbody>
     </table>
     @else
-        <p>No hay móvil en servicio asociado</p>
+        {{ $event->external_crew }}
     @endif
 
 

@@ -26,8 +26,15 @@
             <input type="text" class="form-control" id="for_name_mobile_plate" name="plate" value="{{ $mobile->plate}}" required>
         </fieldset>
         <fieldset class="form-group col-8 col-md-3">
-            <label for="for_name_mobile_type">Tipo </label>
-            <input type="text" class="form-control" id="for_name_mobile_type" name="type" value="{{ $mobile->type}}" required>
+            <label for="for_type">Tipo de  móvil</label>
+            <select class="form-control" name="type" required>
+                <option value="M1" {{ $mobile->type === 'M1' ? 'selected' : '' }}>M1</option>
+                <option value="M2" {{ $mobile->type ==='M2' ? 'selected' : ''}}>M2</option>
+                <option value="M3" {{ $mobile->type ==='M3' ? 'selected' : ''}}>M3</option>
+                <option value="Hibrido" {{ $mobile->type ==='Hibrido' ? 'selected': ''}}>Hibrido</option>
+                <option value="RU1" {{ $mobile->type === 'RU1' ? 'selected' : ''}}>RU1</option>
+                <option value="RU2" {{ $mobile->type ==='RU2' ? 'selected' :''}}>RU2 </option>
+            </select>
         </fieldset>
         <fieldset class="form-group col-8 col-md-5">
             <label for="for_name_mobile_type">Descripción</label>
