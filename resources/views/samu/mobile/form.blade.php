@@ -11,13 +11,7 @@
         <input type="text" class="form-control" id="for_name_mobile_code" name="name" 
             value="{{ ($mobile && $mobile->name) ? $mobile->name : '' }}" required>
     </fieldset>
-
-    <fieldset class="form-group col-8 col-md-1">
-        <label for="for_name_mobile_plate">Patente</label>
-        <input type="text" class="form-control" id="for_name_mobile_plate" name="plate" 
-            value="{{ ($mobile && $mobile->plate) ? $mobile->plate : '' }}">
-    </fieldset>
-
+    
     <fieldset class="form-group col-8 col-md-1">
         <label for="for_type">Tipo de móvil*</label>
         <select class="form-control" name="type" required>
@@ -29,6 +23,12 @@
             <option value="RU1" {{ optional($mobile)->type === 'RU1' ? 'selected' : '' }}>RU1</option>
             <option value="RU2" {{ optional($mobile)->type === 'RU2' ? 'selected' : '' }}>RU2 </option>
         </select>
+    </fieldset>
+
+    <fieldset class="form-group col-8 col-md-1">
+        <label for="for_name_mobile_plate">Patente</label>
+        <input type="text" class="form-control" id="for_name_mobile_plate" name="plate" 
+            value="{{ ($mobile && $mobile->plate) ? $mobile->plate : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-8 col-md-3">

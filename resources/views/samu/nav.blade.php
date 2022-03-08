@@ -94,5 +94,19 @@
         </div>
     </li>
     @endcan
+
+    @can('SAMU administrador')
+    <li class="nav-item">
+        <a class="nav-link {{ active('samu.map') }}" 
+        href="{{ route('samu.map') }}" targe="_blank"><i class="fas fa-map"></i> Mapa</a>
+    </li>
+    @endcan
+
+    @can('SAMU conductor')
+    <li class="nav-item">
+        <a class="nav-link {{ active('samu.mobiles.mobile_selector') }}" 
+        href="{{ route('samu.mobiles.mobile_selector') }}"><i class="fas fa-th-large"></i> Conductor</a>
+    </li>
+    @endcan
     
 </ul>
