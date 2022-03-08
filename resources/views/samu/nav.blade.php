@@ -95,7 +95,7 @@
     </li>
     @endcan
 
-    @can('SAMU administrador')
+    @canany(['SAMU administrador','SAMU despachador','SAMU regulador','SAMU operador'])
     <li class="nav-item">
         <a class="nav-link {{ active('samu.map') }}" 
         href="{{ route('samu.map') }}" targe="_blank"><i class="fas fa-map"></i> Mapa</a>
