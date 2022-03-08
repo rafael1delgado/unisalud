@@ -10,19 +10,9 @@
     @csrf
     @method('PUT')
 
-    <div class="form-row">
-
-        <fieldset class="form-group col-8 col-md-1">
-            <label for="for_key">Código </label> 
-            <input type="text" class="form-control" id="for_key" name="key" value="{{ $key->key }}" autocomplete="off" required>
-        </fieldset>
-
-        <fieldset class="form-group col-8 col-md-4">
-            <label for="for_name">Nombre </label>
-            <input type="text" class="form-control" id="for_name" name="name" value="{{ $key->name }}" autocomplete="off" required>
-        </fieldset>
-    
-    </div>
+    @include('samu.key.form', [
+        'key' => $key,
+    ])
 
     <button type="submit" class="btn btn-primary">Guardar</button>
 

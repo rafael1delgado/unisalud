@@ -28,7 +28,7 @@
         </fieldset>
 
         <fieldset class="form-group col-12 col-md-1">
-            <label for="empresa">Tipo de  móvil</label>
+            <label for="for_type">Tipo de  móvil</label>
             <select class="form-control" name="type">
                 <option value="M1" {{ $mobileInService->type === 'M1' ? 'selected' : '' }}>M1</option>
                 <option value="M2" {{ $mobileInService->type ==='M2' ? 'selected' : ''}}>M2</option>

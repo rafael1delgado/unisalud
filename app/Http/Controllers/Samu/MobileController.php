@@ -30,7 +30,6 @@ class MobileController extends Controller
      */
     public function create()
     {
-        
         return view('samu.mobile.create');
     }
 
