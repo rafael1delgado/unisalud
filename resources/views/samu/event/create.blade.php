@@ -13,8 +13,8 @@
     <div class="form-row">
         <fieldset class="form-group col-md-12">
             <label for="for_calls">Ultimas 20 llamadas clasificadas*</label>
-            <select class="form-control" name="call" id="call" required>
-                <option> </option>
+            <select class="form-control" name="call_id" id="call" required>
+                <option value="">Selecciona una llamada</option>
                 @foreach($calls as $call)
                     <option value="{{ $call->id }}">
                     @if($call->events->isNotEmpty())
