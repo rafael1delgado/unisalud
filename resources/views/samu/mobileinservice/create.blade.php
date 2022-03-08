@@ -4,7 +4,7 @@
 
 @include('samu.nav')  
 
-<h3 class="mb-3"><i class="fas fa-ambulance"></i> Asinga un móvil a un turno</h3>
+<h3 class="mb-3"><i class="fas fa-ambulance"></i> Asigna un móvil a un turno</h3>
 
 <form method="POST" action="{{ route('samu.mobileinservice.store') }}">
     @csrf
