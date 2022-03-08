@@ -15,7 +15,7 @@ use App\Models\User;
 use App\Models\Commune;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
-
+use Illuminate\Support\Carbon;
 
 class Event extends Model implements Auditable
 {   
@@ -161,7 +161,6 @@ class Event extends Model implements Auditable
     public function users()
     {
         return $this->belongsToMany(User::class,'samu_event_user','event_id')
-
                     ->using(EventUser::class)
                     ->withPivot('id','job_type_id')
                     ->withTimestamps();
@@ -176,21 +175,43 @@ class Event extends Model implements Auditable
         return $color;
     }
 
-    /**
-     * Perform any actions required after the model boots.
-     *
-     * @return void
-     */
-    protected static function booted()
+    public function getDepartureAtAttribute($value)
     {
-        self::creating(function (Event $event): void {
-            /* Asigna el creador */
-            $event->creator()->associate(auth()->user());
+        return ($value) ? Carbon::parse($value)->format('H:i') : '';
+    }
 
-            $counter          = EventCounter::useNext();
-            $event->counter   = $counter->counter;
-            $event->date      = $counter->date;
-        });
+    public function getMobileDepartureAtAttribute($value)
+    {
+        return ($value) ? Carbon::parse($value)->format('H:i') : '';
+    }
 
+    public function getMobileArrivalAtAttribute($value)
+    {
+        return ($value) ? Carbon::parse($value)->format('H:i') : '';
+    }
+
+    public function getRouteToHealtcenterAtAttribute($value)
+    {
+        return ($value) ? Carbon::parse($value)->format('H:i') : '';
+    }
+
+    public function getHealthcenterAtAttribute($value)
+    {
+        return ($value) ? Carbon::parse($value)->format('H:i') : '';
+    }
+
+    public function getPatientReceptionAtAttribute($value)
+    {
+        return ($value) ? Carbon::parse($value)->format('H:i') : '';
+    }
+
+    public function getReturnBaseAtAttribute($value)
+    {
+        return ($value) ? Carbon::parse($value)->format('H:i') : '';
+    }
+
+    public function getOnBaseAtAttribute($value)
+    {
+        return ($value) ? Carbon::parse($value)->format('H:i') : '';
     }
 }
