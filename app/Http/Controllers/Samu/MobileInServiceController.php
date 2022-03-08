@@ -122,27 +122,40 @@ class MobileInServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, MobileInService $mobileInService)
-        
     {
-         /* Obtener el turno actual */
-         $shift = Shift::where('status',true)->first();
+        /* Obtener el turno actual */
+        $shift = Shift::where('status',true)->first();
 
-        if($shift) {
+        if($shift) 
+        {
             $mobileInService->fill($request->all());
             $mobileInService->status = $request->has('status') ? 1:0;
             $mobileInService->save();
             $mobileInService->shift()->associate($shift);    
+
+            $mobilesInService = MobileInService::query()
+                ->whereShiftId($shift->id)
+                ->orderBy('status', 'DESC')
+                ->orderBy('position', 'ASC')
+                ->get();
+
+            foreach($mobilesInService as $index => $mis)
+            {
+                $mis->update([
+                    'position' => $index + 1
+                ]);
+            }
+            
             session()->flash('info', 'Movil editado.');
             return redirect()->route('samu.mobileinservice.index', compact('mobileInService'));
         }
-        else {
+        else
+        {
             $request->session()->flash('danger', 'No se pudo actualizar el cambio, 
                 el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
             
             return redirect()->back()->withInput();
         }
-
-        
     }
 
     /**
