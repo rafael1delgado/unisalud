@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Event\EventStoreRequest;
+use App\Http\Requests\Event\EventUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Samu\Shift;
 use App\Models\Samu\Event;
 use App\Models\Samu\Key;
 use App\Models\Samu\Call;
-use App\Models\Samu\MobileCrew;
-use App\Models\Samu\EventUser;
 use App\Models\Samu\EventCounter;
-use App\Models\Samu\MobileInService;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\ReceptionPlace;
-use App\Models\Samu\Establishment;
 use App\Models\Commune;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
@@ -60,7 +58,7 @@ class EventController extends Controller
     public function create()
     {
         /* Obtener el turno actual */
-        $shift              = Shift::where('status',true)->first();
+        $shift = Shift::whereStatus(true)->first();
         if(!$shift) 
         {
             session()->flash('danger', 'Debe abrir un turno primero');
@@ -79,7 +77,7 @@ class EventController extends Controller
             ->get();
         
         /* TODO: Parametrizar */
-        $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
+        $communes = Commune::whereRegionId(1)->pluck('id','name')->sort();
 
         return view ('samu.event.create',compact(
             'shift',
@@ -97,42 +95,20 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Event\EventStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EventStoreRequest $request)
     {
-        $shift = Shift::where('status',true)->first();
-        
+        $shift = Shift::whereStatus(true)->first();
+
         if($shift) 
         {
-            $event = new Event($request->all());
-            $event->patient_unknown = $request->has('patient_unknown') ? 1:0;
-            $isMobileInService = $shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
-            
-            if($isMobileInService)
-            {
-                $event->mobileInService()->associate($isMobileInService);
-            }
-            
-            $event->shift()->associate($shift);
-            $event->save();
+            $dataValidated = $request->validated();
+            $dataValidated['patient_unknow'] = ($request->has('patient_unknown')) ? 1 : 0;
+            $event = Event::create($dataValidated);
+            $event->calls()->attach($dataValidated['call_id']);
 
-            if($request->filled('call'))
-            {
-                $event->calls()->attach($request->input('call'));
-            }
-        
-            $mobilecrews=MobileCrew::where('mobiles_in_service_id', $request->mobile_in_service_id)->get();
-
-            foreach($mobilecrews as $mobilecrew)
-            {
-                EventUser::create([
-                    'event_id'              => $event->id,
-                    'user_id'               => $mobilecrew->user_id,
-                    'job_type_id'           => $mobilecrew->job_type_id
-                ]);
-            }
             session()->flash('success', 'Se ha creado el evento');
             return redirect()->route('samu.event.index');
         }
@@ -142,21 +118,16 @@ class EventController extends Controller
                 el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
             
             return redirect()->back()->withInput();
-
         }
     }
    
-
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Samu\Event $event
      * @return \Illuminate\Http\Response
      */
-
-
-     
-    public function show(event $event)
+    public function show(Event $event)
     {
         //
     }
@@ -167,10 +138,10 @@ class EventController extends Controller
      * @param  \App\Models\Samu\event  $follow
      * @return \Illuminate\Http\Response
      */
-    public function edit(event $event)
+    public function edit(Event $event)
     {
         /* Obtener el turno actual */
-        $shift  = Shift::where('status',true)->first();
+        $shift = Shift::whereStatus(true)->first();
         if(!$shift) 
         {
             session()->flash('danger', 'Debe abrir un turno primero');
@@ -182,7 +153,7 @@ class EventController extends Controller
         $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes    = CodConIdentifierType::pluck('id','text')->sort();
         /* TODO: Parametrizar */
-        $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
+        $communes = Commune::whereRegionId(1)->pluck('id','name')->sort();
         
         return view ('samu.event.edit', compact('shift','establishments','keys','event','mobiles','receptionPlaces','identifierTypes','communes'));
     }
@@ -190,21 +161,18 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Samu\event  $follow
+     * @param  \App\Http\Requests\Event\EventUpdateRequest  $request
+     * @param  \App\Models\Samu\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, event $event)
+    public function update(EventUpdateRequest $request, Event $event)
     {   
-        // $shift = Shift::where('status',true)->first();
-        // if(!$shift) 
-        // {
-        //     session()->flash('danger', 'Debe abrir un turno primero');
-        //     return redirect()->back()->withInput();
-        // }
-        $event->fill($request->all());
-        $event->patient_unknown = $request->has('patient_unknown') ? 1:0;
-        $isMobileInService = $event->shift->MobilesInService->where('mobile_id',$request->input('mobile_id'))->first();
+        $dataValidated = $request->validated();
+        $dataValidated['patient_unknown'] = ($request->has('patient_unknown')) ? 1 : 0;
+        $dataValidated['status'] = ($dataValidated["save_close"] == "yes") ? false : $event->status;
+        $event->update($dataValidated);
+
+        $isMobileInService = $event->shift->MobilesInService->where('mobile_id', $dataValidated['mobile_id'])->first();
 
         if($isMobileInService)
         {
@@ -215,23 +183,14 @@ class EventController extends Controller
             $event->mobileInService()->dissociate();
         }
         
-        if($request->input("save_close") == "yes")
-        {
-            /** Chequear campos obligatorios */
-            $event->status = false;
-        }
-        
-        $event->update();
-        
         session()->flash('success', 'Cometido actualizado satisfactoriamente.');
         return redirect()->route('samu.event.index');
     }
 
-    
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Samu\event  $event
+     * @param  \App\Models\Samu\Event  $event
      * @return \Illuminate\Http\Response
      */
     public function destroy(Event $event)
@@ -292,7 +251,6 @@ class EventController extends Controller
             $request->flash();
         }
     
-
         return view ('samu.event.filter', compact('events','keys','communes'));
     }
 
@@ -300,5 +258,4 @@ class EventController extends Controller
     {
         return view('samu.event.report',compact('event'));
     }
-
 }
