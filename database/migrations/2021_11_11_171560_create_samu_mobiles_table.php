@@ -20,8 +20,8 @@ class CreateSamuMobilesTable extends Migration
             $table->string('name');
             $table->string('plate')->nullable();
             $table->string('type')->nullable();
-            $table->boolean('managed');
             $table->string('description')->nullable();
+            $table->boolean('managed')->default(false);
             $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();
