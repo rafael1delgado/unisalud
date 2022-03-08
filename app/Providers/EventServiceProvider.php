@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Samu\Call;
+use App\Models\Samu\Event;
 use App\Observers\Samu\CallObserver;
+use App\Observers\Samu\EventObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+// use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -30,5 +32,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Call::observe(CallObserver::class);
+        Event::observe(EventObserver::class);
     }
 }
