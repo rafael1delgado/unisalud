@@ -20,6 +20,21 @@ class EventObserver
     public function creating(Event $event)
     {
         $shift = Shift::whereStatus(true)->first();
+        
+        // Event information
+        $counter = EventCounter::useNext();
+        $event->counter   = $counter->counter;
+        $event->date      = $counter->date;
+        
+        $event->creator()->associate(auth()->user());
+        $event->shift()->associate($shift);
+
+        $isMobileInService = $shift->MobilesInService->where('mobile_id', $event->mobile_id)->first();
+
+        if($isMobileInService)
+        {
+            $event->mobileInService()->associate($isMobileInService);
+        }
 
         // Order the mobiles
         if($shift && $event->mobileInService)
@@ -44,21 +59,6 @@ class EventObserver
                     'position' => $index + 1
                 ]);
             }
-
-        }
-        // Info Event
-        $counter = EventCounter::useNext();
-        $event->counter   = $counter->counter;
-        $event->date      = $counter->date;
-        
-        $event->creator()->associate(auth()->user());
-        $event->shift()->associate($shift);
-
-        $isMobileInService = $shift->MobilesInService->where('mobile_id', $event->mobile_id)->first();
-
-        if($isMobileInService)
-        {
-            $event->mobileInService()->associate($isMobileInService);
         }
     }
 
@@ -86,38 +86,5 @@ class EventObserver
                 ]);
             }
         }
-    }
-
-    /**
-     * Handle the Event "deleted" event.
-     *
-     * @param  \App\Models\Event  $event
-     * @return void
-     */
-    public function deleted(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Handle the Event "restored" event.
-     *
-     * @param  \App\Models\Event  $event
-     * @return void
-     */
-    public function restored(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Handle the Event "force deleted" event.
-     *
-     * @param  \App\Models\Event  $event
-     * @return void
-     */
-    public function forceDeleted(Event $event)
-    {
-        //
     }
 }
