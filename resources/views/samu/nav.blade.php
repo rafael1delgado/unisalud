@@ -55,7 +55,7 @@
     </li>
     @endcan
     
-    @canany(['SAMU administrador','SAMU despachador','SAMU regulador'])
+    @canany(['SAMU administrador','SAMU regulador'])
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle {{ active(['samu.event.filter','samu.calls.search']) }}" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
             <i class="fas fa-search"></i> </a>

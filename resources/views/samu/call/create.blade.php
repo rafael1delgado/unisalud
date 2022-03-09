@@ -15,7 +15,7 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-headset"></i> Nueva de Llamada
+<h3 class="mb-3"><i class="fas fa-headset"></i> Nueva llamada
     <small class="float-right"><i class="far fa-calendar-alt"></i> Fecha de registro: {{ date('Y-m-d') }}</small>
 </h3>
 
