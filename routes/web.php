@@ -462,8 +462,8 @@ Route::prefix('soap')->name('soap.')->group(function(){
     Route::any('rayen', [SoapController::class, 'server'])->name('rayen');
 });
 
-//rutas samu
 
+/* Rutas SAMU */
 use App\Http\Controllers\Samu\ShiftController;
 use App\Http\Controllers\Samu\MobileInServiceController;
 use App\Http\Controllers\Samu\ShiftMobileController;

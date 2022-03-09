@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\Response;
 use App\Models\Samu\Shift;
 use App\Models\Samu\Event;
 use App\Models\Samu\Key;
@@ -102,6 +104,11 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+        
         $shift = Shift::where('status',true)->first();
         
         if($shift) 
@@ -195,7 +202,12 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, event $event)
-    {   
+    {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         // $shift = Shift::where('status',true)->first();
         // if(!$shift) 
         // {
@@ -236,6 +248,11 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         $event->mobileInService()->dissociate();
         $event->calls()->detach();
         $event->delete();
@@ -246,6 +263,11 @@ class EventController extends Controller
 
     public function reopen(Event $event)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+        
         if($event->created_at->gt(now()->subDays(1)))
         {
             $event->status = true;

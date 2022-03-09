@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\Response;
 use App\Models\Samu\MobileInService;
 use App\Models\Samu\MobileCrew;
 use App\Models\Samu\Shift;
@@ -19,7 +21,8 @@ class MobileInServiceController extends Controller
      */
     public function index()
     {
-        $openShift = Shift::where('status',true)->first();
+        $openShift = Shift::whereStatus(true)->first();
+        
         if(!$openShift) 
         {
             session()->flash('danger', 'Debe abrir un turno primero');
@@ -38,7 +41,8 @@ class MobileInServiceController extends Controller
      */
     public function create()
     {
-        $shift = Shift::where('status',true)->first();
+        $shift = Shift::whereStatus(true)->first();
+
         if(!$shift) 
         {
             session()->flash('danger', 'Debe abrir un turno primero');
@@ -58,7 +62,12 @@ class MobileInServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $shift = Shift::where('status',true)->first();
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
+        $shift = Shift::whereStatus(true)->first();
 
         if($shift) 
         {
@@ -103,7 +112,8 @@ class MobileInServiceController extends Controller
      */
     public function edit(MobileInService $mobileInService)
     {
-        $shift = Shift::where('status',true)->first();
+        $shift = Shift::whereStatus(true)->first();
+
         if(!$shift) 
         {
             session()->flash('danger', 'Debe abrir un turno primero');
@@ -122,10 +132,14 @@ class MobileInServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, MobileInService $mobileInService)
-        
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+    
          /* Obtener el turno actual */
-         $shift = Shift::where('status',true)->first();
+         $shift = Shift::whereStatus(true)->first();
 
         if($shift) {
             $mobileInService->fill($request->all());
@@ -153,6 +167,11 @@ class MobileInServiceController extends Controller
      */
     public function destroy(MobileInService $mobileInService)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+    
         $mobileInService->delete();
  
         return redirect()->route('samu.mobileinservice.index')->with('danger', 'Eliminado satisfactoriamente.');
@@ -163,12 +182,18 @@ class MobileInServiceController extends Controller
     {
         $mobiles = Mobile::where('managed',true)->get();
     
-        $shift = Shift::where('status',true)->get();
+        $shift = Shift::whereStatus(true)->first();
+
         return view('samu.crew.crewedit', compact('mobiles','shift','mobileCrew'));
     }
 
     public function crewupdate(Request $request, MobileCrew $mobileCrew)    
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+    
         $mobileCrew->fill($request->all());
         $mobileCrew->save();
         session()->flash('info', 'Movil editado.');
