@@ -77,12 +77,8 @@ class EventController extends Controller
             ->limit(20)
             ->get();
 
-        $mobilesInService = MobileInService::query()
-            ->whereShiftId($shift->id)
-            ->whereStatus(true)
-            ->orderBy('position', 'asc')
-            ->get();
-
+        $mobilesInService = $shift->mobilesInService->where('shift_id', $shift->id)->where('status', true)->sortBy('position');
+       
         /* TODO: Parametrizar */
         $communes = Commune::whereRegionId(1)->pluck('id','name')->sort();
 
@@ -160,11 +156,7 @@ class EventController extends Controller
         $mobiles            = Mobile::where('managed',false)->get();
         $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes    = CodConIdentifierType::pluck('id','text')->sort();
-        $mobilesInService   = MobileInService::query()
-            ->whereShiftId($shift->id)
-            ->whereStatus(true)
-            ->orderBy('position', 'asc')
-            ->get();
+        $mobilesInService   = $shift->mobilesInService->where('status', true)->sortBy('position');
 
         /* TODO: Parametrizar */
         $communes = Commune::whereRegionId(1)->pluck('id','name')->sort();
