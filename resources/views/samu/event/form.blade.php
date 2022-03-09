@@ -37,7 +37,7 @@
             @foreach($mobilesInService as $mis)
             <option value="{{ $mis->mobile->id }}" {{ old('mobile_id', optional($event)->mobile_id) == $mis->mobile->id ? 'selected' : '' }}>
                 {{ $mis->mobile->code }} {{ $mis->mobile->name }} - {{ $mis->type }} (PROPIO) 
-                {{ ($mis->lunch_start_at) ? ' - (COLACIÓN)' : '' }}
+                {{ ($mis->isHavingLunch()) ? ' - (COLACIÓN)' : '' }}
             </option>
             @endforeach 
             @foreach($mobiles as $mobile)
@@ -59,42 +59,42 @@
 
     <fieldset class="form-group col-md-1">
         <label for="for_departure_at">Aviso salida</label>
-        <input type="time" class="form-control" name="departure_at" value="{{ old('departure_at', optional($event)->departure_at) }}">
+        <input type="time" class="form-control" name="departure_at" value="{{ ( $event &&  $event->departure_at)? $event->departure_at->format('H:i') : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
         <label for="for_mobile_departure_at">Salida móvil</label>
-        <input type="time" class="form-control" name="mobile_departure_at" value="{{ old('mobile_departure_at', optional($event)->mobile_departure_at) }}">
+        <input type="time" class="form-control" name="mobile_departure_at" value="{{ ( $event &&  $event->mobile_departure_at)? $event->mobile_departure_at->format('H:i') : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
         <label for="for_mobile_arrival_at">Llegada al lugar</label>
-        <input type="time" class="form-control" name="mobile_arrival_at" value="{{ old('mobile_arrival_at', optional($event)->mobile_arrival_at) }}">
+        <input type="time" class="form-control" name="mobile_arrival_at" value="{{ ( $event &&  $event->mobile_arrival_at)? $event->mobile_arrival_at->format('H:i') : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
         <label for="for_route_to_healtcenter_at">Ruta c.asistencial </label>
-        <input type="time" class="form-control" name="route_to_healtcenter_at" value="{{ old('route_to_healtcenter_at', optional($event)->route_to_healtcenter_at) }}">
+        <input type="time" class="form-control" name="route_to_healtcenter_at" value="{{ ( $event &&  $event->route_to_healtcenter_at)? $event->route_to_healtcenter_at->format('H:i') : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
         <label for="for_healthcenter_at">Centro asistencial</label>
-        <input type="time" class="form-control" name="healthcenter_at" value="{{ old('healthcenter_at', optional($event)->healthcenter_at) }}">
+        <input type="time" class="form-control" name="healthcenter_at" value="{{ ( $event &&  $event->healthcenter_at)? $event->healthcenter_at->format('H:i') : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
         <label for="for_patient_reception_at">Recepción de pcte</label>
-        <input type="time" class="form-control" name="patient_reception_at" value="{{ old('patient_reception_at', optional($event)->patient_reception_at) }}">
+        <input type="time" class="form-control" name="patient_reception_at" value="{{ ( $event &&  $event->patient_reception_at)? $event->patient_reception_at->format('H:i') : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
         <label for="for_return_base_at">Retorno base</label>
-        <input type="time" class="form-control" name="return_base_at" value="{{ old('return_base_at', optional($event)->return_base_at) }}">
+        <input type="time" class="form-control" name="return_base_at" value="{{ ( $event &&  $event->return_base_at)? $event->return_base_at->format('H:i') : '' }}">
     </fieldset>
 
     <fieldset class="form-group col-md-1">
         <label for="for_on_base_at">Móvil en base</label>
-        <input type="time" class="form-control" name="on_base_at" value="{{ old('on_base_at', optional($event)->on_base_at) }}">
+        <input type="time" class="form-control" name="on_base_at" value="{{ ( $event &&  $event->on_base_at)? $event->on_base_at->format('H:i') : '' }}">
     </fieldset>
         
 </div>
