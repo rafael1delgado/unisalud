@@ -133,6 +133,7 @@ Route::prefix('user')->name('user.')->middleware('auth')->group(function(){
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
     Route::put('/{user}', [UserController::class, 'update'])->name('update');
     Route::get('/search_by_name', [UserController::class, 'searchByName'])->name('search_by_name');
+	Route::get('{user}/switch', [UserController::class, 'switch'])->name('switch');
 });
 Route::prefix('patient')->name('patient.')->middleware('auth')->group(function(){
     Route::get('/', [PatientController::class, 'index'])->name('index');
