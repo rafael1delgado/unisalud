@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Api\Samu;
 
 use App\Http\Controllers\Controller;
-use App\Models\Samu\Mobile;
+use App\Models\Samu\Shift;
 
 class MobileController extends Controller
 {
     public function index()
     {
-        $mobiles = Mobile::all();
-        return response()->json(['mobiles' => $mobiles]);
+        $shift = Shift::query()
+            ->with('mobilesInService.mobile')
+            ->whereStatus(true)
+            ->first();
+
+        $mobilesInService = ($shift) ? ($shift->mobilesInService) : [];
+
+        return response()->json(['mobilesInService' => $mobilesInService]);
     }
 }

@@ -48,7 +48,7 @@
             <tr>
                 <td colspan="6">
 
-                    @if($mis->shift->status == true)
+                    @if($mis->shift->status AND auth()->user()->cannot('SAMU auditor') )
                         @livewire('samu.mobile-crew',['mobileInService' => $mis])
                     @else
                         @foreach($mis->crew as $tripulant)

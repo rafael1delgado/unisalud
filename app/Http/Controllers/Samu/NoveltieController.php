@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\Response;
 use App\Models\Samu\Noveltie;
 use App\Models\Samu\Shift;
 use Illuminate\Http\Request;
@@ -39,8 +41,13 @@ class NoveltieController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+        
         /* Obtener el turno actual */
-        $shift = Shift::where('status',1)->first();
+        $shift = Shift::whereStatus(true)->first();
 
         if($shift) {
             $noveltie = new Noveltie($request->All());
@@ -80,8 +87,13 @@ class NoveltieController extends Controller
      */
     public function update(Request $request, Noveltie $noveltie)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         /* Obtener el turno actual */
-        $shift = Shift::where('status',1)->first();
+        $shift = Shift::whereStatus(true)->first();
 
         if($shift) {
             $noveltie->fill($request->all());

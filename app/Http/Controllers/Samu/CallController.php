@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\Response;
 use App\Http\Requests\Call\StoreCallRequest;
 use App\Http\Requests\Call\UpdateCallRequest;
 use App\Models\Commune;
@@ -79,14 +81,14 @@ class CallController extends Controller
      */
     public function store(StoreCallRequest $request)
     {
-        $shift = Shift::where('status',true)->first();
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
 
-        if($shift) 
+        if(Shift::whereStatus(true)->exists()) 
         {
-            $call = new Call($request->All());
-            $call->hour = now();
-            $call->shift()->associate($shift);
-            $call->save();
+            Call::create($request->validated());
 
             $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
             return redirect()->route('samu.call.create');
@@ -140,15 +142,18 @@ class CallController extends Controller
      */
     public function update(UpdateCallRequest $request, Call $call)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
 
+        $dataValidated = $request->validated();
         if($call->classification != $request->filled('classification'))
         {
-            $call->regulator_id = auth()->id();
-            $call->save();
+            $dataValidated['regulator_id'] = auth()->id();
         }
 
-        $call->update($request->validated());
-
+        $call->update($dataValidated);
         $request->session()->flash('success', 'Se han actualizado los datos la orientación telefónica.');
 
         switch($call->classification) {
@@ -168,6 +173,11 @@ class CallController extends Controller
 
     public function syncevents(Request $request, Call $call)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         $call->events()->sync($request->input('events'));
 
         $request->session()->flash('success', 'Se han asignado los cometidos a la llamada.');
@@ -182,6 +192,11 @@ class CallController extends Controller
      */
     public function destroy(Call $call)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         $call->delete();
         return redirect()->route('samu.call.index')->with('danger', 'Eliminado');
     }

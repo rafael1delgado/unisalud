@@ -19,7 +19,7 @@ class KeyController extends Controller
         $search_key = $request->get('search_key');       
         $keys = Key::when($search_key!=null, function ($query) use ($search_key){
                     $query->where('key','like','%'.$search_key.'%');
-                })->paginate(100);
+                })->paginate(200);
          
         return view ('samu.key.index' , compact('keys','search_key'));
     }

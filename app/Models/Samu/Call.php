@@ -83,6 +83,18 @@ class Call extends Model implements Auditable
 
     }
 
+    /* Una llamada puede hace referencia o tener relación con otra llamada  */
+    public function referenceCall()
+    {
+        return $this->belongsTo(Call::class,'call_id');
+    }
+    
+    /* Una llamada puede tener muchas llamadas asociadas  */
+    public function associatedCalls()
+    {
+        return $this->hasMany(Call::class);
+    }
+
     public function getSexAbbrAttribute()
     {
         switch($this->sex)
@@ -112,31 +124,6 @@ class Call extends Model implements Auditable
             }
             return $edad;
         }
-    }
-
-    /* Una llamada puede hace referencia o tener relación con otra llamada  */
-    public function referenceCall()
-    {
-        return $this->belongsTo(Call::class,'call_id');
-    }
-    
-    /* Una llamada puede tener muchas llamadas asociadas  */
-    public function associatedCalls()
-    {
-        return $this->hasMany(Call::class);
-    }
-    
-    /**
-     * Perform any actions required after the model boots.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        /* Asigna el creador */
-        self::creating(function (Call $call): void {
-            $call->receptor()->associate(auth()->user());
-        });
     }
 
     public function scopeWithClassification($query, $type)

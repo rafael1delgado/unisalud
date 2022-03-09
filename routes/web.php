@@ -463,8 +463,8 @@ Route::prefix('soap')->name('soap.')->group(function(){
     Route::any('rayen', [SoapController::class, 'server'])->name('rayen');
 });
 
-//rutas samu
 
+/* Rutas SAMU */
 use App\Http\Controllers\Samu\ShiftController;
 use App\Http\Controllers\Samu\MobileInServiceController;
 use App\Http\Controllers\Samu\ShiftMobileController;
@@ -484,7 +484,7 @@ use App\Http\Livewire\Samu\SearchCalls;
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
     Route::view('/', 'samu.welcome')->name('welcome');
-	Route::get('/map', [CallController::class, 'maps'])->name('samu.maps');
+	Route::get('/map', [CallController::class, 'maps'])->name('map');
 
 	Route::prefix('shifts')->name('shift.')
 	->middleware('permission:SAMU administrador|SAMU regulador|SAMU despachador')
