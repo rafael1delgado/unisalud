@@ -115,4 +115,9 @@ class MobileInService extends Model implements Auditable
             return "Inactivo";
         }
     }
+
+    public function isHavingLunch()
+    {
+        return $this->lunch_start_at != null && $this->lunch_end_at == null;
+    }
 }
