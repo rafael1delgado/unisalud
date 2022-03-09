@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\Response;
 use App\Http\Requests\Call\StoreCallRequest;
 use App\Http\Requests\Call\UpdateCallRequest;
 use App\Models\Commune;
@@ -79,6 +81,11 @@ class CallController extends Controller
      */
     public function store(StoreCallRequest $request)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         if(Shift::whereStatus(true)->exists()) 
         {
             Call::create($request->validated());
@@ -135,6 +142,11 @@ class CallController extends Controller
      */
     public function update(UpdateCallRequest $request, Call $call)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         $dataValidated = $request->validated();
         if($call->classification != $request->filled('classification'))
         {
@@ -161,6 +173,11 @@ class CallController extends Controller
 
     public function syncevents(Request $request, Call $call)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         $call->events()->sync($request->input('events'));
 
         $request->session()->flash('success', 'Se han asignado los cometidos a la llamada.');
@@ -175,6 +192,11 @@ class CallController extends Controller
      */
     public function destroy(Call $call)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         $call->delete();
         return redirect()->route('samu.call.index')->with('danger', 'Eliminado');
     }

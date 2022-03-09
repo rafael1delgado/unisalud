@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Event\EventStoreRequest;
 use App\Http\Requests\Event\EventUpdateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\Response;
 use App\Models\Samu\Shift;
 use App\Models\Samu\Event;
 use App\Models\Samu\Key;
@@ -104,8 +106,13 @@ class EventController extends Controller
      */
     public function store(EventStoreRequest $request)
     {
-        $shift = Shift::whereStatus(true)->first();
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
 
+        $shift = Shift::whereStatus(true)->first();
+        
         if($shift) 
         {
             $dataValidated = $request->validated();
@@ -183,12 +190,24 @@ class EventController extends Controller
      */
     public function update(EventUpdateRequest $request, Event $event)
     {   
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         $dataValidated = $request->validated();
         $dataValidated['patient_unknown'] = ($request->has('patient_unknown')) ? 1 : 0;
         $dataValidated['status'] = ($dataValidated["save_close"] == "yes") ? false : $event->status;
         $event->update($dataValidated);
 
         $isMobileInService = $event->shift->MobilesInService->where('mobile_id', $dataValidated['mobile_id'])->first();
+
+        // $shift = Shift::where('status',true)->first();
+        // if(!$shift) 
+        // {
+        //     session()->flash('danger', 'Debe abrir un turno primero');
+        //     return redirect()->back()->withInput();
+        // }
 
         if($isMobileInService)
         {
@@ -211,6 +230,11 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         $event->mobileInService()->dissociate();
         $event->calls()->detach();
         $event->delete();
@@ -221,6 +245,11 @@ class EventController extends Controller
 
     public function reopen(Event $event)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+        
         if($event->created_at->gt(now()->subDays(1)))
         {
             $event->status = true;

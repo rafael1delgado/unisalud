@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Samu;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\Response;
 use App\Models\Samu\Shift;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -41,6 +43,11 @@ class ShiftController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+    
         $shift = Shift::where('status', true)->first();
 
         if(!$shift) {
@@ -91,6 +98,11 @@ class ShiftController extends Controller
      */
     public function update(Request $request, Shift $shift)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         $shift->fill($request->all());
         $shift->save();
 
@@ -106,6 +118,11 @@ class ShiftController extends Controller
      */
     public function destroy(Shift $shift)
     {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+            ? Response::allow()
+            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+        );
+
         $shift->delete();
         session()->flash('danger', 'El turno ha sido eliminado satisfactoriamente.');
         return redirect()->route('samu.shift.index');
