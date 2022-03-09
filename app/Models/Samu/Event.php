@@ -174,44 +174,4 @@ class Event extends Model implements Auditable
         if($this->on_base_at)               $color = 'success';
         return $color;
     }
-
-    public function getDepartureAtAttribute($value)
-    {
-        return ($value) ? Carbon::parse($value)->format('H:i') : '';
-    }
-
-    public function getMobileDepartureAtAttribute($value)
-    {
-        return ($value) ? Carbon::parse($value)->format('H:i') : '';
-    }
-
-    public function getMobileArrivalAtAttribute($value)
-    {
-        return ($value) ? Carbon::parse($value)->format('H:i') : '';
-    }
-
-    public function getRouteToHealtcenterAtAttribute($value)
-    {
-        return ($value) ? Carbon::parse($value)->format('H:i') : '';
-    }
-
-    public function getHealthcenterAtAttribute($value)
-    {
-        return ($value) ? Carbon::parse($value)->format('H:i') : '';
-    }
-
-    public function getPatientReceptionAtAttribute($value)
-    {
-        return ($value) ? Carbon::parse($value)->format('H:i') : '';
-    }
-
-    public function getReturnBaseAtAttribute($value)
-    {
-        return ($value) ? Carbon::parse($value)->format('H:i') : '';
-    }
-
-    public function getOnBaseAtAttribute($value)
-    {
-        return ($value) ? Carbon::parse($value)->format('H:i') : '';
-    }
 }
