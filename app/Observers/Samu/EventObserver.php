@@ -75,14 +75,12 @@ class EventObserver
 
         if($isMobileInService)
         {
-            $mobilecrews = MobileCrew::where('mobiles_in_service_id', $isMobileInService->id)->get();
-
-            foreach($mobilecrews as $mobilecrew)
+            foreach($isMobileInService->crew as $mobilecrew)
             {
                 EventUser::create([
                     'event_id'              => $event->id,
-                    'user_id'               => $mobilecrew->user_id,
-                    'job_type_id'           => $mobilecrew->job_type_id
+                    'user_id'               => $mobilecrew->pivot->user_id,
+                    'job_type_id'           => $mobilecrew->pivot->job_type_id
                 ]);
             }
         }
