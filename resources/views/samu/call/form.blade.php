@@ -27,9 +27,9 @@
         <select class="form-control form-control-sm @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune">
             <option value=""></option>
             @foreach ($communes as $commune)
-                <option value="{{ $commune->id }}" {{ optional($call)->commune_id == $commune->id ? 'selected' : '' }}>
-                    {{ $commune->name }}
-                </option>
+            <option value="{{ $commune->id }}" {{ optional($call)->commune_id == $commune->id ? 'selected' : '' }}>
+                {{ $commune->name }}
+            </option>
             @endforeach
         </select>
         @error('commune_id')
@@ -38,7 +38,7 @@
             </div>
         @enderror
     </fieldset>
-
+    
     <fieldset class="form-group col-12 col-md-2">
         <label for="for-telephone">Teléfono</label>
         <input type="text" class="form-control form-control-sm @error('telephone') is-invalid @enderror" name="telephone" id="for-telephone"
@@ -53,6 +53,16 @@
 </div>
 
 <div class="form-row">
+    <fieldset class="form-group col-md-6">
+        <label for="for-reason">Motivo</label>
+        <input type="reason" class="form-control form-control-sm @error('reason') is-invalid @enderror" name="reason" id="for-reason"
+        value="{{ old('reason', optional($call)->reason) }}">
+        @error('reason')
+            <div class="text-danger">
+                <small>{{ $message }}</small>
+            </div>
+        @enderror
+    </fieldset>
     
     <fieldset class="form-group col-6 col-md-2">
         <label for="for-sex">Sexo</label>
@@ -64,9 +74,9 @@
             <option value="OTHER" {{ optional($call)->sex == 'OTHER' ? 'selected' : '' }}>Otro</option>
         </select>
         @error('sex')
-        <div class="text-danger">
-            <small>{{ $message }}</small>
-        </div>
+            <div class="text-danger">
+                <small>{{ $message }}</small>
+            </div>
         @enderror
     </fieldset>
     
@@ -76,22 +86,12 @@
         value="{{ old('age', optional($call)->age) }}">
         <small id="for-age" class="form-text">1,06 = 1 año 6 meses</small>
         @error('age')
-        <div class="text-danger">
-            <small>{{ $message }}</small>
-        </div>
+            <div class="text-danger">
+                <small>{{ $message }}</small>
+            </div>
         @enderror
     </fieldset>
     
-    <!-- <fieldset class="form-group col-md-6">
-        <label for="for-reason">Motivo</label>
-        <input type="reason" class="form-control form-control-sm @error('reason') is-invalid @enderror" name="reason" id="for-reason"
-        value="{{ old('reason', optional($call)->reason) }}">
-        @error('reason')
-        <div class="text-danger">
-                <small>{{ $message }}</small>
-            </div>
-            @enderror
-    </fieldset> -->
     
     <fieldset class="form-group col-12 col-md-2">
         <label for="for-police_intervention">Intervención de carabineros</label>
@@ -101,9 +101,9 @@
             <option value="0" {{ optional($call)->police_intervention == '0' ? 'selected' : '' }}>No</option>
         </select>
         @error('police_intervention')
-        <div class="text-danger">
-            <small>{{ $message }}</small> 
-        </div>
+            <div class="text-danger">
+                <small>{{ $message }}</small> 
+            </div>
         @enderror
     </fieldset>
         
