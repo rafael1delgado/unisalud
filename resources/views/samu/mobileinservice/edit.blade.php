@@ -13,13 +13,13 @@
     <div class="form-row">
 
         <fieldset class="form-group col-8 col-md-1">
-            <label for="for_position">Posición </label>
-            <input type="number" value="{{ $mobileInService->position }}" class="form-control" name="position">             
+            <label for="for-position">Posición</label>
+            <input type="number" value="{{ $mobileInService->position }}" class="form-control" name="position" id="for-position">             
         </fieldset>
 
         <fieldset class="form-group col-8 col-md-2">
-            <label for="for_mobile_id">Móvil </label>
-            <select class="form-control" name="mobile_id">
+            <label for="for-mobile-id">Móvil </label>
+            <select class="form-control" name="mobile_id" id="for-mobile-id">
                 @foreach($mobiles as $mobile)
                     <option value="{{ $mobile->id }}" {{ $mobileInService->mobile_id === $mobile->id ? 'selected' : '' }}>{{ $mobile->code }} - {{ $mobile->name }} </option>
                 @endforeach
@@ -28,8 +28,8 @@
         </fieldset>
 
         <fieldset class="form-group col-12 col-md-1">
-            <label for="for_type">Tipo de  móvil</label>
-            <select class="form-control" name="type">
+            <label for="for-type">Tipo de  móvil</label>
+            <select class="form-control" name="type" id="for-type">
                 <option value="M1" {{ $mobileInService->type === 'M1' ? 'selected' : '' }}>M1</option>
                 <option value="M2" {{ $mobileInService->type ==='M2' ? 'selected' : ''}}>M2</option>
                 <option value="M3" {{ $mobileInService->type ==='M3' ? 'selected' : ''}}>M3</option>
@@ -41,20 +41,20 @@
 
         
         <fieldset class="form-group col-8 col-md-3">
-            <label for="for_o2">Oxígeno Central</label>
-            <input type="text" class="form-control" name="o2" value="{{ $mobileInService->o2 }}">             
+            <label for="for-o2">Oxígeno Central</label>
+            <input type="text" class="form-control" name="o2" id="for-o2" value="{{ $mobileInService->o2 }}">             
         </fieldset>
         
         <div class="mt-5 form-check col-md-1">
-            <input type="checkbox" class="form-check-input ml-3" name="status" {{ ($mobileInService->status) ? 'checked':''}} >
-            <label class="form-check-label ml-5" for="exampleCheck1">Activo</label>
+            <input type="checkbox" class="form-check-input ml-3" name="status" id="for-status" {{ ($mobileInService->status) ? 'checked':''}} >
+            <label class="form-check-label ml-5" for="for-status">Activo</label>
         </div>
     </div>
     <div class="form-row">
         
         <fieldset class="form-group col-12 col-md-8">
-            <label for="observation">Observación</label>
-            <textarea class="form-control" id="observation" name="observation">{{ $mobileInService->observation }}</textarea>
+            <label for="for-observation">Observación</label>
+            <textarea class="form-control" name="observation" id="for-observation">{{ $mobileInService->observation }}</textarea>
         </fieldset>
 
     </div>
