@@ -53,7 +53,7 @@
 </div>
 
 <div class="form-row">
-    <fieldset class="form-group col-md-6">
+    <fieldset class="form-group col-12 col-md-3">
         <label for="for-reason">Motivo</label>
         <input type="reason" class="form-control form-control-sm @error('reason') is-invalid @enderror" name="reason" id="for-reason"
         value="{{ old('reason', optional($call)->reason) }}">
@@ -81,11 +81,25 @@
     </fieldset>
     
     <fieldset class="form-group col-6 col-md-1">
-        <label for="for-age">Edad</label>
-        <input type="number" class="form-control form-control-sm @error('age') is-invalid @enderror" step=".01" name="age" id="for-age"
-        value="{{ old('age', optional($call)->age) }}">
-        <small id="for-age" class="form-text">1,06 = 1 año 6 meses</small>
-        @error('age')
+        <label for="for-age">Años</label>
+        <input type="number" class="form-control form-control-sm 
+            @error('age_years') is-invalid @enderror" 
+            name="age_years" id="for-age-years"
+            value="{{ old('age_years', optional($call)->age_years) }}">
+        @error('age_years')
+            <div class="text-danger">
+                <small>{{ $message }}</small>
+            </div>
+        @enderror
+    </fieldset>
+
+    <fieldset class="form-group col-6 col-md-1">
+        <label for="for-age">Meses</label>
+        <input type="number" class="form-control form-control-sm 
+            @error('age_months') is-invalid @enderror" 
+            name="age_months" id="for-age-months"
+            value="{{ old('age_months', optional($call)->age_months) }}">
+        @error('age_months')
             <div class="text-danger">
                 <small>{{ $message }}</small>
             </div>
