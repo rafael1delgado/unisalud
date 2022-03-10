@@ -49,7 +49,7 @@ class MobileInService extends Model implements Auditable
 
     public function shift()
     {
-        return $this->BelongsTo(Shift::class);
+        return $this->belongsTo(Shift::class);
     }
 
     public function mobile()
@@ -114,5 +114,10 @@ class MobileInService extends Model implements Auditable
         {
             return "Inactivo";
         }
+    }
+
+    public function isHavingLunch()
+    {
+        return $this->lunch_start_at != null && $this->lunch_end_at == null;
     }
 }

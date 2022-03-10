@@ -15,7 +15,7 @@ use App\Models\User;
 use App\Models\Commune;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
-
+use Illuminate\Support\Carbon;
 
 class Event extends Model implements Auditable
 {   
@@ -161,7 +161,6 @@ class Event extends Model implements Auditable
     public function users()
     {
         return $this->belongsToMany(User::class,'samu_event_user','event_id')
-
                     ->using(EventUser::class)
                     ->withPivot('id','job_type_id')
                     ->withTimestamps();
@@ -174,23 +173,5 @@ class Event extends Model implements Auditable
         if($this->return_base_at)           $color = 'info';
         if($this->on_base_at)               $color = 'success';
         return $color;
-    }
-
-    /**
-     * Perform any actions required after the model boots.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        self::creating(function (Event $event): void {
-            /* Asigna el creador */
-            $event->creator()->associate(auth()->user());
-
-            $counter          = EventCounter::useNext();
-            $event->counter   = $counter->counter;
-            $event->date      = $counter->date;
-        });
-
     }
 }
