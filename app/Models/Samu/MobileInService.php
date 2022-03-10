@@ -44,6 +44,8 @@ class MobileInService extends Model implements Auditable
     */
     protected $dates = [
         'lunch_start_at',
+        'lunch_break_start_at',
+        'lunch_break_end_at',
         'lunch_end_at',
     ];
 
