@@ -18,8 +18,7 @@
             integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
             crossorigin="anonymous"></script>
 
-        <script src="https://kit.fontawesome.com/7c4f606aba.js" SameSite="None"
-            crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-mutate-approach="sync"></script>
 
         <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
         <!-- Fonts -->

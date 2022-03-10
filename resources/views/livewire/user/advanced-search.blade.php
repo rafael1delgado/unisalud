@@ -48,7 +48,7 @@
                         <td nowrap>
                             <a class="btn-primary btn-sm mr-1" title="Seleccionar" href="{{ route('user.edit',$patient->id)}}"><span class="fas fa-check" aria-hidden="true"></span></a>
                             @can('be god')
-                                <a class="btn-warning btn-sm" href="#"><span class="fas fa-redo" aria-hidden="true"></span></a>
+                                <a class="btn-warning btn-sm" href="{{ route('user.switch', $patient->id)}}"><span class="fas fa-redo" aria-hidden="true"></span></a>
                             @endcan
                         </td>
                     </tr>
