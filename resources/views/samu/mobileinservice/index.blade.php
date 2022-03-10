@@ -18,11 +18,17 @@
 --}}
 
 <h4>Turno {{ $openShift->opening_at }} {{ $openShift->type }} ({{ $openShift->statusInWord }})</h4>
-@include('samu.mobileinservice.partials.list',['mobilesInService' => $openShift->mobilesInService, 'edit' => true])
+@include(
+    'samu.mobileinservice.partials.list', 
+    ['mobilesInService' => $openShift->mobilesInService->sortBy('position'), 'edit' => true, 'editLuch' => true]
+)
 
 @if($lastShift)
     <h4>Turno {{ $lastShift->opening_at }} {{ $lastShift->type }} ({{ $lastShift->statusInWord }})</h4>
-    @include('samu.mobileinservice.partials.list',['mobilesInService' => $lastShift->mobilesInService, 'edit' => false])
+    @include(
+        'samu.mobileinservice.partials.list', 
+        ['mobilesInService' => $lastShift->mobilesInService->sortBy('position'), 'edit' => false, 'editLuch' => false]
+    )
 @endif
 
 @endsection
