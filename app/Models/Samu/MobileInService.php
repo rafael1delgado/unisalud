@@ -88,6 +88,22 @@ class MobileInService extends Model implements Auditable
         return $this->hasMany(Event::class);
     }
 
+    public function getTotalMinutesAttribute()
+    {
+        $total = 0;
+        if($this->lunch_start_at && $this->lunch_break_start_at && $this->lunch_break_end_at && $this->lunch_end_at)
+        {
+            $firstBreak = intval($this->lunch_start_at->diff($this->lunch_break_start_at)->format('%I'));
+            $secondBreak = intval($this->lunch_break_end_at->diff($this->lunch_end_at)->format('%I'));
+            $total = $firstBreak + $secondBreak;
+        }
+        elseif($this->lunch_start_at && $this->lunch_end_at)
+        {
+            $total = intval($this->lunch_start_at->diff($this->lunch_end_at)->format('%I'));
+        }
+        return $total;
+    }
+    
     public function getLastEventAttribute()
     {
         return $this->events->where('status', true)->last();
