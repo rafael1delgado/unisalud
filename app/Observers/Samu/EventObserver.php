@@ -39,23 +39,22 @@ class EventObserver
         // Order the mobiles
         if($shift && $event->mobileInService)
         {
-            $mobileExit = $event->mobileInService;
-
-            $query = $mobilesInService = MobileInService::query()
-                ->whereShiftId($shift->id)
-                ->whereStatus(true);
-
-            $totalAvailable = $query->count();
+            $newPosition = $shift->mobilesInService->where('status', true)->count() + 1;
             
+            $mobileExit = $event->mobileInService;
             $mobileExit->update([
-                'position' => $totalAvailable
+                'position' => $newPosition
             ]);
+            
+            $mobilesInService = MobileInService::query()
+                ->whereShiftId($shift->id)
+                ->orderBy('status', 'DESC')
+                ->orderBy('position', 'ASC')
+                ->get();
 
-            $mobilesInService = $query->whereNotIn('id', [$mobileExit->id])->orderBy('position', 'asc')->get();
-
-            foreach($mobilesInService as $index => $mobileInService)
+            foreach($mobilesInService as $index => $mis)
             {
-                $mobileInService->update([
+                $mis->update([
                     'position' => $index + 1
                 ]);
             }

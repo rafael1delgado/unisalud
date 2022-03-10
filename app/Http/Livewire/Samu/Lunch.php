@@ -24,6 +24,21 @@ class Lunch extends Component
         $this->mis->fresh();
     }
 
+    public function lunchBreakStart()
+    {
+        $this->mis->lunch_break_start_at = now();
+        $this->mis->save();
+        $this->mis->fresh();
+        
+    }
+
+    public function lunchBreakEnd()
+    {
+        $this->mis->lunch_break_end_at = now();
+        $this->mis->save();
+        $this->mis->fresh();
+    }
+
     public function render()
     {
         return view('livewire.samu.lunch');
