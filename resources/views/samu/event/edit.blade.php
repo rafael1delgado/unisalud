@@ -16,7 +16,8 @@
     @include('samu.event.form', [
         'event' => $event,
         'keys'  => $keys,
-        'shift' => $shift
+        'shift' => $shift,
+        'call'  => null
     ])
 
     @if($event->status)
