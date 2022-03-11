@@ -38,7 +38,7 @@
 
     <fieldset class="form-group col-md-3">
         <label for="for-mobile">Móvil*</label>
-        <select class="form-control" name="mobile_id" id="for-mobile">
+        <select class="form-control" name="mobile_id" id="for-mobile" required>
             <option value="">Selecciona un Móvil</option>
             @foreach($mobilesInService as $mis)
             <option value="{{ $mis->mobile->id }}" {{ old('mobile_id', optional($event)->mobile_id) == $mis->mobile->id ? 'selected' : '' }}>
