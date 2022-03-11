@@ -20,7 +20,7 @@
             ({{ optional($shift)->statusInWord }})
         </h4>
 
-        @include('samu.call.partials.list', ['calls' => $shift->calls->where('classification','<>','OT')->sortByDesc('id'), 'edit' => true])
+        @include('samu.call.partials.list', ['calls' => $shift->calls->where('classification','<>','OT')->sortByDesc('id'), 'edit' => true, 'createEvent' => false])
    
     @endunless
 @endforeach
