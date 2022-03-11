@@ -19,7 +19,7 @@
             <td>{{ $audit->url }}</td>
             <td>{{ $audit->auditable_type }}</td>
             <td>{{ $audit->created_at }}</td>
-            <td>{{ $audit->user->officialFullName }}</td>
+            <td>{{ ($audit->user) ? $audit->user->officialFullName : '' }}</td>
             <td>{{ $audit->event }}</td>
             <td>
             @foreach($audit->getModified() as $attribute => $modified)
