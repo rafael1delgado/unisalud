@@ -89,7 +89,7 @@ class CallController extends Controller
         if(Shift::whereStatus(true)->exists()) 
         {
             $dataValidated = $request->validated();
-            $dataValidated['age'] = generateAge($dataValidated['anho'], $dataValidated['month']);
+            $dataValidated['age'] = generateAge($dataValidated['year'], $dataValidated['month']);
             Call::create($dataValidated);
 
             $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
@@ -151,7 +151,7 @@ class CallController extends Controller
         );
 
         $dataValidated = $request->validated();
-        $dataValidated['age'] = generateAge($dataValidated['anho'], $dataValidated['month']);
+        $dataValidated['age'] = generateAge($dataValidated['year'], $dataValidated['month']);
 
         if($call->classification != $request->filled('classification'))
         {

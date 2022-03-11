@@ -127,15 +127,15 @@ class Call extends Model implements Auditable
         }
     }
 
-    public function getAnhoAttribute()
+    public function getYearAttribute()
     {
-        $anho = null;
+        $year = null;
         if($this->age)
         {
-            list($anho) = explode('.', $this->age);
-            $anho = ($anho == 0) ? null : (int)$anho;
+            list($year) = explode('.', $this->age);
+            $year = ($year == 0) ? null : (int)$year;
         }
-        return $anho;
+        return $year;
     }
 
     public function getMonthAttribute()
@@ -143,7 +143,7 @@ class Call extends Model implements Auditable
         $month = null;
         if($this->age)
         {
-            list($anho, $month) = explode('.', $this->age);
+            list($year, $month) = explode('.', $this->age);
             $month = ($month == 0) ? null : (int)$month;
         }
         return $month;

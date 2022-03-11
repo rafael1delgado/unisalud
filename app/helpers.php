@@ -101,9 +101,9 @@ function GuardarSic($request){
     );
 }
 
-function generateAge($anho, $month) {
+function generateAge($year, $month) {
     $age = null;
-    $valueAnho = $anho ? $anho : 0;
+    $valueYear = $year ? $year : 0;
     $valueMonth = $month ? (int)$month : 0;
 
     if($valueMonth >= 1 && $valueMonth <= 9 ) 
@@ -111,9 +111,9 @@ function generateAge($anho, $month) {
         $valueMonth = "0" . (string)$valueMonth;
     }
 
-    if($anho != null or $month != null) 
+    if($year != null or $month != null) 
     {
-        $age = (float)($valueAnho . '.' . $valueMonth);
+        $age = (float)($valueYear . '.' . $valueMonth);
     }
 
     return $age;

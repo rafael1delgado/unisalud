@@ -81,10 +81,10 @@
     </fieldset>
     
     <fieldset class="form-group col-6 col-md-1">
-        <label for="for-anho">Años</label>
-        <input type="number" class="form-control form-control-sm @error('anho') is-invalid @enderror" name="anho" id="for-anho"
-            value="{{ old('anho', optional($call)->anho) }}" >
-        @error('anho')
+        <label for="for-year">Años</label>
+        <input type="number" class="form-control form-control-sm @error('year') is-invalid @enderror" name="year" id="for-year"
+            value="{{ old('year', optional($call)->year) }}" >
+        @error('year')
         <div class="text-danger">
             <small>{{ $message }}</small>
         </div>
