@@ -56,9 +56,10 @@ class EventController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \App\Models\Samu\Call  $call
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Call $call)
     {
         /* Obtener el turno actual */
         $shift = Shift::whereStatus(true)->first();
@@ -85,6 +86,7 @@ class EventController extends Controller
         $communes = Commune::whereRegionId(1)->pluck('id','name')->sort();
 
         return view('samu.event.create', compact(
+            'call',
             'shift',
             'keys',
             'establishments',
