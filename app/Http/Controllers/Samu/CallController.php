@@ -88,7 +88,9 @@ class CallController extends Controller
 
         if(Shift::whereStatus(true)->exists()) 
         {
-            Call::create($request->validated());
+            $dataValidated = $request->validated();
+            $dataValidated['age'] = generateAge($dataValidated['anho'], $dataValidated['month']);
+            Call::create($dataValidated);
 
             $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
             return redirect()->route('samu.call.create');
@@ -148,6 +150,8 @@ class CallController extends Controller
         );
 
         $dataValidated = $request->validated();
+        $dataValidated['age'] = generateAge($dataValidated['anho'], $dataValidated['month']);
+
         if($call->classification != $request->filled('classification'))
         {
             $dataValidated['regulator_id'] = auth()->id();
