@@ -10,6 +10,9 @@
                 <th>Dirección</th>
                 <th>Teléfono</th>
                 <th>Receptor de llamada</th>
+                @if($createEvent)
+                <th>Acciones</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -51,7 +54,13 @@
                 <td>{{ $call->address }} {{ optional($call->commune)->name }}</td>
                 <td>{{ $call->telephone }}</td>
                 <td>{{ $call->receptor->officialFullName }}</td>
-
+                @if($createEvent)
+                <td>
+                    <a href="{{ route('samu.event.create', $call) }}" class="btn btn-sm btn-outline-success">
+                        <i class="fas fa-plus"></i> Cometido
+                    </a>
+                </td>
+                @endif
             </tr>
             @endforeach   
         </tbody>
