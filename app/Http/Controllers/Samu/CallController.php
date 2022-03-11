@@ -123,8 +123,9 @@ class CallController extends Controller
     public function edit(Call $call)
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',true)->first();
-        $communes = Commune::where('region_id', 1)->get(['id', 'name', 'latitude', 'longitude']);
+        $shift = Shift::whereStatus(true)->first();
+        $communes = Commune::whereRegionId(1)->get(['id', 'name', 'latitude', 'longitude']);
+        $keys = Key::get(['id', 'key', 'name']);
 
         if(!$shift) 
         {
@@ -132,7 +133,7 @@ class CallController extends Controller
             return redirect()->route('samu.welcome');
         }
 
-        return view ('samu.call.edit' , compact('call', 'communes', 'shift'));
+        return view ('samu.call.edit' , compact('call', 'communes','keys', 'shift'));
     }
 
     /**
