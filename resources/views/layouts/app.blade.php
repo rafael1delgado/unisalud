@@ -58,14 +58,29 @@
     <body>
 
     @livewireScripts
-    <nav class="navbar navbar-dark sticky-top bg-ssi flex-md-nowrap p-0 mb-3 shadow ssi-azul">
+    <nav class="navbar navbar-dark navbar-expand sticky-top bg-ssi flex-md-nowrap p-0 mb-3 shadow ssi-azul">
             <a class="navbar-ssi @production ssi-rojo @else ssi-morado @endproduction col-md-3 col-lg-2 mr-0 px-3" href="{{ route('home') }}">Servicio de Salud</a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
-            <ul class="navbar-nav px-3 d-none d-md-block">
-                <li class="nav-item">
-                    <span class="nav-link">@auth {{ auth()->user()->officialName }} @endauth</span>
+            <ul class="navbar-nav ml-auto mr-1">
+                <li class="nav-item dropdown">
+
+                    @if(auth()->check())
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->officialName }} <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            @if(session()->has('god'))
+                                <a class="dropdown-item" href="{{ route('user.switch', session('god')) }}">
+                                    <i class="fas fa-eye text-danger"></i> God Like
+                                </a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('claveunica.logout') }}">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                            </a>
+                        </div>
+                    @endif
                 </li>
             </ul>
         </nav>
