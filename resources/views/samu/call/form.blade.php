@@ -81,17 +81,26 @@
     </fieldset>
     
     <fieldset class="form-group col-6 col-md-1">
-        <label for="for-age">Edad</label>
-        <input type="number" class="form-control form-control-sm @error('age') is-invalid @enderror" step=".01" name="age" id="for-age"
-        value="{{ old('age', optional($call)->age) }}">
-        <small id="for-age" class="form-text">1,06 = 1 año 6 meses</small>
-        @error('age')
-            <div class="text-danger">
-                <small>{{ $message }}</small>
-            </div>
+        <label for="for-anho">Años</label>
+        <input type="number" class="form-control form-control-sm @error('anho') is-invalid @enderror" name="anho" id="for-anho"
+            value="{{ old('anho', optional($call)->anho) }}" >
+        @error('anho')
+        <div class="text-danger">
+            <small>{{ $message }}</small>
+        </div>
         @enderror
     </fieldset>
-    
+
+    <fieldset class="form-group col-6 col-md-1">
+        <label for="for-month">Meses</label>
+        <input type="number" class="form-control form-control-sm @error('month') is-invalid @enderror" name="month" id="for-month"
+            value="{{ old('month', optional($call)->month) }}">
+        @error('month')
+        <div class="text-danger">
+            <small>{{ $message }}</small>
+        </div>
+        @enderror
+    </fieldset>
     
     <fieldset class="form-group col-12 col-md-2">
         <label for="for-police_intervention">Intervención de carabineros</label>
@@ -142,6 +151,18 @@
                 <small>{{ $message }}</small>
             </div>
         @enderror
+    </fieldset>
+
+    <fieldset class="form-group col-md-3">
+        <label for="for-key">Clave*</label>
+        <select class="form-control form-control-sm" name="key_id" id="for-key" required>
+            <option value="">Selecciona una Clave</option>
+            @foreach($keys as $key)
+            <option value="{{ $key->id }}" {{ old('key_id', optional($call)->key_id) == $key->id ? 'selected' : '' }}>
+                {{ $key->key }} - {{ $key->name }}
+            </option>
+            @endforeach 
+        </select>
     </fieldset>
 </div>
 <div class="form-row">
