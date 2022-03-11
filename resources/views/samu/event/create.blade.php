@@ -4,7 +4,12 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Nuevo cometido {{ $nextCounter }}</h3>
+<h3 class="mb-3">
+    <i class="fas fa-car-crash"></i> Nuevo cometido {{ $nextCounter }}
+    @if($call->id)
+        - Relacionada con la llamada ID: {{ $call->id }}
+    @endif
+</h3>
       
 <form method="post" action="{{ route('samu.event.store') }}">
 
@@ -12,11 +17,11 @@
 
     <div class="form-row">
         <fieldset class="form-group col-md-12">
-            <label for="for_calls">Ultimas 20 llamadas clasificadas*</label>
-            <select class="form-control" name="call_id" id="call" required>
+            <label for="for-call">Ultimas 20 llamadas clasificadas*</label>
+            <select class="form-control" name="call_id" id="for-call" required>
                 <option value="">Selecciona una llamada</option>
-                @foreach($calls as $call)
-                    <option value="{{ $call->id }}">
+                @foreach($calls as $callItem)
+                    <option value="{{ $call->id }}" {{ old('call_id', optional($call)->id) == $callItem->id ? 'selected' : '' }}>
                     @if($call->events->isNotEmpty())
                      &nbsp;
                     @endif
@@ -40,7 +45,8 @@
     @include('samu.event.form', [
         'event' => null,
         'keys'  => $keys,
-        'shift' => $shift
+        'shift' => $shift,
+        'call'  => $call
     ])
 
     <button type="submit" class="btn btn-primary">Guardar</button>
