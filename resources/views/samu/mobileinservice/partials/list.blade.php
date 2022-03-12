@@ -9,7 +9,7 @@
                 <th>Estado</th>
                 <th>O2 central</th>
                 <th>Observaciones</th>
-                @if($editLuch)
+                @if($editLunch)
                     <th>Almuerzo</th>
                 @endif
                 <th></th>
@@ -34,7 +34,7 @@
                 <td>
                     {{ $mis->observation}} 
                 </td>
-                @if($editLuch)
+                @if($editLunch)
                 <td>
                         @livewire('samu.lunch',['mis' => $mis])
                     </td>
