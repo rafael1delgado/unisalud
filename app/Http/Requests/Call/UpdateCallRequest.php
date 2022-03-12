@@ -28,7 +28,7 @@ class UpdateCallRequest extends FormRequest
             'applicant'         => 'nullable|string|min:0|max:255',
             'year'              => 'nullable|integer|min:0|max:150',
             'month'             => 'nullable|integer|min:0|max:12',
-            'telephone'         => 'nullable|string|size:9',
+            'telephone'         => 'nullable|string',
             'reason'            => 'nullable|string|min:0|max:255',
             'police_intervention'=> 'nullable|boolean',
             'information'       => 'required|string|min:3|max:5000',

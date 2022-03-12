@@ -135,7 +135,7 @@
                     <th>Frecuencia respiratoria</th>
                     <th>Presión arterial</th>
                     <th>Presión arterial media</th>
-                    <th>Grasgow</th>
+                    <th>Glasgow</th>
                     <th>% Saturacion Oxig/Ambi</th>
                     <th>% Saturacion Oxig/Apoyo</th>
                     <th>HGT mg/dl</th>
