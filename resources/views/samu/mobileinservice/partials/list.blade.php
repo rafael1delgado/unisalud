@@ -9,7 +9,9 @@
                 <th>Estado</th>
                 <th>O2 central</th>
                 <th>Observaciones</th>
-                <th>Almuerzo</th>
+                @if($editLunch)
+                    <th>Almuerzo</th>
+                @endif
                 <th></th>
             </tr>
         </thead>
@@ -32,9 +34,11 @@
                 <td>
                     {{ $mis->observation}} 
                 </td>
+                @if($editLunch)
                 <td>
-                    @livewire('samu.lunch',['mis' => $mis])
-                </td>
+                        @livewire('samu.lunch',['mis' => $mis])
+                    </td>
+                @endif
                 <td rowspan="2">
                     @if($mis->shift->status == true)
                     <form method="POST" action="{{ route('samu.mobileinservice.destroy' , $mis) }}">

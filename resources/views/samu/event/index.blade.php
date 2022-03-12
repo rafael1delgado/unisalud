@@ -62,7 +62,7 @@
         <i class="fas fa-plus"></i> Crear cometido
     </a>
 </h3>
-@include('samu.call.partials.list',['calls' => $calls, 'edit' => true])
+@include('samu.call.partials.list',['calls' => $calls, 'edit' => true, 'createEvent' => true])
 
 
 <h3 class="mb-3"><i class="fas fa-car-crash"></i> Listado de cometidos abiertos</h3>

@@ -88,7 +88,9 @@ class CallController extends Controller
 
         if(Shift::whereStatus(true)->exists()) 
         {
-            Call::create($request->validated());
+            $dataValidated = $request->validated();
+            $dataValidated['age'] = generateAge($dataValidated['year'], $dataValidated['month']);
+            Call::create($dataValidated);
 
             $request->session()->flash('success', 'Se ha guardado el nuevo llamado.');
             return redirect()->route('samu.call.create');
@@ -121,8 +123,9 @@ class CallController extends Controller
     public function edit(Call $call)
     {
         /* Obtener el turno actual */
-        $shift = Shift::where('status',true)->first();
-        $communes = Commune::where('region_id', 1)->get(['id', 'name', 'latitude', 'longitude']);
+        $shift = Shift::whereStatus(true)->first();
+        $communes = Commune::whereRegionId(1)->get(['id', 'name', 'latitude', 'longitude']);
+        $keys = Key::get(['id', 'key', 'name']);
 
         if(!$shift) 
         {
@@ -130,7 +133,7 @@ class CallController extends Controller
             return redirect()->route('samu.welcome');
         }
 
-        return view ('samu.call.edit' , compact('call', 'communes', 'shift'));
+        return view ('samu.call.edit' , compact('call', 'communes','keys', 'shift'));
     }
 
     /**
@@ -148,6 +151,8 @@ class CallController extends Controller
         );
 
         $dataValidated = $request->validated();
+        $dataValidated['age'] = generateAge($dataValidated['year'], $dataValidated['month']);
+
         if($call->classification != $request->filled('classification'))
         {
             $dataValidated['regulator_id'] = auth()->id();

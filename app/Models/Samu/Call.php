@@ -32,6 +32,7 @@ class Call extends Model implements Auditable
         'commune_id',
         'classification',
         'clasificator_id',
+        'key_id',
         'regulator_id',
         'receptor_id',
         'hour',
@@ -124,6 +125,28 @@ class Call extends Model implements Auditable
             }
             return $edad;
         }
+    }
+
+    public function getYearAttribute()
+    {
+        $year = null;
+        if($this->age)
+        {
+            list($year) = explode('.', $this->age);
+            $year = ($year == 0) ? null : (int)$year;
+        }
+        return $year;
+    }
+
+    public function getMonthAttribute()
+    {
+        $month = null;
+        if($this->age)
+        {
+            list($year, $month) = explode('.', $this->age);
+            $month = ($month == 0) ? null : (int)$month;
+        }
+        return $month;
     }
 
     public function scopeWithClassification($query, $type)

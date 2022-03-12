@@ -30,7 +30,7 @@
 
 @if($call->associatedCalls->isNotEmpty())
     <h4 class="mb-3"><i class="fas fa-phone"></i> Llamadas asociadas</h4>
-    @include('samu.call.partials.list',['calls' => $call->associatedCalls, 'edit'=>true])
+    @include('samu.call.partials.list',['calls' => $call->associatedCalls, 'edit'=>true, 'createEvent' => false])
 @else
     <h4 class="mb-3"><i class="fas fa-phone"></i> Asociar a llamada</h4>
     @livewire('samu.associated-calls',['shift' => $shift, 'currentCall' => $call])

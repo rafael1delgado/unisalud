@@ -40,7 +40,8 @@
     @if($calls)
         @include('samu.call.partials.list', [
             'calls' => $calls, 
-            'edit' => true
+            'edit' => true,
+            'createEvent' => false
         ])
 
     @endif

@@ -100,3 +100,21 @@ function GuardarSic($request){
         'descripcion' => 'Descripcion de prueba'
     );
 }
+
+function generateAge($year, $month) {
+    $age = null;
+    $valueYear = $year ? $year : 0;
+    $valueMonth = $month ? (int)$month : 0;
+
+    if($valueMonth >= 1 && $valueMonth <= 9 ) 
+    {
+        $valueMonth = "0" . (string)$valueMonth;
+    }
+
+    if($year != null or $month != null) 
+    {
+        $age = (float)($valueYear . '.' . $valueMonth);
+    }
+
+    return $age;
+}
