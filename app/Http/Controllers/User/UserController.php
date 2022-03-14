@@ -116,10 +116,12 @@ class UserController extends Controller
             $newHumanName->save();
         }
 
-        if (
-            $user->officialEmail != $request->email 
-        ) {
-            $user->officialContactPointEmail->delete();
+        if ($user->officialEmail != $request->email) {
+
+            if($user->officialContactPointEmail){
+                $user->officialContactPointEmail->delete();
+            }
+
             $newContactPoint = new ContactPoint();
             $newContactPoint->system = 'email';
             $newContactPoint->user_id = $user->id;
@@ -128,10 +130,12 @@ class UserController extends Controller
             $newContactPoint->save();
         }
 
-        if (
-            $user->officialPhone != $request->phone 
-        ) {
-            $user->officialContactPointPhone->delete();
+        if ($user->officialPhone != $request->phone) {
+
+            if($user->officialContactPointPhone){
+                $user->officialContactPointPhone->delete();
+            }
+
             $newContactPoint = new ContactPoint();
             $newContactPoint->system = 'phone';
             $newContactPoint->user_id = $user->id;
