@@ -43,7 +43,7 @@
     @method('POST')
 
     @include('samu.event.form', [
-        'event' => null,
+        'event' => (isset($event->id)) ? $event : null,
         'keys'  => $keys,
         'shift' => $shift,
         'call'  => $call
