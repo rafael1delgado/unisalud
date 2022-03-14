@@ -51,15 +51,25 @@
                 <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
                 <td>{{ $event->observation }}</td>
                 <td>
-                    @can('SAMU administrador')
+                    <div class="btn-group" role="group">
+
+                        @can('SAMU administrador')
                         @if($event->status AND !$event->trashed())
                         <form method="POST" action="{{ route('samu.event.destroy', $event) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                            <button type="submit" class="btn btn-sm btn-danger" title="Eliminar Cometido">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </form>
                         @endif
-                    @endcan
+                        @endcan
+                        @if($btnDuplicate)
+                        <a href="{{ route('samu.event.duplicate', $event) }}" title="Duplicar cometido" class="btn btn-sm btn-success">
+                            <i class="far fa-copy"></i>
+                        </a>
+                        @endif
+                    </div>
                 </td>
             </tr>
             <tr class="table-{{ $event->color }}">
