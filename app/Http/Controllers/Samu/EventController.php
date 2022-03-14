@@ -57,9 +57,10 @@ class EventController extends Controller
      * Show the form for creating a new resource.
      *
      * @param  \App\Models\Samu\Call  $call
+     * @param  \App\Models\Samu\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function create(Call $call)
+    public function create(Call $call, Event $event)
     {
         /* Obtener el turno actual */
         $shift = Shift::whereStatus(true)->first();
@@ -87,6 +88,7 @@ class EventController extends Controller
 
         return view('samu.event.create', compact(
             'call',
+            'event',
             'shift',
             'keys',
             'establishments',
