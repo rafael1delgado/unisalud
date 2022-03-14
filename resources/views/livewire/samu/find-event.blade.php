@@ -13,7 +13,7 @@
 
     @if($events)
         @if($events->isNotEmpty())
-            @include('samu.event.partials.index', ['events' => $events ])
+            @include('samu.event.partials.index', ['events' => $events , 'btnDuplicate' => false])
         @else
             <div class="alert alert-warning" role="alert">
                 <strong>No hay resultados</strong>
