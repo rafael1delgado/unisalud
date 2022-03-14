@@ -53,9 +53,9 @@
                         </td>
                     </tr>
                     @empty
-                        <tr><th scope="row" colspan="8" class="text-center">No hay coincidencias con la búsqueda <a class="btn-primary btn-sm" href="{{ route('user.create')}}"> Ingresar uno nuevo</a></td></th>
+                        <tr><th scope="row" colspan="8" class="text-center">No hay coincidencias con la búsqueda <a class="btn-primary btn-sm" href="{{ route('user.create')}}"><i class="fas fa-user-plus"></i> Ingresar nuevo usuario</a></td></th>
                     @endforelse
-                    @if($patients->count() > 0) <tr><th scope="row" colspan="8" class="text-center">Si ninguno en la búsqueda corresponde al usuario que estas buscando <a class="btn-primary btn-sm" href="{{ route('user.create')}}"> <i class="fas fa-user-plus"></i> Ingresar uno nuevo</a></td></th> @endif
+                    @if($patients->count() > 0) <tr><th scope="row" colspan="8" class="text-center">Si ninguno en la búsqueda corresponde al usuario que estas buscando <a class="btn-primary btn-sm" href="{{ route('user.create')}}"> <i class="fas fa-user-plus"></i> Ingresar nuevo usuario</a></td></th> @endif
                 @endif
             </tbody>
         </table>
