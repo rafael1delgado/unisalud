@@ -64,6 +64,7 @@ class User extends Authenticatable implements Auditable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birthday' => 'datetime'
     ];
 
 
@@ -242,29 +243,23 @@ class User extends Authenticatable implements Auditable
     //ContactPoints
     public function getOfficialPhoneAttribute()
     {
-        if ($this->contactPoints()->where('system', 'phone')->count() > 0) {
-            return $this->contactPoints()
-                ->where('system', 'phone')
-                ->first('value')->value;
-        }
-        else
-            return '';
+        $phone = $this->getOfficialContactPointPhoneAttribute();
+        return ($phone) ? $phone->value : ''; 
     }
 
     public function getOfficialContactPointPhoneAttribute()
     {
         return $this->contactPoints()
             ->where('system', 'phone')
+            ->latest()
             ->first();
         
     }
 
     public function getOfficialEmailAttribute()
     {
-        $email = $this->contactPoints()
-            ->where('system', 'email')
-            ->first('value');
-        return ($email) ? $email->value : null;
+        $email = $this->getOfficialContactPointEmailAttribute();
+        return ($email) ? $email->value : '';
     }
 
 
@@ -272,6 +267,7 @@ class User extends Authenticatable implements Auditable
     {
         $contactPointEmail = $this->contactPoints()
             ->where('system', 'email')
+            ->latest()
             ->first();
         return $contactPointEmail;
     }
@@ -295,6 +291,21 @@ class User extends Authenticatable implements Auditable
             case 'female': return 'Femenino'; break;
             case 'other': return 'Otro'; break;
             case 'unknown': return 'Desconocido'; break;
+        }
+    }
+
+    function getAgeStringAttribute(){
+        if($this->birthday){
+            $age = $this->birthday->age;
+            if($age > 0){
+                return $age .' años';
+            }elseif($this->birthday->diffInMonths(now()) > 0){
+                return $this->birthday->diffInMonths(now()) . ' meses';
+            }else{
+                return $this->birthday->diffInDays(now()) . ' días';
+            }
+        }else{
+            return '';
         }
     }
 

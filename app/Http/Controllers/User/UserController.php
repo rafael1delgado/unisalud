@@ -117,11 +117,6 @@ class UserController extends Controller
         }
 
         if ($user->officialEmail != $request->email) {
-
-            if($user->officialContactPointEmail){
-                $user->officialContactPointEmail->delete();
-            }
-
             $newContactPoint = new ContactPoint();
             $newContactPoint->system = 'email';
             $newContactPoint->user_id = $user->id;
@@ -131,11 +126,6 @@ class UserController extends Controller
         }
 
         if ($user->officialPhone != $request->phone) {
-
-            if($user->officialContactPointPhone){
-                $user->officialContactPointPhone->delete();
-            }
-
             $newContactPoint = new ContactPoint();
             $newContactPoint->system = 'phone';
             $newContactPoint->user_id = $user->id;

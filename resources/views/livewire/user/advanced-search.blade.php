@@ -40,7 +40,7 @@
                     <tr>
                         <td>{{ ($patient) ? $patient->officialFullName : '' }}</td>
                         <td>{{($patient) ? $patient->identifierRun->value . '-' . $patient->identifierRun->dv : ''}}</td>
-                        <td>{{($patient) ? \Carbon\Carbon::parse($patient->birthday)->age .' años' : ''}}</td>
+                        <td>{{($patient) ? $patient->ageString : ''}}</td>
                         <td>{{($patient) ? $patient->sex : '' }}</td>
                         <td>{{($patient) ? $patient->officialFullAddress : ''}}</td>
                         <td>{{($patient) ? $patient->officialPhone : ''}}</td>
