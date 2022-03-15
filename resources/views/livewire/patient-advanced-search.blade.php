@@ -48,7 +48,7 @@
                         <td>{{($patient) ? $patient->officialFullAddress : ''}}</td>
                         <td>{{($patient) ? $patient->officialPhone : ''}}</td>
                         <td>{{($patient && $patient->officialEmail) ? $patient->officialEmail : ''}}</td>
-                        <td><a class="btn-primary btn-sm" href="{{ route('patient.edit',$patient->id)}}"> <i class="fas fa-check"></i> </a></td>
+                        <td><a class="btn-primary btn-sm" href="{{ route('patient.edit',$patient->id)}}" title="Editar"> <i class="fas fa-edit"></i> </a></td>
                         @can('Epi: Create')
                         <td>
                             <a href="{{ route('epi.chagas.create',$patient) }}"><i class="fas fa-viruses"></i></a>
@@ -56,9 +56,9 @@
                         @endcan
                     </tr>
                     @empty
-                        <tr><th scope="row" colspan="8" class="text-center">No hay coincidencias con la búsqueda <a class="btn-primary btn-sm" href="{{ route('patient.create')}}"> Ingresar uno nuevo</a></td></th>
+                        <tr><th scope="row" colspan="8" class="text-center">No hay coincidencias con la búsqueda <a class="btn-primary btn-sm" href="{{ route('patient.create')}}"> <i class="fas fa-user-plus"></i> Ingresar nuevo paciente</a></td></th>
                     @endforelse
-                    @if($patients->count() > 0) <tr><th scope="row" colspan="8" class="text-center">Si ninguno en la búsqueda corresponde al paciente que estas buscando <a class="btn-primary btn-sm" href="{{ route('patient.create')}}"> Ingresar uno nuevo</a></td></th> @endif
+                    @if($patients->count() > 0) <tr><th scope="row" colspan="8" class="text-center">Si ninguno en la búsqueda corresponde al paciente que estas buscando <a class="btn-primary btn-sm" href="{{ route('patient.create')}}"> <i class="fas fa-user-plus"></i> Ingresar nuevo paciente</a></td></th> @endif
                 @endif
             </tbody>
         </table>

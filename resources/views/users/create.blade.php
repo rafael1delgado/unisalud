@@ -20,12 +20,12 @@
 
                 <fieldset class="form-group col-md-1">
                     <label for="for_given">Run*</label>
-                    <input type="text" class="form-control" name="run" id="for_run" required value="{{ old('run')}}"
+                    <input type="number" class="form-control" name="run" id="for_run" required value="{{ old('run')}}"
                 >
                 </fieldset>
                 <fieldset class="form-group col-md-1">
                     <label for="for_given">DV*</label>
-                    <input type="text" class="form-control" name="dv" id="for_dv" required value="{{ old('dv')}}"
+                    <input type="text" class="form-control" name="dv" id="for_dv" readonly required value="{{ old('dv')}}"
                 >
                 </fieldset>
 

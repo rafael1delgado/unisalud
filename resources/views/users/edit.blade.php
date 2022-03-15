@@ -22,12 +22,12 @@
 
                 <fieldset class="form-group col-md-1">
                     <label for="for_run">Run*</label>
-                    <input type="text" class="form-control" name="run" id="for_run" required readonly value="{{ old('run', $user->identifierRun->value)}}"
+                    <input type="number" class="form-control" name="run" id="for_run" required readonly value="{{ old('run', $user->identifierRun->value)}}"
                 >
                 </fieldset>
                 <fieldset class="form-group col-md-1">
                     <label for="for_dv">DV*</label>
-                    <input type="text" class="form-control" name="dv" id="for_dv" required readonly value="{{ old('dv', $user->identifierRun->dv)}}"
+                    <input type="text" class="form-control" name="dv" id="for_dv" readonly required readonly value="{{ old('dv', $user->identifierRun->dv)}}"
                 >
                 </fieldset>
 

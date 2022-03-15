@@ -34,14 +34,14 @@
                 <input type="hidden" name='human_name_use' value='official'>
                 <div class="form-row">
                     <fieldset class="form-group col-md-5">
-                        <label for="for_name">Nombres</label>
+                        <label for="for_name">Nombres *</label>
                         <input type="text" class="form-control" name="given"
                                id="for_name" required
                                value="{{ $patient->actualOfficialHumanName->given }}">
                     </fieldset>
 
                     <fieldset class="form-group col-md-3">
-                        <label for="for_fathers_family">Apellido Paterno</label>
+                        <label for="for_fathers_family">Apellido Paterno *</label>
                         <input type="text" class="form-control" name="fathers_family"
                                id="for_fathers_family" required
                                value="{{ $patient->actualOfficialHumanName->fathers_family }}">
@@ -50,7 +50,7 @@
                     <fieldset class="form-group col-md-3">
                         <label for="for_mothers_family">Apellido Materno</label>
                         <input type="text" class="form-control" name="mothers_family"
-                               id="for_mothers_family" required
+                               id="for_mothers_family" 
                                value="{{ $patient->actualOfficialHumanName->mothers_family }}">
                     </fieldset>
 
@@ -104,7 +104,7 @@
                 <div class="form-row">
 
                 <fieldset class="form-group col-md-4">
-                    <label for="for_nationality_id">Nacionalidad</label>
+                    <label for="for_nationality_id">Nacionalidad *</label>
                     <select name="nationality_id" id="for_nationality_id" class="form-control" required>
                         <option value=""></option>
                         @foreach($countries as $country)
@@ -136,7 +136,7 @@
 
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
-                        <label for="for_cod_con_marital_id">Estado Civil</label>
+                        <label for="for_cod_con_marital_id">Estado Civil *</label>
                         <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($maritalStatus as $status)
