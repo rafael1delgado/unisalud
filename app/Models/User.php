@@ -472,6 +472,13 @@ class User extends Authenticatable implements Auditable
         return $this->hasMany(Surveys\TeleconsultationSurvey::class, 'user_id');
     }
 
+    public function scopeDontHavePermission($query, $permissionName)
+    {
+        return $query->whereDoesntHave('permissions', function($subquery) use ($permissionName) {
+            return $subquery->where('name', $permissionName);
+        });
+    }
+    
     /**
      * Perform any actions required after the model boots.
      *
