@@ -154,6 +154,7 @@ return [
         'age'                   => 'edad',
         'body'                  => 'contenido',
         'city'                  => 'ciudad',
+        'call_id'               => 'llamada',
         'classification'        => 'clasificación',
         'commune_id'            => 'comuna',
         'content'               => 'contenido',
