@@ -117,7 +117,7 @@
     <fieldset class="form-group col-md-3">
         <label for="for-commune">Comuna</label>
         <select class="form-control" name="commune_id" id="for-commune">
-            <option value="">Selecciona una Comuna</option>
+            <option value="">Selecciona una Comuna </option>
             @foreach($communes as $name => $id)
             <option value="{{ $id }}" {{ old('commune_id', $call ? optional($call)->commune_id : optional($event)->commune_id ) == $id ? 'selected' : '' }}>{{ $name }}</option>
             @endforeach 

@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">
     <i class="fas fa-car-crash"></i> Nuevo cometido {{ $nextCounter }}
-    @if($call->id)
+    @if($call)
         - Relacionada con la llamada ID: {{ $call->id }}
     @endif
 </h3>
@@ -21,12 +21,12 @@
             <select class="form-control" name="call_id" id="for-call" required>
                 <option value="">Selecciona una llamada</option>
                 @foreach($calls as $callItem)
-                    <option value="{{ $call->id }}" {{ old('call_id', optional($call)->id) == $callItem->id ? 'selected' : '' }}>
-                    @if($call->events->isNotEmpty())
+                    <option value="{{ $callItem->id }}" {{ old('call_id', $event ? optional($event)->last_call->id : optional($call)->id) == $callItem->id ? 'selected' : '' }}>
+                    @if($callItem->events->isNotEmpty())
                      &nbsp;
                     @endif
                         <b>ID: {{ $callItem->id }}</b>
-                        @if($call->events->isNotEmpty())
+                        @if($callItem->events->isNotEmpty())
                             - COM: 
                             {{ implode(',', $callItem->events->pluck('id')->toArray() )}}
                         @endif
@@ -43,10 +43,10 @@
     @method('POST')
 
     @include('samu.event.form', [
-        'event' => null,
+        'event' => $event,
+        'call'  => $call,
         'keys'  => $keys,
         'shift' => $shift,
-        'call'  => $call
     ])
 
     <button type="submit" class="btn btn-primary">Guardar</button>

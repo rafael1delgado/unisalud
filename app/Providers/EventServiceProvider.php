@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Samu\Call;
 use App\Models\Samu\Event;
+use App\Models\Samu\MobileInService;
+use App\Observers\MobileInServiceObserver;
 use App\Observers\Samu\CallObserver;
 use App\Observers\Samu\EventObserver;
 use Illuminate\Auth\Events\Registered;
@@ -33,5 +35,6 @@ class EventServiceProvider extends ServiceProvider
     {
         Call::observe(CallObserver::class);
         Event::observe(EventObserver::class);
+        MobileInService::observe(MobileInServiceObserver::class);
     }
 }

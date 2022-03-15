@@ -53,7 +53,7 @@
 @if($events->isNotEmpty())
     <h4>Total de registros: {{ $events->count() }}</h4>
 
-    @include('samu.event.partials.index', ['events' => $events])
+    @include('samu.event.partials.index', ['events' => $events, 'btnDuplicate' => false])
 
     {{ $events->links() }}
 @else
