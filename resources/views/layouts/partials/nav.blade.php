@@ -494,8 +494,15 @@
 </ul>
 @endcan
 
+
 <ul class="nav flex-column">
     <li class="nav-item border-top">
+        @if(session()->has('god'))
+            <a class="nav-link" href="{{ route('user.switch', session('god')) }}">
+                <span class="text-danger" data-feather="eye"></span>
+                God Like
+            </a>
+        @endif
         <a class="nav-link" href="{{ route('claveunica.logout') }}">
             <span data-feather="log-out"></span>
             Cerrar sesión
