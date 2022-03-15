@@ -140,7 +140,7 @@ class MobileInServiceController extends Controller
         /* Obtener el turno actual */
         $shift = Shift::whereStatus(true)->first();
 
-        if($shift) 
+        if($shift)
         {
             $dataValidated = $request->validated();
             $dataValidated['shift_id'] = $shift->id;
@@ -174,10 +174,6 @@ class MobileInServiceController extends Controller
             : Response::deny('Acción no autorizada para "SAMU auditor".') 
         );
 
-        $mobileInService->update([
-            'position' => 0,
-        ]);
-    
         $mobileInService->delete();
  
         return redirect()->route('samu.mobileinservice.index')->with('danger', 'Eliminado satisfactoriamente.');
