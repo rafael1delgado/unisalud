@@ -8,7 +8,7 @@
             @foreach($keys as $key)
             <option 
                 value="{{ $key->id }}" 
-                {{ old('key_id', isset($call->id) ? optional($call)->key_id : optional($event)->key_id) == $key->id ? 'selected' : '' }}>
+                {{ old('key_id', $call ? optional($call)->key_id : optional($event)->key_id) == $key->id ? 'selected' : '' }}>
                 {{ $key->key }}  - {{ $key->name }}
             </option>
             @endforeach 
@@ -111,7 +111,7 @@
     <fieldset class="form-group col-md-5">
         <label for="for-address">Dirección</label>
         <input type="text" class="form-control" name="address" id="for-address"
-        value="{{ old('address', isset($call->id) ? optional($call)->address : optional($event)->address )}}">
+        value="{{ old('address', $call ? optional($call)->address : optional($event)->address )}}">
     </fieldset>
 
     <fieldset class="form-group col-md-3">
@@ -119,7 +119,7 @@
         <select class="form-control" name="commune_id" id="for-commune">
             <option value="">Selecciona una Comuna </option>
             @foreach($communes as $name => $id)
-            <option value="{{ $id }}" {{ old('commune_id', isset($call->id) ? optional($call)->commune_id : optional($event)->commune_id ) == $id ? 'selected' : '' }}>{{ $name }}</option>
+            <option value="{{ $id }}" {{ old('commune_id', $call ? optional($call)->commune_id : optional($event)->commune_id ) == $id ? 'selected' : '' }}>{{ $name }}</option>
             @endforeach 
         </select>
     </fieldset>
