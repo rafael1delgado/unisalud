@@ -31,7 +31,7 @@
     
     </div>
 
-    <button type="submit" class="btn btn-primary"> <i class="fa fa-send"></i> Enviar mi ubicación</button>
+    <button type="submit" class="btn btn-primary"> <i class="fa fa-paper-plane"></i> Enviar mi ubicación</button>
 
 </form>
 @endsection
