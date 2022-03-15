@@ -44,7 +44,7 @@
 
     @include('samu.event.form', [
         'event' => $event,
-        'call'  => $call
+        'call'  => $call,
         'keys'  => $keys,
         'shift' => $shift,
     ])

@@ -31,7 +31,7 @@
     @method('PUT')
 
     @include('samu.event.form', [
-        'call'  => null
+        'call'  => null,
         'event' => $event,
         'keys'  => $keys,
         'shift' => $shift,
