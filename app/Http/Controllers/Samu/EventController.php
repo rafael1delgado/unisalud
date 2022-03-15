@@ -60,7 +60,7 @@ class EventController extends Controller
      * @param  \App\Models\Samu\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function create(Call $call, Event $event)
+    public function create(Call $call = null, Event $event = null)
     {
         /* Obtener el turno actual */
         $shift = Shift::whereStatus(true)->first();
@@ -69,22 +69,20 @@ class EventController extends Controller
             session()->flash('danger', 'Debe abrir un turno primero');
             return redirect()->route('samu.welcome');
         }
+
         $mobiles            = Mobile::whereManaged(false)->get();
         $establishments     = Organization::whereHas('samu')->pluck('id','name')->sort();
         $nextCounter        = EventCounter::getNext();
         $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes    = CodConIdentifierType::pluck('id','text')->sort();
         $keys               = Key::orderBy('key')->get();
+        $communes           = Commune::whereRegionId(1)->pluck('id','name')->sort();
+        $mobilesInService   = $shift->mobilesInService->where('shift_id', $shift->id)->where('status', true)->sortBy('position');
+        $calls              = Call::latest()->where('classification','<>','OT')->limit(20)->get();
 
-        $calls = Call::latest()
-            ->where('classification','<>','OT')
-            ->limit(20)
-            ->get();
-
-        $mobilesInService = $shift->mobilesInService->where('shift_id', $shift->id)->where('status', true)->sortBy('position');
-       
-        /* TODO: Parametrizar */
-        $communes = Commune::whereRegionId(1)->pluck('id','name')->sort();
+        $event = $event
+            ? Event::select('id', 'observation', 'address', 'commune_id', 'key_id')->find($event->id)
+            : null;
 
         return view('samu.event.create', compact(
             'call',
