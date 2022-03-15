@@ -55,8 +55,8 @@
                 <td>{{ $call->telephone }}</td>
                 <td>{{ $call->receptor->officialFullName }}</td>
                 @if($createEvent)
-                <td>
-                    <a href="{{ route('samu.event.create', $call) }}" class="btn btn-sm btn-outline-success">
+                <td class="text-center">
+                    <a href="{{ route('samu.event.create', $call) }}" class="btn btn-sm btn-success">
                         <i class="fas fa-plus"></i> Cometido
                     </a>
                 </td>

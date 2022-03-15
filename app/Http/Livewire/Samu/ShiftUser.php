@@ -56,7 +56,12 @@ class ShiftUser extends Component
 
     public function render()
     {
-        $this->users = User::OrderBy('text')->Permission('SAMU')->pluck('id','text');
+        $this->users = User::query()
+            ->with('permissions')
+            ->orderBy('text')
+            ->permission(['SAMU operador', 'SAMU regulador', 'SAMU despachador'])
+            ->dontHavePermission('SAMU auditor')
+            ->pluck('id', 'text');
 
         $this->job_types    = JobType::where('tripulant', false)->orderBy('name')->get();
         return view('livewire.samu.shift-user');

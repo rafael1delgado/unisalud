@@ -548,6 +548,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 	->middleware('permission:SAMU administrador|SAMU despachador')
 	->group(function () {
 		Route::get('/', 			[EventController::class, 'index'])->name('index');
+		Route::get('/create/duplicate/{event}', [EventController::class, 'create'])->name('duplicate');
 		Route::get('/create/{call?}', [EventController::class, 'create'])->name('create');
 		Route::post('/store',		[EventController::class, 'store'])->name('store');
 		Route::get('/edit/{event}', [EventController::class, 'edit'])->name('edit');

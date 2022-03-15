@@ -100,7 +100,8 @@ class Event extends Model implements Auditable
     ];
 
     protected $appends = [
-        'color'
+        'color',
+        'last_call'
     ];
 
     public function shift() 
@@ -173,5 +174,10 @@ class Event extends Model implements Auditable
         if($this->return_base_at)           $color = 'info';
         if($this->on_base_at)               $color = 'success';
         return $color;
+    }
+
+    public function getLastCallAttribute()
+    {
+        return $this->calls->last();
     }
 }
