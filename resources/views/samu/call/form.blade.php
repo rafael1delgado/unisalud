@@ -154,8 +154,8 @@
     </fieldset>
 
     <fieldset class="form-group col-md-3">
-        <label for="for-key">Clave*</label>
-        <select class="form-control form-control-sm" name="key_id" id="for-key" required>
+        <label for="for-key">Clave</label>
+        <select class="form-control form-control-sm" name="key_id" id="for-key">
             <option value="">Selecciona una Clave</option>
             @foreach($keys as $key)
             <option value="{{ $key->id }}" {{ old('key_id', optional($call)->key_id) == $key->id ? 'selected' : '' }}>
