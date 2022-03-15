@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">
     <i class="fas fa-car-crash"></i> Nuevo cometido {{ $nextCounter }}
-    @if($call->id)
+    @if($call)
         - Relacionada con la llamada ID: {{ $call->id }}
     @endif
 </h3>
@@ -43,10 +43,10 @@
     @method('POST')
 
     @include('samu.event.form', [
-        'event' => (isset($event->id)) ? $event : null,
+        'event' => $event,
+        'call'  => $call
         'keys'  => $keys,
         'shift' => $shift,
-        'call'  => $call
     ])
 
     <button type="submit" class="btn btn-primary">Guardar</button>
