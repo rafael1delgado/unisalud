@@ -138,4 +138,20 @@ class MobileInService extends Model implements Auditable
     {
         return $this->lunch_start_at != null && $this->lunch_end_at == null;
     }
+
+    public static function reorder(Shift $shift)
+    {
+        $mobilesInService = MobileInService::query()
+            ->whereShiftId($shift->id)
+            ->orderBy('status', 'DESC')
+            ->orderBy('position', 'ASC')
+            ->get();
+
+        foreach($mobilesInService as $index => $mis)
+        {
+            $mis->update([
+                'position' => $index + 1
+            ]);
+        }
+    }
 }
