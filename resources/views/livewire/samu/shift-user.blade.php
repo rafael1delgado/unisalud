@@ -3,7 +3,7 @@
 <div class="form-row">
     <div class="col-6">
         <select class="form-control" wire:model='user_id' required="required">
-            <option value=""></option>
+            <option value="">Selecciona un usuario</option>
             @foreach($users as $user => $id)
             <option value="{{ $id }}">{{ $user }}</option>
             @endforeach
@@ -13,7 +13,7 @@
 
     <div class="col-5">
         <select class="form-control"  wire:model="job_type_id">
-            <option value=""></option>
+            <option value="">Selecciona un tipo de trabajador</option>
             @foreach($job_types as $jt)
             <option value="{{ $jt->id }}">{{ $jt->name }}</option>
             @endforeach
