@@ -4,7 +4,24 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-car-crash"></i> Editar cometido {{ $event->id }}</h3>
+<div class="row">
+    <div class="col">
+        <h3 class="mb-3"><i class="fas fa-car-crash"></i> Editar cometido {{ $event->id }}</h3>
+    </div>
+    <div class="col text-right">
+        @can('SAMU administrador')
+            @if($event->status AND !$event->trashed())
+            <form method="POST" action="{{ route('samu.event.destroy', $event) }}">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-sm btn-danger" title="Eliminar Cometido">
+                    <i class="fas fa-trash"></i> Eliminar Cometido
+                </button>
+            </form>
+            @endif
+        @endcan
+    </div>
+</div>
 
 @if($event->status)
 <form method="post" action="{{ route('samu.event.update', $event) }}">
@@ -14,10 +31,10 @@
     @method('PUT')
 
     @include('samu.event.form', [
+        'call'  => null
         'event' => $event,
         'keys'  => $keys,
         'shift' => $shift,
-        'call'  => null
     ])
 
     @if($event->status)
