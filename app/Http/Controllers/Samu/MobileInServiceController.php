@@ -148,18 +148,7 @@ class MobileInServiceController extends Controller
             
             $mobileInService->update($dataValidated);
             
-            $mobilesInService = MobileInService::query()
-                ->whereShiftId($shift->id)
-                ->orderBy('status', 'DESC')
-                ->orderBy('position', 'ASC')
-                ->get();
-
-            foreach($mobilesInService as $index => $mis)
-            {
-                $mis->update([
-                    'position' => $index + 1
-                ]);
-            }
+            MobileInService::reorder($shift);
 
             return redirect()->route('samu.mobileinservice.index', compact('mobileInService'));
         }
