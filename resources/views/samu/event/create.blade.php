@@ -21,12 +21,12 @@
             <select class="form-control" name="call_id" id="for-call" required>
                 <option value="">Selecciona una llamada</option>
                 @foreach($calls as $callItem)
-                    <option value="{{ $callItem->id }}" {{ old('call_id', optional($call)->id) == $callItem->id ? 'selected' : '' }}>
-                    @if($call->events->isNotEmpty())
+                    <option value="{{ $callItem->id }}" {{ old('call_id', $event ? optional($event)->last_call->id : optional($call)->id) == $callItem->id ? 'selected' : '' }}>
+                    @if($callItem->events->isNotEmpty())
                      &nbsp;
                     @endif
                         <b>ID: {{ $callItem->id }}</b>
-                        @if($call->events->isNotEmpty())
+                        @if($callItem->events->isNotEmpty())
                             - COM: 
                             {{ implode(',', $callItem->events->pluck('id')->toArray() )}}
                         @endif
