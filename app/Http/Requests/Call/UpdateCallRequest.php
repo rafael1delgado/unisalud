@@ -33,7 +33,7 @@ class UpdateCallRequest extends FormRequest
             'police_intervention'=> 'nullable|boolean',
             'information'       => 'required|string|min:3|max:5000',
             'commune_id'        => 'nullable|exists:communes,id',
-            'key_id'            => 'exists:samu_keys,id',
+            'key_id'            => 'nullable|exists:samu_keys,id',
             'address'           => 'nullable|string|min:0|max:255',
             'latitude'          => 'nullable|numeric',
             'longitude'         => 'nullable|numeric',
