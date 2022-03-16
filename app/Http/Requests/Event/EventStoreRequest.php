@@ -27,7 +27,6 @@ class EventStoreRequest extends FormRequest
             'mobile_id'             => 'required|exists:samu_mobiles,id',
             'key_id'                => 'required|exists:samu_keys,id',
             'call_id'               => 'required|exists:samu_calls,id',
-            'shift_id'              => 'nullable|exists:samu_shifts,id',
             'return_key_id'         => 'nullable|exists:samu_keys,id',
             'observation'           => 'nullable|string|min:0|max:5000',
             'external_crew'         => 'nullable|string|min:0|max:5000',

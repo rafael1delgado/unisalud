@@ -93,6 +93,10 @@ Recepción de paciente -> Estado actual "
 ## Pendientes
 - [x] Listar al crear un turno, los usuarios que tenga los permisos, operador o regulador o despachador y que no tenga el permiso auditor.
 - [ ] Perfil de conductor solo pueda ver el sub menú de conductor.
+- [ ] Pasar select de comunas a un mantenedor, que ellos puedan selecconar las comunas que aparezca en el select. 
+- [x] Los eventos cerrados, se pueden abrir dentro de 30 dias.
+- [ ] Asociar coordenadas que estan en la lupa, actualizar las coordenadas a una llamada en base a las seleccionadas.
+
 # Notas Sistema SAMU
 - Tripulación registrar movimientos, fecha en que asume
 - Ubicación de las ambulancias
