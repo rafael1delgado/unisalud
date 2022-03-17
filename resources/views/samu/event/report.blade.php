@@ -30,22 +30,42 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($event->calls as $call)
+                @if($event->call)
+                    <tr>
+                        <td class="center">{{ $event->call->hour->format('H:i') }}</td>
+                        <td>{{ $event->call->telephone }}</td>
+                        <td>{{ $event->call->address }} {{ optional($event->call->commune)->name }}</td>
+                        <td>{{ $event->call->applicant }}</td>
+                        <td class="center">{{ $event->call->classification }}</td>
+                        <td class="center">{{ $event->call->receptor_id }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">{{ $event->call->sex_abbr }} {{ $event->call->age_format }} {{ $event->call->information }}</td>
+                    </tr>
+                    @foreach($event->call->associatedCalls as $associatedCall)
+                    <tr>
+                        <td class="center">{{ $associatedCall->hour->format('H:i') }}</td>
+                        <td>{{ $associatedCall->telephone }}</td>
+                        <td>{{ $associatedCall->address }} {{ optional($associatedCall->commune)->name }}</td>
+                        <td>{{ $associatedCall->applicant }}</td>
+                        <td class="center">{{ $associatedCall->classification }}</td>
+                        <td class="center">{{ $associatedCall->receptor_id }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">{{ $associatedCall->sex_abbr }} {{ $associatedCall->age_format }} {{ $associatedCall->information }}</td>
+                    </tr>
+                    @endforeach
+                @else
                 <tr>
-                    <td class="center">{{ $call->hour->format('H:i') }}</td>
-                    <td>{{ $call->telephone }}</td>
-                    <td>{{ $call->address }} {{ optional($call->commune)->name }}</td>
-                    <td>{{ $call->applicant }}</td>
-                    <td class="center">{{ $call->classification }}</td>
-                    <td class="center">{{ $call->receptor_id }}</td>
+                    <td class="center" colspan="6">
+                        No hay llamadas
+                    </td>
                 </tr>
-                <tr>
-                    <td colspan="6">{{ $call->sex_abbr }} {{ $call->age_format }} {{ $call->information }}</td>
-                </tr>
-                @if(!$loop->last)
-                    <tr><td colspan="6" style="border-left: 1px solid white; border-right: 1px solid white;">&nbsp;</td></tr>
                 @endif
-                @endforeach
+                {{-- @if(!$loop->last)
+                    <tr><td colspan="6" style="border-left: 1px solid white; border-right: 1px solid white;">&nbsp;</td></tr>
+                    @endif 
+                --}}
             </tbody>
         </table>
 
