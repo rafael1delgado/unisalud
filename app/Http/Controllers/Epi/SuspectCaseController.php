@@ -19,8 +19,9 @@ class SuspectCaseController extends Controller
     public function index($tray)
     {
         if ($tray == 'Mi Organización') {
-            //dd('soy organizacion');
+            // dd('soy organizacion');
             $suspectcases = SuspectCase::where('organization_id', Auth::user()->practitioners->last()->organization->id)->get();
+            //dd($suspectcases);
         } 
         else {
             $suspectcases = SuspectCase::all();
