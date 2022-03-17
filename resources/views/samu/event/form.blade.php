@@ -1,4 +1,4 @@
-<h4> Asignación de seguimiento y horarios</h4>
+<h4>Asignación de seguimiento y horarios</h4>
 <div class="form-row">
 
     <fieldset class="form-group col-md-3">
