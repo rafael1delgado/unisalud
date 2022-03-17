@@ -47,7 +47,7 @@ class CoordinateController extends Controller
         $coordinate = new Coordinate($request->all());
         $coordinate->save();
 
-        session()->flash('success', 'Se envió correctamente su ubicación número: ' . $coordinate->id);
+        session()->flash('success', 'Se envió correctamente su ubicación a SAMU, su identificador es: ' . $coordinate->id);
         return redirect()->back();
     }
 

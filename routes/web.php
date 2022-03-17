@@ -98,9 +98,6 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('authentic
 Route::get('/logout', [LoginController::class,'logout'])->name('logout');
 
 
-Route::get('/miubicacion', [CoordinateController::class, 'create'])->name('coordinate.create');
-
-
 
 /** Ejempo con livewire */
 //Route::get('/home', Home::class)->middleware('auth')->name('home');
@@ -603,6 +600,9 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::post('/', [CoordinateController::class, 'store'])->name('store');
 	});
 });
+
+Route::get('/miubicacion', [CoordinateController::class, 'create'])->name('coordinate.create');
+Route::post('/miubicacion', [CoordinateController::class, 'store'])->name('coordinate.store');
 
 //fin rutas samu
 

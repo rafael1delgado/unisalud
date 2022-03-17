@@ -4,7 +4,7 @@
 
 <h3 class="mb-3"><i class="fas fa-globe"></i> Mi ubicación</h3>
 
-<form action="{{route('samu.coordinate.store')}}" method="post" autocomplete="off">
+<form action="{{route('coordinate.store')}}" method="post" autocomplete="off">
     @csrf
     @method('POST')
 
