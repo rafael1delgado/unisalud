@@ -57,10 +57,8 @@
     </div>
 </div>
 
-<h3 class="mb-3"><i class="fas fa-phone"></i> Llamadas pendientes (sin cometido asociado)
-    <a class="btn btn-success float-right" href="{{ route('samu.event.create') }}">
-        <i class="fas fa-plus"></i> Crear cometido
-    </a>
+<h3 class="mb-3">
+    <i class="fas fa-phone"></i> Llamadas pendientes (sin cometido asociado)
 </h3>
 @include('samu.call.partials.list',['calls' => $calls, 'edit' => true, 'createEvent' => true])
 
