@@ -75,7 +75,7 @@ class EventController extends Controller
         $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes    = CodConIdentifierType::pluck('id','text')->sort();
         $keys               = Key::orderBy('key')->get();
-        $communes           = Commune::whereRegionId(1)->pluck('id','name')->sort();
+        $communes           = Commune::whereHas('samu')->pluck('id','name')->sort();
         $mobilesInService   = $shift->mobilesInService->where('shift_id', $shift->id)->where('status', true)->sortBy('position');
         
         $event = $event
@@ -165,7 +165,7 @@ class EventController extends Controller
         $mobilesInService   = $shift->mobilesInService->where('status', true)->sortBy('position');
 
         /* TODO: Parametrizar */
-        $communes = Commune::whereRegionId(1)->pluck('id','name')->sort();
+        $communes = Commune::whereHas('samu')->pluck('id','name')->sort();
         
         return view('samu.event.edit', compact(
             'shift',
@@ -261,7 +261,7 @@ class EventController extends Controller
         /* Obtener los filtros */
         $keys = Key::orderBy('key')->get();
         /* TODO: Parametrizar */
-        $communes = Commune::where('region_id',1)->pluck('id','name')->sort();
+        $communes = Commune::whereHas('samu')->pluck('id','name')->sort();
 
         $events = collect();
 

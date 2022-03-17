@@ -53,14 +53,14 @@
 
                 <fieldset class="form-group col-md-3">
                     <label for="for_social_name">Email laboral</label>
-                    <input type="text" class="form-control" name="email" id="for_email"
+                    <input type="email" class="form-control" name="email" id="for_email"
                         value="{{old('email', $user->officialEmail)}}"
                 >
                 </fieldset>
 
                 <fieldset class="form-group col-md-2">
                     <label for="for_social_name">Teléfono laboral</label>
-                    <input type="text" class="form-control" name="phone" id="for_phone"
+                    <input type="number" class="form-control" name="phone" id="for_phone"
                         value="{{old('phone', $user->officialPhone)}}"
                 >
                 </fieldset>

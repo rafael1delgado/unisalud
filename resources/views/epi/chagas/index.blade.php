@@ -23,11 +23,15 @@
         </thead>
 
 
-        @can('Epi: Add Value')
+        
         <tbody id="tableCases">        
             @foreach($suspectcases as $suspectcase)
             <tr>
-                <td>{{$suspectcase->id??''}} <a href="{{ route('epi.chagas.edit',$suspectcase) }}" pclass="btn_edit"><i class="fas fa-edit"></i></a></td>
+                <td>{{$suspectcase->id??''}} 
+                @can('Epi: Add Value')
+                    <a href="{{ route('epi.chagas.edit',$suspectcase) }}" pclass="btn_edit"><i class="fas fa-edit"></i></a>
+                @endcan                
+                </td>
                 <td>{{$suspectcase->sample_at? $suspectcase->sample_at: ''}}</td>
                 <td>{{$suspectcase->organization->alias??''}}</td>
                 <td>{{$suspectcase->patient->OfficialFullName ??''}}</td>
@@ -44,7 +48,6 @@
             </tr>
             @endforeach
         </tbody>
-        @endcan
     </table>
 
 </div>

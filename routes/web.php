@@ -98,9 +98,6 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('authentic
 Route::get('/logout', [LoginController::class,'logout'])->name('logout');
 
 
-Route::get('/miubicacion', [CoordinateController::class, 'create'])->name('coordinate.create');
-
-
 
 /** Ejempo con livewire */
 //Route::get('/home', Home::class)->middleware('auth')->name('home');
@@ -475,6 +472,7 @@ use App\Http\Controllers\Samu\CallController;
 use App\Http\Controllers\Samu\NoveltieController;
 use App\Http\Controllers\Samu\EstablishmentController;
 use App\Http\Controllers\Samu\GpsController;
+use App\Http\Controllers\Samu\CommuneController;
 use App\Http\Livewire\Samu\FindEvent;
 use App\Http\Livewire\Samu\MobileSelector;
 use App\Http\Livewire\Samu\TimestampsAndLocation;
@@ -597,6 +595,13 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::post('/', 			[EstablishmentController::class, 'store'])->name('store');
 	});
 	
+	Route::prefix('communes')->name('commune.')
+	->middleware('permission:SAMU administrador')
+	->group(function () {
+		Route::get('/', 			[CommuneController::class, 'index'])->name('index');
+		Route::post('/', 			[CommuneController::class, 'store'])->name('store');
+	});
+
 	Route::prefix('coordinates')->name('coordinate.')
 	->group(function () {
 		Route::get('/', [CoordinateController::class, 'index'])->name('index');
@@ -604,6 +609,9 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::post('/', [CoordinateController::class, 'store'])->name('store');
 	});
 });
+
+Route::get('/miubicacion', [CoordinateController::class, 'create'])->name('coordinate.create');
+Route::post('/miubicacion', [CoordinateController::class, 'store'])->name('coordinate.store');
 
 //fin rutas samu
 
