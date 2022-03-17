@@ -18,7 +18,6 @@ use App\Models\Samu\ReceptionPlace;
 use App\Models\Commune;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
-use App\Models\Samu\MobileInService;
 
 class EventController extends Controller
 {
@@ -78,11 +77,10 @@ class EventController extends Controller
         $keys               = Key::orderBy('key')->get();
         $communes           = Commune::whereRegionId(1)->pluck('id','name')->sort();
         $mobilesInService   = $shift->mobilesInService->where('shift_id', $shift->id)->where('status', true)->sortBy('position');
-        $calls              = Call::latest()->where('classification','<>','OT')->limit(20)->get();
-
+        
         $event = $event
-            ? Event::select('id', 'observation', 'address', 'commune_id', 'key_id')->find($event->id)
-            : null;
+        ? Event::select('id', 'observation', 'address', 'commune_id', 'key_id', 'call_id')->find($event->id)
+        : null;
 
         return view('samu.event.create', compact(
             'call',
@@ -95,8 +93,7 @@ class EventController extends Controller
             'mobilesInService',
             'receptionPlaces',
             'identifierTypes',
-            'communes',
-            'calls'
+            'communes'
         ));
     }
 
@@ -106,7 +103,7 @@ class EventController extends Controller
      * @param  \App\Http\Requests\Event\EventStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventStoreRequest $request)
+    public function store(EventStoreRequest $request, Call $call = null, Event $event = null)
     {
         Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
             ? Response::allow()
@@ -115,12 +112,12 @@ class EventController extends Controller
 
         $shift = Shift::whereStatus(true)->first();
         
-        if($shift) 
+        if($shift)
         {
-            $dataValidated = $request->validated();
-            $dataValidated['patient_unknow'] = ($request->has('patient_unknown')) ? 1 : 0;
-            $event = Event::create($dataValidated);
-            $event->calls()->attach($dataValidated['call_id']);
+            $newEvent = Event::create($request->validated());
+            $callRelationed = $event ? $event->call : $call;
+            $newEvent->call()->associate($callRelationed);
+            $newEvent->save();
 
             session()->flash('success', 'Se ha creado el evento');
             return redirect()->route('samu.event.index');
@@ -198,18 +195,10 @@ class EventController extends Controller
         );
 
         $dataValidated = $request->validated();
-        $dataValidated['patient_unknown'] = ($request->has('patient_unknown')) ? 1 : 0;
         $dataValidated['status'] = ($dataValidated["save_close"] == "yes") ? false : $event->status;
         $event->update($dataValidated);
 
         $isMobileInService = $event->shift->MobilesInService->where('mobile_id', $dataValidated['mobile_id'])->first();
-
-        // $shift = Shift::where('status',true)->first();
-        // if(!$shift) 
-        // {
-        //     session()->flash('danger', 'Debe abrir un turno primero');
-        //     return redirect()->back()->withInput();
-        // }
 
         if($isMobileInService)
         {
