@@ -5,40 +5,103 @@
 @include('samu.nav')
 
 <h3 class="mb-3">
-    <i class="fas fa-car-crash"></i> Nuevo cometido {{ $nextCounter }}
-    @if($call)
-        - Relacionada con la llamada ID: {{ $call->id }}
+    @if(request()->routeIs('samu.event.create'))
+        <i class="fas fa-car-crash"></i> 
+        Nuevo cometido {{ $nextCounter }}
+        @if($call)
+            - Relacionada con la llamada ID: {{ $call->id }}
+        @endif
+    @else
+        <i class="fas fa-car-crash"></i>
+        @if($event)
+            Duplicando cometido Nº {{ $event->id }}, con nuevo Nº {{ $nextCounter }}
+        @endif
     @endif
 </h3>
-      
-<form method="post" action="{{ route('samu.event.store') }}">
 
-    <h4 class="mb-3">Asociar cometido a una llamada</h4>
+@if($event)
+<h4 class="mt-3">Llamadas relacionadas a este cometido</h4>
 
-    <div class="form-row">
-        <fieldset class="form-group col-md-12">
-            <label for="for-call">Ultimas 20 llamadas clasificadas*</label>
-            <select class="form-control" name="call_id" id="for-call" required>
-                <option value="">Selecciona una llamada</option>
-                @foreach($calls as $callItem)
-                    <option value="{{ $callItem->id }}" {{ old('call_id', $event ? optional($event)->last_call->id : optional($call)->id) == $callItem->id ? 'selected' : '' }}>
-                    @if($callItem->events->isNotEmpty())
-                     &nbsp;
+<div class="table-responsive">
+
+    <table class="table table-sm table-bordered table-striped">
+        <thead>
+            <tr class="text-center table-primary">
+                <th>Id</th>
+                <th>Clasificación</th>
+                <th nowrap>Hora</th>
+                <th>Solicitante</th>
+                <th>Información telefonica</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Receptor de llamada</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if($event->call)
+                <tr>
+                    <td class="text-center">
+                        <a href="{{ route('samu.call.edit', $event->call) }}" class="btn btn-sm btn-primary">
+                            <i class="fas fa-edit"></i> {{ $event->call->id }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ $event->call->classification }} 
+                    </td>
+                    <td>{{ $event->call->hour }}</td>
+                    <td>{{ $event->call->applicant }}</td>
+                    <td>
+                        {{ $event->call->sex_abbr }} 
+                        {{ $event->call->age_format }} 
+                        {{ $event->call->information }}
+                    </td>
+                    <td>{{ $event->call->address }}</td>
+                    <td>{{ $event->call->telephone }}</td>
+                    <td>{{ $event->call->receptor->officialFullName }}</td>
+                </tr>
+                @foreach($event->call->associatedCalls as $associatedCall)
+                <tr>
+                    <td class="text-center">
+                        <a href="{{ route('samu.call.edit', $associatedCall) }}" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-edit"></i> {{ $associatedCall->id }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ $associatedCall->classification }}
+                        @if($associatedCall->referenceCall)
+                        Referencia a: 
+                        <a href="{{ route('samu.call.edit',$associatedCall->referenceCall) }}">
+                            {{ $associatedCall->referenceCall->id }}
+                        </a>
                     @endif
-                        <b>ID: {{ $callItem->id }}</b>
-                        @if($callItem->events->isNotEmpty())
-                            - COM: 
-                            {{ implode(',', $callItem->events->pluck('id')->toArray() )}}
-                        @endif
-                        - CLAS: {{ $callItem->classification }} 
-                        - DIR: {{ $callItem->address }} 
-                        ( {{ $callItem->information }} )
-                    </option>
+                    </td>
+                    <td>{{ $associatedCall->hour }}</td>
+                    <td>{{ $associatedCall->applicant }}</td>
+                    <td>
+                        {{ $associatedCall->sex_abbr }} 
+                        {{ $associatedCall->age_format }} 
+                        {{ $associatedCall->information }}
+                    </td>
+                    <td>{{ $associatedCall->address }}</td>
+                    <td>{{ $associatedCall->telephone }}</td>
+                    <td>{{ $associatedCall->receptor->officialFullName }}</td>
+                </tr>
                 @endforeach
-            </select>
-        </fieldset>
-    </div>
+            @else 
+                <tr>
+                    <td class="text-center" colspan="8">
+                        No hay llamadas relacionadas a este cometido.
+                    </td>
+                </tr>
+            @endif
+        </tbody>
+    </table>
 
+</div>
+@endif
+
+<form method="post" action="{{ request()->routeIs('samu.event.create') ? route('samu.event.store', $call) : route('samu.event.store.duplicate', $event) }}">
+ 
     @csrf
     @method('POST')
 
@@ -49,9 +112,17 @@
         'shift' => $shift,
     ])
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary">
+        @if(request()->routeIs('samu.event.create'))
+            <i class="fas fa-save"></i> Guardar
+        @else
+            <i class="fas fa-copy"></i> Duplicar
+        @endif
+    </button>
 
-    <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+    <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">
+        Cancelar
+    </a>
 
 </form>
 
