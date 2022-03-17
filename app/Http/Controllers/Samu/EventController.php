@@ -252,7 +252,7 @@ class EventController extends Controller
             : Response::deny('Acción no autorizada para "SAMU auditor".') 
         );
         
-        if($event->created_at->gt(now()->subDays(1)))
+        if($event->created_at->gt(now()->subDays(30)))
         {
             $event->status = true;
             $event->save();
@@ -261,7 +261,7 @@ class EventController extends Controller
         }
         else
         {
-            session()->flash('danger', 'El cometido es mayor a 24 horas, no se puede reabrir.');
+            session()->flash('danger', 'El cometido es mayor a 30 días, no se puede reabrir.');
         }
 
         return redirect()->back();
