@@ -35,4 +35,9 @@ class Commune extends Model
     {
         return $this->hasMany('App\Agreement\Agreement');
     }
+
+    public function samu()
+    {
+        return $this->belongsTo('App\Models\Samu\Commune','id', 'commune_id');
+    }
 }
