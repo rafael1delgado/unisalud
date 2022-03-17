@@ -60,7 +60,7 @@ class Call extends Model implements Auditable
 
     public function events()
     {
-        return $this->belongsToMany(Event::class,'samu_call_event');
+        return $this->hasMany(Event::class,);
     }
 
     public function shift()
