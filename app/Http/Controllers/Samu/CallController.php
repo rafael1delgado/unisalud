@@ -62,7 +62,7 @@ class CallController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
-        $communes = Commune::where('region_id', 1)->get(['id', 'name', 'latitude', 'longitude']);
+        $communes = Commune::whereHas('samu')->get(['id', 'name', 'latitude', 'longitude']);
 
         if(!$shift) 
         {
@@ -124,7 +124,7 @@ class CallController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::whereStatus(true)->first();
-        $communes = Commune::whereRegionId(1)->get(['id', 'name', 'latitude', 'longitude']);
+        $communes = Commune::whereHas('samu')->get(['id', 'name', 'latitude', 'longitude']);
         $keys = Key::get(['id', 'key', 'name']);
 
         if(!$shift) 

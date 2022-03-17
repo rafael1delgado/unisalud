@@ -20,7 +20,7 @@ class SearchCalls extends Component
     public function mount()
     {
         /* TODO: Parametrizar */
-        $this->communes = Commune::where('region_id',1)
+        $this->communes = Commune::whereHas('samu')
             ->pluck('id','name')
             ->sort();
     }
