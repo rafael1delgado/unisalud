@@ -71,4 +71,16 @@ class EventUpdateRequest extends FormRequest
             'save_close'        => 'nullable|string'
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'patient_unknown'   => isset($this->patient_unknown) ? true : false,
+        ]);
+    }
 }
