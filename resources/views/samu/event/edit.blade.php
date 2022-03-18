@@ -75,88 +75,8 @@
 
 <br>
 
-<h3 class="mt-3">Llamadas relacionadas a este cometido</h3>
+@include('samu.call.partials.associated-calls', ['call' => $event->call])
 
-<div class="table-responsive">
-
-    <table class="table table-sm table-bordered table-striped">
-        <thead>
-            <tr class="text-center table-primary">
-                <th>Id</th>
-                <th>Clasificación</th>
-                <th nowrap>Hora</th>
-                <th>Solicitante</th>
-                <th>Información telefonica</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Receptor de llamada</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @if($event->call)
-            <tr>
-                <td class="text-center">
-                    <a href="{{ route('samu.call.edit', $event->call) }}" class="btn btn-sm btn-primary">
-                        <i class="fas fa-edit"></i> {{ $event->call->id }}
-                    </a>
-                </td>
-                <td>
-                    {{ $event->call->classification }}
-                </td>
-                <td>{{ $event->call->hour }}</td>
-                <td>{{ $event->call->applicant }}</td>
-                <td>
-                    {{ $event->call->sex_abbr }} 
-                    {{ $event->call->age_format }} 
-                    {{ $event->call->information }}
-                </td>
-                <td>{{ $event->call->address }}</td>
-                <td>{{ $event->call->telephone }}</td>
-                <td>{{ $event->call->receptor->officialFullName }}</td>
-            </tr>
-            @foreach($event->call->associatedCalls as $call)
-            <tr>
-                <td class="text-center">
-                    <a href="{{ route('samu.call.edit',$call) }}" class="btn btn-sm btn-outline-primary">
-                        <i class="fas fa-edit"></i> {{ $call->id }}
-                    </a>
-                </td>
-                <td>
-                    @if($call->classification)
-                        {{ $call->classification }} 
-                        @if($call->classification != 'OT')
-                            - Evento:
-                            @foreach($call->events as $event)
-                                <a href="{{ route('samu.event.edit', $event) }}" class="link-primary"> {{ $event->id }}</a>, 
-                            @endforeach
-                        @endif
-                    @endif
-
-                    @if($call->referenceCall)
-                        Referencia a: <a href="{{ route('samu.call.edit',$call->referenceCall) }}">{{ $call->referenceCall->id }}</a>
-                    @endif
-                </td>
-                <td>{{ $call->hour }}</td>
-                <td>{{ $call->applicant }}</td>
-                <td>{{ $call->sex_abbr }} {{ $call->age_format }} {{ $call->information }}</td>
-                
-                <td>{{ $call->address }}</td>
-                <td>{{ $call->telephone }}</td>
-                <td>{{ $call->receptor->officialFullName }}</td>
-            </tr>
-            @endforeach
-            @else
-            <tr>
-                <td class="text-center" colspan="8">
-                    No hay llamadas relacionadas a este cometido
-                </td>
-            </tr>
-            @endif
-        </tbody>
-    </table>
-
-</div>
 <!-- fin de registro de llamadas-->
 
 @canany(['SAMU'])
