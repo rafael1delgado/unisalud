@@ -15,7 +15,6 @@ use App\Models\User;
 use App\Models\Commune;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
-use Illuminate\Support\Carbon;
 
 class Event extends Model implements Auditable
 {   
@@ -30,6 +29,7 @@ class Event extends Model implements Auditable
         'date',
         
         'shift_id',
+        'call_id',
         'key_id',
         'return_key_id',
         'mobile_in_service_id',
@@ -100,8 +100,7 @@ class Event extends Model implements Auditable
     ];
 
     protected $appends = [
-        'color',
-        'last_call'
+        'color'
     ];
 
     public function shift() 
@@ -112,6 +111,11 @@ class Event extends Model implements Auditable
     public function calls()
     {
         return $this->belongsToMany(Call::class,'samu_call_event');
+    }
+
+    public function call()
+    {
+        return $this->belongsTo(Call::class);
     }
 
     public function key()
@@ -174,10 +178,5 @@ class Event extends Model implements Auditable
         if($this->return_base_at)           $color = 'info';
         if($this->on_base_at)               $color = 'success';
         return $color;
-    }
-
-    public function getLastCallAttribute()
-    {
-        return $this->calls->last();
     }
 }

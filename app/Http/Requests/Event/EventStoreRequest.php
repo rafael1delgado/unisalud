@@ -26,7 +26,6 @@ class EventStoreRequest extends FormRequest
         return [
             'mobile_id'             => 'required|exists:samu_mobiles,id',
             'key_id'                => 'required|exists:samu_keys,id',
-            'call_id'               => 'required|exists:samu_calls,id',
             'return_key_id'         => 'nullable|exists:samu_keys,id',
             'observation'           => 'nullable|string|min:0|max:5000',
             'external_crew'         => 'nullable|string|min:0|max:5000',
@@ -69,5 +68,17 @@ class EventStoreRequest extends FormRequest
             'treatment'         => 'nullable|string|min:0|max:5000',
             'observation_sv'    => 'nullable|string|min:0|max:5000',
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'patient_unknown' => isset($this->patient_unknown) ? true : false,
+        ]);
     }
 }

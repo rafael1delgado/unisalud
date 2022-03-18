@@ -138,14 +138,19 @@
 <div class="form-row">
     <fieldset class="form-group col-md-3">
         <label for="for-classification">Clasificación</label>
-        <select class="form-control form-control-sm @error('classification') is-invalid @enderror" name="classification" id="for-classification" {{ optional($call)->classification == 'OT' ? 'disabled readonly' : '' }}>
+        @if($call->classification != 'OT')
+        <select class="form-control form-control-sm @error('classification') is-invalid @enderror" name="classification" id="for-classification">
             <option value="">Selecciona una Clasificación</option>
-            <option value="T1" {{ optional($call)->classification == 'T1' ? 'selected' : '' }}>T1</option>
-            <option value="T2" {{ optional($call)->classification == 'T2' ? 'selected' : '' }}>T2</option>
-            <option value="NM" {{ optional($call)->classification == 'NM' ? 'selected' : '' }}>NM</option>
-            <option value="OT" {{ optional($call)->classification == 'OT' ? 'selected' : '' }}>OT</option>
+            <option value="T1" {{ old('classification', optional($call)->classification) == 'T1' ? 'selected' : '' }}>T1</option>
+            <option value="T2" {{ old('classification', optional($call)->classification) == 'T2' ? 'selected' : '' }}>T2</option>
+            <option value="NM" {{ old('classification', optional($call)->classification) == 'NM' ? 'selected' : '' }}>NM</option>
+            <option value="OT" {{ old('classification', optional($call)->classification) == 'OT' ? 'selected' : '' }}>OT</option>
         </select>
         <small id="for-classification" class="form-text text-danger">Si hace referencia a otra llamada, no debe clasificarla.</small>
+        @else
+            <input type="text" class="form-control form-control-sm" name="classification" id="for-classification" readonly
+                value="{{ optional($call)->classification }}" >
+        @endif
         @error('classification')
             <div class="text-danger">
                 <small>{{ $message }}</small>

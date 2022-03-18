@@ -105,7 +105,7 @@ class SamuSeeder extends Seeder
             'return_key_id' => 2,
         ]);
 
-        $call2->events()->attach($event);
+        // $call2->events()->save($event);
 
     }
 }
