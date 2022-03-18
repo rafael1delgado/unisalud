@@ -22,9 +22,9 @@
             <thead>
                 <tr>
                     <th style="width: 50px;">Hora</th>
-                    <th>Teléfono</th>
-                    <th>Dirección</th>
                     <th>Solicitante</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
                     <th>OPT</th>
                     <th>OP ID</th>
                 </tr>
@@ -33,9 +33,9 @@
                 @if($event->call)
                     <tr>
                         <td class="center">{{ $event->call->hour->format('H:i') }}</td>
-                        <td>{{ $event->call->telephone }}</td>
-                        <td>{{ $event->call->address }} {{ optional($event->call->commune)->name }}</td>
                         <td>{{ $event->call->applicant }}</td>
+                        <td>{{ $event->call->address }} {{ optional($event->call->commune)->name }}</td>
+                        <td class="right">{{ $event->call->telephone }}</td>
                         <td class="center">{{ $event->call->classification }}</td>
                         <td class="center">{{ $event->call->receptor_id }}</td>
                     </tr>
@@ -44,10 +44,13 @@
                     </tr>
                     @foreach($event->call->associatedCalls as $associatedCall)
                     <tr>
+                        <td colspan="6" style="border-left-style: hidden;border-right-style: hidden;">&nbsp;</td>
+                    </tr>
+                    <tr>
                         <td class="center">{{ $associatedCall->hour->format('H:i') }}</td>
-                        <td>{{ $associatedCall->telephone }}</td>
-                        <td>{{ $associatedCall->address }} {{ optional($associatedCall->commune)->name }}</td>
                         <td>{{ $associatedCall->applicant }}</td>
+                        <td>{{ $associatedCall->address }} {{ optional($associatedCall->commune)->name }}</td>
+                        <td class="right">{{ $associatedCall->telephone }}</td>
                         <td class="center">{{ $associatedCall->classification }}</td>
                         <td class="center">{{ $associatedCall->receptor_id }}</td>
                     </tr>

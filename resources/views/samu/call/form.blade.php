@@ -53,7 +53,7 @@
 </div>
 
 <div class="form-row">
-    <fieldset class="form-group col-12 col-md-3">
+    <!-- <fieldset class="form-group col-12 col-md-3">
         <label for="for-reason">Motivo</label>
         <input type="reason" class="form-control form-control-sm @error('reason') is-invalid @enderror" name="reason" id="for-reason"
         value="{{ old('reason', optional($call)->reason) }}">
@@ -62,7 +62,7 @@
                 <small>{{ $message }}</small>
             </div>
         @enderror
-    </fieldset>
+    </fieldset> -->
     
     <fieldset class="form-group col-6 col-md-2">
         <label for="for-sex">Sexo</label>
