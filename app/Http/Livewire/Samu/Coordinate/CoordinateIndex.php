@@ -41,7 +41,7 @@ class CoordinateIndex extends Component
 
     public function render()
     {
-        return view('livewire.samu.coordinates.coordinates-index',  ['coordinates' => $this->getCoordinates()]);
+        return view('livewire.samu.coordinate.coordinate-index',  ['coordinates' => $this->getCoordinates()]);
     }
 
     public function showButton(Coordinate $coordinate)
