@@ -89,7 +89,8 @@
                                         class="btn btn-sm btn-success" 
                                         wire:click="assignCoordinate" 
                                         wire:loading.attr="disabled"
-                                        wire:target="assignCoordinate">
+                                        wire:target="assignCoordinate"
+                                        {{ ($selectedCallId) ? '' : 'disabled'}}>
                                         <span
                                             class="spinner-border spinner-border-sm"
                                             role="status"
@@ -100,7 +101,7 @@
                                         Guardar
                                     </button>
                                     <button 
-                                        class="btn btn-sm btn-primary"
+                                        class="btn btn-sm btn-danger"
                                         wire:click="showButton({{ $coordinate }})"
                                         wire:loading.attr="disabled"
                                         wire:target="assignCoordinate">
