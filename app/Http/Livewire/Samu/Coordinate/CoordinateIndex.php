@@ -62,20 +62,27 @@ class CoordinateIndex extends Component
             ]);
             $this->selectedCoordinate->call()->associate($call);
             $this->selectedCoordinate->save();
-
+            $this->selectedCallId = null;
+            $this->selectedCoordinate = null;
+            $this->selectedCoordinateId = null;
+            $this->edit = false;
+            session()->flash('success', 'Las coordenadas fueron asociada a la llamada con ID: ' . $this->selectedCallId);
         }
-        $this->selectedCallId = null;
-        $this->selectedCoordinate = null;
-        $this->selectedCoordinateId = null;
-        $this->edit = false;
+       
         $this->render();
-        session()->flash('success', 'Las coordenadas fueron asociada a la llamada con ID: ' . $this->selectedCallId);
     }
 
     public function deleteCoordinate(Coordinate $coordinate)
     {
         $coordinate->delete();
         session()->flash('success', 'La coordenada fue eliminada exitosamente');
+        $this->render();
+    }
+
+    public function refreshCoordinates()
+    {
+        $this->search = null;
+        $this->paginate = 10;
         $this->render();
     }
 }
