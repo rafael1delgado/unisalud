@@ -1,7 +1,21 @@
 <div>
     @include('samu.nav')
 
-    <h3 class="mb-3"><i class="fas fa-globe"></i> Coordenadas ingresadas</h3>
+    <div class="row" class="mb-3">
+        <div class="col">
+            <h3>
+                <i class="fas fa-globe"></i> Coordenadas ingresadas
+            </h3>
+        </div>
+        <div class="col text-right">
+            <button
+                class="btn btn-sm btn-primary"
+                wire:click="refreshCoordinates">
+                <i class="fas fa-sync-alt"></i> Actualizar
+            </button>
+        </div>
+    </div>
+   
 
     <div class="row mb-3">
         <div class="col-12 col-md-10">
@@ -56,50 +70,51 @@
                         </td>
                         <td class="text-center" style="width: 200px">
                             @if($edit && $selectedCoordinateId == $coordinate->id)
-                            <select 
-                                class="form-control form-control-sm" 
-                                name="calls-{{ $coordinate->id }}"
-                                id="calls-{{ $coordinate->id }}"
-                                wire:model="selectedCallId" 
-                                >
-                                <option value="">Selecciona una llamada</option>
-                                @foreach ($calls as $call)
-                                    <option value="{{ $call->id }}" >
-                                        ID: {{ $call->id }} - {{ $call->applicant }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <br>
-                            <div class="btn-group">
-                                <button 
-                                    class="btn btn-sm btn-success" 
-                                    wire:click="assignCoordinate" 
-                                    wire:loading.attr="disabled"
-                                    wire:target="assignCoordinate">
-                                    <span
-                                        class="spinner-border spinner-border-sm"
-                                        role="status"
-                                        aria-hidden="true"
-                                        wire:loading
+                                <select 
+                                    class="form-control form-control-sm" 
+                                    name="calls-{{ $coordinate->id }}"
+                                    id="calls-{{ $coordinate->id }}"
+                                    wire:model="selectedCallId" 
+                                    >
+                                    <option value="">Selecciona una llamada</option>
+                                    @foreach ($calls as $call)
+                                        <option value="{{ $call->id }}" >
+                                            ID: {{ $call->id }} - {{ $call->applicant }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <br>
+                                <div class="btn-group">
+                                    <button 
+                                        class="btn btn-sm btn-success" 
+                                        wire:click="assignCoordinate" 
+                                        wire:loading.attr="disabled"
                                         wire:target="assignCoordinate">
-                                    </span>
-                                    Guardar
-                                </button>
-                                <button 
-                                    class="btn btn-sm btn-primary"
-                                    wire:click="showButton({{ $coordinate }})"
-                                    wire:loading.attr="disabled"
-                                    wire:target="assignCoordinate">
-                                    Cancelar
-                                </button>
-                            </div>
+                                        <span
+                                            class="spinner-border spinner-border-sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                            wire:loading
+                                            wire:target="assignCoordinate">
+                                        </span>
+                                        Guardar
+                                    </button>
+                                    <button 
+                                        class="btn btn-sm btn-primary"
+                                        wire:click="showButton({{ $coordinate }})"
+                                        wire:loading.attr="disabled"
+                                        wire:target="assignCoordinate">
+                                        Cancelar
+                                    </button>
+                                </div>
                             @else
                                 <div class="btn-group">
                                     <button
                                         class="btn btn-sm btn-primary"
                                         wire:click="showButton({{ $coordinate }})"
                                         wire:loading.attr="disabled"
-                                        wire:target="deleteCoordinate">
+                                        wire:target="deleteCoordinate"
+                                        {{ $coordinate->call ? 'disabled' : '' }}>
                                         Editar
                                     </button>
                                     <button 
