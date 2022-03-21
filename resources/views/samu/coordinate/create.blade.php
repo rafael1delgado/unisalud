@@ -22,11 +22,11 @@
         </fieldset>
         <fieldset class="form-group col-12 col-md-4">
             <label for="for_name_mobile_plate">Latitud </label>
-            <input type="text" class="form-control" readonly id="for_latitude" name="latitude" value="" required>
+            <input type="text" class="form-control readonly" id="for_latitude" name="latitude" value="" required style="background-color: #e9ecef;">
         </fieldset>
         <fieldset class="form-group col-12 col-md-4">
             <label for="for_name_mobile_type">Longitud </label>
-            <input type="text" class="form-control" readonly id="for_longitude" name="longitude" value="" required>
+            <input type="text" class="form-control readonly" id="for_longitude" name="longitude" value="" required style="background-color: #e9ecef;">
         </fieldset>
     
     </div>
@@ -59,5 +59,10 @@
         document.getElementById("warning_msg").removeAttribute("hidden");
         document.getElementById("warning_msg").innerHTML = err.message;
     }
+    
+    $(".readonly").on('keydown paste focus mousedown', function(e){
+        if(e.keyCode != 9) // ignore tab
+            e.preventDefault();
+    });
 </script> 
 @endsection
