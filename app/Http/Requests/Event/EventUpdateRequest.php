@@ -54,21 +54,12 @@ class EventUpdateRequest extends FormRequest
             'reception_place_id'    => 'nullable|exists:samu_reception_places,id',
 
             'rau'               => 'nullable|string|min:0|max:255',
-            'fc'                => 'nullable|string|min:0|max:10',
-            'fr'                => 'nullable|integer',
-            'pa'                => 'nullable|string|min:0|max:255',
-            'pam'               => 'nullable|string|min:0|max:255',
-            'gl'                => 'nullable|integer',
-            'soam'              => 'nullable|integer',
-            'soap'              => 'nullable|integer',
-            'hgt'               => 'nullable|integer',
-            'fill_capillary'    => 'nullable|integer',
-            't'                 => 'nullable|numeric',
+            'vital_signs'       => 'nullable',
 
             'treatment'         => 'nullable|string|min:0|max:5000',
             'observation_sv'    => 'nullable|string|min:0|max:5000',
 
-            'save_close'        => 'nullable|string'
+            'save_close'        => 'nullable|string',
         ];
     }
 
