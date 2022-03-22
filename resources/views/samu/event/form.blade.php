@@ -167,7 +167,7 @@
 
 <hr>
 
-<h4>Evaluación </h4>
+<h4>Evaluación</h4>
 
 <div class="form-row">
     <fieldset class="form-group col-md-12">
@@ -219,53 +219,10 @@
 
 <hr>
 
-<h4> Asignación Signos Vitales</h4>
+<h4>Asignación Signos Vitales</h4>
 
-<div class="form-row">
-    <fieldset class="form-group col-6 col-md-1">
-        <label for="for-fc">Frecuencia <br>Cardiaca</label>
-        <input type="text" class="form-control" maxlength="8" name="fc" id="for-fc" value="{{ old('fc', optional($event)->fc) }}">
-    </fieldset>
-    <fieldset class="form-group col-6 col-md-1">
-        <label for="for-fr">Frecuencia <br>Respiratoria</label>
-        <input type="number" class="form-control" name="fr" id="for-fr" value="{{ old('fr', optional($event)->fr) }}">
-    </fieldset>
-    <fieldset class="form-group col-6 col-md-1">
-        <label for="for-pa">Presión <br>Arterial</label>
-        <input type="text" class="form-control" name="pa" id="for-pa" value="{{ old('pa', optional($event)->pa) }}" 
-            placeholder="xxx/xx">
-    </fieldset>
-    <fieldset class="form-group col-6 col-md-1">
-        <label for="for-pam">Presión Arterial <br>Media</label>
-        <input type="text" class="form-control" name="pam" id="for-pam" value="{{ old('pam', optional($event)->pam) }}"
-            placeholder="xxx/xx">
-    </fieldset>
-    <fieldset class="form-group col-6 col-md-1">
-        <label for="for-gl">Glasgow<br>&nbsp;</label>
-        <input type="number" class="form-control" name="gl" id="for-gl" value="{{ old('gl', optional($event)->gl) }}">
-    </fieldset>
-    <fieldset class="form-group col-6 col-md-1">
-        <label for="for-soam">% Saturacion <br>Oxigeno/Ambi.</label>
-        <input type="number" class="form-control" name="soam" id="for-soam" value="{{ old('soam', optional($event)->soam) }}">
-    </fieldset>
-    <fieldset class="form-group col-6 col-md-1">
-        <label for="for-soap">% Saturación <br>Oxigeno/Apoyo</label>
-        <input type="number" class="form-control" name="soap" id="for-soap" value="{{ old('soap', optional($event)->soap) }}">
-    </fieldset>
-    <fieldset class="form-group col-6 col-md-1">
-        <label for="for-hgt">HGT <br>mg/dl</label>
-        <input type="number" class="form-control" name="hgt" id="for-hgt" value="{{ old('hgt', optional($event)->hgt) }}">
-    </fieldset>
-    <fieldset class="form-group col-6 col-md-1">
-        <label for="for-fill-capillary">Llene <br>Capilar</label>
-        <input type="number" class="form-control" name="fill_capillary" id="for-fill-capillary" value="{{ old('fill_capillary', optional($event)->fill_capillary) }}">
-    </fieldset>
-    <fieldset class="form-group col-6 col-md-1">
-        <label for="for-t">Temperatura <br>°C</label>
-        <input type="number" class="form-control" step=".01" name="t" id="for-t" value="{{ old('t', optional($event)->t) }}">
-    </fieldset>
-
-</div>
+<livewire:samu.vital-sign.vital-sign-create :event="$event">
+</livewire:samu.vital-sign.vital-sign-create>
 
 <div class="form-row">
     <fieldset class="form-group col-12 col-md-4">
