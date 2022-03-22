@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\Call;
 use App\Models\Samu\Shift;
-use App\Models\Samu\EventCounter;
 use App\Models\Samu\ReceptionPlace;
 use App\Models\User;
 use App\Models\Commune;
@@ -66,6 +65,7 @@ class Event extends Model implements Auditable
         'rau',
         
         /* Asignacion signos vitales */
+        // TODO: Eliminar signos vitales
         'fc',
         'fr',
         'pa',
@@ -169,6 +169,11 @@ class Event extends Model implements Auditable
                     ->using(EventUser::class)
                     ->withPivot('id','job_type_id')
                     ->withTimestamps();
+    }
+
+    public function vitalSigns() 
+    {
+        return $this->hasMany(VitalSign::class)->orderBy('datetime');
     }
 
     public function getColorAttribute()
