@@ -4,11 +4,15 @@ namespace App\Http\Livewire\Samu\VitalSign;
 
 use App\Models\Samu\VitalSign;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Request;
 use Livewire\Component;
+use Illuminate\Support\Facades\Route;
 
 class VitalSignCreate extends Component
 {
     public $event;
+    public $edit;
+    public $vitalSigns;
     public $fc;
     public $fr;
     public $pa;
@@ -20,8 +24,24 @@ class VitalSignCreate extends Component
     public $fill_capillary;
     public $t;
     public $datetime;
-    public $vitalSigns;
     
+    public function rules()
+    {
+        return [
+            'fc'                => 'nullable|string|min:0|max:10',
+            'fr'                => 'nullable|integer',
+            'pa'                => 'nullable|string|min:0|max:255',
+            'pam'               => 'nullable|string|min:0|max:255',
+            'gl'                => 'nullable|integer',
+            'soam'              => 'nullable|integer',
+            'soap'              => 'nullable|integer',
+            'hgt'               => 'nullable|integer',
+            'fill_capillary'    => 'nullable|integer',
+            't'                 => 'nullable|numeric',
+            'datetime'          => 'required',
+        ];
+    }
+
     public function mount()
     {
         $this->vitalSigns = collect([]);
@@ -44,34 +64,18 @@ class VitalSignCreate extends Component
         return view('livewire.samu.vital-sign.vital-sign-create');
     }
 
-    public function getData()
-    {
-        return [
-            'datetime' => $this->datetime,
-            'fc' => $this->fc,
-            'fr' => $this->fr,
-            'pa' => $this->pa,
-            'pam' => $this->pam,
-            'gl' => $this->gl,
-            'soam' => $this->soam,
-            'soap' => $this->soap,
-            'hgt' => $this->hgt,
-            'fill_capillary' => $this->fill_capillary,
-            't' => $this->t
-        ];
-    }
     public function addVitalSign()
     {
-        $data = $this->getData();
+        $dataValidated = $this->validate();
 
-        if(request()->routeIs('samu.event.edit'))
+        if($this->edit)
         {
-            $vs = VitalSign::create($data);
+            $vs = VitalSign::create($dataValidated);
             $this->event->vitalSigns()->save($vs);
         }
         
-        $data['datetime_format'] = Carbon::parse($this->datetime)->format('d/m/Y H:i');
-        $this->vitalSigns->push($data);
+        $dataValidated['datetime_format'] = Carbon::parse($dataValidated['datetime'])->format('d/m/Y H:i');
+        $this->vitalSigns->push($dataValidated);
         $this->resetInputs();
     }
 
