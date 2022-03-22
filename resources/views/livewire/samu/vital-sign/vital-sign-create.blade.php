@@ -4,13 +4,13 @@
             <thead>
                 <tr>
                     <th>Fecha y Hora</th>
-                    <th>F. Cardiaca</th>
+                    <th>F. Cardíaca</th>
                     <th>F. Respiratoria</th>
-                    <th>Presion Arterial</th>
-                    <th>Presion Arterial Media</th>
+                    <th>Presión Arterial</th>
+                    <th>Presión Arterial Media</th>
                     <th>Glasgow</th>
-                    <th>% Sat. Oxigeno/Ambi.</th>
-                    <th>% Sat. Oxigeno/Apoyo</th>
+                    <th>% Sat. Oxígeno/Ambi.</th>
+                    <th>% Sat. Oxígeno/Apoyo</th>
                     <th>HGT mg/dl</th>
                     <th>Llene capilar</th>
                     <th>Temperatura °C</th>
