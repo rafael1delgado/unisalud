@@ -9,25 +9,25 @@
         <i class="fas fa-plus"></i> </i> Agregar móvil a turno
     </a>
 </h3>
-{{-- 
-<td>
-    <b>{{ $mis->shift->id }}</b> -
-    {{ $mis->shift->opening_at->format('Y-m-d') }} - 
-    {{ $mis->shift->type }} <br> ({{ $mis->shift->statusInWord }})
-</td> 
---}}
 
 <h4>Turno {{ $openShift->opening_at }} {{ $openShift->type }} ({{ $openShift->statusInWord }})</h4>
+
 @include(
-    'samu.mobileinservice.partials.list', 
-    ['mobilesInService' => $openShift->mobilesInService->sortBy('position'), 'edit' => true, 'editLunch' => true]
+    'samu.mobileinservice.partials.list', [
+        'mobilesInService' => $openShift->mobilesInService->sortBy('position'), 
+        'edit' => true, 
+        'editLunch' => true
+    ]
 )
 
 @if($lastShift)
     <h4>Turno {{ $lastShift->opening_at }} {{ $lastShift->type }} ({{ $lastShift->statusInWord }})</h4>
     @include(
-        'samu.mobileinservice.partials.list', 
-        ['mobilesInService' => $lastShift->mobilesInService->sortBy('position'), 'edit' => false, 'editLunch' => false]
+        'samu.mobileinservice.partials.list', [
+            'mobilesInService' => $lastShift->mobilesInService->sortBy('position'), 
+            'edit' => false, 
+            'editLunch' => false
+        ]
     )
 @endif
 

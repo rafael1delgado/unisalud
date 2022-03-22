@@ -50,14 +50,17 @@ class MobileCrew extends Component
             'leaves_at'             => $this->leaves_at
         ]);
        
-        redirect()->to(route('samu.mobileinservice.index'));
+        $this->mobileInService->refresh();
+        //redirect()->to(route('samu.mobileinservice.index'));
     }
-
+    
     public function delete(MobileCrewModel $mobileCrew)
     {
         $mobileCrew->delete();
-
+        
         $this->mobileInService->refresh();
+
+        //redirect()->to(route('samu.mobileinservice.index'));
     }
 
     public function render()

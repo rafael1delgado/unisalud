@@ -46,8 +46,7 @@ Recepción de paciente -> Estado actual "
 - Operador y despachador
 - Administrador
 
-- [ ] Colación, termine en forma automática (y pausar)
-- [ ] Tiempo de secado por cometido (30 min)
+- [X] Colación, termine en forma automática (y pausar)
 
 
 ## Observaciones 27-01-2022
@@ -85,8 +84,7 @@ Recepción de paciente -> Estado actual "
 ### Filtros 
 - [GZ] Filtro de call center por fecha, (hora), Nº event, ¿dirección, telefono?, personal
 
-- [ ] Impresion de informes (de un Evento)
-- [ ] Historial de cambios sólo para dra Astudillo
+- [X] Impresion de informes (de un Evento)
 - [AT] Orden de salida de los moviles (listado de moviles) de acuerdo al orden de salida
 - [ ] Estadisticas (enfermero, coordinador)
 

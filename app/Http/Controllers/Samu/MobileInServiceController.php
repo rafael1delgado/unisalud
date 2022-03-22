@@ -174,9 +174,18 @@ class MobileInServiceController extends Controller
             : Response::deny('Acción no autorizada para "SAMU auditor".') 
         );
 
-        $mobileInService->delete();
+        if($mobileInService->crew->isEmpty())
+        {
+            $mobileInService->delete();
+            session()->flash('success', 'Móvil en servicio eliminado correctamente');
+            return redirect()->route('samu.mobileinservice.index');
+        }
+        else
+        {
+            session()->flash('danger', 'No se puede eliminar el móvil en servicio, primero debe eliminar la tripulación');
+            return redirect()->back();
+        }
  
-        return redirect()->route('samu.mobileinservice.index')->with('danger', 'Eliminado satisfactoriamente.');
     }  
 
 
