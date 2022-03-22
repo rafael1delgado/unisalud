@@ -33,17 +33,16 @@
 <div class="form-row m-1">
     <div class="col-6 nowrap">
         <li>
-            @if($shift->status == true)
-            <button class="btn btn-danger btn-sm" wire:click="delete({{$user->pivot->id}})"><i class="fas fa-trash"></i></button>
-            @endif
             {{ $user->officialFullName }}
         </li>
     </div>
-    <div class="col-5">
+    <div class="col-4">
         {{ $user->pivot->jobType->name }}
     </div>
     <div class="col-1">
-
+        @if($shift->status == true)
+            <button class="btn btn-danger btn-sm" wire:click="delete({{$user->pivot->id}})"><i class="fas fa-trash"></i></button>
+         @endif
     </div>
 </div>
 @endforeach

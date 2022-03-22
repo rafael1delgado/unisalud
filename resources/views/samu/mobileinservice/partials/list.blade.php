@@ -1,77 +1,80 @@
 <div class="table-responsive">
-    <table class="table table-stripped">
-        <thead>
-            <tr class="table-primary">
-                <th></th>
+    <table class="table table-bordered">
+        <tbody>
+            @foreach($mobilesInService as $mis)
+            <tr class="table-secondary">
+                <th width="90"></th>
                 <th>Movil</th>
                 <th>Posición</th>
                 <th>Tipo</th>
                 <th>Estado</th>
                 <th>O2 central</th>
-                <th>Observaciones</th>
-                @if($editLunch)
-                    <th>Almuerzo</th>
-                @endif
-                <th></th>
+                <th>Observación</th>
+                <th>Almuerzo</th>
+                <th width="54"></th>
             </tr>
-        </thead>
-        <tbody>
 
-            @foreach($mobilesInService as $mis)
             <tr>
-                <td rowspan="2">
+                <td>
                 @if($mis->shift->status == true)
                     <a href="{{ route('samu.mobileinservice.edit',$mis) }}">
-                        <button class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> {{ $mis->id }}</button>
                     </a>
                 @endif
                 </td>
-                <td>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
+                <td><b>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</b></td>
                 <td>{{ $mis->position }}</td>
                 <td>{{ $mis->type }}</td>
                 <td>{{ $mis->status ? 'Activo' : 'Inactivo'  }}</td>
                 <td>{{ $mis->o2 }}</td>
+                <td>{{ $mis->observation}}</td>
                 <td>
-                    {{ $mis->observation}} 
-                </td>
-                @if($editLunch)
-                <td>
+                    @if($editLunch)
                         @livewire('samu.lunch',['mis' => $mis])
-                    </td>
-                @endif
-                <td rowspan="2">
-                    @if($mis->shift->status == true)
+                    @endif
+                </td>
+                <td width="50">
+                    @if($mis->shift->status)
                     <form method="POST" action="{{ route('samu.mobileinservice.destroy' , $mis) }}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
                     @endif
                 </td>
             </tr>
-            <tr>
-                <td colspan="6">
 
+            <tr>
+                <td colspan="9">
                     @if($mis->shift->status AND auth()->user()->cannot('SAMU auditor') )
                         @livewire('samu.mobile-crew',['mobileInService' => $mis])
                     @else
-                        @foreach($mis->crew as $tripulant)
-                        <div class="form-row m-1">
-                            <div class="col-5">
-                                <li>
-                                    {{ $tripulant->officialFullName }}
-                                </li>
-                            </div>
-                            <div class="col-2">
-                                {{ $tripulant->pivot->jobType->name }}
-                            </div>
-                            <div class="col-3">
-                                {{ $tripulant->pivot->assumes_at }}
-                            </div>
-                            <div class="col-2">
+                        <div class="row">
+                            <div class="col-md-8 col-12">
+                            <h4>Tripulación</h4>
+
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Funcionario</th>
+                                        <th>Función</th>
+                                        <th>Asume</th>
+                                        <th>Se retira</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($mis->crew as $tripulant)
+                                    <tr>
+                                        <td>{{ $tripulant->officialFullName }}</td>
+                                        <td>{{ $tripulant->pivot->jobType->name }}</td>
+                                        <td>{{ $tripulant->pivot->assumes_at }}</td>
+                                        <td>{{ $tripulant->pivot->leaves_at }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                             </div>
                         </div>
-                        @endforeach
                     @endif
 
                 </td>
