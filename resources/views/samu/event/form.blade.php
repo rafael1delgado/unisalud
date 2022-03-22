@@ -221,7 +221,7 @@
 
 <h4>Asignación Signos Vitales</h4>
 
-<livewire:samu.vital-sign.vital-sign-create :event="$event">
+<livewire:samu.vital-sign.vital-sign-create :event="$event" :edit="request()->routeIs('samu.event.edit') ? true : false">
 </livewire:samu.vital-sign.vital-sign-create>
 
 <div class="form-row">
