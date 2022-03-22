@@ -4,9 +4,7 @@ namespace App\Http\Livewire\Samu\VitalSign;
 
 use App\Models\Samu\VitalSign;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Request;
 use Livewire\Component;
-use Illuminate\Support\Facades\Route;
 
 class VitalSignCreate extends Component
 {
