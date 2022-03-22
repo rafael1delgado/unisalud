@@ -18,6 +18,7 @@ use App\Models\Samu\ReceptionPlace;
 use App\Models\Commune;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
+use App\Services\Samu\EventService;
 
 class EventController extends Controller
 {
@@ -114,10 +115,7 @@ class EventController extends Controller
         
         if($shift)
         {
-            $newEvent = Event::create($request->validated());
-            $callRelationed = $event ? $event->call : $call;
-            $newEvent->call()->associate($callRelationed);
-            $newEvent->save();
+            (new EventService())->create($event, $call, $request->validated());
 
             session()->flash('success', 'Se ha creado el evento');
             return redirect()->route('samu.event.index');
@@ -194,20 +192,7 @@ class EventController extends Controller
             : Response::deny('Acción no autorizada para "SAMU auditor".') 
         );
 
-        $dataValidated = $request->validated();
-        $dataValidated['status'] = ($dataValidated["save_close"] == "yes") ? false : $event->status;
-        $event->update($dataValidated);
-
-        $isMobileInService = $event->shift->MobilesInService->where('mobile_id', $dataValidated['mobile_id'])->first();
-
-        if($isMobileInService)
-        {
-            $event->mobileInService()->associate($isMobileInService);
-        }
-        else 
-        {
-            $event->mobileInService()->dissociate();
-        }
+        (new EventService())->update($event, $request->validated());
         
         session()->flash('success', 'Cometido actualizado satisfactoriamente.');
         return redirect()->route('samu.event.index');
