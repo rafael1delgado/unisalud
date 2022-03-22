@@ -8,7 +8,6 @@ use Livewire\Component;
 
 class CoordinateIndex extends Component
 {
-    
     public $calls;
     public $selectedCallId  = null;
     public $selectedCoordinate  = null;
@@ -81,8 +80,10 @@ class CoordinateIndex extends Component
 
     public function refreshCoordinates()
     {
+        $this->edit = false;
         $this->search = null;
         $this->paginate = 10;
         $this->render();
+        $this->mount();
     }
 }
