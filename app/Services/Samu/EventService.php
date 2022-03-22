@@ -49,16 +49,6 @@ class EventService
 
         $vitalSigns = json_decode($dataValidated['vital_signs'], TRUE);
 
-        foreach($vitalSigns as $itemVitalSign)
-        {
-            if(!isset($itemVitalSign['id']))
-            {
-                $vitalSign = VitalSign::create($itemVitalSign);
-                $event->vitalSigns()->save($vitalSign);
-                $event->save();
-            }
-        }
-
         $isMobileInService = $event->shift->MobilesInService->where('mobile_id', $dataValidated['mobile_id'])->first();
 
         if($isMobileInService)
