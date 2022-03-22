@@ -47,8 +47,6 @@ class EventService
         $dataValidated['status'] = ($dataValidated["save_close"] == "yes") ? false : $event->status;
         $event->update($dataValidated);
 
-        $vitalSigns = json_decode($dataValidated['vital_signs'], TRUE);
-
         $isMobileInService = $event->shift->MobilesInService->where('mobile_id', $dataValidated['mobile_id'])->first();
 
         if($isMobileInService)
