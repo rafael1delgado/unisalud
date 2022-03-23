@@ -63,6 +63,7 @@ use Spatie\Permission\Contracts\Role;
 
 use App\Http\Controllers\Epi\SuspectCaseController;
 use App\Http\Controllers\CoordinateController;
+use App\Http\Livewire\Samu\Dashboard\DashboardIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +86,7 @@ Route::get('/', function () {
 
 //Auth::routes();
 
-
+Route::get('/samu/dashboard', DashboardIndex::class)->name('dashboard');
 
 Route::get('/claveunica', [ClaveUnicaController::class,'autenticar'])->name('claveunica');
 Route::get('/claveunica/redirect/{redirect}', [ClaveUnicaController::class,'autenticar'])->name('claveunica.redirect');
