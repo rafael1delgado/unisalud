@@ -18,6 +18,7 @@ class Noveltie extends Model implements Auditable
     protected $table="samu_novelties";
 
     protected $fillable = [
+        'telephone',
         'detail',
         'shift_id'
     ];

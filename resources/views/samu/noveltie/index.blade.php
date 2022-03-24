@@ -4,10 +4,10 @@
 
 @include('samu.nav')
 
-<h3 class="mb-3"><i class="fas fa-book"></i> Registro de novedades</h3>
+<h3 class="mb-3"><i class="fas fa-book"></i> Registro de novedades y reportes</h3>
 
 @if($openShift OR old('detail'))
-    @include('samu.noveltie.create')
+    @include('samu.noveltie.partials.create')
 @endif
           
 <h4 class="mb-3 mt-3"><i class="fas fa-book"></i> Novedades del turno 

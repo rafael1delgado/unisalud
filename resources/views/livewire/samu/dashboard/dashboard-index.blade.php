@@ -1,4 +1,6 @@
 <div>
+    @include('samu.nav')
+
     <h3 class="mb-1">
         <i class="fas fa-chart-line"></i> Panel de Estadísticas
     </h3>

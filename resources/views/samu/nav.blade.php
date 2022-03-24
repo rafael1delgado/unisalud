@@ -55,6 +55,20 @@
     </li>
     @endcan
     
+    @canany(['SAMU administrador','SAMU despachador','SAMU regulador','SAMU operador'])
+    <li class="nav-item">
+        <a class="nav-link {{ active('samu.map') }}" 
+        href="{{ route('samu.map') }}" targe="_blank"><i class="fas fa-map"></i> </a>
+    </li>
+    @endcan
+    
+    @can('SAMU conductor')
+    <li class="nav-item">
+        <a class="nav-link {{ active('samu.mobiles.mobile_selector') }}" 
+        href="{{ route('samu.mobiles.mobile_selector') }}"><i class="fas fa-clock"></i></a>
+    </li>
+    @endcan
+
     @canany(['SAMU administrador','SAMU regulador'])
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle {{ active(['samu.event.filter','samu.calls.search']) }}" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -76,11 +90,11 @@
         </div>
     </li>
     @endcan
-
+    
     @can('SAMU administrador')
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle {{ active(['samu.key.*','samu.mobile.*']) }}" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-            <i class="fas fa-cog"></i> Configuración</a>
+            <i class="fas fa-cog"></i> </a>
         <div class="dropdown-menu">
 
             <a class="dropdown-item {{ active('samu.key.*') }}"
@@ -100,19 +114,4 @@
         </div>
     </li>
     @endcan
-
-    @canany(['SAMU administrador','SAMU despachador','SAMU regulador','SAMU operador'])
-    <li class="nav-item">
-        <a class="nav-link {{ active('samu.map') }}" 
-        href="{{ route('samu.map') }}" targe="_blank"><i class="fas fa-map"></i> Mapa</a>
-    </li>
-    @endcan
-
-    @can('SAMU conductor')
-    <li class="nav-item">
-        <a class="nav-link {{ active('samu.mobiles.mobile_selector') }}" 
-        href="{{ route('samu.mobiles.mobile_selector') }}"><i class="fas fa-th-large"></i> Conductor</a>
-    </li>
-    @endcan
-    
 </ul>
