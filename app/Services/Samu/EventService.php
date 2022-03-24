@@ -24,14 +24,14 @@ class EventService
         $newEvent->call()->associate($callRelationed);
         $newEvent->save();
 
-        // $vitalSigns = json_decode($dataValidated['vital_signs'], TRUE);
+        $vitalSigns = json_decode($dataValidated['vital_signs'], TRUE);
 
-        // foreach($vitalSigns as $itemVitalSign)
-        // {
-        //     $vitalSign = VitalSign::create($itemVitalSign);
-        //     $newEvent->vitalSigns()->save($vitalSign);
-        //     $newEvent->save();
-        // }
+        foreach($vitalSigns as $itemVitalSign)
+        {
+            $vitalSign = VitalSign::create($itemVitalSign);
+            $newEvent->vitalSigns()->save($vitalSign);
+            $newEvent->save();
+        }
     }
 
     /**
