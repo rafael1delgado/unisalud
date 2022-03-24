@@ -15,7 +15,6 @@ class DeleteVitalSignsToSamuEvents extends Migration
     {
         Schema::table('samu_events', function (Blueprint $table) {
             $table->dropColumn(['fc', 'fr', 'pa', 'pam', 'gl', 'soam', 'soap', 'hgt', 'fill_capillary', 't']);
-
         });
     }
 
