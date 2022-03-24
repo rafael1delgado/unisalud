@@ -123,7 +123,7 @@
             .colors(['#006cb7'])
             .responsive()
             .beginAtZero()
-            .title('# de Eventos de los últimos tres meses')
+            .title('# de Eventos de los últimos seis meses')
             .datasets([{ type: 'bar', fill: true }, 'bar']),
         });
 
