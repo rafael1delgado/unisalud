@@ -1,28 +1,34 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace App\Charts\Samu;
 
 use App\Models\Samu\Event;
-use Chartisan\PHP\Chartisan;
-use ConsoleTVs\Charts\BaseChart;
-use Illuminate\Http\Request;
+use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class EventByMobile extends BaseChart
+class EventByMobile extends Chart
 {
+    public $myLabel;
+    public $myDataset;
+
     /**
-     * Handles the HTTP request for the given chart.
-     * It must always return an instance of Chartisan
-     * and never a string or an array.
+     * Initializes the chart.
+     *
+     * @return void
      */
-    public function handler(Request $request): Chartisan
+    public function __construct()
+    {
+        parent::__construct();
+        $this->getData();
+    }
+
+    public function getData()
     {
         $now = Carbon::now();
-        $labels = collect([]);
-        $datasets = collect([]);
+        
+        $this->myLabel = collect([]);
+        $this->myDataset = collect([]);
 
         $events = Event::query()
             ->with('mobile')
@@ -40,12 +46,18 @@ class EventByMobile extends BaseChart
                 ? ($event->mobile->code . ' - ' . $event->mobile->name ) 
                 : 'SIN MOBILE';
             
-            $labels->push($nameMobile);
-            $datasets->push($event->total);
+            $this->myLabel->push($nameMobile);
+            $this->myDataset->push($event->total);
         }
+    }
 
-        return Chartisan::build()
-            ->labels($labels->toArray())
-            ->dataset('Eventos atendidos', $datasets->toArray());
+    public function getLabel()
+    {
+        return $this->myLabel->toArray();
+    }
+
+    public function getDataset()
+    {
+        return $this->myDataset->toArray();
     }
 }

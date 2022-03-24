@@ -1,29 +1,34 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace App\Charts\Samu;
 
 use App\Models\Samu\Event;
-use Chartisan\PHP\Chartisan;
-use ConsoleTVs\Charts\BaseChart;
-use Illuminate\Http\Request;
+use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 use Illuminate\Support\Carbon;
 
-class EventBySex extends BaseChart
+class EventBySex extends Chart
 {
+    public $myLabel;
+    public $myDataset;
+
     /**
-     * Handles the HTTP request for the given chart.
-     * It must always return an instance of Chartisan
-     * and never a string or an array.
+     * Initializes the chart.
+     *
+     * @return void
      */
-    public function handler(Request $request): Chartisan
+    public function __construct()
+    {
+        parent::__construct();
+        $this->getData();
+    }
+
+    public function getData()
     {
         $now = Carbon::now();
         $sexs = ['MALE', 'FEMALE', 'UNKNOWN', 'OTHER', null];
-
-        $labels = collect([]);
-        $datasets = collect([]);
+        
+        $this->myLabel = collect([]);
+        $this->myDataset = collect([]);
 
         foreach($sexs as $sex)
         {
@@ -33,12 +38,18 @@ class EventBySex extends BaseChart
                 ->whereRaw('MONTH(samu_events.date) = ?', [$now->month])
                 ->count();
             
-            $labels->push(translateSex($sex));
-            $datasets->push($totalBySex);
+            $this->myLabel->push(translateSex($sex));
+            $this->myDataset->push($totalBySex);
         }
+    }
 
-        return Chartisan::build()
-            ->labels($labels->toArray())
-            ->dataset('Eventos por sexo', $datasets->toArray());
+    public function getLabel()
+    {
+        return $this->myLabel->toArray();
+    }
+
+    public function getDataset()
+    {
+        return $this->myDataset->toArray();
     }
 }
