@@ -36,7 +36,7 @@
                     @endif
                 </td>
                 <td>{{ $event->counter }} </td>
-                <td>{{ optional($event->departure_at)->format('H:i') }} </td>
+                <td nowrap>{{ optional($event->departure_at)->format('H:i') }}</td>
                 <td>
                     @if($event->call)
                         <a href="{{ route('samu.call.edit', $event->call) }}">{{ $event->call->id }}</a>,
@@ -62,7 +62,7 @@
                 </td>
             </tr>
             <tr class="table-{{ $event->color }}">
-                <td class="text-center"><i class="fas fa-phone"></i></td>
+                <td class="text-center"><i class="fas fa-phone"></i><br><small>{{ $event->date }}</small></td>
                 <td colspan="9">
                     @if($event->call)
                         <li>{{ $event->call->sex_abbr }} {{ $event->call->age_format }} {{ $event->call->information }}</li>
