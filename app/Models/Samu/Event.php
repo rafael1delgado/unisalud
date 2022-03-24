@@ -173,7 +173,7 @@ class Event extends Model implements Auditable
 
     public function vitalSigns() 
     {
-        return $this->hasMany(VitalSign::class)->orderBy('datetime');
+        return $this->hasMany(VitalSign::class)->orderBy('time');
     }
 
     public function getColorAttribute()
