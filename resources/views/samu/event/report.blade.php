@@ -141,47 +141,66 @@
         
         <h4>Información del paciente:</h4>
 
-        <ul>
-
-        <li style="margin-bottom: 16px;">
-            <b>Paciente:</b> {{ $event->patient_name }} - 
-            <b>Tipo de identificación:</b> {{ optional($event->identifierType)->text }} -
-            <b>Identificación:</b> {{ $event->patient_identification }}
-        </li>
-        <li style="margin-bottom: 16px;"><b>Clínico:</b> {{ $event->reception_detail }}</li>
-        <li style="margin-bottom: 16px;"><b>Tratamiento:</b> {{ $event->treatment }}</li>
-        <li>
         <table class="ocho">
             <thead>
                 <tr>
-                    <th>Frecuencia cardiaca</th>
+                    <th>Paciente</th>
+                    <th>Tipo de identificación</th>
+                    <th>Identificación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="center">
+                    <td>{{ $event->patient_name }}</td>
+                    <td>{{ optional($event->identifierType)->text }}</td>
+                    <td>{{ $event->patient_identification }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><b>Clínico:</b> {{ $event->reception_detail }}</p>
+        <p><b>Tratamiento:</b> {{ $event->treatment }}</p>
+
+        <h4>Signos Vitales:</h4>
+
+        <table class="vital-signs ocho">
+            <thead>
+                <tr>
+                    <th>Fecha Hora</th>
+                    <th>Frecuencia cardíaca</th>
                     <th>Frecuencia respiratoria</th>
                     <th>Presión arterial</th>
                     <th>Presión arterial media</th>
                     <th>Glasgow</th>
-                    <th>% Saturacion Oxig/Ambi</th>
-                    <th>% Saturacion Oxig/Apoyo</th>
+                    <th>% Saturación Oxig/Ambi</th>
+                    <th>% Saturación Oxig/Apoyo</th>
                     <th>HGT mg/dl</th>
                     <th>Llene Capilar</th>
                     <th>Temperatura ºC</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach($event->vitalSigns as $vs)
                 <tr>
-                    <td class="center">{{ $event->fc }}</td>
-                    <td class="center">{{ $event->fr }}</td>
-                    <td class="center">{{ $event->pa }}</td>
-                    <td class="center">{{ $event->pam }}</td>
-                    <td class="center">{{ $event->gl }}</td>
-                    <td class="center">{{ $event->soam }}</td>
-                    <td class="center">{{ $event->soap }}</td>
-                    <td class="center">{{ $event->hgt }}</td>
-                    <td class="center">{{ $event->fill_capillary }}</td>
-                    <td class="center">{{ $event->t }}</td>
+                    <td class="center">
+                        <small class="seis nowrap">
+                            {{ $vs->time_format ? $vs->time_format : '-' }}
+                        </small>
+                    </td>
+                    <td class="center">{{ $vs->fc ? $vs->fc : '-' }}</td>
+                    <td class="center">{{ $vs->fr ? $vs->fr : '-' }}</td>
+                    <td class="center">{{ $vs->pa ? $vs->pa : '-' }}</td>
+                    <td class="center">{{ $vs->pam ? $vs->pam : '-' }}</td>
+                    <td class="center">{{ $vs->gl ? $vs->gl : '-' }}</td>
+                    <td class="center">{{ $vs->soam ? $vs->soam : '-'}}</td>
+                    <td class="center">{{ $vs->soap ? $vs->soap : '-'}}</td>
+                    <td class="center">{{ $vs->hgt ? $vs->hgt : '-' }}</td>
+                    <td class="center">{{ $vs->fill_capillary ? $vs->fill_capillary : '-' }}</td>
+                    <td class="center">{{ $vs->t ? $vs->t : '-' }}</td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
-        </li>
         
     </ul>
 
@@ -231,7 +250,6 @@
         {{ $event->external_crew }}
     @endif
 
-
     <h4>Centro Regulador:</h4>
     
     <table class="ocho">
@@ -251,7 +269,6 @@
         </tbody>
     </table>
 
-    
     <div class="pie_pagina seis center">
         <span class="uppercase">Servicio de Salud Iquique</span><br>
         Anibal Pinto #815, Iquique -
