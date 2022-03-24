@@ -40,6 +40,6 @@ class VitalSign extends Model
 
     public function getTimeFormatAttribute()
     {
-        return $this->time->format('d/m/Y H:i');
+        return $this->time->format('Y-m-d H:i ');
     }
 }
