@@ -11,7 +11,6 @@ use App\Charts\Samu\SampleChart;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
-use ConsoleTVs\Charts\Registrar as Charts;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,17 +29,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Charts $charts)
+    public function boot()
     {
         Paginator::useBootstrap();
-        $charts->register([
-            SampleChart::class,
-            EventByCommune::class,
-            EventByMonth::class,
-            EventByMobile::class,
-            EventBySex::class,
-            EventLastMonth::class
-        ]);
-
     }
 }
