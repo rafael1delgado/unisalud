@@ -41,10 +41,10 @@ class DashboardIndex extends Component
             ->backgroundColor('#006cb7');
 
         $eventBySex = new EventBySex;
-        $eventBySex->labels($eventBySex->getLabel());
-        $eventBySex->dataset('Eventos por sexo', 'bar', $eventBySex->getDataset())
-            ->color('#006cb7')
-            ->backgroundColor('#006cb7');
+        $eventBySex->labels($eventBySex->getLabel())->options([ 'scales' => [ 'yAxes' => [ 'display' => false ] ] ]);
+        $eventBySex->dataset('Eventos por sexo', 'doughnut', $eventBySex->getDataset())
+            ->color(['#006cb7', '#c90076', '#491152', '#8fce00', '#5b5b5b'])
+            ->backgroundColor(['#006cb7', '#c90076', '#491152', '#8fce00', '##5b5b5b']);
 
         return view('livewire.samu.dashboard.dashboard-index', compact([
             'eventLastMonth',
