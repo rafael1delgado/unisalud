@@ -1,11 +1,11 @@
 <div>
     @include('samu.nav')
 
-    <h3 class="mb-1">
+    <h3 class="mb-2">
         <i class="fas fa-chart-line"></i> Panel de Estadísticas
     </h3>
    
-    <div class="row pt-1">
+    <div class="row mb-2">
         <div class="col">
             <div class="card" style="height:350px">
                 <h6 class="card-header"># de Eventos atendidos en los últimos 30 días</h6>
@@ -17,8 +17,8 @@
         </div>
     </div>
 
-    <div class="row pt-2">
-        <div class="col">
+    <div class="row mb-2">
+        <div class="col-12 col-md-6">
             <div class="card" style="height:300px">
                 <h6 class="card-header"># de Eventos atendidos por comuna durante el mes de Marzo</h6>
                 <div class="card-body pt-2">
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-12 col-md-6">
             <div class="card" style="height:300px">
                 <h6 class="card-header"># de Eventos atendidos por móviles durante el mes de Marzo</h6>
                 <div class="card-body pt-2">
@@ -38,8 +38,8 @@
         </div>
     </div>
     
-    <div class="row pt-2 pb-4">
-        <div class="col">
+    <div class="row mb-2">
+        <div class="col-12 col-md-6">
             <div class="card" style="height:300px">
                 <h6 class="card-header"># de Eventos atendidos agrupados por sexo durante el mes de Marzo</h6>
                 <div class="card-body pt-2">
@@ -48,7 +48,7 @@
                 </div>
             </div>  
         </div>
-        <div class="col">
+        <div class="col-12 col-md-6">
             <div class="card" style="height:300px">
                 <h6 class="card-header"># de Eventos atendidos en los últimos 6 meses</h6>
                 <div class="card-body pt-2">
