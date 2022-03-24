@@ -1,32 +1,36 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace App\Charts\Samu;
 
 use App\Models\Samu\Event;
 use Carbon\CarbonPeriod;
-use Chartisan\PHP\Chartisan;
-use ConsoleTVs\Charts\BaseChart;
-use Illuminate\Http\Request;
+use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 use Illuminate\Support\Carbon;
 
-class EventByMonth extends BaseChart
+class EventByMonth extends Chart
 {
+    public $myLabel;
+    public $myDataset;
+
     /**
-     * Handles the HTTP request for the given chart.
-     * It must always return an instance of Chartisan
-     * and never a string or an array.
+     * Initializes the chart.
+     *
+     * @return void
      */
-    public function handler(Request $request): Chartisan
+    public function __construct()
+    {
+        parent::__construct();
+        $this->getData();
+    }
+
+    public function getData()
     {
         $end = Carbon::now();
         $start = $end->copy()->subMonths(5);
-
         $rangeMoths = CarbonPeriod::create($start, '1 month', $end);
-
-        $labels = collect([]);
-        $datasets = collect([]);
+        
+        $this->myLabel = collect([]);
+        $this->myDataset = collect([]);
 
         foreach($rangeMoths as $month)
         {
@@ -38,12 +42,18 @@ class EventByMonth extends BaseChart
                 ->whereYear('date', '=', $month)
                 ->count();
 
-            $labels->push("$nameMonth-$year");
-            $datasets->push($totalEvents);
+            $this->myLabel->push("$nameMonth-$year");
+            $this->myDataset->push($totalEvents);
         }
+    }
 
-        return Chartisan::build()
-            ->labels($labels->toArray())
-            ->dataset('Evento por mes', $datasets->toArray());
+    public function getLabel()
+    {
+        return $this->myLabel->toArray();
+    }
+
+    public function getDataset()
+    {
+        return $this->myDataset->toArray();
     }
 }
