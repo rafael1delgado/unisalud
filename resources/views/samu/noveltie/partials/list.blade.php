@@ -2,8 +2,9 @@
     <table class="table table-striped">
         <thead>
             <tr class="table-primary">
-                <th></th>
-                <th>Fecha registro</th>
+                <th width="90"></th>
+                <th width="100">Fecha</th>
+                <th>Teléfono</th>
                 <th>Detalle de Novedades</th>
                 <th>Creador</th>
             </tr>
@@ -18,6 +19,7 @@
                     @endif
                 </td>
                 <td>{{ $noveltie->created_at }}</td>
+                <td>{{ $noveltie->telephone }}</td>
                 <td>{{ $noveltie->detail ?? ''}} </td>
                 <td>{{ $noveltie->creator->officialFullName }}</td>
             </tr>
