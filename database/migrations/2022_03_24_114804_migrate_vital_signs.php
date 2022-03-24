@@ -28,7 +28,7 @@ class MigrateVitalSigns extends Migration
                 'hgt' => $event->hgt,
                 'fill_capillary' => $event->fill_capillary,
                 't' => $event->t,
-                'datetime'  => $event->created_at,
+                'time'  => $event->created_at,
                 'created_at' => $event->created_at,
                 'updated_at' => $event->updated_at
             ]);
