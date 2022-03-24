@@ -86,8 +86,6 @@ Route::get('/', function () {
 
 //Auth::routes();
 
-Route::get('/samu/dashboard', DashboardIndex::class)->name('dashboard');
-
 Route::get('/claveunica', [ClaveUnicaController::class,'autenticar'])->name('claveunica');
 Route::get('/claveunica/redirect/{redirect}', [ClaveUnicaController::class,'autenticar'])->name('claveunica.redirect');
 Route::get('/claveunica/callback', [ClaveUnicaController::class,'callback']);
@@ -485,6 +483,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
     Route::view('/', 'samu.welcome')->name('welcome');
 	Route::get('/map', [CallController::class, 'maps'])->name('map');
+	Route::get('/dashboard', DashboardIndex::class)->name('dashboard');
 
 	Route::prefix('shifts')->name('shift.')
 	->middleware('permission:SAMU administrador|SAMU regulador|SAMU despachador')
