@@ -171,9 +171,9 @@ class Event extends Model implements Auditable
                     ->withTimestamps();
     }
 
-    public function vitalSigns() 
+    public function vitalSign() 
     {
-        return $this->hasMany(VitalSign::class)->orderBy('registered_at');
+        return $this->hasOne(VitalSign::class);
     }
 
     public function getColorAttribute()
