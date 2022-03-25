@@ -180,25 +180,23 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($event->vitalSigns as $vs)
                 <tr>
                     <td class="center">
                         <small class="seis nowrap">
-                            {{ $vs->time_format ? $vs->time_format : '-' }}
+                            {{ $event->vitalSign->registered_at_format ? $event->vitalSign->registered_at_format : '-' }}
                         </small>
                     </td>
-                    <td class="center">{{ $vs->fc ? $vs->fc : '-' }}</td>
-                    <td class="center">{{ $vs->fr ? $vs->fr : '-' }}</td>
-                    <td class="center">{{ $vs->pa ? $vs->pa : '-' }}</td>
-                    <td class="center">{{ $vs->pam ? $vs->pam : '-' }}</td>
-                    <td class="center">{{ $vs->gl ? $vs->gl : '-' }}</td>
-                    <td class="center">{{ $vs->soam ? $vs->soam : '-'}}</td>
-                    <td class="center">{{ $vs->soap ? $vs->soap : '-'}}</td>
-                    <td class="center">{{ $vs->hgt ? $vs->hgt : '-' }}</td>
-                    <td class="center">{{ $vs->fill_capillary ? $vs->fill_capillary : '-' }}</td>
-                    <td class="center">{{ $vs->t ? $vs->t : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign->fc ? $event->vitalSign->fc : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign->fr ? $event->vitalSign->fr : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign->pa ? $event->vitalSign->pa : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign->pam ? $event->vitalSign->pam : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign->gl ? $event->vitalSign->gl : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign->soam ? $event->vitalSign->soam : '-'}}</td>
+                    <td class="center">{{ $event->vitalSign->soap ? $event->vitalSign->soap : '-'}}</td>
+                    <td class="center">{{ $event->vitalSign->hgt ? $event->vitalSign->hgt : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign->fill_capillary ? $event->vitalSign->fill_capillary : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign->t ? $event->vitalSign->t : '-' }}</td>
                 </tr>
-                @endforeach
             </tbody>
         </table>
         
