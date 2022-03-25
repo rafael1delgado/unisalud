@@ -10,7 +10,6 @@ class VitalSignCreate extends Component
 {
     public $event;
     public $edit;
-    public $vitalSigns;
     public $fc;
     public $fr;
     public $pa;
@@ -42,18 +41,19 @@ class VitalSignCreate extends Component
 
     public function mount()
     {
-        $this->vitalSigns = collect([]);
-
-        if(request()->routeIs('samu.event.edit'))
+        if($this->edit && $this->event->vitalSign)
         {
-            if($this->event->vitalSigns)
-            {
-                foreach($this->event->vitalSigns as $vs)
-                {
-                    $vs['datetime_format'] = $vs->time_format;
-                    $this->vitalSigns->push($vs);
-                }
-            }
+            $this->fr = $this->event->vitalSign->fr;
+            $this->fc = $this->event->vitalSign->fc;
+            $this->pa = $this->event->vitalSign->pa;
+            $this->pam = $this->event->vitalSign->pam;
+            $this->gl = $this->event->vitalSign->gl;
+            $this->soam = $this->event->vitalSign->soam;
+            $this->soap = $this->event->vitalSign->soap;
+            $this->hgt = $this->event->vitalSign->hgt;
+            $this->fill_capillary = $this->event->vitalSign->fill_capillary;
+            $this->t = $this->event->vitalSign->t;
+            $this->registered_at = $this->event->vitalSign->registered_at->format('H:i');
         }
     }
 
@@ -62,44 +62,14 @@ class VitalSignCreate extends Component
         return view('livewire.samu.vital-sign.vital-sign-create');
     }
 
-    public function addVitalSign()
+    public function updateVitalSign()
     {
         $dataValidated = $this->validate();
-        $dataValidated['registered_at'] = now()->format('Y-m-d ') . $dataValidated['registered_at'];
-
+        $dataValidated['registered_at'] = $this->event->vitalSign->registered_at->format('Y-m-d ') . $dataValidated['registered_at'];
         if($this->edit)
         {
-            $vs = VitalSign::create($dataValidated);
-            $this->event->vitalSigns()->save($vs);
+            $this->event->vitalSign->update($dataValidated);
         }
-        
-        //$dataValidated['registered_at'] = Carbon::parse($dataValidated['registered_at'])->format('Y-m-d H:i');
-        $this->vitalSigns->push($dataValidated);
-        $this->resetInputs();
-    }
-
-    public function resetInputs()
-    {
-        $this->registered_at = null;
-        $this->fc = null;
-        $this->fr = null;
-        $this->pa = null;
-        $this->pam = null;
-        $this->gl = null;
-        $this->soam = null;
-        $this->soap = null;
-        $this->hgt = null;
-        $this->fill_capillary = null;
-        $this->t = null;
-    }
-
-    public function deleteVitalSign($index)
-    {
-        if(isset($this->vitalSigns[$index]['id']))
-        {
-            $vs = VitalSign::find($this->vitalSigns[$index]['id']);
-            $vs->delete();
-        }
-        $this->vitalSigns->forget($index);
+        $this->event->vitalSign->refresh();
     }
 }
