@@ -50,6 +50,11 @@
         @break
 @endswitch
 
+<hr>
+
+@canany(['SAMU'])
+    @include('partials.short_audit', ['audits' => $call->audits] )
+@endcanany
 
 @endsection
 
