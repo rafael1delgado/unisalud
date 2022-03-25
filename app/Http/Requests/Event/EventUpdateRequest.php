@@ -66,8 +66,6 @@ class EventUpdateRequest extends FormRequest
             'fill_capillary'    => 'nullable|integer',
             't'                 => 'nullable|numeric',
             
-            'vital_signs'       => 'nullable',
-
             'treatment'         => 'nullable|string|min:0|max:5000',
             'observation_sv'    => 'nullable|string|min:0|max:5000',
 
