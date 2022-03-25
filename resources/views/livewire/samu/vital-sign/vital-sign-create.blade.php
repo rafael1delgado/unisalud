@@ -1,6 +1,15 @@
 <div>
     <div class="form-row">
         <fieldset class="form-group col-6 col-md-1">
+            <label for="for-registered-at">Hora<br>&nbsp;</label>
+            <input type="time" class="form-control @error('registered_at') is-invalid @enderror" id="for-registered-at" wire:model="registered_at">
+            @error('registered_at')
+                <div class="text-danger">
+                    <small>{{ $message }}</small>
+                </div>
+            @enderror
+        </fieldset>
+        <fieldset class="form-group col-6 col-md-1">
             <label for="for-fc">Frecuencia <br>Cardiaca</label>
             <input type="text" class="form-control @error('fc') is-invalid @enderror" maxlength="8" wire:model="fc" id="for-fc" value="{{ old('fc', optional($event)->fc) }}">
             @error('fc')
@@ -92,25 +101,17 @@
                 </div>
             @enderror
         </fieldset>
-        <fieldset class="form-group col-6 col-md-1">
-            <label for="for-created-at">Hora</label>
-            <input type="time" class="form-control @error('time') is-invalid @enderror" id="for-created-at" wire:model="time">
-            @error('time')
-                <div class="text-danger">
-                    <small>{{ $message }}</small>
-                </div>
-            @enderror
-        </fieldset>
-        <fieldset class="form-group col-6 col-md-1 mt-5 pt-1">
-            <button type="button" id="btn-add" wire:click="addVitalSign()" class="btn btn-block btn-sm btn-success">
+        <fieldset class="form-group col-6 col-md-1 mt-5">
+            <button type="button" id="btn-add" wire:click="addVitalSign()" class="btn btn-block btn-success">
                 <i class="fas fa-plus"></i> Agregar
             </button>
         </fieldset>
         
     </div>
 
+    @if($vitalSigns->isNotEmpty())
     <div class="table-responsive">
-        <table class="table table-sm table-bordered table-striped small">
+        <table class="table table-sm table-bordered">
             <thead>
                 <tr>
                     <th>Fecha y Hora</th>
@@ -129,9 +130,9 @@
             </thead>
             <tbody>
                 <input type="hidden" name="vital_signs" value="{{ $vitalSigns }}">                    
-                @forelse($vitalSigns as $index => $vs)
-                <tr>
-                    <td>{{ $vs['datetime_format'] ? $vs['datetime_format'] : '-' }}</td>
+                @foreach($vitalSigns as $index => $vs)
+                <tr class="text-center">
+                    <td>{{ $vs['registered_at'] ? $vs['registered_at'] : '-' }}</td>
                     <td>{{ $vs['fc'] ? $vs['fc'] : '-' }}</td>
                     <td>{{ $vs['fr'] ? $vs['fr'] : '-' }}</td>
                     <td>{{ $vs['pa'] ? $vs['pa'] : '-' }}</td>
@@ -148,14 +149,9 @@
                         </button>
                     </td>
                 </tr>
-                @empty
-                <tr class="text-center">
-                    <td colspan="12">
-                        <em>No hay registros</em>
-                    </td>
-                </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>
+    @endif
 </div>
