@@ -21,7 +21,7 @@ class VitalSignCreate extends Component
     public $hgt;
     public $fill_capillary;
     public $t;
-    public $time;
+    public $registered_at;
     
     public function rules()
     {
@@ -36,7 +36,7 @@ class VitalSignCreate extends Component
             'hgt'               => 'nullable|integer',
             'fill_capillary'    => 'nullable|integer',
             't'                 => 'nullable|numeric',
-            'time'              => 'required|date_format:H:i',
+            'registered_at'     => 'required|date_format:H:i',
         ];
     }
 
@@ -65,7 +65,7 @@ class VitalSignCreate extends Component
     public function addVitalSign()
     {
         $dataValidated = $this->validate();
-        $dataValidated['time'] = now()->format('Y-m-d ') . $dataValidated['time'];
+        $dataValidated['registered_at'] = now()->format('Y-m-d ') . $dataValidated['registered_at'];
 
         if($this->edit)
         {
@@ -73,14 +73,14 @@ class VitalSignCreate extends Component
             $this->event->vitalSigns()->save($vs);
         }
         
-        $dataValidated['datetime_format'] = Carbon::parse($dataValidated['time'])->format('d/m/Y H:i');
+        //$dataValidated['registered_at'] = Carbon::parse($dataValidated['registered_at'])->format('Y-m-d H:i');
         $this->vitalSigns->push($dataValidated);
         $this->resetInputs();
     }
 
     public function resetInputs()
     {
-        $this->datetime = null;
+        $this->registered_at = null;
         $this->fc = null;
         $this->fr = null;
         $this->pa = null;
