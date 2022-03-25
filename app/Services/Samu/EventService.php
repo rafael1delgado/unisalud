@@ -8,6 +8,9 @@ use App\Models\Samu\VitalSign;
 
 class EventService
 {
+    public array $dataVitalSign;
+    public array $dataEvent;
+
     /**
      * Method to create an Event
      * 
@@ -19,19 +22,16 @@ class EventService
      */
     public function create(Event $event = null, Call $call = null, $dataValidated)
     {
+        $this->getDataVitalSign($dataValidated);
+
         $callRelationed = $event ? $event->call : $call;
-        $newEvent = Event::create($dataValidated);
+        $newEvent = Event::create($this->dataEvent);
         $newEvent->call()->associate($callRelationed);
         $newEvent->save();
 
-        $vitalSigns = json_decode($dataValidated['vital_signs'], TRUE);
-
-        foreach($vitalSigns as $itemVitalSign)
-        {
-            $vitalSign = VitalSign::create($itemVitalSign);
-            $newEvent->vitalSigns()->save($vitalSign);
-            $newEvent->save();
-        }
+        $vitalSign = VitalSign::create($this->dataVitalSign);
+        $newEvent->vitalSign()->save($vitalSign);
+        $newEvent->save();
     }
 
     /**
@@ -57,5 +57,34 @@ class EventService
         {
             $event->mobileInService()->dissociate();
         }
+    }
+
+    public function getDataVitalSign($dataValidated)
+    {
+        $this->dataVitalSign['fc'] = $dataValidated['fc'];
+        $this->dataVitalSign['fr'] = $dataValidated['fr'];
+        $this->dataVitalSign['pa'] = $dataValidated['pa'];
+        $this->dataVitalSign['pam'] = $dataValidated['pam'];
+        $this->dataVitalSign['gl'] = $dataValidated['gl'];
+        $this->dataVitalSign['soam'] = $dataValidated['soam'];
+        $this->dataVitalSign['soap'] = $dataValidated['soap'];
+        $this->dataVitalSign['hgt'] = $dataValidated['hgt'];
+        $this->dataVitalSign['fill_capillary'] = $dataValidated['fill_capillary'];
+        $this->dataVitalSign['t'] = $dataValidated['t'];
+        $this->dataVitalSign['registered_at'] = now()->format('Y-m-d ') . $dataValidated['registered_at'];
+
+        unset($dataValidated['fc']);
+        unset($dataValidated['fr']);
+        unset($dataValidated['pa']);
+        unset($dataValidated['pam']);
+        unset($dataValidated['gl']);
+        unset($dataValidated['soam']);
+        unset($dataValidated['soap']);
+        unset($dataValidated['hgt']);
+        unset($dataValidated['fill_capillary']);
+        unset($dataValidated['t']);
+        unset($dataValidated['registered_at']);
+
+        $this->dataEvent = $dataValidated;
     }
 }
