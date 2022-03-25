@@ -45,7 +45,7 @@ class MigrateVitalSigns extends Migration
                     'created_at' => $event->created_at,
                     'updated_at' => $event->updated_at
                 ]);
-                $event->vitalSigns()->save($vitalSign);
+                $event->vitalSign()->save($vitalSign);
             }
 
 
