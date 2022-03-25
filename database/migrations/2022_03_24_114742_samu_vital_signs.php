@@ -26,7 +26,7 @@ class SamuVitalSigns extends Migration
             $table->integer('hgt')->nullable();
             $table->integer('fill_capillary')->nullable();
             $table->decimal('t', 5, 2)->nullable();
-            $table->timestamp('time')->nullable();
+            $table->datetime('registered_at')->nullable();
 
             $table->foreignId('event_id')->nullable()->constrained('samu_events');
 

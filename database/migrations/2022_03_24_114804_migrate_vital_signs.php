@@ -17,23 +17,38 @@ class MigrateVitalSigns extends Migration
 
         foreach($events as $event)
         {
-            $vitalSign = VitalSign::create([
-                'fc' => $event->fc,
-                'fr' => $event->fr,
-                'pa' => $event->pa,
-                'pam' => $event->pam,
-                'gl' => $event->gl,
-                'soam' => $event->soam,
-                'soap' => $event->soap,
-                'hgt' => $event->hgt,
-                'fill_capillary' => $event->fill_capillary,
-                't' => $event->t,
-                'time'  => $event->created_at,
-                'created_at' => $event->created_at,
-                'updated_at' => $event->updated_at
-            ]);
+            if(
+                $event->fc OR
+                $event->fr OR
+                $event->pa OR
+                $event->pam OR
+                $event->gl OR
+                $event->soam OR
+                $event->soap OR
+                $event->hgt OR
+                $event->fill_capillary OR
+                $event->t
+            )
+            {
+                $vitalSign = VitalSign::create([
+                    'fc' => $event->fc,
+                    'fr' => $event->fr,
+                    'pa' => $event->pa,
+                    'pam' => $event->pam,
+                    'gl' => $event->gl,
+                    'soam' => $event->soam,
+                    'soap' => $event->soap,
+                    'hgt' => $event->hgt,
+                    'fill_capillary' => $event->fill_capillary,
+                    't' => $event->t,
+                    'registered_at'  => $event->created_at,
+                    'created_at' => $event->created_at,
+                    'updated_at' => $event->updated_at
+                ]);
+                $event->vitalSigns()->save($vitalSign);
+            }
 
-            $event->vitalSigns()->save($vitalSign);
+
         }
     }
 

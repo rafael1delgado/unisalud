@@ -24,7 +24,7 @@ class VitalSign extends Model
         'hgt',
         'fill_capillary',
         't',
-        'time',
+        'registered_at',
     ];
 
     /**
@@ -35,11 +35,11 @@ class VitalSign extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'time',
+        'registered_at',
     ];
 
     public function getTimeFormatAttribute()
     {
-        return $this->time->format('Y-m-d H:i ');
+        return $this->registered_at->format('Y-m-d H:i ');
     }
 }
