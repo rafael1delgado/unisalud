@@ -40,8 +40,8 @@
                                 <td>{{ $shift->id }}</td>
                                 <td>{{ $shift->status_in_word }}</td>
                                 <td>{{ $shift->type }}</td>
-                                <td>{{ optional($shift->opening_at)->format('Y-m-d H:i') }}</td>
-                                <td>{{ optional($shift->closing_at)->format('Y-m-d H:i') }}</td>
+                                <td>{{ $shift->opening_at_format }}</td>
+                                <td>{{ $shift->closing_at_format }}</td>
                                 <td>{{ $shift->creator->official_name }}</td>
                             </tr>
                             <tr  wire:loading.remove>
@@ -51,7 +51,8 @@
                             </tr>
                             <tr wire:loading.remove>
                                 <td colspan="3">
-                                    <p>Personal de turno:</p>
+                                    <span>Personal de turno:</span>
+                                    <br>
                                     @foreach($shift->users as $user)
                                         <li>
                                             {{ optional($user)->officialFullName }}
@@ -61,11 +62,21 @@
                                     @endforeach
                                 </td>
                                 <td colspan="3">
-                                    <p>Móbiles de turno:</p>
+                                    <span>Móviles de turno:</span>
+                                    <br>
                                     @foreach($shift->mobilesInService as $mis)
                                         <li>
-                                            {{ optional($mis->mobile)->code }} {{ optional($mis->mobile)->name }}
+                                            {{ optional($mis->mobile)->code }} 
+                                            {{ optional($mis->mobile)->name }}
                                             - Tipo {{ $mis->type }}
+                                            <br>
+                                            <span class="pl-5">Tripulación:</span>
+                                            <br>
+                                            @foreach($mis->crew as $tripulant)
+                                            <li class="pl-5" style="list-style-type: circle;">
+                                                {{ $tripulant->officialFullName }}
+                                            </li>
+                                            @endforeach
                                         </li>
                                     @endforeach
                                 </td>
