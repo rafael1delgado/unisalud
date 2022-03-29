@@ -65,19 +65,19 @@
                                     <span>Móviles de turno:</span>
                                     <br>
                                     @foreach($shift->mobilesInService as $mis)
-                                        <li>
-                                            {{ optional($mis->mobile)->code }} 
-                                            {{ optional($mis->mobile)->name }}
-                                            - Tipo {{ $mis->type }}
-                                            <br>
-                                            <span class="pl-5">Tripulación:</span>
-                                            <br>
-                                            @foreach($mis->crew as $tripulant)
-                                            <li class="pl-5" style="list-style-type: circle;">
-                                                {{ $tripulant->officialFullName }}
-                                            </li>
-                                            @endforeach
+                                    <li>
+                                        {{ optional($mis->mobile)->code }} 
+                                        {{ optional($mis->mobile)->name }}
+                                        - Tipo {{ $mis->type }}
+                                        <br>
+                                        <span class="pl-4">Tripulación:</span>
+                                        <br>
+                                        @foreach($mis->crew as $tripulant)
+                                        <li class="pl-4" style="list-style-type: circle;">
+                                            {{ $tripulant->officialFullName }}
                                         </li>
+                                        @endforeach
+                                    </li>
                                     @endforeach
                                 </td>
                             </tr>
