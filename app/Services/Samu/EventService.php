@@ -44,8 +44,16 @@ class EventService
      */
     public function update(Event $event, $dataValidated)
     {
-        $dataValidated['status'] = ($dataValidated["save_close"] == "yes") ? false : $event->status;
-        $event->update($dataValidated);
+        $this->getDataVitalSign($dataValidated, $event);
+        $this->dataEvent['status'] = ($dataValidated["save_close"] == "yes") ? false : $event->status;
+        $event->update($this->dataEvent);
+
+        $vitalSign = VitalSign::findOrNew(optional($event->vitalSign)->id);
+        $vitalSign->fill($this->dataVitalSign);
+        $vitalSign->save();
+
+        $event->vitalSign()->save($vitalSign);
+        $event->save();
 
         $isMobileInService = $event->shift->MobilesInService->where('mobile_id', $dataValidated['mobile_id'])->first();
 
@@ -59,8 +67,10 @@ class EventService
         }
     }
 
-    public function getDataVitalSign($dataValidated)
+    public function getDataVitalSign($dataValidated, Event $event = null)
     {
+        $date = $this->getDate($event);
+
         $this->dataVitalSign['fc'] = $dataValidated['fc'];
         $this->dataVitalSign['fr'] = $dataValidated['fr'];
         $this->dataVitalSign['pa'] = $dataValidated['pa'];
@@ -71,7 +81,7 @@ class EventService
         $this->dataVitalSign['hgt'] = $dataValidated['hgt'];
         $this->dataVitalSign['fill_capillary'] = $dataValidated['fill_capillary'];
         $this->dataVitalSign['t'] = $dataValidated['t'];
-        $this->dataVitalSign['registered_at'] = now()->format('Y-m-d ') . $dataValidated['registered_at'];
+        $this->dataVitalSign['registered_at'] = $date . $dataValidated['registered_at'];
 
         unset($dataValidated['fc']);
         unset($dataValidated['fr']);
@@ -86,5 +96,13 @@ class EventService
         unset($dataValidated['registered_at']);
 
         $this->dataEvent = $dataValidated;
+    }
+
+    public function getDate(Event $event = null)
+    {
+        $date = now()->format('Y-m-d ');
+        if($event && $event->vitalSign)
+            $date = $event->vitalSign->registered_at->format('Y-m-d ');
+        return $date;
     }
 }
