@@ -13,9 +13,9 @@ class DeleteVitalSignsToSamuEvents extends Migration
      */
     public function up()
     {
-        Schema::table('samu_events', function (Blueprint $table) {
-            $table->dropColumn(['fc', 'fr', 'pa', 'pam', 'gl', 'soam', 'soap', 'hgt', 'fill_capillary', 't']);
-        });
+        // Schema::table('samu_events', function (Blueprint $table) {
+        //     $table->dropColumn(['fc', 'fr', 'pa', 'pam', 'gl', 'soam', 'soap', 'hgt', 'fill_capillary', 't']);
+        // });
     }
 
     /**
