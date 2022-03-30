@@ -51,12 +51,15 @@ class EventService
         $this->dataEvent['status'] = ($dataValidated["save_close"] == "yes") ? false : $event->status;
         $event->update($this->dataEvent);
 
-        $vitalSign = VitalSign::findOrNew(optional($event->vitalSign)->id);
-        $vitalSign->fill($this->dataVitalSign);
-        $vitalSign->save();
+        if($this->notEmptyVitalSign($dataValidated))
+        {
+            $vitalSign = VitalSign::findOrNew(optional($event->vitalSign)->id);
+            $vitalSign->fill($this->dataVitalSign);
+            $vitalSign->save();
 
-        $event->vitalSign()->save($vitalSign);
-        $event->save();
+            $event->vitalSign()->save($vitalSign);
+            $event->save();
+        }
 
         $isMobileInService = $event->shift->MobilesInService->where('mobile_id', $dataValidated['mobile_id'])->first();
 
