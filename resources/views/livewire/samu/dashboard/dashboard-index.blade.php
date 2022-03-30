@@ -20,7 +20,7 @@
     <div class="row mb-2">
         <div class="col-12 col-md-6">
             <div class="card" style="height:300px">
-                <h6 class="card-header"># de Eventos atendidos por comuna durante el mes de Marzo</h6>
+                <h6 class="card-header"># de Eventos atendidos por comuna durante el mes de {{ translateMonth(now()->format('F')) }}</h6>
                 <div class="card-body pt-2">
                     {!! $eventByCommune->container() !!}
                     {!! $eventByCommune->script() !!}
@@ -29,7 +29,7 @@
         </div>
         <div class="col-12 col-md-6">
             <div class="card" style="height:300px">
-                <h6 class="card-header"># de Eventos atendidos por móviles durante el mes de Marzo</h6>
+                <h6 class="card-header"># de Eventos atendidos por móviles durante el mes de {{ translateMonth(now()->format('F')) }}</h6>
                 <div class="card-body pt-2">
                     {!! $eventByMobile->container() !!}
                     {!! $eventByMobile->script() !!}
@@ -41,7 +41,7 @@
     <div class="row mb-2">
         <div class="col-12 col-md-6">
             <div class="card" style="height:300px">
-                <h6 class="card-header"># de Eventos atendidos agrupados por sexo durante el mes de Marzo</h6>
+                <h6 class="card-header"># de Eventos atendidos agrupados por sexo durante el mes de {{ translateMonth(now()->format('F')) }}</h6>
                 <div class="card-body pt-2">
                     {!! $eventBySex->container() !!}
                     {!! $eventBySex->script() !!}

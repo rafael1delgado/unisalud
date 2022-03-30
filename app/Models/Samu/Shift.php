@@ -39,7 +39,6 @@ class Shift extends Model implements Auditable
         'closing_at'
     ];
 
-
     /**
      * The users that belong to the shift.
      */
@@ -66,11 +65,6 @@ class Shift extends Model implements Auditable
         //             ->withTimestamps();
     }
 
-    public static function todayShiftVerify()
-    {
-        return Shift::where('status',true)->exists() ?? false;
-    }
-
     public function calls()
     {
         return $this->hasMany(Call::class);
@@ -81,15 +75,36 @@ class Shift extends Model implements Auditable
         return $this->hasMany(Event::class);
     }
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class,'creator_id');
+    }
+
     /* Obtiene el estado en palabra */
     public function getStatusInWordAttribute()
     {
         return $this->status == 1 ? 'Abierto' : 'Cerrado';
     }
 
-    public function creator()
+    public function getOpeningAtFormatAttribute()
     {
-        return $this->belongsTo(User::class,'creator_id');
+        $opening = '-';
+        if($this->opening_at)
+            $opening = $this->opening_at->format('Y-m-d H:i');
+        return $opening;
+    }
+
+    public function getClosingAtFormatAttribute()
+    {
+        $closing = '-';
+        if($this->closing_at)
+            $closing = $this->closing_at->format('Y-m-d H:i');
+        return $closing;
+    }
+
+    public static function todayShiftVerify()
+    {
+        return Shift::where('status',true)->exists() ?? false;
     }
 
     /**

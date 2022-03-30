@@ -27,12 +27,12 @@ class EventByMonth extends Chart
     {
         $end = Carbon::now();
         $start = $end->copy()->subMonths(5);
-        $rangeMoths = CarbonPeriod::create($start, '1 month', $end);
+        $rangeMonths = CarbonPeriod::create($start->startOfMonth(), '1 month', $end->startOfMonth());
         
         $this->myLabel = collect([]);
         $this->myDataset = collect([]);
 
-        foreach($rangeMoths as $month)
+        foreach($rangeMonths as $month)
         {
             $nameMonth = translateMonth($month->format('F'));
             $year = $month->format('Y');

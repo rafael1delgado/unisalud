@@ -81,10 +81,13 @@
             <a class="dropdown-item {{ active('samu.calls.search') }}"
             href=" {{ route('samu.call.search') }}"><i class="fas fa-phone"></i> Llamadas</a>
 
+            <a class="dropdown-item {{ active('samu.shift.searcher') }}"
+            href=" {{ route('samu.shift.searcher') }}"><i class="fas fa-blender-phone"></i> Buscador Turnos</a>
+
             <a class="dropdown-item {{ active('samu.coordinate.index') }}"
             href=" {{ route('samu.coordinate.index') }}"><i class="fas fa-globe"></i> Coordenadas Pacientes</a>
 
-            <a class="dropdown-item {{ active('samu.coordinate.index') }}"
+            <a class="dropdown-item {{ active('samu.dashboard') }}"
             href=" {{ route('samu.dashboard') }}"><i class="fas fa-chart-line"></i> Panel Estadísticas</a>
 
         </div>

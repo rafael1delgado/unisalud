@@ -478,6 +478,7 @@ use App\Http\Livewire\Samu\MobileSelector;
 use App\Http\Livewire\Samu\TimestampsAndLocation;
 use App\Http\Livewire\Samu\GetLocation;
 use App\Http\Livewire\Samu\SearchCalls;
+use App\Http\Livewire\Samu\Shift\ShiftSearcher;
 
 Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
@@ -491,6 +492,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/',				[ShiftController::class, 'index'])->name('index');
 		Route::get('/create',		[ShiftController::class, 'create'])->name('create');
 		Route::post('/store',		[ShiftController::class, 'store'])->name('store');
+		Route::get('/searcher',		ShiftSearcher::class)->name('searcher');
 		Route::get('/edit/{shift}',	[ShiftController::class, 'edit'])->name('edit');
 		Route::put('/{shift}',		[ShiftController::class, 'update'])->name('update');
 		Route::delete('/{shift}', 	[ShiftController::class, 'destroy'])->name('destroy');
@@ -612,7 +614,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 });
 
 Route::get('/miubicacion', [CoordinateController::class, 'create'])->name('coordinate.create');
-Route::post('/miubicacion', [CoordinateController::class, 'store'])->name('coordinate.store');
+Route::post('/miubicacion', [CoordinateController::class, 'store'])->name('coordinate.store')->middleware('throttle:2');
 
 //fin rutas samu
 

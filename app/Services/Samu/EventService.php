@@ -8,8 +8,8 @@ use App\Models\Samu\VitalSign;
 
 class EventService
 {
-    public array $dataVitalSign;
-    public array $dataEvent;
+    public $dataVitalSign = [];
+    public $dataEvent = [];
 
     /**
      * Method to create an Event
@@ -67,10 +67,10 @@ class EventService
         }
     }
 
+
     public function getDataVitalSign($dataValidated, Event $event = null)
     {
-        $date = $this->getDate($event);
-
+        
         $this->dataVitalSign['fc'] = $dataValidated['fc'];
         $this->dataVitalSign['fr'] = $dataValidated['fr'];
         $this->dataVitalSign['pa'] = $dataValidated['pa'];
@@ -81,7 +81,12 @@ class EventService
         $this->dataVitalSign['hgt'] = $dataValidated['hgt'];
         $this->dataVitalSign['fill_capillary'] = $dataValidated['fill_capillary'];
         $this->dataVitalSign['t'] = $dataValidated['t'];
-        $this->dataVitalSign['registered_at'] = $date . $dataValidated['registered_at'];
+        
+        if($dataValidated['registered_at'])
+        {
+            $date = $this->getDate($event);
+            $this->dataVitalSign['registered_at'] = $date . $dataValidated['registered_at'];
+        }
 
         unset($dataValidated['fc']);
         unset($dataValidated['fr']);
@@ -101,7 +106,7 @@ class EventService
     public function getDate(Event $event = null)
     {
         $date = now()->format('Y-m-d ');
-        if($event && $event->vitalSign)
+        if($event && $event->vitalSign && $event->vitalSign->registered_at)
             $date = $event->vitalSign->registered_at->format('Y-m-d ');
         return $date;
     }
