@@ -10,6 +10,7 @@ class VitalSignCreate extends Component
 {
     public $event;
     public $edit;
+
     public $fc;
     public $fr;
     public $pa;
