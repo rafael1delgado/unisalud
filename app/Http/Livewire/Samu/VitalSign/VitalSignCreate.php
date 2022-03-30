@@ -54,7 +54,7 @@ class VitalSignCreate extends Component
             $this->hgt = $this->event->vitalSign->hgt;
             $this->fill_capillary = $this->event->vitalSign->fill_capillary;
             $this->t = $this->event->vitalSign->t;
-            $this->registered_at = $this->event->vitalSign->registered_at->format('H:i');
+            $this->registered_at = optional($this->event->vitalSign->registered_at)->format('H:i');
         }
     }
 

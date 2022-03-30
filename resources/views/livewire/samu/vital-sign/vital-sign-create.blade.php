@@ -3,7 +3,15 @@
         <fieldset class="form-group col-6 col-md-1">
             <label for="for-registered-at">Hora<br>&nbsp;</label>
 
-            <input @if($edit) value="{{ optional(optional($event->vitalSign)->registered_at)->format('H:i') }}" @endif name="registered_at" type="time" class="form-control @error('registered_at') is-invalid @enderror" id="for-registered-at">
+            <input 
+                @if($edit) 
+                    value="{{ optional(optional($event->vitalSign)->registered_at)->format('H:i') }}" 
+                @endif 
+
+                name="registered_at" 
+                type="time" 
+                class="form-control @error('registered_at') is-invalid @enderror" 
+                id="for-registered-at">
 
             @error('registered_at')
                 <div class="text-danger">
@@ -11,10 +19,20 @@
                 </div>
             @enderror
         </fieldset>
+
         <fieldset class="form-group col-6 col-md-1">
             <label for="for-fc">Frecuencia <br>Cardiaca</label>
 
-            <input @if($edit) value="{{ optional($event->vitalSign)->fc }}" @endif name="fc" type="text" class="form-control @error('fc') is-invalid @enderror" maxlength="8" id="for-fc" {{ old('fc', optional($event)->fc) }}>
+            <input 
+                @if($edit) 
+                    value="{{ optional($event->vitalSign)->fc }}" 
+                @endif 
+
+                name="fc" 
+                type="text" 
+                class="form-control @error('fc') is-invalid @enderror" 
+                maxlength="8" 
+                id="for-fc" {{ old('fc', optional($event)->fc) }}>
 
             @error('fc')
                 <div class="text-danger">
@@ -22,10 +40,16 @@
                 </div>
             @enderror
         </fieldset>
+
         <fieldset class="form-group col-6 col-md-1">
             <label for="for-fr">Frecuencia <br>Respiratoria</label>
 
-            <input @if($edit) value="{{ optional($event->vitalSign)->fr }}" @endif name="fr" type="number" class="form-control @error('fr') is-invalid @enderror" id="for-fr" {{ old('fr', optional($event)->fr) }}>
+            <input 
+                @if($edit) value="{{ optional($event->vitalSign)->fr }}" @endif 
+                name="fr" 
+                type="number" 
+                class="form-control @error('fr') is-invalid @enderror" 
+                id="for-fr" {{ old('fr', optional($event)->fr) }}>
 
             @error('fr')
                 <div class="text-danger">
@@ -33,10 +57,17 @@
                 </div>
             @enderror
         </fieldset>
+
         <fieldset class="form-group col-6 col-md-1">
             <label for="for-pa">Presión <br>Arterial</label>
 
-            <input @if($edit) value="{{ optional($event->vitalSign)->pa }}" @endif name="pa" type="text" class="form-control @error('pa') is-invalid @enderror" id="for-pa" {{ old('pa', optional($event)->pa) }}
+            <input 
+                @if($edit) value="{{ optional($event->vitalSign)->pa }}" @endif 
+                name="pa" 
+                type="text" 
+                class="form-control @error('pa') is-invalid @enderror" 
+                id="for-pa" 
+                {{ old('pa', optional($event)->pa) }}
 
                 placeholder="xxx/xx">
             @error('pa')
@@ -48,9 +79,14 @@
         <fieldset class="form-group col-6 col-md-1">
             <label for="for-pam">Presión Arterial <br>Media</label>
 
-            <input @if($edit) value="{{ optional($event->vitalSign)->pam }}" @endif name="pam" type="text" class="form-control @error('pam') is-invalid @enderror" id="for-pam" {{ old('pam', optional($event)->pam) }}
-
+            <input 
+                @if($edit) value="{{ optional($event->vitalSign)->pam }}" @endif 
+                name="pam" 
+                type="text" 
+                class="form-control @error('pam') is-invalid @enderror" 
+                id="for-pam" {{ old('pam', optional($event)->pam) }}
                 placeholder="xxx/xx">
+
             @error('pam')
                 <div class="text-danger">
                     <small>{{ $message }}</small>
