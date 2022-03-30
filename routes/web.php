@@ -614,7 +614,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 });
 
 Route::get('/miubicacion', [CoordinateController::class, 'create'])->name('coordinate.create');
-Route::post('/miubicacion', [CoordinateController::class, 'store'])->name('coordinate.store');
+Route::post('/miubicacion', [CoordinateController::class, 'store'])->name('coordinate.store')->middleware('throttle:2');
 
 //fin rutas samu
 

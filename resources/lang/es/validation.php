@@ -211,6 +211,7 @@ return [
         'position'              => 'posición',
         'price'                 => 'precio',
         'rau'                   => 'registro atención de urgencia',
+        'registered_at'         => 'hora',
         'reason'                => 'motivo',
         'reception_place_id'    => 'otro lugar de recepción',
         'regulation'            => 'regulación',

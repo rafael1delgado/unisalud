@@ -65,7 +65,7 @@ class EventStoreRequest extends FormRequest
             'hgt'               => 'nullable|integer',
             'fill_capillary'    => 'nullable|integer',
             't'                 => 'nullable|numeric',
-            'registered_at'     => 'required|date_format:H:i',
+            'registered_at'     => 'nullable|date_format:H:i',
 
             'treatment'         => 'nullable|string|min:0|max:5000',
             'observation_sv'    => 'nullable|string|min:0|max:5000',

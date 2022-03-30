@@ -1,7 +1,7 @@
 <div>
     @include('samu.nav')
 
-    <div class="row" class="mb-3">
+    <div class="row">
         <div class="col">
             <h3>
                 <i class="fas fa-globe"></i> Coordenadas ingresadas
@@ -10,13 +10,20 @@
         <div class="col text-right">
             <button
                 class="btn btn-sm btn-primary"
-                wire:click="refreshCoordinates">
-                <i class="fas fa-sync-alt"></i> Actualizar
+                wire:click="refreshCoordinates"
+                wire:loading.attr="disabled">
+                <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                    wire:loading
+                    wire:target="refreshCoordinates">
+                </span>
+                Actualizar
             </button>
         </div>
     </div>
    
-
     <div class="row mb-3">
         <div class="col-12 col-md-10">
             <label class="form-label" for="for-search">Buscador</label>
@@ -39,6 +46,7 @@
             </select>
         </div>
     </div>
+
     <div class="table-responsive">
         <table class="table table-sm table-bordered table-striped small">
             <thead>
@@ -55,19 +63,6 @@
             <tbody>
                 @forelse($coordinates as $coordinate)
                     <tr>
-                        <td class="text-center">{{ $coordinate->id }}</td>
-                        <td>{{ $coordinate->name }}</td>
-                        <td>{{ $coordinate->latitude }}</td>
-                        <td>{{ $coordinate->longitude }}</td>
-                        <td>{{ $coordinate->observation }}</td>
-                        <td class="text-center">
-                            @if($coordinate->call)
-                            <a class="nav-link" href=" {{ route('samu.call.edit', $coordinate->call) }}">
-                                {{ $coordinate->call->id }}
-                            @else 
-                                -
-                            @endif
-                        </td>
                         <td class="text-center" style="width: 200px">
                             @if($edit && $selectedCoordinateId == $coordinate->id)
                                 <select 
@@ -109,31 +104,45 @@
                                     </button>
                                 </div>
                             @else
-                                <div class="btn-group">
-                                    <button
-                                        class="btn btn-sm btn-primary"
-                                        wire:click="showButton({{ $coordinate }})"
-                                        wire:loading.attr="disabled"
-                                        wire:target="deleteCoordinate"
-                                        {{ $coordinate->call ? 'disabled' : '' }}>
-                                        Editar
-                                    </button>
-                                    <button 
-                                        class="btn btn-sm btn-danger"    
-                                        wire:click="deleteCoordinate({{ $coordinate }})"
-                                        wire:loading.attr="disabled"
-                                        wire:target="deleteCoordinate">
-                                        <span
-                                            class="spinner-border spinner-border-sm"
-                                            role="status"
-                                            aria-hidden="true"
-                                            wire:loading
-                                            wire:target="deleteCoordinate">
-                                        </span>
-                                        Eliminar
-                                    </button>
-                                </div>
+                                <button
+                                    class="btn btn-sm btn-primary"
+                                    title="Editar coordenada"
+                                    wire:click="showButton({{ $coordinate }})"
+                                    wire:loading.attr="disabled"
+                                    wire:target="deleteCoordinate"
+                                    {{ $coordinate->call ? 'disabled' : '' }}>
+                                    <i class="fas fa-edit"></i> {{ $coordinate->id }}
+                                </button>
                             @endif
+                        </td>
+                        <td>{{ $coordinate->name }}</td>
+                        <td>{{ $coordinate->latitude }}</td>
+                        <td>{{ $coordinate->longitude }}</td>
+                        <td>{{ $coordinate->observation }}</td>
+                        <td class="text-center">
+                            @if($coordinate->call)
+                            <a class="nav-link" href=" {{ route('samu.call.edit', $coordinate->call) }}">
+                                {{ $coordinate->call->id }}
+                            @else 
+                                -
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            <button 
+                                class="btn btn-sm btn-danger"
+                                title="Eliminar coordenada"
+                                wire:click="deleteCoordinate({{ $coordinate }})"
+                                wire:loading.attr="disabled"
+                                wire:target="deleteCoordinate">
+                                <span
+                                    class="spinner-border spinner-border-sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                    wire:loading
+                                    wire:target="deleteCoordinate">
+                                </span>
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </td>
                     </tr>
                 @empty
@@ -145,10 +154,10 @@
                 @endforelse
                 </tr>
             </tbody>
+            <caption>
+                Total resultados : {{ $coordinates->total() }}
+            </caption>
         </table>
         {{ $coordinates->links() }}
-        <p class="text-end">
-            Total resultados : {{ $coordinates->total() }}
-        </p>
     </div>
 </div>
