@@ -8,8 +8,8 @@ use App\Models\Samu\VitalSign;
 
 class EventService
 {
-    public array $dataVitalSign;
-    public array $dataEvent;
+    public $dataVitalSign = [];
+    public $dataEvent = [];
 
     /**
      * Method to create an Event
