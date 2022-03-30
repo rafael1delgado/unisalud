@@ -67,6 +67,7 @@ class EventService
         }
     }
 
+
     public function getDataVitalSign($dataValidated, Event $event = null)
     {
         $date = $this->getDate($event);
@@ -81,6 +82,7 @@ class EventService
         $this->dataVitalSign['hgt'] = $dataValidated['hgt'];
         $this->dataVitalSign['fill_capillary'] = $dataValidated['fill_capillary'];
         $this->dataVitalSign['t'] = $dataValidated['t'];
+
         $this->dataVitalSign['registered_at'] = $date . $dataValidated['registered_at'];
 
         unset($dataValidated['fc']);

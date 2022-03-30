@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Coordinate\CoordinateStoreRequest;
 use App\Models\Coordinate;
 use Illuminate\Http\Request;
 
@@ -39,15 +40,31 @@ class CoordinateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Coordinate\CoordinateStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CoordinateStoreRequest $request)
     {
-        $coordinate = new Coordinate($request->all());
-        $coordinate->save();
+        $dataValidated = $request->validated();
 
-        session()->flash('success', 'Se envió correctamente su ubicación a SAMU, su identificador es: ' . $coordinate->id);
+        $coordinates = Coordinate::query()
+            ->whereLatitude($dataValidated['latitude'])
+            ->whereLongitude($dataValidated['longitude'])
+            ->whereBetween('created_at', [now()->subDay(), now()]);
+
+        if($coordinates->count() == 0)
+        {
+            $coordinate = Coordinate::create($dataValidated);
+            $type = 'success';
+            $msg = 'Se envió correctamente su ubicación a SAMU, su identificador es: ' . $coordinate->id;
+        }
+        else
+        {
+            $type = 'danger';
+            $msg = 'La ubicación ya está registrada en SAMU, el identificador es: ' . $coordinates->first()->id;
+        }
+
+        session()->flash($type, $msg);
         return redirect()->back();
     }
 
