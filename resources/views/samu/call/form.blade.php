@@ -11,25 +11,7 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-12 col-md-4">
-        <label for="for-address">Dirección</label>
-        <div class="input-group">
-            <input type="text" class="form-control form-control-sm @error('address') is-invalid @enderror" name="address" id="for-address"
-                value="{{ old('address', optional($call)->address) }}">
-            <div class="input-group-append">
-                <button class="btn btn-sm btn-primary" type="button" id="btn-search">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-        @error('address')
-            <div class="text-danger">
-                <small>{{ $message }}</small>
-            </div>
-        @enderror
-    </fieldset>
-
-    <fieldset class="form-group col-12 col-md-2">
+        <fieldset class="form-group col-12 col-md-2">
         <label for="for-commune">Comuna</label>
         <select class="form-control form-control-sm @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune">
             <option value="">Selecciona una comuna</option>
@@ -40,6 +22,25 @@
             @endforeach
         </select>
         @error('commune_id')
+        <div class="text-danger">
+            <small>{{ $message }}</small>
+        </div>
+        @enderror
+    </fieldset>
+    
+    <fieldset class="form-group col-12 col-md-4">
+        <label for="for-address">Dirección</label>
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm @error('address') is-invalid @enderror" 
+                name="address" id="for-address"
+                value="{{ old('address', optional($call)->address) }}">
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-primary" type="button" id="btn-search">
+                    <i class="fas fa-map-marker"></i>
+                </button>
+            </div>
+        </div>
+        @error('address')
             <div class="text-danger">
                 <small>{{ $message }}</small>
             </div>
@@ -47,9 +48,12 @@
     </fieldset>
 
     <fieldset class="form-group col-12 col-md-3">
-        <label for="for-address-reference">Punto de Referencia</label>
-        <input type="text" class="form-control form-control-sm @error('address_reference') is-invalid @enderror" name="address_reference" id="for-address-reference"
-            value="{{ old('address_reference', optional($call)->address_reference) }}">
+        <label for="for-address-reference">Referencia dirección</label>
+        <input type="text" 
+            class="form-control form-control-sm @error('address_reference') is-invalid @enderror" 
+            name="address_reference" id="for-address-reference"
+            value="{{ old('address_reference', optional($call)->address_reference) }}" 
+            placeholder="Después del semáforo, Abajo del puente, Entre calle 1 y 2">
         @error('address_reference')
             <div class="text-danger">
                 <small>{{ $message }}</small>
