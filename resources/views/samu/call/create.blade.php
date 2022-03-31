@@ -24,7 +24,8 @@
     @csrf
     @method('POST')
 
-    <div id="warning-msg"  class='alert alert-warning' style="display:none"></div>
+    <div id="danger-msg"  class='alert alert-danger' style="display:none"></div>
+    <div id="success-msg"  class='alert alert-success' style="display:none"></div>
 
     @include('samu.call.form', ['call' => null])
 
@@ -39,20 +40,27 @@
 <script>
     const URL_GEOCODE = 'https://geocode.search.hereapi.com/v1/geocode';
     const API_KEY = '{{ env("API_KEY_HERE") }}';
-    const ZOOM_SEARCH = 16;
+    const ZOOM_SEARCH = 15;
     let btnSearch = document.getElementById('btn-search');
 
-    setTimeout(function(){
-        hiddenError();
-    }, 10000);
-
     function showError(msg) {
-        document.getElementById("warning-msg").innerHTML = msg;
-        document.getElementById("warning-msg").style.display = 'block';
+        hiddenSuccess();
+        document.getElementById("danger-msg").innerHTML = msg;
+        document.getElementById("danger-msg").style.display = 'block';
+    }
+
+    function showSuccess(msg) {
+        hiddenError();
+        document.getElementById("success-msg").innerHTML = msg;
+        document.getElementById("success-msg").style.display = 'block';
     }
 
     function hiddenError() {
-        document.getElementById("warning-msg").style.display = 'none';
+        document.getElementById("danger-msg").style.display = 'none';
+    }
+
+    function hiddenSuccess() {
+        document.getElementById("success-msg").style.display = 'none';
     }
 
     btnSearch.addEventListener('click', (event) => {
@@ -81,14 +89,14 @@
                 let location = locations[0].position;
                 marker.setLatLng([location.lat, location.lng]);
                 map.setView([location.lat, location.lng], ZOOM_SEARCH);
-                console.log([location.lat, location.lng]);
                 inputLatitude.setAttribute('value', location.lat);
                 inputLongitude.setAttribute('value', location.lng);
+                showSuccess('El pin fue autoposicionado.');
             } else {
                 showError('La dirección indicada no fue encontrada.');
             }
         } catch (error) {
-            console.error(error);
+            showError('Disculpe, en este momento no podemos buscar la dirección indicada.');
         }
     }
 </script>
