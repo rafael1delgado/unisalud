@@ -44,6 +44,7 @@ class Call extends Model implements Auditable
         'applicant',
         'age',
         'address',
+        'address_reference',
         'latitude',
         'longitude',
         'telephone',
@@ -67,7 +68,7 @@ class Call extends Model implements Auditable
     {
         return $this->belongsTo(Shift::class);
     }
-    
+
     public function commune()
     {
         return $this->belongsTo(Commune::class);
@@ -89,7 +90,7 @@ class Call extends Model implements Auditable
     {
         return $this->belongsTo(Call::class,'call_id');
     }
-    
+
     /* Una llamada puede tener muchas llamadas asociadas  */
     public function associatedCalls()
     {
