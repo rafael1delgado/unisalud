@@ -32,11 +32,11 @@
                 </td>
                 <td>
                     @if($call->classification)
-                        {{ $call->classification }} 
+                        {{ $call->classification }}
                         @if($call->classification != 'OT')
-                            <br> Evento: 
+                            <br> Evento:
                             @foreach($call->events as $event)
-                                <a href="{{ route('samu.event.edit', $event) }}" class="link-primary"> {{ $event->id }}</a>, 
+                                <a href="{{ route('samu.event.edit', $event) }}" class="link-primary"> {{ $event->id }}</a>,
                             @endforeach
                         @endif
                     @endif
@@ -51,7 +51,9 @@
                     {{ $call->age_format }}
                     {{ $call->information }}
                 </td>
-                <td>{{ $call->address }} {{ optional($call->commune)->name }}</td>
+                <td>
+                    {{ $call->full_address }} {{ optional($call->commune)->name }}
+                </td>
                 <td>{{ $call->telephone }}</td>
                 <td>{{ $call->receptor->officialFullName }}</td>
                 @if($createEvent)
@@ -62,7 +64,7 @@
                 </td>
                 @endif
             </tr>
-            @endforeach   
+            @endforeach
         </tbody>
     </table>
 </div>

@@ -176,7 +176,7 @@
     <fieldset class="form-group col-md-5">
         <label for="for-address">Dirección</label>
         <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="for-address"
-        value="{{ old('address', $call ? optional($call)->address : optional($event)->address )}}">
+        value="{{ old('address', $call ? optional($call)->full_address : optional($event)->address )}}">
         @error('address')
             <div class="text-danger">
                 <small>{{ $message }}</small>
