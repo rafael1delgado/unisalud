@@ -23,11 +23,11 @@
             </button>
         </div>
     </div>
-   
+
     <div class="row mb-3">
         <div class="col-12 col-md-10">
             <label class="form-label" for="for-search">Buscador</label>
-            <input class="form-control" 
+            <input class="form-control"
                 type="text"
                 id="for-search"
                 autocomplete="off"
@@ -65,13 +65,13 @@
                     <tr>
                         <td class="text-center" style="width: 200px">
                             @if($edit && $selectedCoordinateId == $coordinate->id)
-                                <select 
-                                    class="form-control form-control-sm" 
+                                <select
+                                    class="form-control form-control-sm"
                                     name="calls-{{ $coordinate->id }}"
                                     id="calls-{{ $coordinate->id }}"
-                                    wire:model="selectedCallId" 
+                                    wire:model="selectedCallId"
                                     >
-                                    <option value="">Selecciona una llamada</option>
+                                    <option value="">Selecciona una llamada de las últimas 25</option>
                                     @foreach ($calls as $call)
                                         <option value="{{ $call->id }}" >
                                             ID: {{ $call->id }} - {{ $call->applicant }}
@@ -80,9 +80,9 @@
                                 </select>
                                 <br>
                                 <div class="btn-group">
-                                    <button 
-                                        class="btn btn-sm btn-success" 
-                                        wire:click="assignCoordinate" 
+                                    <button
+                                        class="btn btn-sm btn-success"
+                                        wire:click="assignCoordinate"
                                         wire:loading.attr="disabled"
                                         wire:target="assignCoordinate"
                                         {{ ($selectedCallId) ? '' : 'disabled'}}>
@@ -95,7 +95,7 @@
                                         </span>
                                         Guardar
                                     </button>
-                                    <button 
+                                    <button
                                         class="btn btn-sm btn-danger"
                                         wire:click="showButton({{ $coordinate }})"
                                         wire:loading.attr="disabled"
@@ -123,12 +123,12 @@
                             @if($coordinate->call)
                             <a class="nav-link" href=" {{ route('samu.call.edit', $coordinate->call) }}">
                                 {{ $coordinate->call->id }}
-                            @else 
+                            @else
                                 -
                             @endif
                         </td>
                         <td class="text-center">
-                            <button 
+                            <button
                                 class="btn btn-sm btn-danger"
                                 title="Eliminar coordenada"
                                 wire:click="deleteCoordinate({{ $coordinate }})"
