@@ -150,6 +150,7 @@ return [
 
     'attributes' => [
         'address'               => 'dirección',
+        'address_reference'     => 'punto de referencia',
         'applicant'             => 'solicitante',
         'age'                   => 'edad',
         'body'                  => 'contenido',
@@ -231,7 +232,7 @@ return [
         'title'                 => 'título',
         'treatment'             => 'tratamiento',
         'type'                  => 'tipo',
-        'telephone'             => 'teléfono',    
+        'telephone'             => 'teléfono',
         'username'              => 'usuario',
         'year'                  => 'año',
     ],
