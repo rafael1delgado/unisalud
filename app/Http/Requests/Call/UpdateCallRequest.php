@@ -39,6 +39,7 @@ class UpdateCallRequest extends FormRequest
                 new CallRegulation($this->route('call')->call_id, $this->classification, $this->key_id)
             ],
             'address'           => 'nullable|string|min:0|max:255',
+            'address_reference' => 'nullable|string|min:0|max:255',
             'latitude'          => 'nullable|numeric',
             'longitude'         => 'nullable|numeric',
             'regulation'        => 'nullable|string|min:3|max:5000',

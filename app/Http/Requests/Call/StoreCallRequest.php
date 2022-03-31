@@ -34,6 +34,7 @@ class StoreCallRequest extends FormRequest
             'information'       => 'required|string|min:3|max:5000',
             'commune_id'        => 'nullable|exists:communes,id',
             'address'           => 'nullable|string|min:0|max:255',
+            'address_reference' => 'nullable|string|min:0|max:255',
             'latitude'          => 'nullable|numeric',
             'longitude'         => 'nullable|numeric',
             'sex' => [
