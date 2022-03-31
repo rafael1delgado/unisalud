@@ -21,6 +21,10 @@
     {{ $call->age_format }} 
     {{ $call->information }}
 </td>
-<td>{{ $call->address }} {{ optional($call->commune)->name }}</td>
+<td>
+    {{ $call->address }} 
+    {{ ($call->address_reference) ? '('.$call->address_reference.')':'' }} 
+    {{ optional($call->commune)->name }}
+</td>
 <td>{{ $call->telephone }}</td>
 <td>{{ $call->receptor->officialFullName }}</td>
