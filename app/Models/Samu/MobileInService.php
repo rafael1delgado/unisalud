@@ -77,10 +77,22 @@ class MobileInService extends Model implements Auditable
                     ->withTimestamps();
     }
 
+    public function currentCrew()
+    {
+        return $this->belongsToMany(User::class,'samu_mobile_crew','mobiles_in_service_id')
+            ->using(MobileCrew::class)
+            ->wherePivot('leaves_at', '=', null)
+            ->withPivot('id','job_type_id','assumes_at','leaves_at')
+            ->orWhere(function($query) {
+                $query->where('mobiles_in_service_id', $this->id)
+                    ->where('leaves_at', '>', now());
+            })
+            ->withTimestamps();
+    }
 
     public function follows()
     {
-        return $this->belongsToMany(Follow::class,'samu_follow_mis');    
+        return $this->belongsToMany(Follow::class,'samu_follow_mis');
     }
 
     public function events()
@@ -103,7 +115,7 @@ class MobileInService extends Model implements Auditable
         }
         return $total;
     }
-    
+
     public function getLastEventAttribute()
     {
         return $this->events->where('status', true)->last();
