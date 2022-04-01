@@ -173,7 +173,7 @@
 
 <div class="form-row">
 
-    <fieldset class="form-group col-md-3">
+    <fieldset class="form-group col-12 col-md-2">
         <label for="for-commune">Comuna</label>
         <select class="form-control @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune">
             <option value="">Selecciona una Comuna </option>
@@ -188,7 +188,7 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-5">
+    <fieldset class="form-group col-12 col-md-3">
         <label for="for-address">Dirección</label>
         <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="for-address"
         value="{{ old('address', $call ? optional($call)->address : optional($event)->address )}}">
@@ -199,7 +199,7 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-4">
+    <fieldset class="form-group col-12 col-md-4">
         <label for="for-address-reference">Referencia dirección</label>
         <input
             type="text"
