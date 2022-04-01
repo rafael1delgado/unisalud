@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class MobileCrew extends pivot
 {
     use HasFactory;
-   
+
     protected $table="samu_mobile_crew";
 
     protected $fillable = [
@@ -43,4 +43,11 @@ class MobileCrew extends pivot
         return $this->BelongsTo(JobType::class);
     }
 
+    public function getCrewStatusAttribute()
+    {
+        if($this->leaves_at == null || $this->leaves_at > now())
+            return 'success';
+        else
+            return 'danger';
+    }
 }
