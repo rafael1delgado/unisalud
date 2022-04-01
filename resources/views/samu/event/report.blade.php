@@ -34,7 +34,7 @@
                     <tr>
                         <td class="center">{{ $event->call->hour->format('H:i') }}</td>
                         <td>{{ $event->call->applicant }}</td>
-                        <td>{{ $event->call->address }} {{ optional($event->call->commune)->name }}</td>
+                        <td>{{ $event->call->full_address }} {{ optional($event->call->commune)->name }}</td>
                         <td class="right">{{ $event->call->telephone }}</td>
                         <td class="center">{{ $event->call->classification }}</td>
                         <td class="center">{{ $event->call->receptor_id }}</td>
@@ -49,7 +49,7 @@
                     <tr>
                         <td class="center">{{ $associatedCall->hour->format('H:i') }}</td>
                         <td>{{ $associatedCall->applicant }}</td>
-                        <td>{{ $associatedCall->address }} {{ optional($associatedCall->commune)->name }}</td>
+                        <td>{{ $associatedCall->full_address }} {{ optional($associatedCall->commune)->name }}</td>
                         <td class="right">{{ $associatedCall->telephone }}</td>
                         <td class="center">{{ $associatedCall->classification }}</td>
                         <td class="center">{{ $associatedCall->receptor_id }}</td>
@@ -67,7 +67,7 @@
                 @endif
                 {{-- @if(!$loop->last)
                     <tr><td colspan="6" style="border-left: 1px solid white; border-right: 1px solid white;">&nbsp;</td></tr>
-                    @endif 
+                    @endif
                 --}}
             </tbody>
         </table>
@@ -121,7 +121,7 @@
                     <td class="center">{{ $event->counter }}</td>
                     <td class="center">
                         @if($event->mobileInService)
-                            {{ optional($event->mobileInService)->mobile->code }} - 
+                            {{ optional($event->mobileInService)->mobile->code }} -
                             {{ optional($event->mobileInService)->mobile->name }}
                         @else
                             {{ optional($event->mobile)->code }} -
@@ -138,7 +138,7 @@
                 </tr>
             </tbody>
         </table>
-        
+
         <h4>Información del paciente:</h4>
 
         <table class="ocho">
@@ -183,23 +183,27 @@
                 <tr>
                     <td class="center">
                         <small class="seis nowrap">
-                            {{ $event->vitalSign->registered_at_format ? $event->vitalSign->registered_at_format : '-' }}
+                            @if($event->vitalSign && $event->vitalSign->registered_at)
+                                {{ $event->vitalSign->registered_at_format }}
+                            @else
+                            -
+                            @endif
                         </small>
                     </td>
-                    <td class="center">{{ $event->vitalSign->fc ? $event->vitalSign->fc : '-' }}</td>
-                    <td class="center">{{ $event->vitalSign->fr ? $event->vitalSign->fr : '-' }}</td>
-                    <td class="center">{{ $event->vitalSign->pa ? $event->vitalSign->pa : '-' }}</td>
-                    <td class="center">{{ $event->vitalSign->pam ? $event->vitalSign->pam : '-' }}</td>
-                    <td class="center">{{ $event->vitalSign->gl ? $event->vitalSign->gl : '-' }}</td>
-                    <td class="center">{{ $event->vitalSign->soam ? $event->vitalSign->soam : '-'}}</td>
-                    <td class="center">{{ $event->vitalSign->soap ? $event->vitalSign->soap : '-'}}</td>
-                    <td class="center">{{ $event->vitalSign->hgt ? $event->vitalSign->hgt : '-' }}</td>
-                    <td class="center">{{ $event->vitalSign->fill_capillary ? $event->vitalSign->fill_capillary : '-' }}</td>
-                    <td class="center">{{ $event->vitalSign->t ? $event->vitalSign->t : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign ? $event->vitalSign->fc : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign ? $event->vitalSign->fr : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign ? $event->vitalSign->pa : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign ? $event->vitalSign->pam : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign ? $event->vitalSign->gl : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign ? $event->vitalSign->soam : '-'}}</td>
+                    <td class="center">{{ $event->vitalSign ? $event->vitalSign->soap : '-'}}</td>
+                    <td class="center">{{ $event->vitalSign ? $event->vitalSign->hgt : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign ? $event->vitalSign->fill_capillary : '-' }}</td>
+                    <td class="center">{{ $event->vitalSign ? $event->vitalSign->t : '-' }}</td>
                 </tr>
             </tbody>
         </table>
-        
+
     </ul>
 
     <h4>Información establecimiento o lugar de recepción:</h4>
@@ -215,8 +219,8 @@
         <tbody>
             <tr>
                 <td class="center">
-                    {{ optional($event->establishment)->name }} 
-                    {{ optional($event->receptionPlace)->name }} 
+                    {{ optional($event->establishment)->name }}
+                    {{ optional($event->receptionPlace)->name }}
                     {{ $event->establishment_details }}
                 </td>
                 <td class="center">{{ $event->reception_person }}</td>
@@ -224,9 +228,9 @@
             </tr>
         </tbody>
     </table>
-    
+
     <h4>Tripulación móvil:</h4>
-    
+
     @if($event->mobileInService)
     <table class="ocho">
         <thead>
@@ -249,7 +253,7 @@
     @endif
 
     <h4>Centro Regulador:</h4>
-    
+
     <table class="ocho">
         <thead>
             <tr>

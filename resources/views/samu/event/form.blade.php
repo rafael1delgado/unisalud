@@ -173,6 +173,21 @@
 
 <div class="form-row">
 
+    <fieldset class="form-group col-md-3">
+        <label for="for-commune">Comuna</label>
+        <select class="form-control @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune">
+            <option value="">Selecciona una Comuna </option>
+            @foreach($communes as $name => $id)
+            <option value="{{ $id }}" {{ old('commune_id', $call ? optional($call)->commune_id : optional($event)->commune_id ) == $id ? 'selected' : '' }}>{{ $name }}</option>
+            @endforeach
+        </select>
+        @error('commune_id')
+            <div class="text-danger">
+                <small>{{ $message }}</small>
+            </div>
+        @enderror
+    </fieldset>
+
     <fieldset class="form-group col-md-5">
         <label for="for-address">Dirección</label>
         <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="for-address"
@@ -184,15 +199,16 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-3">
-        <label for="for-commune">Comuna</label>
-        <select class="form-control @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune">
-            <option value="">Selecciona una Comuna </option>
-            @foreach($communes as $name => $id)
-            <option value="{{ $id }}" {{ old('commune_id', $call ? optional($call)->commune_id : optional($event)->commune_id ) == $id ? 'selected' : '' }}>{{ $name }}</option>
-            @endforeach
-        </select>
-        @error('commune_id')
+    <fieldset class="form-group col-md-4">
+        <label for="for-address-reference">Referencia dirección</label>
+        <input
+            type="text"
+            class="form-control @error('address_reference') is-invalid @enderror"
+            name="address_reference" id="for-address-reference"
+            value="{{ old('address_reference', $call ? optional($call)->address_reference : optional($event)->address_reference )}}"
+            placeholder="Después del semáforo, cerca del puente, entre calle 1 y 2">
+
+        @error('address_reference')
             <div class="text-danger">
                 <small>{{ $message }}</small>
             </div>

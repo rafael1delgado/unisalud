@@ -16,7 +16,7 @@ use App\Models\CodConIdentifierType;
 use App\Models\Organization;
 
 class Event extends Model implements Auditable
-{   
+{
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
     use SoftDeletes;
@@ -26,7 +26,7 @@ class Event extends Model implements Auditable
     protected $fillable = [
         'counter',
         'date',
-        
+
         'shift_id',
         'call_id',
         'key_id',
@@ -48,14 +48,15 @@ class Event extends Model implements Auditable
         'on_base_at',
 
         'address',
+        'address_reference',
         'commune_id',
-        
+
         /* Paciente */
         'patient_unknown',
         'patient_identifier_type_id',
         'patient_identification',
         'patient_name',
-        
+
         /* Recepción en centro asistencial */
         'reception_detail',
         'establishment_id',
@@ -63,7 +64,7 @@ class Event extends Model implements Auditable
         'reception_person',
         'reception_place_id',
         'rau',
-        
+
         /* Asignacion signos vitales */
         // TODO: Eliminar signos vitales
         'fc',
@@ -103,7 +104,7 @@ class Event extends Model implements Auditable
         'color'
     ];
 
-    public function shift() 
+    public function shift()
     {
         return $this->belongsTo(Shift::class);
     }
@@ -130,10 +131,10 @@ class Event extends Model implements Auditable
 
     public function mobileInService()
     {
-        return $this->belongsTo(MobileInService::class); 
+        return $this->belongsTo(MobileInService::class);
     }
 
-    public function mobile() 
+    public function mobile()
     {
         return $this->belongsTo(Mobile::class);
     }
@@ -152,13 +153,13 @@ class Event extends Model implements Auditable
     {
         return $this->belongsTo(CodConIdentifierType::class,'patient_identifier_type_id');
     }
-    
+
     public function receptionPlace()
     {
         return $this->belongsTo(receptionPlace::class,'reception_place_id');
     }
 
-    public function commune() 
+    public function commune()
     {
         return $this->belongsTo(Commune::class);
     }
@@ -171,7 +172,7 @@ class Event extends Model implements Auditable
                     ->withTimestamps();
     }
 
-    public function vitalSign() 
+    public function vitalSign()
     {
         return $this->hasOne(VitalSign::class);
     }
@@ -183,5 +184,13 @@ class Event extends Model implements Auditable
         if($this->return_base_at)           $color = 'info';
         if($this->on_base_at)               $color = 'success';
         return $color;
+    }
+
+    public function getFullAddressAttribute()
+    {
+        $full_address = $this->address;
+        if($this->address_reference)
+            $full_address = "$this->address ($this->address_reference)";
+        return $full_address;
     }
 }

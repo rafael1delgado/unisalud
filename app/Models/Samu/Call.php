@@ -150,6 +150,14 @@ class Call extends Model implements Auditable
         return $month;
     }
 
+    public function getFullAddressAttribute()
+    {
+        $full_address = $this->address;
+        if($this->address_reference)
+            $full_address = "$this->address ($this->address_reference)";
+        return $full_address;
+    }
+
     public function scopeWithClassification($query, $type)
     {
         return $query->whereIn('classification', $type);

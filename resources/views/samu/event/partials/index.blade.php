@@ -1,6 +1,6 @@
 <div class="table-responsive">
     <table class="table table-sm">
-            
+
         <thead>
             <tr class="table-primary">
                 <th>ID</th>
@@ -15,7 +15,7 @@
                 <th></th>
             </tr>
         </thead>
-            
+
         <tbody>
             @foreach($events as $event)
             <tr class="table-{{ $event->color }}">
@@ -46,10 +46,10 @@
                     @endif
                 </td>
                 <td nowrap>
-                    {{ optional($event->mobile)->code }} 
+                    {{ optional($event->mobile)->code }}
                     {{ optional($event->mobile)->name }}
                 </td>
-                <td>{{ $event->address }}, {{ optional($event->commune)->name }}</td>
+                <td>{{ $event->full_address }} {{ optional($event->commune)->name }}</td>
                 <td>{{ $event->key->key }} - {{ $event->key->name }} </td>
                 <td>{{ optional($event->returnKey)->key }} - {{ optional($event->returnKey)->name }}</td>
                 <td>{{ $event->observation }}</td>
@@ -79,6 +79,6 @@
             </tr>
             @endforeach
         </tbody>
-        
+
     </table>
 </div>
