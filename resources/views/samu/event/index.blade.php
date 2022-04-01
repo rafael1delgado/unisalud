@@ -26,19 +26,20 @@
                         @if(!$mis->status)
                             {{ $mis->observation }}
                         @else
-                            @foreach($mis->crew as $tripulant)
+                            @foreach($mis->currentCrew as $tripulant)
                             {{ $tripulant->officialFullName }} <span class="badge bg-secondary text-white">{{ substr($tripulant->pivot->jobType->name,0,1) }}</span>
                             @endforeach
                         @endif
+                        <br>
                     </td>
                     <td>{{ $mis->o2 }}</td>
                     <td nowrap>
                         @if($mis->lunch_start_at AND !$mis->lunch_end_at)
-                            {{ $mis->lunch_start_at->format('H:i')}} - 
+                            {{ $mis->lunch_start_at->format('H:i')}} -
                             {{ now()->diff($mis->lunch_start_at->copy()->addMinutes('45'))->format('%I') }}"
                         @elseif($mis->lunch_end_at)
-                            {{ $mis->lunch_start_at->format('H:i')}} - 
-                            {{ $mis->lunch_end_at->format('H:i')}} - 
+                            {{ $mis->lunch_start_at->format('H:i')}} -
+                            {{ $mis->lunch_end_at->format('H:i')}} -
                             {{ $mis->lunch_start_at->diff($mis->lunch_end_at)->format('%I') }}"
                         @endif
                     </td>
