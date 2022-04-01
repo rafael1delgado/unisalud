@@ -27,7 +27,7 @@
                 <td>{{ $mis->type }}</td>
                 <td>{{ $mis->status ? 'Activo' : 'Inactivo'  }}</td>
                 <td>{{ $mis->o2 }}</td>
-                <td>{{ $mis->observation}}</td>
+                <td>{{ $mis->observation }}</td>
                 <td>
                     @if($editLunch)
                         @livewire('samu.lunch',['mis' => $mis])
