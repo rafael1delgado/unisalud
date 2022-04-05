@@ -15,30 +15,16 @@ class UpdateAgeToSamuCalls extends Migration
     public function up()
     {
         Schema::table('samu_calls', function (Blueprint $table) {
-            $table->integer('month')->after('age')->nullable();
+            $table->integer('year')->after('age')->nullable();
+            $table->integer('month')->after('year')->nullable();
         });
 
         $calls = Call::all();
         foreach($calls as $call)
         {
             $call->update([
+                'year' => ($call->age != null && $call->age < 1) ? null : $call->age,
                 'month' => $call->month_format != 0 ? $call->month_format : null
-            ]);
-        }
-
-        Schema::table('samu_calls', function (Blueprint $table) {
-            $table->integer('age')->change();
-        });
-
-        Schema::table('samu_calls', function (Blueprint $table) {
-            $table->renameColumn('age', 'year');
-        });
-
-        $calls = Call::all();
-        foreach($calls as $call)
-        {
-            $call->update([
-                'year' => $call->year == 0 ? null : $call->year
             ]);
         }
     }
