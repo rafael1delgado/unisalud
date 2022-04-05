@@ -38,7 +38,7 @@ class HumanName extends Model
 
     public function getfullNameAttribute()
     {
-        return "{$this->text} {$this->fathers_family} {$this->mothers_family}";
+        return "{$this->text}";
     }
 
     /**
