@@ -42,6 +42,7 @@ class Call extends Model implements Auditable
         'regulation',
         'sex',
         'applicant',
+        'age',
         'year',
         'month',
         'address',
