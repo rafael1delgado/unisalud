@@ -305,7 +305,7 @@ class AppointmentController extends Controller
     }
 
     public function appointment_detail($id){
-      $appointment = Appointment::find($id);
+      $appointment = Appointment::withTrashed()->find($id);
       // dd($appointment);
       return view('some.appointment_detail', compact('appointment'));
     }

@@ -50,7 +50,7 @@
                     <fieldset class="form-group col-md-3">
                         <label for="for_mothers_family">Apellido Materno</label>
                         <input type="text" class="form-control" name="mothers_family"
-                               id="for_mothers_family" 
+                               id="for_mothers_family"
                                value="{{ $patient->actualOfficialHumanName->mothers_family }}">
                     </fieldset>
 
@@ -239,7 +239,7 @@
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Hitorial de nombres</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Historial de nombres</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
