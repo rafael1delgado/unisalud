@@ -35,7 +35,7 @@ class AsignAppointment extends Component
     public $selectedLocationId;
     public $patientInstruction;
     public $interconsultationId;
-    // public $appointmentId; //Viene por parámetro 
+    // public $appointmentId; //Viene por parámetro
     // public $pendingPractitionerId; //Viene por parámetro
 
     protected $listeners = [
@@ -300,7 +300,7 @@ class AsignAppointment extends Component
         }
     }
 
-    public function createPatient($interconsultationId){
+    public function createPatient($interconsultationId = null){
         return redirect()->route('patient.create_from_sic', compact('interconsultationId'));
     }
 

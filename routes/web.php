@@ -135,7 +135,7 @@ Route::prefix('patient')->name('patient.')->middleware('auth')->group(function()
     Route::get('/', [PatientController::class, 'index'])->name('index');
     Route::post('/', [PatientController::class, 'store'])->name('store');
     Route::get('/create', [PatientController::class, 'create'])->name('create');
-    Route::get('/create-from-sic/{interconsultationId}', [PatientController::class, 'create'])->name('create_from_sic');
+    Route::get('/create-from-sic/{interconsultationId?}', [PatientController::class, 'create'])->name('create_from_sic');
     Route::get('/{patient}', [PatientController::class, 'show'])->name('show');
     Route::post('/{patient}', [PatientController::class, 'update'])->name('update');
     Route::delete('/{patient}', [PatientController::class, 'destroy'])->name('destroy');
@@ -518,9 +518,9 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::view('/', 'samu.crew.index')->name('index');
 		Route::view('/create', 'samu.crew.create')->name('create');
 		Route::view('/edit', 'samu.crew.edit')->name('edit');
-		
+
     });
-	
+
 	Route::prefix('novelties')->name('noveltie.')
 	->middleware('permission:SAMU administrador|SAMU regulador|SAMU operador|SAMU despachador')
 	->group(function () {
@@ -529,8 +529,8 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/edit/{noveltie}', [NoveltieController::class, 'edit'])->name('edit');
 		Route::put('/update/{noveltie}',[NoveltieController::class, 'update'])->name('update');
 	});
-	
-	
+
+
     Route::prefix('calls')->name('call.')
 	->middleware('permission:SAMU administrador|SAMU regulador|SAMU operador|SAMU despachador')
 	->group(function () {
@@ -563,7 +563,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 			->middleware('permission:SAMU administrador')->name('report');
 		Route::get('/find', FindEvent::class);
     });
-	
+
 	Route::prefix('keys')->name('key.')
 	->middleware('permission:SAMU administrador')
 	->group(function () {
@@ -574,7 +574,7 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 		Route::get('/edit/{key}',	[KeyController::class, 'edit'])->name('edit');
 		Route::delete('/{key}',		[KeyController::class, 'destroy'])->name('destroy');
 	});
-	
+
 	Route::prefix('mobiles')->name('mobile.')
 	->middleware('permission:SAMU administrador')
 	->group(function () {
@@ -590,14 +590,14 @@ Route::prefix('samu')->name('samu.')->middleware('auth')->group(function () {
 
 	Route::get('/movil/event/{event}', TimestampsAndLocation::class)->name('mobiles.timestamps_locations');
 	Route::get('/movil', MobileSelector::class)->name('mobiles.mobile_selector');
-	
+
 	Route::prefix('establishments')->name('establishment.')
 	->middleware('permission:SAMU administrador')
 	->group(function () {
 		Route::get('/', 			[EstablishmentController::class, 'index'])->name('index');
 		Route::post('/', 			[EstablishmentController::class, 'store'])->name('store');
 	});
-	
+
 	Route::prefix('communes')->name('commune.')
 	->middleware('permission:SAMU administrador')
 	->group(function () {
@@ -641,9 +641,9 @@ Route::prefix('epi')->name('epi.')->group(function () {
 		Route::get('/{tray}', [SuspectCaseController::class, 'index'])->name('index');
 		Route::get('/{user}/create', [SuspectCaseController::class, 'create'])->name('create');
 		Route::post('/', [SuspectCaseController::class, 'store'])->name('store');
-		
+
 	});
-	
+
 
 
 
@@ -676,12 +676,12 @@ Route::prefix('developer')->name('developer.')->middleware('can:Developer')->gro
 	Route::view('/artisan', 'developer.artisan')->name('artisan');
 
 	Route::prefix('artisan')->name('artisan.')->group(function () {
-		Route::get('/down', function() 
+		Route::get('/down', function()
 		{
 			Artisan::call('down --secret='. env('MAINTENANCE_TOKEN'));
 			echo 'En modo mantención.';
 		})->name('down');
-		Route::get('/up', function() 
+		Route::get('/up', function()
 		{
 			Artisan::call('up');
 			return redirect()->route('developer.artisan') ;
