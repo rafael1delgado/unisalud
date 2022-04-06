@@ -3,12 +3,12 @@
 use App\Models\Some\ExternalIncomingSic;
 use \Carbon\Carbon;
 
-function active($route_name) { 
+function active($route_name) {
     echo request()->routeIs($route_name) ? 'active' : '';
 }
 
 function fdatetime($string) {
-    return Carbon::createFromFormat('Y-m-d\TH:i:sP', $string)->format('d-m-Y H:i'); 
+    return Carbon::createFromFormat('Y-m-d\TH:i:sP', $string)->format('d-m-Y H:i');
 }
 
 //Funciones para WS SOAP Rayen
@@ -22,7 +22,7 @@ function BuscarSic($request){
         return array(
             'VLmensaje' => 'Se encontro SIC numSicGes: ' . $externalIncomingSic->pciNumSicGes . ' codEstab: ' . $externalIncomingSic->pcsCodEstab,
         );
-    } 
+    }
     else {
         return array(
             'VLmensaje' => 'No se encontro SIC con numSicGes: ' . $request['pcsNumSicGes'] . ' codEstab:' . $request['pcsCodEstab'],
@@ -101,17 +101,17 @@ function GuardarSic($request){
     );
 }
 
-function generateAge($year, $month) {
+function generateAge($year, $month) { // TODO: Eliminar a futuro
     $age = null;
     $valueYear = $year ? $year : 0;
     $valueMonth = $month ? (int)$month : 0;
 
-    if($valueMonth >= 1 && $valueMonth <= 9 ) 
+    if($valueMonth >= 1 && $valueMonth <= 9 )
     {
         $valueMonth = "0" . (string)$valueMonth;
     }
 
-    if($year != null or $month != null) 
+    if($year != null or $month != null)
     {
         $age = (float)($valueYear . '.' . $valueMonth);
     }

@@ -43,6 +43,8 @@ class Call extends Model implements Auditable
         'sex',
         'applicant',
         'age',
+        'year',
+        'month',
         'address',
         'address_reference',
         'latitude',
@@ -110,37 +112,21 @@ class Call extends Model implements Auditable
 
     public function getAgeFormatAttribute()
     {
-        if($this->age) {
-            list($integer, $decimal) = explode('.', $this->age);
-
-            $edad = '';
-
-            if($integer != '00')
-            {
-                $edad .= $integer == '01' ? (int)$integer . ' AÑO ': (int)$integer . ' AÑOS ';
-            }
-
-            if($decimal != '00')
-            {
-                $edad .= $decimal == '01' ? (int)$decimal . ' MES ': (int)$decimal . ' MESES ';
-            }
-            return $edad;
-        }
-    }
-
-    public function getYearAttribute()
-    {
-        $year = null;
-        if($this->age)
+        $age = '';
+        if($this->year != 0)
         {
-            list($year) = explode('.', $this->age);
-            $year = ($year == 0) ? null : (int)$year;
+            $age .= ($this->year) . ($this->year == 1 ?  ' AÑO ' : ' AÑOS ');
         }
-        return $year;
+        if($this->month)
+        {
+            $age .= ($this->month) . ($this->month == 1 ?  ' MES' : ' MESES');
+        }
+        return $age;
     }
 
-    public function getMonthAttribute()
+    public function getMonthFormatAttribute()
     {
+        // TODO: Eliminar a futuro, no se elimina de inmediato ya que es necesaria para migración
         $month = null;
         if($this->age)
         {
