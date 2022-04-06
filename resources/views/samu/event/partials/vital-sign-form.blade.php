@@ -2,8 +2,8 @@
     <fieldset class="form-group col-6 col-md-1">
         <label for="for-registered-at">Hora<br>&nbsp;</label>
 
-        <input 
-            value="{{ $edit ? optional(optional($event->vitalSign)->registered_at)->format('H:i') : old('registered_at') }}" 
+        <input
+            value="{{ $edit ? optional(optional($event->vitalSign)->registered_at)->format('H:i') : old('registered_at') }}"
             name="registered_at"
             type="time"
             class="form-control @error('registered_at') is-invalid @enderror"
@@ -19,7 +19,7 @@
     <fieldset class="form-group col-6 col-md-1">
         <label for="for-fc">Frecuencia <br>Cardiaca</label>
 
-        <input 
+        <input
             value="{{ $edit ? optional($event->vitalSign)->fc : old('fc') }}"
             name="fc"
             type="text"
@@ -37,7 +37,7 @@
     <fieldset class="form-group col-6 col-md-1">
         <label for="for-fr">Frecuencia <br>Respiratoria</label>
 
-        <input 
+        <input
             value="{{ $edit ? optional($event->vitalSign)->fr : old('fr') }}"
             name="fr"
             type="number"
@@ -59,7 +59,7 @@
             name="pa"
             type="text"
             class="form-control @error('pa') is-invalid @enderror"
-            id="for-pa" 
+            id="for-pa"
             placeholder="xxx/xx">
         @error('pa')
             <div class="text-danger">
@@ -71,7 +71,7 @@
     <fieldset class="form-group col-6 col-md-1">
         <label for="for-pam">Presión Arterial <br>Media</label>
 
-        <input 
+        <input
             value="{{ $edit ? optional($event->vitalSign)->pam : old('pam') }}"
             name="pam"
             type="text"
@@ -123,7 +123,7 @@
     <fieldset class="form-group col-6 col-md-1">
         <label for="for-soap">% Saturación <br>Oxigeno/Apoyo</label>
 
-        <input 
+        <input
             value="{{ $edit ? optional($event->vitalSign)->soap : old('soap') }}"
             name="soap"
             type="number"
@@ -170,7 +170,7 @@
             </div>
         @enderror
     </fieldset>
-    
+
     <fieldset class="form-group col-6 col-md-1">
         <label for="for-t">Temperatura <br>°C</label>
 
@@ -178,8 +178,8 @@
             value="{{ $edit ? optional($event->vitalSign)->t : old('t') }}"
             name="t"
             type="number"
-            class="form-control @error('t') is-invalid @enderror" 
-            tep=".01"
+            class="form-control @error('t') is-invalid @enderror"
+            step=".01"
             id="for-t">
 
         @error('t')
