@@ -26,7 +26,7 @@ class AddAddressReferenceToSamuEvents extends Migration
     public function down()
     {
         Schema::table('samu_events', function (Blueprint $table) {
-            //
+            $table->dropColumn('address_reference');
         });
     }
 }
