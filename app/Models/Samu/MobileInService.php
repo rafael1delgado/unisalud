@@ -89,8 +89,8 @@ class MobileInService extends Model implements Auditable
             })
             ->orWhere(function($query) {
                 $query->where('mobiles_in_service_id', $this->id)
-                    ->where('leaves_at', '=', null)
-                    ->where('assumes_at', '<', now());
+                    ->where('assumes_at', '<', now())
+                    ->where('leaves_at', '=', null);
             })
             ->withTimestamps();
     }
