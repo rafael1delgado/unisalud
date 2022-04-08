@@ -26,7 +26,7 @@ class AddAddressReferenceToSamuCalls extends Migration
     public function down()
     {
         Schema::table('samu_calls', function (Blueprint $table) {
-            //
+            $table->dropColumn('address_reference');
         });
     }
 }
