@@ -1887,16 +1887,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.83.6",
+            "version": "v8.83.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "dffcec0cb686eafaa3b8f33db11da2cd9d69af1c"
+                "reference": "0706abf5c99d3b14149fcf79c95074dadd40b203"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/dffcec0cb686eafaa3b8f33db11da2cd9d69af1c",
-                "reference": "dffcec0cb686eafaa3b8f33db11da2cd9d69af1c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0706abf5c99d3b14149fcf79c95074dadd40b203",
+                "reference": "0706abf5c99d3b14149fcf79c95074dadd40b203",
                 "shasum": ""
             },
             "require": {
@@ -2052,7 +2052,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2022-03-29T14:41:02+00:00"
+            "time": "2022-04-05T15:08:10+00:00"
         },
         {
             "name": "laravel/passport",
@@ -2709,16 +2709,16 @@
         },
         {
             "name": "league/mime-type-detection",
-            "version": "1.9.0",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/mime-type-detection.git",
-                "reference": "aa70e813a6ad3d1558fc927863d47309b4c23e69"
+                "reference": "3e4a35d756eedc67096f30240a68a3149120dae7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/aa70e813a6ad3d1558fc927863d47309b4c23e69",
-                "reference": "aa70e813a6ad3d1558fc927863d47309b4c23e69",
+                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/3e4a35d756eedc67096f30240a68a3149120dae7",
+                "reference": "3e4a35d756eedc67096f30240a68a3149120dae7",
                 "shasum": ""
             },
             "require": {
@@ -2747,11 +2747,7 @@
                 }
             ],
             "description": "Mime-type detection for Flysystem",
-            "support": {
-                "issues": "https://github.com/thephpleague/mime-type-detection/issues",
-                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.9.0"
-            },
-            "time": "2021-11-21T11:48:40+00:00"
+            "time": "2022-04-11T12:49:04+00:00"
         },
         {
             "name": "league/oauth2-server",
@@ -3010,16 +3006,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v2.10.4",
+            "version": "v2.10.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "2d68c61a8edf338534fdd8e2b2750dca2e741439"
+                "reference": "9ea6237760f627b3b6a05d15137880780ac843b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/2d68c61a8edf338534fdd8e2b2750dca2e741439",
-                "reference": "2d68c61a8edf338534fdd8e2b2750dca2e741439",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/9ea6237760f627b3b6a05d15137880780ac843b5",
+                "reference": "9ea6237760f627b3b6a05d15137880780ac843b5",
                 "shasum": ""
             },
             "require": {
@@ -3069,7 +3065,7 @@
                 }
             ],
             "description": "A front-end framework for Laravel.",
-            "time": "2022-02-18T22:35:27+00:00"
+            "time": "2022-04-07T21:38:12+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -3371,16 +3367,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "d7fd7450628561ba697b7097d86db72662f54aef"
+                "reference": "4192345e260f1d51b365536199744b987e160edc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/d7fd7450628561ba697b7097d86db72662f54aef",
-                "reference": "d7fd7450628561ba697b7097d86db72662f54aef",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/4192345e260f1d51b365536199744b987e160edc",
+                "reference": "4192345e260f1d51b365536199744b987e160edc",
                 "shasum": ""
             },
             "require": {
@@ -3452,7 +3448,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2022-03-14T12:44:37+00:00"
+            "time": "2022-04-08T15:43:54+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -7357,16 +7353,16 @@
         },
         {
             "name": "twilio/sdk",
-            "version": "6.36.0",
+            "version": "6.36.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twilio/twilio-php.git",
-                "reference": "86de6fb1ba57eb69c092cf49cff88e125342ecaf"
+                "reference": "68aa5dd58450d3b449c83138567ecfca93955ed9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/86de6fb1ba57eb69c092cf49cff88e125342ecaf",
-                "reference": "86de6fb1ba57eb69c092cf49cff88e125342ecaf",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/68aa5dd58450d3b449c83138567ecfca93955ed9",
+                "reference": "68aa5dd58450d3b449c83138567ecfca93955ed9",
                 "shasum": ""
             },
             "require": {
@@ -7402,7 +7398,7 @@
                 "sms",
                 "twilio"
             ],
-            "time": "2022-03-23T19:16:12+00:00"
+            "time": "2022-04-06T23:33:30+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -7754,16 +7750,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.13.8",
+            "version": "v1.13.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "b00f1b64afff9c16355d23bb1e0f83a7ea9bbb7e"
+                "reference": "7bb294fe99fc42c3b1bee83fb667cd7698b3c385"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/b00f1b64afff9c16355d23bb1e0f83a7ea9bbb7e",
-                "reference": "b00f1b64afff9c16355d23bb1e0f83a7ea9bbb7e",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/7bb294fe99fc42c3b1bee83fb667cd7698b3c385",
+                "reference": "7bb294fe99fc42c3b1bee83fb667cd7698b3c385",
                 "shasum": ""
             },
             "require": {
@@ -7806,7 +7802,7 @@
                 "docker",
                 "laravel"
             ],
-            "time": "2022-03-23T12:35:34+00:00"
+            "time": "2022-04-04T15:21:51+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -9535,6 +9531,5 @@
         "ext-gd": "*",
         "ext-soap": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": []
 }

@@ -45,7 +45,7 @@ class MobileCrew extends pivot
 
     public function getCrewStatusAttribute()
     {
-        if($this->leaves_at == null || $this->leaves_at > now())
+        if(($this->assumes_at < now() && $this->leaves_at == null) || ($this->assumes_at < now() && $this->leaves_at > now()))
             return 'success';
         else
             return 'danger';

@@ -81,11 +81,16 @@ class MobileInService extends Model implements Auditable
     {
         return $this->belongsToMany(User::class,'samu_mobile_crew','mobiles_in_service_id')
             ->using(MobileCrew::class)
-            ->wherePivot('leaves_at', '=', null)
             ->withPivot('id','job_type_id','assumes_at','leaves_at')
+            ->where(function($query) {
+                $query->where('mobiles_in_service_id', $this->id)
+                    ->where('assumes_at', '<', now())
+                    ->where('leaves_at', '>', now());
+            })
             ->orWhere(function($query) {
                 $query->where('mobiles_in_service_id', $this->id)
-                    ->where('leaves_at', '>', now());
+                    ->where('assumes_at', '<', now())
+                    ->where('leaves_at', '=', null);
             })
             ->withTimestamps();
     }
