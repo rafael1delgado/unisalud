@@ -26,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        //Rutas para oauth2 passport
         if (! $this->app->routesAreCached()) {
             Passport::routes();
         }
