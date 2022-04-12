@@ -81,7 +81,7 @@ class EventStoreRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'patient_unknown' => isset($this->patient_unknown) ? true : false,
+            'patient_unknown' => isset($this->patient_unknown) ? 1 : 0,
         ]);
     }
 }
