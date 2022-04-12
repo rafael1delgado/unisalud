@@ -130,9 +130,9 @@
                     </td>
                     <td class="center">
                         @if($event->mobileInService)
-                            {{ optional($event->mobileInService)->type }}
+                            {{ optional(optional($event->mobileInService)->type)->name }}
                         @else
-                            {{ optional($event->mobile)->type }}
+                            {{ optional(optional($event->mobile)->type)->name }}
                         @endif
                     </td>
                 </tr>
