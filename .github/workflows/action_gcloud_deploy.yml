@@ -8,6 +8,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup PHP with PECL extension
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.3'
+      - name: Check PHP Version
+        run: php -v
       - uses: actions/checkout@v2
         with:
           repository: cl-ssi/config
