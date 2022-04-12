@@ -37,7 +37,8 @@ class UpdateAgeToSamuCalls extends Migration
     public function down()
     {
         Schema::table('samu_calls', function (Blueprint $table) {
-            //
+            $table->dropColumn('year');
+            $table->dropColumn('month');
         });
     }
 }
