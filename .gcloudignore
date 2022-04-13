@@ -29,3 +29,4 @@ yarn-error.log
 
 # PHP Composer dependencies:
 /vendor/
+.vscode
