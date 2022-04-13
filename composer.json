@@ -80,7 +80,8 @@
             "@php artisan key:generate --ansi"
         ],
         "post-install-cmd": [
-            "chmod -R 755 bootstrap\/cache"
+            "chmod -R 755 bootstrap\/cache",
+            "@php artisan passport:keys"
         ],
         "clear-all": [
             "@php artisan config:cache"
