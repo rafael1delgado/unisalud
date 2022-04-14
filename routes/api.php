@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Parameters\RegionController;
 use App\Http\Controllers\Api\Samu\CallController;
 use App\Http\Controllers\Api\Samu\GpsController;
 use App\Http\Controllers\Api\Samu\MobileController;
+use App\Http\Controllers\MedicalProgrammer\SubActivityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,8 @@ use App\Http\Controllers\Some\AppointmentController;
 
 Route::prefix('agenda')->name('agenda.')->middleware('client')->group(function (){
     Route::get('/by-day/{date}', [AppointmentController::class, 'getByDay']);
+});
+
+Route::prefix('sub-activity')->name('subActivity.')->middleware('client')->group(function (){
+    Route::get('/by-id/{id}', [SubActivityController::class, 'getById']);
 });
