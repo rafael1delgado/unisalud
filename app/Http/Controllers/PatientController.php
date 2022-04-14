@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\Address;
 use App\Models\CodConIdentifierType;
 use App\Models\CodConMarital;
@@ -494,5 +495,16 @@ class PatientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Retorna usuario para API
+     * @param string $id
+     * @return UserResource
+     */
+    public function getById(string $id)
+    {
+        $user = User::find($id);
+        return new UserResource($user);
     }
 }
