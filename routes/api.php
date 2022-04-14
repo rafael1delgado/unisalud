@@ -43,5 +43,4 @@ Route::prefix('sub-activity')->name('subActivity.')->middleware('client')->group
 Route::prefix('patient')->name('patient.')->middleware('client')->group(function (){
     Route::get('/by-id/{id}', [PatientController::class, 'getById']);
 });
-
 /** FIN RUTAS HETG **/
