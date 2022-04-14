@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Some;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Some\AppointmentCollection;
 use App\Models\MedicalProgrammer\TheoreticalProgramming;
 use App\Models\Some\Appointment;
 use App\Models\Absence;
@@ -308,5 +309,21 @@ class AppointmentController extends Controller
       $appointment = Appointment::withTrashed()->find($id);
       // dd($appointment);
       return view('some.appointment_detail', compact('appointment'));
+    }
+
+    /**
+     * Obtiene appointments para API
+     * @param string $date
+     * @return AppointmentCollection
+     */
+    public function getByDay(string $date)
+    {
+        $date = Carbon::parse($date);
+
+        $appointments = Appointment::query()
+            ->whereDate('start', $date)
+            ->get();
+
+        return new AppointmentCollection($appointments);
     }
 }

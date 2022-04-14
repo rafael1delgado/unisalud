@@ -26,3 +26,11 @@ Route::get('calls', [CallController::class, 'index']);
 Route::get('mobiles', [MobileController::class, 'index']);
 Route::get('region/{region}/communes', [RegionController::class, 'communes']);
 Route::get('gps/mobile/{mobile}', [GpsController::class, 'index'])->middleware('auth.basic:,id');
+
+
+/** RUTAS API AGENDA **/
+use App\Http\Controllers\Some\AppointmentController;
+
+Route::prefix('agenda')->name('agenda.')->middleware('client')->group(function (){
+    Route::get('/by-day/{date}', [AppointmentController::class, 'getByDay']);
+});
