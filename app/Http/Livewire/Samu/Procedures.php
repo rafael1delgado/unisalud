@@ -17,7 +17,7 @@ class Procedures extends Component
         'code' => 'required',
         'name' => 'required|min:4',
         'valid_from' => 'required|date_format:Y-m-d',
-        'valid_to' => 'nullable|date',
+        'valid_to' => 'nullable|date', /** Algo así como convertir un empty string a null */
         'value' => 'integer',
     ];
 
@@ -53,6 +53,10 @@ class Procedures extends Component
 
     public function store()
     {
+        /* Esto fixea que si seleccionas una fecha en el navegador 
+         * y luego la borras, se pasa un string vacio en vez de null */
+        empty($this->valid_to) ? $this->valid_to = null : $this->valid_to;
+
         Procedure::create($this->validate());
         $this->mount();
         $this->view = 'index';
@@ -72,6 +76,10 @@ class Procedures extends Component
 
     public function update(Procedure $procedure)
     {
+        /* Esto fixea que si seleccionas una fecha en el navegador 
+         * y luego la borras, se pasa un string vacio en vez de null */
+        empty($this->valid_to) ? $this->valid_to = null : $this->valid_to;
+
         $procedure->update($this->validate());
 
         $this->mount();
