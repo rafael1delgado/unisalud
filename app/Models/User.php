@@ -18,7 +18,7 @@ class User extends Authenticatable implements Auditable
 {
     use HasFactory, Notifiable, HasRoles;
     use SoftDeletes;
-    
+
     use \OwenIt\Auditing\Auditable;
 
 
@@ -108,6 +108,15 @@ class User extends Authenticatable implements Auditable
     public function appointments()
     {
         return $this->morphToMany(Appointment::class, 'appointable');
+    }
+
+    public function maritalStatus()
+    {
+        return $this->belongsTo(CodConMarital::class, 'cod_con_marital_id');
+    }
+
+    public function nationality(){
+        return $this->belongsTo(Country::class, 'nationality_id');
     }
 
     // public function manager_shifts(): HasMany
@@ -244,7 +253,7 @@ class User extends Authenticatable implements Auditable
     public function getOfficialPhoneAttribute()
     {
         $phone = $this->getOfficialContactPointPhoneAttribute();
-        return ($phone) ? $phone->value : ''; 
+        return ($phone) ? $phone->value : '';
     }
 
     public function getOfficialContactPointPhoneAttribute()
@@ -253,7 +262,7 @@ class User extends Authenticatable implements Auditable
             ->where('system', 'phone')
             ->latest()
             ->first();
-        
+
     }
 
     public function getOfficialEmailAttribute()
@@ -489,7 +498,7 @@ class User extends Authenticatable implements Auditable
             return $subquery->where('name', $permissionName);
         });
     }
-    
+
     /**
      * Perform any actions required after the model boots.
      *
