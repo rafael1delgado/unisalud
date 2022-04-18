@@ -287,7 +287,8 @@ class PatientController extends Controller
      *
      * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View|\Illuminate\Http\Response
+     * @throws \Throwable
      */
     public function update(Request $request, $id)
     {
@@ -484,17 +485,6 @@ class PatientController extends Controller
         if($request->session()->has('request_match')) $request->session()->forget('request_match');
         session()->flash('success', 'El paciente ' . $patient->officialFullName . ' ha sido actualizado.');
         return view('patients.show', compact('patient'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     /**
