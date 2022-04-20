@@ -12,15 +12,6 @@
         @csrf
         @method('POST')
 
-{{--        <div class="form-row">--}}
-{{--            <fieldset class="form-group col-md-4">--}}
-{{--                <label for="for_id_type">Tipo de paciente</label>--}}
-{{--                <select name="id_patient_type" id="for_id_patient_type" class="form-control">--}}
-{{--                    <option value="PN">Normal</option>--}}
-{{--                </select>--}}
-{{--            </fieldset>--}}
-{{--        </div>--}}
-
         @livewire('user.user-identifiers', compact('identifierTypes'))
 
         <div class="border-bottom mt-3 mb-3"></div>
@@ -33,34 +24,39 @@
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
                         <label for="for_given">Nombres *</label>
-                        <input type="text" class="form-control" name="given" id="for_given" required value="{{ old('given') ?? ($sic ? $sic->patient_name : '')  }}"
-                            {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
+                        <input type="text" class="form-control" name="given" id="for_given" required
+                               value="{{ old('given') ?? ($sic ? $sic->patient_name : '')  }}"
+                        >
                     </fieldset>
 
                     <fieldset class="form-group col-md-3">
                         <label for="for_fathers_family">Apellido Paterno *</label>
-                        <input type="text" class="form-control" name="fathers_family" id="for_fathers_family" required value="{{ old('fathers_family') ?? ($sic ? $sic->patient_fathers_family : '') }}"
-                            {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
+                        <input type="text" class="form-control" name="fathers_family" id="for_fathers_family" required
+                               value="{{ old('fathers_family') ?? ($sic ? $sic->patient_fathers_family : '') }}"
+                        >
                     </fieldset>
 
                     <fieldset class="form-group col-md-3">
                         <label for="for_mothers_family">Apellido Materno</label>
-                        <input type="text" class="form-control" name="mothers_family" id="for_mothers_family" value="{{ old('mothers_family') ?? ($sic ? $sic->patient_mothers_family : '') }}"
-                            {{-- value="{{ substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 7) }}" --}}>
+                        <input type="text" class="form-control" name="mothers_family" id="for_mothers_family"
+                               value="{{ old('mothers_family') ?? ($sic ? $sic->patient_mothers_family : '') }}"
+                        >
                     </fieldset>
 
                     <fieldset class="form-group col-md-2">
                         <label for="for_social_name">Nombre Social</label>
-                        <input type="text" class="form-control" name="social_name" id="social_name" value="{{$sic ? $sic->patient_social_name : ''}}">
+                        <input type="text" class="form-control" name="social_name" id="social_name"
+                               value="{{$sic ? $sic->patient_social_name : ''}}"
+                        >
 
                     </fieldset>
                 </div>
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
                         <label for="for_birthday">Fecha de nacimiento *</label>
-                        <input type="date" class="form-control" name="birthday" required value="{{ old('birthday') ?? ($sic ? $sic->patient_birthday->format('Y-m-d') : '') }}"
-                            {{-- id="for_birthday" value="{{ rand(1900, 2021) }}-{{ rand(10, 12) }}-{{ rand(10, 30) }}"
-                            --}}>
+                        <input type="date" class="form-control" name="birthday" required
+                               value="{{ old('birthday') ?? ($sic ? $sic->patient_birthday->format('Y-m-d') : '') }}"
+                        >
                     </fieldset>
 
                     <fieldset class="form-group col-md-2">
@@ -68,7 +64,8 @@
                         <select name="sex" id="for_sex" class="form-control" required>
                             <option value=""></option>
                             @foreach($sexes as $sex)
-                                <option value="{{$sex->id}}" {{old('sex') == $sex->id ? 'selected' : ''}}>{{$sex->text}}</option>
+                                <option
+                                    value="{{$sex->id}}" {{old('sex') == $sex->id ? 'selected' : ''}}>{{$sex->text}}</option>
                             @endforeach
                         </select>
                     </fieldset>
@@ -78,7 +75,8 @@
                         <select name="gender" id="for_gender" class="form-control" required>
                             <option value=""></option>
                             @foreach($genders as $gender)
-                                <option value="{{$gender->id}}" {{old('gender') == $gender->id ? 'selected' : ''}}>{{$gender->text}}</option>
+                                <option
+                                    value="{{$gender->id}}" {{old('gender') == $gender->id ? 'selected' : ''}}>{{$gender->text}}</option>
                             @endforeach
                         </select>
                     </fieldset>
@@ -87,30 +85,24 @@
                         <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($maritalStatus as $status)
-                                <option value="{{ $status->id }}" {{(old('cod_con_marital_id') == $status->id) ? 'selected' : ''}}>{{ $status->text }}</option>
+                                <option
+                                    value="{{ $status->id }}" {{(old('cod_con_marital_id') == $status->id) ? 'selected' : ''}}>{{ $status->text }}</option>
                             @endforeach
                         </select>
                     </fieldset>
                 </div>
 
-                    <div class="form-row">
-                        {{--        <fieldset class="form-group col-2">--}}
-                        {{--            <label for="for_prevision">Previsión</label>--}}
-                        {{--            <select name="prevision" id="for_prevision" class="form-control">--}}
-                        {{--                @foreach($previciones as $previcion)--}}
-                        {{--                    <option value="{{ $previcion['code'] }}">{{ $previcion['display'] }}</option>
-                        --}}
-                        {{--                @endforeach--}}
-                        {{--            </select>--}}
-                        {{--        </fieldset>--}}
-                 </div>
+                <div class="form-row">
+
+                </div>
                 <div class="form-row">
                     <fieldset class="form-group col-md-4">
                         <label for="for_nationality_id">Nacionalidad *</label>
                         <select name="nationality_id" id="for_nationality_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($countries as $country)
-                                <option value="{{ $country->id }}" {{(old('nationality_id') == $country->id) ? 'selected' : ''}} >{{ $country->name }}</option>
+                                <option
+                                    value="{{ $country->id }}" {{(old('nationality_id') == $country->id) ? 'selected' : ''}} >{{ $country->name }}</option>
                             @endforeach
                         </select>
                     </fieldset>
@@ -121,18 +113,18 @@
                                 data-live-search="true" multiple="" data-size="10" title="Seleccione..." multiple
                                 data-actions-box="true">
                             @foreach($congregations as $congregation)
-                                <option value="{{ $congregation->id }}" {{(old('congregation_id.0') == $congregation->id) ? 'selected' : ''}}>{{ $congregation->name}}</option>
+                                <option
+                                    value="{{ $congregation->id }}" {{(old('congregation_id.0') == $congregation->id) ? 'selected' : ''}}>{{ $congregation->name}}</option>
                             @endforeach
                         </select>
                     </fieldset>
 
-                    {{--                <div id="otro_etnia">--}}
                     <fieldset class="form-group col-md-4">
                         <label for="for_congregation_other">Otro Pueblo Originario</label>
-                        <input type="text" class="form-control" name="congregation_other" id="for_congregation_other" value="{{ old('congregation_other') }}"
+                        <input type="text" class="form-control" name="congregation_other" id="for_congregation_other"
+                               value="{{ old('congregation_other') }}"
                                disabled>
                     </fieldset>
-                    {{--                </div>--}}
                 </div>
 
 
@@ -164,9 +156,7 @@
                         <label for="">Vencimiento</label>
                         <input type="date" class="form-control" name="identifier" id="for_identifier">
                     </fieldset>
-                    <!--de aui saque la div CERRADA-->
 
-                    <!--<div class="form-row">-->
                     <fieldset class="form-group col-md-3">
                         <label for="">Titular</label>
                         <input type="text" class="form-control" name="identifier" id="for_identifier">
@@ -176,7 +166,6 @@
                         <label for="">Previsión</label>
                         <input type="text" class="form-control" name="identifier" id="for_identifier">
                     </fieldset>
-                    <!--</div>-->
                 </div>
             </div>
         </div>
@@ -203,7 +192,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mb-3"> <i class="fas fa-save"></i> Guardar</button>
+        <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-save"></i> Guardar</button>
 
 
     </form>
@@ -216,8 +205,7 @@
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $('#for_congregation_id').change(function () {
-                var fieldsetName = $(this).val();
-                // console.log(fieldsetName);
+                const fieldsetName = $(this).val();
 
                 if (fieldsetName.includes("10")) {
                     $('#for_congregation_other').attr("disabled", false);
