@@ -68,7 +68,7 @@ class User extends Authenticatable implements Auditable
     ];
 
 
-    public function humanNames(): HasMany
+    public function humanNames()
     {
         return $this->hasMany(HumanName::class, 'user_id')->orderBy('created_at');
     }
@@ -115,8 +115,19 @@ class User extends Authenticatable implements Auditable
         return $this->belongsTo(CodConMarital::class, 'cod_con_marital_id');
     }
 
-    public function nationality(){
+    public function nationality()
+    {
         return $this->belongsTo(Country::class, 'nationality_id');
+    }
+
+    public function sex()
+    {
+        return $this->belongsToMany(Sex::class)->withTimestamps();
+    }
+
+    public function gender()
+    {
+        return $this->belongsToMany(Gender::class)->withTimestamps();
     }
 
     // public function manager_shifts(): HasMany

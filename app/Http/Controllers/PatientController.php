@@ -102,7 +102,6 @@ class PatientController extends Controller
             $this->savePatientData(new Request($request->session()->get('request_match')));
             $request->session()->forget('request_match');
         }else{
-            //Busca los pacientes que ya esten ingresados con los datos de request
             $matchingPatients = $this->getMatchingPatients($request);
             if ($matchingPatients->count() === 0) {
                 $this->savePatientData($request);
@@ -127,14 +126,12 @@ class PatientController extends Controller
             $newHumanName->user_id = $newPatient->id;
             $newHumanName->save();
 
+            $newPatient->sex()->attach($request->sex, ['valid_from' => now()]);
+            $newPatient->gender()->attach($request->gender, ['valid_from' => now()]);
+
             $newPatient->syncPermissions(
                 is_array($request->input('permissions')) ? $request->input('permissions') : array()
             );
-
-            // //siempre que usuario logeado sea de programador, se asigna el permiso de programador
-            // if (Auth::user()->hasPermissionTo('Mp: user creator')) {
-            //   $newPatient->syncPermissions('Mp: user');
-            // }
 
             if ($request->has('id_type')) {
                 foreach ($request->id_type as $key => $id_type) {
