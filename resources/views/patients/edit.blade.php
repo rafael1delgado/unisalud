@@ -5,24 +5,12 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Editar paciente</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-{{--            <div class="btn-group mr-2">--}}
-{{--                <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>--}}
-{{--            </div>--}}
         </div>
     </div>
 
     <form method="POST" class="form-horizontal" action="{{ route('patient.update', $patient->id) }}">
         @csrf
         @method('POST')
-
-{{--        <div class="form-row">--}}
-{{--            <fieldset class="form-group col-2">--}}
-{{--                <label for="for_id_type">Tipo de paciente</label>--}}
-{{--                <select name="id_patient_type" id="for_id_patient_type" class="form-control">--}}
-{{--                    <option value="PN">Normal</option>--}}
-{{--                </select>--}}
-{{--            </fieldset>--}}
-{{--        </div>--}}
 
         @livewire('user.user-identifiers', compact('identifierTypes', 'patient'))
 
@@ -82,7 +70,7 @@
                     </fieldset>
 
                     <fieldset class="form-group col-md-4">
-                        <label for="for_gender">Identidad de Genero</label>
+                        <label for="for_gender">Identidad de Género</label>
                         <select name="gender" id="for_gender" class="form-control">
                             <option value=""></option>
                         <option value="male" {{$patient->gender === 'male'? 'selected' : ''}}>Masculino</option>
@@ -92,13 +80,6 @@
                         <option value="other" {{$patient->gender === 'other'? 'selected' : ''}}>Otro</option>
                         </select>
                     </fieldset>
-
-                    {{-- <fieldset class="form-group col-2">
-                        <label for="for_birth_place">País de nacimeinto</label>
-                        <select name="birth_place" id="for_birth_place" class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </fieldset> --}}
 
                 </div>
                 <div class="form-row">
@@ -124,14 +105,12 @@
                     </select>
                 </fieldset>
 
-                {{--                <div id="otro_etnia">--}}
                     <fieldset class="form-group col-md-4">
                         <label for="for_congregation_other">Otro Pueblo Originario</label>
                         <input type="text" class="form-control" name="congregation_other" id="for_congregation_other"
                                value="{{$congregationOther}}"
                                disabled>
                     </fieldset>
-                    {{--                </div>--}}
                 </div>
 
                 <div class="form-row">
@@ -144,15 +123,6 @@
                             @endforeach
                         </select>
                     </fieldset>
-
-                    {{--        <fieldset class="form-group col-2">--}}
-                    {{--            <label for="for_instrucionLevel">Nivel de Instrucción</label>--}}
-                    {{--            <select name="instrucionLevel" id="for_instrucionLevel" class="form-control">--}}
-                    {{--                @foreach($instructionLevel as $level)--}}
-                    {{--                    <option value="{{ $level['code'] }}">{{ $level['display'] }}</option>--}}
-                    {{--                @endforeach--}}
-                    {{--            </select>--}}
-                    {{--        </fieldset>--}}
 
                     {{--        <fieldset class="form-group col-2">--}}
                     {{--            <label for="for_prevision">Previsión</label>--}}
