@@ -13,7 +13,7 @@ class CreateSexTable extends Migration
      */
     public function up()
     {
-        Schema::create('sex', function (Blueprint $table) {
+        Schema::create('sexes', function (Blueprint $table) {
             $table->id();
             $table->string('value');
             $table->string('text');
