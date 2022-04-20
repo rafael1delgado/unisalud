@@ -62,22 +62,20 @@
                         <label for="for_sex">Sexo</label>
                         <select name="sex" id="for_sex" class="form-control">
                             <option value=""></option>
-                            <option value="male" {{$patient->sex === 'male'? 'selected' : ''}}>Masculino</option>
-                            <option value="female" {{$patient->sex === 'female'? 'selected' : ''}}>Femenino</option>
-                            <option value="unknown" {{$patient->sex === 'unknown'? 'selected' : ''}}>Desconocido</option>
-                            <option value="other" {{$patient->sex === 'other'? 'selected' : ''}}>Otro</option>
+                            @foreach($sexes as $sex)
+                                <option
+                                    value="{{$sex->id}}" {{$patient->sex === $sex->value ? 'selected' : ''}} >{{$sex->text}}</option>
+                            @endforeach
                         </select>
                     </fieldset>
 
                     <fieldset class="form-group col-md-4">
                         <label for="for_gender">Identidad de Género</label>
                         <select name="gender" id="for_gender" class="form-control">
-                            <option value=""></option>
-                        <option value="male" {{$patient->gender === 'male'? 'selected' : ''}}>Masculino</option>
-                        <option value="female" {{$patient->gender === 'female'? 'selected' : ''}}>Femenino</option>
-                        <option value="transgender-female" {{$patient->gender === 'transgender-female'? 'selected' : ''}}>Femenino Trans "FT"</option>
-                        <option value="transgender-male" {{$patient->gender === 'transgender-male'? 'selected' : ''}}>Masculino Trans "MT"</option>
-                        <option value="other" {{$patient->gender === 'other'? 'selected' : ''}}>Otro</option>
+                        <option value=""></option>
+                        @foreach($genders as $gender)
+                            <option value="{{$gender->id}}" {{$patient->gender === $gender->value ? 'selected' : ''}}>{{$gender->text}}</option>
+                        @endforeach
                         </select>
                     </fieldset>
 
@@ -123,15 +121,6 @@
                             @endforeach
                         </select>
                     </fieldset>
-
-                    {{--        <fieldset class="form-group col-2">--}}
-                    {{--            <label for="for_prevision">Previsión</label>--}}
-                    {{--            <select name="prevision" id="for_prevision" class="form-control">--}}
-                    {{--                @foreach($previciones as $previcion)--}}
-                    {{--                    <option value="{{ $previcion['code'] }}">{{ $previcion['display'] }}</option>--}}
-                    {{--                @endforeach--}}
-                    {{--            </select>--}}
-                    {{--        </fieldset>--}}
                 </div>
 
         </div>
@@ -187,7 +176,6 @@
 
         <div class="card mb-3">
             <div class="card-body">
-                <!-- <h5 class="card-title">Permisos</h5> -->
                 <div class="form-row">
                     <fieldset class="form-group col-md">
                         <label for="for_name">Permisos</label>
@@ -267,9 +255,8 @@
                 $('#for_dv').val($.rut.dv(str));
             });
 
-            // $('#otro_etnia').hide();
             $('#for_congregation_id').change(function () {
-                var fieldsetName = $(this).val();
+                const fieldsetName = $(this).val();
                 // console.log(fieldsetName);
 
                 if (fieldsetName.includes("10")) {
@@ -280,19 +267,6 @@
                     $('#for_congregation_other').attr("required", false);
                     $('#for_congregation_other').attr("disabled", true);
                 }
-
-                // switch(this.value){
-                //     case "10":
-                //      //   $('#for_other_specialty').attr("disabled", false);
-                //      $('#otro_etnia').show();
-                //         break;
-                //
-                //     default:
-                //     $('#otro_etnia').show();
-                //         $('#otro_etnia').attr("disabled", true);
-                //         document.getElementById('#otro_etnia').value = '';
-                //         break;
-                // }
             });
 
         });

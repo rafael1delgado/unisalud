@@ -286,7 +286,15 @@ class PatientController extends Controller
         $specialties = Specialty::all();
         $patientCongregationIds = $patient->congregations->pluck('id')->toArray();
         $congregationOther = ($patient->congregationUsers()->where('congregation_id', 10)->first()) ? $patient->congregationUsers()->where('congregation_id', 10)->first()->other : '';
-        return view('patients.edit', compact('permissions', 'patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'professions', 'specialties', 'patientCongregationIds', 'congregationOther'));
+        $sexes = Sex::all();
+        $genders = Gender::all();
+
+        return view('patients.edit', compact(
+                'permissions', 'patient', 'countries', 'communes', 'regions', 'maritalStatus',
+                'identifierTypes', 'congregations', 'organizations', 'professions', 'specialties', 'patientCongregationIds',
+                'congregationOther', 'sexes', 'genders'
+            )
+        );
     }
 
     /**
