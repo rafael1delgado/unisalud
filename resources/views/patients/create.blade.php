@@ -67,10 +67,9 @@
                         <label for="for_sex">Sexo *</label>
                         <select name="sex" id="for_sex" class="form-control" required>
                             <option value=""></option>
-                            <option value="male" {{old('sex') === 'male'? 'selected' : ''}}>Masculino</option>
-                            <option value="female" {{old('sex') === 'female'? 'selected' : ''}}>Femenino</option>
-                            <option value="unknown"{{old('sex') === 'unknown'? 'selected' : ''}}>Desconocido</option>
-                            <option value="other"{{old('sex') === 'other'? 'selected' : ''}}>Otro</option>
+                            @foreach($sexes as $sex)
+                                <option value="{{$sex->id}}" {{old('sex') == $sex->id ? 'selected' : ''}}>{{$sex->text}}</option>
+                            @endforeach
                         </select>
                     </fieldset>
 
@@ -78,10 +77,9 @@
                         <label for="for_gender">Identidad de Género *</label>
                         <select name="gender" id="for_gender" class="form-control" required>
                             <option value=""></option>
-                            <option value="male" {{old('sex') === 'male'? 'selected' : ''}}>Masculino</option>
-                            <option value="female" {{old('sex') === 'female'? 'selected' : ''}}>Femenino</option>
-                            <option value="transgender-female" {{old('sex') === 'transgender-female'? 'selected' : ''}}>Femenino Trans "FT"</option>
-                            <option value="transgender-male" {{old('sex') === 'transgender-male'? 'selected' : ''}}>Masculino Trans "MT"</option>
+                            @foreach($genders as $gender)
+                                <option value="{{$gender->id}}" {{old('gender') == $gender->id ? 'selected' : ''}}>{{$gender->text}}</option>
+                            @endforeach
                         </select>
                     </fieldset>
                     <fieldset class="form-group col-md-3">

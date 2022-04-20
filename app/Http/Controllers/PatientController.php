@@ -11,6 +11,7 @@ use App\Models\CongregationUser;
 use App\Models\ContactPoint;
 use App\Models\Country;
 use App\Models\Congregation;
+use App\Models\Gender;
 use App\Models\HumanName;
 use App\Models\Identifier;
 use App\Models\MedicalProgrammer\Specialty;
@@ -18,6 +19,7 @@ use App\Models\Organization;
 use App\Models\MedicalProgrammer\Profession;
 use App\Models\Practitioner;
 use App\Models\Region;
+use App\Models\Sex;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
@@ -49,7 +51,7 @@ class PatientController extends Controller
 
     public function create($interconsultationId = null)
     {
-        if(request()->session()->has('request_match')) request()->session()->forget('request_match');
+        if (request()->session()->has('request_match')) request()->session()->forget('request_match');
         $permissions = Permission::OrderBy('name')->get();
         $maritalStatus = CodConMarital::all();
         $countries = Country::all();
@@ -59,13 +61,18 @@ class PatientController extends Controller
         $organizations = Organization::all();
         $professions = Profession::all();
         $specialties = Specialty::all();
+        $sexes = Sex::all();
+        $genders = Gender::all();
 
         $sic = null;
-        if($interconsultationId){
+        if ($interconsultationId) {
             $sic = Sic::find($interconsultationId);
         }
 
-        return view('patients.create', compact('permissions', 'maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations', 'professions', 'organizations', 'specialties', 'sic'));
+        return view('patients.create', compact(
+                'permissions', 'maritalStatus', 'countries', 'regions', 'identifierTypes',
+                'congregations', 'professions', 'organizations', 'specialties', 'sic', 'sexes', 'genders')
+        );
     }
 
 
@@ -73,7 +80,7 @@ class PatientController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return RedirectResponse
+     * @return Application|Factory|View|RedirectResponse
      * @throws \Exception
      */
     public function store(Request $request)
