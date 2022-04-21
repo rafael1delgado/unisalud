@@ -120,15 +120,17 @@ class User extends Authenticatable implements Auditable
         return $this->belongsTo(Country::class, 'nationality_id');
     }
 
-    public function sex()
+    public function sexes()
     {
-        return $this->belongsToMany(Sex::class)->withTimestamps();
+        return $this->belongsToMany(Sex::class)->withPivot('valid_from', 'valid_to')->withTimestamps();
     }
 
-    public function gender()
+    public function genders()
     {
-        return $this->belongsToMany(Gender::class)->withTimestamps();
+        return $this->belongsToMany(Gender::class)->withPivot('valid_from', 'valid_to')->withTimestamps();
     }
+
+
 
     // public function manager_shifts(): HasMany
     // {
@@ -234,7 +236,7 @@ class User extends Authenticatable implements Auditable
 
     /**
      * Retorna Usuarios según contenido en $searchText
-     * Busqueda realizada en: nombres, apellidos, rut.
+     * Búsqueda realizada en: nombres, apellidos, rut.
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function getUsersBySearch($searchText){
@@ -327,6 +329,30 @@ class User extends Authenticatable implements Auditable
         }else{
             return '';
         }
+    }
+
+    public function actualSex()
+    {
+        return $this->sexes()
+            ->wherePivotNull('valid_to')
+            ->first();
+    }
+
+    public function actualGender()
+    {
+        return $this->genders()
+            ->wherePivotNull('valid_to')
+            ->first();
+    }
+
+    public function getActualSexAttribute()
+    {
+        return $this->actualSex()->text;
+    }
+
+    public function getActualGenderAttribute()
+    {
+        return $this->actualGender()->text;
     }
 
     //Scopes

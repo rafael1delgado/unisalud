@@ -21,6 +21,7 @@ use App\Models\Practitioner;
 use App\Models\Region;
 use App\Models\Sex;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Contracts\Foundation\Application;
@@ -34,6 +35,7 @@ use Illuminate\Support\Facades\Http;
 use App\Traits\GoogleToken;
 use App\Models\Some\Sic;
 use Session;
+use Throwable;
 
 class PatientController extends Controller
 {
@@ -269,7 +271,6 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        // return session()->get('request_match');
         $permissions = Permission::OrderBy('name')->get();
         $patient = User::find($id);
         $maritalStatus = CodConMarital::all();
@@ -299,16 +300,18 @@ class PatientController extends Controller
      *
      * @param Request $request
      * @param int $id
-     * @return Application|Factory|View|\Illuminate\Http\Response
-     * @throws \Throwable
+     * @return Application|Factory|View
+     * @throws Throwable
      */
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
         try {
-            // dd($request);
             $patient = User::find($id);
             $patient->fill($request->all());
+
+            $this->updateSex($patient, $request);
+            $this->updateGender($patient, $request);
 
             $patient->syncPermissions(
                 is_array($request->input('permissions')) ? $request->input('permissions') : array()
@@ -490,13 +493,47 @@ class PatientController extends Controller
             }
 
             Db::commit();
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             DB::rollBack();
             throw $th;
         }
         if($request->session()->has('request_match')) $request->session()->forget('request_match');
         session()->flash('success', 'El paciente ' . $patient->officialFullName . ' ha sido actualizado.');
         return view('patients.show', compact('patient'));
+    }
+
+    /**
+     * @param $patient
+     * @param Request $request
+     * @return void
+     */
+    public function updateSex($patient, Request $request): void
+    {
+        if($request->sex == $patient->actualSex()->id)
+            return;
+
+        $patient->sexes()
+            ->wherePivotNull('valid_to')
+            ->updateExistingPivot($patient->actualSex(), ['valid_to' => now()]);
+
+        $patient->sexes()->attach($request->sex, ['valid_from' => Carbon::now()->addSecond()]);
+    }
+
+    /**
+     * @param $patient
+     * @param Request $request
+     * @return void
+     */
+    public function updateGender($patient, Request $request): void
+    {
+        if($request->gender == $patient->actualGender()->id)
+            return;
+
+        $patient->genders()
+            ->wherePivotNull('valid_to')
+            ->updateExistingPivot($patient->actualGender(), ['valid_to' => now()]);
+
+        $patient->genders()->attach($request->gender, ['valid_from' => Carbon::now()->addSecond()]);
     }
 
     /**
