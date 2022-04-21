@@ -64,7 +64,7 @@
                             <option value=""></option>
                             @foreach($sexes as $sex)
                                 <option
-                                    value="{{$sex->id}}" {{$patient->actualSex()->id === $sex->id ? 'selected' : ''}} >{{$sex->text}}
+                                    value="{{$sex->id}}" {{ ($patient->actualSex() && $patient->actualSex()->id === $sex->id) ? 'selected' : ''}} >{{$sex->text}}
                                 </option>
                             @endforeach
                         </select>
@@ -75,7 +75,7 @@
                         <select name="gender" id="for_gender" class="form-control">
                         <option value=""></option>
                         @foreach($genders as $gender)
-                            <option value="{{$gender->id}}" {{$patient->actualGender()->id === $gender->id ? 'selected' : ''}}>{{$gender->text}}</option>
+                            <option value="{{$gender->id}}" {{($patient->actualGender() && $patient->actualGender()->id === $gender->id) ? 'selected' : ''}}>{{$gender->text}}</option>
                         @endforeach
                         </select>
                     </fieldset>

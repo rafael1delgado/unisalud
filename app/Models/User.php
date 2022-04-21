@@ -122,12 +122,16 @@ class User extends Authenticatable implements Auditable
 
     public function sexes()
     {
-        return $this->belongsToMany(Sex::class)->withPivot('valid_from', 'valid_to')->withTimestamps();
+        return $this->belongsToMany(Sex::class)
+            ->withPivot('valid_from', 'valid_to')
+            ->withTimestamps();
     }
 
     public function genders()
     {
-        return $this->belongsToMany(Gender::class)->withPivot('valid_from', 'valid_to')->withTimestamps();
+        return $this->belongsToMany(Gender::class)
+            ->withPivot('valid_from', 'valid_to')
+            ->withTimestamps();
     }
 
 

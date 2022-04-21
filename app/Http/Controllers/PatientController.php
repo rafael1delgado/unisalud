@@ -128,8 +128,8 @@ class PatientController extends Controller
             $newHumanName->user_id = $newPatient->id;
             $newHumanName->save();
 
-            $newPatient->sex()->attach($request->sex, ['valid_from' => now()]);
-            $newPatient->gender()->attach($request->gender, ['valid_from' => now()]);
+            $newPatient->sexes()->attach($request->sex, ['valid_from' => now()]);
+            $newPatient->genders()->attach($request->gender, ['valid_from' => now()]);
 
             $newPatient->syncPermissions(
                 is_array($request->input('permissions')) ? $request->input('permissions') : array()
@@ -509,6 +509,14 @@ class PatientController extends Controller
      */
     public function updateSex($patient, Request $request): void
     {
+        if ($request->sex === null)
+            return;
+
+        if ($patient->actualSex() === null) {
+            $patient->sexes()->attach($request->sex, ['valid_from' => now()]);
+            return;
+        }
+
         if($request->sex == $patient->actualSex()->id)
             return;
 
@@ -526,6 +534,14 @@ class PatientController extends Controller
      */
     public function updateGender($patient, Request $request): void
     {
+        if($request->gender === null)
+            return;
+
+        if ($patient->actualGender() === null) {
+            $patient->genders()->attach($request->gender, ['valid_from' => now()]);
+            return;
+        }
+
         if($request->gender == $patient->actualGender()->id)
             return;
 
