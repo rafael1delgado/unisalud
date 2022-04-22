@@ -351,11 +351,19 @@ class User extends Authenticatable implements Auditable
 
     public function getActualSexAttribute()
     {
+        if ($this->actualSex() === null) {
+            return '';
+        }
+
         return $this->actualSex()->text;
     }
 
     public function getActualGenderAttribute()
     {
+        if ($this->actualGender() === null) {
+            return '';
+        }
+
         return $this->actualGender()->text;
     }
 
