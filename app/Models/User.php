@@ -363,7 +363,6 @@ class User extends Authenticatable implements Auditable
         if ($this->actualGender() === null) {
             return '';
         }
-
         return $this->actualGender()->text;
     }
 
