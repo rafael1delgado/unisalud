@@ -63,7 +63,6 @@ class HumanName extends Model
             $humanName->mothers_family = trim($humanName->mothers_family);
 
             $humanName->text = $humanName->given.' '.$humanName->fathers_family.' '.$humanName->mothers_family;
-            $humanName->period_start = now();
         });
     }
 }

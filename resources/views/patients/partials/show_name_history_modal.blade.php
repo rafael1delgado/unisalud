@@ -17,13 +17,15 @@
                             <thead class="table-info">
                             <tr>
                                 <th scope="col">Nombre:</th>
-                                <th scope="col">Fecha vigencia:</th>
+                                <th scope="col">Inicio vigencia:</th>
+                                <th scope="col">Fin vigencia:</th>
                             </thead>
                             <tbody>
                             @foreach($patient->humanNames as $humanName)
                                 <tr>
                                     <td>{{$humanName->fullName}}</td>
-                                    <td>{{$humanName->created_at}}</td>
+                                    <td>{{$humanName->period_start}}</td>
+                                    <td>{{$humanName->period_end}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
