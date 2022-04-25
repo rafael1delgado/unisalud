@@ -53,7 +53,10 @@
                     <td>{{($activities['hours'] * $activities['performance']) * 7 * 4}}</td>
                     <td>{{($activities['hours'] * $activities['performance']) * 7 * 4 * 52}}</td>
                   @else
-
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   @endif
               </tr>
             @endforeach
