@@ -8,7 +8,7 @@
     <div class="form-row">
       <fieldset class="form-group col col-md-4">
           <label for="for_id_deis">Fecha</label>
-          <input type="date" class="form-control" name="date">
+          <input type="date" class="form-control" name="date" value="{{$request->date}}">
       </fieldset>
 
       <div class="form-group col-md-2">
