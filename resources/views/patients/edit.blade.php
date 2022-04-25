@@ -5,24 +5,12 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Editar paciente</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-{{--            <div class="btn-group mr-2">--}}
-{{--                <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>--}}
-{{--            </div>--}}
         </div>
     </div>
 
     <form method="POST" class="form-horizontal" action="{{ route('patient.update', $patient->id) }}">
         @csrf
         @method('POST')
-
-{{--        <div class="form-row">--}}
-{{--            <fieldset class="form-group col-2">--}}
-{{--                <label for="for_id_type">Tipo de paciente</label>--}}
-{{--                <select name="id_patient_type" id="for_id_patient_type" class="form-control">--}}
-{{--                    <option value="PN">Normal</option>--}}
-{{--                </select>--}}
-{{--            </fieldset>--}}
-{{--        </div>--}}
 
         @livewire('user.user-identifiers', compact('identifierTypes', 'patient'))
 
@@ -58,7 +46,7 @@
                         <fieldset class="form-group col-md-1">
                             <label for="">&nbsp;</label>
                             <button type="button" class="btn btn-primary form btn-block" data-toggle="modal"
-                                    data-target="#showNameHistory"> <i class="fas fa-clock"></i> </button>
+                                    data-target="#showNameHistory"><i class="fas fa-clock"></i></button>
                         </fieldset>
                     @endif
 
@@ -70,68 +58,74 @@
                                id="for_birthday" value="{{ $patient->birthday }}">
                     </fieldset>
 
-                    <fieldset class="form-group col-md-4">
+                    <fieldset class="form-group col-md-3">
                         <label for="for_sex">Sexo</label>
                         <select name="sex" id="for_sex" class="form-control">
                             <option value=""></option>
-                            <option value="male" {{$patient->sex === 'male'? 'selected' : ''}}>Masculino</option>
-                            <option value="female" {{$patient->sex === 'female'? 'selected' : ''}}>Femenino</option>
-                            <option value="unknown" {{$patient->sex === 'unknown'? 'selected' : ''}}>Desconocido</option>
-                            <option value="other" {{$patient->sex === 'other'? 'selected' : ''}}>Otro</option>
+                            @foreach($sexes as $sex)
+                                <option
+                                    value="{{$sex->id}}" {{ ($patient->actualSex() && $patient->actualSex()->id === $sex->id) ? 'selected' : ''}} >{{$sex->text}}
+                                </option>
+                            @endforeach
                         </select>
                     </fieldset>
 
-                    <fieldset class="form-group col-md-4">
-                        <label for="for_gender">Identidad de Genero</label>
+
+                    <fieldset class="form-group col-md-1 {{$patient->sexes()->count() <= 1 ? 'invisible' : ''}}">
+                        <label for="">&nbsp;</label>
+                        <button type="button" class="btn btn-primary form btn-block" data-toggle="modal"
+                                data-target="#showSexHistory" title="Historial de cambios de sexo."><i class="fas fa-clock"></i></button>
+                    </fieldset>
+
+                    <fieldset class="form-group col-md-3">
+                        <label for="for_gender">Identidad de Género</label>
                         <select name="gender" id="for_gender" class="form-control">
                             <option value=""></option>
-                        <option value="male" {{$patient->gender === 'male'? 'selected' : ''}}>Masculino</option>
-                        <option value="female" {{$patient->gender === 'female'? 'selected' : ''}}>Femenino</option>
-                        <option value="transgender-female" {{$patient->gender === 'transgender-female'? 'selected' : ''}}>Femenino Trans "FT"</option>
-                        <option value="transgender-male" {{$patient->gender === 'transgender-male'? 'selected' : ''}}>Masculino Trans "MT"</option>
-                        <option value="other" {{$patient->gender === 'other'? 'selected' : ''}}>Otro</option>
+                            @foreach($genders as $gender)
+                                <option
+                                    value="{{$gender->id}}" {{($patient->actualGender() && $patient->actualGender()->id === $gender->id) ? 'selected' : ''}}>{{$gender->text}}</option>
+                            @endforeach
                         </select>
                     </fieldset>
 
-                    {{-- <fieldset class="form-group col-2">
-                        <label for="for_birth_place">País de nacimeinto</label>
-                        <select name="birth_place" id="for_birth_place" class="form-control">
-                            <option value=""></option>
-                        </select>
-                    </fieldset> --}}
+                    <fieldset class="form-group col-md-1 {{$patient->genders()->count() <= 1 ? 'invisible' : ''}}">
+                        <label for="">&nbsp;</label>
+                        <button type="button" class="btn btn-primary form btn-block" data-toggle="modal"
+                                data-target="#showGenderHistory" title="Historial de cambios de género."><i class="fas fa-clock"></i></button>
+                    </fieldset>
 
                 </div>
                 <div class="form-row">
 
-                <fieldset class="form-group col-md-4">
-                    <label for="for_nationality_id">Nacionalidad *</label>
-                    <select name="nationality_id" id="for_nationality_id" class="form-control" required>
-                        <option value=""></option>
-                        @foreach($countries as $country)
-                        <option value="{{ $country->id }}" {{$country->id === $patient->nationality_id ? 'selected' : ''}} >{{ $country->name }}</option>
-                        @endforeach
-                    </select>
-                </fieldset>
+                    <fieldset class="form-group col-md-4">
+                        <label for="for_nationality_id">Nacionalidad *</label>
+                        <select name="nationality_id" id="for_nationality_id" class="form-control" required>
+                            <option value=""></option>
+                            @foreach($countries as $country)
+                                <option
+                                    value="{{ $country->id }}" {{$country->id === $patient->nationality_id ? 'selected' : ''}} >{{ $country->name }}</option>
+                            @endforeach
+                        </select>
+                    </fieldset>
 
-                <fieldset class="form-group col-md-4">
-                    <label for="for_congregation">Pueblo originario</label>
-                    <select name="congregation_id[]" id="for_congregation_id" class="form-control selectpicker"
-                            data-live-search="true" multiple="" data-size="10" title="Seleccione..." multiple
-                            data-actions-box="true">
-                        @foreach($congregations as $congregation)
-                        <option value="{{ $congregation->id }}" {{in_array($congregation->id, $patientCongregationIds)  ? 'selected' : ''}} >{{ $congregation->name}}</option>
-                        @endforeach
-                    </select>
-                </fieldset>
+                    <fieldset class="form-group col-md-4">
+                        <label for="for_congregation">Pueblo originario</label>
+                        <select name="congregation_id[]" id="for_congregation_id" class="form-control selectpicker"
+                                data-live-search="true" multiple="" data-size="10" title="Seleccione..." multiple
+                                data-actions-box="true">
+                            @foreach($congregations as $congregation)
+                                <option
+                                    value="{{ $congregation->id }}" {{in_array($congregation->id, $patientCongregationIds)  ? 'selected' : ''}} >{{ $congregation->name}}</option>
+                            @endforeach
+                        </select>
+                    </fieldset>
 
-                {{--                <div id="otro_etnia">--}}
                     <fieldset class="form-group col-md-4">
                         <label for="for_congregation_other">Otro Pueblo Originario</label>
                         <input type="text" class="form-control" name="congregation_other" id="for_congregation_other"
                                value="{{$congregationOther}}"
                                disabled>
                     </fieldset>
-                    {{--                </div>--}}
                 </div>
 
                 <div class="form-row">
@@ -140,31 +134,14 @@
                         <select name="cod_con_marital_id" id="for_cod_con_marital_id" class="form-control" required>
                             <option value=""></option>
                             @foreach($maritalStatus as $status)
-                                <option value="{{ $status->id }}" {{$status->id === $patient->cod_con_marital_id ? 'selected' : '' }} >{{ $status->text }}</option>
+                                <option
+                                    value="{{ $status->id }}" {{$status->id === $patient->cod_con_marital_id ? 'selected' : '' }} >{{ $status->text }}</option>
                             @endforeach
                         </select>
                     </fieldset>
-
-                    {{--        <fieldset class="form-group col-2">--}}
-                    {{--            <label for="for_instrucionLevel">Nivel de Instrucción</label>--}}
-                    {{--            <select name="instrucionLevel" id="for_instrucionLevel" class="form-control">--}}
-                    {{--                @foreach($instructionLevel as $level)--}}
-                    {{--                    <option value="{{ $level['code'] }}">{{ $level['display'] }}</option>--}}
-                    {{--                @endforeach--}}
-                    {{--            </select>--}}
-                    {{--        </fieldset>--}}
-
-                    {{--        <fieldset class="form-group col-2">--}}
-                    {{--            <label for="for_prevision">Previsión</label>--}}
-                    {{--            <select name="prevision" id="for_prevision" class="form-control">--}}
-                    {{--                @foreach($previciones as $previcion)--}}
-                    {{--                    <option value="{{ $previcion['code'] }}">{{ $previcion['display'] }}</option>--}}
-                    {{--                @endforeach--}}
-                    {{--            </select>--}}
-                    {{--        </fieldset>--}}
                 </div>
 
-        </div>
+            </div>
         </div>
 
         <div class="border-bottom mt-3 mb-3"></div>
@@ -217,13 +194,13 @@
 
         <div class="card mb-3">
             <div class="card-body">
-                <!-- <h5 class="card-title">Permisos</h5> -->
                 <div class="form-row">
                     <fieldset class="form-group col-md">
                         <label for="for_name">Permisos</label>
                         <select class="form-control selectpicker" name="permissions[]" multiple>
                             @foreach($permissions as $permission)
-                                <option value="{{ $permission->name }}" {{ ($patient->hasPermissionTo($permission->name))?'selected':'' }}>{{ $permission->name }}</option>
+                                <option
+                                    value="{{ $permission->name }}" {{ ($patient->hasPermissionTo($permission->name))?'selected':'' }}>{{ $permission->name }}</option>
                             @endforeach
                         </select>
                     </fieldset>
@@ -231,58 +208,17 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mb-3"> <i class="fas fa-save"></i> Guardar</button>
+        <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-save"></i> Guardar</button>
 
-
-        <div  class="modal fade" id="showNameHistory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true" >
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Historial de nombres</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="table-responsive">
-                                <table class="table table-sm table-hover">
-                                    <thead class="table-info">
-                                    <tr>
-                                        <th scope="col">Nombre:</th>
-                                        <th scope="col">Fecha vigencia:</th>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($patient->humanNames as $humanName)
-                                            <tr>
-                                                <td>{{$humanName->fullName}}</td>
-                                                <td>{{$humanName->created_at}}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        @include('patients.partials.show_name_history_modal')
+        @include('patients.partials.show_sex_history_modal')
+        @include('patients.partials.show_gender_history_modal')
 
     </form>
 
     @can('Administrator')
         @include('partials.audit', ['audits' => $patient->audits] )
     @endcan
-
 
 @endsection
 @section('custom_js')
@@ -297,9 +233,8 @@
                 $('#for_dv').val($.rut.dv(str));
             });
 
-            // $('#otro_etnia').hide();
             $('#for_congregation_id').change(function () {
-                var fieldsetName = $(this).val();
+                const fieldsetName = $(this).val();
                 // console.log(fieldsetName);
 
                 if (fieldsetName.includes("10")) {
@@ -310,19 +245,6 @@
                     $('#for_congregation_other').attr("required", false);
                     $('#for_congregation_other').attr("disabled", true);
                 }
-
-                // switch(this.value){
-                //     case "10":
-                //      //   $('#for_other_specialty').attr("disabled", false);
-                //      $('#otro_etnia').show();
-                //         break;
-                //
-                //     default:
-                //     $('#otro_etnia').show();
-                //         $('#otro_etnia').attr("disabled", true);
-                //         document.getElementById('#otro_etnia').value = '';
-                //         break;
-                // }
             });
 
         });

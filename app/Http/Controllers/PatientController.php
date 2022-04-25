@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\Address;
 use App\Models\CodConIdentifierType;
 use App\Models\CodConMarital;
@@ -10,6 +11,7 @@ use App\Models\CongregationUser;
 use App\Models\ContactPoint;
 use App\Models\Country;
 use App\Models\Congregation;
+use App\Models\Gender;
 use App\Models\HumanName;
 use App\Models\Identifier;
 use App\Models\MedicalProgrammer\Specialty;
@@ -17,7 +19,9 @@ use App\Models\Organization;
 use App\Models\MedicalProgrammer\Profession;
 use App\Models\Practitioner;
 use App\Models\Region;
+use App\Models\Sex;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Contracts\Foundation\Application;
@@ -31,6 +35,7 @@ use Illuminate\Support\Facades\Http;
 use App\Traits\GoogleToken;
 use App\Models\Some\Sic;
 use Session;
+use Throwable;
 
 class PatientController extends Controller
 {
@@ -48,7 +53,7 @@ class PatientController extends Controller
 
     public function create($interconsultationId = null)
     {
-        if(request()->session()->has('request_match')) request()->session()->forget('request_match');
+        if (request()->session()->has('request_match')) request()->session()->forget('request_match');
         $permissions = Permission::OrderBy('name')->get();
         $maritalStatus = CodConMarital::all();
         $countries = Country::all();
@@ -58,13 +63,18 @@ class PatientController extends Controller
         $organizations = Organization::all();
         $professions = Profession::all();
         $specialties = Specialty::all();
+        $sexes = Sex::all();
+        $genders = Gender::all();
 
         $sic = null;
-        if($interconsultationId){
+        if ($interconsultationId) {
             $sic = Sic::find($interconsultationId);
         }
 
-        return view('patients.create', compact('permissions', 'maritalStatus', 'countries', 'regions', 'identifierTypes', 'congregations', 'professions', 'organizations', 'specialties', 'sic'));
+        return view('patients.create', compact(
+                'permissions', 'maritalStatus', 'countries', 'regions', 'identifierTypes',
+                'congregations', 'professions', 'organizations', 'specialties', 'sic', 'sexes', 'genders')
+        );
     }
 
 
@@ -72,7 +82,7 @@ class PatientController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return RedirectResponse
+     * @return Application|Factory|View|RedirectResponse
      * @throws \Exception
      */
     public function store(Request $request)
@@ -94,7 +104,6 @@ class PatientController extends Controller
             $this->savePatientData(new Request($request->session()->get('request_match')));
             $request->session()->forget('request_match');
         }else{
-            //Busca los pacientes que ya esten ingresados con los datos de request
             $matchingPatients = $this->getMatchingPatients($request);
             if ($matchingPatients->count() === 0) {
                 $this->savePatientData($request);
@@ -119,14 +128,12 @@ class PatientController extends Controller
             $newHumanName->user_id = $newPatient->id;
             $newHumanName->save();
 
+            $newPatient->sexes()->attach($request->sex, ['valid_from' => now()]);
+            $newPatient->genders()->attach($request->gender, ['valid_from' => now()]);
+
             $newPatient->syncPermissions(
                 is_array($request->input('permissions')) ? $request->input('permissions') : array()
             );
-
-            // //siempre que usuario logeado sea de programador, se asigna el permiso de programador
-            // if (Auth::user()->hasPermissionTo('Mp: user creator')) {
-            //   $newPatient->syncPermissions('Mp: user');
-            // }
 
             if ($request->has('id_type')) {
                 foreach ($request->id_type as $key => $id_type) {
@@ -264,7 +271,6 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        // return session()->get('request_match');
         $permissions = Permission::OrderBy('name')->get();
         $patient = User::find($id);
         $maritalStatus = CodConMarital::all();
@@ -278,7 +284,15 @@ class PatientController extends Controller
         $specialties = Specialty::all();
         $patientCongregationIds = $patient->congregations->pluck('id')->toArray();
         $congregationOther = ($patient->congregationUsers()->where('congregation_id', 10)->first()) ? $patient->congregationUsers()->where('congregation_id', 10)->first()->other : '';
-        return view('patients.edit', compact('permissions', 'patient', 'countries', 'communes', 'regions', 'maritalStatus', 'identifierTypes', 'congregations', 'organizations', 'professions', 'specialties', 'patientCongregationIds', 'congregationOther'));
+        $sexes = Sex::all();
+        $genders = Gender::all();
+
+        return view('patients.edit', compact(
+                'permissions', 'patient', 'countries', 'communes', 'regions', 'maritalStatus',
+                'identifierTypes', 'congregations', 'organizations', 'professions', 'specialties', 'patientCongregationIds',
+                'congregationOther', 'sexes', 'genders'
+            )
+        );
     }
 
     /**
@@ -286,15 +300,18 @@ class PatientController extends Controller
      *
      * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
+     * @throws Throwable
      */
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
         try {
-            // dd($request);
             $patient = User::find($id);
             $patient->fill($request->all());
+
+            $this->updateSex($patient, $request);
+            $this->updateGender($patient, $request);
 
             $patient->syncPermissions(
                 is_array($request->input('permissions')) ? $request->input('permissions') : array()
@@ -305,9 +322,10 @@ class PatientController extends Controller
 
             if (
                 $actualOfficialHumanName->use != $request->human_name_use ||
-                $actualOfficialHumanName->text != $request->text || //TODO verificar
+                $actualOfficialHumanName->given != $request->given ||
                 $actualOfficialHumanName->fathers_family != $request->fathers_family ||
                 $actualOfficialHumanName->mothers_family != $request->mothers_family
+
             ) {
                 $actualOfficialHumanName->period_end = now();
                 $actualOfficialHumanName->save();
@@ -476,7 +494,7 @@ class PatientController extends Controller
             }
 
             Db::commit();
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             DB::rollBack();
             throw $th;
         }
@@ -486,13 +504,63 @@ class PatientController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param $patient
+     * @param Request $request
+     * @return void
      */
-    public function destroy($id)
+    public function updateSex($patient, Request $request): void
     {
-        //
+        if ($request->sex === null)
+            return;
+
+        if ($patient->actualSex() === null) {
+            $patient->sexes()->attach($request->sex, ['valid_from' => now()]);
+            return;
+        }
+
+        if($request->sex == $patient->actualSex()->id)
+            return;
+
+        $patient->sexes()
+            ->wherePivotNull('valid_to')
+            ->updateExistingPivot($patient->actualSex(), ['valid_to' => now()]);
+
+        $patient->sexes()->attach($request->sex, ['valid_from' => Carbon::now()->addSecond()]);
+    }
+
+    /**
+     * @param $patient
+     * @param Request $request
+     * @return void
+     */
+    public function updateGender($patient, Request $request): void
+    {
+        if($request->gender === null)
+            return;
+
+        if ($patient->actualGender() === null) {
+            $patient->genders()->attach($request->gender, ['valid_from' => now()]);
+            return;
+        }
+
+        if($request->gender == $patient->actualGender()->id)
+            return;
+
+        $patient->genders()
+            ->wherePivotNull('valid_to')
+            ->updateExistingPivot($patient->actualGender(), ['valid_to' => now()]);
+
+        $patient->genders()->attach($request->gender, ['valid_from' => Carbon::now()->addSecond()]);
+    }
+
+    /**
+     * Retorna usuario para API
+     * @param string $id
+     * @return UserResource
+     */
+    public function getById(string $id)
+    {
+        $user = User::find($id);
+        return new UserResource($user);
     }
 }

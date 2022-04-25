@@ -3,15 +3,17 @@
 namespace App\Http\Livewire\Samu;
 
 use Livewire\Component;
-use App\Models\Samu\Procedure;
+use App\Models\Samu\Supply;
+use App\Models\Samu\SupplyCategory;
 
-class Procedures extends Component
+class Supplies extends Component
 {
-    public $procedures;
+    public $supplies;
+    public $categories;
     public $view;
 
-    public $procedure;
-    public $code,$name,$valid_from,$valid_to,$value;
+    public $supply;
+    public $category_id, $code, $name, $valid_from, $valid_to, $value;
 
     protected function rules()
     {
@@ -20,15 +22,17 @@ class Procedures extends Component
         empty($this->valid_to) ? $this->valid_to = null : $this->valid_to;
 
         return [
+            'category_id' => 'required|exists:samu_supply_categories,id',
             'code' => 'required',
             'name' => 'required|min:4',
             'valid_from' => 'required|date_format:Y-m-d',
-            'valid_to' => 'nullable|date',
+            'valid_to' => 'nullable|date_format:Y-m-d',
             'value' => 'integer',
         ];
     }
 
     protected $messages = [
+        'category_id.required' => 'La categoría es obligatoria.',
         'code.required' => 'El código es requerido.',
         'name.required' => 'El nombre es requerido.',
         'valid_from.required' => 'La vigencia desde es requerida.',
@@ -37,7 +41,9 @@ class Procedures extends Component
 
     public function mount()
     {
-        $this->procedures = Procedure::orderBy('name')->get();
+        $this->supplies = Supply::orderBy('name')->get();
+        $this->categories = SupplyCategory::orderBy('name')->get();
+
         $this->view = 'index';
     }
 
@@ -49,8 +55,9 @@ class Procedures extends Component
     public function create()
     {
         $this->view = 'create';
-        $this->procedure = null;
+        $this->supply = null;
         
+        $this->category_id = null;
         $this->code = null;
         $this->name = null;
         $this->valid_from = null;
@@ -60,39 +67,40 @@ class Procedures extends Component
 
     public function store()
     {
-        Procedure::create($this->validate());
+        Supply::create($this->validate());
         $this->mount();
         $this->view = 'index';
     }
 
-    public function edit(Procedure $procedure)
+    public function edit(Supply $supply)
     {
         $this->view = 'edit';
-        $this->procedure = $procedure;
+        $this->supply = $supply;
         
-        $this->code = $procedure->code;
-        $this->name = $procedure->name;
-        $this->valid_from = $procedure->valid_from->format('Y-m-d');
-        $this->valid_to = optional($procedure->valid_to)->format('Y-m-d');
-        $this->value = $procedure->value;
+        $this->category_id = $supply->category_id;
+        $this->code = $supply->code;
+        $this->name = $supply->name;
+        $this->valid_from = $supply->valid_from->format('Y-m-d');
+        $this->valid_to = optional($supply->valid_to)->format('Y-m-d');
+        $this->value = $supply->value;
     }
 
-    public function update(Procedure $procedure)
+    public function update(Supply $supply)
     {
-        $procedure->update($this->validate());
+        $supply->update($this->validate());
 
         $this->mount();
         $this->view = 'index';
     }
 
-    public function delete(Procedure $procedure)
+    public function delete(Supply $supply)
     {
-        $procedure->delete();
+        $supply->delete();
         $this->mount();
     }
 
     public function render()
     {
-        return view('livewire.samu.procedures');
+        return view('livewire.samu.supplies');
     }
 }

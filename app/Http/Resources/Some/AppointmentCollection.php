@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Some;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class AppointmentCollection extends ResourceCollection
@@ -9,13 +11,11 @@ class AppointmentCollection extends ResourceCollection
     /**
      * Transform the resource collection into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param  Request  $request
+     * @return AnonymousResourceCollection
      */
-    public function toArray($request)
+    public function toArray($request): AnonymousResourceCollection
     {
-        return [
-            'data' => $this->collection,
-        ];
+        return AppointmentResource::collection($this->collection);
     }
 }
