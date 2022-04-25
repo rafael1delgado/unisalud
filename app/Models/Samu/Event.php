@@ -9,16 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Samu\Mobile;
 use App\Models\Samu\Call;
 use App\Models\Samu\Shift;
-use App\Models\Samu\EventCounter;
 use App\Models\Samu\ReceptionPlace;
 use App\Models\User;
 use App\Models\Commune;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
-use Illuminate\Support\Carbon;
 
 class Event extends Model implements Auditable
-{   
+{
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
     use SoftDeletes;
@@ -28,8 +26,9 @@ class Event extends Model implements Auditable
     protected $fillable = [
         'counter',
         'date',
-        
+
         'shift_id',
+        'call_id',
         'key_id',
         'return_key_id',
         'mobile_in_service_id',
@@ -49,14 +48,15 @@ class Event extends Model implements Auditable
         'on_base_at',
 
         'address',
+        'address_reference',
         'commune_id',
-        
+
         /* Paciente */
         'patient_unknown',
         'patient_identifier_type_id',
         'patient_identification',
         'patient_name',
-        
+
         /* Recepción en centro asistencial */
         'reception_detail',
         'establishment_id',
@@ -64,8 +64,9 @@ class Event extends Model implements Auditable
         'reception_person',
         'reception_place_id',
         'rau',
-        
+
         /* Asignacion signos vitales */
+        // TODO: Eliminar signos vitales
         'fc',
         'fr',
         'pa',
@@ -100,11 +101,10 @@ class Event extends Model implements Auditable
     ];
 
     protected $appends = [
-        'color',
-        'last_call'
+        'color'
     ];
 
-    public function shift() 
+    public function shift()
     {
         return $this->belongsTo(Shift::class);
     }
@@ -112,6 +112,11 @@ class Event extends Model implements Auditable
     public function calls()
     {
         return $this->belongsToMany(Call::class,'samu_call_event');
+    }
+
+    public function call()
+    {
+        return $this->belongsTo(Call::class);
     }
 
     public function key()
@@ -126,10 +131,10 @@ class Event extends Model implements Auditable
 
     public function mobileInService()
     {
-        return $this->belongsTo(MobileInService::class); 
+        return $this->belongsTo(MobileInService::class);
     }
 
-    public function mobile() 
+    public function mobile()
     {
         return $this->belongsTo(Mobile::class);
     }
@@ -148,13 +153,13 @@ class Event extends Model implements Auditable
     {
         return $this->belongsTo(CodConIdentifierType::class,'patient_identifier_type_id');
     }
-    
+
     public function receptionPlace()
     {
         return $this->belongsTo(receptionPlace::class,'reception_place_id');
     }
 
-    public function commune() 
+    public function commune()
     {
         return $this->belongsTo(Commune::class);
     }
@@ -167,6 +172,23 @@ class Event extends Model implements Auditable
                     ->withTimestamps();
     }
 
+    public function vitalSign()
+    {
+        return $this->hasOne(VitalSign::class);
+    }
+
+    public function getMobileTypeAttribute()
+    {
+        if($this->mobileInService)
+        {
+            return optional(optional($this->mobileInService)->type)->name;
+        }
+        else
+        {
+            return optional(optional($this->mobile)->type)->name;
+        }
+    }
+
     public function getColorAttribute()
     {
         if(!$this->mobile_departure_at)     $color = 'danger';
@@ -176,8 +198,11 @@ class Event extends Model implements Auditable
         return $color;
     }
 
-    public function getLastCallAttribute()
+    public function getFullAddressAttribute()
     {
-        return $this->calls->last();
+        $full_address = $this->address;
+        if($this->address_reference)
+            $full_address = "$this->address ($this->address_reference)";
+        return $full_address;
     }
 }

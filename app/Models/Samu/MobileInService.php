@@ -24,7 +24,7 @@ class MobileInService extends Model implements Auditable
         'id',
         'shift_id',
         'mobile_id',
-        'type',
+        'type_id',
         'position',
         'o2',
         'lunch_start_at',
@@ -60,6 +60,11 @@ class MobileInService extends Model implements Auditable
         return $this->belongsTo(Mobile::class);
     }
 
+    public function type()
+    {
+        return $this->belongsTo(MobileType::class,'type_id');
+    }
+
     public function crew()
     {
         // $mobileCrews = MobileCrew::where('mobiles_in_service_id',$this->id)
@@ -77,10 +82,27 @@ class MobileInService extends Model implements Auditable
                     ->withTimestamps();
     }
 
+    public function currentCrew()
+    {
+        return $this->belongsToMany(User::class,'samu_mobile_crew','mobiles_in_service_id')
+            ->using(MobileCrew::class)
+            ->withPivot('id','job_type_id','assumes_at','leaves_at')
+            ->where(function($query) {
+                $query->where('mobiles_in_service_id', $this->id)
+                    ->where('assumes_at', '<', now())
+                    ->where('leaves_at', '>', now());
+            })
+            ->orWhere(function($query) {
+                $query->where('mobiles_in_service_id', $this->id)
+                    ->where('assumes_at', '<', now())
+                    ->where('leaves_at', '=', null);
+            })
+            ->withTimestamps();
+    }
 
     public function follows()
     {
-        return $this->belongsToMany(Follow::class,'samu_follow_mis');    
+        return $this->belongsToMany(Follow::class,'samu_follow_mis');
     }
 
     public function events()
@@ -103,7 +125,7 @@ class MobileInService extends Model implements Auditable
         }
         return $total;
     }
-    
+
     public function getLastEventAttribute()
     {
         return $this->events->where('status', true)->last();

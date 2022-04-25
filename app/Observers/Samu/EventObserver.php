@@ -20,12 +20,12 @@ class EventObserver
     public function creating(Event $event)
     {
         $shift = Shift::whereStatus(true)->first();
-        
+
         // Event information
         $counter = EventCounter::useNext();
         $event->counter   = $counter->counter;
         $event->date      = $counter->date;
-        
+
         $event->creator()->associate(auth()->user());
         $event->shift()->associate($shift);
 
@@ -40,12 +40,12 @@ class EventObserver
         if($shift && $event->mobileInService)
         {
             $newPosition = $shift->mobilesInService->where('status', true)->count() + 1;
-            
+
             $mobileExit = $event->mobileInService;
             $mobileExit->update([
                 'position' => $newPosition
             ]);
-            
+
             MobileInService::reorder($shift);
         }
     }
@@ -63,7 +63,7 @@ class EventObserver
 
         if($isMobileInService)
         {
-            foreach($isMobileInService->crew as $mobilecrew)
+            foreach($isMobileInService->currentCrew as $mobilecrew)
             {
                 EventUser::create([
                     'event_id'              => $event->id,

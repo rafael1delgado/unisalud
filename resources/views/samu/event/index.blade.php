@@ -20,25 +20,26 @@
                 <tr class="{{ (($mis->lunch_start_at AND !$mis->lunch_end_at) OR !$mis->status) ? 'bg-secondary text-white' : '' }}">
                     <td>{{ $mis->position }}</td>
                     <td nowrap>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
-                    <td>{{ $mis->type }}</td>
+                    <td>{{ optional($mis->type)->name }}</td>
                     <td>{{ $mis->event_status }}</td>
                     <td>
                         @if(!$mis->status)
                             {{ $mis->observation }}
                         @else
-                            @foreach($mis->crew as $tripulant)
+                            @foreach($mis->currentCrew as $tripulant)
                             {{ $tripulant->officialFullName }} <span class="badge bg-secondary text-white">{{ substr($tripulant->pivot->jobType->name,0,1) }}</span>
                             @endforeach
                         @endif
+                        <br>
                     </td>
                     <td>{{ $mis->o2 }}</td>
                     <td nowrap>
                         @if($mis->lunch_start_at AND !$mis->lunch_end_at)
-                            {{ $mis->lunch_start_at->format('H:i')}} - 
+                            {{ $mis->lunch_start_at->format('H:i')}} -
                             {{ now()->diff($mis->lunch_start_at->copy()->addMinutes('45'))->format('%I') }}"
                         @elseif($mis->lunch_end_at)
-                            {{ $mis->lunch_start_at->format('H:i')}} - 
-                            {{ $mis->lunch_end_at->format('H:i')}} - 
+                            {{ $mis->lunch_start_at->format('H:i')}} -
+                            {{ $mis->lunch_end_at->format('H:i')}} -
                             {{ $mis->lunch_start_at->diff($mis->lunch_end_at)->format('%I') }}"
                         @endif
                     </td>
@@ -57,10 +58,8 @@
     </div>
 </div>
 
-<h3 class="mb-3"><i class="fas fa-phone"></i> Llamadas pendientes (sin cometido asociado)
-    <a class="btn btn-success float-right" href="{{ route('samu.event.create') }}">
-        <i class="fas fa-plus"></i> Crear cometido
-    </a>
+<h3 class="mb-3">
+    <i class="fas fa-phone"></i> Llamadas pendientes (sin cometido asociado)
 </h3>
 @include('samu.call.partials.list',['calls' => $calls, 'edit' => true, 'createEvent' => true])
 

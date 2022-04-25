@@ -97,6 +97,14 @@ th, td {
   clear: both;
 }
 
+.vital-signs th {
+    font-size: 0.7rem;
+}
+
+.nowrap {
+    white-space: nowrap
+}
+
 @media all {
     .page-break { display: none; }
 }

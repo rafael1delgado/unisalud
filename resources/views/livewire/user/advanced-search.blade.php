@@ -32,7 +32,7 @@
                     <th scope="col">Teléfono</th>
                     <th scope="col">Correo</th>
                     <th scope="col">Selec.</th>
-                    
+
             </thead>
             <tbody>
                 @if($patients)
@@ -41,7 +41,7 @@
                         <td>{{ ($patient) ? $patient->officialFullName : '' }}</td>
                         <td>{{($patient) ? $patient->identifierRun->value . '-' . $patient->identifierRun->dv : ''}}</td>
                         <td>{{($patient) ? $patient->ageString : ''}}</td>
-                        <td>{{($patient) ? $patient->sex : '' }}</td>
+                        <td>{{($patient) ? $patient->actualSex : '' }}</td>
                         <td>{{($patient) ? $patient->officialFullAddress : ''}}</td>
                         <td>{{($patient) ? $patient->officialPhone : ''}}</td>
                         <td>{{($patient && $patient->officialEmail) ? $patient->officialEmail : ''}}</td>

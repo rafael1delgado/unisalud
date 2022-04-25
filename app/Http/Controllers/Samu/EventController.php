@@ -18,7 +18,7 @@ use App\Models\Samu\ReceptionPlace;
 use App\Models\Commune;
 use App\Models\CodConIdentifierType;
 use App\Models\Organization;
-use App\Models\Samu\MobileInService;
+use App\Services\Samu\EventService;
 
 class EventController extends Controller
 {
@@ -32,7 +32,7 @@ class EventController extends Controller
         /* Obtener el turno actual */
         $shift = Shift::where('status',true)->first();
 
-        if(!$shift) 
+        if(!$shift)
         {
             session()->flash('danger', 'Debe abrir un turno primero');
             return redirect()->route('samu.welcome');
@@ -64,7 +64,7 @@ class EventController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::whereStatus(true)->first();
-        if(!$shift) 
+        if(!$shift)
         {
             session()->flash('danger', 'Debe abrir un turno primero');
             return redirect()->route('samu.welcome');
@@ -78,11 +78,10 @@ class EventController extends Controller
         $keys               = Key::orderBy('key')->get();
         $communes           = Commune::whereHas('samu')->pluck('id','name')->sort();
         $mobilesInService   = $shift->mobilesInService->where('shift_id', $shift->id)->where('status', true)->sortBy('position');
-        $calls              = Call::latest()->where('classification','<>','OT')->limit(20)->get();
 
         $event = $event
-            ? Event::select('id', 'observation', 'address', 'commune_id', 'key_id')->find($event->id)
-            : null;
+        ? Event::select('id', 'observation', 'address', 'address_reference', 'commune_id', 'key_id', 'call_id')->find($event->id)
+        : null;
 
         return view('samu.event.create', compact(
             'call',
@@ -95,8 +94,7 @@ class EventController extends Controller
             'mobilesInService',
             'receptionPlaces',
             'identifierTypes',
-            'communes',
-            'calls'
+            'communes'
         ));
     }
 
@@ -106,21 +104,18 @@ class EventController extends Controller
      * @param  \App\Http\Requests\Event\EventStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventStoreRequest $request)
+    public function store(EventStoreRequest $request, Call $call = null, Event $event = null)
     {
-        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor')
             ? Response::allow()
-            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+            : Response::deny('Acción no autorizada para "SAMU auditor".')
         );
 
         $shift = Shift::whereStatus(true)->first();
-        
-        if($shift) 
+
+        if($shift)
         {
-            $dataValidated = $request->validated();
-            $dataValidated['patient_unknow'] = ($request->has('patient_unknown')) ? 1 : 0;
-            $event = Event::create($dataValidated);
-            $event->calls()->attach($dataValidated['call_id']);
+            (new EventService())->create($event, $call, $request->validated());
 
             session()->flash('success', 'Se ha creado el evento');
             return redirect()->route('samu.event.index');
@@ -129,11 +124,11 @@ class EventController extends Controller
         {
             $request->session()->flash('danger', 'No se pudo registrar el evento ya que
                 el turno se ha cerrado, solicite que abran un turno y luego intente guardar nuevamente.');
-            
+
             return redirect()->back()->withInput();
         }
     }
-   
+
     /**
      * Display the specified resource.
      *
@@ -155,7 +150,7 @@ class EventController extends Controller
     {
         /* Obtener el turno actual */
         $shift = Shift::whereStatus(true)->first();
-        if(!$shift) 
+        if(!$shift)
         {
             session()->flash('danger', 'Debe abrir un turno primero');
             return redirect()->route('samu.welcome');
@@ -165,11 +160,11 @@ class EventController extends Controller
         $mobiles            = Mobile::where('managed',false)->get();
         $receptionPlaces    = ReceptionPlace::pluck('id','name')->sort();
         $identifierTypes    = CodConIdentifierType::pluck('id','text')->sort();
-        $mobilesInService   = $shift->mobilesInService->where('status', true)->sortBy('position');
+        $mobilesInService   = $event->shift->mobilesInService->where('status', true)->sortBy('position');
 
         /* TODO: Parametrizar */
         $communes = Commune::whereHas('samu')->pluck('id','name')->sort();
-        
+
         return view('samu.event.edit', compact(
             'shift',
             'establishments',
@@ -191,35 +186,14 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(EventUpdateRequest $request, Event $event)
-    {   
-        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+    {
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor')
             ? Response::allow()
-            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+            : Response::deny('Acción no autorizada para "SAMU auditor".')
         );
 
-        $dataValidated = $request->validated();
-        $dataValidated['patient_unknown'] = ($request->has('patient_unknown')) ? 1 : 0;
-        $dataValidated['status'] = ($dataValidated["save_close"] == "yes") ? false : $event->status;
-        $event->update($dataValidated);
+        (new EventService())->update($event, $request->validated());
 
-        $isMobileInService = $event->shift->MobilesInService->where('mobile_id', $dataValidated['mobile_id'])->first();
-
-        // $shift = Shift::where('status',true)->first();
-        // if(!$shift) 
-        // {
-        //     session()->flash('danger', 'Debe abrir un turno primero');
-        //     return redirect()->back()->withInput();
-        // }
-
-        if($isMobileInService)
-        {
-            $event->mobileInService()->associate($isMobileInService);
-        }
-        else 
-        {
-            $event->mobileInService()->dissociate();
-        }
-        
         session()->flash('success', 'Cometido actualizado satisfactoriamente.');
         return redirect()->route('samu.event.index');
     }
@@ -232,9 +206,9 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor')
             ? Response::allow()
-            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+            : Response::deny('Acción no autorizada para "SAMU auditor".')
         );
 
         $event->mobileInService()->dissociate();
@@ -247,16 +221,16 @@ class EventController extends Controller
 
     public function reopen(Event $event)
     {
-        Gate::allowIf( auth()->user()->cannot('SAMU auditor') 
+        Gate::allowIf( auth()->user()->cannot('SAMU auditor')
             ? Response::allow()
-            : Response::deny('Acción no autorizada para "SAMU auditor".') 
+            : Response::deny('Acción no autorizada para "SAMU auditor".')
         );
-        
+
         if($event->created_at->gt(now()->subDays(30)))
         {
             $event->status = true;
             $event->save();
-    
+
             session()->flash('success', 'Cometido re abierto.');
         }
         else
@@ -279,7 +253,7 @@ class EventController extends Controller
         if($request->isMethod('post'))
         {
             $query = Event::query();
-    
+
             if($request->filled('date')) {
                 $query->whereDate('date',$request->input('date'));
             }
@@ -292,12 +266,12 @@ class EventController extends Controller
             if($request->filled('commune_id')) {
                 $query->where('commune_id',$request->input('commune_id'));
             }
-                
+
             $events = $query->withTrashed()->latest()->paginate(100);
-                
+
             $request->flash();
         }
-    
+
         return view ('samu.event.filter', compact('events','keys','communes'));
     }
 

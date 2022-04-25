@@ -385,44 +385,52 @@ class ProgrammingProposalController extends Controller
 
       if ($request->date != null) {
           // if ($request->user_id != null) {
-
+              $request_start_date = Carbon::parse($request->date)->startOfWeek();
+              $request_end_date = Carbon::parse($request->date)->endOfWeek();
               $now = Carbon::now();
-              $programmingProposals = ProgrammingProposal::when($request->specialty_id != null, function ($query) use ($request) {
-                                                            $query->where('specialty_id',$request->specialty_id);
-                                                        })
-                                                        ->when($request->profession_id != null, function ($query) use ($request) {
-                                                            $query->where('profession_id',$request->profession_id);
-                                                        })
-                                                        ->whereYear('request_date',$now->format('Y'))
-                                                        ->where('status', 'Confirmado')
+              $programmingProposals = ProgrammingProposal::
+                                                        //   when($request->specialty_id != null, function ($query) use ($request) {
+                                                        //     $query->where('specialty_id',$request->specialty_id);
+                                                        // })
+                                                        // ->when($request->profession_id != null, function ($query) use ($request) {
+                                                        //     $query->where('profession_id',$request->profession_id);
+                                                        // })
+                                                          whereYear('request_date',$now->format('Y'))
+                                                        ->where('start_date','<=',$request_start_date)
+                                                        // ->where('status', 'Confirmado')
                                                         ->orderBy('user_id')
                                                         ->orderBy('request_date','ASC') //debe ir así, para que deje los primeros ingresados al principio, y aspi se puedan ordenar correctamente y no se pisen
                                                         ->get();
 
-              $request_start_date = Carbon::parse($request->date)->startOfWeek();
-              $request_end_date = Carbon::parse($request->date)->endOfWeek();
+                                                        // dd($programmingProposals);
 
               // separa onthefly los días que se mostraran en fullcalendar
               $programmed_days = [];
               $count = 0;
+              // ciclo para obtener fechas
               foreach ($programmingProposals as $key => $programmingProposal) {
-                // ciclo para obtener fechas
-                $start_date = $programmingProposal->start_date;
-                $end_date = $programmingProposal->end_date;
+              // $start_date = $programmingProposal->start_date;
+                // $end_date = $programmingProposal->end_date;
+                $start_date = clone $request_start_date;
+                $end_date = clone $request_end_date;
 
-                // se eliminan antiguos del array (periodos anteriores del ciclo) que se encuentren between de nueva iteración
-                foreach ($programmed_days as $key2 => $programmed_day) {
-                  foreach ($programmed_day as $key3 => $value) {
-                    if (Carbon::parse($value['start_date'])->between($request_start_date, $request_end_date)) {
-                      unset($programmed_days[$programmingProposal->user_id][$key3]);
-                    }
-                  }
-                }
+                // print_r($start_date . "<--<br>");
+                
+                // // se eliminan antiguos del array (periodos anteriores del ciclo) que se encuentren between de nueva iteración
+                // foreach ($programmed_days as $key2 => $programmed_day) {
+                //   foreach ($programmed_day as $key3 => $value) {
+                //     if (Carbon::parse($value['start_date'])->between($request_start_date, $request_end_date)) {
+                //       unset($programmed_days[$programmingProposal->user_id][$key3]);
+                //     }
+                //   }
+                // }
 
                 //se obtienen los del periodo actual
                 while ($start_date <= $end_date) {
                   $dayOfWeek = $start_date->dayOfWeek;
+                  // print_r($programmingProposal->id . "<<<<---\n");
                   foreach ($programmingProposal->details->where('day',$dayOfWeek) as $key2 => $detail) {
+                    
                     //solo los que esten en el rango de fechas
                     if (Carbon::parse($start_date->format('Y-m-d'))->between($request_start_date, $request_end_date)) {
                       $programmed_days[$programmingProposal->user_id][$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
@@ -434,6 +442,8 @@ class ProgrammingProposalController extends Controller
                   $start_date->addDays(1);
                 }
               }
+
+              // dd($programmed_days);
 
               // se obtiene array final
               foreach ($programmed_days as $key => $programmed_day) {
@@ -487,6 +497,8 @@ class ProgrammingProposalController extends Controller
                   }
                 }
               }
+
+              // dd($array_medic_programmings);
       }
 
       return view('medical_programmer.management.reports.consolidated_programmings',compact('array_medic_programmings'));

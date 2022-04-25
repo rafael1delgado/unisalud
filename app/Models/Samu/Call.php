@@ -40,10 +40,14 @@ class Call extends Model implements Auditable
         'police_intervention',
         'information',
         'regulation',
+        'bls',
         'sex',
         'applicant',
         'age',
+        'year',
+        'month',
         'address',
+        'address_reference',
         'latitude',
         'longitude',
         'telephone',
@@ -55,19 +59,19 @@ class Call extends Model implements Auditable
     * @var array
     */
     protected $dates = [
-        'hour',
+        'hour','bls'
     ];
 
     public function events()
     {
-        return $this->belongsToMany(Event::class,'samu_call_event');
+        return $this->hasMany(Event::class);
     }
 
     public function shift()
     {
         return $this->belongsTo(Shift::class);
     }
-    
+
     public function commune()
     {
         return $this->belongsTo(Commune::class);
@@ -89,7 +93,7 @@ class Call extends Model implements Auditable
     {
         return $this->belongsTo(Call::class,'call_id');
     }
-    
+
     /* Una llamada puede tener muchas llamadas asociadas  */
     public function associatedCalls()
     {
@@ -109,37 +113,21 @@ class Call extends Model implements Auditable
 
     public function getAgeFormatAttribute()
     {
-        if($this->age) {
-            list($integer, $decimal) = explode('.', $this->age);
-
-            $edad = '';
-
-            if($integer != '00')
-            {
-                $edad .= $integer == '01' ? (int)$integer . ' AÑO ': (int)$integer . ' AÑOS ';
-            }
-
-            if($decimal != '00')
-            {
-                $edad .= $decimal == '01' ? (int)$decimal . ' MES ': (int)$decimal . ' MESES ';
-            }
-            return $edad;
-        }
-    }
-
-    public function getYearAttribute()
-    {
-        $year = null;
-        if($this->age)
+        $age = '';
+        if($this->year != 0)
         {
-            list($year) = explode('.', $this->age);
-            $year = ($year == 0) ? null : (int)$year;
+            $age .= ($this->year) . ($this->year == 1 ?  ' AÑO ' : ' AÑOS ');
         }
-        return $year;
+        if($this->month)
+        {
+            $age .= ($this->month) . ($this->month == 1 ?  ' MES' : ' MESES');
+        }
+        return $age;
     }
 
-    public function getMonthAttribute()
+    public function getMonthFormatAttribute()
     {
+        // TODO: Eliminar a futuro, no se elimina de inmediato ya que es necesaria para migración
         $month = null;
         if($this->age)
         {
@@ -147,6 +135,14 @@ class Call extends Model implements Auditable
             $month = ($month == 0) ? null : (int)$month;
         }
         return $month;
+    }
+
+    public function getFullAddressAttribute()
+    {
+        $full_address = $this->address;
+        if($this->address_reference)
+            $full_address = "$this->address ($this->address_reference)";
+        return $full_address;
     }
 
     public function scopeWithClassification($query, $type)

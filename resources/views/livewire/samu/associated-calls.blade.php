@@ -17,10 +17,10 @@
                 ->where('id','<>',$currentCall->id)
                 ->whereNull('call_id')
                 ->whereNotNull('classification')
-                ->sortByDesc('id') 
+                ->sortByDesc('id')
                     as $call)
             <tr>
-                <td class="text-center">
+                <td class="text-center" nowrap>
                     @if(!$currentCall->call_id)
                         <button class="btn btn-sm btn-success" wire:click="associate({{ $call->id }})">Asociar a {{ $call->id }}</button>
                     @elseif($currentCall->call_id == $call->id)
@@ -35,25 +35,31 @@
                 </td>
                 <td>
                     @if($call->classification)
-                        {{ $call->classification }} 
+                        {{ $call->classification }}
                         @if($call->classification != 'OT')
-                            -  
+                            <br> Evento:
                             @foreach($call->events as $event)
-                                <a href="{{ route('samu.event.edit', $event) }}" class="link-primary"> {{ $event->id }}</a>, 
+                                <a href="{{ route('samu.event.edit', $event) }}" class="link-primary"> {{ $event->id }}</a>,
                             @endforeach
                         @endif
                     @endif
+                    @if($call->referenceCall)
+                        Referencia: <a href="{{ route('samu.call.edit',$call->referenceCall) }}">{{ $call->referenceCall->id }}</a>
+                    @endif
                 </td>
-                <td>{{ $call->hour }}</td>
+                <td width="90">{{ $call->hour }}</td>
                 <td>{{ $call->applicant }}</td>
-                <td>{{ $call->information }}</td>
-                
-                <td>{{ $call->address }}</td>
+                <td>
+                    {{ $call->sex_abbr }}
+                    {{ $call->age_format }}
+                    {{ $call->information }}
+                </td>
+                <td>{{ $call->full_address }} {{ optional($call->commune)->name }}</td>
                 <td>{{ $call->telephone }}</td>
                 <td>{{ $call->receptor->officialFullName }}</td>
 
             </tr>
-            @endforeach   
+            @endforeach
         </tbody>
     </table>
 </div>

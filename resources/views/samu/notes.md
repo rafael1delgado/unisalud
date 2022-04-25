@@ -46,8 +46,7 @@ Recepción de paciente -> Estado actual "
 - Operador y despachador
 - Administrador
 
-- [ ] Colación, termine en forma automática (y pausar)
-- [ ] Tiempo de secado por cometido (30 min)
+- [X] Colación, termine en forma automática (y pausar)
 
 
 ## Observaciones 27-01-2022
@@ -85,14 +84,13 @@ Recepción de paciente -> Estado actual "
 ### Filtros 
 - [GZ] Filtro de call center por fecha, (hora), Nº event, ¿dirección, telefono?, personal
 
-- [ ] Impresion de informes (de un Evento)
-- [ ] Historial de cambios sólo para dra Astudillo
+- [X] Impresion de informes (de un Evento)
 - [AT] Orden de salida de los moviles (listado de moviles) de acuerdo al orden de salida
 - [ ] Estadisticas (enfermero, coordinador)
 
 ## Pendientes
 - [x] Listar al crear un turno, los usuarios que tenga los permisos, operador o regulador o despachador y que no tenga el permiso auditor.
-- [ ] Perfil de conductor solo pueda ver el sub menú de conductor.
+- [x] Perfil de conductor solo pueda ver el sub menú de conductor.
 - [ ] Pasar select de comunas a un mantenedor, que ellos puedan selecconar las comunas que aparezca en el select. 
 - [x] Los eventos cerrados, se pueden abrir dentro de 30 dias.
 - [ ] Asociar coordenadas que estan en la lupa, actualizar las coordenadas a una llamada en base a las seleccionadas.

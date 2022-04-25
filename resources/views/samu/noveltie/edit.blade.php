@@ -10,14 +10,9 @@
     @csrf
     @method('PUT')
 
-    <div class="form-row">
-
-        <fieldset class="form-group col">
-            <label for="for_detail">Detalles </label>
-            <textarea class="form-control" rows="8" name="detail" required >{{ old('detail', $noveltie->detail) }}</textarea>
-        </fieldset>
-
-    </div>
+    @include('samu.noveltie.partials.form', [
+        'noveltie' => $noveltie
+    ])
 
     <button type="submit" class="btn btn-primary">Guardar</button>
 

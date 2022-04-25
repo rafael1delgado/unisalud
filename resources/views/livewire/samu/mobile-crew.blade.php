@@ -1,75 +1,90 @@
-<div>
-    @if($mobileInService->shift->status == true)
-    <div class="form-row"> 
-        <fieldset class="col-6">            
-            <select class="form-control" wire:model='user_id' required="required">
-                <option value=""></option>
-                @foreach($users as $user => $id)
-                <option value="{{ $id }}">{{ strtoupper($user) }}</option>
-                @endforeach
-            </select>
-            @error('user_id') <span class="error">{{ $message }}</span> @enderror
-        </fieldset>
-        <fieldset class="col-5">
-            <select class="form-control" wire:model="job_type_id">
-                <option value=""></option>
-                @foreach($job_types as $jt)
-                <option value="{{ $jt->id }}">{{ $jt->name }}</option>
-                @endforeach
-            </select>
-            @error('job_type_id') <span class="error">{{ $message }}</span> @enderror    
-        </fieldset>
-        <fieldset class="col-1">
-            @if($mobileInService->shift->status == true)
-            <button wire:click="store()" class="btn btn-success"><i class="fas fa-plus"></i></button>
-            @endif
-        </fieldset>
-    </div>
-    <div class="form-row">
-        <fieldset class="col-md-6 col-6 mt-3">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="for_assumes_at">Asume:</span>
-                </div>
-                <input type="datetime-local" class="form-control" wire:model="assumes_at">
-            </div>
-            @error('assumes_at') <span class="error">{{ $message }}</span> @enderror
-        </fieldset>
-        <fieldset class="col-md-5 col-5 mt-3">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="for_leaves_at">Se retira:</span>
-                </div>
-                <input type="datetime-local" class="form-control" wire:model="leaves_at">
-            </div>
-            @error('leaves_at') <span class="error">{{ $message }}</span> @enderror
-        </fieldset>
-    </div>
-    @endif
+<div class="row">
 
-    @foreach($mobileInService->crew as $tripulant)
-    <div class="form-row m-1">
-        <div class="col-5">
-            <li>
-                {{ $tripulant->officialFullName }}
-            </li>
-        </div>
-        <div class="col-2">
-            {{ $tripulant->pivot->jobType->name }}
-        </div>
-        <div class="col-3">
-            {{ $tripulant->pivot->assumes_at }} <br> {{ $tripulant->pivot->leaves_at }}
-        </div>
-        <div class="col-2">
-            @if($mobileInService->shift->status == true)
-            <a class="btn btn-primary  btn-sm ml-4" href="{{route('samu.mobileinservice.crewedit', $tripulant->pivot->id) }}">
-                <i class="fas fa-edit"></i>
-            </a>
-            <button class="btn btn-danger btn-sm ml-4" wire:click="delete({{ $tripulant->pivot->id }})">
-                <i class="fas fa-trash"></i>
-            </button>
-            @endif
-        </div>
+    <div class="col-md-8 col-12">
+        <h4>Tripulación</h4>
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th width="54"></th>
+                    <th>Nombre</th>
+                    <th>Funcion</th>
+                    <th>Asume</th>
+                    <th>Se retira</th>
+                    <th width="50"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($mobileInService->crew as $tripulant)
+                <tr class="table-{{ $tripulant->pivot->crew_status }}">
+                    <td>
+                    @if($mobileInService->shift->status == true)
+                    <a class="btn btn-outline-primary btn-sm" href="{{route('samu.mobileinservice.crewedit', $tripulant->pivot->id) }}">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    @endif
+                    </td>
+                    <td>{{ $tripulant->officialFullName }}</td>
+                    <td>{{ $tripulant->pivot->jobType->name }}</td>
+                    <td>{{ $tripulant->pivot->assumes_at }}</td>
+                    <td>{{ $tripulant->pivot->leaves_at }}</td>
+                    <td>
+                    @if($mobileInService->shift->status == true)
+                        <button class="btn btn-danger btn-sm" wire:click="delete({{ $tripulant->pivot->id }})">
+                        <i class="fas fa-trash"></i>
+                        </button>
+                    @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+
     </div>
-    @endforeach
+    <div class="col-12 col-md-4">
+        @if($mobileInService->shift->status == true)
+        <div class="form-row">
+            <fieldset class="col-12 mb-1">
+                <label for="for-user-id">Funcionario</label>
+                <select class="form-control" wire:model='user_id' required="required">
+                    <option value=""></option>
+                    @foreach($users as $user => $id)
+                    <option value="{{ $id }}">{{ strtoupper($user) }}</option>
+                    @endforeach
+                </select>
+                @error('user_id') <span class="error">{{ $message }}</span> @enderror
+            </fieldset>
+
+            <fieldset class="col-12">
+                <label for="for-job-type-id">Función</label>
+                <select class="form-control" wire:model="job_type_id">
+                    <option value=""></option>
+                    @foreach($job_types as $jt)
+                    <option value="{{ $jt->id }}">{{ $jt->name }}</option>
+                    @endforeach
+                </select>
+                @error('job_type_id') <span class="error">{{ $message }}</span> @enderror
+            </fieldset>
+
+            <fieldset class="col-6">
+                <label for="for-assumes-at">Asume</label>
+                <input type="datetime-local" class="form-control" wire:model="assumes_at">
+                @error('assumes_at') <span class="error">{{ $message }}</span> @enderror
+            </fieldset>
+
+            <fieldset class="col-6 mb-3">
+                <label for="for-leaves-at">Se retira</label>
+                <input type="datetime-local" class="form-control" wire:model="leaves_at">
+                @error('leaves_at') <span class="error">{{ $message }}</span> @enderror
+            </fieldset>
+
+            <fieldset class="col-12">
+                @if($mobileInService->shift->status == true)
+                <button wire:click="store()" class="form-control btn btn-success"><i class="fas fa-plus"></i> Agregar tripulación</button>
+                @endif
+            </fieldset>
+        </div>
+        @endif
+    </div>
 </div>

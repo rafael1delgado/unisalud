@@ -5,40 +5,24 @@
 @include('samu.nav')
 
 <h3 class="mb-3">
-    <i class="fas fa-car-crash"></i> Nuevo cometido {{ $nextCounter }}
-    @if($call)
-        - Relacionada con la llamada ID: {{ $call->id }}
+    @if(request()->routeIs('samu.event.create'))
+        <i class="fas fa-car-crash"></i> 
+        Nuevo cometido {{ $nextCounter }}
+        @if($call)
+            - Relacionada con la llamada ID: {{ $call->id }}
+        @endif
+    @else
+        <i class="fas fa-car-crash"></i>
+        @if($event)
+            Duplicando cometido Nº {{ $event->id }}, con nuevo Nº {{ $nextCounter }}
+        @endif
     @endif
 </h3>
-      
-<form method="post" action="{{ route('samu.event.store') }}">
 
-    <h4 class="mb-3">Asociar cometido a una llamada</h4>
+@include('samu.call.partials.associated-calls', ['call' => ($event) ? $event->call : $call])
 
-    <div class="form-row">
-        <fieldset class="form-group col-md-12">
-            <label for="for-call">Ultimas 20 llamadas clasificadas*</label>
-            <select class="form-control" name="call_id" id="for-call" required>
-                <option value="">Selecciona una llamada</option>
-                @foreach($calls as $callItem)
-                    <option value="{{ $callItem->id }}" {{ old('call_id', $event ? optional($event)->last_call->id : optional($call)->id) == $callItem->id ? 'selected' : '' }}>
-                    @if($callItem->events->isNotEmpty())
-                     &nbsp;
-                    @endif
-                        <b>ID: {{ $callItem->id }}</b>
-                        @if($callItem->events->isNotEmpty())
-                            - COM: 
-                            {{ implode(',', $callItem->events->pluck('id')->toArray() )}}
-                        @endif
-                        - CLAS: {{ $callItem->classification }} 
-                        - DIR: {{ $callItem->address }} 
-                        ( {{ $callItem->information }} )
-                    </option>
-                @endforeach
-            </select>
-        </fieldset>
-    </div>
-
+<form method="post" action="{{ request()->routeIs('samu.event.create') ? route('samu.event.store', $call) : route('samu.event.store.duplicate', $event) }}">
+ 
     @csrf
     @method('POST')
 
@@ -49,9 +33,17 @@
         'shift' => $shift,
     ])
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary">
+        @if(request()->routeIs('samu.event.create'))
+            <i class="fas fa-save"></i> Guardar
+        @else
+            <i class="fas fa-copy"></i> Duplicar
+        @endif
+    </button>
 
-    <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+    <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">
+        Cancelar
+    </a>
 
 </form>
 
