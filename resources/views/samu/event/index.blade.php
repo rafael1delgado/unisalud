@@ -20,7 +20,7 @@
                 <tr class="{{ (($mis->lunch_start_at AND !$mis->lunch_end_at) OR !$mis->status) ? 'bg-secondary text-white' : '' }}">
                     <td>{{ $mis->position }}</td>
                     <td nowrap>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
-                    <td>{{ $mis->type }}</td>
+                    <td>{{ optional($mis->type)->name }}</td>
                     <td>{{ $mis->event_status }}</td>
                     <td>
                         @if(!$mis->status)

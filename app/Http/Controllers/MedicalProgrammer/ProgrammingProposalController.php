@@ -378,56 +378,82 @@ class ProgrammingProposalController extends Controller
     public function consolidated_programmings(Request $request){
       // dd($request->start_date);
 
+      set_time_limit(7200);
+      ini_set('memory_limit', '2048M');
+
       $theoreticalProgrammings = null;
       $programmingProposals = null;
       $programmed_days = [];
       $array_medic_programmings = array();
+      $array_non_medic_programmings = array();
 
       if ($request->date != null) {
           // if ($request->user_id != null) {
-
+              $request_start_date = Carbon::parse($request->date)->startOfWeek();
+              $request_end_date = Carbon::parse($request->date)->endOfWeek();
               $now = Carbon::now();
-              $programmingProposals = ProgrammingProposal::when($request->specialty_id != null, function ($query) use ($request) {
-                                                            $query->where('specialty_id',$request->specialty_id);
-                                                        })
-                                                        ->when($request->profession_id != null, function ($query) use ($request) {
-                                                            $query->where('profession_id',$request->profession_id);
-                                                        })
+              $programmingProposals = ProgrammingProposal::with('details')
+                                                        //   when($request->specialty_id != null, function ($query) use ($request) {
+                                                        //     $query->where('specialty_id',$request->specialty_id);
+                                                        // })
+                                                        // ->when($request->profession_id != null, function ($query) use ($request) {
+                                                        //     $query->where('profession_id',$request->profession_id);
+                                                        // })
                                                         ->whereYear('request_date',$now->format('Y'))
-                                                        ->where('status', 'Confirmado')
+                                                        ->where('start_date','<=',$request_start_date)
+                                                        // ->where('status', 'Confirmado')
                                                         ->orderBy('user_id')
                                                         ->orderBy('request_date','ASC') //debe ir así, para que deje los primeros ingresados al principio, y aspi se puedan ordenar correctamente y no se pisen
                                                         ->get();
 
-              $request_start_date = Carbon::parse($request->date)->startOfWeek();
-              $request_end_date = Carbon::parse($request->date)->endOfWeek();
+                                                        // dd($programmingProposals);
 
               // separa onthefly los días que se mostraran en fullcalendar
               $programmed_days = [];
               $count = 0;
+              // ciclo para obtener fechas
               foreach ($programmingProposals as $key => $programmingProposal) {
-                // ciclo para obtener fechas
-                $start_date = $programmingProposal->start_date;
-                $end_date = $programmingProposal->end_date;
 
-                // se eliminan antiguos del array (periodos anteriores del ciclo) que se encuentren between de nueva iteración
-                foreach ($programmed_days as $key2 => $programmed_day) {
-                  foreach ($programmed_day as $key3 => $value) {
-                    if (Carbon::parse($value['start_date'])->between($request_start_date, $request_end_date)) {
-                      unset($programmed_days[$programmingProposal->user_id][$key3]);
-                    }
-                  }
+                $start_date = clone $request_start_date;
+                $end_date = clone $request_end_date;
+
+                $programmingProposal->aux_OfficialFullName = $programmingProposal->user->OfficialFullName;
+                $programmingProposal->aux_contract_id = $programmingProposal->contract->contract_id;
+                if($programmingProposal->specialty){
+                  $programmingProposal->aux_id_specialty = $programmingProposal->specialty->id_specialty;
+                  $programmingProposal->aux_specialty_name = $programmingProposal->specialty->specialty_name;
+                }
+                if($programmingProposal->profession){
+                  $programmingProposal->aux_id_profession = $programmingProposal->profession->id_profession;
+                  $programmingProposal->aux_profession_name = $programmingProposal->profession->profession_name;
                 }
 
                 //se obtienen los del periodo actual
                 while ($start_date <= $end_date) {
                   $dayOfWeek = $start_date->dayOfWeek;
+                  // print_r($programmingProposal->id . "<<<<---\n");
                   foreach ($programmingProposal->details->where('day',$dayOfWeek) as $key2 => $detail) {
+                    
                     //solo los que esten en el rango de fechas
                     if (Carbon::parse($start_date->format('Y-m-d'))->between($request_start_date, $request_end_date)) {
                       $programmed_days[$programmingProposal->user_id][$count]['start_date'] = $start_date->format('Y-m-d') . " " . $detail->start_hour;
                       $programmed_days[$programmingProposal->user_id][$count]['end_date'] = $start_date->format('Y-m-d') . " " . $detail->end_hour;
                       $programmed_days[$programmingProposal->user_id][$count]['data'] = $detail;
+                      $programmed_days[$programmingProposal->user_id][$count]['fullName'] = $programmingProposal->aux_OfficialFullName;
+                      $programmed_days[$programmingProposal->user_id][$count]['contractId'] = $programmingProposal->aux_contract_id;
+                      $programmed_days[$programmingProposal->user_id][$count]['activity'] = $detail->activity->id_activity . ' - ' . $detail->activity->activity_name;
+                      if($programmingProposal->aux_id_specialty){
+                        $programmed_days[$programmingProposal->user_id][$count]['specialty'] = $programmingProposal->aux_id_specialty . ' - ' . $programmingProposal->aux_specialty_name;
+                      }else{
+                        $programmed_days[$programmingProposal->user_id][$count]['specialty'] = '';
+                      }
+                      if($programmingProposal->aux_id_profession){
+                        $programmed_days[$programmingProposal->user_id][$count]['profession'] = $programmingProposal->aux_id_profession . ' - ' . $programmingProposal->aux_profession_name;
+                      }else{
+                        $programmed_days[$programmingProposal->user_id][$count]['profession'] = '';
+                      }
+                      
+                      
                       $count+=1;
                     }
                   }
@@ -435,60 +461,47 @@ class ProgrammingProposalController extends Controller
                 }
               }
 
+              // dd($programmed_days);
+
               // se obtiene array final
               foreach ($programmed_days as $key => $programmed_day) {
-                foreach ($programmed_day as $key => $value) {
-                  // especialidades
-                  if ($value['data']->programmingProposal->specialty) {
-                    $array_medic_programmings[$value['data']->programmingProposal->user->OfficialFullName][$value['data']->programmingProposal->contract->contract_id]
-                                            [$value['data']->programmingProposal->specialty->id_specialty . ' - ' . $value['data']->programmingProposal->specialty->specialty_name]
-                                            [$value['data']->activity->id_activity . ' - ' . $value['data']->activity->activity_name]['hours'] = 0;
 
-                    $array_medic_programmings[$value['data']->programmingProposal->user->OfficialFullName][$value['data']->programmingProposal->contract->contract_id]
-                                            [$value['data']->programmingProposal->specialty->id_specialty . ' - ' . $value['data']->programmingProposal->specialty->specialty_name]
-                                            [$value['data']->activity->id_activity . ' - ' . $value['data']->activity->activity_name]['performance'] = 0;
+                foreach ($programmed_day as $key2 => $value) {
+                  if ($value['specialty']!='') {
+                    $specialty = $value['specialty'];
+                    $array_medic_programmings[$value['fullName']][$value['contractId']][$value['specialty']][$value['activity']]['hours'] = 0;
+                    $array_medic_programmings[$value['fullName']][$value['contractId']][$value['specialty']][$value['activity']]['performance'] = 0;
                   }
                   // profesiones
                   if ($value['data']->programmingProposal->profession) {
-                    $array_medic_programmings[$value['data']->programmingProposal->user->OfficialFullName][$value['data']->programmingProposal->contract->contract_id]
-                                            [$value['data']->programmingProposal->profession->id_profession . ' - ' . $value['data']->programmingProposal->profession->profession_name]
-                                            [$value['data']->activity->id_activity . ' - ' . $value['data']->activity->activity_name]['hours'] = 0;
-
-                    $array_medic_programmings[$value['data']->programmingProposal->user->OfficialFullName][$value['data']->programmingProposal->contract->contract_id]
-                                            [$value['data']->programmingProposal->profession->id_profession . ' - ' . $value['data']->programmingProposal->profession->profession_name]
-                                            [$value['data']->activity->id_activity . ' - ' . $value['data']->activity->activity_name]['performance'] = 0;
+                    $profesion = $value['profession'];
+                    $array_non_medic_programmings[$value['fullName']][$value['contractId']][$value['profession']][$value['activity']]['hours'] = 0;
+                    $array_non_medic_programmings[$value['fullName']][$value['contractId']][$value['profession']][$value['activity']]['performance'] = 0;
                   }
                 }
 
                 foreach ($programmed_day as $key => $value) {
+
                   // especialidades
-                  if ($value['data']->programmingProposal->specialty) {
+                  if ($value['specialty']!='') {
                     $start = Carbon::parse($value['start_date']);
                     $end = Carbon::parse($value['end_date']);
-                    $array_medic_programmings[$value['data']->programmingProposal->user->OfficialFullName][$value['data']->programmingProposal->contract->contract_id]
-                                            [$value['data']->programmingProposal->specialty->id_specialty . ' - ' . $value['data']->programmingProposal->specialty->specialty_name]
-                                            [$value['data']->activity->id_activity . ' - ' . $value['data']->activity->activity_name]['hours'] += $start->diffInMinutes($end)/60;
-
-                    $array_medic_programmings[$value['data']->programmingProposal->user->OfficialFullName][$value['data']->programmingProposal->contract->contract_id]
-                                            [$value['data']->programmingProposal->specialty->id_specialty . ' - ' . $value['data']->programmingProposal->specialty->specialty_name]
-                                            [$value['data']->activity->id_activity . ' - ' . $value['data']->activity->activity_name]['performance'] = $value['data']->activity->specialties->where('id',$value['data']->programmingProposal->specialty_id)->first()->pivot->performance;
+                    $array_medic_programmings[$value['fullName']][$value['contractId']][$value['specialty']][$value['activity']]['hours'] += $start->diffInMinutes($end)/60;
+                    $array_medic_programmings[$value['fullName']][$value['contractId']][$value['specialty']][$value['activity']]['performance'] = $value['data']->activity->specialties->where('id',$value['data']->programmingProposal->specialty_id)->first()->pivot->performance;
                   }
                   // profesiones
                   if ($value['data']->programmingProposal->profession) {
                     $start = Carbon::parse($value['start_date']);
                     $end = Carbon::parse($value['end_date']);
-                    $array_medic_programmings[$value['data']->programmingProposal->user->OfficialFullName][$value['data']->programmingProposal->contract->contract_id]
-                                            [$value['data']->programmingProposal->profession->id_profession . ' - ' . $value['data']->programmingProposal->profession->profession_name]
-                                            [$value['data']->activity->id_activity . ' - ' . $value['data']->activity->activity_name]['hours'] += $start->diffInMinutes($end)/60;
-
-                    $array_medic_programmings[$value['data']->programmingProposal->user->OfficialFullName][$value['data']->programmingProposal->contract->contract_id]
-                                            [$value['data']->programmingProposal->profession->id_profession . ' - ' . $value['data']->programmingProposal->profession->profession_name]
-                                            [$value['data']->activity->id_activity . ' - ' . $value['data']->activity->activity_name]['performance'] = $value['data']->activity->professions->where('id',$value['data']->programmingProposal->profession_id)->first()->pivot->performance;
+                    $array_non_medic_programmings[$value['fullName']][$value['contractId']][$value['specialty']][$value['activity']]['hours'] += $start->diffInMinutes($end)/60;
+                    $array_non_medic_programmings[$value['fullName']][$value['contractId']][$value['specialty']][$value['activity']]['performance'] = $value['data']->activity->specialties->where('id',$value['data']->programmingProposal->specialty_id)->first()->pivot->performance;
                   }
                 }
               }
+
+              // dd($array_medic_programmings, $array_non_medic_programmings);
       }
 
-      return view('medical_programmer.management.reports.consolidated_programmings',compact('array_medic_programmings'));
+      return view('medical_programmer.management.reports.consolidated_programmings',compact('array_medic_programmings','array_non_medic_programmings','request'));
     }
 }

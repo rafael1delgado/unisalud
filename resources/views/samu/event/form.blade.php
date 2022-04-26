@@ -57,7 +57,7 @@
             <option value="">Selecciona un Móvil</option>
             @foreach($mobilesInService as $mis)
             <option value="{{ $mis->mobile->id }}" {{ old('mobile_id', optional($event)->mobile_id) == $mis->mobile->id ? 'selected' : '' }}>
-                {{ $mis->mobile->code }} {{ $mis->mobile->name }} - {{ $mis->type }} (PROPIO)
+                {{ $mis->mobile->code }} {{ $mis->mobile->name }} - {{ optional($mis->type)->name }} (PROPIO)
                 {{ ($mis->isHavingLunch()) ? ' - (COLACIÓN)' : '' }}
             </option>
             @endforeach

@@ -35,7 +35,7 @@
                     @can('Epi: Create')
                     <th scope="col">Añadir Caso Sospecha</th>
                     @endcan
-                    
+
             </thead>
             <tbody>
                 @if($patients)
@@ -44,7 +44,7 @@
                         <td>{{ ($patient) ? $patient->officialFullName : '' }}</td>
                         <td>{{($patient) ? $patient->identifierRun->value . '-' . $patient->identifierRun->dv : ''}}</td>
                         <td>{{($patient) ? $patient->ageString : ''}}</td>
-                        <td>{{($patient) ? $patient->sex : '' }}</td>
+                        <td>{{($patient) ? $patient->actualSex : '' }}</td>
                         <td>{{($patient) ? $patient->officialFullAddress : ''}}</td>
                         <td>{{($patient) ? $patient->officialPhone : ''}}</td>
                         <td>{{($patient && $patient->officialEmail) ? $patient->officialEmail : ''}}</td>

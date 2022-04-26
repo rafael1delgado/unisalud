@@ -18,7 +18,7 @@ class User extends Authenticatable implements Auditable
 {
     use HasFactory, Notifiable, HasRoles;
     use SoftDeletes;
-    
+
     use \OwenIt\Auditing\Auditable;
 
 
@@ -68,7 +68,7 @@ class User extends Authenticatable implements Auditable
     ];
 
 
-    public function humanNames(): HasMany
+    public function humanNames()
     {
         return $this->hasMany(HumanName::class, 'user_id')->orderBy('created_at');
     }
@@ -109,6 +109,32 @@ class User extends Authenticatable implements Auditable
     {
         return $this->morphToMany(Appointment::class, 'appointable');
     }
+
+    public function maritalStatus()
+    {
+        return $this->belongsTo(CodConMarital::class, 'cod_con_marital_id');
+    }
+
+    public function nationality()
+    {
+        return $this->belongsTo(Country::class, 'nationality_id');
+    }
+
+    public function sexes()
+    {
+        return $this->belongsToMany(Sex::class)
+            ->withPivot('valid_from', 'valid_to')
+            ->withTimestamps();
+    }
+
+    public function genders()
+    {
+        return $this->belongsToMany(Gender::class)
+            ->withPivot('valid_from', 'valid_to')
+            ->withTimestamps();
+    }
+
+
 
     // public function manager_shifts(): HasMany
     // {
@@ -214,7 +240,7 @@ class User extends Authenticatable implements Auditable
 
     /**
      * Retorna Usuarios según contenido en $searchText
-     * Busqueda realizada en: nombres, apellidos, rut.
+     * Búsqueda realizada en: nombres, apellidos, rut.
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function getUsersBySearch($searchText){
@@ -244,7 +270,7 @@ class User extends Authenticatable implements Auditable
     public function getOfficialPhoneAttribute()
     {
         $phone = $this->getOfficialContactPointPhoneAttribute();
-        return ($phone) ? $phone->value : ''; 
+        return ($phone) ? $phone->value : '';
     }
 
     public function getOfficialContactPointPhoneAttribute()
@@ -253,7 +279,7 @@ class User extends Authenticatable implements Auditable
             ->where('system', 'phone')
             ->latest()
             ->first();
-        
+
     }
 
     public function getOfficialEmailAttribute()
@@ -307,6 +333,37 @@ class User extends Authenticatable implements Auditable
         }else{
             return '';
         }
+    }
+
+    public function actualSex()
+    {
+        return $this->sexes()
+            ->wherePivotNull('valid_to')
+            ->first();
+    }
+
+    public function actualGender()
+    {
+        return $this->genders()
+            ->wherePivotNull('valid_to')
+            ->first();
+    }
+
+    public function getActualSexAttribute()
+    {
+        if ($this->actualSex() === null) {
+            return '';
+        }
+
+        return $this->actualSex()->text;
+    }
+
+    public function getActualGenderAttribute()
+    {
+        if ($this->actualGender() === null) {
+            return '';
+        }
+        return $this->actualGender()->text;
     }
 
     //Scopes
@@ -489,7 +546,7 @@ class User extends Authenticatable implements Auditable
             return $subquery->where('name', $permissionName);
         });
     }
-    
+
     /**
      * Perform any actions required after the model boots.
      *

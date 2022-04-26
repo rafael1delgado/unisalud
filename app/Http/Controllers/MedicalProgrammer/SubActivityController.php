@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\MedicalProgrammer;
 
+use App\Http\Resources\MedicalProgrammer\SubActivityResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -118,5 +120,16 @@ class SubActivityController extends Controller
 
         session()->flash('success', 'La subactividad ha sido eliminada.');
         return redirect()->route('medical_programmer.subactivities.index');
+    }
+
+    /**
+     * Retorna sub actividad para API
+     * @param string $id
+     * @return SubActivityResource
+     */
+    public function getById(string $id)
+    {
+        $subActivity = SubActivity::find($id);
+        return new SubActivityResource($subActivity);
     }
 }
