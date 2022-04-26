@@ -378,6 +378,9 @@ class ProgrammingProposalController extends Controller
     public function consolidated_programmings(Request $request){
       // dd($request->start_date);
 
+      set_time_limit(7200);
+      ini_set('memory_limit', '2048M');
+
       $theoreticalProgrammings = null;
       $programmingProposals = null;
       $programmed_days = [];
