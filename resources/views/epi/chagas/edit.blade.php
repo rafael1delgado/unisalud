@@ -21,6 +21,7 @@
             <label for="for_dv">DV</label>
             <input type="text" class="form-control" id="for_dv" name="dv" value="{{$suspectCase->patient->identifierRun->dv}}" readonly>
         </fieldset>
+        <!-- comentando para que vea sick -->
 
         <fieldset class="form-group col-12 col-md-3">
             <label for="for_other_identification">Otra identificación</label>
@@ -99,7 +100,7 @@
             </select>
         </fieldset>
     </div>
-
+    @can('Epi: Add Value')
     <div class="form-row">
 
         <fieldset class="form-group col-6 col-md-6">
@@ -120,7 +121,7 @@
 
     </div>
 
-    @can('Epi: Add Value')
+    
     <div class="form-row">
 
         <fieldset class="form-group col-6 col-md-3 alert-warning">
