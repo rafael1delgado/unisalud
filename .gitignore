@@ -20,4 +20,4 @@ artisan
 
 /config-git-crypt.key
 docker-compose.yml
-.vscode
+.vscode/settings.json
