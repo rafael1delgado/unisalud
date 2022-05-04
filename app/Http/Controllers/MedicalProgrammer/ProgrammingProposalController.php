@@ -163,7 +163,7 @@ class ProgrammingProposalController extends Controller
       $programmingProposalSignatureFlow->sign_position = $last_position + 1;
       $programmingProposalSignatureFlow->signature_date = Carbon::now();
 
-      if ($request->has('accept_button')) {
+      if ($request->buttonaction == "accept_button") {
         $programmingProposalSignatureFlow->status = "Solicitud confirmada";
 
         if (Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección Médica') || Auth::user()->hasPermissionTo('Mp: Proposal - Subdirección DGCP')) {

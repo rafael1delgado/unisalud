@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h3 class="mb-3">Editar Propuestas</h3>
+<h3 class="mb-3">Editar PropuestasEditar Propuestas</h3>
 
 <div class="row">
   <fieldset class="form-group col col-md-4">
@@ -275,12 +275,14 @@
       <fieldset class="form-group col col-md-6">
         <div class="d-flex flex-row-reverse bd-highlight">
           @if($programmingProposal->employeeCanModify() == 1)
-            <button type="submit" name="accept_button" value="1" class="form-control btn btn-success" onclick="return confirm('Al confirmar, la información que usted envía deberá ser visada por la subdirección médica ¿Está seguro de confirmar la información?');">
+            <button type="submit" id="accept_button" class="form-control btn btn-success" onclick="return confirm('Al confirmar, la información que usted envía deberá ser visada por la subdirección médica ¿Está seguro de confirmar la información?');">
               Confirmar
             </button>
-            <button type="submit" name="reject_button" value="1" class="form-control btn btn-danger" onclick="return confirm('¿Está seguro de rechazar la solicitud?');">
+            <button type="submit" id="reject_button" class="form-control btn btn-danger" onclick="return confirm('¿Está seguro de rechazar la solicitud?');">
               Rechazar
             </button>
+
+            <input type="hidden" id="buttonaction" name="buttonaction" value="accept_button">
           @else
             <button type="submit" name="accept_button" class="form-control btn btn-success" disabled>
               Confirmar
@@ -292,9 +294,7 @@
         </div>
       </fieldset>
     </div>
-
     </form>
-
   </div>
 </div>
 
@@ -302,5 +302,9 @@
 @endsection
 
 @section('custom_js')
-
+  <script>
+      $("#reject_button").click(function(event) {
+          $('#buttonaction').val("reject_button");
+      });
+  </script>
 @endsection
