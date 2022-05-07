@@ -20,7 +20,11 @@
 </h3>
 
 <!-- Create-->
-<form method="POST" action="{{ route('samu.call.store') }}">
+<form
+    method="POST"
+    action="{{ route('samu.call.store') }}"
+    onkeydown="return event.key != 'Enter';"
+>
     @csrf
     @method('POST')
 
