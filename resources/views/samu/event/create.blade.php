@@ -6,7 +6,7 @@
 
 <h3 class="mb-3">
     @if(request()->routeIs('samu.event.create'))
-        <i class="fas fa-car-crash"></i> 
+        <i class="fas fa-car-crash"></i>
         Nuevo cometido {{ $nextCounter }}
         @if($call)
             - Relacionada con la llamada ID: {{ $call->id }}
@@ -21,8 +21,14 @@
 
 @include('samu.call.partials.associated-calls', ['call' => ($event) ? $event->call : $call])
 
-<form method="post" action="{{ request()->routeIs('samu.event.create') ? route('samu.event.store', $call) : route('samu.event.store.duplicate', $event) }}">
- 
+<form
+    method="post"
+    action="{{ request()->routeIs('samu.event.create')
+        ? route('samu.event.store', $call)
+        : route('samu.event.store.duplicate', $event) }}"
+    onkeydown="return event.key != 'Enter';"
+>
+
     @csrf
     @method('POST')
 
