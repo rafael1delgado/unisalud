@@ -4,9 +4,9 @@ namespace App\Models\Samu;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Str;
+use OwenIt\Auditing\Contracts\Auditable;
 
 class JobType extends Model implements Auditable
 {
@@ -20,4 +20,9 @@ class JobType extends Model implements Auditable
         'name',
         'tripulant',
     ];
+
+    public function getShortNameAttribute()
+    {
+        return Str::substr($this->name, 0, 1);
+    }
 }
