@@ -131,29 +131,20 @@ class MobileInService extends Model implements Auditable
         return $this->events->where('status', true)->last();
     }
 
-    public function getEventStatusAttribute()
+    public function getMisStatusAttribute()
     {
-        if($this->status)
-        {
-            $lastEvent = $this->events->where('status',true)->last();
-            if(!$lastEvent) return "Disponible";
-            else
-            {
-                $msg = 'Aviso de salida';
-                if(!$lastEvent->departure_at)           $msg = 'Aviso de salida';
-                if($lastEvent->mobile_departure_at)     $msg = 'Navegación';
-                if($lastEvent->mobile_arrival_at)       $msg = 'Contacto';
-                if($lastEvent->route_to_healtcenter_at) $msg = 'Navegación';
-                if($lastEvent->healthcenter_at)         $msg = 'AP';
-                if($lastEvent->return_base_at)          $msg = 'Retorno a base';
-                if($lastEvent->on_base_at)              $msg = 'Disponible';
-                return $msg;
-            }
-        }
-        else
-        {
-            return "Inactivo";
-        }
+        $status = 'Disponible';
+        if($this->last_event)
+            $status = $this->last_event->event_status;
+        return $status;
+    }
+
+    public function getColorAttribute()
+    {
+        $color = 'success';
+        if($this->last_event)
+            $color = $this->last_event->color;
+        return $color;
     }
 
     public function isHavingLunch()
