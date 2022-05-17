@@ -21,13 +21,16 @@
                     <td>{{ $mis->position }}</td>
                     <td nowrap>{{ $mis->mobile->code }} {{ $mis->mobile->name }}</td>
                     <td>{{ optional($mis->type)->name }}</td>
-                    <td>{{ $mis->event_status }}</td>
+                    <td> {{ $mis->mis_status }}</td>
                     <td>
                         @if(!$mis->status)
                             {{ $mis->observation }}
                         @else
                             @foreach($mis->currentCrew as $tripulant)
-                            {{ $tripulant->officialFullName }} <span class="badge bg-secondary text-white">{{ substr($tripulant->pivot->jobType->name,0,1) }}</span>
+                                {{ $tripulant->officialFullName }}
+                                <span class="badge bg-secondary text-white">
+                                    {{ $tripulant->pivot->jobType->short_name }}
+                                </span>
                             @endforeach
                         @endif
                         <br>
@@ -51,9 +54,11 @@
         <table class="table table-sm">
             <tr><th>Codificación colores</th></tr>
             <tr><td class="table-danger">Aviso de salida</td></tr>
-            <tr><td class="table-warning">Móvil rumbo a destino</td></tr>
-            <tr><td class="table-info">Móvil retornando a base</td></tr>
-            <tr><td class="table-success">Móvil en base</td></tr>
+            <tr><td class="table-warning">Rumbo a destino</td></tr>
+            <tr><td class="table-primary">En destino</td></tr>
+            <tr><td class="table-info">Ruta AP</td></tr>
+            <tr><td class="table-success">Retornando a base</td></tr>
+            <tr><td class="table-success">En base</td></tr>
         </table>
     </div>
 </div>
