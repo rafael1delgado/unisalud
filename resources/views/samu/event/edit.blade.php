@@ -10,7 +10,7 @@
             <i class="fas fa-car-crash"></i> Editar cometido {{ $event->id }}
             @if($event->call)
                 - Llamada ID: {{ $event->call->id }}
-            @else 
+            @else
                 - Sin llamada asociada
             @endif
         </h3>
@@ -50,7 +50,7 @@
         <button type="submit" name="btn_save" class="btn btn-primary">
             <i class="fas fa-save"></i> Guardar
         </button>
-        
+
         <button type="submit" name="btn_save_close" id="btn_save_close" class="btn btn-success float-right">
             <i class="fas fa-lock"></i> Guardar y cerrar
         </button>
@@ -68,10 +68,10 @@
             @endif
         @endcan
     @endif
-    
+
     <a href="{{ route('samu.event.index') }}" class="btn btn-outline-secondary">Cancelar</a>
-    
-@if($event->status)    
+
+@if($event->status)
 </form>
 @endif
 
@@ -88,7 +88,12 @@
 @section('custom_js')
     <script>
         $("#btn_save_close").click(function(event) {
-            $('#save_close').val("yes");
+            var question = '¿Está seguro que desea guardar y cerrar el cometido?';
+            var answer = window.confirm(question);
+
+            if (answer) {
+                $('#save_close').val("yes");
+            }
         });
     </script>
 @endsection

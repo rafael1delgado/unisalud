@@ -27,11 +27,11 @@
         </div>
         @enderror
     </fieldset>
-    
+
     <fieldset class="form-group col-12 col-md-4">
         <label for="for-address">Dirección</label>
         <div class="input-group">
-            <input type="text" class="form-control form-control @error('address') is-invalid @enderror" 
+            <input type="text" class="form-control form-control @error('address') is-invalid @enderror"
                 name="address" id="for-address"
                 value="{{ old('address', optional($call)->address) }}">
             <div class="input-group-append">
@@ -49,10 +49,10 @@
 
     <fieldset class="form-group col-12 col-md-3">
         <label for="for-address-reference">Referencia dirección</label>
-        <input type="text" 
-            class="form-control form-control @error('address_reference') is-invalid @enderror" 
+        <input type="text"
+            class="form-control form-control @error('address_reference') is-invalid @enderror"
             name="address_reference" id="for-address-reference"
-            value="{{ old('address_reference', optional($call)->address_reference) }}" 
+            value="{{ old('address_reference', optional($call)->address_reference) }}"
             placeholder="Después del semáforo, Abajo del puente, Entre calle 1 y 2">
         @error('address_reference')
             <div class="text-danger">
@@ -204,9 +204,7 @@
                 <button class="btn btn-outline-secondary" type="button" onclick="startStop()" id="start">Iniciar</button>
                 <button class="btn btn-outline-secondary" type="button" onclick="resetTimer()">Borrar</button>
             </div>
-
         </div>
-        
     </fieldset>
 
 </div>
@@ -226,9 +224,13 @@
 @endif
 
 <div class="my-1">
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary">
+        Guardar
+    </button>
 
-    <a href="{{ route('samu.call.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+    <button type="button" onclick="showWarning()" class="btn btn-outline-secondary">
+        Cancelar
+    </button>
 </div>
 
 <div class="my-3">
@@ -261,6 +263,17 @@
     </fieldset>
 
 </div>
+
+<script>
+    function showWarning() {
+        var question = '¿Está seguro que desea cancelar? Si ha escrito información, esta no será guardada.';
+        var answer = window.confirm(question);
+
+        if (answer) {
+            window.location.href = "{{ route('samu.call.index') }}";
+        }
+    }
+</script>
 
 <script>
     var x;
@@ -327,12 +340,12 @@
             min = 0;
             hour = ++hour;
         }
-    
+
         document.getElementById("bls").value = hourOut + ':' + minOut + ':' + secOut;
     }
 
     /* Adds 0 when value is <10 */
-    function checkTime(i) 
+    function checkTime(i)
     {
         if (i < 10) {
             i = "0" + i;
