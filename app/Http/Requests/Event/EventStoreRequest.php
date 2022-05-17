@@ -30,7 +30,7 @@ class EventStoreRequest extends FormRequest
             'observation'           => 'nullable|string|min:0|max:5000',
             'external_crew'         => 'nullable|string|min:0|max:5000',
 
-            'departure_at'              => 'nullable|date_format:H:i',
+            'departure_at'              => 'required|date_format:H:i',
             'mobile_departure_at'       => 'nullable|date_format:H:i',
             'mobile_arrival_at'         => 'nullable|date_format:H:i',
             'route_to_healtcenter_at'   => 'nullable|date_format:H:i',
