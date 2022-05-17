@@ -180,23 +180,11 @@ class Event extends Model implements Auditable
     public function getMobileTypeAttribute()
     {
         if($this->mobileInService)
-        {
             return optional(optional($this->mobileInService)->type)->name;
-        }
         else
-        {
             return optional(optional($this->mobile)->type)->name;
-        }
     }
 
-    public function getColorAttribute()
-    {
-        if(!$this->mobile_departure_at)     $color = 'danger';
-        if($this->mobile_departure_at)      $color = 'warning';
-        if($this->return_base_at)           $color = 'info';
-        if($this->on_base_at)               $color = 'success';
-        return $color;
-    }
 
     public function getFullAddressAttribute()
     {
@@ -204,5 +192,47 @@ class Event extends Model implements Auditable
         if($this->address_reference)
             $full_address = "$this->address ($this->address_reference)";
         return $full_address;
+    }
+
+    public function getColorAttribute()
+    {
+        return $this->status(0);
+    }
+
+    public function getEventStatusAttribute()
+    {
+        return $this->status(1);
+    }
+
+    public function status($option)
+    {
+        $status = null;
+        $color = 'secondary';
+        if($this->on_base_at || $this->return_base_at)
+        {
+            $status = 'Disponible';
+            $color = 'success';
+        }
+        elseif($this->route_to_healtcenter_at || $this->healthcenter_at || $this->patient_reception_at)
+        {
+            $status = 'AP';
+            $color = 'info';
+        }
+        elseif($this->mobile_arrival_at)
+        {
+            $status = 'En destino';
+            $color = 'primary';
+        }
+        elseif($this->mobile_departure_at)
+        {
+            $status = 'Rumbo a destino';
+            $color = 'warning';
+        }
+        elseif($this->departure_at)
+        {
+            $status = 'Aviso de salida';
+            $color = 'danger';
+        }
+        return $option ? $status : $color;
     }
 }
