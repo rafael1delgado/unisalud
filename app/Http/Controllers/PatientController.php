@@ -563,4 +563,18 @@ class PatientController extends Controller
         $user = User::find($id);
         return new UserResource($user);
     }
+
+    /**
+     * Retorna usuario para API
+     * @return UserResource
+     */
+    public function getByIdentifier(string $type, string $value)
+    {
+        $user = User::whereHas('identifiers', function ($q) use ($value, $type) {
+            $q->where('cod_con_identifier_type_id', $type)
+                ->where('value', $value);
+        })->first();
+
+        return new UserResource($user);
+    }
 }

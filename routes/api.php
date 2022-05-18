@@ -43,5 +43,6 @@ Route::prefix('sub-activity')->name('subActivity.')->middleware('client')->group
 
 Route::prefix('patient')->name('patient.')->middleware('client')->group(function (){
     Route::get('/by-id/{id}', [PatientController::class, 'getById']);
+    Route::get('/by-type-identifier/{type}/{value}', [PatientController::class, 'getByIdentifier']);
 });
 /** FIN RUTAS API HETG **/
