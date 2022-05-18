@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\Address;
 use App\Models\CodConIdentifierType;
@@ -576,5 +577,16 @@ class PatientController extends Controller
         })->first();
 
         return new UserResource($user);
+    }
+
+    /**
+     * Retorna usuarios para api
+     * @param string $name
+     * @return UserCollection
+     */
+    public function getByName(string $name)
+    {
+        $users = User::getUsersBySearch($name)->get();
+        return new UserCollection($users);
     }
 }

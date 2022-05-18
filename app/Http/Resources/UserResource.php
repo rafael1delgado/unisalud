@@ -25,8 +25,8 @@ class UserResource extends JsonResource
             'gender' => $this->gender,
             'birthday' => $this->birthday,
             'deceased_at' => $this->deceased_datetime,
-            'marital_status' => $this->maritalStatus->text,
-            'nationality' => $this->nationality->name,
+            'marital_status' => optional($this->maritalStatus)->text,
+            'nationality' => optional($this->nationality)->name,
         ];
     }
 }

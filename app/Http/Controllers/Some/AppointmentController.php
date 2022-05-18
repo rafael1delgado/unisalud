@@ -300,7 +300,6 @@ class AppointmentController extends Controller
         $appointments = Appointment::query()
             ->whereDate('start', $date)
             ->get();
-
         return new AppointmentCollection($appointments);
     }
 
