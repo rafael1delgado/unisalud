@@ -303,4 +303,18 @@ class AppointmentController extends Controller
 
         return new AppointmentCollection($appointments);
     }
+
+    public function getByDayRun(string $date, string $run)
+    {
+        $date = Carbon::parse($date);
+
+        $appointments = Appointment::query()
+            ->whereDate('start', $date)
+            ->whereHas('practitioners.user.identifiers', function ($q) use ($run) {
+                $q->where('value', $run);
+            })
+            ->get();
+
+        return new AppointmentCollection($appointments);
+    }
 }

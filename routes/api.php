@@ -34,6 +34,7 @@ Route::get('gps/mobile/{mobile}', [GpsController::class, 'index'])->middleware('
 /** RUTAS API HETG **/
 Route::prefix('agenda')->name('agenda.')->middleware('client')->group(function (){
     Route::get('/by-day/{date}', [AppointmentController::class, 'getByDay']);
+    Route::get('/by-day-run/{date}/{run}', [AppointmentController::class, 'getByDayRun']);
 });
 
 Route::prefix('sub-activity')->name('subActivity.')->middleware('client')->group(function (){
