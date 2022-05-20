@@ -14,7 +14,7 @@ class Appointment extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['status', 'patient_instruction'];
+    protected $fillable = ['status', 'patient_instruction', 'sent_to_hetg_at'];
 
     public function appointment_type_text()
     {

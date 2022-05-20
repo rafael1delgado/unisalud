@@ -7,6 +7,8 @@ use App\Http\Resources\Some\AppointmentCollection;
 use App\Models\MedicalProgrammer\TheoreticalProgramming;
 use App\Models\Some\Appointment;
 use App\Models\Absence;
+use App\Models\Some\AppointmentWsHetgRequest;
+use App\Models\WsHetgRequest;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -160,10 +162,38 @@ class AppointmentController extends Controller
             }
         }
 
+        $this->sendToHetg();
+
         return redirect()->route('some.agenda', ['type' => $request->type,
             'specialty_id' => $request->specialty_id,
             'profession_id' => $request->profession_id,
             'user_id' => $request->user_id]);
+    }
+
+
+    private function sendToHetg()
+    {
+        $appointmentsToSend = Appointment::query()
+            ->whereNull('sent_to_hetg_at')
+            ->get();
+
+        $appointmentsToSendCollection = new AppointmentCollection($appointmentsToSend);
+
+        $newWsRequest = new WsHetgRequest();
+        $newWsRequest->type = WsHetgRequest::APPOINTMENT_SEND;
+        $newWsRequest->sent_data = $appointmentsToSendCollection->toJson();
+        $newWsRequest->response_data = '';
+        $newWsRequest->token = '';
+        $newWsRequest->status = '';
+        $newWsRequest->save();
+
+        foreach ($appointmentsToSend as $appointmentToSend) {
+            $newAppointmentWsHetgRequest = new AppointmentWsHetgRequest();
+            $newAppointmentWsHetgRequest->ws_hetg_request_id = $newWsRequest->id;
+            $newAppointmentWsHetgRequest->appointment_id = $appointmentToSend->id;
+            $appointmentToSend->update(['sent_to_hetg_at' => now()]);
+            $newAppointmentWsHetgRequest->save();
+        }
     }
 
     public function agenda(Request $request)
