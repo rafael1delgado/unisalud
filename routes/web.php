@@ -43,6 +43,8 @@ use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalController;
 use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalDetailController;
 use App\Http\Controllers\MedicalProgrammer\ProgrammingProposalSignatureFlowController;
 
+use App\Http\Controllers\Aps\MinorAuthorizationController;
+use App\Http\Controllers\Aps\AuthorizationTypeController;
 
 use App\Http\Controllers\MedicalLicenceController;
 use App\Http\Livewire\Some\AsignAppointment;
@@ -179,6 +181,30 @@ Route::prefix('some')->name('some.')->middleware('auth')->group(function(){
 		Route::delete('/{observation}', [ObservationController::class, 'destroy'])->name('destroy');
 		Route::get('/{observation}/edit', [ObservationController::class, 'edit'])->name('edit');
     });
+});
+
+Route::prefix('aps')->name('aps.')->middleware('auth')->group(function(){
+	Route::prefix('minor_authorizations')->name('minor_authorizations.')->group(function(){
+		Route::get('parents_index', [MinorAuthorizationController::class, 'parents_index'])->name('parents_index');
+
+		Route::get('/', [MinorAuthorizationController::class, 'index'])->name('index');
+		Route::post('/', [MinorAuthorizationController::class, 'store'])->name('store');
+		Route::get('/{type_id}/create', [MinorAuthorizationController::class, 'create'])->name('create');
+		Route::get('/{minorAuthorization}', [MinorAuthorizationController::class, 'show'])->name('show');
+		Route::put('/{minorAuthorization}', [MinorAuthorizationController::class, 'update'])->name('update');
+		Route::delete('/{minorAuthorization}', [MinorAuthorizationController::class, 'destroy'])->name('destroy');
+		Route::get('/{minorAuthorization}/edit', [MinorAuthorizationController::class, 'edit'])->name('edit');
+    });
+
+	Route::prefix('authorization_types')->name('authorization_types.')->group(function(){
+		Route::get('/', [AuthorizationTypeController::class, 'index'])->name('index');
+		Route::post('/', [AuthorizationTypeController::class, 'store'])->name('store');
+		Route::get('/create', [AuthorizationTypeController::class, 'create'])->name('create');
+		Route::get('/{authorizationType}', [AuthorizationTypeController::class, 'show'])->name('show');
+		Route::put('/{authorizationType}', [AuthorizationTypeController::class, 'update'])->name('update');
+		Route::delete('/{authorizationType}', [AuthorizationTypeController::class, 'destroy'])->name('destroy');
+		Route::get('/{authorizationType}/edit', [AuthorizationTypeController::class, 'edit'])->name('edit');
+    });	
 });
 
 Route::prefix('fq')->as('fq.')->group(function(){

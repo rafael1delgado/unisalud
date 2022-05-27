@@ -495,6 +495,51 @@
 @endcan
 
 
+
+<!-- aps -->
+<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-1 text-muted">
+    <span>APS</span>
+    <a class="d-flex align-items-center text-muted" data-toggle="collapse" aria-expanded="false" aria-label="Seremia" href="#seremia" aria-controls="absences">
+        <span id="icon_absences" data-feather="plus-circle"></span>
+    </a>
+</h6>
+@can('APS: Minor authorizations')
+    <ul class="nav flex-column collapse collapse-menu" id="seremia">
+        <li class="nav-item">
+            <a class="nav-link {{ active('aps.authorization_types.index') }}" href="{{ route('aps.authorization_types.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Tipos de autorizaciones<span class="sr-only"></span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav flex-column collapse collapse-menu" id="seremia">
+        <li class="nav-item">
+            <a class="nav-link {{ active('aps.minor_authorizations.index') }}" href="{{ route('aps.minor_authorizations.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Listado de autorizaciones<span class="sr-only"></span>
+            </a>
+        </li>
+    </ul>
+@else
+    <ul class="nav flex-column collapse collapse-menu" id="seremia">
+        <li class="nav-item">
+            <a class="nav-link {{ active('aps.minor_authorizations.index') }}" href="{{ route('aps.minor_authorizations.index') }}">
+                <span data-feather="chevrons-right"></span>
+                Listado de autorizaciones<span class="sr-only"></span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav flex-column collapse collapse-menu" id="seremia">
+        <li class="nav-item">
+            <a class="nav-link {{ active('aps.minor_authorizations.parents_index') }}" href="{{ route('aps.minor_authorizations.parents_index') }}">
+                <span data-feather="chevrons-right"></span>
+                Mis autorizaciones<span class="sr-only"></span>
+            </a>
+        </li>
+    </ul>
+@endcan
+
+
 <ul class="nav flex-column">
     <li class="nav-item border-top">
         @if(session()->has('god'))
