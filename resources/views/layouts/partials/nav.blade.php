@@ -523,14 +523,6 @@
 @else
     <ul class="nav flex-column collapse collapse-menu" id="seremia">
         <li class="nav-item">
-            <a class="nav-link {{ active('aps.minor_authorizations.index') }}" href="{{ route('aps.minor_authorizations.index') }}">
-                <span data-feather="chevrons-right"></span>
-                Listado de autorizaciones<span class="sr-only"></span>
-            </a>
-        </li>
-    </ul>
-    <ul class="nav flex-column collapse collapse-menu" id="seremia">
-        <li class="nav-item">
             <a class="nav-link {{ active('aps.minor_authorizations.parents_index') }}" href="{{ route('aps.minor_authorizations.parents_index') }}">
                 <span data-feather="chevrons-right"></span>
                 Mis autorizaciones<span class="sr-only"></span>
