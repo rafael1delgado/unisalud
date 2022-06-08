@@ -25,7 +25,7 @@
             <thead class="table-info">
                 <tr>
                     <th scope="col">Nombre:</th>
-                    <th scope="col">Identificación</th>
+                    <th scope="col">Run o Identificación</th>
                     <th scope="col">Edad</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Dirección</th>
@@ -42,7 +42,9 @@
                     @forelse($patients as $patient)
                     <tr>
                         <td>{{ ($patient) ? $patient->officialFullName : '' }}</td>
-                        <td>{{($patient) ? $patient->identifierRun->value . '-' . $patient->identifierRun->dv : ''}}</td>
+                        <td>{{($patient) ? $patient->Identification->value:'' }}
+                        {{($patient->IdentifierRun)?'-'.$patient->identifierRun->dv:'' }}
+                        </td>
                         <td>{{($patient) ? $patient->ageString : ''}}</td>
                         <td>{{($patient) ? $patient->actualSex : '' }}</td>
                         <td>{{($patient) ? $patient->officialFullAddress : ''}}</td>

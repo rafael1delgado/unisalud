@@ -206,11 +206,19 @@ class User extends Authenticatable implements Auditable
     }
 
 
-    //Identificadores
+    //Identificadores solo RUN
     public function getIdentifierRunAttribute()
     {
         return $this->identifiers()
             ->where('cod_con_identifier_type_id', 1)
+            ->latest()
+            ->first();
+    }
+
+    //Identificadores solo RUN
+    public function getIdentificationAttribute()
+    {
+        return $this->identifiers()            
             ->latest()
             ->first();
     }

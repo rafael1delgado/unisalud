@@ -18,19 +18,20 @@
             value="Chagas"
             >
             <label for="for_run">Run</label>
-
             <input type="number" max="50000000" class="form-control" id="for_run" name="run"
-            value="{{$user->identifierRun->value}}"
+            value="{{$user->Identification->value}}"
             readonly
             >
         </fieldset>
 
+        @if($user->IdentifierRun)
         <fieldset class="form-group col-2 col-md-1">
             <label for="for_dv">DV</label>
-            <input type="text" class="form-control" id="for_dv" name="dv"             
+            <input type="text" class="form-control" id="for_dv" name="dv"
             value="{{$user->identifierRun->dv}}"
             readonly>
         </fieldset>
+        @endif
 
         <fieldset class="form-group col-12 col-md-3">
             <label for="for_other_identification">Otra identificación</label>
