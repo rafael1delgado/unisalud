@@ -11,7 +11,7 @@
                 <th>Fecha muestra</th>
                 <th>Origen</th>
                 <th>Nombre</th>
-                <th>RUN</th>
+                <th>RUN o Identificación</th>
                 <th>Edad</th>
                 <th>Sexo</th>
                 <th>Fecha de Resultado Tamizaje</th>
@@ -35,7 +35,12 @@
                 <td>{{$suspectcase->sample_at? $suspectcase->sample_at: ''}}</td>
                 <td>{{$suspectcase->organization->alias??''}}</td>
                 <td>{{$suspectcase->patient->OfficialFullName ??''}}</td>
-                <td>{{$suspectcase->patient->identifierRun->value ??''}}-{{$suspectcase->patient->identifierRun->dv}}</td>
+                <td>@if($suspectcase->patient->identifierRun)
+                    {{$suspectcase->patient->identifierRun->value ??''}}-{{$suspectcase->patient->identifierRun->dv}}
+                    @else
+                   {{ $suspectcase->patient->Identification->value ??''}}
+                    @endif
+                </td>
                 <td>
                 {{\Carbon\Carbon::parse($suspectcase->patient->birthday)->age}}
                 </td>
