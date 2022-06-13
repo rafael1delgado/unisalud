@@ -189,7 +189,7 @@
     </div>
     <div class="form-row">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-outline-secondary " href="{{ route('epi.chagas.index') }}">
+        <a class="btn btn-outline-secondary " href="{{ route('home') }}">
             Cancelar
         </a>
     </div>
