@@ -11,16 +11,18 @@
         <fieldset class="form-group col-10 col-md-3">
             <input type="hidden" class="form-control" id="for_id" name="patient_id" value="{{$suspectCase->patient->id}}">
 
+            
             <input type="hidden" class="form-control" id="for_id" name="type" value="Chagas">
-            <label for="for_run">Run</label>
+            <label for="for_run">Run/Identificación</label>
 
-            <input type="number" max="50000000" class="form-control" id="for_run" name="run" value="{{$suspectCase->patient->identifierRun->value}}" readonly>
+            <input type="number" max="50000000" class="form-control" id="for_run" name="run" value="{{$suspectCase->patient->Identification->value}}" readonly>
         </fieldset>
-
+        @if($suspectCase->patient->identifierRun)
         <fieldset class="form-group col-2 col-md-1">
             <label for="for_dv">DV</label>
             <input type="text" class="form-control" id="for_dv" name="dv" value="{{$suspectCase->patient->identifierRun->dv}}" readonly>
         </fieldset>
+        @endif
         <!-- comentando para que vea sick -->
 
         <fieldset class="form-group col-12 col-md-3">
