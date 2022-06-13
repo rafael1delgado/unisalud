@@ -115,6 +115,7 @@
                 <option value="Gestante (+semana gestacional)">Gestante (+semana gestacional)</option>
                 <option value="Estudio de contacto">Estudio de contacto</option>
                 <option value="Morbilidad (cualquier persona)">Morbilidad (cualquier persona)</option>
+                <option value="Congénito (RN)">Congénito (RN)</option>
             </select>
         </fieldset>
 
