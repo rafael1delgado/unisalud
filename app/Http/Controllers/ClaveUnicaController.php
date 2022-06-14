@@ -20,7 +20,7 @@ class ClaveUnicaController extends Controller
 
         if($redirect)
         {
-            $redirect_uri .= '?redirect=neosalud';
+            $redirect_uri .= '?redirect='.$redirect;
         }
 
         /* Si se quiere agregar un $redirect tiene que tener formato: 
@@ -136,7 +136,7 @@ class ClaveUnicaController extends Controller
         if($redirect) {
             if($redirect == 'neosalud')
             {
-                return redirect()->url('https://neo.saludtarapaca.org/login/claveunica/'.$access_token);
+                return redirect('https://neo.saludtarapaca.org/login/claveunica/'.$access_token);
             }
             $route = $redirect;
         }
