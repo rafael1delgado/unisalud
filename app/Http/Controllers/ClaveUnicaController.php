@@ -18,11 +18,16 @@ class ClaveUnicaController extends Controller
         $client_id      = env("CLAVEUNICA_CLIENT_ID");
         $redirect_uri   = urlencode(env("CLAVEUNICA_CALLBACK"));
 
+        if($redirect)
+        {
+            $redirect_uri .= '?redirect=neosalud';
+        }
+
         /* Si se quiere agregar un $redirect tiene que tener formato: 
             /claveunica/redirect/{ruta.a.redirigir} 
             NO PUEDE TENER "/" la ruta.a.redirigir 
         */
-        $state      = csrf_token().$redirect;
+        $state      = csrf_token();
         $scope      = 'openid run name';
 
         $params     = '?client_id='.$client_id.
@@ -38,13 +43,14 @@ class ClaveUnicaController extends Controller
         /* Segundo Paso: enviar credenciales de clave única */
         $code       = $request->input('code');
         $state      = $request->input('state');
-        $redirect   = null;
+        $redirect   = $request->input('redirect');
+        // $redirect   = null;
 
         /* Si incluye redirect, el state es más largo que 40 */
-        if(strlen($state) > 40) {
-            $redirect = substr($state, 40);
-            $state    = substr($state, 0, 40);
-        }
+        // if(strlen($state) > 40) {
+        //     $redirect = substr($state, 40);
+        //     $state    = substr($state, 0, 40);
+        // }
 
         /* Validar que el state sea el mismo que le enviamos nosotros */
         //if($state == csrf_token()) { 
@@ -128,6 +134,10 @@ class ClaveUnicaController extends Controller
         
         /* Si tiene una redirección o de lo contrario se va al home */
         if($redirect) {
+            if($redirect == 'neosalud')
+            {
+                return redirect()->url('https://neo.saludtarapaca.org/login/claveunica/'.$access_token);
+            }
             $route = $redirect;
         }
         else {
