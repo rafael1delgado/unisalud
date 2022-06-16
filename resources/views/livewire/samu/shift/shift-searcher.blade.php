@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-6 col-md-2">
             <label class="form-label" for="for-date">Fecha</label>
-            <input class="form-control" 
+            <input class="form-control"
                 type="date"
                 id="for-date"
                 autocomplete="off"
@@ -66,9 +66,9 @@
                                     <br>
                                     @foreach($shift->mobilesInService as $mis)
                                     <li>
-                                        {{ optional($mis->mobile)->code }} 
+                                        {{ optional($mis->mobile)->code }}
                                         {{ optional($mis->mobile)->name }}
-                                        - Tipo {{ $mis->type }}
+                                        - Tipo {{ $mis->type->name }}
                                         <br>
                                         <span class="pl-4">Tripulación:</span>
                                         <br>
@@ -94,6 +94,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>  
+        </div>
     </div>
 </div>
