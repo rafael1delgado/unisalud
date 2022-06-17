@@ -14,7 +14,7 @@
 
         <div class="titulo">INFORME DE COMETIDO {{ $event->id }}</div>
 
-        <b>Fecha:</b> {{ $event->date }}
+        <b>Fecha:</b> {{ $event->date->format('Y-m-d') }}
 
         <h4>Registro de la(s) llamadas:</h4>
 
