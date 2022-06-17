@@ -21,7 +21,7 @@ class Event extends Model implements Auditable
     use HasFactory;
     use SoftDeletes;
 
-    protected $table="samu_events";
+    protected $table = "samu_events";
 
     protected $fillable = [
         'counter',
@@ -90,6 +90,7 @@ class Event extends Model implements Auditable
     * @var array
     */
     protected $dates = [
+        'date',
         'departure_at',
         'mobile_departure_at',
         'mobile_arrival_at',
@@ -97,11 +98,11 @@ class Event extends Model implements Auditable
         'healthcenter_at',
         'patient_reception_at',
         'return_base_at',
-        'on_base_at'
+        'on_base_at',
     ];
 
     protected $appends = [
-        'color'
+        'color',
     ];
 
     public function shift()
