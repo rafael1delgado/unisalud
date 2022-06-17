@@ -4,6 +4,7 @@ namespace App\Services\Samu;
 
 use App\Models\Samu\Call;
 use App\Models\Samu\Event;
+use App\Models\Samu\MobileInService;
 use App\Models\Samu\VitalSign;
 
 class EventService
@@ -13,11 +14,10 @@ class EventService
 
     /**
      * Method to create an Event
-     * 
+     *
      * @param  \App\Models\Samu\Event  $event
      * @param  \App\Models\Samu\Call  $call
      * @param  array  $dataValidated
-     * 
      * @return void
      */
     public function create(Event $event = null, Call $call = null, $dataValidated)
@@ -39,10 +39,9 @@ class EventService
 
     /**
      * Method to update an Event
-     * 
+     *
      * @param  \App\Models\Samu\Event  $event
      * @param  array  $dataValidated
-     * 
      * @return void
      */
     public function update(Event $event, $dataValidated)
@@ -61,24 +60,25 @@ class EventService
             $event->save();
         }
 
-        $isMobileInService = $event->shift->MobilesInService->where('mobile_id', $dataValidated['mobile_id'])->first();
+        $mobileInService = MobileInService::whereShiftId($event->shift->id)->whereMobileId($dataValidated['mobile_id'])->first();
 
-        if($isMobileInService)
+        if($mobileInService)
         {
-            $event->mobileInService()->associate($isMobileInService);
+            $event->mobileInService()->associate($mobileInService);
+            $event->save();
         }
-        else 
+        else
         {
             $event->mobileInService()->dissociate();
+            $event->save();
         }
     }
 
     /**
      * Get field of event and vital sign from dataValidated
-     * 
+     *
      * @param  array  $dataValidated
      * @param  \App\Models\Samu\Event  $event
-     * 
      * @return void
      */
     public function getDataVitalSign($dataValidated, Event $event = null)
@@ -93,7 +93,7 @@ class EventService
         $this->dataVitalSign['hgt'] = $dataValidated['hgt'];
         $this->dataVitalSign['fill_capillary'] = $dataValidated['fill_capillary'];
         $this->dataVitalSign['t'] = $dataValidated['t'];
-        
+
         if($dataValidated['registered_at'])
         {
             $date = $this->getDate($event);
@@ -116,8 +116,8 @@ class EventService
     }
 
     /**
-     * Get the date for the registered_at 
-     * 
+     * Get the date for the registered_at
+     *
      * @param  \App\Models\Samu\Event  $event
      * @return string
      */
@@ -131,7 +131,7 @@ class EventService
 
     /**
      * checks if at least one data of the vital signs are defined
-     * 
+     *
      * @param  array  $dataValidated
      * @return boolean
      */
