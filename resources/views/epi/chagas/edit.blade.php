@@ -33,10 +33,10 @@
         <fieldset class="form-group col-6 col-md-2">
             <label for="for_sex">Sexo</label>
             <select name="sex" id="for_sex" class="form-control sex" readonly>
-                <option value="male" {{$suspectCase->patient->sex === 'male'? 'selected' : ''}}>Masculino</option>
-                <option value="female" {{$suspectCase->patient->sex === 'female'? 'selected' : ''}}>Femenino</option>
-                <option value="other" {{$suspectCase->patient->sex === 'other'? 'selected' : ''}}>Otro</option>
-                <option value="unknown" {{$suspectCase->patient->sex === 'unknown'? 'selected' : ''}}>Desconocido</option>
+                <option value="male" {{$suspectCase->patient->actualSex()->value === 'male'? 'selected' : ''}}>Masculino</option>
+                <option value="female" {{$suspectCase->patient->actualSex()->value === 'female'? 'selected' : ''}}>Femenino</option>
+                <option value="other" {{$suspectCase->patient->actualSex()->value === 'other'? 'selected' : ''}}>Otro</option>
+                <option value="unknown" {{$suspectCase->patient->actualSex()->value === 'unknown'? 'selected' : ''}}>Desconocido</option>
             </select>
         </fieldset>
 
