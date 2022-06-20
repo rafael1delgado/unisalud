@@ -669,11 +669,15 @@ Route::prefix('absences')->name('absences.')->group(function () {
 //Rutas Epi
 Route::prefix('epi')->name('epi.')->group(function () {
 	Route::prefix('chagas')->name('chagas.')->group(function () {
+
 		Route::get('/{suspectCase}/edit', [SuspectCaseController::class, 'edit'])->name('edit');
 		Route::put('/{suspectCase}', [SuspectCaseController::class, 'update'])->name('update');
+		Route::get('/resultchagasnegative',[SuspectCaseController::class, 'resultchagasnegative'])->name('resultchagasnegative');
+		Route::get('/print/{suspectCase}',[SuspectCaseController::class, 'printresultchagasnegative'])->name('printresultchagasnegative');
 		Route::get('/{tray}', [SuspectCaseController::class, 'index'])->name('index');
 		Route::get('/{user}/create', [SuspectCaseController::class, 'create'])->name('create');
-		Route::post('/', [SuspectCaseController::class, 'store'])->name('store');
+		Route::post('/', [SuspectCaseController::class, 'store'])->name('store');		
+		
 
 	});
 
