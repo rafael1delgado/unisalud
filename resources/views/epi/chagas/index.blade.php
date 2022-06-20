@@ -14,6 +14,7 @@
                 <th>RUN o Identificación</th>
                 <th>Edad</th>
                 <th>Sexo</th>
+                <th>Nacionalidad</th>
                 <th>Fecha de Resultado Tamizaje</th>
                 <th>Resultado Tamizaje</th>
                 <th>Fecha de Resultado Confirmación</th>
@@ -45,6 +46,7 @@
                 {{\Carbon\Carbon::parse($suspectcase->patient->birthday)->age}}
                 </td>
                 <td>{{$suspectcase->patient->sex ??''}}</td>
+                <td>{{$suspectcase->patient->nationality->name ??''}}</td>
                 <td>{{$suspectcase->chagas_result_screening_at ??''}}</td>
                 <td>{{$suspectcase->chagas_result_screening ?? ''}}</td>
                 <td>{{$suspectcase->chagas_result_confirmation_at ??''}}</td>
