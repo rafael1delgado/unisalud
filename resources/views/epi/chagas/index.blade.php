@@ -14,23 +14,25 @@
                 <th>RUN o Identificación</th>
                 <th>Edad</th>
                 <th>Sexo</th>
+                <th>Nacionalidad</th>
                 <th>Fecha de Resultado Tamizaje</th>
                 <th>Resultado Tamizaje</th>
                 <th>Fecha de Resultado Confirmación</th>
                 <th>Resultado Confirmación</th>
                 <th>Observación</th>
+                <th>Descargar resultado (Bosquejo)</th>
             </tr>
         </thead>
 
 
-        
-        <tbody id="tableCases">        
+
+        <tbody id="tableCases">
             @foreach($suspectcases as $suspectcase)
             <tr>
-                <td>{{$suspectcase->id??''}} 
-                @can('Epi: Add Value')
+                <td>{{$suspectcase->id??''}}
+                    @can('Epi: Add Value')
                     <a href="{{ route('epi.chagas.edit',$suspectcase) }}" pclass="btn_edit"><i class="fas fa-edit"></i></a>
-                @endcan                
+                    @endcan
                 </td>
                 <td>{{$suspectcase->sample_at? $suspectcase->sample_at: ''}}</td>
                 <td>{{$suspectcase->organization->alias??''}}</td>
@@ -38,18 +40,26 @@
                 <td>@if($suspectcase->patient->identifierRun)
                     {{$suspectcase->patient->identifierRun->value ??''}}-{{$suspectcase->patient->identifierRun->dv}}
                     @else
-                   {{ $suspectcase->patient->Identification->value ??''}}
+                    {{ $suspectcase->patient->Identification->value ??''}}
                     @endif
                 </td>
                 <td>
-                {{\Carbon\Carbon::parse($suspectcase->patient->birthday)->age}}
+                    {{\Carbon\Carbon::parse($suspectcase->patient->birthday)->age}}
                 </td>
-                <td>{{$suspectcase->patient->sex ??''}}</td>
+                <td>{{$suspectcase->patient->actualSex()->text ??''}}</td>
+                <td>{{$suspectcase->patient->nationality->name ??''}}</td>
                 <td>{{$suspectcase->chagas_result_screening_at ??''}}</td>
                 <td>{{$suspectcase->chagas_result_screening ?? ''}}</td>
                 <td>{{$suspectcase->chagas_result_confirmation_at ??''}}</td>
                 <td>{{$suspectcase->chagas_result_confirmation}}</td>
-                <td>{{$suspectcase->observatio??''}}</td>
+                <td>{{$suspectcase->observation??''}}</td>
+
+                <td>
+                    @if($suspectcase->chagas_result_screening == 'Negativo')
+                    <a href="{{ route('epi.chagas.printresultchagasnegative', $suspectcase) }}" target="_blank"><i class="fas fa-paperclip"></i>&nbsp</a>
+                    @endif
+
+                </td>
             </tr>
             @endforeach
         </tbody>

@@ -108,4 +108,20 @@ class SuspectCaseController extends Controller
     {
         //
     }
+
+    public function resultchagasnegative(SuspectCase $case)
+    {
+        //
+        // dd(llegue);
+        return view('epi.chagas.resultchagasnegative', compact('case'));
+    }
+
+    public function printresultchagasnegative(SuspectCase $suspectCase)
+    {
+        //
+        $case = $suspectCase;
+        $pdf = \PDF::loadView('epi.chagas.resultchagasnegative', compact('case'));
+        return $pdf->stream();
+    }
+
 }
