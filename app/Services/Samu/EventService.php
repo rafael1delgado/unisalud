@@ -6,6 +6,7 @@ use App\Models\Samu\Call;
 use App\Models\Samu\Event;
 use App\Models\Samu\MobileInService;
 use App\Models\Samu\VitalSign;
+use Illuminate\Support\Carbon;
 
 class EventService
 {
@@ -23,6 +24,7 @@ class EventService
     public function create(Event $event = null, Call $call = null, $dataValidated)
     {
         $this->getDataVitalSign($dataValidated);
+        $this->getTimestamps($event, $dataValidated);
 
         $callRelationed = $event ? $event->call : $call;
         $newEvent = Event::create($this->dataEvent);
@@ -96,7 +98,7 @@ class EventService
 
         if($dataValidated['registered_at'])
         {
-            $date = $this->getDate($event);
+            $date = $this->getDateRegisteredAt($event);
             $this->dataVitalSign['registered_at'] = $date . $dataValidated['registered_at'];
         }
 
@@ -121,7 +123,7 @@ class EventService
      * @param  \App\Models\Samu\Event  $event
      * @return string
      */
-    public function getDate(Event $event = null)
+    public function getDateRegisteredAt(Event $event = null)
     {
         $date = now()->format('Y-m-d ');
         if($event && $event->vitalSign && $event->vitalSign->registered_at)
@@ -130,7 +132,50 @@ class EventService
     }
 
     /**
-     * checks if at least one data of the vital signs are defined
+     * Get the timestamp of the event
+     *
+     * @param  \App\Models\Samu\Event  $event
+     * @param  array  $dataValidated
+     * @return void
+     */
+    public function getTimestamps(Event $event = null, $dataValidated)
+    {
+        $this->dataEvent['departure_at'] = $this->getDate($event, $dataValidated['departure_at']);
+        $this->dataEvent['mobile_departure_at'] = $this->getDate($event, $dataValidated['mobile_departure_at']);
+        $this->dataEvent['mobile_arrival_at'] = $this->getDate($event, $dataValidated['mobile_arrival_at']);
+        $this->dataEvent['route_to_healtcenter_at'] = $this->getDate($event, $dataValidated['route_to_healtcenter_at']);
+        $this->dataEvent['healthcenter_at'] = $this->getDate($event, $dataValidated['healthcenter_at']);
+        $this->dataEvent['patient_reception_at'] = $this->getDate($event, $dataValidated['patient_reception_at']);
+    }
+
+    /**
+     * Get the timestamp of the event
+     *
+     * @param  \App\Models\Samu\Event  $event|null
+     * @param  string  $date
+     * @return \Iluminate\Support\Carbon|null
+     */
+    public function getDate(Event $event = null, $date)
+    {
+        $datetime = null;
+        if($date)
+        {
+            if($event)
+            {
+                if($event->date->toDateString() == now()->toDateString())
+                    $datetime = Carbon::parse($event->date->format('Y-m-d ') . $date);
+                else
+                    $datetime = Carbon::parse($date);
+            }
+            else
+                $datetime = Carbon::parse(now()->format('Y-m-d ') . $date);
+        }
+
+        return $datetime;
+    }
+
+    /**
+     * Checks if at least one data of the vital signs are defined
      *
      * @param  array  $dataValidated
      * @return boolean
