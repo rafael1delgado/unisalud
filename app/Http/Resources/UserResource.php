@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-    /**
+    /*iid
      * Transform the resource into an array.
      *
      * @param  Request  $request
@@ -21,12 +21,12 @@ class UserResource extends JsonResource
             'given_name' => $this->given,
             'fathers_family' => $this->fathers_family,
             'mothers_family' => $this->mothers_family,
-            'sex' => $this->sex,
-            'gender' => $this->gender,
-            'birthday' => $this->birthday,
-            'deceased_at' => $this->deceased_datetime,
-            'marital_status' => optional($this->maritalStatus)->text,
-            'nationality' => optional($this->nationality)->name,
+            'sex' => $this->actualSex()->id,
+            'gender' => $this->actualGender()->id,
+            'birthday' => $this->birthday->format('d/m/Y H:i:s'),
+            'deceased_at' => optional($this->deceased_datetime)->format('d/m/Y H:i:s'),
+            'marital_status' => optional($this->maritalStatus)->id,
+            'nationality' => optional($this->nationality)->code_deis,
         ];
     }
 }

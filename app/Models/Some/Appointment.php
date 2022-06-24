@@ -108,7 +108,7 @@ class Appointment extends Model
         return $this->belongsTo('App\Models\CodConAppointmentType', 'cod_con_appointment_type_id');
     }
 
-    protected $dates = ['start','end'];
+    protected $dates = ['start','end', 'created'];
     protected $table = 'appointments';
 
 }
