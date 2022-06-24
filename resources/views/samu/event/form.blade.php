@@ -8,7 +8,8 @@
             @foreach($keys as $key)
             <option
                 value="{{ $key->id }}"
-                {{ old('key_id', $call ? optional($call)->key_id : optional($event)->key_id) == $key->id ? 'selected' : '' }}>
+                {{ old('key_id', $call ? optional($call)->key_id : optional($event)->key_id) == $key->id ? 'selected' : '' }}
+            >
                 {{ $key->key }}  - {{ $key->name }}
             </option>
             @endforeach
@@ -87,10 +88,19 @@
 </div>
 
 <div class="form-row">
+    <!-- Is used for the rule -->
+    <input type="hidden" name="timestampFormat" value="{{ $timestampFormat }}">
 
-    <fieldset class="form-group col-md-1">
+    <fieldset class="form-group {{ $inputType == 'time' ? 'col-md-1' : 'col-md-3' }}">
         <label for="for-departure-at">Aviso salida</label>
-        <input type="time" class="form-control @error('departure_at') is-invalid @enderror" name="departure_at" id="for-departure-at" value="{{ ( $event && $event->departure_at) ? $event->departure_at->format('H:i') : old('departure_at') }}">
+        <input
+            type="{{ $inputType }}"
+            class="form-control @error('departure_at') is-invalid @enderror"
+            name="departure_at"
+            id="for-departure-at"
+            value="{{ ( $event && $event->departure_at) ? $event->departure_at->format($timestampFormat) : old('departure_at') }}"
+        >
+
         @error('departure_at')
             <div class="text-danger">
                 <small>{{ $message }}</small>
@@ -98,9 +108,15 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-1">
-        <label for="for-mobile-departur-at">Salida móvil</label>
-        <input type="time" class="form-control @error('mobile_departure_at') is-invalid @enderror" name="mobile_departure_at" id="for-mobile-departur-at" value="{{ ( $event &&  $event->mobile_departure_at)? $event->mobile_departure_at->format('H:i') : old('mobile_departure_at') }}">
+    <fieldset class="form-group {{ $inputType == 'time' ? 'col-md-1' : 'col-md-3' }}">
+        <label for="for-mobile-departure-at">Salida móvil</label>
+        <input
+            type="{{ $inputType }}"
+            class="form-control @error('mobile_departure_at') is-invalid @enderror"
+            name="mobile_departure_at"
+            id="for-mobile-departure-at"
+            value="{{ ( $event &&  $event->mobile_departure_at)? $event->mobile_departure_at->format($timestampFormat) : old('mobile_departure_at') }}"
+        >
         @error('mobile_departure_at')
             <div class="text-danger">
                 <small>{{ $message }}</small>
@@ -108,9 +124,15 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-1">
+    <fieldset class="form-group {{ $inputType == 'time' ? 'col-md-1' : 'col-md-3' }}">
         <label for="for-mobile-arrival-at">Llegada al lugar</label>
-        <input type="time" class="form-control @error('mobile_arrival_at') is-invalid @enderror" name="mobile_arrival_at" id="for-mobile-arrival-at" value="{{ ( $event &&  $event->mobile_arrival_at)? $event->mobile_arrival_at->format('H:i') : old('mobile_arrival_at') }}">
+        <input
+            type="{{ $inputType }}"
+            class="form-control @error('mobile_arrival_at') is-invalid @enderror"
+            name="mobile_arrival_at"
+            id="for-mobile-arrival-at"
+            value="{{ ( $event &&  $event->mobile_arrival_at)? $event->mobile_arrival_at->format($timestampFormat) : old('mobile_arrival_at') }}"
+        >
         @error('mobile_arrival_at')
             <div class="text-danger">
                 <small>{{ $message }}</small>
@@ -118,9 +140,15 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-1">
-        <label for="for-route-to-healtcenter-at">Ruta c.asistencial </label>
-        <input type="time" class="form-control @error('route_to_healtcenter_at') is-invalid @enderror" name="route_to_healtcenter_at" id="for-route-to-healtcenter-at" value="{{ ( $event &&  $event->route_to_healtcenter_at)? $event->route_to_healtcenter_at->format('H:i') : old('route_to_healtcenter_at') }}">
+    <fieldset class="form-group {{ $inputType == 'time' ? 'col-md-1' : 'col-md-3' }}">
+        <label for="for-route-to-healtcenter-at">Ruta c.asistencial</label>
+        <input
+            type="{{ $inputType }}"
+            class="form-control @error('route_to_healtcenter_at') is-invalid @enderror"
+            name="route_to_healtcenter_at"
+            id="for-route-to-healtcenter-at"
+            value="{{ ( $event &&  $event->route_to_healtcenter_at)? $event->route_to_healtcenter_at->format($timestampFormat) : old('route_to_healtcenter_at') }}"
+        >
         @error('route_to_healtcenter_at')
             <div class="text-danger">
                 <small>{{ $message }}</small>
@@ -128,9 +156,15 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-1">
+    <fieldset class="form-group {{ $inputType == 'time' ? 'col-md-1' : 'col-md-3' }}">
         <label for="for-healthcenter-at">Centro asistencial</label>
-        <input type="time" class="form-control @error('healthcenter_at') is-invalid @enderror" name="healthcenter_at" id="for-healthcenter-at" value="{{ ( $event &&  $event->healthcenter_at)? $event->healthcenter_at->format('H:i') : old('healthcenter_at') }}">
+        <input
+            type="{{ $inputType }}"
+            class="form-control @error('healthcenter_at') is-invalid @enderror"
+            name="healthcenter_at"
+            id="for-healthcenter-at"
+            value="{{ ( $event &&  $event->healthcenter_at)? $event->healthcenter_at->format($timestampFormat) : old('healthcenter_at') }}"
+        >
         @error('healthcenter_at')
             <div class="text-danger">
                 <small>{{ $message }}</small>
@@ -138,9 +172,15 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-1">
+    <fieldset class="form-group {{ $inputType == 'time' ? 'col-md-1' : 'col-md-3' }}">
         <label for="for-patient-reception-at">Recepción de pcte</label>
-        <input type="time" class="form-control @error('patient_reception_at') is-invalid @enderror" name="patient_reception_at" id="for-patient-reception-at" value="{{ ( $event &&  $event->patient_reception_at)? $event->patient_reception_at->format('H:i') : old('patient_reception_at') }}">
+        <input
+            type="{{ $inputType }}"
+            class="form-control @error('patient_reception_at') is-invalid @enderror"
+            name="patient_reception_at"
+            id="for-patient-reception-at"
+            value="{{ ( $event &&  $event->patient_reception_at)? $event->patient_reception_at->format($timestampFormat) : old('patient_reception_at') }}"
+        >
         @error('patient_reception_at')
             <div class="text-danger">
                 <small>{{ $message }}</small>
@@ -148,9 +188,15 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-1">
+    <fieldset class="form-group {{ $inputType == 'time' ? 'col-md-1' : 'col-md-3' }}">
         <label for="for-return-base-at">Retorno base</label>
-        <input type="time" class="form-control @error('return_base_at') is-invalid @enderror" name="return_base_at" id="for-return-base-at" value="{{ ( $event &&  $event->return_base_at)? $event->return_base_at->format('H:i') : old('return_base_at') }}">
+        <input
+            type="{{ $inputType }}"
+            class="form-control @error('return_base_at') is-invalid @enderror"
+            name="return_base_at"
+            id="for-return-base-at"
+            value="{{ ( $event &&  $event->return_base_at)? $event->return_base_at->format($timestampFormat) : old('return_base_at') }}"
+        >
         @error('return_base_at')
             <div class="text-danger">
                 <small>{{ $message }}</small>
@@ -158,9 +204,15 @@
         @enderror
     </fieldset>
 
-    <fieldset class="form-group col-md-1">
+    <fieldset class="form-group {{ $inputType == 'time' ? 'col-md-1' : 'col-md-3' }}">
         <label for="for-on-base-at">Móvil en base</label>
-        <input type="time" class="form-control @error('on_base_at') is-invalid @enderror" name="on_base_at" id="for-on-base-at" value="{{ ( $event &&  $event->on_base_at)? $event->on_base_at->format('H:i') : old('on_base_at') }}">
+        <input
+            type="{{ $inputType }}"
+            class="form-control @error('on_base_at') is-invalid @enderror"
+            name="on_base_at"
+            id="for-on-base-at"
+            value="{{ ( $event &&  $event->on_base_at)? $event->on_base_at->format($timestampFormat) : old('on_base_at') }}"
+        >
         @error('on_base_at')
             <div class="text-danger">
                 <small>{{ $message }}</small>
@@ -178,7 +230,12 @@
         <select class="form-control @error('commune_id') is-invalid @enderror" name="commune_id" id="for-commune">
             <option value="">Selecciona una Comuna </option>
             @foreach($communes as $name => $id)
-            <option value="{{ $id }}" {{ old('commune_id', $call ? optional($call)->commune_id : optional($event)->commune_id ) == $id ? 'selected' : '' }}>{{ $name }}</option>
+                <option
+                    value="{{ $id }}"
+                    {{ old('commune_id', $call ? optional($call)->commune_id : optional($event)->commune_id ) == $id ? 'selected' : '' }}
+                >
+                    {{ $name }}
+                </option>
             @endforeach
         </select>
         @error('commune_id')
