@@ -40,10 +40,12 @@
     @method('PUT')
 
     @include('samu.event.form', [
-        'call'  => null,
-        'event' => $event,
-        'keys'  => $keys,
-        'shift' => $shift,
+        'call'              => null,
+        'event'             => $event,
+        'keys'              => $keys,
+        'shift'             => $shift,
+        'inputType'         => $inputType,
+        'timestampFormat'   => $timestampFormat,
     ])
 
     @if($event->status)
