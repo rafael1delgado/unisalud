@@ -18,7 +18,7 @@ class SubActivityResource extends JsonResource
         return [
             'id' => $this->id,
             'specialty_id' => $this->specialty->id_specialty,
-            'profession_id' => $this->profession ?? $this->profession_id,
+            'profession_id' => $this->profession ? $this->profession->id_profession : null,
             'activity_id' => $this->activity->id_activity,
             'abbreviation' => $this->sub_activity_abbreviated,
             'name' => $this->sub_activity_name,
