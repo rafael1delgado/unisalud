@@ -178,6 +178,20 @@ class Event extends Model implements Auditable
         return $this->hasOne(VitalSign::class);
     }
 
+    public function getCrewAttribute()
+    {
+        $crew = null;
+
+        if($this->mobileInService)
+        {
+            if($this->mobileInService->crew && $this->departure_at)
+            {
+                $crew = $this->mobileInService->crew->where('pivot.assumes_at', '<=', $this->departure_at);
+            }
+        }
+        return $crew;
+    }
+
     public function getMobileTypeAttribute()
     {
         if($this->mobileInService)
