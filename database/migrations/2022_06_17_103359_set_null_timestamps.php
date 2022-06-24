@@ -14,6 +14,9 @@ class SetNullTimestamps extends Migration
      */
     public function up()
     {
+        // Disable auditing from this point on
+        Event::disableAuditing();
+
         $events = Event::query()
             ->whereTime('departure_at', '=', '00:00:00')
             ->orWhereTime('mobile_departure_at', '=', '00:00:00')
@@ -83,6 +86,9 @@ class SetNullTimestamps extends Migration
                 ]);
             }
         }
+
+        // Re-enable auditing
+        Event::enableAuditing();
     }
 
     /**
