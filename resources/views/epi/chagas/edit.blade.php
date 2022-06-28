@@ -91,6 +91,13 @@
             </select>
         </fieldset>
 
+        @if($suspectCase->research_group === 'Gestante (+semana gestacional)')
+        <fieldset class="form-group col-2 col-md-1">
+            <label for="newborn_week">Semanas</label>
+            <input type="number" class="form-control" id="newborn_week" name="newborn_week" readonly value="{{$suspectCase->newborn_week}}">
+        </fieldset>
+        @endif
+
         <fieldset class="form-group col-12 col-md-4">
             <label for="for_establishment_id">Establecimiento*</label>
             <select name="organization_id" id="for_organization_id" class="form-control" readonly required>
