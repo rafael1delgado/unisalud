@@ -9,6 +9,9 @@ use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DelegateChagasNotification;
+
 class SuspectCaseController extends Controller
 {
     /**
@@ -92,6 +95,13 @@ class SuspectCaseController extends Controller
         //
         $suspectCase->fill($request->all());
         $suspectCase->save();
+
+        if ($request->chagas_result_screening == 'En Proceso') {
+            Mail::to('marina.miranda@cormudesi.cl')
+            // Mail::to('tebiccr@gmail.com')
+            ->send(new DelegateChagasNotification($suspectCase));
+        }
+        
 
         session()->flash('success', 'Se añadieron los datos adicionales a Caso sospecha');
         return redirect()->back();
