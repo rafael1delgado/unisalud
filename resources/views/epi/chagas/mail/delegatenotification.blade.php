@@ -8,7 +8,7 @@
 
     <br>
 
-    <p>De acuerdo al Decreto 7 del Ministerio de Salud/Subsecretaría de Salud Públicaque aprueba el reglamiento sobre notificación de enfermedades transmisibles de declaración obligatoria y vigilancia</p>
+    <p>De acuerdo al Decreto 7 Articulo 1 inciso a) del Ministerio de Salud/Subsecretaría de Salud Pública que aprueba el reglamiento sobre notificación de enfermedades transmisibles de declaración obligatoria y vigilancia</p>
 
     <p>Se informa que la Muestra:</p>
 
