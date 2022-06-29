@@ -36,7 +36,9 @@
                 </td>
                 <td>{{$suspectcase->sample_at? $suspectcase->sample_at: ''}}</td>
                 <td>{{$suspectcase->organization->alias??''}}</td>
-                <td>{{$suspectcase->patient->OfficialFullName ??''}}</td>
+                <td>{{$suspectcase->patient->OfficialFullName ??''}}
+                @if($suspectcase->research_group == "Gestante (+semana gestacional)") <img align="center" src="{{ asset('images/pregnant.png') }}" width="24"> @endif
+                </td>
                 <td>@if($suspectcase->patient->identifierRun)
                     {{$suspectcase->patient->identifierRun->value ??''}}-{{$suspectcase->patient->identifierRun->dv}}
                     @else

@@ -20,6 +20,7 @@ class SuspectCase extends Model
         'chagas_result_screening_at',
         'chagas_result_confirmation',
         'chagas_result_confirmation_at',
+        'newborn_week',
         //fin datos chagas
 
         'age', 'gender', 'sample_at', 'epidemiological_week',
@@ -40,7 +41,7 @@ class SuspectCase extends Model
 
     protected $dates = [
         'sample_at', 'symptoms_at', 'reception_at', 'result_ifd_at', 'pcr_sars_cov_2_at', 'sent_external_lab_at',
-        'notification_at', 'discharged_at', 'deleted_at','chagas_result_confirmation_at','chagas_result_screening_at'
+        'notification_at', 'discharged_at', 'deleted_at','chagas_result_confirmation_at','chagas_result_screening_at',
     ];
 
 
